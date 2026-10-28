@@ -39,7 +39,7 @@ def clean_title(raw):
             async for m in client.iter_messages(entity,search=query,limit=50):
                 if not m.file or not (m.video or m.document):continue
                 size=int(getattr(m.file,'size',0) or 0)
-                if 0<size<=2000000000:items.append(item_for(m))
+                if 0<size<=2000000000:items.append(item_for(m,enrich=len(items)<8))
             print(json.dumps({'movies':items}),flush=True)
         elif mode=='download':
             mid=int(sys.argv[2]);destination=sys.argv[3]
@@ -128,10 +128,10 @@ def canonical_title(raw):
         pass
     return candidate,None
 
-def item_for(m):
+def item_for(m,enrich=False):
     filename=(getattr(m.file,'name',None) or '')[:180]
     raw=filename or title_for(m)
-    title,imdb_id=canonical_title(raw)
+    title,imdb_id=canonical_title(raw) if enrich else (clean_title(raw),None)
     return {'id':m.id,'title':title,'filename':filename,'size':int(getattr(m.file,'size',0) or 0),'imdb_id':imdb_id}
 
 async def main():
