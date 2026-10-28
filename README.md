@@ -2,7 +2,7 @@
 
 ## Koyeb web service: verified public requests (deployment-ready configuration)
 
-This repository includes a separate **Koyeb API + public web form**. Visitors do not need GitHub accounts. The Koyeb service does **not** download or upload movies: it verifies WhatsApp ownership, then sends a private `repository_dispatch` event to GitHub Actions. The `Process verified AutoWA request` workflow stages the request in the runner (not in Git), awaits the `production` environment approval gate, and runs the existing publisher.
+This repository includes a separate **Koyeb API + public web form**. Visitors do not need GitHub accounts. The Koyeb service does **not** download or upload movies: it verifies WhatsApp ownership, then sends a private `repository_dispatch` event to GitHub Actions. The `Process verified FilmGo request` workflow stages the request in the runner (not in Git), awaits the `production` environment approval gate, and runs the existing publisher.
 
 ### Deploy (Baileys OTP on Koyeb)
 1. Create an **Upstash Redis** database with REST URL/token. The Koyeb OTP bot persists its complete Baileys authentication state (creds **and** Signal keys) to encrypted Redis values. Do not delete the Redis keys or change `APP_SECRET` after pairing.
