@@ -24,6 +24,7 @@ jobs:
       - name: Install media tools
         run: sudo apt-get update && sudo apt-get install -y ffmpeg
       - name: Validate request and stage private job
+        id: stage
         env:
           REQUEST_PAYLOAD_JSON: ${{ toJSON(github.event.client_payload) }}
         run: node src/stage-request.mjs
@@ -39,6 +40,7 @@ jobs:
           REQUEST_ID: ${{ github.event.client_payload.request_id }}
           REQUEST_PAYLOAD_JSON: ${{ toJSON(github.event.client_payload) }}
           PUBLISH_OUTCOME: ${{ steps.publish.outcome }}
+          STAGE_OUTCOME: ${{ steps.stage.outcome }}
         run: node src/save-request-history.mjs
       - name: Commit movie history
         if: always()
