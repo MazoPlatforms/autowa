@@ -1,0 +1,16 @@
+{
+  "jobs": [
+    {
+      "id": "sample-001",
+      "title": "Sample Licensed Video",
+      "source_url": "https://example.org/your-authorized-video.mp4",
+      "filename": "Sample Licensed Video.mp4",
+      "caption": "🎬 Sample Licensed Video\\nEnjoy!",
+      "group_ids": ["YOUR_GROUP_ID@g.us"],
+      "license_confirmed": false,
+      "enabled": false,
+      "thumbnail_url": "",
+      "file_type": "mp4"
+    }
+  ]
+}

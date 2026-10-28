@@ -1,0 +1,14 @@
+{
+  "name": "wa-community-uploader",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "validate": "node src/validate.mjs",
+    "publish": "node src/publish.mjs"
+  },
+  "dependencies": {
+    "@whiskeysockets/baileys": "^6.7.21",
+    "pino": "^9.6.0"
+  }
+}

@@ -1,0 +1,31 @@
+name: Publish authorized media
+on:
+  workflow_dispatch:
+    inputs:
+      job_id:
+        description: 'Enabled job ID (blank = all enabled jobs)'
+        required: false
+        type: string
+permissions:
+  contents: read
+concurrency:
+  group: whatsapp-publisher
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    environment: production
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node src/validate.mjs
+      - run: npm install --no-audit --no-fund
+      - run: sudo apt-get update && sudo apt-get install -y ffmpeg
+      - name: Publish
+        env:
+          WA_AUTH_B64: ${{ secrets.WA_AUTH_B64 }}
+          JOB_ID: ${{ inputs.job_id }}
+        run: node src/publish.mjs
