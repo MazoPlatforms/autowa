@@ -23,8 +23,11 @@ jobs:
         run: npm install --no-audit --no-fund
       - name: Install media tools
         run: sudo apt-get update && sudo apt-get install -y ffmpeg
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
       - name: Install Telegram client
-        run: python3 -m pip install --user telethon==1.42.0
+        run: python3 -m pip install telethon==1.42.0
       - name: Validate request and stage private job
         id: stage
         env:
