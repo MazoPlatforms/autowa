@@ -24,24 +24,37 @@ async function redis(...args){
 const telegramReady=['TELEGRAM_API_ID','TELEGRAM_API_HASH','TELEGRAM_SESSION','TELEGRAM_CHANNEL_ID'].every(k=>!!process.env[k]);
 let indexing=false;
 let recentIndexing=false;
+let telegramProcessBusy=false;
+async function telegramCommand(mode,args=[],timeout=90000){
+ if(telegramProcessBusy)throw Object.assign(new Error('Telegram sync already running'),{code:'BUSY'});
+ telegramProcessBusy=true;
+ try{return await execFileAsync('python3',['src/telegram_media.py',mode,...args],{timeout,maxBuffer:3*1024*1024,env:process.env});}
+ finally{telegramProcessBusy=false;}
+}
+function telegramError(err){
+ if(err.code==='BUSY')return 'Telegram sync already running';
+ const stderr=String(err.stderr||'').trim();
+ const detail=stderr?stderr.split('\\n').slice(-5).join(' | '):'No Python stderr';
+ return ['Telegram process failed','exit='+String(err.code??'unknown'),'signal='+String(err.signal??'none'),'killed='+Boolean(err.killed),detail].join('; ').slice(0,700);
+}
 let telegramCatalogStatus={state:'starting',updated_at:null,error:null};
 async function refreshRecent(){
  if(!configured||!telegramReady||recentIndexing)return;
  recentIndexing=true;
  try{
-  const {stdout}=await execFileAsync('python3',['src/telegram_media.py','recent'],{timeout:45000,maxBuffer:262144,env:process.env});
+  const {stdout}=await telegramCommand('recent',[],90000);
   const data=JSON.parse(stdout);
   if(!Array.isArray(data.movies))throw Error('Invalid recent catalog');
   await redis('SET','telegram:recent:v1',JSON.stringify(data));
   telegramCatalogStatus={state:'ready',updated_at:Date.now(),error:null};
- }catch(e){telegramCatalogStatus={state:'error',updated_at:Date.now(),error:String(e.stderr||e.message).slice(0,600)};console.error('Recent Telegram refresh failed:',String(e.stderr||e.message).slice(0,1200));}
+ }catch(e){telegramCatalogStatus={state:'error',updated_at:Date.now(),error:telegramError(e)};console.error('Recent Telegram refresh failed:',telegramError(e));}
  finally{recentIndexing=false;}
 }
 async function indexTelegram(){
  if(!configured||!telegramReady||indexing)return;
  indexing=true;
  try{
-  const {stdout}=await execFileAsync('python3',['src/telegram_media.py','index'],{timeout:180000,maxBuffer:3*1024*1024,env:process.env});
+  const {stdout}=await telegramCommand('index',[],180000);
   const data=JSON.parse(stdout);
   if(!Array.isArray(data.movies))throw Error('Invalid catalog');
   await redis('SET','telegram:catalog:v2',JSON.stringify(data));
@@ -49,7 +62,7 @@ async function indexTelegram(){
  }catch(e){console.error('Telegram catalog refresh failed:',String(e.stderr||e.message).slice(0,1200));}
  finally{indexing=false;}
 }
-void refreshRecent();void indexTelegram();setInterval(()=>{void refreshRecent();void indexTelegram();},2*60*1000).unref();
+void refreshRecent().then(()=>indexTelegram());setInterval(()=>{void refreshRecent().then(()=>indexTelegram());},2*60*1000).unref();
 async function getCatalog(){
  const raw=await redis('GET','telegram:catalog:v2');
  return raw?JSON.parse(raw):null;
