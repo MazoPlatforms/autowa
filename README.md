@@ -4,27 +4,26 @@
 
 This repository includes a separate **Koyeb API + public web form**. Visitors do not need GitHub accounts. The Koyeb service does **not** download or upload movies: it verifies WhatsApp ownership, then sends a private `repository_dispatch` event to GitHub Actions. The `Process verified AutoWA request` workflow stages the request in the runner (not in Git), awaits the `production` environment approval gate, and runs the existing publisher.
 
-### Deploy
-1. Create an **Upstash Redis** database with its REST endpoint and token. Redis stores short-lived hashed OTPs, verification sessions, cooldowns and rate limits; do not use Koyeb's ephemeral filesystem for this.
-2. Configure an approved **WhatsApp Cloud API authentication template** in Meta Business Manager. The current implementation sends a 6-digit body template parameter; adjust the template components if your approved template uses different authentication components. Set the corresponding phone-number ID, permanent access token, template name and language. **Baileys is not used for OTP.**
-3. Create a GitHub fine-grained PAT scoped to this repository with **Contents: read/write** permission sufficient to invoke `repository_dispatch` (or use a GitHub App token with equivalent permission). Keep it **only in Koyeb secrets**.
-4. In GitHub, configure the **production environment** with **required reviewers** (if supported by the repository plan/settings), and set the existing `WA_AUTH_CREDS` environment secret. Do not remove the human approval gate for arbitrary user-supplied media URLs. The WhatsApp publisher still uses Baileys, and its creds-only auth may fail without persisted Signal keys.
-5. Create a **Koyeb Web Service** from this GitHub repository, using the root **Dockerfile**. HTTP port: **8000**, health path: **/health**. The container is a lightweight Node 22 service and does not require FFmpeg or WhatsApp auth keys.
-6. Set these **Koyeb secrets/environment variables**:
+### Deploy (Baileys OTP on Koyeb)
+1. Create an **Upstash Redis** database with REST URL/token. The Koyeb OTP bot persists its complete Baileys authentication state (creds **and** Signal keys) to encrypted Redis values. Do not delete the Redis keys or change `APP_SECRET` after pairing.
+2. In Koyeb, deploy the repository root **Dockerfile** as a Web Service. HTTP port: **8000**; health path: **/health**. Run **one** OTP bot replica only: multiple replicas can corrupt a shared Baileys session.
+3. Add these **Koyeb secret environment variables**:
 
 | Variable | Purpose |
 |---|---|
-| `APP_SECRET` | Random secret, **at least 32 characters**, for HMAC OTP hashes and signed session tokens |
+| `APP_SECRET` | Strong random secret, at least 32 characters, used for HMAC and AES-256-GCM encryption |
 | `UPSTASH_REDIS_REST_URL` | Upstash Redis REST endpoint |
 | `UPSTASH_REDIS_REST_TOKEN` | Upstash Redis REST token |
-| `WHATSAPP_CLOUD_TOKEN` | Meta WhatsApp Cloud API access token |
-| `WHATSAPP_PHONE_NUMBER_ID` | WhatsApp Cloud API sending phone number ID |
-| `WHATSAPP_OTP_TEMPLATE` | Approved template name containing the OTP body variable |
-| `WHATSAPP_OTP_LANGUAGE` | Optional, defaults to `en_US` |
-| `WHATSAPP_GRAPH_VERSION` | Optional, defaults to `v22.0`; update to a supported Meta Graph version |
-| `GITHUB_DISPATCH_TOKEN` | GitHub credential for repository dispatch |
+| `GITHUB_DISPATCH_TOKEN` | GitHub fine-grained PAT with Contents write access to dispatch repository events |
 | `GITHUB_REPOSITORY` | `MazoPlatforms/autowa` |
-| `PORT` | Optional, defaults to `8000` |
+| `WA_OTP_AUTH_CREDS` | **Optional bootstrap only**: an unregistered Baileys creds JSON; a registered `creds.json` alone is incomplete without Signal keys and is ignored for a fresh QR pairing |
+| `PORT` | Optional, defaults to 8000 |
+
+4. **Pair OTP bot**: On first startup, look for a QR in **private Koyeb service logs** and scan it with WhatsApp → Linked devices → Link a device. Once connected, the bot saves encrypted auth data in Redis and reconnects automatically. Do **not** expose logs containing QR codes or secrets. If QR output is unreadable in the hosting logs, pairing requires a separate secure setup route; it has not been implemented.
+5. Create a GitHub **production environment** with required reviewer approval (if your repository plan/settings support it) and the `WA_AUTH_CREDS` environment secret for the **separate movie publisher bot**. The publisher's creds-only authentication is still unreliable without its matching Signal keys.
+6. Test OTP to your own WhatsApp number, then a small authorized media file through a reviewed GitHub Actions dispatch. Do not open public registration until real tests pass.
+
+**No Meta WhatsApp Cloud API credentials are required.** OTP sending now uses Baileys on Koyeb. Unofficial WhatsApp automation may be rate-limited or lead to account restrictions.
 
 ### Security and limitations
 - OTP: six digits, 5-minute expiry, 60-second resend cooldown, bounded verification attempts, 15-minute one-time signed session. Each verified session submits at most one request; daily per-number limits apply.
