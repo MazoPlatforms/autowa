@@ -60,6 +60,8 @@ def parse(message):
         "year": int(fields["year"]),
         "quality": fields["quality"][:40],
         "file_size": int(getattr(message.file, "size", 0) or 0),
+        "file_name": (getattr(message.file, "name", None) or "")[:255],
+        "mime_type": (getattr(message.file, "mime_type", None) or "")[:100],
     }
 
 async def main():
