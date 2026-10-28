@@ -24,6 +24,7 @@ async function redis(...args){
 const telegramReady=['TELEGRAM_API_ID','TELEGRAM_API_HASH','TELEGRAM_SESSION','TELEGRAM_CHANNEL_ID'].every(k=>!!process.env[k]);
 let indexing=false;
 let recentIndexing=false;
+let telegramCatalogStatus={state:'starting',updated_at:null,error:null};
 async function refreshRecent(){
  if(!configured||!telegramReady||recentIndexing)return;
  recentIndexing=true;
@@ -32,7 +33,8 @@ async function refreshRecent(){
   const data=JSON.parse(stdout);
   if(!Array.isArray(data.movies))throw Error('Invalid recent catalog');
   await redis('SET','telegram:recent:v1',JSON.stringify(data));
- }catch(e){console.error('Recent Telegram refresh failed:',e.message);}
+  telegramCatalogStatus={state:'ready',updated_at:Date.now(),error:null};
+ }catch(e){telegramCatalogStatus={state:'error',updated_at:Date.now(),error:String(e.message).slice(0,180)};console.error('Recent Telegram refresh failed:',e.message);}
  finally{recentIndexing=false;}
 }
 async function indexTelegram(){
@@ -94,11 +96,12 @@ const server=http.createServer(async(req,res)=>{
    let matches=(query?catalog.movies:(recent?.movies||catalog.movies)).filter(m=>!query||m.title.toLowerCase().includes(query)||String(m.year||'').includes(query)).slice(0,query?50:15);
    let live=false;
    if(!catalog.movies.length)void indexTelegram();
+   if(!query&&!recent?.movies?.length)void refreshRecent();
    if(query.length>=2){
     // Return indexed matches immediately. Telegram refreshes the index in the background.
     if(!matches.length)void indexTelegram();
    }
-   return send(res,200,{movies:matches,indexed_at:catalog.indexed_at,live,syncing:!catalog.movies.length&&!recent?.movies?.length});
+   return send(res,200,{movies:matches,indexed_at:catalog.indexed_at,live,syncing:!catalog.movies.length&&!recent?.movies?.length,catalog_status:telegramCatalogStatus.state});
   }
   if(req.method==='GET'&&url.pathname==='/api/me'){
    const session=await authenticated(req);
@@ -107,6 +110,7 @@ const server=http.createServer(async(req,res)=>{
    const used=Number(await redis('GET','rate:'+hmac('submit:'+session.number))||0);
    return send(res,200,{number:session.number,name:user.name||'',limit:3,used:Math.min(used,3),remaining:Math.max(0,3-used),period:'rolling rate window (up to 24 hours)'});
   }
+  if(req.method==='GET'&&url.pathname==='/api/catalog-status')return send(res,200,{state:telegramCatalogStatus.state,updated_at:telegramCatalogStatus.updated_at,error:telegramCatalogStatus.error,telegram_configured:telegramReady});
   if(req.method==='GET'&&url.pathname==='/health'){return send(res,200,{ok:true});}
   if(req.method==='GET'&&(url.pathname==='/'||url.pathname==='/profile')){res.writeHead(200,{'Content-Type':'text/html; charset=utf-8','Cache-Control':'no-store','X-Content-Type-Options':'nosniff','Content-Security-Policy':"default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src 'self'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'"});return res.end(index);}
   if(req.method==='GET'&&url.pathname==='/style.css'){res.writeHead(200,{'Content-Type':'text/css; charset=utf-8','Cache-Control':'public, max-age=3600','X-Content-Type-Options':'nosniff'});return res.end(stylesheet);}
