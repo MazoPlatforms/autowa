@@ -28,10 +28,10 @@ fs.mkdirSync('.auth',{recursive:true,mode:0o700});
 fs.writeFileSync(path.join('.auth','creds.json'),JSON.stringify(creds),{mode:0o600});
 console.warn('Using creds.json-only auth: missing Signal key files or rotated session keys may cause authentication failures.');
 const {state,saveCreds}=await useMultiFileAuthState('.auth');
-const sock=makeWASocket({auth:state,logger:pino({level:'silent'}),markOnlineOnConnect:false,syncFullHistory:false});
+const sock=makeWASocket({auth:state,logger:pino({level:'silent'}),markOnlineOnConnect:false,syncFullHistory:false,connectTimeoutMs:120000,defaultQueryTimeoutMs:120000});
 sock.ev.on('creds.update',saveCreds);
 await new Promise((resolve,reject)=>{
- const timeout=setTimeout(()=>reject(Error('WhatsApp connection timed out')),90000);
+ const timeout=setTimeout(()=>reject(Error('WhatsApp connection timed out')),130000);
  sock.ev.on('connection.update',u=>{
   if(u.connection==='open'){clearTimeout(timeout);resolve();}
   if(u.connection==='close'){clearTimeout(timeout);reject(Error('WhatsApp connection closed: '+(u.lastDisconnect?.error?.message||'unknown')));}
@@ -58,6 +58,8 @@ const archivedMetadata = {
 */
 
 const groups=await sock.groupFetchAllParticipating();
+let connectionClosed=false;
+sock.ev.on('connection.update',u=>{if(u.connection==='close'){connectionClosed=true;console.error('WhatsApp disconnected during publishing:',u.lastDisconnect?.error?.message||'unknown','status:',u.lastDisconnect?.error?.output?.statusCode||'unknown');}});
 let failures=0;
 try{
  for(const j of queue){
@@ -72,6 +74,8 @@ try{
   fs.mkdirSync('downloads',{recursive:true});
   console.log('Downloading',j.id);
   execFileSync('python3',['src/download.py',j.source_url,dest],{stdio:'inherit',timeout:90*60*1000});
+  const mediaBytes=fs.statSync(dest).size;
+  console.log('Media ready:',mediaBytes,'bytes /',(mediaBytes/1048576).toFixed(2),'MiB (thumbnail excluded)');
   const probe=JSON.parse(execFileSync('ffprobe',['-v','error','-show_entries','format=format_name:stream=codec_type,codec_name','-of','json',dest],{encoding:'utf8',timeout:120000}));
   const formats=String(probe.format?.format_name||'').split(',');
   const isMkv=formats.includes('matroska')||formats.includes('webm');
@@ -99,6 +103,7 @@ try{
    if(groupId.endsWith('@g.us')&&!groups[groupId]){console.error('Not a member of group',groupId);failures++;movieFailures++;continue;}
    let ok=false;
    for(let attempt=1;attempt<=3;attempt++){
+    if(connectionClosed){console.error('Stopping retries: WhatsApp socket is disconnected; a new authenticated connection is required');break;}
     try{
      const result=await sock.sendMessage(groupId,{
       document:{url:path.resolve(dest)},mimetype:type==='mp4'?'video/mp4':'video/x-matroska',
