@@ -14,7 +14,11 @@ for(const file of files){
   if(!j.filename.toLowerCase().endsWith('.'+j.file_type)) throw Error('Filename extension mismatch');
   if(typeof j.caption!=='string'||j.caption.length>2048) throw Error('Invalid caption');
   if(typeof j.enabled!=='boolean'||typeof j.license_confirmed!=='boolean') throw Error('Invalid flags');
-  if(!Array.isArray(j.group_ids)||!j.group_ids.length||j.group_ids.some(x=>typeof x!=='string'||!x.endsWith('@g.us'))) throw Error('Invalid group ids');
+  const groups=j.group_ids??[];
+  const people=j.recipient_jids??[];
+  if(!Array.isArray(groups)||groups.some(x=>typeof x!=='string'||!/^\\d+(-\\d+)?@g\\.us$/.test(x))) throw Error('Invalid group ids');
+  if(!Array.isArray(people)||people.some(x=>typeof x!=='string'||!/^\\d{7,15}@s\\.whatsapp\\.net$/.test(x))) throw Error('Invalid personal recipient JIDs');
+  if(!groups.length&&!people.length) throw Error('At least one recipient is required');
   if(j.enabled&&!j.license_confirmed) throw Error('Enabled media requires confirmed distribution rights');
   const url=new URL(j.source_url);
   if(url.protocol!=='https:') throw Error('Source URL must be HTTPS');
