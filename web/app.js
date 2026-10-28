@@ -28,28 +28,27 @@ function readRecentCache(){
   return saved&&Date.now()-saved.time<60000&&Array.isArray(saved.movies)?saved.movies:null;
  }catch{return null;}
 }
-let catalogRetryCount=0;
+let catalogLoading=false;
 async function loadMovies(){
- const cached=readRecentCache();
- if(cached&&movieResults.length===0){movieResults=cached;$('movie-hint').textContent='Checking recent movies…';}
- else if(!cached&&movieResults.length===0)$('movie-hint').textContent='Loading recent movies…';
+ if(catalogLoading)return;
+ catalogLoading=true;
+ $('movie-hint').textContent='Checking movie library…';
  try{
   const response=await fetch('/api/movies',{cache:'no-store'});
   const data=await response.json();
-  if(!response.ok)throw Error(data.error||'Catalog unavailable');
-  if(data.syncing&&!data.movies?.length){
-   if(catalogRetryCount<2){
-    catalogRetryCount++;
-    $('movie-hint').textContent='Movie library is starting…';
-    setTimeout(()=>{if(!movieSearch.value.trim())void loadMovies();},3000);
-   }else $('movie-hint').textContent='Movie library unavailable. Please try again later.';
-   return;
-  }
-  catalogRetryCount=0;
-  movieResults=(data.movies||[]).slice(0,15);
-  try{localStorage.setItem(catalogCacheKey,JSON.stringify({time:Date.now(),movies:movieResults}));}catch{}
-  $('movie-hint').textContent=movieResults.length?'Recent '+movieResults.length+' movies · Search to find more':'No captioned movies available yet.';
- }catch(e){$('movie-hint').textContent='Movie library unavailable. Please try again later.';}
+  if(!response.ok)throw Error(data.error||'Movie catalog unavailable');
+  movieResults=Array.isArray(data.movies)?data.movies.slice(0,15):[];
+  if(movieResults.length){
+   $('movie-hint').textContent='Recent '+movieResults.length+' movies · Search to find more';
+  }else if(data.syncing){
+   const statusResponse=await fetch('/api/catalog-status',{cache:'no-store'});
+   const status=statusResponse.ok?await statusResponse.json():null;
+   $('movie-hint').textContent=status?.state==='error'
+    ?'Telegram connection failed. Check catalog status and Koyeb logs.'
+    :'Movie library is not ready yet. Tap search to retry.';
+  }else $('movie-hint').textContent='No movies with valid captions found.';
+ }catch(e){$('movie-hint').textContent=e.message||'Movie library unavailable';}
+ finally{catalogLoading=false;}
 }
 
 let movieTimer=0,movieQuerySequence=0;
@@ -67,7 +66,7 @@ movieSearch.addEventListener('input',()=>{
   }catch(e){$('movie-hint').textContent=e.message;}
  },250);
 });
-movieSearch.addEventListener('focus',()=>{if(movieResults.length)renderMovies();else if(!movieSearch.value.trim()&&catalogRetryCount>=2){catalogRetryCount=0;void loadMovies();}});
+movieSearch.addEventListener('focus',()=>{if(movieResults.length)renderMovies();else if(!movieSearch.value.trim())void loadMovies();});
 movieSearch.addEventListener('keydown',e=>{if(e.key==='Escape'){movieOptions.classList.add('hidden');movieSearch.setAttribute('aria-expanded','false');}});
 document.addEventListener('click',e=>{if(!e.target.closest('.movie-picker')){movieOptions.classList.add('hidden');movieSearch.setAttribute('aria-expanded','false');}});
 $('request').addEventListener('submit',e=>{if(!$('movie-id').value){e.preventDefault();msg('Please select a movie from the dropdown.');}},true);
