@@ -7,7 +7,7 @@ from telethon.sessions import StringSession
 
 async def main():
     message_id, start, length = map(int, sys.argv[1:4])
-    if message_id <= 0 or start < 0 or length <= 0 or length > 4 * 1024 * 1024:
+    if message_id <= 0 or start < 0 or length <= 0 or length > 32 * 1024 * 1024:
         raise ValueError("Invalid media range")
     channel = int(os.environ["TELEGRAM_CHANNEL_ID"])
     client = TelegramClient(
