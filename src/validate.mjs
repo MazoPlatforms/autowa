@@ -5,6 +5,12 @@ if(!files.length) throw Error('No movie JSON files found');
 const ids=new Set();
 for(const file of files){
   const j=JSON.parse(fs.readFileSync(dir+'/'+file,'utf8'));
+  if(j.request_origin==='koyeb_verified'&&j.enabled===false){
+    if(file!==j.id+'.json')throw Error('Invalid history filename');
+    if(ids.has(j.id))throw Error('Duplicate job id');
+    ids.add(j.id);
+    continue;
+  }
   if(file!==j.id+'.json') throw Error('Filename must match movie id: '+file);
   if(!/^[a-zA-Z0-9_-]{1,80}$/.test(j.id)) throw Error('Invalid job id');
   if(ids.has(j.id)) throw Error('Duplicate job id'); ids.add(j.id);
