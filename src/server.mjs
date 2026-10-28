@@ -93,6 +93,7 @@ async function sendOtp(number,code){return sendWhatsAppOtp(number,code);}
 const index=fs.readFileSync(new URL('../web/index.html',import.meta.url));
 const catalogHtml=fs.readFileSync(new URL('../web/catalog.html',import.meta.url));
 const catalogJs=fs.readFileSync(new URL('../web/catalog.js',import.meta.url));
+const catalogCss=fs.readFileSync(new URL('../web/catalog.css',import.meta.url));
 const publishedMovies=fs.readFileSync(new URL('../data/movies.json',import.meta.url));
 const countries=fs.readFileSync(new URL('../site/countries.json',import.meta.url));
 const appJs=fs.readFileSync(new URL('../web/app.js',import.meta.url));
@@ -127,8 +128,9 @@ const server=http.createServer(async(req,res)=>{
   if(req.method==='GET'&&url.pathname==='/api/catalog-status')return send(res,200,{state:telegramCatalogStatus.state,updated_at:telegramCatalogStatus.updated_at,error:telegramCatalogStatus.error,telegram_configured:telegramReady});
   if(req.method==='GET'&&url.pathname==='/health'){return send(res,200,{ok:true});}
   if(req.method==='GET'&&url.pathname==='/movies.json'){res.writeHead(200,{'Content-Type':'application/json; charset=utf-8','Cache-Control':'public, max-age=300','X-Content-Type-Options':'nosniff'});return res.end(publishedMovies);}
+  if(req.method==='GET'&&url.pathname==='/catalog.css'){res.writeHead(200,{'Content-Type':'text/css; charset=utf-8','Cache-Control':'public, max-age=300','X-Content-Type-Options':'nosniff'});return res.end(catalogCss);}
   if(req.method==='GET'&&url.pathname==='/catalog.js'){res.writeHead(200,{'Content-Type':'text/javascript; charset=utf-8','Cache-Control':'public, max-age=300','X-Content-Type-Options':'nosniff'});return res.end(catalogJs);}
-  if(req.method==='GET'&&url.pathname==='/'){res.writeHead(200,{'Content-Type':'text/html; charset=utf-8','Cache-Control':'no-store','Content-Security-Policy':"default-src 'self'; img-src 'self' https: data:; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src 'self'; base-uri 'none'; frame-ancestors 'none'"});return res.end(catalogHtml);}
+  if(req.method==='GET'&&(url.pathname==='/'||/^\\/title\\/[a-zA-Z0-9_-]+\\/?$/.test(url.pathname))){res.writeHead(200,{'Content-Type':'text/html; charset=utf-8','Cache-Control':'no-store','Content-Security-Policy':"default-src 'self'; img-src 'self' https: data:; script-src 'self' https://cdn.tailwindcss.com 'unsafe-eval'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src 'self'; base-uri 'none'; frame-ancestors 'none'"});return res.end(catalogHtml);}
   if(req.method==='GET'&&(url.pathname==='/request'||url.pathname==='/profile')){res.writeHead(200,{'Content-Type':'text/html; charset=utf-8','Cache-Control':'no-store','X-Content-Type-Options':'nosniff','Content-Security-Policy':"default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src 'self'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'"});return res.end(index);}
   if(req.method==='GET'&&url.pathname==='/style.css'){res.writeHead(200,{'Content-Type':'text/css; charset=utf-8','Cache-Control':'no-store','X-Content-Type-Options':'nosniff'});return res.end(stylesheet);}
   if(req.method==='GET'&&url.pathname==='/app.js'){res.writeHead(200,{'Content-Type':'text/javascript; charset=utf-8','Cache-Control':'no-store','X-Content-Type-Options':'nosniff'});return res.end(appJs);}
