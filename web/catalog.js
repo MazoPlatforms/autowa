@@ -5,6 +5,8 @@ const video=el('video','w-full rounded-xl bg-black');
 video.controls=true;video.preload='none';video.playsInline=true;
 if(poster(m))video.poster=poster(m);
 section.append(video);
+video.addEventListener('error',()=>{status.textContent='Playback failed. The video format may be unsupported or the Telegram media stream may have stopped.';});
+video.addEventListener('stalled',()=>{status.textContent='Video stalled while loading. Check the Telegram streaming connection.';});
 const status=el('p','mt-3 text-xs text-zinc-500','Checking playback availability…');
 section.append(status);
 root.append(section);
@@ -12,7 +14,7 @@ fetch('/api/stream-availability/'+encodeURIComponent(m.slug_id||''),{cache:'no-s
  if(!root.isConnected||location.pathname!=='/title/'+encodeURIComponent(m.slug_id))return;
  if(data?.available){
   video.src='/api/stream/'+encodeURIComponent(m.slug_id);
-  status.textContent='Press play to stream. Playback requires a browser-compatible MP4 file.';
+  status.textContent=data.format==='mkv'?'This is an MKV file. Many mobile browsers cannot decode MKV video. Use a compatible external player or provide an MP4 (H.264/AAC) source.':data.format==='unknown'?'Video format is unknown. Playback depends on the file container and codecs.':'Press play to stream. Playback requires browser-compatible video codecs.';
   const open=el('a','mt-4 inline-flex rounded-xl border border-zinc-700 px-5 py-3 text-sm font-semibold text-zinc-100','Open video');
   open.href=video.src;open.target='_blank';open.rel='noopener';section.append(open);
  }else{status.textContent='Streaming is not available for this title.';}
