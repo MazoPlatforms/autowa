@@ -1,4 +1,4 @@
-name = "tamil-films-world-streamer"
+name = "filmgo-streamer"
 main = "src/index.js"
 compatibility_date = "2026-10-29"
 compatibility_flags = ["nodejs_compat"]
