@@ -7,11 +7,15 @@
     "validate": "node src/validate.mjs",
     "publish": "node src/publish.mjs",
     "groups": "node src/list-groups.mjs",
-    "start": "node src/server.mjs"
+    "start": "node src/server.mjs",
+    "build:css": "tailwindcss -i ./web/tailwind.input.css -o ./web/tailwind.css --minify"
   },
   "dependencies": {
     "@whiskeysockets/baileys": "^6.7.21",
     "pino": "^9.6.0",
     "qrcode-terminal": "^0.12.0"
+  },
+  "devDependencies": {
+    "tailwindcss": "3.4.17"
   }
 }
