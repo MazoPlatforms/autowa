@@ -30,3 +30,10 @@ footer{border-top:1px solid #d8dee4;margin-top:26px;padding-top:18px;font-size:1
 .movie-option span{color:#6e7781;font-size:12px;white-space:nowrap}
 .movie-options .small{margin:10px}
 #movie-hint{margin:7px 0 0;font-size:12px}
+
+h2{font-size:18px;margin:24px 0 10px;letter-spacing:-.3px}
+#account{padding:16px 0 20px;border-bottom:1px solid #d8dee4}
+#account-number{margin-bottom:10px}
+#account-limits{margin:14px 0 0}
+button.secondary{background:#fff;color:#24292f;border-color:#d0d7de}
+button.secondary:hover{background:#f6f8fa}
