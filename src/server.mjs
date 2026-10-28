@@ -160,7 +160,7 @@ const server=http.createServer(async(req,res)=>{
    const extension=originalExt||(mime.includes('matroska')?'mkv':mime.includes('webm')?'webm':mime.includes('mp4')?'mp4':'mp4');
    const mediaType=extension==='mkv'?'video/x-matroska':extension==='webm'?'video/webm':extension==='mp4'||extension==='m4v'?'video/mp4':extension==='mov'?'video/quicktime':'application/octet-stream';
    const baseName=originalName||[movie.title,movie.year,movie.quality].filter(Boolean).join(' ')+'.'+extension;
-   const safeName=baseName.replace(/[\\r\\n\\x00-\\x1f"\\\\/]/g,'_').slice(0,180);
+   const safeName=baseName.replace(/[^a-zA-Z0-9 ._()-]/g,'_').slice(0,180);
    const asciiName=safeName.replace(/[^\\x20-\\x7e]/g,'_');
    const disposition='inline; filename="'+asciiName+'"; filename*=UTF-8\'\''+encodeURIComponent(safeName);
    const headers={'Content-Type':mediaType,'Content-Length':String(length),'Content-Range':'bytes '+start+'-'+end+'/'+total,'Accept-Ranges':'bytes','Cache-Control':'no-store','X-Content-Type-Options':'nosniff','Content-Disposition':disposition};
