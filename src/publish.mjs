@@ -13,7 +13,7 @@ const queue=selected?jobs.filter(j=>j.id===selected || j.job_id===selected):jobs
 if(selected&&!queue.length) throw Error('No eligible movie with ID '+selected);
 if(!queue.length){console.log('No enabled jobs');process.exit(0);}
 if(process.env.DRY_RUN==='1'){
-  for(const j of queue) console.log(`DRY RUN: ${j.id} => ${j.group_ids.length} group(s), ${j.source_url}`);
+  for(const j of queue) console.log(`DRY RUN: ${j.id} => ${(j.group_ids?.length||0)+(j.recipient_jids?.length||0)} recipient(s), ${j.source_url}`);
   process.exit(0);
 }
 const raw=process.env.WA_AUTH_CREDS;
@@ -64,8 +64,8 @@ try{
    }catch(e){console.warn('Automatic thumbnail unavailable');}
   }
   if(thumbnail && !(thumbnail[0]===255&&thumbnail[1]===216&&thumbnail[2]===255)) thumbnail=undefined;
-  for(const groupId of [...new Set(j.group_ids)]){
-   if(!groups[groupId]){console.error('Not a member of group',groupId);failures++;movieFailures++;continue;}
+  for(const groupId of [...new Set([...(j.group_ids||[]),...(j.recipient_jids||[])])]){
+   if(groupId.endsWith('@g.us')&&!groups[groupId]){console.error('Not a member of group',groupId);failures++;movieFailures++;continue;}
    let ok=false;
    for(let attempt=1;attempt<=3;attempt++){
     try{
