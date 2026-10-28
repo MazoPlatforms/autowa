@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 const esc = v => String(v ?? '').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const movies = fs.readdirSync('movies').filter(n=>n.endsWith('.json')).sort().map(n=>JSON.parse(fs.readFileSync('movies/'+n,'utf8')));
+const groups=fs.existsSync('site/groups.json')?JSON.parse(fs.readFileSync('site/groups.json','utf8')).groups:[];
 const counts={total:movies.length,done:movies.filter(x=>x.status==='submitted').length,active:movies.filter(x=>x.status==='processing').length};
 const rows=movies.map(m=>'<tr><td><strong>'+esc(m.title)+'</strong><span class="muted sub">'+esc(m.id)+'</span></td><td><code>'+esc(m.job_id||'Not assigned')+'</code></td><td><span class="status '+(m.status==='submitted'?'good':m.status==='failed'?'bad':m.status==='processing'?'busy':'idle')+'">'+esc(m.status||(m.enabled?'Pending':'Disabled'))+'</span></td><td>'+esc(m.started_at?new Date(m.started_at).toLocaleString('en-GB',{timeZone:'UTC'}):'—')+'</td></tr>').join('');
 const html=String.raw`<!doctype html>
@@ -22,7 +23,7 @@ const html=String.raw`<!doctype html>
 <div class="field"><label for="filename">Output filename *</label><input id="filename" required placeholder="My Licensed Film.mp4" pattern="[^/\\\\]+\\.(mp4|mkv)"></div>
 <div class="field"><label for="type">Media format *</label><select id="type"><option value="mp4">MP4</option><option value="mkv">MKV</option></select></div>
 <div class="field full"><label for="caption">WhatsApp caption *</label><textarea id="caption" required maxlength="2048" placeholder="🎬 My Licensed Film (2026)"></textarea></div>
-<div class="field full"><label for="groups">Target group JIDs *</label><textarea id="groups" required placeholder="120363012345678901@g.us" spellcheck="false"></textarea><span class="hint">One group JID per line. Keep group IDs out of public posts; JSON files in public repositories can be read by anyone.</span></div>
+<div class="field full"><label for="groups">Select WhatsApp groups *</label><div id="group-picker" style="display:grid;gap:10px;border:1px solid #35384a;padding:15px;border-radius:10px;background:#0d101a">Loading groups…</div><span class="hint">Only groups explicitly approved for public listing are displayed. Selection saves their JIDs in the downloaded JSON.</span></div>
 <div class="field full"><label for="thumb">Custom thumbnail URL (optional)</label><input id="thumb" type="url" placeholder="https://example.com/thumbnail.jpg"></div>
 <div class="field full"><label class="check"><input id="rights" type="checkbox" required> I confirm I own this media or have explicit permission to redistribute it to these groups.</label></div>
 <div class="field full"><label class="check"><input id="enabled" type="checkbox" checked> Enable automatic processing after maintainer approval and merge to main.</label></div>
@@ -37,13 +38,24 @@ if(!form.reportValidity())return null;
 const id=document.getElementById('id').value.trim(),type=document.getElementById('type').value;
 const filename=document.getElementById('filename').value.trim();
 if(!/^[a-zA-Z0-9_-]{1,80}$/.test(id)||!filename.toLowerCase().endsWith('.'+type)){msg.textContent='Check the movie ID and file extension.';return null;}
-const groups=[...new Set(document.getElementById('groups').value.split(/[\\n,]+/).map(x=>x.trim()).filter(Boolean))];
+const groups=[...document.querySelectorAll('#group-picker input:checked')].map(x=>x.value);
 if(!groups.length||groups.some(x=>!/^\\d+(-\\d+)?@g\\.us$/.test(x))){msg.textContent='Enter valid group JIDs ending in @g.us.';return null;}
 return {id,title:document.getElementById('title').value.trim(),source_url:document.getElementById('url').value.trim(),filename,caption:document.getElementById('caption').value,group_ids:groups,license_confirmed:document.getElementById('rights').checked,enabled:document.getElementById('enabled').checked,thumbnail_url:document.getElementById('thumb').value.trim(),file_type:type};
 }
+fetch('./groups.json').then(r=>{if(!r.ok)throw Error('Group catalog unavailable');return r.json()}).then(data=>{
+ const root=document.getElementById('group-picker');root.textContent='';
+ if(!Array.isArray(data.groups)||!data.groups.length){root.textContent='No public groups configured yet.';return;}
+ for(const g of data.groups){
+  const label=document.createElement('label');label.className='check';
+  const input=document.createElement('input');input.type='checkbox';input.value=g.jid;
+  const span=document.createElement('span');span.textContent=g.name;
+  label.append(input,span);root.append(label);
+ }
+}).catch(()=>{document.getElementById('group-picker').textContent='Group list unavailable. Try again later.';});
 form.addEventListener('submit',e=>{e.preventDefault();const data=makeMovie();if(!data)return;const blob=new Blob([JSON.stringify(data,null,2)+'\\n'],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=data.id+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);msg.textContent='JSON downloaded. Add it to movies/ through a reviewed GitHub contribution.';});
 document.getElementById('copy').addEventListener('click',async()=>{const data=makeMovie();if(!data)return;try{await navigator.clipboard.writeText(JSON.stringify(data,null,2)+'\\n');msg.textContent='JSON copied to clipboard.';}catch{msg.textContent='Clipboard unavailable; use Download movie JSON.';}});
 </script></body></html>`;
 fs.mkdirSync('site',{recursive:true});
+if(!fs.existsSync('site/groups.json'))fs.writeFileSync('site/groups.json',JSON.stringify({groups:[],updated_at:null},null,2));
 fs.writeFileSync('site/index.html',html.replaceAll(String.fromCharCode(92)+'${','${').replace('${COUNTS_TOTAL}',String(counts.total)).replace('\${COUNTS_DONE}',String(counts.done)).replace('\${COUNTS_ACTIVE}',String(counts.active)).replace('\${ROWS}',rows).replace('\${EMPTY}',movies.length?'':'<p class="empty">No movie entries yet.</p>'));
 console.log('Generated premium dashboard for '+movies.length+' movies');
