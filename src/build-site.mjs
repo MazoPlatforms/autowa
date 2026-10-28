@@ -17,18 +17,14 @@ const html=String.raw`<!doctype html>
 <div class="stats"><div class="stat"><small>Total entries</small><strong>\${COUNTS_TOTAL}</strong></div><div class="stat"><small>Submitted</small><strong>\${COUNTS_DONE}</strong></div><div class="stat"><small>Processing</small><strong>\${COUNTS_ACTIVE}</strong></div></div>
 <section id="jobs"><div class="sectionhead"><div><h2>Processing activity</h2><p>Public metadata only. A submitted message is not proof of delivery.</p></div></div><div class="panel tablewrap"><table><thead><tr><th>Movie</th><th>Job ID</th><th>Status</th><th>Started · UTC</th></tr></thead><tbody>\${ROWS}</tbody></table>\${EMPTY}</div></section>
 <section id="create"><div class="sectionhead"><div><h2>Create a movie entry</h2><p>Fill in the fields and download a validated JSON draft. No login required.</p></div></div><div class="panel"><form id="movie-form" class="formgrid">
-<div class="field"><label for="id">Movie ID / filename *</label><input id="id" required maxlength="80" pattern="[a-zA-Z0-9_-]+" placeholder="my-licensed-film-2026"><span class="hint">Creates movies/your-id.json. This is not the job ID.</span></div>
 <div class="field"><label for="title">Movie title *</label><input id="title" required placeholder="My Licensed Film (2026)"></div>
 <div class="field full"><label for="url">Direct HTTPS download URL *</label><input id="url" required type="url" pattern="https://.*" placeholder="https://example.com/film.mp4"></div>
-<div class="field"><label for="filename">Output filename *</label><input id="filename" required placeholder="My Licensed Film.mp4" pattern="[^/\\\\]+\\.(mp4|mkv)"></div>
 <div class="field"><label for="type">Media format *</label><select id="type"><option value="mp4">MP4</option><option value="mkv">MKV</option></select></div>
-<div class="field full"><label for="caption">WhatsApp caption *</label><textarea id="caption" required maxlength="2048" placeholder="🎬 My Licensed Film (2026)"></textarea></div>
 <div class="field full"><label for="groups">Select WhatsApp groups *</label><div id="group-picker" style="display:grid;gap:10px;border:1px solid #35384a;padding:15px;border-radius:10px;background:#0d101a">Loading groups…</div><span class="hint">All joined WhatsApp groups are listed by name. Selection automatically saves their JIDs in the downloaded JSON.</span></div>
 <div class="field full"><label>Personal WhatsApp recipients (optional)</label><span class="hint">Only send to people who explicitly agreed to receive this media. Personal phone numbers will be included in the generated JSON; do not commit them to a public repository.</span></div>
 <div class="field"><label for="country">Country calling code</label><select id="country"><option value="94" selected>🇱🇰 Sri Lanka (+94)</option><option value="91">🇮🇳 India (+91)</option><option value="1">🇺🇸 USA / Canada (+1)</option><option value="44">🇬🇧 United Kingdom (+44)</option><option value="971">🇦🇪 UAE (+971)</option><option value="966">🇸🇦 Saudi Arabia (+966)</option><option value="60">🇲🇾 Malaysia (+60)</option><option value="65">🇸🇬 Singapore (+65)</option><option value="61">🇦🇺 Australia (+61)</option><option value="49">🇩🇪 Germany (+49)</option><option value="33">🇫🇷 France (+33)</option><option value="other">Other country code…</option></select></div>
 <div class="field"><label for="phone">Phone number</label><input id="phone" type="tel" inputmode="tel" autocomplete="off" placeholder="077 123 4567"><span class="hint">Local or international format. Use one recipient per line for multiple numbers.</span></div>
 <div class="field full" id="custom-code-field" hidden><label for="custom-code">Country calling code (digits only)</label><input id="custom-code" inputmode="numeric" placeholder="94" pattern="[0-9]{1,3}"></div>
-<div class="field full"><label for="thumb">Custom thumbnail URL (optional)</label><input id="thumb" type="url" placeholder="https://example.com/thumbnail.jpg"></div>
 <div class="field full"><label class="check"><input id="rights" type="checkbox" required> I confirm I own this media or have explicit permission to redistribute it to these groups.</label></div>
 <div class="field full"><label class="check"><input id="enabled" type="checkbox" checked> Enable automatic processing after maintainer approval and merge to main.</label></div>
 <div class="field full"><div class="formactions"><button class="btn" type="submit">Download movie JSON ↓</button><button class="btn secondary" type="button" id="copy">Copy JSON</button><a class="btn secondary" href="https://github.com/MazoPlatforms/autowa/new/main/movies" target="_blank" rel="noopener">Add file on GitHub ↗</a></div><div class="toast" id="message" role="status"></div><p class="note">This site is static: downloading or copying JSON does not submit it to GitHub. Upload the file through a reviewed pull request or an authorized commit. The server assigns <code>job_id</code> when processing begins.</p></div>
@@ -39,9 +35,11 @@ const html=String.raw`<!doctype html>
 const form=document.getElementById('movie-form'),msg=document.getElementById('message');
 function makeMovie(){
 if(!form.reportValidity())return null;
-const id=document.getElementById('id').value.trim(),type=document.getElementById('type').value;
-const filename=document.getElementById('filename').value.trim();
-if(!/^[a-zA-Z0-9_-]{1,80}$/.test(id)||!filename.toLowerCase().endsWith('.'+type)){msg.textContent='Check the movie ID and file extension.';return null;}
+const title=document.getElementById('title').value.trim(),type=document.getElementById('type').value;
+const id=title.toLowerCase().normalize('NFKD').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,70);
+if(!id){msg.textContent='Enter a movie title with Latin letters or numbers.';return null;}
+const filename=('mzn.is-a.dev - '+title+' - 1080p.'+type).replace(/[\/\x00-\x1f]/g,'').slice(0,180);
+const caption=['🎬 TAMIL FILMS WORLD','','🎞️ '+title,'','🍿 Enjoy the Movie!','','⚡ Powered by Itz Maazin','🌐 https://mzn.is-a.dev/'].join(String.fromCharCode(10));
 const groups=[...document.querySelectorAll('#group-picker input:checked')].map(x=>x.value);
 if(groups.some(x=>!/^\d+(-\d+)?@g\.us$/.test(x))){msg.textContent='Invalid group selection.';return null;}
 const countrySelect=document.getElementById('country');
@@ -58,7 +56,7 @@ for(const line of lines){
  recipient_jids.push(digits+'@s.whatsapp.net');
 }
 if(!groups.length&&!recipient_jids.length){msg.textContent='Select a group or enter a personal recipient.';return null;}
-return {recipient_jids:[...new Set(recipient_jids)],id,title:document.getElementById('title').value.trim(),source_url:document.getElementById('url').value.trim(),filename,caption:document.getElementById('caption').value,group_ids:groups,license_confirmed:document.getElementById('rights').checked,enabled:document.getElementById('enabled').checked,thumbnail_url:document.getElementById('thumb').value.trim(),file_type:type};
+return {recipient_jids:[...new Set(recipient_jids)],id,title,source_url:document.getElementById('url').value.trim(),filename,caption,group_ids:groups,license_confirmed:document.getElementById('rights').checked,enabled:document.getElementById('enabled').checked,thumbnail_url:'https://i.ibb.co/8L3RB6Qh/Itz-Maazin-20261027-155011.jpg',file_type:type};
 }
 fetch('./groups.json').then(r=>{if(!r.ok)throw Error('Group catalog unavailable');return r.json()}).then(data=>{
  const root=document.getElementById('group-picker');root.textContent='';
