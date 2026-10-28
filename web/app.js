@@ -57,6 +57,7 @@ async function refreshAccount(){
  const user=await response.json();
  $('account-number').textContent='WhatsApp: '+user.number;
  $('profile-name').value=user.name||'';
+ $('avatar-initials').textContent=(user.name||user.number||'?').trim().split(/\s+/).slice(0,2).map(v=>v[0]||'').join('').toUpperCase();
  $('account-limits').textContent='Requests: '+user.used+' / '+user.limit+' used · '+user.remaining+' remaining ('+user.period+')';
  return user;
 }
@@ -65,7 +66,8 @@ function routeView(){
  $('verify').classList.add('hidden');
  $('account').classList.toggle('hidden',!signedIn||location.pathname!=='/profile');
  $('request').classList.toggle('hidden',!signedIn||location.pathname==='/profile');
- $('navigation').classList.toggle('hidden',!signedIn);
+ $('profile-avatar').classList.toggle('hidden',!signedIn||location.pathname==='/profile');
+ $('profile-back').classList.toggle('hidden',!signedIn||location.pathname!=='/profile');
  $('auth-intro').classList.toggle('hidden',signedIn);
 }
 async function showAccount(){
@@ -75,7 +77,8 @@ async function showAccount(){
  await loadMovies();
 }
 function navigate(path){history.pushState({},'',path);routeView();if(path==='/profile'&&signedIn)refreshAccount().catch(e=>msg(e.message));}
-document.querySelectorAll('[data-route]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();navigate(a.getAttribute('href'));}));
+$('profile-avatar').addEventListener('click',()=>navigate('/profile'));
+$('profile-back').addEventListener('click',()=>navigate('/'));
 window.addEventListener('popstate',routeView);
 $('save-profile').addEventListener('click',async()=>{
  const btn=$('save-profile');btn.disabled=true;
