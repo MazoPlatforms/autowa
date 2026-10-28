@@ -31,7 +31,21 @@ async function loadMovies(){
   $('movie-hint').textContent=movieResults.length+' movies available · Select a movie from the dropdown';
  }catch(e){$('movie-hint').textContent=e.message;}
 }
-movieSearch.addEventListener('input',()=>{$('movie-id').value='';renderMovies();});
+let movieTimer=0,movieQuerySequence=0;
+movieSearch.addEventListener('input',()=>{
+ $('movie-id').value='';
+ clearTimeout(movieTimer);
+ const query=movieSearch.value.trim(),sequence=++movieQuerySequence;
+ movieTimer=setTimeout(async()=>{
+  try{
+   const response=await fetch('/api/movies?q='+encodeURIComponent(query),{cache:'no-store'});
+   if(!response.ok)throw Error('Catalog search unavailable');
+   const data=await response.json();
+   if(sequence!==movieQuerySequence)return;
+   movieResults=data.movies||[];renderMovies();
+  }catch(e){$('movie-hint').textContent=e.message;}
+ },250);
+});
 movieSearch.addEventListener('focus',()=>{if(movieResults.length)renderMovies();});
 movieSearch.addEventListener('keydown',e=>{if(e.key==='Escape'){movieOptions.classList.add('hidden');movieSearch.setAttribute('aria-expanded','false');}});
 document.addEventListener('click',e=>{if(!e.target.closest('.movie-picker')){movieOptions.classList.add('hidden');movieSearch.setAttribute('aria-expanded','false');}});
