@@ -113,6 +113,7 @@ const server=http.createServer(async(req,res)=>{
    const used=Number(await redis('GET','rate:'+hmac('submit:'+session.number))||0);
    return send(res,200,{number:session.number,name:user.name||'',limit:3,used:Math.min(used,3),remaining:Math.max(0,3-used),period:'rolling rate window (up to 24 hours)'});
   }
+  if(req.method==='GET'&&url.pathname==='/api/version')return send(res,200,{version:'20261028-3',catalog_sync:'single-flight'});
   if(req.method==='GET'&&url.pathname==='/api/catalog-status')return send(res,200,{state:telegramCatalogStatus.state,updated_at:telegramCatalogStatus.updated_at,error:telegramCatalogStatus.error,telegram_configured:telegramReady});
   if(req.method==='GET'&&url.pathname==='/health'){return send(res,200,{ok:true});}
   if(req.method==='GET'&&(url.pathname==='/'||url.pathname==='/profile')){res.writeHead(200,{'Content-Type':'text/html; charset=utf-8','Cache-Control':'no-store','X-Content-Type-Options':'nosniff','Content-Security-Policy':"default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src 'self'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'"});return res.end(index);}
