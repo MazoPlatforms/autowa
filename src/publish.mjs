@@ -63,7 +63,7 @@ sock.ev.on('connection.update',u=>{if(u.connection==='close'){connectionClosed=t
 
 const miB=n=>(n/1048576).toFixed(1);
 function requesterProgress(sock,j){
- const jid=(j.recipient_jids||[]).find(v=>/^\\d{8,15}@s\\.whatsapp\\.net$/.test(v));
+ const jid=(j.recipient_jids||[]).find(v=>/^\d{8,15}@s\.whatsapp\.net$/.test(v));
  let key=null,last='',lastAt=0,chain=Promise.resolve();
  const label=String(j.title||'Movie').slice(0,100);
  const update=(message,force=false)=>{
@@ -71,7 +71,7 @@ function requesterProgress(sock,j){
   chain=chain.then(async()=>{
    if(!force&&(message===last||Date.now()-lastAt<12000))return;
    try{
-    const payload={text:'🎬 Tamil Films World\\n\\n🎞️ '+label+'\\n\\n'+message};
+    const payload={text:'🎬 Tamil Films World\n\n🎞️ '+label+'\n\n'+message};
     if(key)payload.edit=key;
     const result=await sock.sendMessage(jid,payload);
     if(!key&&result?.key?.id)key=result.key;
@@ -89,9 +89,9 @@ async function downloadWithProgress(args,onProgress){
   child.stdout.setEncoding('utf8');
   child.stdout.on('data',chunk=>{
    stdout+=chunk;
-   const lines=stdout.split('\\n');stdout=lines.pop();
+   const lines=stdout.split('\n');stdout=lines.pop();
    for(const line of lines){
-    const match=/^PROGRESS (\\d+) (\\d+)$/.exec(line.trim());
+    const match=/^PROGRESS (\d+) (\d+)$/.exec(line.trim());
     if(match)onProgress(Number(match[1]),Number(match[2]));
     else if(line.trim())console.log(line.trim());
    }
