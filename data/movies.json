@@ -25,7 +25,8 @@
       ],
       "plot": "A young girl is torn between an obsessive lover and a mild-mannered suitor.",
       "imdb_rating": "7.6",
-      "metadata_status": "matched"
+      "metadata_status": "matched",
+      "slug_id": "tfw-ydqusmlrw02bcfc3"
     },
     {
       "id": "telegram-8",
@@ -49,7 +50,8 @@
       ],
       "plot": "Follows two strangers brought together at an unusual wedding where, in one night, too many surprises unfold and several lies are told, spiraling into chaos that changes everything.",
       "imdb_rating": "8.9",
-      "metadata_status": "matched"
+      "metadata_status": "matched",
+      "slug_id": "tfw-kl0aqkpzj64icj2q"
     }
   ]
 }
