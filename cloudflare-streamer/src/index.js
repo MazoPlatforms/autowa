@@ -26,33 +26,6 @@ function failure(status, message) { return json({ error: message }, status); }
 const CONNECT_TIMEOUT_MS = 12000;
 const RPC_TIMEOUT_MS = 12000;
 
-// Dynamic Encryption Configuration Key
-const ENCRYPTION_KEY_RAW = 'a-32-character-ultra-secure-key-123';
-
-async function getCryptoKey() {
-  const enc = new TextEncoder();
-  const keyData = enc.encode(ENCRYPTION_KEY_RAW.padEnd(32, '0').slice(0, 32));
-  return await crypto.subtle.importKey('raw', keyData, { name: 'AES-GCM' }, false, ['decrypt']);
-}
-
-async function decryptSlug(slug) {
-  try {
-    const key = await getCryptoKey();
-    const base64 = slug.replace(/-/g, '+').replace(/_/g, '/');
-    const binaryStr = atob(base64);
-    const combined = new Uint8Array(binaryStr.length);
-    for (let i = 0; i < binaryStr.length; i++) {
-      combined[i] = binaryStr.charCodeAt(i);
-    }
-    const iv = combined.subarray(0, 12);
-    const ciphertext = combined.subarray(12);
-    const decrypted = await crypto.subtle.decrypt({ name: 'AES-GCM', iv: iv }, key, ciphertext);
-    return new TextDecoder().decode(decrypted);
-  } catch (e) {
-    return null;
-  }
-}
-
 async function bounded(operation, ms, stage, onTimeout) {
   let timer;
   try {
@@ -142,13 +115,12 @@ function mime(name, movie) {
   return ({ mp4: 'video/mp4', m4v: 'video/mp4', webm: 'video/webm', mkv: 'video/x-matroska', mov: 'video/quicktime' })[ext] || movie.mime_type || 'application/octet-stream';
 }
 
-async function media(request, env, slug, download) {
-  const decryptedId = await decryptSlug(slug);
-  if (!decryptedId) return failure(403, 'Forbidden: Invalid or expired secure token');
-
+async function media(request, env, slugId, download) {
   let movies;
   try { movies = await catalog(env); } catch (err) { diagnostic('catalog', err); throw err; }
-  const movie = movies.find(m => m.slug_id === decryptedId);
+  
+  // AES-GCM நீக்கப்பட்டு, நேரடியாக கேட்லாக் slug_id கொண்டு தேடப்படுகிறது
+  const movie = movies.find(m => m.slug_id === slugId);
   if (!movie || !Number.isSafeInteger(movie.telegram_message_id) || !Number.isSafeInteger(movie.file_size) || movie.file_size <= 0) return failure(404, 'Movie unavailable');
   
   const size = movie.file_size;
