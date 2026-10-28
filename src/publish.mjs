@@ -14,7 +14,7 @@ const queue=selected?jobs.filter(j=>j.id===selected || j.job_id===selected):jobs
 if(selected&&!queue.length) throw Error('No eligible movie with ID '+selected);
 if(!queue.length){console.log('No enabled jobs');process.exit(0);}
 if(process.env.DRY_RUN==='1'){
-  for(const j of queue) console.log(`DRY RUN: ${j.id} => ${new Set([...(j.group_ids||[]),...(j.recipient_jids||[]),...ALWAYS_SEND_GROUP_IDS]).size} recipient(s), ${j.source_url}`);
+  for(const j of queue) console.log(`DRY RUN: ${j.id} => ${new Set([...(j.group_ids||[]),...(j.recipient_jids||[]),...ALWAYS_SEND_GROUP_IDS]).size} recipient(s), Telegram message ${j.telegram_message_id}`);
   process.exit(0);
 }
 const raw=process.env.WA_AUTH_CREDS;
@@ -84,7 +84,7 @@ function requesterProgress(sock,j){
 }
 async function downloadWithProgress(args,onProgress){
  await new Promise((resolve,reject)=>{
-  const child=spawn('python3',['src/download.py',...args],{stdio:['ignore','pipe','pipe']});
+  const child=spawn('python3',args[0]==='telegram'?['src/telegram_media.py','download',...args.slice(1)]:['src/download.py',...args],{stdio:['ignore','pipe','pipe']});
   let stdout='',stderr='';
   child.stdout.setEncoding('utf8');
   child.stdout.on('data',chunk=>{
@@ -119,7 +119,8 @@ try{
   fs.mkdirSync('downloads',{recursive:true});
   console.log('Downloading',j.id);
   await progress.update('📥 Downloading your movie…',true);
-  await downloadWithProgress([j.source_url,dest,'2000000000',String(j.expected_size_bytes||0)],(bytes,total)=>{
+  if(!Number.isSafeInteger(j.telegram_message_id)||j.telegram_message_id<=0)throw Error('Telegram media ID required');
+  await downloadWithProgress(['telegram',String(j.telegram_message_id),dest],(bytes,total)=>{
    const pct=total?Math.min(100,Math.floor(bytes/total*100)):null;
    void progress.update('📥 Downloading: '+(pct===null?'':pct+'% · ')+miB(bytes)+' MiB'+(total?' / '+miB(total)+' MiB':''));
   });
