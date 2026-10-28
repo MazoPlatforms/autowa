@@ -23,6 +23,7 @@ async function redis(...args){
 }
 const telegramReady=['TELEGRAM_API_ID','TELEGRAM_API_HASH','TELEGRAM_SESSION','TELEGRAM_CHANNEL_ID'].every(k=>!!process.env[k]);
 let syncPromise=null;
+let telegramAuthBlocked=false;
 let telegramCatalogStatus={state:'starting',updated_at:null,error:null};
 function telegramError(err){
  const stderr=String(err.stderr||'').trim();
@@ -30,7 +31,7 @@ function telegramError(err){
  return ['exit='+String(err.code??'unknown'),'signal='+String(err.signal??'none'),lines.slice(-5).join(' | ')||String(err.message)].join('; ').slice(0,700);
 }
 async function refreshCatalog(){
- if(!configured||!telegramReady)return;
+ if(!configured||!telegramReady||telegramAuthBlocked)return;
  if(syncPromise)return syncPromise;
  syncPromise=(async()=>{
   telegramCatalogStatus={...telegramCatalogStatus,state:'syncing'};
@@ -44,6 +45,12 @@ async function refreshCatalog(){
    console.log('Telegram catalog refreshed:',data.movies.length,'media items');
   }catch(err){
    const error=telegramError(err);
+   if(/AuthKeyUnregisteredError|AuthKeyInvalidError|SessionRevokedError|SessionExpiredError|UnauthorizedError/i.test(error)){
+    telegramAuthBlocked=true;
+    telegramCatalogStatus={state:'auth_required',updated_at:Date.now(),error:'Telegram authentication expired or revoked; update TELEGRAM_SESSION and redeploy'};
+    console.error('Telegram authorization rejected; automatic retries suspended until restart with a renewed session');
+    return;
+   }
    telegramCatalogStatus={state:'error',updated_at:Date.now(),error};
    console.error('Telegram catalog refresh failed:',error);
   }
