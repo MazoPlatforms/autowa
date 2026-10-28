@@ -26,5 +26,6 @@ jobs:
           node --check src/whatsapp-otp.mjs
           node --check src/stage-request.mjs
           node --check web/app.js
+          test -s web/style.css
       - name: Container build
         run: docker build -t autowa-koyeb-check .
