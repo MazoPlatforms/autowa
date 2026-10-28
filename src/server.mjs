@@ -48,11 +48,13 @@ async function sendOtp(number,code){
 }
 const index=fs.readFileSync(new URL('../web/index.html',import.meta.url));
 const countries=fs.readFileSync(new URL('../site/countries.json',import.meta.url));
+const appJs=fs.readFileSync(new URL('../web/app.js',import.meta.url));
 const server=http.createServer(async(req,res)=>{
  try{
   const url=new URL(req.url,'http://localhost');
   if(req.method==='GET'&&url.pathname==='/health'){return send(res,200,{ok:true});}
   if(req.method==='GET'&&url.pathname==='/'){res.writeHead(200,{'Content-Type':'text/html; charset=utf-8','Cache-Control':'no-store','X-Content-Type-Options':'nosniff','Content-Security-Policy':"default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'"});return res.end(index);}
+  if(req.method==='GET'&&url.pathname==='/app.js'){res.writeHead(200,{'Content-Type':'text/javascript; charset=utf-8','Cache-Control':'no-store','X-Content-Type-Options':'nosniff'});return res.end(appJs);}
   if(req.method==='GET'&&url.pathname==='/countries.json'){res.writeHead(200,{'Content-Type':'application/json','Cache-Control':'public, max-age=86400'});return res.end(countries);}
   if(req.method!=='POST'||!['/api/otp/start','/api/otp/verify','/api/request'].includes(url.pathname))return send(res,404,{error:'Not found'});
   if(req.headers['content-type']?.split(';')[0]!=='application/json')return send(res,415,{error:'JSON required'});
