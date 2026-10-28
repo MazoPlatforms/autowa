@@ -1,6 +1,9 @@
 import http from 'node:http';
 import crypto from 'node:crypto';
 import fs from 'node:fs';
+import {execFile} from 'node:child_process';
+import {promisify} from 'node:util';
+const execFileAsync=promisify(execFile);
 import {startWhatsApp,isWhatsAppReady,sendWhatsAppOtp} from './whatsapp-otp.mjs';
 
 const PORT=Number(process.env.PORT||8000);
@@ -17,6 +20,25 @@ async function redis(...args){
  const r=await fetch(redisBase,{method:'POST',headers:{Authorization:'Bearer '+redisToken,'Content-Type':'application/json'},body:JSON.stringify(args),signal:AbortSignal.timeout(10000)});
  if(!r.ok)throw Error('Persistent store unavailable');
  const data=await r.json();if(data.error)throw Error('Persistent store error');return data.result;
+}
+const telegramReady=['TELEGRAM_API_ID','TELEGRAM_API_HASH','TELEGRAM_SESSION','TELEGRAM_CHANNEL_ID'].every(k=>!!process.env[k]);
+let indexing=false;
+async function indexTelegram(){
+ if(!configured||!telegramReady||indexing)return;
+ indexing=true;
+ try{
+  const {stdout}=await execFileAsync('python3',['src/telegram_media.py','index'],{timeout:180000,maxBuffer:3*1024*1024,env:process.env});
+  const data=JSON.parse(stdout);
+  if(!Array.isArray(data.movies))throw Error('Invalid catalog');
+  await redis('SET','telegram:catalog:v1',JSON.stringify(data),'EX',7200);
+  console.log('Telegram catalog refreshed:',data.movies.length,'media items');
+ }catch(e){console.error('Telegram catalog refresh failed:',e.message);}
+ finally{indexing=false;}
+}
+setTimeout(()=>{void indexTelegram();setInterval(()=>void indexTelegram(),15*60*1000).unref();},3000).unref();
+async function getCatalog(){
+ const raw=await redis('GET','telegram:catalog:v1');
+ return raw?JSON.parse(raw):null;
 }
 async function limit(key,max,seconds){
  const name='rate:'+hmac(key),n=Number(await redis('INCR',name));
@@ -46,6 +68,14 @@ const stylesheet=fs.readFileSync(new URL('../web/style.css',import.meta.url));
 const server=http.createServer(async(req,res)=>{
  try{
   const url=new URL(req.url,'http://localhost');
+  if(req.method==='GET'&&url.pathname==='/api/movies'){
+   if(!configured||!telegramReady)return send(res,503,{error:'Movie catalog not configured'});
+   const catalog=await getCatalog();
+   if(!catalog)return send(res,503,{error:'Movie catalog is syncing. Try again shortly.'});
+   const query=(url.searchParams.get('q')||'').trim().toLowerCase().slice(0,100);
+   const matches=catalog.movies.filter(m=>!query||m.title.toLowerCase().includes(query)||m.filename.toLowerCase().includes(query)).slice(0,50);
+   return send(res,200,{movies:matches,indexed_at:catalog.indexed_at});
+  }
   if(req.method==='GET'&&url.pathname==='/health'){return send(res,200,{ok:true});}
   if(req.method==='GET'&&url.pathname==='/'){res.writeHead(200,{'Content-Type':'text/html; charset=utf-8','Cache-Control':'no-store','X-Content-Type-Options':'nosniff','Content-Security-Policy':"default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src 'self'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'"});return res.end(index);}
   if(req.method==='GET'&&url.pathname==='/style.css'){res.writeHead(200,{'Content-Type':'text/css; charset=utf-8','Cache-Control':'public, max-age=3600','X-Content-Type-Options':'nosniff'});return res.end(stylesheet);}
@@ -85,17 +115,16 @@ const server=http.createServer(async(req,res)=>{
   const session=verifyToken(data.token);
   if(!session||await redis('GET','session:'+hmac(session.nonce))!==session.number)return send(res,401,{error:'Verify your WhatsApp number first'});
   if(!await limit('submit:'+session.number,3,86400))return send(res,429,{error:'Daily request limit reached'});
-  if(typeof data.title!=='string'||data.title.trim().length<2||data.title.length>140||typeof data.source_url!=='string'||data.source_url.length>2048||data.rights_confirmed!==true)return send(res,400,{error:'Title, HTTPS URL and rights confirmation required'});
-  let source;try{source=new URL(data.source_url);}catch{return send(res,400,{error:'Invalid URL'});}
-  if(source.protocol!=='https:'||source.username||source.password||source.port||source.hostname==='localhost')return send(res,400,{error:'Public HTTPS URL required'});
-  const expectedSizeMiB=data.expected_size_mib;
-  if(expectedSizeMiB!=null&&(!Number.isFinite(expectedSizeMiB)||expectedSizeMiB<1||expectedSizeMiB>1907))return send(res,400,{error:'Expected size must be between 1 and 1907 MiB'});
+  if(data.rights_confirmed!==true||!Number.isSafeInteger(data.movie_id)||data.movie_id<=0)return send(res,400,{error:'Select a movie and confirm distribution rights'});
+  const catalog=await getCatalog();
+  const movie=catalog?.movies?.find(m=>m.id===data.movie_id);
+  if(!movie)return send(res,400,{error:'Selected movie unavailable; refresh the catalog'});
   const claim=await redis('SET','claim:'+hmac(session.nonce),'1','EX',900,'NX');
   if(claim!=='OK')return send(res,409,{error:'Request already submitted'});
   const requestId=crypto.randomUUID();
   const [owner,repo]=process.env.GITHUB_REPOSITORY.split('/');
   if(!owner||!repo)throw Error('Invalid GITHUB_REPOSITORY');
-  const payload={request_id:requestId,title:data.title.trim(),source_url:source.toString(),recipient_jid:session.number.slice(1)+'@s.whatsapp.net',rights_confirmed:true,expected_size_bytes:expectedSizeMiB==null?null:Math.round(expectedSizeMiB*1048576)};
+  const payload={request_id:requestId,title:movie.title,movie_id:movie.id,recipient_jid:session.number.slice(1)+'@s.whatsapp.net',rights_confirmed:true,expected_size_bytes:expectedSizeMiB==null?null:Math.round(expectedSizeMiB*1048576)};
   const result=await fetch('https://api.github.com/repos/'+encodeURIComponent(owner)+'/'+encodeURIComponent(repo)+'/dispatches',{
    method:'POST',headers:{Authorization:'Bearer '+process.env.GITHUB_DISPATCH_TOKEN,Accept:'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28','Content-Type':'application/json'},
    body:JSON.stringify({event_type:'autowa-verified-request',client_payload:payload}),signal:AbortSignal.timeout(15000)
