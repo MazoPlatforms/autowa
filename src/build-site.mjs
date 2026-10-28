@@ -45,5 +45,5 @@ form.addEventListener('submit',e=>{e.preventDefault();const data=makeMovie();if(
 document.getElementById('copy').addEventListener('click',async()=>{const data=makeMovie();if(!data)return;try{await navigator.clipboard.writeText(JSON.stringify(data,null,2)+'\\n');msg.textContent='JSON copied to clipboard.';}catch{msg.textContent='Clipboard unavailable; use Download movie JSON.';}});
 </script></body></html>`;
 fs.mkdirSync('site',{recursive:true});
-fs.writeFileSync('site/index.html',html.replace('\${COUNTS_TOTAL}',String(counts.total)).replace('\${COUNTS_DONE}',String(counts.done)).replace('\${COUNTS_ACTIVE}',String(counts.active)).replace('\${ROWS}',rows).replace('\${EMPTY}',movies.length?'':'<p class="empty">No movie entries yet.</p>'));
+fs.writeFileSync('site/index.html',html.replaceAll(String.fromCharCode(92)+'${','${').replace('${COUNTS_TOTAL}',String(counts.total)).replace('\${COUNTS_DONE}',String(counts.done)).replace('\${COUNTS_ACTIVE}',String(counts.active)).replace('\${ROWS}',rows).replace('\${EMPTY}',movies.length?'':'<p class="empty">No movie entries yet.</p>'));
 console.log('Generated premium dashboard for '+movies.length+' movies');
