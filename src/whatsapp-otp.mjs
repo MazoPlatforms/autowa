@@ -30,8 +30,12 @@ async function authState(){
  else if(process.env.WA_OTP_AUTH_CREDS){
   try{creds=JSON.parse(process.env.WA_OTP_AUTH_CREDS,BufferJSON.reviver);}
   catch{throw Error('WA_OTP_AUTH_CREDS is not valid JSON');}
-  // Registered credentials without the matching Signal key files are insufficient.
-  // Prefer a fresh QR pairing, which persists both credentials and keys.
+  // A standalone registered creds.json cannot restore Signal sessions without matching keys.
+  // Start a fresh QR pairing instead of accepting an unusable partial session.
+  if(creds.registered===true){
+   console.warn('WA_OTP_AUTH_CREDS contains registered creds without Signal keys; fresh QR pairing required. Existing seed ignored.');
+   creds=initAuthCreds();
+  }
   await redis('SET',prefix+'creds',encrypt(creds));
  }else creds=initAuthCreds();
  const keys={
