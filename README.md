@@ -36,3 +36,16 @@ The included sample is disabled and its URL is a placeholder. Real delivery cann
 - To enable the public dashboard, GitHub Settings → Pages → Build and deployment → Source: **GitHub Actions**. The dashboard displays only movie title, job ID, status, and start time. It does not display source URLs, group IDs, or credentials.
 - GitHub Actions job results are not proof of delivery. If the process crashes before its state commit, a future run can retry; this starter cannot guarantee exactly-once delivery.
 - Publishing depends on the `production` environment secret `WA_AUTH_CREDS`. Authentication may fail with only `creds.json` because Baileys normally needs additional persisted keys.
+
+## Premium GitHub Pages site
+The dashboard uses Google Fonts Inter, mobile-friendly cards, status tracking, and a browser-only movie JSON builder. Open the Pages URL after selecting GitHub Actions as the Pages deployment source. The form downloads or copies JSON; it cannot write directly to GitHub without authentication. Upload `<id>.json` to `movies/` through a reviewed contribution.
+
+## How to find a WhatsApp group JID
+Use a trusted local machine with an existing, paired Baileys auth directory containing `creds.json` and its other Signal key files:
+```bash
+npm install
+WA_AUTH_DIR=/private/path/to/auth npm run groups
+```
+This prints each joined group's **name** and **JID** locally. Never paste credentials into the public website. Group invite links and visible group names are not reliable substitutes for JIDs.
+
+**Privacy:** A movie JSON committed to a public repository exposes its `group_ids` to the public. Do not publish private group identifiers; use a private repo or change the system to use secret-side group aliases before production use. The dashboard itself does not display JIDs.
