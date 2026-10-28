@@ -1,6 +1,6 @@
 name = "filmgo-streamer"
 main = "src/index.js"
-compatibility_date = "2026-10-29"
+compatibility_date = "2026-10-28"
 compatibility_flags = ["nodejs_compat"]
 
 [vars]
