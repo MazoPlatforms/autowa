@@ -21,9 +21,17 @@ const html=String.raw`<!doctype html>
 <div class="field full"><label for="url">Direct HTTPS download URL *</label><input id="url" required type="url" pattern="https://.*" placeholder="https://example.com/film.mp4"></div>
 <div class="field full"><label for="groups">Select WhatsApp groups *</label><div id="group-picker" style="display:grid;gap:10px;border:1px solid #35384a;padding:15px;border-radius:10px;background:#0d101a">Loading groups…</div><span class="hint">All joined WhatsApp groups are listed by name. Selection automatically saves their JIDs in the downloaded JSON.</span></div>
 <div class="field full"><label>Personal WhatsApp recipients (optional)</label><span class="hint">Only send to people who explicitly agreed to receive this media. Personal phone numbers will be included in the generated JSON; do not commit them to a public repository.</span></div>
-<div class="field"><label for="country">Country calling code</label><select id="country"><option value="94" selected>🇱🇰 Sri Lanka (+94)</option><option value="91">🇮🇳 India (+91)</option><option value="1">🇺🇸 USA / Canada (+1)</option><option value="44">🇬🇧 United Kingdom (+44)</option><option value="971">🇦🇪 UAE (+971)</option><option value="966">🇸🇦 Saudi Arabia (+966)</option><option value="60">🇲🇾 Malaysia (+60)</option><option value="65">🇸🇬 Singapore (+65)</option><option value="61">🇦🇺 Australia (+61)</option><option value="49">🇩🇪 Germany (+49)</option><option value="33">🇫🇷 France (+33)</option><option value="other">Other country code…</option></select></div>
-<div class="field"><label for="phone">Phone number</label><input id="phone" type="tel" inputmode="tel" autocomplete="off" placeholder="077 123 4567"><span class="hint">Local or international format. Use one recipient per line for multiple numbers.</span></div>
-<div class="field full" id="custom-code-field" hidden><label for="custom-code">Country calling code (digits only)</label><input id="custom-code" inputmode="numeric" placeholder="94" pattern="[0-9]{1,3}"></div>
+<div class="field full"><label class="check"><input type="checkbox" id="send-personally"> Send personally to WhatsApp number(s)</label></div>
+<div class="field full" id="personal-fields" hidden style="grid-column:1/-1">
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px">
+    <div class="field"><label for="country-search">Country / region</label>
+      <input id="country-search" type="text" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="country-options" autocomplete="off" placeholder="Search country or calling code…" value="🇱🇰 Sri Lanka (+94)">
+      <div id="country-options" role="listbox" hidden style="max-height:230px;overflow-y:auto;background:#151927;border:1px solid #44495b;border-radius:12px;margin-top:6px;padding:5px"></div>
+      <span class="hint" id="country-status">Sri Lanka (+94)</span>
+    </div>
+    <div class="field"><label for="phone">WhatsApp phone number(s)</label><textarea id="phone" rows="3" inputmode="tel" placeholder="077 123 4567" autocomplete="off"></textarea><span class="hint">One number per line; local or +international format.</span></div>
+  </div>
+</div>
 <div class="field full"><div class="formactions"><button class="btn" type="submit">Download movie JSON ↓</button><button class="btn secondary" type="button" id="copy">Copy JSON</button><a class="btn secondary" href="https://github.com/MazoPlatforms/autowa/new/main/movies" target="_blank" rel="noopener">Add file on GitHub ↗</a></div><div class="toast" id="message" role="status"></div><p class="note">This site is static: downloading or copying JSON does not submit it to GitHub. Upload the file through a reviewed pull request or an authorized commit. The server assigns <code>job_id</code> when processing begins.</p></div>
 </form></div></section>
 <section id="group-help"><div class="sectionhead"><div><h2>Find your WhatsApp group JID</h2><p>A group name and a group JID are different values.</p></div></div><div class="guide"><div class="guidecard"><h3>01 · Identify the group</h3><p>Use a WhatsApp account that is already a member of the group. Group JIDs typically look like <code>120363012345678901@g.us</code>. They cannot be reliably derived from a group invite link or its visible name.</p></div><div class="guidecard"><h3>02 · Retrieve it privately</h3><p>Run the repository's local <code>npm run groups</code> command on a trusted computer with an existing Baileys auth directory. It lists each joined group's <b>name</b> and <b>JID</b>. Never upload session files or authentication credentials to GitHub Pages.</p></div></div><p class="note">Group membership and JIDs are sensitive. The public website lists the groups synchronized during the latest Pages build; it does not connect to WhatsApp directly.</p></section>
@@ -37,10 +45,11 @@ const id=title.toLowerCase().normalize('NFKD').replace(/[^a-z0-9]+/g,'-').replac
 if(!id){msg.textContent='Enter a movie title with Latin letters or numbers.';return null;}
 const groups=[...document.querySelectorAll('#group-picker input:checked')].map(x=>x.value);
 if(groups.some(x=>!/^\d+(-\d+)?@g\.us$/.test(x))){msg.textContent='Invalid group selection.';return null;}
-const countrySelect=document.getElementById('country');
-const code=countrySelect.value==='other'?document.getElementById('custom-code').value.trim():countrySelect.value;
-const lines=document.getElementById('phone').value.split(/[\n,;]+/).map(x=>x.trim()).filter(Boolean);
-if(lines.length&&!/^\d{1,3}$/.test(code)){msg.textContent='Enter a valid country calling code.';return null;}
+const personalEnabled=document.getElementById('send-personally').checked;
+const code=selectedCountry?.dial||'';
+const lines=personalEnabled?document.getElementById('phone').value.split(/[\n,;]+/).map(x=>x.trim()).filter(Boolean):[];
+if(personalEnabled&&!lines.length){msg.textContent='Enter at least one personal phone number.';return null;}
+if(lines.length&&(!selectedCountry||!/^\d{1,5}$/.test(code))){msg.textContent='Enter a valid country calling code.';return null;}
 const recipient_jids=[];
 for(const line of lines){
  let digits=line.replace(/[^0-9+]/g,'');
@@ -63,7 +72,34 @@ fetch('./groups.json').then(r=>{if(!r.ok)throw Error('Group catalog unavailable'
   label.append(input,span);root.append(label);
  }
 }).catch(()=>{document.getElementById('group-picker').textContent='Group list unavailable. Try again later.';});
-document.getElementById('country').addEventListener('change',e=>{document.getElementById('custom-code-field').hidden=e.target.value!=='other';});
+const personalToggle=document.getElementById('send-personally');
+const personalFields=document.getElementById('personal-fields');
+const countrySearch=document.getElementById('country-search');
+const countryOptions=document.getElementById('country-options');
+const countryStatus=document.getElementById('country-status');
+let selectedCountry={iso:'LK',name:'Sri Lanka',dial:'94'},countryList=[];
+const flagFor=iso=>iso.replace(/./g,c=>String.fromCodePoint(c.charCodeAt(0)+127397));
+const countryLabel=c=>flagFor(c.iso)+' '+c.name+' (+'+c.dial+')';
+personalToggle.addEventListener('change',()=>{personalFields.hidden=!personalToggle.checked;countrySearch.setAttribute('aria-expanded','false');countryOptions.hidden=true;});
+function showCountries(){
+ const term=countrySearch.value.toLowerCase().trim();
+ const matches=countryList.filter(c=>c.name.toLowerCase().includes(term)||c.iso.toLowerCase().includes(term)||('+'+c.dial).includes(term)).slice(0,75);
+ countryOptions.replaceChildren();
+ for(const c of matches){
+  const item=document.createElement('button');item.type='button';item.setAttribute('role','option');
+  item.textContent=countryLabel(c);item.style.cssText='display:block;width:100%;text-align:left;padding:10px 12px;border:0;border-radius:8px;background:transparent;color:inherit;cursor:pointer';
+  item.addEventListener('click',()=>{selectedCountry=c;countrySearch.value=countryLabel(c);countryStatus.textContent=c.name+' (+'+c.dial+')';countryOptions.hidden=true;countrySearch.setAttribute('aria-expanded','false');});
+  countryOptions.append(item);
+ }
+ if(!matches.length){countryOptions.textContent='No matching countries';}
+ countryOptions.hidden=false;countrySearch.setAttribute('aria-expanded','true');
+}
+countrySearch.addEventListener('focus',()=>{countrySearch.value='';showCountries();});
+countrySearch.addEventListener('input',()=>{selectedCountry=null;showCountries();});
+countrySearch.addEventListener('keydown',e=>{if(e.key==='Escape'){countryOptions.hidden=true;countrySearch.setAttribute('aria-expanded','false');}});
+countrySearch.addEventListener('blur',()=>{setTimeout(()=>{countryOptions.hidden=true;countrySearch.setAttribute('aria-expanded','false');if(selectedCountry)countrySearch.value=countryLabel(selectedCountry);},160);});
+fetch('./countries.json').then(r=>{if(!r.ok)throw Error('Country list unavailable');return r.json()}).then(data=>{countryList=data.countries||[];selectedCountry=countryList.find(c=>c.iso==='LK')||selectedCountry;countrySearch.value=countryLabel(selectedCountry);}).catch(()=>{countryStatus.textContent='Country list unavailable';countrySearch.disabled=true;});
+
 form.addEventListener('submit',e=>{e.preventDefault();const data=makeMovie();if(!data)return;const blob=new Blob([JSON.stringify(data,null,2)+'\n'],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=data.id+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);msg.textContent='JSON downloaded. Add it to movies/ through a reviewed GitHub contribution.';});
 document.getElementById('copy').addEventListener('click',async()=>{const data=makeMovie();if(!data)return;try{await navigator.clipboard.writeText(JSON.stringify(data,null,2)+'\n');msg.textContent='JSON copied to clipboard.';}catch{msg.textContent='Clipboard unavailable; use Download movie JSON.';}});
 </script></body></html>`;
