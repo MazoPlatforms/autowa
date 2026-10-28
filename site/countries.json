@@ -22,6 +22,11 @@
       "dial": "213"
     },
     {
+      "iso": "AS",
+      "name": "American Samoa",
+      "dial": "1684"
+    },
+    {
       "iso": "AD",
       "name": "Andorra",
       "dial": "376"
@@ -32,9 +37,19 @@
       "dial": "244"
     },
     {
+      "iso": "AI",
+      "name": "Anguilla",
+      "dial": "1264"
+    },
+    {
       "iso": "AQ",
       "name": "Antarctica",
       "dial": "672"
+    },
+    {
+      "iso": "AG",
+      "name": "Antigua & Barbuda",
+      "dial": "1268"
     },
     {
       "iso": "AR",
@@ -67,6 +82,11 @@
       "dial": "994"
     },
     {
+      "iso": "BS",
+      "name": "Bahamas",
+      "dial": "1242"
+    },
+    {
       "iso": "BH",
       "name": "Bahrain",
       "dial": "973"
@@ -75,6 +95,11 @@
       "iso": "BD",
       "name": "Bangladesh",
       "dial": "880"
+    },
+    {
+      "iso": "BB",
+      "name": "Barbados",
+      "dial": "1246"
     },
     {
       "iso": "BY",
@@ -95,6 +120,11 @@
       "iso": "BJ",
       "name": "Benin",
       "dial": "229"
+    },
+    {
+      "iso": "BM",
+      "name": "Bermuda",
+      "dial": "1441"
     },
     {
       "iso": "BT",
@@ -130,6 +160,11 @@
       "iso": "IO",
       "name": "British Indian Ocean Territory",
       "dial": "246"
+    },
+    {
+      "iso": "VG",
+      "name": "British Virgin Islands",
+      "dial": "1284"
     },
     {
       "iso": "BN",
@@ -175,6 +210,11 @@
       "iso": "BQ",
       "name": "Caribbean Netherlands",
       "dial": "599"
+    },
+    {
+      "iso": "KY",
+      "name": "Cayman Islands",
+      "dial": "1345"
     },
     {
       "iso": "CF",
@@ -275,6 +315,11 @@
       "iso": "DJ",
       "name": "Djibouti",
       "dial": "253"
+    },
+    {
+      "iso": "DM",
+      "name": "Dominica",
+      "dial": "1767"
     },
     {
       "iso": "EC",
@@ -397,9 +442,19 @@
       "dial": "299"
     },
     {
+      "iso": "GD",
+      "name": "Grenada",
+      "dial": "1473"
+    },
+    {
       "iso": "GP",
       "name": "Guadeloupe",
       "dial": "590"
+    },
+    {
+      "iso": "GU",
+      "name": "Guam",
+      "dial": "1671"
     },
     {
       "iso": "GT",
@@ -495,6 +550,11 @@
       "iso": "IT",
       "name": "Italy",
       "dial": "39"
+    },
+    {
+      "iso": "JM",
+      "name": "Jamaica",
+      "dial": "1876"
     },
     {
       "iso": "JP",
@@ -672,6 +732,11 @@
       "dial": "382"
     },
     {
+      "iso": "MS",
+      "name": "Montserrat",
+      "dial": "1664"
+    },
+    {
       "iso": "MA",
       "name": "Morocco",
       "dial": "212"
@@ -750,6 +815,11 @@
       "iso": "MK",
       "name": "North Macedonia",
       "dial": "389"
+    },
+    {
+      "iso": "MP",
+      "name": "Northern Mariana Islands",
+      "dial": "1670"
     },
     {
       "iso": "NO",
@@ -872,6 +942,11 @@
       "dial": "221"
     },
     {
+      "iso": "RS",
+      "name": "Serbia",
+      "dial": "381"
+    },
+    {
       "iso": "SC",
       "name": "Seychelles",
       "dial": "248"
@@ -885,6 +960,11 @@
       "iso": "SG",
       "name": "Singapore",
       "dial": "65"
+    },
+    {
+      "iso": "SX",
+      "name": "Sint Maarten",
+      "dial": "1721"
     },
     {
       "iso": "SK",
@@ -942,6 +1022,21 @@
       "dial": "590"
     },
     {
+      "iso": "SH",
+      "name": "St. Helena",
+      "dial": "290"
+    },
+    {
+      "iso": "KN",
+      "name": "St. Kitts & Nevis",
+      "dial": "1869"
+    },
+    {
+      "iso": "LC",
+      "name": "St. Lucia",
+      "dial": "1758"
+    },
+    {
       "iso": "MF",
       "name": "St. Martin",
       "dial": "590"
@@ -950,6 +1045,11 @@
       "iso": "PM",
       "name": "St. Pierre & Miquelon",
       "dial": "508"
+    },
+    {
+      "iso": "VC",
+      "name": "St. Vincent & Grenadines",
+      "dial": "1784"
     },
     {
       "iso": "SD",
@@ -1022,6 +1122,11 @@
       "dial": "676"
     },
     {
+      "iso": "TT",
+      "name": "Trinidad & Tobago",
+      "dial": "1868"
+    },
+    {
       "iso": "TN",
       "name": "Tunisia",
       "dial": "216"
@@ -1037,9 +1142,19 @@
       "dial": "993"
     },
     {
+      "iso": "TC",
+      "name": "Turks & Caicos Islands",
+      "dial": "1649"
+    },
+    {
       "iso": "TV",
       "name": "Tuvalu",
       "dial": "688"
+    },
+    {
+      "iso": "VI",
+      "name": "U.S. Virgin Islands",
+      "dial": "1340"
     },
     {
       "iso": "UG",
@@ -1080,6 +1195,11 @@
       "iso": "VU",
       "name": "Vanuatu",
       "dial": "678"
+    },
+    {
+      "iso": "VA",
+      "name": "Vatican City",
+      "dial": "3906"
     },
     {
       "iso": "VE",
