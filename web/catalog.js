@@ -2,8 +2,8 @@ const $=id=>document.getElementById(id);const grid=$('catalog-grid'),search=$('c
 const section=el('section','mt-9 max-w-3xl border-t border-zinc-800 pt-8');
 section.append(el('h2','mb-4 text-lg font-bold','Watch movie'));
 const video=el('video','w-full rounded-xl bg-black');
-video.controls=true;video.preload='none';video.playsInline=true;
-if(poster(m))video.poster=poster(m);
+video.controls=true;video.preload='metadata';video.playsInline=true;
+video.removeAttribute('poster');
 section.append(video);
 video.addEventListener('error',()=>{status.textContent='Playback failed. The video format may be unsupported or the Telegram media stream may have stopped.';});
 video.addEventListener('stalled',()=>{status.textContent='Video stalled while loading. Check the Telegram streaming connection.';});
