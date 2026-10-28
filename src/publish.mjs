@@ -71,7 +71,7 @@ function requesterProgress(sock,j){
   chain=chain.then(async()=>{
    if(!force&&(message===last||Date.now()-lastAt<12000))return;
    try{
-    const payload={text:'🎬 Tamil Films World\n\n🎞️ '+label+'\n\n'+message};
+    const payload={text:'🎬 FilmGo\n\n🎞️ '+label+'\n\n'+message};
     if(key)payload.edit=key;
     const result=await sock.sendMessage(jid,payload);
     if(!key&&result?.key?.id)key=result.key;
@@ -137,7 +137,7 @@ try{
   const year=String(j.year||'Unknown Year');
   const quality=String(j.quality||'Unknown Quality');
   const filename=('mzn.is-a.dev - '+movieName+' ('+year+') - '+quality+'.'+type).replace(/[\\/\\x00-\\x1f]/g,'').slice(0,180);
-  const caption=['🎬 TAMIL FILMS WORLD','','🎞️ '+j.title,'','🍿 Enjoy the Movie!','','⚡ Powered by Itz Maazin','🌐 https://mzn.is-a.dev/'].join('\n');
+  const caption=['🎬 FILMGO','','🎞️ '+j.title,'','🍿 Enjoy the Movie!','','⚡ Powered by Itz Maazin','🌐 https://mzn.is-a.dev/'].join('\n');
   j.file_type=type;j.filename=filename;j.caption=caption;
   const thumbUrl='https://i.ibb.co/8L3RB6Qh/Itz-Maazin-20261027-155011.jpg';
   let thumbnail;
