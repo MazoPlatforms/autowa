@@ -1,9 +1,11 @@
 import fs from 'node:fs';
-const file=process.argv[2]||'movies/jobs.json';
-const data=JSON.parse(fs.readFileSync(file,'utf8'));
-if(!Array.isArray(data.jobs)) throw Error('jobs must be array');
+const dir='movies';
+const files=fs.readdirSync(dir).filter(n=>n.endsWith('.json')).sort();
+if(!files.length) throw Error('No movie JSON files found');
 const ids=new Set();
-for(const j of data.jobs){
+for(const file of files){
+  const j=JSON.parse(fs.readFileSync(dir+'/'+file,'utf8'));
+  if(file!==j.id+'.json') throw Error('Filename must match movie id: '+file);
   if(!/^[a-zA-Z0-9_-]{1,80}$/.test(j.id)) throw Error('Invalid job id');
   if(ids.has(j.id)) throw Error('Duplicate job id'); ids.add(j.id);
   if(typeof j.title!=='string'||!j.title.trim()) throw Error('Missing title');
@@ -18,4 +20,4 @@ for(const j of data.jobs){
   if(url.protocol!=='https:') throw Error('Source URL must be HTTPS');
   if(j.thumbnail_url && new URL(j.thumbnail_url).protocol!=='https:') throw Error('Thumbnail URL must be HTTPS');
 }
-console.log(`Validated ${data.jobs.length} jobs`);
+console.log(`Validated ${files.length} movie files`);
