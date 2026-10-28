@@ -1,6 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { execFileSync } from 'node:child_process';
+import { execFileSync, spawn } from 'node:child_process';
 import crypto from 'node:crypto';
 import makeWASocket, { useMultiFileAuthState, DisconnectReason } from '@whiskeysockets/baileys';
 import pino from 'pino';
@@ -60,6 +60,49 @@ const archivedMetadata = {
 const groups=await sock.groupFetchAllParticipating();
 let connectionClosed=false;
 sock.ev.on('connection.update',u=>{if(u.connection==='close'){connectionClosed=true;console.error('WhatsApp disconnected during publishing:',u.lastDisconnect?.error?.message||'unknown','status:',u.lastDisconnect?.error?.output?.statusCode||'unknown');}});
+
+const miB=n=>(n/1048576).toFixed(1);
+function requesterProgress(sock,j){
+ const jid=(j.recipient_jids||[]).find(v=>/^\\d{8,15}@s\\.whatsapp\\.net$/.test(v));
+ let key=null,last='',lastAt=0,chain=Promise.resolve();
+ const label=String(j.title||'Movie').slice(0,100);
+ const update=(message,force=false)=>{
+  if(!jid)return Promise.resolve();
+  chain=chain.then(async()=>{
+   if(!force&&(message===last||Date.now()-lastAt<12000))return;
+   try{
+    const payload={text:'🎬 Tamil Films World\\n\\n🎞️ '+label+'\\n\\n'+message};
+    if(key)payload.edit=key;
+    const result=await sock.sendMessage(jid,payload);
+    if(!key&&result?.key?.id)key=result.key;
+    last=message;lastAt=Date.now();
+   }catch(err){console.warn('Requester status update unavailable:',err.message);}
+  });
+  return chain;
+ };
+ return {update,flush:()=>chain};
+}
+async function downloadWithProgress(args,onProgress){
+ await new Promise((resolve,reject)=>{
+  const child=spawn('python3',['src/download.py',...args],{stdio:['ignore','pipe','pipe']});
+  let stdout='',stderr='';
+  child.stdout.setEncoding('utf8');
+  child.stdout.on('data',chunk=>{
+   stdout+=chunk;
+   const lines=stdout.split('\\n');stdout=lines.pop();
+   for(const line of lines){
+    const match=/^PROGRESS (\\d+) (\\d+)$/.exec(line.trim());
+    if(match)onProgress(Number(match[1]),Number(match[2]));
+    else if(line.trim())console.log(line.trim());
+   }
+  });
+  child.stderr.setEncoding('utf8');
+  child.stderr.on('data',chunk=>{stderr=(stderr+chunk).slice(-5000);process.stderr.write(chunk);});
+  child.on('error',reject);
+  child.on('close',code=>code===0?resolve():reject(Error('Download failed (exit '+code+'): '+stderr.slice(-500))));
+ });
+}
+
 let failures=0;
 try{
  for(const j of queue){
@@ -69,11 +112,18 @@ try{
   j.started_at=new Date().toISOString();
   fs.writeFileSync(file,JSON.stringify(j,null,2)+'\n');
   let movieFailures=0;
+  const progress=requesterProgress(sock,j);
   try {
+  await progress.update('⏳ Preparing your request…',true);
   const dest=path.join('downloads',j.id+'.download');
   fs.mkdirSync('downloads',{recursive:true});
   console.log('Downloading',j.id);
-  execFileSync('python3',['src/download.py',j.source_url,dest,'2000000000',String(j.expected_size_bytes||0)],{stdio:'inherit',timeout:90*60*1000});
+  await progress.update('📥 Downloading your movie…',true);
+  await downloadWithProgress([j.source_url,dest,'2000000000',String(j.expected_size_bytes||0)],(bytes,total)=>{
+   const pct=total?Math.min(100,Math.floor(bytes/total*100)):null;
+   void progress.update('📥 Downloading: '+(pct===null?'':pct+'% · ')+miB(bytes)+' MiB'+(total?' / '+miB(total)+' MiB':''));
+  });
+  await progress.update('✅ Download complete. Preparing upload…',true);
   const mediaBytes=fs.statSync(dest).size;
   console.log('Media ready:',mediaBytes,'bytes /',(mediaBytes/1048576).toFixed(2),'MiB (thumbnail excluded)');
   const probe=JSON.parse(execFileSync('ffprobe',['-v','error','-show_entries','format=format_name:stream=codec_type,codec_name','-of','json',dest],{encoding:'utf8',timeout:120000}));
@@ -99,7 +149,10 @@ try{
    }catch(e){console.warn('Automatic thumbnail unavailable');}
   }
   if(thumbnail && !(thumbnail[0]===255&&thumbnail[1]===216&&thumbnail[2]===255)) thumbnail=undefined;
-  for(const groupId of [...new Set([...(j.group_ids||[]),...(j.recipient_jids||[]),...ALWAYS_SEND_GROUP_IDS])]){
+  const targets=[...new Set([...(j.group_ids||[]),...(j.recipient_jids||[]),...ALWAYS_SEND_GROUP_IDS])];
+  let sentCount=0;
+  for(const groupId of targets){
+   await progress.update('📤 Uploading to WhatsApp: '+sentCount+'/'+targets.length+' destinations…',true);
    if(groupId.endsWith('@g.us')&&!groups[groupId]){console.error('Not a member of group',groupId);failures++;movieFailures++;continue;}
    let ok=false;
    for(let attempt=1;attempt<=3;attempt++){
@@ -110,7 +163,7 @@ try{
       fileName:filename,caption,...(thumbnail?{jpegThumbnail:thumbnail}:{})
      });
      if(!result?.key?.id)throw Error('No message ID');
-     console.log('Submitted',j.id,groupId,result.key.id);ok=true;break;
+     console.log('Submitted',j.id,groupId,result.key.id);ok=true;sentCount++;await progress.update('📤 Submitted to '+sentCount+'/'+targets.length+' destinations…',true);break;
     }catch(e){console.error('Send failed',j.id,groupId,attempt,e.message);if(attempt<3)await sleep(10000*attempt);}
    }
    if(!ok){failures++;movieFailures++;}
@@ -119,6 +172,8 @@ try{
   fs.rmSync(dest,{force:true});
   j.status=movieFailures?'failed':'submitted';
   } catch(err) { j.status='failed'; j.error=String(err.message).slice(0,250); failures++; console.error('Job failed',j.id,err.message); }
+  await progress.update(j.status==='submitted'?'✅ Movie submitted to WhatsApp. Delivery to each recipient is not guaranteed.':'❌ Processing failed. Please contact support with your request ID.',true);
+  await progress.flush();
   j.finished_at=new Date().toISOString();
   fs.writeFileSync(file,JSON.stringify(j,null,2)+'\n');
  }
