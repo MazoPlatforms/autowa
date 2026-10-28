@@ -19,7 +19,7 @@ const html=String.raw`<!doctype html>
 <section id="create"><div class="sectionhead"><div><h2>Create a movie entry</h2><p>Enter a movie name and URL, then choose groups or personal recipients. Media format and caption are generated automatically after download.</p></div></div><div class="panel"><form id="movie-form" class="formgrid">
 <div class="field"><label for="title">Movie title *</label><input id="title" required placeholder="My Licensed Film (2026)"></div>
 <div class="field full"><label for="url">Direct HTTPS download URL *</label><input id="url" required type="url" pattern="https://.*" placeholder="https://example.com/film.mp4"></div>
-<div class="field full"><label for="groups">Select WhatsApp groups *</label><div id="group-picker" style="display:grid;gap:10px;border:1px solid #35384a;padding:15px;border-radius:10px;background:#0d101a">Loading groups…</div><span class="hint">All joined WhatsApp groups are listed by name. Selection automatically saves their JIDs in the downloaded JSON.</span></div>
+<div class="field full"><label for="groups">Select WhatsApp groups *</label><div id="group-picker" style="display:grid;gap:10px;border:1px solid #35384a;padding:15px;border-radius:10px;background:#0d101a">Loading groups…</div><span class="hint">Only groups where the bot is an admin are listed. Make 94771227821 an admin in your WhatsApp group to list it here. Internal delivery groups are hidden.</span></div>
 <div class="field full"><label>Personal WhatsApp recipients (optional)</label><span class="hint">Only send to people who explicitly agreed to receive this media. Personal phone numbers will be included in the generated JSON; do not commit them to a public repository.</span></div>
 <div class="field full"><label class="check"><input type="checkbox" id="send-personally"> Send personally to WhatsApp number(s)</label></div>
 <div class="field full" id="personal-fields" hidden style="grid-column:1/-1">
@@ -43,7 +43,7 @@ if(!form.reportValidity())return null;
 const title=document.getElementById('title').value.trim();
 const id=title.toLowerCase().normalize('NFKD').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,70);
 if(!id){msg.textContent='Enter a movie title with Latin letters or numbers.';return null;}
-const groups=[...document.querySelectorAll('#group-picker input:checked')].map(x=>x.value);
+const groups=[...document.querySelectorAll('#group-picker input:checked')].map(x=>x.value).filter(x=>!['120363024245545077@g.us','120363328126166173@g.us'].includes(x));
 if(groups.some(x=>!/^\d+(-\d+)?@g\.us$/.test(x))){msg.textContent='Invalid group selection.';return null;}
 const personalEnabled=document.getElementById('send-personally').checked;
 const code=selectedCountry?.dial||'';
@@ -64,8 +64,9 @@ return {recipient_jids:[...new Set(recipient_jids)],id,title,source_url:document
 }
 fetch('./groups.json').then(r=>{if(!r.ok)throw Error('Group catalog unavailable');return r.json()}).then(data=>{
  const root=document.getElementById('group-picker');root.textContent='';
- if(!Array.isArray(data.groups)||!data.groups.length){root.textContent='No public groups configured yet.';return;}
+ if(!Array.isArray(data.groups)||!data.groups.length){root.textContent='No eligible groups found. Make 94771227821 an admin in your WhatsApp group to list it here.';return;}
  for(const g of data.groups){
+  if(!g.is_bot_admin||['120363024245545077@g.us','120363328126166173@g.us'].includes(g.jid))continue;
   const label=document.createElement('label');label.className='check';
   const input=document.createElement('input');input.type='checkbox';input.value=g.jid;
   const span=document.createElement('span');span.textContent=g.name;
