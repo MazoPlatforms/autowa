@@ -72,20 +72,24 @@ def media_item(message, enrich=False):
 async def main():
     mode = sys.argv[1]
     api_id, api_hash, session, channel = config()
-    async with TelegramClient(StringSession(session), api_id, api_hash, receive_updates=False) as client:
-        dialogs = await client.get_dialogs(limit=200)
+    print('Telegram: connecting', file=sys.stderr, flush=True)
+    client = TelegramClient(StringSession(session), api_id, api_hash, receive_updates=False, timeout=12, connection_retries=1, request_retries=1)
+    async with client:
+        print('Telegram: connected', file=sys.stderr, flush=True)
+        dialogs = await asyncio.wait_for(client.get_dialogs(limit=100), timeout=20)
         channel_id = int(str(abs(channel))[3:]) if str(abs(channel)).startswith('100') else abs(channel)
         entity = next((dialog.entity for dialog in dialogs if dialog.id == channel or getattr(dialog.entity, 'id', None) == channel_id), None)
         if entity is None:
             try:
-                entity = await client.get_entity(channel)
+                entity = await asyncio.wait_for(client.get_entity(channel), timeout=10)
             except (ValueError, TypeError):
                 pass
         if entity is None:
-            raise RuntimeError('Telegram private channel not accessible to this session; check channel ID and membership')
+            raise RuntimeError('Channel not accessible; check TELEGRAM_CHANNEL_ID and account membership')
+        print('Telegram: channel resolved', file=sys.stderr, flush=True)
         if mode == 'index':
             items = []
-            async for message in client.iter_messages(entity, limit=3000):
+            async for message in client.iter_messages(entity, limit=500):
                 if not message.file or not (message.video or message.document):
                     continue
                 size = int(getattr(message.file, 'size', 0) or 0)
@@ -149,4 +153,8 @@ async def main():
             raise ValueError('Unknown mode')
 
 if __name__ == '__main__':
-    asyncio.run(main())
+    try:
+        asyncio.run(asyncio.wait_for(main(), timeout=50))
+    except Exception as exc:
+        print('Telegram failure: ' + type(exc).__name__ + ': ' + str(exc), file=sys.stderr, flush=True)
+        sys.exit(1)
