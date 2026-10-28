@@ -4,24 +4,13 @@ Simple GitHub Actions + JSON queue for **media you own or are authorized to redi
 
 ## Setup
 1. Create a GitHub repository and upload these files. Use **private** while setting up.
-2. `movies/jobs.json`: edit title, direct HTTPS URL, filename, caption, WhatsApp group IDs, and file type. Set `license_confirmed: true` **only with documented redistribution rights**, then `enabled: true`.
-3. WhatsApp authentication: use an **already paired** Baileys multi-file auth directory from a trusted local machine. Bundle every `.json` file, not only `creds.json`, into a JSON object keyed by filename. Base64 encode the UTF-8 JSON and store as the GitHub Actions repository secret `WA_AUTH_B64`. Never commit auth files, token dumps, logs containing secrets, or personal phone numbers.
+2. Create one `movies/<id>.json` per movie (see `movies/sample-001.json`): edit title, direct HTTPS URL, filename, caption, WhatsApp group IDs, and file type. Set `license_confirmed: true` **only with documented redistribution rights**, then `enabled: true`.
+3. WhatsApp authentication: set the **production environment** secret `WA_AUTH_CREDS` to the plain-text JSON contents of a registered Baileys `creds.json`. Note: creds-only sessions can fail without other Signal key files, and runner-side session updates are not persisted. Never commit credentials.
 4. Create a GitHub `production` environment with required reviewer approval. Restrict who can push to the default branch.
 5. GitHub → Actions → **Publish authorized media** → Run workflow; optionally enter one job ID.
 
-## Auth bundle (run locally only)
-From the directory containing your `auth/` folder:
-```bash
-python3 - <<'PY'
-import base64,json,pathlib
-p=pathlib.Path('auth')
-data={f.name:json.loads(f.read_text()) for f in p.glob('*.json')}
-assert 'creds.json' in data
-pathlib.Path('auth-bundle.b64').write_text(base64.b64encode(json.dumps(data).encode()).decode())
-print('Saved auth-bundle.b64 — keep private; paste its contents into GitHub secret WA_AUTH_B64.')
-PY
-```
-**Warning:** GitHub Actions runners are ephemeral. Baileys auth state can rotate during a run; this starter does **not** persist refreshed session keys back into GitHub Secrets. Re-pair or update the secret from a trusted environment as necessary. This can cause intermittent authentication failures. For reliable long-term publishing, use a persistent private runner/server and encrypted auth storage.
+## Per-movie files
+Each file must be named `<id>.json` and contain one movie object (not a `jobs` array). Keep disabled until redistribution rights are verified. Run Actions manually and provide the movie ID to publish just one file. Leave blank to publish all enabled files (including ones already published); there is no persistent deduplication yet.
 
 ## Local validation / testing
 ```bash
