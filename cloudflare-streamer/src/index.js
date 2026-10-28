@@ -23,9 +23,22 @@ function json(body, status = 200) {
 }
 function failure(status, message) { return json({ error: message }, status); }
 async function getClient(env) {
+  const apiId = Number(String(env.TELEGRAM_API_ID ?? '').trim());
+  const apiHash = String(env.TELEGRAM_API_HASH ?? '').trim();
+  const session = String(env.TELEGRAM_SESSION ?? '').trim();
+  if (!Number.isSafeInteger(apiId) || apiId <= 0 || !apiHash || !session) {
+    console.error('FilmGo configuration check', JSON.stringify({
+      apiIdPresent: env.TELEGRAM_API_ID !== undefined && env.TELEGRAM_API_ID !== null,
+      apiIdValid: Number.isSafeInteger(apiId) && apiId > 0,
+      apiHashPresent: apiHash.length > 0,
+      sessionPresent: session.length > 0,
+      channelPresent: Boolean(String(env.TELEGRAM_CHANNEL_ID ?? '').trim())
+    }));
+    throw Error('Telegram Worker bindings missing or invalid');
+  }
   if (!pending) {
     pending = (async () => {
-      const client = new TelegramClient(new StringSession(env.TELEGRAM_SESSION), Number(env.TELEGRAM_API_ID), env.TELEGRAM_API_HASH, {
+      const client = new TelegramClient(new StringSession(session), apiId, apiHash, {
         connectionRetries: 1, useWSSecure: true, autoReconnect: true
       });
       await client.connect();
