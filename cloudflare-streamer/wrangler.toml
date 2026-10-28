@@ -1,0 +1,9 @@
+name = "tamil-films-world-streamer"
+main = "src/index.js"
+compatibility_date = "2026-10-29"
+compatibility_flags = ["nodejs_compat"]
+
+[vars]
+CATALOG_URL = "https://raw.githubusercontent.com/MazoPlatforms/autowa/main/data/movies.json"
+# Set PUBLIC_ORIGIN to your deployed site origin to restrict browser requests.
+# Store TELEGRAM_API_ID, TELEGRAM_API_HASH, TELEGRAM_SESSION and TELEGRAM_CHANNEL_ID as secrets.
