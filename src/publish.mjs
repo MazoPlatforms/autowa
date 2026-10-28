@@ -36,23 +36,25 @@ await new Promise((resolve,reject)=>{
   if(u.connection==='close'){clearTimeout(timeout);reject(Error('WhatsApp connection closed: '+(u.lastDisconnect?.error?.message||'unknown')));}
  });
 });
-// INACTIVE REFERENCE ONLY — quoted/forwarded metadata is intentionally disabled.
-// These constants are not passed to sock.sendMessage() and do not affect delivery.
-// A fabricated quote or forwarding score must not be presented as real provenance.
+// FUTURE FEATURE HOOK — intentionally inactive.
+// To implement authentic replies later:
+// 1. Retrieve an actual message from the destination chat and retain its original key/content.
+// 2. Pass that real message as the Baileys `quoted` option to sock.sendMessage().
+// 3. Only represent forwarding when the message really has forwarding provenance.
+// 4. Add automated tests and an explicit operator-controlled feature flag before activation.
+// 5. Do not fabricate a participant's request or an arbitrary forwarding count.
+//
+// Legacy requested example values are retained for reference, not as executable behavior.
 /*
-const FAKE_REPLY_ENABLED = true;
+const FAKE_REPLY_ENABLED = true; // NOT supported for fabricated requests
 const FAKE_REPLY_TEXT = 'This movie was requested by our group participant.';
 const FAKE_REPLY_PARTICIPANT = '94779290433@s.whatsapp.net';
-const FORWARDING_ENABLED = true;
-const FORWARDING_SCORE = 127;
+const FORWARDING_ENABLED = true; // use only for genuine forwarding
+const FORWARDING_SCORE = 127; // arbitrary score must not be asserted as real
 
-// Example shape only — NOT used in the message payload:
-// const inactiveContextInfo = {
-//   quotedMessage: { conversation: FAKE_REPLY_TEXT },
-//   participant: FAKE_REPLY_PARTICIPANT,
-//   isForwarded: FORWARDING_ENABLED,
-//   forwardingScore: FORWARDING_SCORE
-// };
+// Future authentic quote implementation (after fetching a real message):
+// const realQuotedMessage = await lookupActualMessage(destinationJid, messageId);
+// await sock.sendMessage(destinationJid, messagePayload, { quoted: realQuotedMessage });
 */
 
 const groups=await sock.groupFetchAllParticipating();
