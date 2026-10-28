@@ -22,6 +22,25 @@ function json(body, status = 200) {
   return new Response(JSON.stringify(body), { status, headers: { 'content-type': 'application/json; charset=utf-8', 'cache-control': 'no-store' } });
 }
 function failure(status, message) { return json({ error: message }, status); }
+const CONNECT_TIMEOUT_MS = 12000;
+const AUTH_TIMEOUT_MS = 8000;
+async function bounded(operation, ms, stage, onTimeout) {
+  let timer;
+  try {
+    return await Promise.race([
+      Promise.resolve().then(operation),
+      new Promise((_, reject) => {
+        timer = setTimeout(() => {
+          diagnostic(stage + '-timeout', new Error('Operation exceeded time limit'));
+          try { onTimeout?.(); } catch {}
+          reject(new Error(stage + ' timed out'));
+        }, ms);
+      })
+    ]);
+  } finally {
+    clearTimeout(timer);
+  }
+}
 async function getClient(env) {
   const apiId = Number(String(env.TELEGRAM_API_ID ?? '').trim());
   const apiHash = String(env.TELEGRAM_API_HASH ?? '').trim();
@@ -38,16 +57,32 @@ async function getClient(env) {
   }
   if (!pending) {
     pending = (async () => {
-      const client = new TelegramClient(new StringSession(session), apiId, apiHash, {
-        connectionRetries: 1, useWSSecure: true, autoReconnect: true
-      });
-      await client.connect();
-      if (!await client.isUserAuthorized()) throw Error('Telegram session unauthorized');
-      return client;
+      let client;
+      try {
+        console.info('FilmGo Telegram stage', 'client-init');
+        client = new TelegramClient(new StringSession(session), apiId, apiHash, {
+          connectionRetries: 0, useWSSecure: true, autoReconnect: false,
+          timeout: 10000
+        });
+        console.info('FilmGo Telegram stage', 'connect-start');
+        await bounded(() => client.connect(), CONNECT_TIMEOUT_MS, 'connect', () => { void client.disconnect().catch(() => {}); });
+        console.info('FilmGo Telegram stage', 'connect-complete');
+        const authorized = await bounded(() => client.isUserAuthorized(), AUTH_TIMEOUT_MS, 'authorization', () => { void client.disconnect().catch(() => {}); });
+        if (!authorized) throw Error('Telegram session unauthorized');
+        console.info('FilmGo Telegram stage', 'authorized');
+        return client;
+      } catch (err) {
+        diagnostic('telegram-client-lifecycle', err);
+        if (client) { try { await bounded(() => client.disconnect(), 1500, 'disconnect'); } catch {} }
+        throw err;
+      }
     })().catch(err => { pending = null; throw err; });
   }
   const client = await pending;
-  if (!client.connected) { pending = null; return getClient(env); }
+  if (!client.connected) {
+    pending = null;
+    throw Error('Telegram client disconnected; retry request');
+  }
   return client;
 }
 async function catalog(env) {
