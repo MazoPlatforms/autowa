@@ -87,6 +87,17 @@ async def main():
                     item = media_item(message)
                     if item: items.append(item)
             print(json.dumps({'movies': items, 'indexed_at': int(time.time())}), flush=True)
+        elif mode == 'recent':
+            items = []
+            async for message in client.iter_messages(entity, limit=100):
+                if not message.file or not (message.video or message.document):
+                    continue
+                size = int(getattr(message.file, 'size', 0) or 0)
+                if 0 < size <= 2000000000:
+                    item = media_item(message)
+                    if item: items.append(item)
+                if len(items) >= 15: break
+            print(json.dumps({'movies': items, 'indexed_at': int(time.time())}), flush=True)
         elif mode == 'search':
             query = sys.argv[2].strip()[:100]
             if len(query) < 2:
