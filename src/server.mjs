@@ -141,7 +141,7 @@ const server=http.createServer(async(req,res)=>{
    const range=req.headers.range;
    let start=0,end=Math.min(total-1,4*1024*1024-1);
    if(range){
-    const match=/^bytes=(\\d+)-(\\d*)$/.exec(range);
+    const match=/^bytes=(\d+)-(\d*)$/.exec(range);
     if(!match)return send(res,416,{error:'Invalid byte range'},{'Content-Range':'bytes */'+total});
     start=Number(match[1]);
     if(!Number.isSafeInteger(start)||start>=total)return send(res,416,{error:'Range unavailable'},{'Content-Range':'bytes */'+total});
