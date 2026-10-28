@@ -74,7 +74,12 @@ async def main():
     api_id, api_hash, session, channel = config()
     async with TelegramClient(StringSession(session), api_id, api_hash, receive_updates=False) as client:
         dialogs = await client.get_dialogs(limit=None)
-        entity = next((dialog.entity for dialog in dialogs if dialog.id == channel), None)
+        entity = next((dialog.entity for dialog in dialogs if dialog.id == channel or getattr(dialog.entity, 'id', None) == abs(channel) % (10 ** 12)), None)
+        if entity is None:
+            try:
+                entity = await client.get_entity(channel)
+            except (ValueError, TypeError):
+                pass
         if entity is None:
             raise RuntimeError('Telegram private channel not accessible to session')
         if mode == 'index':
