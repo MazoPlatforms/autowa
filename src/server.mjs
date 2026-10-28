@@ -73,8 +73,24 @@ const server=http.createServer(async(req,res)=>{
    const catalog=await getCatalog();
    if(!catalog)return send(res,503,{error:'Movie catalog is syncing. Try again shortly.'});
    const query=(url.searchParams.get('q')||'').trim().toLowerCase().slice(0,100);
-   const matches=catalog.movies.filter(m=>!query||m.title.toLowerCase().includes(query)||m.filename.toLowerCase().includes(query)).slice(0,50);
-   return send(res,200,{movies:matches,indexed_at:catalog.indexed_at});
+   let matches=catalog.movies.filter(m=>!query||m.title.toLowerCase().includes(query)||m.filename.toLowerCase().includes(query)).slice(0,50);
+   let live=false;
+   if(query.length>=2){
+    const cached=await redis('GET','telegram:search:'+hmac(query));
+    if(cached){matches=JSON.parse(cached);live=true;}
+    else{
+     try{
+      const {stdout}=await execFileAsync('python3',['src/telegram_media.py','search',query],{timeout:90000,maxBuffer:1024*1024,env:process.env});
+      const remote=JSON.parse(stdout).movies||[];
+      const unique=new Map([...remote,...matches].map(m=>[m.id,m]));
+      matches=[...unique.values()].slice(0,50);
+      await redis('SET','telegram:search:'+hmac(query),JSON.stringify(matches),'EX',120);
+      for(const m of matches)await redis('SET','telegram:movie:'+m.id,JSON.stringify(m),'EX',1800);
+      live=true;
+     }catch(err){console.warn('Telegram live search fallback:',err.message);}
+    }
+   }
+   return send(res,200,{movies:matches,indexed_at:catalog.indexed_at,live});
   }
   if(req.method==='GET'&&url.pathname==='/health'){return send(res,200,{ok:true});}
   if(req.method==='GET'&&url.pathname==='/'){res.writeHead(200,{'Content-Type':'text/html; charset=utf-8','Cache-Control':'no-store','X-Content-Type-Options':'nosniff','Content-Security-Policy':"default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src 'self'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'"});return res.end(index);}
@@ -117,7 +133,8 @@ const server=http.createServer(async(req,res)=>{
   if(!await limit('submit:'+session.number,3,86400))return send(res,429,{error:'Daily request limit reached'});
   if(data.rights_confirmed!==true||!Number.isSafeInteger(data.movie_id)||data.movie_id<=0)return send(res,400,{error:'Select a movie and confirm distribution rights'});
   const catalog=await getCatalog();
-  const movie=catalog?.movies?.find(m=>m.id===data.movie_id);
+  const cachedMovie=await redis('GET','telegram:movie:'+data.movie_id);
+  const movie=catalog?.movies?.find(m=>m.id===data.movie_id)||(cachedMovie?JSON.parse(cachedMovie):null);
   if(!movie)return send(res,400,{error:'Selected movie unavailable; refresh the catalog'});
   const claim=await redis('SET','claim:'+hmac(session.nonce),'1','EX',900,'NX');
   if(claim!=='OK')return send(res,409,{error:'Request already submitted'});
