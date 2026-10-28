@@ -15,39 +15,22 @@ function renderMovies(){
   const title=document.createElement('strong');title.textContent=movie.title;
   const meta=document.createElement('span');meta.textContent=movie.year+' · '+movie.quality+' · '+(movie.size/1048576).toFixed(1)+' MiB';
   option.append(title,meta);
-  option.addEventListener('click',()=>{movieSearch.value=movie.title;$('movie-id').value=String(movie.id);movieOptions.classList.add('hidden');movieSearch.setAttribute('aria-expanded','false');$('movie-hint').textContent='Selected movie · '+meta.textContent;});
+  option.addEventListener('click',()=>{movieSearch.value=movie.title;$('movie-id').value=String(movie.id);movieOptions.classList.add('hidden');movieSearch.setAttribute('aria-expanded','false');});
   movieOptions.append(option);
  }
  if(!rows.length){const empty=document.createElement('p');empty.className='small';empty.textContent='No matching movies';movieOptions.append(empty);}
  movieOptions.classList.remove('hidden');movieSearch.setAttribute('aria-expanded','true');
 }
-const catalogCacheKey='tfw_recent_movies_v3';
-function readRecentCache(){
- try{
-  const saved=JSON.parse(localStorage.getItem(catalogCacheKey)||'null');
-  return saved&&Date.now()-saved.time<60000&&Array.isArray(saved.movies)?saved.movies:null;
- }catch{return null;}
-}
 let catalogLoading=false;
 async function loadMovies(){
  if(catalogLoading)return;
  catalogLoading=true;
- $('movie-hint').textContent='Checking movie library…';
  try{
   const response=await fetch('/api/movies',{cache:'no-store'});
+  if(!response.ok)return;
   const data=await response.json();
-  if(!response.ok)throw Error(data.error||'Movie catalog unavailable');
-  movieResults=Array.isArray(data.movies)?data.movies.slice(0,15):[];
-  if(movieResults.length){
-   $('movie-hint').textContent='Recent '+movieResults.length+' movies · Search to find more';
-  }else if(data.syncing){
-   const statusResponse=await fetch('/api/catalog-status',{cache:'no-store'});
-   const status=statusResponse.ok?await statusResponse.json():null;
-   $('movie-hint').textContent=status?.state==='error'
-    ?'Telegram connection failed. Check catalog status and Koyeb logs.'
-    :'Movie library is not ready yet. Tap search to retry.';
-  }else $('movie-hint').textContent='No movies with valid captions found.';
- }catch(e){$('movie-hint').textContent=e.message||'Movie library unavailable';}
+  if(!movieSearch.value.trim())movieResults=Array.isArray(data.movies)?data.movies.slice(0,15):[];
+ }catch{/* Background catalog refresh is intentionally silent. */}
  finally{catalogLoading=false;}
 }
 
@@ -63,7 +46,7 @@ movieSearch.addEventListener('input',()=>{
    const data=await response.json();
    if(sequence!==movieQuerySequence)return;
    movieResults=data.movies||[];renderMovies();
-  }catch(e){$('movie-hint').textContent=e.message;}
+  }catch(e){movieOptions.replaceChildren();movieOptions.classList.add('hidden');}
  },250);
 });
 movieSearch.addEventListener('focus',()=>{if(movieResults.length)renderMovies();else if(!movieSearch.value.trim())void loadMovies();});
@@ -114,7 +97,6 @@ if(storedLogin()){
  signedIn=true;
  routeView();
  document.documentElement.classList.add('auth-ready');
- $('movie-hint').textContent='Restoring your session…';
 }
 showAccount().then(()=>{
  if(initialAuthVersion!==authVersion)return;
