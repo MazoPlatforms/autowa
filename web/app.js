@@ -21,16 +21,32 @@ function renderMovies(){
  if(!rows.length){const empty=document.createElement('p');empty.className='small';empty.textContent='No matching movies';movieOptions.append(empty);}
  movieOptions.classList.remove('hidden');movieSearch.setAttribute('aria-expanded','true');
 }
+const catalogCacheKey='tfw_recent_movies_v3';
+function readRecentCache(){
+ try{
+  const saved=JSON.parse(localStorage.getItem(catalogCacheKey)||'null');
+  return saved&&Date.now()-saved.time<60000&&Array.isArray(saved.movies)?saved.movies:null;
+ }catch{return null;}
+}
 async function loadMovies(){
- $('movie-hint').textContent='Loading available movies…';
+ const cached=readRecentCache();
+ if(cached){movieResults=cached;$('movie-hint').textContent='Recent movies · Updating…';}
+ else $('movie-hint').textContent='Loading recent movies…';
  try{
   const response=await fetch('/api/movies',{cache:'no-store'});
   const data=await response.json();
   if(!response.ok)throw Error(data.error||'Catalog unavailable');
-  movieResults=data.movies||[];
-  $('movie-hint').textContent='Recent movies · Search to find more';
- }catch(e){$('movie-hint').textContent=e.message;}
+  if(data.syncing&&!data.movies?.length){
+   $('movie-hint').textContent=cached?'Refreshing movie catalog…':'Connecting to Telegram…';
+   setTimeout(()=>{if(!movieSearch.value.trim())loadMovies();},5000);
+   return;
+  }
+  movieResults=(data.movies||[]).slice(0,15);
+  try{localStorage.setItem(catalogCacheKey,JSON.stringify({time:Date.now(),movies:movieResults}));}catch{}
+  $('movie-hint').textContent='Recent '+movieResults.length+' movies · Search to find more';
+ }catch(e){$('movie-hint').textContent=cached?'Showing recent cached movies · '+e.message:e.message;}
 }
+
 let movieTimer=0,movieQuerySequence=0;
 movieSearch.addEventListener('input',()=>{
  $('movie-id').value='';
