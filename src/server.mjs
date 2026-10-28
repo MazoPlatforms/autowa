@@ -60,6 +60,10 @@ function verifyToken(token){
  const [data,mac,...extra]=token.split('.');if(!data||!mac||extra.length||!safeEq(hmac(data),mac))return null;
  try{const value=JSON.parse(Buffer.from(data,'base64url').toString());return value.exp>Date.now()&&phone(value.number)&&typeof value.nonce==='string'?value:null;}catch{return null;}
 }
+function cookieToken(req){return (req.headers.cookie||'').split(';').map(v=>v.trim()).find(v=>v.startsWith('tfw_session='))?.slice(12)||'';}
+async function authenticated(req){const session=verifyToken(cookieToken(req));return session&&await redis('GET','session:'+hmac(session.nonce))===session.number?session:null;}
+function sessionCookie(token,age){return 'tfw_session='+token+'; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age='+age;}
+async function profile(number){const raw=await redis('GET','profile:'+hmac(number));return raw?JSON.parse(raw):{name:'',created_at:new Date().toISOString()};}
 async function sendOtp(number,code){return sendWhatsAppOtp(number,code);}
 const index=fs.readFileSync(new URL('../web/index.html',import.meta.url));
 const countries=fs.readFileSync(new URL('../site/countries.json',import.meta.url));
@@ -93,12 +97,19 @@ const server=http.createServer(async(req,res)=>{
    }
    return send(res,200,{movies:matches,indexed_at:catalog.indexed_at,live});
   }
+  if(req.method==='GET'&&url.pathname==='/api/me'){
+   const session=await authenticated(req);
+   if(!session)return send(res,401,{error:'Not signed in'});
+   const user=await profile(session.number);
+   const used=Number(await redis('GET','rate:'+hmac('submit:'+session.number))||0);
+   return send(res,200,{number:session.number,name:user.name||'',limit:3,used:Math.min(used,3),remaining:Math.max(0,3-used),period:'rolling rate window (up to 24 hours)'});
+  }
   if(req.method==='GET'&&url.pathname==='/health'){return send(res,200,{ok:true});}
   if(req.method==='GET'&&url.pathname==='/'){res.writeHead(200,{'Content-Type':'text/html; charset=utf-8','Cache-Control':'no-store','X-Content-Type-Options':'nosniff','Content-Security-Policy':"default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src 'self'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'"});return res.end(index);}
   if(req.method==='GET'&&url.pathname==='/style.css'){res.writeHead(200,{'Content-Type':'text/css; charset=utf-8','Cache-Control':'public, max-age=3600','X-Content-Type-Options':'nosniff'});return res.end(stylesheet);}
   if(req.method==='GET'&&url.pathname==='/app.js'){res.writeHead(200,{'Content-Type':'text/javascript; charset=utf-8','Cache-Control':'no-store','X-Content-Type-Options':'nosniff'});return res.end(appJs);}
   if(req.method==='GET'&&url.pathname==='/countries.json'){res.writeHead(200,{'Content-Type':'application/json','Cache-Control':'public, max-age=86400'});return res.end(countries);}
-  if(req.method!=='POST'||!['/api/otp/start','/api/otp/verify','/api/request'].includes(url.pathname))return send(res,404,{error:'Not found'});
+  if(req.method!=='POST'||!['/api/otp/start','/api/otp/verify','/api/request','/api/profile','/api/logout'].includes(url.pathname))return send(res,404,{error:'Not found'});
   if(!configured)return send(res,503,{error:'Service setup incomplete; contact operator'});
   if(url.pathname==='/api/otp/start'&&!isWhatsAppReady())return send(res,503,{error:'WhatsApp OTP bot is offline. Try again later.'});
   if(req.headers['content-type']?.split(';')[0]!=='application/json')return send(res,415,{error:'JSON required'});
@@ -125,12 +136,24 @@ const server=http.createServer(async(req,res)=>{
    const stored=await redis('GET','otp:'+hmac(number));
    if(!stored||!safeEq(stored,hmac(number+':'+code)))return send(res,401,{error:'Invalid or expired OTP'});
    await redis('DEL','otp:'+hmac(number));
-   const nonce=crypto.randomBytes(16).toString('hex'),exp=Date.now()+15*60*1000;
-   await redis('SET','session:'+hmac(nonce),number,'EX',900);
-   return send(res,200,{token:tokenFor(number,nonce,exp),expires_in:900});
+   const nonce=crypto.randomBytes(16).toString('hex'),age=30*86400,exp=Date.now()+age*1000;
+   await redis('SET','session:'+hmac(nonce),number,'EX',age);
+   const key='profile:'+hmac(number);
+   await redis('SET',key,JSON.stringify(await profile(number)));
+   return send(res,200,{ok:true,expires_in:age},{'Set-Cookie':sessionCookie(tokenFor(number,nonce,exp),age)});
   }
-  const session=verifyToken(data.token);
-  if(!session||await redis('GET','session:'+hmac(session.nonce))!==session.number)return send(res,401,{error:'Verify your WhatsApp number first'});
+  const session=await authenticated(req);
+  if(!session)return send(res,401,{error:'Sign in with WhatsApp first'});
+  if(url.pathname==='/api/logout'){
+   await redis('DEL','session:'+hmac(session.nonce));
+   return send(res,200,{ok:true},{'Set-Cookie':sessionCookie('',0)});
+  }
+  if(url.pathname==='/api/profile'){
+   if(typeof data.name!=='string'||data.name.trim().length<2||data.name.trim().length>60)return send(res,400,{error:'Name must contain 2–60 characters'});
+   const name=data.name.trim().replace(/[\\x00-\\x1f]/g,'');
+   await redis('SET','profile:'+hmac(session.number),JSON.stringify({name,updated_at:new Date().toISOString()}));
+   return send(res,200,{ok:true,name});
+  }
   if(!await limit('submit:'+session.number,3,86400))return send(res,429,{error:'Daily request limit reached'});
   if(data.rights_confirmed!==true||!Number.isSafeInteger(data.movie_id)||data.movie_id<=0)return send(res,400,{error:'Select a movie and confirm distribution rights'});
   const catalog=await getCatalog();
@@ -148,7 +171,6 @@ const server=http.createServer(async(req,res)=>{
    body:JSON.stringify({event_type:'autowa-verified-request',client_payload:payload}),signal:AbortSignal.timeout(15000)
   });
   if(!result.ok){await redis('DEL','claim:'+hmac(session.nonce));return send(res,503,{error:'Queue unavailable; try again later'});}
-  await redis('DEL','session:'+hmac(session.nonce));
   return send(res,202,{request_id:requestId,status:'pending_review',message:'Request queued for review; delivery is not guaranteed'});
  }catch(err){console.error('API error',String(err.message));return send(res,500,{error:'Request could not be completed'});}
 });
