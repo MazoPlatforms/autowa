@@ -30,8 +30,8 @@ jobs:
           required = ('TELEGRAM_API_ID', 'TELEGRAM_API_HASH', 'TELEGRAM_SESSION', 'TELEGRAM_CHANNEL_ID', 'OMDB_API_KEY')
           missing = [name for name in required if not os.getenv(name, '').strip()]
           if missing:
-              print('::error::Missing GitHub Actions repository secrets: ' + ', '.join(missing))
-              print('Configure these in Settings > Secrets and variables > Actions; Koyeb secrets are not shared with GitHub.')
+              print('::error::Missing GitHub Actions production environment secrets: ' + ', '.join(missing))
+              print('Configure these under Settings > Environments > production > Environment secrets.')
               sys.exit(1)
           for name in ('TELEGRAM_API_ID', 'TELEGRAM_CHANNEL_ID'):
               try:
@@ -50,12 +50,32 @@ jobs:
           TELEGRAM_CHANNEL_ID: ${{ secrets.TELEGRAM_CHANNEL_ID }}
           OMDB_API_KEY: ${{ secrets.OMDB_API_KEY }}
         run: python scripts/sync_movie_catalog.py
-      - name: Commit changed catalog
+      - name: Publish catalog safely against latest main
         run: |
-          if ! git diff --quiet -- data/movies.json; then
-            git config user.name "github-actions[bot]"
-            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          set -euo pipefail
+          if git diff --quiet -- data/movies.json; then
+            echo "No catalog changes to publish"
+            exit 0
+          fi
+          cp data/movies.json /tmp/updated-movies.json
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          for attempt in 1 2 3 4 5; do
+            git fetch origin main
+            git reset --hard origin/main
+            cp /tmp/updated-movies.json data/movies.json
+            if git diff --quiet -- data/movies.json; then
+              echo "Catalog already published"
+              exit 0
+            fi
             git add data/movies.json
             git commit -m "chore: refresh movie metadata catalog"
-            git push
-          fi
+            if git push origin HEAD:main; then
+              echo "Movie catalog published"
+              exit 0
+            fi
+            echo "Main changed during publishing; retrying ($attempt/5)"
+            sleep 2
+          done
+          echo "::error::Unable to publish catalog after five non-force attempts"
+          exit 1
