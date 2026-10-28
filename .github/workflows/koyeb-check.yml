@@ -1,0 +1,30 @@
+name: Check Koyeb service
+on:
+  push:
+    paths:
+      - 'src/server.mjs'
+      - 'src/whatsapp-otp.mjs'
+      - 'src/stage-request.mjs'
+      - 'web/**'
+      - 'Dockerfile'
+      - 'package.json'
+      - '.github/workflows/koyeb-check.yml'
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  syntax:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --no-audit --no-fund
+      - run: |
+          node --check src/server.mjs
+          node --check src/whatsapp-otp.mjs
+          node --check src/stage-request.mjs
+          node --check web/app.js
+      - name: Container build
+        run: docker build -t autowa-koyeb-check .
