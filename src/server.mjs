@@ -138,7 +138,7 @@ const server=http.createServer(async(req,res)=>{
   if(req.method==='GET'&&url.pathname==='/health'){return send(res,200,{ok:true});}
   if(req.method==='GET'&&url.pathname.startsWith('/api/stream-availability/')){
    const id=url.pathname.slice('/api/stream-availability/'.length);
-   const movie=(await getPublicCatalog().movies||[]).find(m=>m.slug_id===id);
+   const movie=((await getPublicCatalog()).movies||[]).find(m=>m.slug_id===id);
    const ext=String(movie?.file_name||'').toLowerCase();
    const format=ext.endsWith('.mkv')?'mkv':ext.endsWith('.webm')?'webm':ext.endsWith('.mp4')?'mp4':'unknown';
    return send(res,200,{available:telegramReady&&!!movie,format});
