@@ -70,6 +70,7 @@ const server=http.createServer(async(req,res)=>{
   const url=new URL(req.url,'http://localhost');
   if(req.method==='GET'&&url.pathname==='/api/movies'){
    if(!configured||!telegramReady)return send(res,503,{error:'Movie catalog not configured'});
+   if(!await limit('search-ip:'+(req.socket.remoteAddress||'unknown'),30,60))return send(res,429,{error:'Search rate limit reached'});
    const catalog=await getCatalog();
    if(!catalog)return send(res,503,{error:'Movie catalog is syncing. Try again shortly.'});
    const query=(url.searchParams.get('q')||'').trim().toLowerCase().slice(0,100);
