@@ -19,4 +19,26 @@ fetch('/api/stream-availability/'+encodeURIComponent(m.slug_id||''),{cache:'no-s
   open.href=video.src;open.target='_blank';open.rel='noopener';section.append(open);
  }else{status.textContent='Streaming is not available for this title.';}
 }).catch(()=>{status.textContent='Streaming availability could not be checked.';});
-document.title=m.title+' — Tamil Films World';}function route(){const match=location.pathname.match(/^\/title\/([^/]+)\/?$/);if(match){const m=movies.find(x=>x.slug_id===decodeURIComponent(match[1])||x.id===decodeURIComponent(match[1]));home.classList.add('hidden');detail.classList.remove('hidden');if(m)showDetail(m);else{$('detail-content').replaceChildren(el('p','text-zinc-400','Movie not found.'));document.title='Movie not found — Tamil Films World';}}else{home.classList.remove('hidden');detail.classList.add('hidden');document.title='Tamil Films World — Explore';render();}window.scrollTo(0,0);}search.addEventListener('input',render);window.addEventListener('popstate',route);$('detail-back').addEventListener('click',e=>{e.preventDefault();history.pushState({},'','/');route();});skeleton();fetch('/movies.json').then(r=>{if(!r.ok)throw Error('Catalog unavailable');return r.json()}).then(d=>{movies=Array.isArray(d.movies)?d.movies:[];route()}).catch(()=>{grid.replaceChildren();empty.textContent='Movie catalog is temporarily unavailable.';empty.classList.remove('hidden');if(location.pathname.startsWith('/title/'))route();});
+document.title=m.title+' — FilmGo';}function route(){const match=location.pathname.match(/^\/title\/([^/]+)\/?$/);if(match){const m=movies.find(x=>x.slug_id===decodeURIComponent(match[1])||x.id===decodeURIComponent(match[1]));home.classList.add('hidden');detail.classList.remove('hidden');if(m)showDetail(m);else{$('detail-content').replaceChildren(el('p','text-zinc-400','Movie not found.'));document.title='Movie not found — FilmGo';}}else{home.classList.remove('hidden');detail.classList.add('hidden');document.title='FilmGo — Explore';render();}window.scrollTo(0,0);}search.addEventListener('input',render);window.addEventListener('popstate',route);$('detail-back').addEventListener('click',e=>{e.preventDefault();history.pushState({},'','/');route();});skeleton();
+let catalogFingerprint='',catalogLoading=false;
+async function refreshCatalog(){
+ if(catalogLoading||document.hidden)return;
+ catalogLoading=true;
+ try{
+  const response=await fetch('/movies.json',{cache:'no-store'});
+  if(!response.ok)throw Error('Catalog unavailable');
+  const data=await response.json();
+  if(!Array.isArray(data.movies))throw Error('Invalid catalog');
+  const fingerprint=JSON.stringify(data.movies.map(m=>[m.slug_id,m.title,m.poster,m.file_size,m.metadata_status]));
+  if(fingerprint!==catalogFingerprint){
+   catalogFingerprint=fingerprint;movies=data.movies;
+   if(!location.pathname.startsWith('/title/'))render();
+   else if(!document.querySelector('#detail-content video'))route();
+  }
+ }catch(err){
+  if(!catalogFingerprint){grid.replaceChildren();empty.textContent='Movie catalog is temporarily unavailable.';empty.classList.remove('hidden');}
+ }finally{catalogLoading=false;}
+}
+route();void refreshCatalog();
+setInterval(()=>{void refreshCatalog();},15000);
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)void refreshCatalog();});
