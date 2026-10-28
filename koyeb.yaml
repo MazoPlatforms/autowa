@@ -1,0 +1,3 @@
+# Koyeb deploy configuration reference; create the service in Koyeb UI
+# using the repository Dockerfile, port 8000, and /health health check.
+# Set the environment variables documented in README.md as Koyeb secrets.
