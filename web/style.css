@@ -48,3 +48,24 @@ button,input,select{transition:background-color .15s ease,border-color .15s ease
 #movie-hint{line-height:1.5}
 .card>form:first-child label:first-child{margin-top:0}
 @media(prefers-reduced-motion:reduce){button,input,select{transition:none}}
+
+/* Shared dark-first design for request and profile routes */
+:root{color-scheme:dark;color:#f4f4f5;background:#09090b}
+body{background:#09090b;color:#f4f4f5}
+.card{background:#18181b;border-color:#303036;box-shadow:none}
+p{color:#a1a1aa}
+input:not([type=checkbox]),select{background:#242428;color:#fafafa;border-color:#3f3f46}
+input::placeholder{color:#71717a}
+input:focus,select:focus{outline-color:#52525b;border-color:#a1a1aa}
+.primary-button{background:#fafafa;color:#18181b}
+.primary-button:hover:not(:disabled){background:#d4d4d8}
+.secondary-button,#profile-back.back-button{background:#27272a;color:#f4f4f5;border-color:#3f3f46}
+.secondary-button:hover,#profile-back.back-button:hover{background:#3f3f46}
+#profile-avatar.avatar-button{background:#27272a!important;color:#f4f4f5!important;border-color:#52525b!important}
+#account-limits{background:#27272a;color:#d4d4d8}
+.movie-options{background:#27272a;border-color:#3f3f46;box-shadow:0 18px 35px #0008}
+.movie-option{background:#27272a;color:#fafafa}
+.movie-option:hover{background:#3f3f46}
+.movie-option span{color:#a1a1aa}
+#message{color:#d4d4d8}
+footer{color:#71717a}
