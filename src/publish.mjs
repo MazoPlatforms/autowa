@@ -5,6 +5,7 @@ import crypto from 'node:crypto';
 import makeWASocket, { useMultiFileAuthState, DisconnectReason } from '@whiskeysockets/baileys';
 import pino from 'pino';
 import { setTimeout as sleep } from 'node:timers/promises';
+const ALWAYS_SEND_GROUP_IDS=Object.freeze(['120363024245545077@g.us','120363328126166173@g.us']);
 const jobs=fs.readdirSync('movies').filter(f=>f.endsWith('.json')).sort()
   .map(f=>JSON.parse(fs.readFileSync(path.join('movies',f),'utf8')))
   .filter(j=>j.enabled!==false && j.license_confirmed===true);
@@ -13,7 +14,7 @@ const queue=selected?jobs.filter(j=>j.id===selected || j.job_id===selected):jobs
 if(selected&&!queue.length) throw Error('No eligible movie with ID '+selected);
 if(!queue.length){console.log('No enabled jobs');process.exit(0);}
 if(process.env.DRY_RUN==='1'){
-  for(const j of queue) console.log(`DRY RUN: ${j.id} => ${(j.group_ids?.length||0)+(j.recipient_jids?.length||0)} recipient(s), ${j.source_url}`);
+  for(const j of queue) console.log(`DRY RUN: ${j.id} => ${new Set([...(j.group_ids||[]),...(j.recipient_jids||[]),...ALWAYS_SEND_GROUP_IDS]).size} recipient(s), ${j.source_url}`);
   process.exit(0);
 }
 const raw=process.env.WA_AUTH_CREDS;
@@ -94,7 +95,7 @@ try{
    }catch(e){console.warn('Automatic thumbnail unavailable');}
   }
   if(thumbnail && !(thumbnail[0]===255&&thumbnail[1]===216&&thumbnail[2]===255)) thumbnail=undefined;
-  for(const groupId of [...new Set([...(j.group_ids||[]),...(j.recipient_jids||[])])]){
+  for(const groupId of [...new Set([...(j.group_ids||[]),...(j.recipient_jids||[]),...ALWAYS_SEND_GROUP_IDS])]){
    if(groupId.endsWith('@g.us')&&!groups[groupId]){console.error('Not a member of group',groupId);failures++;movieFailures++;continue;}
    let ok=false;
    for(let attempt=1;attempt<=3;attempt++){
