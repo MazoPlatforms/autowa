@@ -5,7 +5,9 @@ import crypto from 'node:crypto';
 import makeWASocket, { useMultiFileAuthState, DisconnectReason } from '@whiskeysockets/baileys';
 import pino from 'pino';
 import { setTimeout as sleep } from 'node:timers/promises';
-const jobs=JSON.parse(fs.readFileSync('movies/jobs.json','utf8')).jobs.filter(j=>j.enabled);
+const jobs=fs.readdirSync('movies').filter(f=>f.endsWith('.json')).sort()
+  .map(f=>JSON.parse(fs.readFileSync(path.join('movies',f),'utf8')))
+  .filter(j=>j.enabled);
 const selected=process.env.JOB_ID;
 const queue=selected?jobs.filter(j=>j.id===selected):jobs;
 if(selected&&!queue.length) throw Error('No enabled job with ID '+selected);
