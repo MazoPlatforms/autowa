@@ -133,7 +133,7 @@ try{
   const isMp4=formats.includes('mov')||formats.includes('mp4')||formats.includes('m4a')||formats.includes('3gp')||formats.includes('3g2')||formats.includes('mj2');
   if(!isMkv&&!isMp4)throw Error('Unsupported downloaded media container: '+formats.join(','));
   const type=isMkv?'mkv':'mp4';
-  const filename=('mzn.is-a.dev - '+j.title+' - 1080p.'+type).replace(/[\\/\x00-\x1f]/g,'').slice(0,180);
+  const filename=('Tamil Films World - '+j.title+'.'+type).replace(/[\\/\x00-\x1f]/g,'').slice(0,180);
   const caption=['🎬 TAMIL FILMS WORLD','','🎞️ '+j.title,'','🍿 Enjoy the Movie!','','⚡ Powered by Itz Maazin','🌐 https://mzn.is-a.dev/'].join('\n');
   j.file_type=type;j.filename=filename;j.caption=caption;
   const thumbUrl='https://i.ibb.co/8L3RB6Qh/Itz-Maazin-20261027-155011.jpg';
