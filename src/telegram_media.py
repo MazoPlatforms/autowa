@@ -19,7 +19,9 @@ async def main():
     mode=sys.argv[1]
     api_id,api_hash,session,channel=config()
     async with TelegramClient(StringSession(session),api_id,api_hash,receive_updates=False) as client:
-        entity=await client.get_entity(channel)
+        dialogs=await client.get_dialogs(limit=None)
+        entity=next((d.entity for d in dialogs if d.id==channel),None)
+        if entity is None: raise RuntimeError('Configured private channel is not accessible to this Telegram session')
         if mode=='index':
             items=[]
             async for m in client.iter_messages(entity,limit=3000):
