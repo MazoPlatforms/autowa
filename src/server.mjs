@@ -30,12 +30,12 @@ async function indexTelegram(){
   const {stdout}=await execFileAsync('python3',['src/telegram_media.py','index'],{timeout:180000,maxBuffer:3*1024*1024,env:process.env});
   const data=JSON.parse(stdout);
   if(!Array.isArray(data.movies))throw Error('Invalid catalog');
-  await redis('SET','telegram:catalog:v2',JSON.stringify(data),'EX',1200);
+  await redis('SET','telegram:catalog:v2',JSON.stringify(data));
   console.log('Telegram catalog refreshed:',data.movies.length,'media items');
  }catch(e){console.error('Telegram catalog refresh failed:',e.message);}
  finally{indexing=false;}
 }
-setTimeout(()=>{void indexTelegram();setInterval(()=>void indexTelegram(),2*60*1000).unref();},3000).unref();
+void indexTelegram();setInterval(()=>void indexTelegram(),2*60*1000).unref();
 async function getCatalog(){
  const raw=await redis('GET','telegram:catalog:v2');
  return raw?JSON.parse(raw):null;
