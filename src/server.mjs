@@ -4,11 +4,11 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 const PORT=Number(process.env.PORT||8000);
-const required=['APP_SECRET','UPSTASH_REDIS_REST_URL','UPSTASH_REDIS_REST_TOKEN','WHATSAPP_CLOUD_TOKEN','WHATSAPP_PHONE_NUMBER_ID','WHATSAPP_OTP_TEMPLATE','GITHUB_DISPATCH_TOKEN','GITHUB_REPOSITORY'];
+const required=['APP_SECRET','UPSTASH_REDIS_REST_URL','UPSTASH_REDIS_REST_TOKEN','GITHUB_DISPATCH_TOKEN','GITHUB_REPOSITORY'];
 const missing=required.filter(k=>!process.env[k]);
-if(missing.length)throw Error('Missing required environment variables: '+missing.join(', '));
-const secret=process.env.APP_SECRET;
-if(secret.length<32)throw Error('APP_SECRET must be at least 32 characters');
+const secret=process.env.APP_SECRET||'';
+const configured=missing.length===0&&secret.length>=32;
+if(!configured)console.warn('AutoWA setup incomplete: configure APP_SECRET and required storage/GitHub secrets; API will fail closed. Missing:',missing.join(', ')||'APP_SECRET length < 32');
 const redisBase=process.env.UPSTASH_REDIS_REST_URL.replace(/\/$/,'');
 const redisToken=process.env.UPSTASH_REDIS_REST_TOKEN;
 const hmac=s=>crypto.createHmac('sha256',secret).update(s).digest('hex');
@@ -57,6 +57,8 @@ const server=http.createServer(async(req,res)=>{
   if(req.method==='GET'&&url.pathname==='/app.js'){res.writeHead(200,{'Content-Type':'text/javascript; charset=utf-8','Cache-Control':'no-store','X-Content-Type-Options':'nosniff'});return res.end(appJs);}
   if(req.method==='GET'&&url.pathname==='/countries.json'){res.writeHead(200,{'Content-Type':'application/json','Cache-Control':'public, max-age=86400'});return res.end(countries);}
   if(req.method!=='POST'||!['/api/otp/start','/api/otp/verify','/api/request'].includes(url.pathname))return send(res,404,{error:'Not found'});
+  if(!configured)return send(res,503,{error:'Service setup incomplete; contact operator'});
+  if(url.pathname==='/api/otp/start'&&(!process.env.WHATSAPP_CLOUD_TOKEN||!process.env.WHATSAPP_PHONE_NUMBER_ID||!process.env.WHATSAPP_OTP_TEMPLATE))return send(res,503,{error:'OTP provider not configured. Baileys OTP integration is not yet implemented.'});
   if(req.headers['content-type']?.split(';')[0]!=='application/json')return send(res,415,{error:'JSON required'});
   const origin=req.headers.origin,host=req.headers.host;
   if(origin&&new URL(origin).host!==host)return send(res,403,{error:'Origin rejected'});
