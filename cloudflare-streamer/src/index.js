@@ -1,5 +1,9 @@
 import { TelegramClient, Api } from 'telegram';
 import { StringSession } from 'telegram/sessions/index.js';
+// GramJS 2.26 does arithmetic on offsets with the big-integer library
+// (offset.divide(...)). A native BigInt has no such methods and crashes with
+// "offset.divide is not a function".
+import bigInt from 'big-integer';
 
 // ---------------------------------------------------------------------------
 // FilmGo Telegram streaming Worker (experimental)
@@ -17,6 +21,7 @@ const MAX_RANGE = 8 * 1024 * 1024;
 const CONNECT_TIMEOUT_MS = 12000;
 const RPC_TIMEOUT_MS = 12000;
 const DIALOG_TIMEOUT_MS = 20000;
+const FIRST_CHUNK_TIMEOUT_MS = 20000; // may include a Telegram DC switch
 const CHUNK_TIMEOUT_MS = 20000;
 const CATALOG_TTL_MS = 60000;
 
@@ -267,24 +272,35 @@ async function media(request, env, ctx, id, download) {
       fileReference: document.fileReference,
       thumbSize: ''
     });
-    const iterator = client.iterDownload({
-      file: location, offset: BigInt(start),
-      limit: Math.ceil(length / CHUNK),
-      chunkSize: CHUNK, requestSize: CHUNK,
-      dcId: document.dcId, fileSize: document.size
-    })[Symbol.asyncIterator]();
+    // Telegram only serves offsets aligned to the chunk size. Players seek to
+    // arbitrary bytes, so download from the aligned chunk start and drop the
+    // leading `skip` bytes ourselves.
+    const alignedStart = Math.floor(start / CHUNK) * CHUNK;
+    let toSkip = start - alignedStart;
+    const chunkCount = Math.ceil((toSkip + length) / CHUNK);
 
-    // Fetch the first chunk before answering so failures return a real error
-    // status instead of an empty 206.
-    stage('first-chunk-start');
+    // Everything that can fail while starting the download is inside this try
+    // so it is logged with its own stage and returns a clean error status.
+    stage('download-init');
+    let iterator;
     let first;
     try {
-      first = await bounded(() => iterator.next(), RPC_TIMEOUT_MS, 'first-chunk');
+      iterator = client.iterDownload({
+        file: location,
+        offset: bigInt(alignedStart),
+        limit: chunkCount,
+        chunkSize: CHUNK, requestSize: CHUNK,
+        dcId: document.dcId, fileSize: document.size
+      })[Symbol.asyncIterator]();
+      stage('first-chunk-start');
+      first = await bounded(() => iterator.next(), FIRST_CHUNK_TIMEOUT_MS, 'first-chunk');
     } catch (err) {
-      diagnostic('telegram-first-chunk', err);
+      diagnostic('telegram-download', err);
       return failure(err?.isTimeout ? 504 : 502, 'Telegram media fetch failed');
     }
-    if (first.done || !first.value?.length) return failure(502, 'Telegram returned no media bytes');
+    if (first.done || !first.value?.length || first.value.length <= toSkip) {
+      return failure(502, 'Telegram returned no media bytes');
+    }
     stage('first-chunk-complete');
 
     let remaining = length;
@@ -299,20 +315,28 @@ async function media(request, env, ctx, id, download) {
     const stream = new ReadableStream({
       async pull(controller) {
         try {
-          let result;
-          if (first) { result = first; first = null; }
-          else result = await bounded(() => iterator.next(), CHUNK_TIMEOUT_MS, 'chunk');
+          let part;
+          for (;;) {
+            let result;
+            if (first) { result = first; first = null; }
+            else result = await bounded(() => iterator.next(), CHUNK_TIMEOUT_MS, 'chunk');
 
-          if (result.done) {
-            if (remaining !== 0) controller.error(new Error('Incomplete Telegram stream'));
-            else controller.close();
-            await finish();
-            return;
+            if (result.done) {
+              if (remaining !== 0) controller.error(new Error('Incomplete Telegram stream'));
+              else controller.close();
+              await finish();
+              return;
+            }
+            const raw = result.value instanceof Uint8Array ? result.value : new Uint8Array(result.value);
+            const drop = Math.min(toSkip, raw.byteLength);
+            toSkip -= drop;
+            const bytes = drop ? raw.subarray(drop) : raw;
+            if (bytes.byteLength === 0) continue; // chunk fully skipped
+            part = bytes.subarray(0, remaining);
+            break;
           }
-          const bytes = result.value instanceof Uint8Array ? result.value : new Uint8Array(result.value);
-          const part = bytes.subarray(0, remaining);
           remaining -= part.byteLength;
-          controller.enqueue(part);
+          controller.enqueue(new Uint8Array(part.buffer, part.byteOffset, part.byteLength));
           if (remaining <= 0) { controller.close(); await finish(); }
         } catch (err) {
           diagnostic('stream-chunk', err);
