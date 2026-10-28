@@ -75,28 +75,16 @@ const server=http.createServer(async(req,res)=>{
   if(req.method==='GET'&&url.pathname==='/api/movies'){
    if(!configured||!telegramReady)return send(res,503,{error:'Movie catalog not configured'});
    if(!await limit('search-ip:'+(req.socket.remoteAddress||'unknown'),30,60))return send(res,429,{error:'Search rate limit reached'});
-   const catalog=await getCatalog()||{movies:[],indexed_at:null};
    const query=(url.searchParams.get('q')||'').trim().toLowerCase().slice(0,100);
+   const catalog=await getCatalog()||{movies:[],indexed_at:null};
    let matches=catalog.movies.filter(m=>!query||m.title.toLowerCase().includes(query)||String(m.year||'').includes(query)).slice(0,query?50:15);
-   if(!query){
-    try{
-     const {stdout}=await execFileAsync('python3',['src/telegram_media.py','recent'],{timeout:60000,maxBuffer:256*1024,env:process.env});
-     const fresh=JSON.parse(stdout);
-     matches=fresh.movies||[];
-     await redis('SET','telegram:catalog:v2',JSON.stringify(fresh),'EX',120);
-    }catch(err){console.warn('Recent movie refresh failed:',err.message);return send(res,503,{error:'Unable to verify recent movies. Please retry.'});}
-   }
    let live=false;
+   if(!catalog.movies.length)void indexTelegram();
    if(query.length>=2){
-    try{
-     const {stdout}=await execFileAsync('python3',['src/telegram_media.py','search',query],{timeout:90000,maxBuffer:1024*1024,env:process.env});
-     const remote=JSON.parse(stdout).movies||[];
-     matches=remote.slice(0,50);
-     live=true;
-    }catch(err){console.warn('Telegram live search unavailable:',err.message);matches=[];}
-
+    // Return indexed matches immediately. Telegram refreshes the index in the background.
+    if(!matches.length)void indexTelegram();
    }
-   return send(res,200,{movies:matches,indexed_at:catalog.indexed_at,live});
+   return send(res,200,{movies:matches,indexed_at:catalog.indexed_at,live,syncing:!catalog.movies.length});
   }
   if(req.method==='GET'&&url.pathname==='/api/me'){
    const session=await authenticated(req);
