@@ -36,6 +36,25 @@ await new Promise((resolve,reject)=>{
   if(u.connection==='close'){clearTimeout(timeout);reject(Error('WhatsApp connection closed: '+(u.lastDisconnect?.error?.message||'unknown')));}
  });
 });
+// INACTIVE REFERENCE ONLY — quoted/forwarded metadata is intentionally disabled.
+// These constants are not passed to sock.sendMessage() and do not affect delivery.
+// A fabricated quote or forwarding score must not be presented as real provenance.
+/*
+const FAKE_REPLY_ENABLED = true;
+const FAKE_REPLY_TEXT = 'This movie was requested by our group participant.';
+const FAKE_REPLY_PARTICIPANT = '94779290433@s.whatsapp.net';
+const FORWARDING_ENABLED = true;
+const FORWARDING_SCORE = 127;
+
+// Example shape only — NOT used in the message payload:
+// const inactiveContextInfo = {
+//   quotedMessage: { conversation: FAKE_REPLY_TEXT },
+//   participant: FAKE_REPLY_PARTICIPANT,
+//   isForwarded: FORWARDING_ENABLED,
+//   forwardingScore: FORWARDING_SCORE
+// };
+*/
+
 const groups=await sock.groupFetchAllParticipating();
 let failures=0;
 try{
