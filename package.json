@@ -6,7 +6,8 @@
   "scripts": {
     "validate": "node src/validate.mjs",
     "publish": "node src/publish.mjs",
-    "groups": "node src/list-groups.mjs"
+    "groups": "node src/list-groups.mjs",
+    "start": "node src/server.mjs"
   },
   "dependencies": {
     "@whiskeysockets/baileys": "^6.7.21",
