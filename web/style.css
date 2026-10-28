@@ -37,3 +37,8 @@ h2{font-size:18px;margin:24px 0 10px;letter-spacing:-.3px}
 #account-limits{margin:14px 0 0}
 button.secondary{background:#fff;color:#24292f;border-color:#d0d7de}
 button.secondary:hover{background:#f6f8fa}
+
+html:not(.auth-ready) #start,html:not(.auth-ready) #verify,html:not(.auth-ready) #request,html:not(.auth-ready) #account{display:none!important}
+nav{display:flex;gap:16px;border-bottom:1px solid #d8dee4;margin-bottom:22px;padding:0 0 14px}
+nav a{color:#0969da;text-decoration:none;font-size:13px;font-weight:600}
+nav a:hover{text-decoration:underline}
