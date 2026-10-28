@@ -21,10 +21,9 @@ jobs:
         with:
           node-version: '22'
       - run: npm install --no-audit --no-fund
-      - name: Sync approved groups
+      - name: Sync all joined groups
         env:
           WA_AUTH_CREDS: ${{ secrets.WA_AUTH_CREDS }}
-          WA_PUBLIC_GROUP_JIDS: ${{ secrets.WA_PUBLIC_GROUP_JIDS }}
         run: node src/sync-public-groups.mjs
       - uses: actions/upload-artifact@v4
         with:
