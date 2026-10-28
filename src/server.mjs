@@ -1,7 +1,7 @@
 import http from 'node:http';
 import crypto from 'node:crypto';
 import fs from 'node:fs';
-import path from 'node:path';
+import {startWhatsApp,isWhatsAppReady,sendWhatsAppOtp} from './whatsapp-otp.mjs';
 
 const PORT=Number(process.env.PORT||8000);
 const required=['APP_SECRET','UPSTASH_REDIS_REST_URL','UPSTASH_REDIS_REST_TOKEN','GITHUB_DISPATCH_TOKEN','GITHUB_REPOSITORY'];
@@ -9,7 +9,7 @@ const missing=required.filter(k=>!process.env[k]);
 const secret=process.env.APP_SECRET||'';
 const configured=missing.length===0&&secret.length>=32;
 if(!configured)console.warn('AutoWA setup incomplete: configure APP_SECRET and required storage/GitHub secrets; API will fail closed. Missing:',missing.join(', ')||'APP_SECRET length < 32');
-const redisBase=process.env.UPSTASH_REDIS_REST_URL.replace(/\/$/,'');
+const redisBase=(process.env.UPSTASH_REDIS_REST_URL||'').replace(/\/$/,'');
 const redisToken=process.env.UPSTASH_REDIS_REST_TOKEN;
 const hmac=s=>crypto.createHmac('sha256',secret).update(s).digest('hex');
 const safeEq=(a,b)=>typeof a==='string'&&typeof b==='string'&&a.length===b.length&&crypto.timingSafeEqual(Buffer.from(a),Buffer.from(b));
@@ -38,14 +38,7 @@ function verifyToken(token){
  const [data,mac,...extra]=token.split('.');if(!data||!mac||extra.length||!safeEq(hmac(data),mac))return null;
  try{const value=JSON.parse(Buffer.from(data,'base64url').toString());return value.exp>Date.now()&&phone(value.number)&&typeof value.nonce==='string'?value:null;}catch{return null;}
 }
-async function sendOtp(number,code){
- const version=process.env.WHATSAPP_GRAPH_VERSION||'v22.0';
- const r=await fetch('https://graph.facebook.com/'+version+'/'+encodeURIComponent(process.env.WHATSAPP_PHONE_NUMBER_ID)+'/messages',{
-  method:'POST',headers:{Authorization:'Bearer '+process.env.WHATSAPP_CLOUD_TOKEN,'Content-Type':'application/json'},
-  body:JSON.stringify({messaging_product:'whatsapp',to:number.slice(1),type:'template',template:{name:process.env.WHATSAPP_OTP_TEMPLATE,language:{code:process.env.WHATSAPP_OTP_LANGUAGE||'en_US'},components:[{type:'body',parameters:[{type:'text',text:code}]}]}}),signal:AbortSignal.timeout(15000)
- });
- if(!r.ok)throw Error('WhatsApp OTP provider rejected request');
-}
+async function sendOtp(number,code){return sendWhatsAppOtp(number,code);}
 const index=fs.readFileSync(new URL('../web/index.html',import.meta.url));
 const countries=fs.readFileSync(new URL('../site/countries.json',import.meta.url));
 const appJs=fs.readFileSync(new URL('../web/app.js',import.meta.url));
@@ -58,7 +51,7 @@ const server=http.createServer(async(req,res)=>{
   if(req.method==='GET'&&url.pathname==='/countries.json'){res.writeHead(200,{'Content-Type':'application/json','Cache-Control':'public, max-age=86400'});return res.end(countries);}
   if(req.method!=='POST'||!['/api/otp/start','/api/otp/verify','/api/request'].includes(url.pathname))return send(res,404,{error:'Not found'});
   if(!configured)return send(res,503,{error:'Service setup incomplete; contact operator'});
-  if(url.pathname==='/api/otp/start'&&(!process.env.WHATSAPP_CLOUD_TOKEN||!process.env.WHATSAPP_PHONE_NUMBER_ID||!process.env.WHATSAPP_OTP_TEMPLATE))return send(res,503,{error:'OTP provider not configured. Baileys OTP integration is not yet implemented.'});
+  if(url.pathname==='/api/otp/start'&&!isWhatsAppReady())return send(res,503,{error:'WhatsApp OTP bot is offline. Try again later.'});
   if(req.headers['content-type']?.split(';')[0]!=='application/json')return send(res,415,{error:'JSON required'});
   const origin=req.headers.origin,host=req.headers.host;
   if(origin&&new URL(origin).host!==host)return send(res,403,{error:'Origin rejected'});
@@ -109,3 +102,4 @@ const server=http.createServer(async(req,res)=>{
  }catch(err){console.error('API error',String(err.message));return send(res,500,{error:'Request could not be completed'});}
 });
 server.listen(PORT,'0.0.0.0',()=>console.log('AutoWA API listening on',PORT));
+if(configured)startWhatsApp().catch(e=>console.error('WhatsApp initialization failed',e.message));
