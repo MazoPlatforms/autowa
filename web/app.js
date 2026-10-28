@@ -81,7 +81,7 @@ async function showAccount(){
 }
 function navigate(path){history.pushState({},'',path);routeView();if(path==='/profile'&&signedIn)refreshAccount().catch(e=>msg(e.message));}
 $('profile-avatar').addEventListener('click',()=>navigate('/profile'));
-$('profile-back').addEventListener('click',()=>navigate('/'));
+$('profile-back').addEventListener('click',()=>navigate('/request'));
 window.addEventListener('popstate',routeView);
 $('save-profile').addEventListener('click',async()=>{
  const btn=$('save-profile');btn.disabled=true;
@@ -89,7 +89,7 @@ $('save-profile').addEventListener('click',async()=>{
  catch(e){msg(e.message);}finally{btn.disabled=false;}
 });
 $('logout').addEventListener('click',async()=>{
- try{await api('logout',{});authVersion++;signedIn=false;saveLoginHint(false);navigate('/');msg('Signed out.');}
+ try{await api('logout',{});authVersion++;signedIn=false;saveLoginHint(false);navigate('/request');msg('Signed out.');}
  catch(e){msg(e.message);}
 });
 const initialAuthVersion=authVersion;
