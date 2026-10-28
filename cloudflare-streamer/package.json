@@ -9,6 +9,7 @@
     "check": "wrangler deploy --dry-run"
   },
   "dependencies": {
+    "big-integer": "^1.6.52",
     "telegram": "2.26.22"
   },
   "devDependencies": {
