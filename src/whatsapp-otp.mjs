@@ -95,6 +95,6 @@ export async function startWhatsApp(){
 export async function sendWhatsAppOtp(number,code){
  if(!ready||!socket)throw Error('OTP WhatsApp is offline');
  const jid=number.slice(1)+'@s.whatsapp.net';
- const result=await socket.sendMessage(jid,{text:'Your AutoWA verification code is: '+code+'\nExpires in 5 minutes. Never share this code.'});
+ const result=await socket.sendMessage(jid,{text:'Your FilmGo verification code is: '+code+'\nExpires in 5 minutes. Never share this code.'});
  if(!result?.key?.id)throw Error('WhatsApp did not acknowledge OTP submission');
 }
