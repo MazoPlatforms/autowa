@@ -43,18 +43,18 @@ const id=document.getElementById('id').value.trim(),type=document.getElementById
 const filename=document.getElementById('filename').value.trim();
 if(!/^[a-zA-Z0-9_-]{1,80}$/.test(id)||!filename.toLowerCase().endsWith('.'+type)){msg.textContent='Check the movie ID and file extension.';return null;}
 const groups=[...document.querySelectorAll('#group-picker input:checked')].map(x=>x.value);
-if(groups.some(x=>!/^\\d+(-\\d+)?@g\\.us$/.test(x))){msg.textContent='Invalid group selection.';return null;}
+if(groups.some(x=>!/^\d+(-\d+)?@g\.us$/.test(x))){msg.textContent='Invalid group selection.';return null;}
 const countrySelect=document.getElementById('country');
 const code=countrySelect.value==='other'?document.getElementById('custom-code').value.trim():countrySelect.value;
-const lines=document.getElementById('phone').value.split(/[\\n,;]+/).map(x=>x.trim()).filter(Boolean);
-if(lines.length&&!/^\\d{1,3}$/.test(code)){msg.textContent='Enter a valid country calling code.';return null;}
+const lines=document.getElementById('phone').value.split(/[\n,;]+/).map(x=>x.trim()).filter(Boolean);
+if(lines.length&&!/^\d{1,3}$/.test(code)){msg.textContent='Enter a valid country calling code.';return null;}
 const recipient_jids=[];
 for(const line of lines){
  let digits=line.replace(/[^0-9+]/g,'');
  if(digits.startsWith('+'))digits=digits.slice(1);
  else if(digits.startsWith('00'))digits=digits.slice(2);
  else {digits=digits.replace(/^0+/,'');if(!digits.startsWith(code))digits=code+digits;}
- if(!/^\\d{7,15}$/.test(digits)){msg.textContent='Invalid phone number: '+line;return null;}
+ if(!/^\d{7,15}$/.test(digits)){msg.textContent='Invalid phone number: '+line;return null;}
  recipient_jids.push(digits+'@s.whatsapp.net');
 }
 if(!groups.length&&!recipient_jids.length){msg.textContent='Select a group or enter a personal recipient.';return null;}
@@ -71,8 +71,8 @@ fetch('./groups.json').then(r=>{if(!r.ok)throw Error('Group catalog unavailable'
  }
 }).catch(()=>{document.getElementById('group-picker').textContent='Group list unavailable. Try again later.';});
 document.getElementById('country').addEventListener('change',e=>{document.getElementById('custom-code-field').hidden=e.target.value!=='other';});
-form.addEventListener('submit',e=>{e.preventDefault();const data=makeMovie();if(!data)return;const blob=new Blob([JSON.stringify(data,null,2)+'\\n'],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=data.id+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);msg.textContent='JSON downloaded. Add it to movies/ through a reviewed GitHub contribution.';});
-document.getElementById('copy').addEventListener('click',async()=>{const data=makeMovie();if(!data)return;try{await navigator.clipboard.writeText(JSON.stringify(data,null,2)+'\\n');msg.textContent='JSON copied to clipboard.';}catch{msg.textContent='Clipboard unavailable; use Download movie JSON.';}});
+form.addEventListener('submit',e=>{e.preventDefault();const data=makeMovie();if(!data)return;const blob=new Blob([JSON.stringify(data,null,2)+'\n'],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=data.id+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);msg.textContent='JSON downloaded. Add it to movies/ through a reviewed GitHub contribution.';});
+document.getElementById('copy').addEventListener('click',async()=>{const data=makeMovie();if(!data)return;try{await navigator.clipboard.writeText(JSON.stringify(data,null,2)+'\n');msg.textContent='JSON copied to clipboard.';}catch{msg.textContent='Clipboard unavailable; use Download movie JSON.';}});
 </script></body></html>`;
 fs.mkdirSync('site',{recursive:true});
 if(!fs.existsSync('site/groups.json'))fs.writeFileSync('site/groups.json',JSON.stringify({groups:[],updated_at:null},null,2));
