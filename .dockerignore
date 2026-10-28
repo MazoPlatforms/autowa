@@ -1,0 +1,7 @@
+**/.git
+**/.auth
+**/downloads
+**/node_modules
+movies
+.github
+README.md
