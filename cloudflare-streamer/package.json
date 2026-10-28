@@ -1,0 +1,16 @@
+{
+  "name": "tamil-films-world-streamer",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "check": "wrangler deploy --dry-run"
+  },
+  "dependencies": {
+    "telegram": "2.26.22"
+  },
+  "devDependencies": {
+    "wrangler": "^4.0.0"
+  }
+}
