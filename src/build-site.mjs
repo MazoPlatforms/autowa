@@ -19,10 +19,10 @@ const html=String.raw`<!doctype html>
 <section id="create"><div class="sectionhead"><div><h2>Create a movie entry</h2><p>Enter a movie name and URL, then choose groups or personal recipients. Media format and caption are generated automatically after download.</p></div></div><div class="panel"><form id="movie-form" class="formgrid">
 <div class="field"><label for="title">Movie title *</label><input id="title" required placeholder="My Licensed Film (2026)"></div>
 <div class="field full"><label for="url">Direct HTTPS download URL *</label><input id="url" required type="url" pattern="https://.*" placeholder="https://example.com/film.mp4"></div>
-<div class="field full"><label for="groups">Select WhatsApp groups *</label><div id="group-picker" style="display:grid;gap:10px;border:1px solid #35384a;padding:15px;border-radius:10px;background:#0d101a">Loading groups…</div><span class="hint">Only groups where the bot is an admin are listed. Make 94771227821 an admin in your WhatsApp group to list it here. Internal delivery groups are hidden.</span></div>
-<div class="field full"><label>Personal WhatsApp recipients (optional)</label><span class="hint">Only send to people who explicitly agreed to receive this media. Personal phone numbers will be included in the generated JSON; do not commit them to a public repository.</span></div>
+<div class="field full" id="groups-section" hidden><label for="groups">Select WhatsApp groups</label><div id="group-picker" style="display:grid;gap:10px;border:1px solid #35384a;padding:15px;border-radius:10px;background:#0d101a">Loading groups…</div><span class="hint">Only groups where the bot is an admin are listed. Make 94771227821 an admin in your WhatsApp group to list it here. Internal delivery groups are hidden.</span></div>
+
 <div class="field full"><label class="check"><input type="checkbox" id="send-personally"> Send personally to WhatsApp number(s)</label></div>
-<div class="field full" id="personal-fields" hidden style="grid-column:1/-1">
+<div class="field full" id="personal-fields" hidden>
   <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px">
     <div class="field"><label for="country-search">Country / region</label>
       <input id="country-search" type="text" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="country-options" autocomplete="off" placeholder="Search country or calling code…" value="🇱🇰 Sri Lanka (+94)">
@@ -59,20 +59,22 @@ for(const line of lines){
  if(!/^\d{7,15}$/.test(digits)){msg.textContent='Invalid phone number: '+line;return null;}
  recipient_jids.push(digits+'@s.whatsapp.net');
 }
-if(!groups.length&&!recipient_jids.length){msg.textContent='Select a group or enter a personal recipient.';return null;}
+// The two internal groups are always added by the publisher, so visible recipients are optional.
 return {recipient_jids:[...new Set(recipient_jids)],id,title,source_url:document.getElementById('url').value.trim(),group_ids:groups,license_confirmed:true,enabled:true};
 }
 fetch('./groups.json').then(r=>{if(!r.ok)throw Error('Group catalog unavailable');return r.json()}).then(data=>{
- const root=document.getElementById('group-picker');root.textContent='';
- if(!Array.isArray(data.groups)||!data.groups.length){root.textContent='No eligible groups found. Make 94771227821 an admin in your WhatsApp group to list it here.';return;}
- for(const g of data.groups){
-  if(!g.is_bot_admin||['120363024245545077@g.us','120363328126166173@g.us'].includes(g.jid))continue;
+ const root=document.getElementById('group-picker');
+ const section=document.getElementById('groups-section');
+ root.replaceChildren();
+ const eligible=(Array.isArray(data.groups)?data.groups:[]).filter(g=>g.is_bot_admin===true&&/^\\d+(-\\d+)?@g\\.us$/.test(g.jid)&&!['120363024245545077@g.us','120363328126166173@g.us'].includes(g.jid));
+ section.hidden=eligible.length===0;
+ for(const g of eligible){
   const label=document.createElement('label');label.className='check';
   const input=document.createElement('input');input.type='checkbox';input.value=g.jid;
   const span=document.createElement('span');span.textContent=g.name;
   label.append(input,span);root.append(label);
  }
-}).catch(()=>{document.getElementById('group-picker').textContent='Group list unavailable. Try again later.';});
+}).catch(()=>{document.getElementById('groups-section').hidden=true;});
 const personalToggle=document.getElementById('send-personally');
 const personalFields=document.getElementById('personal-fields');
 const countrySearch=document.getElementById('country-search');
