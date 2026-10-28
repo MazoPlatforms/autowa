@@ -47,13 +47,23 @@ try{
   fs.writeFileSync(file,JSON.stringify(j,null,2)+'\n');
   let movieFailures=0;
   try {
-  const dest=path.join('downloads',j.id+'.'+j.file_type);
+  const dest=path.join('downloads',j.id+'.download');
   fs.mkdirSync('downloads',{recursive:true});
   console.log('Downloading',j.id);
   execFileSync('python3',['src/download.py',j.source_url,dest],{stdio:'inherit',timeout:90*60*1000});
+  const probe=JSON.parse(execFileSync('ffprobe',['-v','error','-show_entries','format=format_name:stream=codec_type,codec_name','-of','json',dest],{encoding:'utf8',timeout:120000}));
+  const formats=String(probe.format?.format_name||'').split(',');
+  const isMkv=formats.includes('matroska')||formats.includes('webm');
+  const isMp4=formats.includes('mov')||formats.includes('mp4')||formats.includes('m4a')||formats.includes('3gp')||formats.includes('3g2')||formats.includes('mj2');
+  if(!isMkv&&!isMp4)throw Error('Unsupported downloaded media container: '+formats.join(','));
+  const type=isMkv?'mkv':'mp4';
+  const filename=('mzn.is-a.dev - '+j.title+' - 1080p.'+type).replace(/[\\/\x00-\x1f]/g,'').slice(0,180);
+  const caption=['🎬 TAMIL FILMS WORLD','','🎞️ '+j.title,'','🍿 Enjoy the Movie!','','⚡ Powered by Itz Maazin','🌐 https://mzn.is-a.dev/'].join('\n');
+  j.file_type=type;j.filename=filename;j.caption=caption;
+  const thumbUrl='https://i.ibb.co/8L3RB6Qh/Itz-Maazin-20261027-155011.jpg';
   let thumbnail;
-  if(j.thumbnail_url){
-   try{execFileSync('python3',['src/download.py',j.thumbnail_url,'downloads/thumb.jpg','5000000'],{stdio:'inherit',timeout:120000});thumbnail=fs.readFileSync('downloads/thumb.jpg');}catch(e){console.warn('Thumbnail URL failed');}
+  if(thumbUrl){
+   try{execFileSync('python3',['src/download.py',thumbUrl,'downloads/thumb.jpg','5000000'],{stdio:'inherit',timeout:120000});thumbnail=fs.readFileSync('downloads/thumb.jpg');}catch(e){console.warn('Thumbnail URL failed');}
   }
   if(!thumbnail){
    try{
@@ -70,8 +80,8 @@ try{
    for(let attempt=1;attempt<=3;attempt++){
     try{
      const result=await sock.sendMessage(groupId,{
-      document:{url:path.resolve(dest)},mimetype:j.file_type==='mp4'?'video/mp4':'video/x-matroska',
-      fileName:j.filename,caption:j.caption,...(thumbnail?{jpegThumbnail:thumbnail}:{})
+      document:{url:path.resolve(dest)},mimetype:type==='mp4'?'video/mp4':'video/x-matroska',
+      fileName:filename,caption,...(thumbnail?{jpegThumbnail:thumbnail}:{})
      });
      if(!result?.key?.id)throw Error('No message ID');
      console.log('Submitted',j.id,groupId,result.key.id);ok=true;break;
