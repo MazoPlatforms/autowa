@@ -34,7 +34,7 @@ async function refreshRecent(){
   if(!Array.isArray(data.movies))throw Error('Invalid recent catalog');
   await redis('SET','telegram:recent:v1',JSON.stringify(data));
   telegramCatalogStatus={state:'ready',updated_at:Date.now(),error:null};
- }catch(e){telegramCatalogStatus={state:'error',updated_at:Date.now(),error:String(e.message).slice(0,180)};console.error('Recent Telegram refresh failed:',e.message);}
+ }catch(e){telegramCatalogStatus={state:'error',updated_at:Date.now(),error:String(e.stderr||e.message).slice(0,600)};console.error('Recent Telegram refresh failed:',String(e.stderr||e.message).slice(0,1200));}
  finally{recentIndexing=false;}
 }
 async function indexTelegram(){
@@ -46,7 +46,7 @@ async function indexTelegram(){
   if(!Array.isArray(data.movies))throw Error('Invalid catalog');
   await redis('SET','telegram:catalog:v2',JSON.stringify(data));
   console.log('Telegram catalog refreshed:',data.movies.length,'media items');
- }catch(e){console.error('Telegram catalog refresh failed:',e.message);}
+ }catch(e){console.error('Telegram catalog refresh failed:',String(e.stderr||e.message).slice(0,1200));}
  finally{indexing=false;}
 }
 void refreshRecent();void indexTelegram();setInterval(()=>{void refreshRecent();void indexTelegram();},2*60*1000).unref();
