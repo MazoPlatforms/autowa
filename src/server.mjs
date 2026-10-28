@@ -143,7 +143,7 @@ const server=http.createServer(async(req,res)=>{
    if(!telegramReady)return send(res,503,{error:'Telegram not configured'});
    const total=movie.file_size;
    const range=req.headers.range;
-   let start=0,end=Math.min(total-1,4*1024*1024-1);
+   let start=0,end=Math.min(total-1,32*1024*1024-1);
    if(range){
     const match=/^bytes=(\d+)-(\d*)$/.exec(range);
     if(!match)return send(res,416,{error:'Invalid byte range'},{'Content-Range':'bytes */'+total});
@@ -151,7 +151,7 @@ const server=http.createServer(async(req,res)=>{
     if(!Number.isSafeInteger(start)||start>=total)return send(res,416,{error:'Range unavailable'},{'Content-Range':'bytes */'+total});
     const requested=match[2]?Number(match[2]):total-1;
     if(!Number.isSafeInteger(requested)||requested<start)return send(res,416,{error:'Invalid byte range'},{'Content-Range':'bytes */'+total});
-    end=Math.min(requested,total-1,start+4*1024*1024-1);
+    end=Math.min(requested,total-1,start+32*1024*1024-1);
    }
    const length=end-start+1;
    const ext=String(movie.file_name||'').toLowerCase();
@@ -160,11 +160,12 @@ const server=http.createServer(async(req,res)=>{
    if(req.method==='HEAD'){res.writeHead(206,headers);return res.end();}
    const child=spawn('python3',['src/telegram_stream.py',String(movie.telegram_message_id),String(start),String(length)],{env:process.env,stdio:['ignore','pipe','pipe']});
    let started=false,bytes=0,closed=false;
+   const startedAt=Date.now();
    const abort=()=>{if(!child.killed)child.kill('SIGTERM');};
    res.once('close',abort);
    child.stdout.on('data',chunk=>{
     if(closed)return;
-    if(!started){res.writeHead(206,headers);started=true;}
+    if(!started){res.writeHead(206,headers);started=true;console.info('Telegram stream first byte',movie.slug_id,Date.now()-startedAt,'ms');}
     bytes+=chunk.length;
     if(!res.write(chunk))child.stdout.pause();
    });
@@ -175,7 +176,7 @@ const server=http.createServer(async(req,res)=>{
    child.on('close',code=>{
     if(closed)return;
     closed=true;
-    if(!started){return send(res,502,{error:'Telegram media could not be retrieved'});}
+    if(!started){console.warn('Telegram stream failed before first byte',movie.slug_id,code,errLog.replace(/TELEGRAM_SESSION=\\S+/g,'TELEGRAM_SESSION=[redacted]'));return send(res,502,{error:'Telegram media could not be retrieved'});}
     if(code!==0||bytes!==length){console.warn('Media range incomplete',movie.slug_id,code,bytes,length);return res.destroy();}
     res.end();
    });
