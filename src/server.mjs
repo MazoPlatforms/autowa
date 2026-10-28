@@ -23,6 +23,18 @@ async function redis(...args){
 }
 const telegramReady=['TELEGRAM_API_ID','TELEGRAM_API_HASH','TELEGRAM_SESSION','TELEGRAM_CHANNEL_ID'].every(k=>!!process.env[k]);
 let indexing=false;
+let recentIndexing=false;
+async function refreshRecent(){
+ if(!configured||!telegramReady||recentIndexing)return;
+ recentIndexing=true;
+ try{
+  const {stdout}=await execFileAsync('python3',['src/telegram_media.py','recent'],{timeout:45000,maxBuffer:262144,env:process.env});
+  const data=JSON.parse(stdout);
+  if(!Array.isArray(data.movies))throw Error('Invalid recent catalog');
+  await redis('SET','telegram:recent:v1',JSON.stringify(data));
+ }catch(e){console.error('Recent Telegram refresh failed:',e.message);}
+ finally{recentIndexing=false;}
+}
 async function indexTelegram(){
  if(!configured||!telegramReady||indexing)return;
  indexing=true;
@@ -35,7 +47,7 @@ async function indexTelegram(){
  }catch(e){console.error('Telegram catalog refresh failed:',e.message);}
  finally{indexing=false;}
 }
-void indexTelegram();setInterval(()=>void indexTelegram(),2*60*1000).unref();
+void refreshRecent();void indexTelegram();setInterval(()=>{void refreshRecent();void indexTelegram();},2*60*1000).unref();
 async function getCatalog(){
  const raw=await redis('GET','telegram:catalog:v2');
  return raw?JSON.parse(raw):null;
@@ -77,14 +89,16 @@ const server=http.createServer(async(req,res)=>{
    if(!await limit('search-ip:'+(req.socket.remoteAddress||'unknown'),30,60))return send(res,429,{error:'Search rate limit reached'});
    const query=(url.searchParams.get('q')||'').trim().toLowerCase().slice(0,100);
    const catalog=await getCatalog()||{movies:[],indexed_at:null};
-   let matches=catalog.movies.filter(m=>!query||m.title.toLowerCase().includes(query)||String(m.year||'').includes(query)).slice(0,query?50:15);
+   const recentRaw=!query?await redis('GET','telegram:recent:v1'):null;
+   const recent=recentRaw?JSON.parse(recentRaw):null;
+   let matches=(query?catalog.movies:(recent?.movies||catalog.movies)).filter(m=>!query||m.title.toLowerCase().includes(query)||String(m.year||'').includes(query)).slice(0,query?50:15);
    let live=false;
    if(!catalog.movies.length)void indexTelegram();
    if(query.length>=2){
     // Return indexed matches immediately. Telegram refreshes the index in the background.
     if(!matches.length)void indexTelegram();
    }
-   return send(res,200,{movies:matches,indexed_at:catalog.indexed_at,live,syncing:!catalog.movies.length});
+   return send(res,200,{movies:matches,indexed_at:catalog.indexed_at,live,syncing:!catalog.movies.length&&!recent?.movies?.length});
   }
   if(req.method==='GET'&&url.pathname==='/api/me'){
    const session=await authenticated(req);
