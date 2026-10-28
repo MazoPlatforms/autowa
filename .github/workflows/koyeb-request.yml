@@ -1,4 +1,4 @@
-name: Process verified AutoWA request
+name: Process verified FilmGo request
 on:
   repository_dispatch:
     types: [autowa-verified-request]
