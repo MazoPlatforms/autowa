@@ -26,15 +26,26 @@ function decrypt(str){
 async function authState(){
  let stored=await redis('GET',prefix+'creds');
  let creds;
- if(stored)creds=decrypt(stored);
- else if(process.env.WA_OTP_AUTH_CREDS){
-  try{creds=JSON.parse(process.env.WA_OTP_AUTH_CREDS,BufferJSON.reviver);}
+ const seed=process.env.WA_OTP_AUTH_CREDS;
+ let provided=null;
+ if(seed){
+  try{provided=JSON.parse(seed,BufferJSON.reviver);}
   catch{throw Error('WA_OTP_AUTH_CREDS is not valid JSON');}
-  // Attempt to resume a registered Baileys identity from the supplied creds.json.
-  // Missing Signal sessions may be recreated for new conversations, but historical
-  // sessions are not guaranteed to be recoverable without their matching keys.
-  if(creds.registered===true)console.warn('Restoring registered WhatsApp credentials; missing Signal keys may require re-pairing if reconnect fails.');
+  if(!provided||typeof provided!=='object'||typeof provided.registered!=='boolean')throw Error('WA_OTP_AUTH_CREDS is not a valid Baileys creds object');
+ }
+ if(stored){
+  creds=decrypt(stored);
+  // A previous first boot may have persisted an unregistered placeholder.
+  // Prefer the operator's registered creds.json in that specific case only.
+  if(!creds.registered&&provided?.registered){
+   console.log('Replacing unregistered Redis auth seed with registered WA_OTP_AUTH_CREDS');
+   creds=provided;
+   await redis('SET',prefix+'creds',encrypt(creds));
+  }
+ }else if(provided){
+  creds=provided;
   await redis('SET',prefix+'creds',encrypt(creds));
+  console.log('Bootstrapped WhatsApp OTP credentials from Koyeb secret');
  }else creds=initAuthCreds();
  const keys={
   get:async(type,ids)=>{
