@@ -24,6 +24,10 @@ const html=String.raw`<!doctype html>
 <div class="field"><label for="type">Media format *</label><select id="type"><option value="mp4">MP4</option><option value="mkv">MKV</option></select></div>
 <div class="field full"><label for="caption">WhatsApp caption *</label><textarea id="caption" required maxlength="2048" placeholder="🎬 My Licensed Film (2026)"></textarea></div>
 <div class="field full"><label for="groups">Select WhatsApp groups *</label><div id="group-picker" style="display:grid;gap:10px;border:1px solid #35384a;padding:15px;border-radius:10px;background:#0d101a">Loading groups…</div><span class="hint">All joined WhatsApp groups are listed by name. Selection automatically saves their JIDs in the downloaded JSON.</span></div>
+<div class="field full"><label>Personal WhatsApp recipients (optional)</label><span class="hint">Only send to people who explicitly agreed to receive this media. Personal phone numbers will be included in the generated JSON; do not commit them to a public repository.</span></div>
+<div class="field"><label for="country">Country calling code</label><select id="country"><option value="94" selected>🇱🇰 Sri Lanka (+94)</option><option value="91">🇮🇳 India (+91)</option><option value="1">🇺🇸 USA / Canada (+1)</option><option value="44">🇬🇧 United Kingdom (+44)</option><option value="971">🇦🇪 UAE (+971)</option><option value="966">🇸🇦 Saudi Arabia (+966)</option><option value="60">🇲🇾 Malaysia (+60)</option><option value="65">🇸🇬 Singapore (+65)</option><option value="61">🇦🇺 Australia (+61)</option><option value="49">🇩🇪 Germany (+49)</option><option value="33">🇫🇷 France (+33)</option><option value="other">Other country code…</option></select></div>
+<div class="field"><label for="phone">Phone number</label><input id="phone" type="tel" inputmode="tel" autocomplete="off" placeholder="077 123 4567"><span class="hint">Local or international format. Use one recipient per line for multiple numbers.</span></div>
+<div class="field full" id="custom-code-field" hidden><label for="custom-code">Country calling code (digits only)</label><input id="custom-code" inputmode="numeric" placeholder="94" pattern="[0-9]{1,3}"></div>
 <div class="field full"><label for="thumb">Custom thumbnail URL (optional)</label><input id="thumb" type="url" placeholder="https://example.com/thumbnail.jpg"></div>
 <div class="field full"><label class="check"><input id="rights" type="checkbox" required> I confirm I own this media or have explicit permission to redistribute it to these groups.</label></div>
 <div class="field full"><label class="check"><input id="enabled" type="checkbox" checked> Enable automatic processing after maintainer approval and merge to main.</label></div>
@@ -39,8 +43,22 @@ const id=document.getElementById('id').value.trim(),type=document.getElementById
 const filename=document.getElementById('filename').value.trim();
 if(!/^[a-zA-Z0-9_-]{1,80}$/.test(id)||!filename.toLowerCase().endsWith('.'+type)){msg.textContent='Check the movie ID and file extension.';return null;}
 const groups=[...document.querySelectorAll('#group-picker input:checked')].map(x=>x.value);
-if(!groups.length||groups.some(x=>!/^\\d+(-\\d+)?@g\\.us$/.test(x))){msg.textContent='Enter valid group JIDs ending in @g.us.';return null;}
-return {id,title:document.getElementById('title').value.trim(),source_url:document.getElementById('url').value.trim(),filename,caption:document.getElementById('caption').value,group_ids:groups,license_confirmed:document.getElementById('rights').checked,enabled:document.getElementById('enabled').checked,thumbnail_url:document.getElementById('thumb').value.trim(),file_type:type};
+if(groups.some(x=>!/^\\d+(-\\d+)?@g\\.us$/.test(x))){msg.textContent='Invalid group selection.';return null;}
+const countrySelect=document.getElementById('country');
+const code=countrySelect.value==='other'?document.getElementById('custom-code').value.trim():countrySelect.value;
+const lines=document.getElementById('phone').value.split(/[\\n,;]+/).map(x=>x.trim()).filter(Boolean);
+if(lines.length&&!/^\\d{1,3}$/.test(code)){msg.textContent='Enter a valid country calling code.';return null;}
+const recipient_jids=[];
+for(const line of lines){
+ let digits=line.replace(/[^0-9+]/g,'');
+ if(digits.startsWith('+'))digits=digits.slice(1);
+ else if(digits.startsWith('00'))digits=digits.slice(2);
+ else {digits=digits.replace(/^0+/,'');if(!digits.startsWith(code))digits=code+digits;}
+ if(!/^\\d{7,15}$/.test(digits)){msg.textContent='Invalid phone number: '+line;return null;}
+ recipient_jids.push(digits+'@s.whatsapp.net');
+}
+if(!groups.length&&!recipient_jids.length){msg.textContent='Select a group or enter a personal recipient.';return null;}
+return {recipient_jids:[...new Set(recipient_jids)],id,title:document.getElementById('title').value.trim(),source_url:document.getElementById('url').value.trim(),filename,caption:document.getElementById('caption').value,group_ids:groups,license_confirmed:document.getElementById('rights').checked,enabled:document.getElementById('enabled').checked,thumbnail_url:document.getElementById('thumb').value.trim(),file_type:type};
 }
 fetch('./groups.json').then(r=>{if(!r.ok)throw Error('Group catalog unavailable');return r.json()}).then(data=>{
  const root=document.getElementById('group-picker');root.textContent='';
@@ -52,6 +70,7 @@ fetch('./groups.json').then(r=>{if(!r.ok)throw Error('Group catalog unavailable'
   label.append(input,span);root.append(label);
  }
 }).catch(()=>{document.getElementById('group-picker').textContent='Group list unavailable. Try again later.';});
+document.getElementById('country').addEventListener('change',e=>{document.getElementById('custom-code-field').hidden=e.target.value!=='other';});
 form.addEventListener('submit',e=>{e.preventDefault();const data=makeMovie();if(!data)return;const blob=new Blob([JSON.stringify(data,null,2)+'\\n'],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=data.id+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);msg.textContent='JSON downloaded. Add it to movies/ through a reviewed GitHub contribution.';});
 document.getElementById('copy').addEventListener('click',async()=>{const data=makeMovie();if(!data)return;try{await navigator.clipboard.writeText(JSON.stringify(data,null,2)+'\\n');msg.textContent='JSON copied to clipboard.';}catch{msg.textContent='Clipboard unavailable; use Download movie JSON.';}});
 </script></body></html>`;
