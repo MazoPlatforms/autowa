@@ -5,7 +5,12 @@ let pending = null;
 function diagnostic(stage, err) {
   const type = err?.name || 'Error';
   const code = typeof err?.code === 'string' || typeof err?.code === 'number' ? String(err.code) : 'none';
-  console.error('FilmGo gateway failure', JSON.stringify({ stage, type, code }));
+  const raw = String(err?.message || '');
+  const message = raw
+    .replace(/\b\d{7,}\b/g, '[number]')
+    .replace(/(?:[A-Za-z0-9_+\/-]{24,}={0,2})/g, '[redacted]')
+    .slice(0, 240);
+  console.error('FilmGo gateway failure', JSON.stringify({ stage, type, code, message }));
 }
 
 let cachedCatalog = null;
