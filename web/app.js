@@ -77,4 +77,4 @@ $('logout').addEventListener('click',async()=>{
  try{await api('logout',{});$('account').classList.add('hidden');$('request').classList.add('hidden');$('start').classList.remove('hidden');msg('Signed out.');}
  catch(e){msg(e.message);}
 });
-showAccount().catch(()=>{});
+showAccount().catch(()=>{}).finally(()=>document.documentElement.classList.add('auth-ready'));
