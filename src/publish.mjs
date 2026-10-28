@@ -73,7 +73,7 @@ try{
   const dest=path.join('downloads',j.id+'.download');
   fs.mkdirSync('downloads',{recursive:true});
   console.log('Downloading',j.id);
-  execFileSync('python3',['src/download.py',j.source_url,dest],{stdio:'inherit',timeout:90*60*1000});
+  execFileSync('python3',['src/download.py',j.source_url,dest,'2000000000',String(j.expected_size_bytes||0)],{stdio:'inherit',timeout:90*60*1000});
   const mediaBytes=fs.statSync(dest).size;
   console.log('Media ready:',mediaBytes,'bytes /',(mediaBytes/1048576).toFixed(2),'MiB (thumbnail excluded)');
   const probe=JSON.parse(execFileSync('ffprobe',['-v','error','-show_entries','format=format_name:stream=codec_type,codec_name','-of','json',dest],{encoding:'utf8',timeout:120000}));
