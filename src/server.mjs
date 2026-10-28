@@ -75,15 +75,7 @@ const server=http.createServer(async(req,res)=>{
   if(req.method==='GET'&&url.pathname==='/api/movies'){
    if(!configured||!telegramReady)return send(res,503,{error:'Movie catalog not configured'});
    if(!await limit('search-ip:'+(req.socket.remoteAddress||'unknown'),30,60))return send(res,429,{error:'Search rate limit reached'});
-   let catalog=await getCatalog();
-   if(!catalog){
-    try{
-     const {stdout}=await execFileAsync('python3',['src/telegram_media.py','recent'],{timeout:60000,maxBuffer:256*1024,env:process.env});
-     catalog=JSON.parse(stdout);
-     if(!Array.isArray(catalog.movies))throw Error('Invalid recent catalog');
-     await redis('SET','telegram:catalog:v2',JSON.stringify(catalog),'EX',120);
-    }catch(err){console.error('Recent Telegram catalog failed:',err.message);return send(res,503,{error:'Telegram is unavailable. Please try again shortly.'});}
-   }
+   const catalog=await getCatalog()||{movies:[],indexed_at:null};
    const query=(url.searchParams.get('q')||'').trim().toLowerCase().slice(0,100);
    let matches=catalog.movies.filter(m=>!query||m.title.toLowerCase().includes(query)||String(m.year||'').includes(query)).slice(0,query?50:15);
    if(!query){
