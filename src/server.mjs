@@ -30,14 +30,14 @@ async function indexTelegram(){
   const {stdout}=await execFileAsync('python3',['src/telegram_media.py','index'],{timeout:180000,maxBuffer:3*1024*1024,env:process.env});
   const data=JSON.parse(stdout);
   if(!Array.isArray(data.movies))throw Error('Invalid catalog');
-  await redis('SET','telegram:catalog:v1',JSON.stringify(data),'EX',7200);
+  await redis('SET','telegram:catalog:v2',JSON.stringify(data),'EX',1200);
   console.log('Telegram catalog refreshed:',data.movies.length,'media items');
  }catch(e){console.error('Telegram catalog refresh failed:',e.message);}
  finally{indexing=false;}
 }
-setTimeout(()=>{void indexTelegram();setInterval(()=>void indexTelegram(),15*60*1000).unref();},3000).unref();
+setTimeout(()=>{void indexTelegram();setInterval(()=>void indexTelegram(),2*60*1000).unref();},3000).unref();
 async function getCatalog(){
- const raw=await redis('GET','telegram:catalog:v1');
+ const raw=await redis('GET','telegram:catalog:v2');
  return raw?JSON.parse(raw):null;
 }
 async function limit(key,max,seconds){
@@ -75,25 +75,21 @@ const server=http.createServer(async(req,res)=>{
   if(req.method==='GET'&&url.pathname==='/api/movies'){
    if(!configured||!telegramReady)return send(res,503,{error:'Movie catalog not configured'});
    if(!await limit('search-ip:'+(req.socket.remoteAddress||'unknown'),30,60))return send(res,429,{error:'Search rate limit reached'});
-   const catalog=await getCatalog();
+   let catalog=await getCatalog();
+   if(!catalog){await indexTelegram();catalog=await getCatalog();}
    if(!catalog)return send(res,503,{error:'Movie catalog is syncing. Try again shortly.'});
    const query=(url.searchParams.get('q')||'').trim().toLowerCase().slice(0,100);
    let matches=catalog.movies.filter(m=>!query||m.title.toLowerCase().includes(query)||String(m.year||'').includes(query)).slice(0,query?50:15);
    let live=false;
    if(query.length>=2){
-    const cached=await redis('GET','telegram:search:'+hmac(query));
-    if(cached){matches=JSON.parse(cached);live=true;}
-    else{
-     try{
-      const {stdout}=await execFileAsync('python3',['src/telegram_media.py','search',query],{timeout:90000,maxBuffer:1024*1024,env:process.env});
-      const remote=JSON.parse(stdout).movies||[];
-      const unique=new Map([...remote,...matches].map(m=>[m.id,m]));
-      matches=[...unique.values()].slice(0,50);
-      await redis('SET','telegram:search:'+hmac(query),JSON.stringify(matches),'EX',120);
-      for(const m of matches)await redis('SET','telegram:movie:'+m.id,JSON.stringify(m),'EX',1800);
-      live=true;
-     }catch(err){console.warn('Telegram live search fallback:',err.message);}
-    }
+    try{
+     const {stdout}=await execFileAsync('python3',['src/telegram_media.py','search',query],{timeout:90000,maxBuffer:1024*1024,env:process.env});
+     const remote=JSON.parse(stdout).movies||[];
+     const validIds=new Set(catalog.movies.map(m=>m.id));
+     matches=[...new Map([...remote,...matches.filter(m=>validIds.has(m.id))].map(m=>[m.id,m])).values()].slice(0,50);
+     live=true;
+    }catch(err){console.warn('Telegram live search unavailable:',err.message);matches=[];}
+
    }
    return send(res,200,{movies:matches,indexed_at:catalog.indexed_at,live});
   }
@@ -150,15 +146,21 @@ const server=http.createServer(async(req,res)=>{
   }
   if(url.pathname==='/api/profile'){
    if(typeof data.name!=='string'||data.name.trim().length<2||data.name.trim().length>60)return send(res,400,{error:'Name must contain 2–60 characters'});
-   const name=data.name.trim().replace(/[\\x00-\\x1f]/g,'');
+   const name=data.name.trim().replace(/[\x00-\x1f]/g,'');
    await redis('SET','profile:'+hmac(session.number),JSON.stringify({name,updated_at:new Date().toISOString()}));
    return send(res,200,{ok:true,name});
   }
   if(data.rights_confirmed!==true||!Number.isSafeInteger(data.movie_id)||data.movie_id<=0)return send(res,400,{error:'Select a movie and confirm distribution rights'});
   const catalog=await getCatalog();
-  const cachedMovie=await redis('GET','telegram:movie:'+data.movie_id);
-  const movie=catalog?.movies?.find(m=>m.id===data.movie_id)||(cachedMovie?JSON.parse(cachedMovie):null);
+  let movie=catalog?.movies?.find(m=>m.id===data.movie_id);
   if(!movie)return send(res,400,{error:'Selected movie unavailable; refresh the catalog'});
+  try{
+   const {stdout}=await execFileAsync('python3',['src/telegram_media.py','check',String(data.movie_id)],{timeout:45000,maxBuffer:32768,env:process.env});
+   const fresh=JSON.parse(stdout).movie;
+   if(!fresh)return send(res,409,{error:'Movie was deleted or caption changed. Refresh and select another.'});
+   movie=fresh;
+  }catch(err){console.warn('Movie verification failed:',err.message);return send(res,503,{error:'Unable to verify movie availability right now'});}
+
   if(!await limit('submit:'+session.number,3,86400))return send(res,429,{error:'Daily request limit reached'});
   const claim=await redis('SET','claim:'+hmac(session.nonce),'1','EX',900,'NX');
   if(claim!=='OK')return send(res,409,{error:'Request already submitted'});
