@@ -1,55 +1,41 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-:root{font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#24292f;background:#f6f8fa;font-synthesis:none}
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+:root{font-family:Inter,system-ui,sans-serif;color:#182033;background:#f5f6fa}
 *{box-sizing:border-box}
-body{margin:0;min-height:100vh;background:#f6f8fa;padding:48px 20px}
-main{width:min(100%,560px);margin:0 auto;background:#fff;border:1px solid #d0d7de;border-radius:10px;padding:32px;box-shadow:0 1px 3px rgba(27,31,36,.05)}
-h1{font-size:27px;line-height:1.25;letter-spacing:-.6px;margin:0 0 14px;font-weight:700}
-p{font-size:14px;line-height:1.7;color:#57606a;margin:0 0 22px}
-label{display:block;font-size:13px;font-weight:600;margin:18px 0 7px;color:#24292f}
-input,select,button{font:inherit;font-size:14px}
-input,select{width:100%;height:42px;padding:9px 12px;background:#fff;border:1px solid #d0d7de;border-radius:6px;color:#24292f;min-width:0}
-input:focus,select:focus{border-color:#0969da;outline:2px solid #0969da33}
-button{width:100%;min-height:42px;padding:10px 16px;margin-top:18px;border:1px solid #1a7f37;border-radius:6px;background:#2da44e;color:white;font-weight:600;cursor:pointer}
-button:hover:not(:disabled){background:#2c974b}
-button:disabled{opacity:.55;cursor:not-allowed}
-.inline{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.check{display:flex;align-items:flex-start;gap:10px;margin-top:20px}
-.check input{width:16px;height:16px;flex:none;margin:2px 0 0}
-.check label{margin:0;font-weight:400;line-height:1.6}
-.small{font-size:12px}
+body{margin:0;min-height:100vh;background:#f5f6fa}
+main{max-width:640px;margin:0 auto;padding:26px 20px 50px}
+.app-header{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:32px;min-height:48px}
+h1{font-size:clamp(22px,5vw,28px);font-weight:800;letter-spacing:-.9px;line-height:1.2;margin:0}
+h2{font-size:21px;letter-spacing:-.5px;margin:0 0 20px}
+p{color:#697286;font-size:14px;line-height:1.6}
+.card{background:white;border:1px solid #e4e7ee;border-radius:20px;padding:24px;box-shadow:0 8px 32px #1b245008}
+label{display:block;font-size:13px;font-weight:600;margin:18px 0 8px}
+input,select,button{font:inherit}
+input:not([type=checkbox]),select{width:100%;height:48px;padding:0 14px;border:1px solid #d9dfe9;border-radius:11px;background:#fff;color:#182033;font-size:14px}
+input:focus,select:focus{outline:2px solid #d4cdfb;border-color:#6d51d5}
+button{cursor:pointer}
+.primary-button{width:100%;min-height:48px;background:#5235c6;color:white;border:0;border-radius:11px;font-weight:700;margin-top:24px;padding:12px}
+.primary-button:disabled{opacity:.5;cursor:not-allowed}
+.secondary-button{width:100%;min-height:44px;background:#fff;color:#4c5264;border:1px solid #d9dfe9;border-radius:11px;margin-top:14px}
 .hidden{display:none!important}
-#message{font-size:13px;min-height:20px;color:#0969da;overflow-wrap:anywhere;margin:18px 0 0}
-footer{border-top:1px solid #d8dee4;margin-top:26px;padding-top:18px;font-size:12px;line-height:1.6;color:#6e7781}
-@media(max-width:480px){body{padding:24px 12px}main{padding:24px 20px;border-radius:8px}}
-
+#profile-avatar.avatar-button{appearance:none!important;display:grid!important;place-items:center!important;position:static!important;width:42px!important;height:42px!important;min-width:42px!important;max-width:42px!important;min-height:42px!important;max-height:42px!important;flex:0 0 42px!important;padding:0!important;margin:0!important;border-radius:50%!important;background:#ece7ff!important;color:#5032b7!important;border:1px solid #d9cdfd!important;box-shadow:none!important;line-height:1!important;font-size:13px!important;font-weight:800!important;overflow:hidden!important}
+#profile-avatar.hidden{display:none!important}
+#profile-avatar span{line-height:1}
+#profile-back.back-button{width:auto;min-height:38px;padding:8px 13px;margin:0;background:#fff;color:#343d50;border:1px solid #dce0e9;border-radius:10px}
+#auth-intro{margin:0 0 20px}
+#account{padding:0}
+#account-number{margin:0 0 12px}
+#account-limits{padding:14px;background:#f5f3ff;border-radius:12px;color:#4936a3}
 .movie-picker{position:relative}
-.movie-options{position:absolute;top:calc(100% + 6px);left:0;right:0;max-height:300px;overflow-y:auto;background:#fff;border:1px solid #d0d7de;border-radius:9px;box-shadow:0 12px 28px rgba(27,31,36,.12);z-index:10;padding:5px}
-.movie-option{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;min-height:48px;margin:0;padding:10px 12px;text-align:left;background:#fff;color:#24292f;border:0;border-radius:6px;font-weight:400}
-.movie-option:hover,.movie-option:focus-visible{background:#f6f8fa;outline:none}
-.movie-option strong{font-weight:600;font-size:13px;overflow-wrap:anywhere}
-.movie-option span{color:#6e7781;font-size:12px;white-space:nowrap}
-.movie-options .small{margin:10px}
-#movie-hint{margin:7px 0 0;font-size:12px}
-
-h2{font-size:18px;margin:24px 0 10px;letter-spacing:-.3px}
-#account{padding:16px 0 20px;border-bottom:1px solid #d8dee4}
-#account-number{margin-bottom:10px}
-#account-limits{margin:14px 0 0}
-button.secondary{background:#fff;color:#24292f;border-color:#d0d7de}
-button.secondary:hover{background:#f6f8fa}
-
+.movie-options{position:absolute;top:calc(100% + 7px);left:0;right:0;background:#fff;border:1px solid #e0e4ec;border-radius:12px;box-shadow:0 14px 32px #20294a22;max-height:300px;overflow:auto;padding:5px;z-index:20}
+.movie-option{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;width:100%;padding:13px 10px;margin:0;background:white;color:#1f2738;border:0;border-radius:8px;text-align:left}
+.movie-option:hover{background:#f5f3ff}
+.movie-option strong{font-size:13px}
+.movie-option span{font-size:11px;color:#727b8e;text-align:right}
+#movie-hint{margin:10px 0;font-size:12px}
+.check{display:flex;gap:11px;align-items:flex-start;margin-top:22px}
+.check input{width:18px;height:18px;flex:none;accent-color:#5235c6;margin-top:3px}
+.check label{margin:0;line-height:1.6;font-weight:400}
+#message{min-height:20px;font-size:13px;color:#5032b7;margin:16px 0}
+footer{font-size:12px;line-height:1.7;color:#8790a0;margin-top:26px;text-align:center}
 html:not(.auth-ready) #start,html:not(.auth-ready) #verify,html:not(.auth-ready) #request,html:not(.auth-ready) #account{display:none!important}
-nav{display:flex;gap:16px;border-bottom:1px solid #d8dee4;margin-bottom:22px;padding:0 0 14px}
-nav a{color:#0969da;text-decoration:none;font-size:13px;font-weight:600}
-nav a:hover{text-decoration:underline}
-
-.app-header{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:24px}
-.app-header h1{margin:0;min-width:0;font-size:clamp(21px,5vw,27px)}
-.avatar-button{width:44px;height:44px;min-height:44px;flex:0 0 44px;margin:0;padding:0;border-radius:50%;background:#e9e5f7;color:#5b36a2;border:1px solid #d8cfee;font-size:14px;font-weight:700;display:grid;place-items:center}
-.avatar-button:hover{background:#ded5f5}
-.back-button{width:auto;min-height:36px;margin:0;padding:6px 12px;background:transparent;color:#24292f;border:1px solid #d0d7de;font-size:13px}
-.back-button:hover{background:#f6f8fa}
-
-.app-header #profile-avatar{display:flex;align-items:center;justify-content:center;width:40px;min-width:40px;max-width:40px;height:40px;min-height:40px;flex:0 0 40px;aspect-ratio:1/1;border-radius:9999px;padding:0;margin:0;overflow:hidden;box-shadow:none;letter-spacing:0}
-.app-header #profile-avatar span{display:block;line-height:1;font-size:13px;white-space:nowrap}
-.app-header #profile-back{width:auto;flex:0 0 auto}
+@media(max-width:480px){main{padding:22px 16px 40px}.card{padding:21px 18px;border-radius:17px}.app-header{margin-bottom:24px}}
