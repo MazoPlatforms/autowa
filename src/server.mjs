@@ -1,7 +1,7 @@
 import http from 'node:http';
 import crypto from 'node:crypto';
 import fs from 'node:fs';
-import {execFile} from 'node:child_process';
+import {execFile,spawn} from 'node:child_process';
 import {promisify} from 'node:util';
 const execFileAsync=promisify(execFile);
 import {startWhatsApp,isWhatsAppReady,sendWhatsAppOtp} from './whatsapp-otp.mjs';
@@ -128,6 +128,53 @@ const server=http.createServer(async(req,res)=>{
   if(req.method==='GET'&&url.pathname==='/api/version')return send(res,200,{version:'20261028-3',catalog_sync:'single-flight'});
   if(req.method==='GET'&&url.pathname==='/api/catalog-status')return send(res,200,{state:telegramCatalogStatus.state,updated_at:telegramCatalogStatus.updated_at,error:telegramCatalogStatus.error,telegram_configured:telegramReady});
   if(req.method==='GET'&&url.pathname==='/health'){return send(res,200,{ok:true});}
+  if((req.method==='GET'||req.method==='HEAD')&&url.pathname.startsWith('/api/stream/')){
+   // Streaming is disabled until the operator explicitly enables licensed titles.
+   if(process.env.STREAMING_ENABLED!=='true')return send(res,403,{error:'Streaming is not enabled'});
+   const publicId=url.pathname.slice('/api/stream/'.length);
+   const allow=new Set((process.env.RIGHTS_CLEARED_MOVIE_IDS||'').split(',').map(x=>x.trim()).filter(Boolean));
+   const catalog=JSON.parse(publishedMovies.toString());
+   const movie=(catalog.movies||[]).find(m=>m.slug_id===publicId&&allow.has(publicId));
+   if(!movie||!Number.isSafeInteger(movie.telegram_message_id)||!Number.isSafeInteger(movie.file_size)||movie.file_size<=0)return send(res,404,{error:'Video unavailable'});
+   if(!telegramReady)return send(res,503,{error:'Telegram not configured'});
+   const total=movie.file_size;
+   const range=req.headers.range;
+   let start=0,end=Math.min(total-1,4*1024*1024-1);
+   if(range){
+    const match=/^bytes=(\\d+)-(\\d*)$/.exec(range);
+    if(!match)return send(res,416,{error:'Invalid byte range'},{'Content-Range':'bytes */'+total});
+    start=Number(match[1]);
+    if(!Number.isSafeInteger(start)||start>=total)return send(res,416,{error:'Range unavailable'},{'Content-Range':'bytes */'+total});
+    const requested=match[2]?Number(match[2]):total-1;
+    if(!Number.isSafeInteger(requested)||requested<start)return send(res,416,{error:'Invalid byte range'},{'Content-Range':'bytes */'+total});
+    end=Math.min(requested,total-1,start+4*1024*1024-1);
+   }
+   const length=end-start+1;
+   const headers={'Content-Type':'application/octet-stream','Content-Length':String(length),'Content-Range':'bytes '+start+'-'+end+'/'+total,'Accept-Ranges':'bytes','Cache-Control':'no-store','X-Content-Type-Options':'nosniff','Content-Disposition':'inline'};
+   if(req.method==='HEAD'){res.writeHead(206,headers);return res.end();}
+   const child=spawn('python3',['src/telegram_stream.py',String(movie.telegram_message_id),String(start),String(length)],{env:process.env,stdio:['ignore','pipe','pipe']});
+   let started=false,bytes=0,closed=false;
+   const abort=()=>{if(!child.killed)child.kill('SIGTERM');};
+   res.once('close',abort);
+   child.stdout.on('data',chunk=>{
+    if(closed)return;
+    if(!started){res.writeHead(206,headers);started=true;}
+    bytes+=chunk.length;
+    if(!res.write(chunk))child.stdout.pause();
+   });
+   res.on('drain',()=>child.stdout.resume());
+   let errLog='';
+   child.stderr.on('data',chunk=>{errLog=(errLog+chunk.toString()).slice(-500);});
+   child.on('error',()=>{closed=true;if(!res.headersSent)send(res,502,{error:'Media gateway unavailable'});else res.destroy();});
+   child.on('close',code=>{
+    if(closed)return;
+    closed=true;
+    if(!started){return send(res,502,{error:'Telegram media could not be retrieved'});}
+    if(code!==0||bytes!==length){console.warn('Media range incomplete',movie.slug_id,code,bytes,length);return res.destroy();}
+    res.end();
+   });
+   return;
+  }
   if(req.method==='GET'&&url.pathname==='/movies.json'){res.writeHead(200,{'Content-Type':'application/json; charset=utf-8','Cache-Control':'public, max-age=300','X-Content-Type-Options':'nosniff'});return res.end(publishedMovies);}
   if(req.method==='GET'&&url.pathname==='/tailwind.css'){res.writeHead(200,{'Content-Type':'text/css; charset=utf-8','Cache-Control':'public, max-age=86400','X-Content-Type-Options':'nosniff'});return res.end(tailwindCss);}
   if(req.method==='GET'&&url.pathname==='/catalog.css'){res.writeHead(200,{'Content-Type':'text/css; charset=utf-8','Cache-Control':'public, max-age=300','X-Content-Type-Options':'nosniff'});return res.end(catalogCss);}
