@@ -128,6 +128,12 @@ const server=http.createServer(async(req,res)=>{
   if(req.method==='GET'&&url.pathname==='/api/version')return send(res,200,{version:'20261028-3',catalog_sync:'single-flight'});
   if(req.method==='GET'&&url.pathname==='/api/catalog-status')return send(res,200,{state:telegramCatalogStatus.state,updated_at:telegramCatalogStatus.updated_at,error:telegramCatalogStatus.error,telegram_configured:telegramReady});
   if(req.method==='GET'&&url.pathname==='/health'){return send(res,200,{ok:true});}
+  if(req.method==='GET'&&url.pathname.startsWith('/api/stream-availability/')){
+   const id=url.pathname.slice('/api/stream-availability/'.length);
+   const allow=(process.env.RIGHTS_CLEARED_MOVIE_IDS||'').split(',').map(x=>x.trim());
+   const exists=(JSON.parse(publishedMovies.toString()).movies||[]).some(m=>m.slug_id===id);
+   return send(res,200,{available:process.env.STREAMING_ENABLED==='true'&&telegramReady&&exists&&allow.includes(id)});
+  }
   if((req.method==='GET'||req.method==='HEAD')&&url.pathname.startsWith('/api/stream/')){
    // Streaming is disabled until the operator explicitly enables licensed titles.
    if(process.env.STREAMING_ENABLED!=='true')return send(res,403,{error:'Streaming is not enabled'});
@@ -150,7 +156,7 @@ const server=http.createServer(async(req,res)=>{
     end=Math.min(requested,total-1,start+4*1024*1024-1);
    }
    const length=end-start+1;
-   const headers={'Content-Type':'application/octet-stream','Content-Length':String(length),'Content-Range':'bytes '+start+'-'+end+'/'+total,'Accept-Ranges':'bytes','Cache-Control':'no-store','X-Content-Type-Options':'nosniff','Content-Disposition':'inline'};
+   const headers={'Content-Type':'video/mp4','Content-Length':String(length),'Content-Range':'bytes '+start+'-'+end+'/'+total,'Accept-Ranges':'bytes','Cache-Control':'no-store','X-Content-Type-Options':'nosniff','Content-Disposition':'inline'};
    if(req.method==='HEAD'){res.writeHead(206,headers);return res.end();}
    const child=spawn('python3',['src/telegram_stream.py',String(movie.telegram_message_id),String(start),String(length)],{env:process.env,stdio:['ignore','pipe','pipe']});
    let started=false,bytes=0,closed=false;
