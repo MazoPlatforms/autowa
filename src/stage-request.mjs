@@ -1,14 +1,12 @@
 import fs from 'node:fs';
 const payload=JSON.parse(process.env.REQUEST_PAYLOAD_JSON||'null');
 if(!payload||typeof payload!=='object')throw Error('Missing request payload');
-const {request_id,title,source_url,recipient_jid,rights_confirmed,expected_size_bytes}=payload;
+const {request_id,title,movie_id,recipient_jid,rights_confirmed}=payload;
 if(typeof request_id!=='string'||!/^[-a-f0-9]{36}$/.test(request_id))throw Error('Invalid request ID');
 if(typeof title!=='string'||title.trim().length<2||title.length>140)throw Error('Invalid title');
 if(typeof recipient_jid!=='string'||!/^\d{8,15}@s\.whatsapp\.net$/.test(recipient_jid))throw Error('Invalid verified recipient');
 if(rights_confirmed!==true)throw Error('Rights confirmation required');
-const u=new URL(source_url);
-if(u.protocol!=='https:'||u.username||u.password||u.port)throw Error('HTTPS URL required');
-if(expected_size_bytes!=null&&(!Number.isSafeInteger(expected_size_bytes)||expected_size_bytes<1048576||expected_size_bytes>2000000000))throw Error('Invalid expected media size');
+if(!Number.isSafeInteger(movie_id)||movie_id<=0)throw Error('Invalid Telegram message id');
 const id='request-'+request_id;
-fs.writeFileSync('movies/'+id+'.json',JSON.stringify({id,title:title.trim(),source_url:u.toString(),group_ids:[],recipient_jids:[recipient_jid],license_confirmed:true,expected_size_bytes:expected_size_bytes??null,enabled:true},null,2)+'\n',{mode:0o600});
+fs.writeFileSync('movies/'+id+'.json',JSON.stringify({id,title:title.trim(),telegram_message_id:movie_id,group_ids:[],recipient_jids:[recipient_jid],license_confirmed:true,enabled:true},null,2)+'\n',{mode:0o600});
 console.log('Private job staged for reviewed request',request_id);
