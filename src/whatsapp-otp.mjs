@@ -30,12 +30,10 @@ async function authState(){
  else if(process.env.WA_OTP_AUTH_CREDS){
   try{creds=JSON.parse(process.env.WA_OTP_AUTH_CREDS,BufferJSON.reviver);}
   catch{throw Error('WA_OTP_AUTH_CREDS is not valid JSON');}
-  // A standalone registered creds.json cannot restore Signal sessions without matching keys.
-  // Start a fresh QR pairing instead of accepting an unusable partial session.
-  if(creds.registered===true){
-   console.warn('WA_OTP_AUTH_CREDS contains registered creds without Signal keys; fresh QR pairing required. Existing seed ignored.');
-   creds=initAuthCreds();
-  }
+  // Attempt to resume a registered Baileys identity from the supplied creds.json.
+  // Missing Signal sessions may be recreated for new conversations, but historical
+  // sessions are not guaranteed to be recoverable without their matching keys.
+  if(creds.registered===true)console.warn('Restoring registered WhatsApp credentials; missing Signal keys may require re-pairing if reconnect fails.');
   await redis('SET',prefix+'creds',encrypt(creds));
  }else creds=initAuthCreds();
  const keys={
