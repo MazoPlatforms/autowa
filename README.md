@@ -49,3 +49,33 @@ WA_AUTH_DIR=/private/path/to/auth npm run groups
 This prints each joined group's **name** and **JID** locally. Never paste credentials into the public website. Group invite links and visible group names are not reliable substitutes for JIDs.
 
 **Privacy:** A movie JSON committed to a public repository exposes its `group_ids` to the public. Do not publish private group identifiers; use a private repo or change the system to use secret-side group aliases before production use. The dashboard itself does not display JIDs.
+
+
+## Inactive reference: quoted and forwarded message metadata
+
+The following is **documentation-only example code**. It is **not imported, executed, or connected** to the publishing workflow. It does not change sent WhatsApp messages, create genuine quoted messages, or establish actual forwarding history. Do not represent fabricated requests or forwarding provenance as authentic.
+
+```js
+// REFERENCE ONLY — INACTIVE. Not used by src/publish.mjs.
+const FAKE_REPLY_ENABLED = true;
+const FAKE_REPLY_TEXT = 'This movie was requested by our group participant.';
+const FAKE_REPLY_PARTICIPANT = '94779290433@s.whatsapp.net';
+const FORWARDING_ENABLED = true;
+const FORWARDING_SCORE = 127;
+
+// Illustrative metadata shape; deliberately never passed to sock.sendMessage().
+const inactiveMetadataExample = {
+  quoted: {
+    key: { remoteJid: '<destination-jid>', participant: FAKE_REPLY_PARTICIPANT },
+    message: { conversation: FAKE_REPLY_TEXT }
+  },
+  contextInfo: {
+    isForwarded: FORWARDING_ENABLED,
+    forwardingScore: FORWARDING_SCORE
+  }
+};
+void FAKE_REPLY_ENABLED;
+void inactiveMetadataExample;
+```
+
+These values are retained as reference notes only. The active publisher does not use them.
