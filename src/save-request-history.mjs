@@ -1,5 +1,4 @@
 import fs from 'node:fs';
-import crypto from 'node:crypto';
 
 const id=process.env.REQUEST_ID;
 if(!id||!/^[a-f0-9-]{36}$/.test(id))throw Error('Invalid request id');
@@ -15,6 +14,7 @@ const status=process.env.PUBLISH_OUTCOME==='success'?'submitted':'failed';
 const wasProcessed=['submitted','failed'].includes(record.status);
 record.status=wasProcessed?record.status:status;
 record.enabled=false;
+if(record.status==='failed')record.failure_stage=process.env.STAGE_OUTCOME!=='success'?'request_validation':process.env.PUBLISH_OUTCOME!=='success'?'media_publishing':'unknown';
 record.finished_at=record.finished_at||new Date().toISOString();
 record.request_origin='koyeb_verified';
 record.workflow_run_id=process.env.GITHUB_RUN_ID||null;
