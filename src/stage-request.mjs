@@ -1,13 +1,14 @@
 import fs from 'node:fs';
 const payload=JSON.parse(process.env.REQUEST_PAYLOAD_JSON||'null');
 if(!payload||typeof payload!=='object')throw Error('Missing request payload');
-const {request_id,title,movie_id,original_filename,recipient_jid,rights_confirmed}=payload;
+const {request_id,title,movie_id,year,quality,recipient_jid,rights_confirmed}=payload;
 if(typeof request_id!=='string'||!/^[-a-f0-9]{36}$/.test(request_id))throw Error('Invalid request ID');
 if(typeof title!=='string'||title.trim().length<2||title.length>140)throw Error('Invalid title');
 if(typeof recipient_jid!=='string'||!/^\d{8,15}@s\.whatsapp\.net$/.test(recipient_jid))throw Error('Invalid verified recipient');
 if(rights_confirmed!==true)throw Error('Rights confirmation required');
 if(!Number.isSafeInteger(movie_id)||movie_id<=0)throw Error('Invalid Telegram message id');
-if(typeof original_filename!=='string'||original_filename.length>180)throw Error('Invalid original filename');
+if(typeof year!=='string'||!/^(19|20)\\d{2}$/.test(year))throw Error('Invalid movie year');
+if(typeof quality!=='string'||!/^[\\w .+-]{2,40}$/.test(quality))throw Error('Invalid movie quality');
 const id='request-'+request_id;
-fs.writeFileSync('movies/'+id+'.json',JSON.stringify({id,title:title.trim(),telegram_message_id:movie_id,original_filename,group_ids:[],recipient_jids:[recipient_jid],license_confirmed:true,enabled:true},null,2)+'\n',{mode:0o600});
+fs.writeFileSync('movies/'+id+'.json',JSON.stringify({id,title:title.trim(),telegram_message_id:movie_id,year,quality,group_ids:[],recipient_jids:[recipient_jid],license_confirmed:true,enabled:true},null,2)+'\n',{mode:0o600});
 console.log('Private job staged for reviewed request',request_id);
