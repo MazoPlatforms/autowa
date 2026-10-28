@@ -148,8 +148,21 @@ async function media(request, env, id, download) {
   const message = messages?.[0];
   const document = message?.media?.document;
   if (!(document instanceof Api.Document)) return failure(404, 'Telegram document unavailable');
+  console.info('FilmGo Telegram stage', 'document-resolved');
   // Start fetching before responding so failures do not produce an empty 206 response.
-  const iterator = client.iterDownload({ file: document, offset: BigInt(start), limit: Math.ceil(length / CHUNK), chunkSize: CHUNK, requestSize: CHUNK })[Symbol.asyncIterator]();
+  // Explicit TL location avoids GramJS document-to-location casting failures.
+  const location = new Api.InputDocumentFileLocation({
+    id: document.id,
+    accessHash: document.accessHash,
+    fileReference: document.fileReference,
+    thumbSize: ''
+  });
+  const iterator = client.iterDownload({
+    file: location, offset: BigInt(start),
+    limit: Math.ceil(length / CHUNK),
+    chunkSize: CHUNK, requestSize: CHUNK,
+    dcId: document.dcId, fileSize: document.size
+  })[Symbol.asyncIterator]();
   let first;
   try { console.info('FilmGo Telegram stage', 'first-chunk-start'); first = await bounded(() => iterator.next(), RPC_TIMEOUT_MS, 'first-chunk'); console.info('FilmGo Telegram stage', 'first-chunk-complete'); } catch (err) { diagnostic('telegram-first-chunk', err); return failure(502, 'Telegram media fetch failed'); }
   if (first.done || !first.value?.length) return failure(502, 'Telegram returned no media bytes');
