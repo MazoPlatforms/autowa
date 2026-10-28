@@ -3,9 +3,9 @@ on:
   repository_dispatch:
     types: [autowa-verified-request]
 permissions:
-  contents: read
+  contents: write
 concurrency:
-  group: autowa-whatsapp-publisher
+  group: whatsapp-publisher
   cancel-in-progress: false
 jobs:
   review-and-publish:
@@ -14,6 +14,8 @@ jobs:
     environment: production
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
@@ -26,10 +28,26 @@ jobs:
           REQUEST_PAYLOAD_JSON: ${{ toJSON(github.event.client_payload) }}
         run: node src/stage-request.mjs
       - name: Send authorized media
+        id: publish
         env:
           WA_AUTH_CREDS: ${{ secrets.WA_AUTH_CREDS }}
           JOB_ID: request-${{ github.event.client_payload.request_id }}
         run: node src/publish.mjs
-      - name: Remove private staged request
+      - name: Save sanitized movie history
         if: always()
-        run: rm -f movies/request-*.json
+        env:
+          REQUEST_ID: ${{ github.event.client_payload.request_id }}
+          REQUEST_PAYLOAD_JSON: ${{ toJSON(github.event.client_payload) }}
+          PUBLISH_OUTCOME: ${{ steps.publish.outcome }}
+        run: node src/save-request-history.mjs
+      - name: Commit movie history
+        if: always()
+        run: |
+          if [ -n "$(git status --porcelain -- movies)" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add movies/
+            git commit -m "chore: archive verified media request [skip ci]"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
