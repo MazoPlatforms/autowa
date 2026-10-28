@@ -2,6 +2,8 @@ import sys,urllib.request,urllib.parse,ipaddress,socket,os
 url,dest=sys.argv[1:3]
 limit=int(sys.argv[3]) if len(sys.argv)>3 else 2_000_000_000
 expected=int(sys.argv[4]) if len(sys.argv)>4 else 0
+# Form size is a human estimate, not an exact checksum or byte count.
+tolerance=max(5*1024*1024,round(expected*0.02)) if expected else 0
 def check(u):
     p=urllib.parse.urlparse(u)
     if p.scheme!='https' or not p.hostname: raise ValueError('HTTPS required')
@@ -20,7 +22,7 @@ with opener.open(request,timeout=45) as response:
     length=response.headers.get('Content-Length')
     encoding=response.headers.get('Content-Encoding','identity').lower()
     if encoding not in ('identity',''): raise ValueError('Compressed HTTP response not allowed for binary media')
-    if expected and length and int(length)!=expected: raise ValueError(f'Source size mismatch: HTTP reports {length} bytes, expected {expected}')
+    if expected and length and abs(int(length)-expected)>tolerance: raise ValueError(f'Source size differs substantially: HTTP reports {length} bytes, estimate {expected} (tolerance {tolerance})')
     if length and int(length)>limit: raise ValueError('File too large')
     total=0
     with open(dest+'.part','wb') as f:
@@ -32,6 +34,6 @@ with opener.open(request,timeout=45) as response:
             f.write(b)
 if not total:raise ValueError('Empty download')
 if length and total!=int(length):raise ValueError(f'Incomplete download: got {total} bytes, HTTP expected {length}')
-if expected and total!=expected:raise ValueError(f'Incomplete or wrong media: got {total} bytes, expected {expected}')
+if expected and abs(total-expected)>tolerance:raise ValueError(f'Download differs substantially from estimate: got {total} bytes, estimate {expected} (tolerance {tolerance})')
 os.replace(dest+'.part',dest)
-print('Downloaded',total,'bytes')
+print('Downloaded',total,'bytes (%.2f MiB)'%(total/1048576))
