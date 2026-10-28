@@ -2,6 +2,12 @@ import { TelegramClient, Api } from 'telegram';
 import { StringSession } from 'telegram/sessions/index.js';
 
 let pending = null;
+function diagnostic(stage, err) {
+  const type = err?.name || 'Error';
+  const code = typeof err?.code === 'string' || typeof err?.code === 'number' ? String(err.code) : 'none';
+  console.error('FilmGo gateway failure', JSON.stringify({ stage, type, code }));
+}
+
 let cachedCatalog = null;
 let cachedAt = 0;
 const CHUNK = 512 * 1024;
@@ -53,7 +59,9 @@ function mime(name, movie) {
   return ({ mp4: 'video/mp4', m4v: 'video/mp4', webm: 'video/webm', mkv: 'video/x-matroska', mov: 'video/quicktime' })[ext] || movie.mime_type || 'application/octet-stream';
 }
 async function media(request, env, id, download) {
-  const movie = (await catalog(env)).find(m => m.slug_id === id);
+  let movies;
+  try { movies = await catalog(env); } catch (err) { diagnostic('catalog', err); throw err; }
+  const movie = movies.find(m => m.slug_id === id);
   if (!movie || !Number.isSafeInteger(movie.telegram_message_id) || !Number.isSafeInteger(movie.file_size) || movie.file_size <= 0) return failure(404, 'Movie unavailable');
   const size = movie.file_size;
   const selected = rangeOf(request.headers.get('range'), size);
@@ -75,16 +83,17 @@ async function media(request, env, id, download) {
     headers.set('Vary', 'Origin');
   }
   if (request.method === 'HEAD') return new Response(null, { status: 206, headers });
-  const client = await getClient(env);
-  const entity = await client.getEntity(env.TELEGRAM_CHANNEL_ID);
-  const messages = await client.getMessages(entity, { ids: [movie.telegram_message_id] });
+  let client, entity, messages;
+  try { client = await getClient(env); } catch (err) { diagnostic('telegram-connect', err); throw err; }
+  try { entity = await client.getEntity(env.TELEGRAM_CHANNEL_ID); } catch (err) { diagnostic('telegram-channel', err); throw err; }
+  try { messages = await client.getMessages(entity, { ids: [movie.telegram_message_id] }); } catch (err) { diagnostic('telegram-message', err); throw err; }
   const message = messages?.[0];
   const document = message?.media?.document;
   if (!(document instanceof Api.Document)) return failure(404, 'Telegram document unavailable');
   // Start fetching before responding so failures do not produce an empty 206 response.
   const iterator = client.iterDownload({ file: document, offset: BigInt(start), limit: Math.ceil(length / CHUNK), chunkSize: CHUNK, requestSize: CHUNK })[Symbol.asyncIterator]();
   let first;
-  try { first = await iterator.next(); } catch { return failure(502, 'Telegram media fetch failed'); }
+  try { first = await iterator.next(); } catch (err) { diagnostic('telegram-first-chunk', err); return failure(502, 'Telegram media fetch failed'); }
   if (first.done || !first.value?.length) return failure(502, 'Telegram returned no media bytes');
   let remaining = length;
   const stream = new ReadableStream({
@@ -119,6 +128,6 @@ export default {
     if (env.PUBLIC_ORIGIN && request.headers.get('origin') && request.headers.get('origin') !== env.PUBLIC_ORIGIN) return failure(403, 'Origin not allowed');
     if (request.method === 'OPTIONS') return new Response(null, { status: 204, headers: { 'Access-Control-Allow-Origin': env.PUBLIC_ORIGIN || 'null', 'Access-Control-Allow-Methods': 'GET, HEAD, OPTIONS', 'Access-Control-Allow-Headers': 'Range' } });
     try { return await media(request, env, match[2], match[1] === 'download'); }
-    catch (err) { console.error('Worker streaming error:', err?.name || 'Error'); return failure(502, 'Streaming gateway unavailable'); }
+    catch (err) { diagnostic('request', err); return failure(502, 'Streaming gateway unavailable'); }
   }
 };
