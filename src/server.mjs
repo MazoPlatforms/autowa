@@ -130,17 +130,13 @@ const server=http.createServer(async(req,res)=>{
   if(req.method==='GET'&&url.pathname==='/health'){return send(res,200,{ok:true});}
   if(req.method==='GET'&&url.pathname.startsWith('/api/stream-availability/')){
    const id=url.pathname.slice('/api/stream-availability/'.length);
-   const allow=(process.env.RIGHTS_CLEARED_MOVIE_IDS||'').split(',').map(x=>x.trim());
    const exists=(JSON.parse(publishedMovies.toString()).movies||[]).some(m=>m.slug_id===id);
-   return send(res,200,{available:process.env.STREAMING_ENABLED==='true'&&telegramReady&&exists&&allow.includes(id)});
+   return send(res,200,{available:telegramReady&&exists});
   }
   if((req.method==='GET'||req.method==='HEAD')&&url.pathname.startsWith('/api/stream/')){
-   // Streaming is disabled until the operator explicitly enables licensed titles.
-   if(process.env.STREAMING_ENABLED!=='true')return send(res,403,{error:'Streaming is not enabled'});
    const publicId=url.pathname.slice('/api/stream/'.length);
-   const allow=new Set((process.env.RIGHTS_CLEARED_MOVIE_IDS||'').split(',').map(x=>x.trim()).filter(Boolean));
    const catalog=JSON.parse(publishedMovies.toString());
-   const movie=(catalog.movies||[]).find(m=>m.slug_id===publicId&&allow.has(publicId));
+   const movie=(catalog.movies||[]).find(m=>m.slug_id===publicId);
    if(!movie||!Number.isSafeInteger(movie.telegram_message_id)||!Number.isSafeInteger(movie.file_size)||movie.file_size<=0)return send(res,404,{error:'Video unavailable'});
    if(!telegramReady)return send(res,503,{error:'Telegram not configured'});
    const total=movie.file_size;
