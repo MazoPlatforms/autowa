@@ -3,6 +3,7 @@ import asyncio
 import difflib
 import json
 import os
+import socket
 import re
 import sys
 import time
@@ -73,8 +74,18 @@ async def main():
     mode = sys.argv[1]
     api_id, api_hash, session, channel = config()
     print('Telegram: connecting', file=sys.stderr, flush=True)
-    client = TelegramClient(StringSession(session), api_id, api_hash, receive_updates=False, timeout=12, connection_retries=1, request_retries=1)
-    async with client:
+    try:
+        socket.getaddrinfo('149.154.167.51',443)
+        with socket.create_connection(('149.154.167.51',443),timeout=5):
+            print('Telegram: DC TCP 443 reachable', file=sys.stderr, flush=True)
+    except OSError as exc:
+        print('Telegram: DC TCP 443 unreachable: '+type(exc).__name__+': '+str(exc),file=sys.stderr,flush=True)
+    
+    client = TelegramClient(StringSession(session), api_id, api_hash, receive_updates=False, timeout=8, connection_retries=0, request_retries=0)
+    try:
+        await asyncio.wait_for(client.connect(),timeout=15)
+        if not client.is_connected():
+            raise ConnectionError('Telegram MTProto connection not established')
         print('Telegram: connected', file=sys.stderr, flush=True)
         dialogs = await asyncio.wait_for(client.get_dialogs(limit=100), timeout=20)
         channel_id = int(str(abs(channel))[3:]) if str(abs(channel)).startswith('100') else abs(channel)
@@ -151,6 +162,8 @@ async def main():
             print('Downloaded %d bytes (%.2f MiB)' % (actual, actual / 1048576), flush=True)
         else:
             raise ValueError('Unknown mode')
+    finally:
+        await client.disconnect()
 
 if __name__ == '__main__':
     try:
