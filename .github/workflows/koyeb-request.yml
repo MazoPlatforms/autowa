@@ -1,0 +1,35 @@
+name: Process verified AutoWA request
+on:
+  repository_dispatch:
+    types: [autowa-verified-request]
+permissions:
+  contents: read
+concurrency:
+  group: autowa-whatsapp-publisher
+  cancel-in-progress: false
+jobs:
+  review-and-publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    environment: production
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install dependencies
+        run: npm ci --no-audit --no-fund
+      - name: Install media tools
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg
+      - name: Validate request and stage private job
+        env:
+          REQUEST_PAYLOAD_JSON: ${{ toJSON(github.event.client_payload) }}
+        run: node src/stage-request.mjs
+      - name: Send authorized media
+        env:
+          WA_AUTH_CREDS: ${{ secrets.WA_AUTH_CREDS }}
+          JOB_ID: ${{ github.event.client_payload.request_id }}
+        run: node src/publish.mjs
+      - name: Remove private staged request
+        if: always()
+        run: rm -f movies/request-*.json
