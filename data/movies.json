@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-28T19:23:02.246896+00:00",
+  "updated_at": "2026-10-28T19:28:59.207014+00:00",
   "movies": [
     {
       "id": "telegram-9",
@@ -30,11 +30,26 @@
     {
       "id": "telegram-8",
       "telegram_message_id": 8,
-      "title": "Modha Rathri",
+      "title": "Modha Rathiri",
       "year": 2026,
       "quality": "720p",
       "file_size": 1660708170,
-      "metadata_status": "unmatched"
+      "imdb_id": "tt42262473",
+      "poster": "https://m.media-amazon.com/images/M/MV5BOTc1NmUxZDMtNTYzOS00ZmYwLTlmZjgtZDg2NjIyYTU0ZWVkXkEyXkFqcGc@._V1_QL75_UX380_CR0,4,380,562_.jpg",
+      "genre": [
+        "Comedy",
+        "Drama"
+      ],
+      "runtime": "150 min",
+      "director": "Raja Karupasammy",
+      "cast": [
+        "Anishma Anilkumar",
+        "Sangetha Balan",
+        "Banupriya"
+      ],
+      "plot": "Follows two strangers brought together at an unusual wedding where, in one night, too many surprises unfold and several lies are told, spiraling into chaos that changes everything.",
+      "imdb_rating": "8.9",
+      "metadata_status": "matched"
     }
   ]
 }
