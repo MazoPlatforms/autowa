@@ -1,5 +1,40 @@
 {
   "schema_version": 1,
-  "updated_at": null,
-  "movies": []
+  "updated_at": "2026-10-28T19:23:02.246896+00:00",
+  "movies": [
+    {
+      "id": "telegram-9",
+      "telegram_message_id": 9,
+      "title": "Minnale",
+      "year": 2001,
+      "quality": "1080p",
+      "file_size": 1882840647,
+      "imdb_id": "tt0357905",
+      "poster": "https://m.media-amazon.com/images/M/MV5BZTkyZTE3MzktMTlmMy00ZGE5LWJkZGEtMmU3YzhlNGJlM2E0XkEyXkFqcGc@._V1_SX300.jpg",
+      "genre": [
+        "Comedy",
+        "Drama",
+        "Musical"
+      ],
+      "runtime": "171 min",
+      "director": "Gautham Vasudev Menon",
+      "cast": [
+        "Madhavan",
+        "Reema Sen",
+        "Abbas"
+      ],
+      "plot": "A young girl is torn between an obsessive lover and a mild-mannered suitor.",
+      "imdb_rating": "7.6",
+      "metadata_status": "matched"
+    },
+    {
+      "id": "telegram-8",
+      "telegram_message_id": 8,
+      "title": "Modha Rathri",
+      "year": 2026,
+      "quality": "720p",
+      "file_size": 1660708170,
+      "metadata_status": "unmatched"
+    }
+  ]
 }
