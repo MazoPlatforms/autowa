@@ -154,9 +154,16 @@ const server=http.createServer(async(req,res)=>{
     end=Math.min(requested,total-1,start+32*1024*1024-1);
    }
    const length=end-start+1;
-   const ext=String(movie.file_name||'').toLowerCase();
-   const mediaType=ext.endsWith('.mkv')?'video/x-matroska':ext.endsWith('.webm')?'video/webm':ext.endsWith('.mp4')?'video/mp4':'application/octet-stream';
-   const headers={'Content-Type':mediaType,'Content-Length':String(length),'Content-Range':'bytes '+start+'-'+end+'/'+total,'Accept-Ranges':'bytes','Cache-Control':'no-store','X-Content-Type-Options':'nosniff','Content-Disposition':'inline'};
+   const originalName=String(movie.file_name||'').trim();
+   const originalExt=/\\.(mp4|mkv|webm|mov|avi|m4v)$/i.exec(originalName)?.[1]?.toLowerCase();
+   const mime=String(movie.mime_type||'').toLowerCase();
+   const extension=originalExt||(mime.includes('matroska')?'mkv':mime.includes('webm')?'webm':mime.includes('mp4')?'mp4':'mp4');
+   const mediaType=extension==='mkv'?'video/x-matroska':extension==='webm'?'video/webm':extension==='mp4'||extension==='m4v'?'video/mp4':extension==='mov'?'video/quicktime':'application/octet-stream';
+   const baseName=originalName||[movie.title,movie.year,movie.quality].filter(Boolean).join(' ')+'.'+extension;
+   const safeName=baseName.replace(/[\\r\\n\\x00-\\x1f"\\\\/]/g,'_').slice(0,180);
+   const asciiName=safeName.replace(/[^\\x20-\\x7e]/g,'_');
+   const disposition='inline; filename="'+asciiName+'"; filename*=UTF-8\'\''+encodeURIComponent(safeName);
+   const headers={'Content-Type':mediaType,'Content-Length':String(length),'Content-Range':'bytes '+start+'-'+end+'/'+total,'Accept-Ranges':'bytes','Cache-Control':'no-store','X-Content-Type-Options':'nosniff','Content-Disposition':disposition};
    if(req.method==='HEAD'){res.writeHead(206,headers);return res.end();}
    const child=spawn('python3',['src/telegram_stream.py',String(movie.telegram_message_id),String(start),String(length)],{env:process.env,stdio:['ignore','pipe','pipe']});
    let started=false,bytes=0,closed=false;
