@@ -11,6 +11,8 @@ on:
         type: string
 permissions:
   contents: write
+  pages: write
+  id-token: write
 concurrency:
   group: whatsapp-publisher
   cancel-in-progress: false
@@ -45,3 +47,14 @@ jobs:
             git pull --rebase origin main
             git push origin HEAD:main
           fi
+      - name: Build Pages dashboard
+        if: always()
+        run: node src/build-site.mjs
+      - uses: actions/configure-pages@v5
+        if: always()
+      - uses: actions/upload-pages-artifact@v3
+        if: always()
+        with:
+          path: site
+      - uses: actions/deploy-pages@v4
+        if: always()
