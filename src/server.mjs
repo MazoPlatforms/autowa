@@ -154,12 +154,12 @@ const server=http.createServer(async(req,res)=>{
    await redis('SET','profile:'+hmac(session.number),JSON.stringify({name,updated_at:new Date().toISOString()}));
    return send(res,200,{ok:true,name});
   }
-  if(!await limit('submit:'+session.number,3,86400))return send(res,429,{error:'Daily request limit reached'});
   if(data.rights_confirmed!==true||!Number.isSafeInteger(data.movie_id)||data.movie_id<=0)return send(res,400,{error:'Select a movie and confirm distribution rights'});
   const catalog=await getCatalog();
   const cachedMovie=await redis('GET','telegram:movie:'+data.movie_id);
   const movie=catalog?.movies?.find(m=>m.id===data.movie_id)||(cachedMovie?JSON.parse(cachedMovie):null);
   if(!movie)return send(res,400,{error:'Selected movie unavailable; refresh the catalog'});
+  if(!await limit('submit:'+session.number,3,86400))return send(res,429,{error:'Daily request limit reached'});
   const claim=await redis('SET','claim:'+hmac(session.nonce),'1','EX',900,'NX');
   if(claim!=='OK')return send(res,409,{error:'Request already submitted'});
   const requestId=crypto.randomUUID();
