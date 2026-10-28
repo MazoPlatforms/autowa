@@ -25,6 +25,7 @@ record.workflow_run_url=process.env.GITHUB_SERVER_URL&&process.env.GITHUB_REPOSI
 delete record.recipient_jids;
 delete record.group_ids;
 delete record.source_url;
+delete record.telegram_message_id;
 delete record.token;
 delete record.request_payload;
 delete record.error;
