@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-28T19:28:59.207014+00:00",
+  "updated_at": "2026-10-28T20:19:16.310759+00:00",
   "movies": [
     {
       "id": "telegram-9",
@@ -9,6 +9,9 @@
       "year": 2001,
       "quality": "1080p",
       "file_size": 1882840647,
+      "file_name": "Minnale (2001) Tamil HQ DVDRip - 1080p - HEVC - x265 - (.mkv",
+      "mime_type": "video/x-matroska",
+      "slug_id": "tfw-ydqusmlrw02bcfc3",
       "imdb_id": "tt0357905",
       "poster": "https://m.media-amazon.com/images/M/MV5BZTkyZTE3MzktMTlmMy00ZGE5LWJkZGEtMmU3YzhlNGJlM2E0XkEyXkFqcGc@._V1_SX300.jpg",
       "genre": [
@@ -25,8 +28,7 @@
       ],
       "plot": "A young girl is torn between an obsessive lover and a mild-mannered suitor.",
       "imdb_rating": "7.6",
-      "metadata_status": "matched",
-      "slug_id": "tfw-ydqusmlrw02bcfc3"
+      "metadata_status": "matched"
     },
     {
       "id": "telegram-8",
@@ -35,6 +37,9 @@
       "year": 2026,
       "quality": "720p",
       "file_size": 1660708170,
+      "file_name": "Modha Rathri (2026) Tamil HQ HDRip - 720p - x264 - (DD+5.mkv",
+      "mime_type": "video/x-matroska",
+      "slug_id": "tfw-kl0aqkpzj64icj2q",
       "imdb_id": "tt42262473",
       "poster": "https://m.media-amazon.com/images/M/MV5BOTc1NmUxZDMtNTYzOS00ZmYwLTlmZjgtZDg2NjIyYTU0ZWVkXkEyXkFqcGc@._V1_QL75_UX380_CR0,4,380,562_.jpg",
       "genre": [
@@ -50,8 +55,7 @@
       ],
       "plot": "Follows two strangers brought together at an unusual wedding where, in one night, too many surprises unfold and several lies are told, spiraling into chaos that changes everything.",
       "imdb_rating": "8.9",
-      "metadata_status": "matched",
-      "slug_id": "tfw-kl0aqkpzj64icj2q"
+      "metadata_status": "matched"
     }
   ]
 }
