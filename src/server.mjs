@@ -74,7 +74,7 @@ const server=http.createServer(async(req,res)=>{
    const catalog=await getCatalog();
    if(!catalog)return send(res,503,{error:'Movie catalog is syncing. Try again shortly.'});
    const query=(url.searchParams.get('q')||'').trim().toLowerCase().slice(0,100);
-   let matches=catalog.movies.filter(m=>!query||m.title.toLowerCase().includes(query)||m.filename.toLowerCase().includes(query)).slice(0,50);
+   let matches=catalog.movies.filter(m=>!query||m.title.toLowerCase().includes(query)||String(m.year||'').includes(query)).slice(0,query?50:15);
    let live=false;
    if(query.length>=2){
     const cached=await redis('GET','telegram:search:'+hmac(query));
@@ -142,7 +142,7 @@ const server=http.createServer(async(req,res)=>{
   const requestId=crypto.randomUUID();
   const [owner,repo]=process.env.GITHUB_REPOSITORY.split('/');
   if(!owner||!repo)throw Error('Invalid GITHUB_REPOSITORY');
-  const payload={request_id:requestId,title:movie.title,movie_id:movie.id,recipient_jid:session.number.slice(1)+'@s.whatsapp.net',rights_confirmed:true,original_filename:movie.filename||''};
+  const payload={request_id:requestId,title:movie.title,movie_id:movie.id,year:movie.year,quality:movie.quality,recipient_jid:session.number.slice(1)+'@s.whatsapp.net',rights_confirmed:true};
   const result=await fetch('https://api.github.com/repos/'+encodeURIComponent(owner)+'/'+encodeURIComponent(repo)+'/dispatches',{
    method:'POST',headers:{Authorization:'Bearer '+process.env.GITHUB_DISPATCH_TOKEN,Accept:'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28','Content-Type':'application/json'},
    body:JSON.stringify({event_type:'autowa-verified-request',client_payload:payload}),signal:AbortSignal.timeout(15000)
