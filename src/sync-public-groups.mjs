@@ -1,8 +1,6 @@
 import fs from 'node:fs';
 import makeWASocket,{useMultiFileAuthState} from '@whiskeysockets/baileys';
 import pino from 'pino';
-const allowed=new Set((process.env.WA_PUBLIC_GROUP_JIDS||'').split(/[\s,]+/).filter(Boolean));
-if(!allowed.size) throw Error('WA_PUBLIC_GROUP_JIDS allowlist required. Do not publish private groups.');
 const raw=process.env.WA_AUTH_CREDS;
 if(!raw)throw Error('WA_AUTH_CREDS is missing');
 const creds=JSON.parse(raw);
@@ -21,9 +19,9 @@ try{
    });
   });
   const joined=Object.values(await sock.groupFetchAllParticipating());
-  const groups=joined.filter(g=>allowed.has(g.id)).map(g=>({name:g.subject||'Unnamed group',jid:g.id})).sort((a,b)=>a.name.localeCompare(b.name));
+  const groups=joined.map(g=>({name:g.subject||'Unnamed group',jid:g.id})).sort((a,b)=>a.name.localeCompare(b.name));
   fs.mkdirSync('site',{recursive:true});
   fs.writeFileSync('site/groups.json',JSON.stringify({groups,updated_at:new Date().toISOString()},null,2));
-  console.log('Published',groups.length,'approved group names');
+  console.log('Published',groups.length,'joined groups');
  }finally{sock.end();}
 }finally{fs.rmSync('.auth',{recursive:true,force:true});}
