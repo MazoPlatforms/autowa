@@ -5,8 +5,12 @@ compatibility_flags = ["nodejs_compat"]
 
 [vars]
 CATALOG_URL = "https://raw.githubusercontent.com/MazoPlatforms/autowa/main/data/movies.json"
+# GramJS log verbosity: "error", "warn" (default), "info" or "debug".
+# Use "debug" only while diagnosing; it is very noisy.
+GRAMJS_LOG_LEVEL = "warn"
 # Set PUBLIC_ORIGIN to your deployed site origin to restrict browser requests.
 # Store TELEGRAM_API_ID, TELEGRAM_API_HASH, TELEGRAM_SESSION and TELEGRAM_CHANNEL_ID as secrets.
+
 [observability]
 enabled = true
 
