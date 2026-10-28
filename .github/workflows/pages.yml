@@ -2,7 +2,7 @@ name: Deploy job dashboard
 on:
   push:
     branches: [main]
-    paths: ['movies/**', 'src/build-site.mjs', '.github/workflows/pages.yml']
+    paths: ['movies/**', 'src/**', '.github/workflows/pages.yml']
   workflow_dispatch:
 permissions:
   contents: read
@@ -10,9 +10,29 @@ permissions:
   id-token: write
 concurrency:
   group: pages
-  cancel-in-progress: true
+  cancel-in-progress: false
 jobs:
+  sync:
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --no-audit --no-fund
+      - name: Sync approved groups
+        env:
+          WA_AUTH_CREDS: ${{ secrets.WA_AUTH_CREDS }}
+          WA_PUBLIC_GROUP_JIDS: ${{ secrets.WA_PUBLIC_GROUP_JIDS }}
+        run: node src/sync-public-groups.mjs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: public-groups
+          path: site/groups.json
+          retention-days: 1
   deploy:
+    needs: sync
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -22,6 +42,10 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - uses: actions/download-artifact@v4
+        with:
+          name: public-groups
+          path: site
       - run: node src/build-site.mjs
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
