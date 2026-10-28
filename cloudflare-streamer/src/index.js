@@ -23,7 +23,8 @@ function json(body, status = 200) {
 }
 function failure(status, message) { return json({ error: message }, status); }
 const CONNECT_TIMEOUT_MS = 12000;
-const AUTH_TIMEOUT_MS = 8000;
+const AUTH_TIMEOUT_MS = 20000;
+const RPC_TIMEOUT_MS = 12000;
 async function bounded(operation, ms, stage, onTimeout) {
   let timer;
   try {
@@ -67,13 +68,17 @@ async function getClient(env) {
         console.info('FilmGo Telegram stage', 'connect-start');
         await bounded(() => client.connect(), CONNECT_TIMEOUT_MS, 'connect', () => { void client.disconnect().catch(() => {}); });
         console.info('FilmGo Telegram stage', 'connect-complete');
-        const authorized = await bounded(() => client.isUserAuthorized(), AUTH_TIMEOUT_MS, 'authorization', () => { void client.disconnect().catch(() => {}); });
-        if (!authorized) throw Error('Telegram session unauthorized');
-        console.info('FilmGo Telegram stage', 'authorized');
+        // A successful socket connect does not prove that Telegram RPC is working.
+        // getMe provides a single, observable authorization/RPC probe without starting a login flow.
+        console.info('FilmGo Telegram stage', 'authorization-probe-start');
+        const me = await bounded(() => client.getMe(), AUTH_TIMEOUT_MS, 'authorization-rpc');
+        if (!me?.id) throw Error('Telegram session unauthorized or invalid');
+        console.info('FilmGo Telegram stage', 'authorization-probe-complete');
         return client;
       } catch (err) {
         diagnostic('telegram-client-lifecycle', err);
-        if (client) { try { await bounded(() => client.disconnect(), 1500, 'disconnect'); } catch {} }
+        // Do not await a potentially stuck GramJS disconnect inside a failing request.
+        if (client) { try { void client.disconnect().catch(() => {}); } catch {} }
         throw err;
       }
     })().catch(err => { pending = null; throw err; });
@@ -138,15 +143,15 @@ async function media(request, env, id, download) {
   if (request.method === 'HEAD') return new Response(null, { status: 206, headers });
   let client, entity, messages;
   try { client = await getClient(env); } catch (err) { diagnostic('telegram-connect', err); throw err; }
-  try { entity = await client.getEntity(env.TELEGRAM_CHANNEL_ID); } catch (err) { diagnostic('telegram-channel', err); throw err; }
-  try { messages = await client.getMessages(entity, { ids: [movie.telegram_message_id] }); } catch (err) { diagnostic('telegram-message', err); throw err; }
+  try { console.info('FilmGo Telegram stage', 'channel-lookup-start'); entity = await bounded(() => client.getEntity(env.TELEGRAM_CHANNEL_ID), RPC_TIMEOUT_MS, 'channel-lookup'); console.info('FilmGo Telegram stage', 'channel-lookup-complete'); } catch (err) { diagnostic('telegram-channel', err); throw err; }
+  try { console.info('FilmGo Telegram stage', 'message-lookup-start'); messages = await bounded(() => client.getMessages(entity, { ids: [movie.telegram_message_id] }), RPC_TIMEOUT_MS, 'message-lookup'); console.info('FilmGo Telegram stage', 'message-lookup-complete'); } catch (err) { diagnostic('telegram-message', err); throw err; }
   const message = messages?.[0];
   const document = message?.media?.document;
   if (!(document instanceof Api.Document)) return failure(404, 'Telegram document unavailable');
   // Start fetching before responding so failures do not produce an empty 206 response.
   const iterator = client.iterDownload({ file: document, offset: BigInt(start), limit: Math.ceil(length / CHUNK), chunkSize: CHUNK, requestSize: CHUNK })[Symbol.asyncIterator]();
   let first;
-  try { first = await iterator.next(); } catch (err) { diagnostic('telegram-first-chunk', err); return failure(502, 'Telegram media fetch failed'); }
+  try { console.info('FilmGo Telegram stage', 'first-chunk-start'); first = await bounded(() => iterator.next(), RPC_TIMEOUT_MS, 'first-chunk'); console.info('FilmGo Telegram stage', 'first-chunk-complete'); } catch (err) { diagnostic('telegram-first-chunk', err); return failure(502, 'Telegram media fetch failed'); }
   if (first.done || !first.value?.length) return failure(502, 'Telegram returned no media bytes');
   let remaining = length;
   const stream = new ReadableStream({
