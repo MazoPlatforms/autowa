@@ -7,3 +7,11 @@ compatibility_flags = ["nodejs_compat"]
 CATALOG_URL = "https://raw.githubusercontent.com/MazoPlatforms/autowa/main/data/movies.json"
 # Set PUBLIC_ORIGIN to your deployed site origin to restrict browser requests.
 # Store TELEGRAM_API_ID, TELEGRAM_API_HASH, TELEGRAM_SESSION and TELEGRAM_CHANNEL_ID as secrets.
+[observability]
+enabled = true
+
+[observability.logs]
+enabled = true
+head_sampling_rate = 1
+invocation_logs = true
+persist = true
