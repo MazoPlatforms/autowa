@@ -36,51 +36,24 @@ await new Promise((resolve,reject)=>{
   if(u.connection==='close'){clearTimeout(timeout);reject(Error('WhatsApp connection closed: '+(u.lastDisconnect?.error?.message||'unknown')));}
  });
 });
-// FUTURE FEATURE HOOK — intentionally inactive.
-// To implement authentic replies later:
-// 1. Retrieve an actual message from the destination chat and retain its original key/content.
-// 2. Pass that real message as the Baileys `quoted` option to sock.sendMessage().
-// 3. Only represent forwarding when the message really has forwarding provenance.
-// 4. Add automated tests and an explicit operator-controlled feature flag before activation.
-// 5. Do not fabricate a participant's request or an arbitrary forwarding count.
-//
-// Legacy requested example values are retained for reference, not as executable behavior.
+// ARCHIVED REFERENCE — FAKE QUOTED REPLY / FORWARDING (INACTIVE).
+// Kept solely as historical project notes. This block is not executed,
+// imported, or attached to the WhatsApp message payload.
+// These values do not establish a real participant request or forwarding history.
 /*
-const FAKE_REPLY_ENABLED = true; // NOT supported for fabricated requests
-const FAKE_REPLY_TEXT = 'This movie was requested by our group participant.';
-const FAKE_REPLY_PARTICIPANT = '94779290433@s.whatsapp.net';
-const FORWARDING_ENABLED = true; // use only for genuine forwarding
-const FORWARDING_SCORE = 127; // arbitrary score must not be asserted as real
+const FAKE_REPLY_ENABLED = true;
+const FAKE_REPLY_TEXT = "This movie was requested by our group participant.";
+const FAKE_REPLY_PARTICIPANT = "94779290433@s.whatsapp.net";
+const FORWARDING_ENABLED = true;
+const FORWARDING_SCORE = 127;
 
-// Future authentic quote implementation (after fetching a real message):
-// const realQuotedMessage = await lookupActualMessage(destinationJid, messageId);
-// await sock.sendMessage(destinationJid, messagePayload, { quoted: realQuotedMessage });
-*/
-
-// OPTIONAL AUTHENTIC QUOTE — disabled by block comment.
-// To activate: remove the /* and */ immediately below, then configure
-// QUOTE_MESSAGE_ID with the ID of a REAL existing message in the destination chat.
-// Do not claim a participant requested a movie unless their actual message says so.
-/*
-const QUOTE_MESSAGE_ID = process.env.QUOTE_MESSAGE_ID;
-const QUOTE_ENABLED = Boolean(QUOTE_MESSAGE_ID);
-const quoteStore = new Map();
-sock.ev.on('messages.upsert', ({ messages }) => {
-  for (const message of messages || []) {
-    if (message?.key?.remoteJid && message?.key?.id) {
-      quoteStore.set(message.key.remoteJid + ':' + message.key.id, message);
-    }
-  }
-});
-const quoteOptionsFor = (destinationJid) => {
-  if (!QUOTE_ENABLED) return {};
-  const original = quoteStore.get(destinationJid + ':' + QUOTE_MESSAGE_ID);
-  if (!original) throw Error('Original quoted message not available in this session');
-  return { quoted: original };
+// Historical metadata sketch (intentionally not wired to sendMessage):
+const archivedMetadata = {
+  quotedMessage: { conversation: FAKE_REPLY_TEXT },
+  participant: FAKE_REPLY_PARTICIPANT,
+  isForwarded: FORWARDING_ENABLED,
+  forwardingScore: FORWARDING_SCORE
 };
-const originalSendMessage = sock.sendMessage.bind(sock);
-sock.sendMessage = (jid, content, options = {}) =>
-  originalSendMessage(jid, content, { ...options, ...quoteOptionsFor(jid) });
 */
 
 const groups=await sock.groupFetchAllParticipating();
