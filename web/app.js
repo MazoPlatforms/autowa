@@ -29,11 +29,13 @@ async function loadMovies(){
   const response=await fetch('/api/movies',{cache:'no-store'});
   if(!response.ok)return;
   const data=await response.json();
-  if(!movieSearch.value.trim())movieResults=Array.isArray(data.movies)?data.movies.slice(0,15):[];
+  if(!movieSearch.value.trim())movieResults=Array.isArray(data.movies)?data.movies:[];
  }catch{/* Background catalog refresh is intentionally silent. */}
  finally{catalogLoading=false;}
 }
 
+setInterval(()=>{if(!document.hidden&&!movieSearch.value.trim())void loadMovies();},15000);
+document.addEventListener('visibilitychange',()=>{if(!document.hidden&&!movieSearch.value.trim())void loadMovies();});
 let movieTimer=0,movieQuerySequence=0;
 movieSearch.addEventListener('input',()=>{
  $('movie-id').value='';
