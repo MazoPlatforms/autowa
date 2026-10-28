@@ -22,9 +22,37 @@ function json(body, status = 200) {
   return new Response(JSON.stringify(body), { status, headers: { 'content-type': 'application/json; charset=utf-8', 'cache-control': 'no-store' } });
 }
 function failure(status, message) { return json({ error: message }, status); }
+
 const CONNECT_TIMEOUT_MS = 12000;
-const AUTH_TIMEOUT_MS = 20000;
 const RPC_TIMEOUT_MS = 12000;
+
+// Dynamic Encryption Configuration Key
+const ENCRYPTION_KEY_RAW = 'a-32-character-ultra-secure-key-123';
+
+async function getCryptoKey() {
+  const enc = new TextEncoder();
+  const keyData = enc.encode(ENCRYPTION_KEY_RAW.padEnd(32, '0').slice(0, 32));
+  return await crypto.subtle.importKey('raw', keyData, { name: 'AES-GCM' }, false, ['decrypt']);
+}
+
+async function decryptSlug(slug) {
+  try {
+    const key = await getCryptoKey();
+    const base64 = slug.replace(/-/g, '+').replace(/_/g, '/');
+    const binaryStr = atob(base64);
+    const combined = new Uint8Array(binaryStr.length);
+    for (let i = 0; i < binaryStr.length; i++) {
+      combined[i] = binaryStr.charCodeAt(i);
+    }
+    const iv = combined.subarray(0, 12);
+    const ciphertext = combined.subarray(12);
+    const decrypted = await crypto.subtle.decrypt({ name: 'AES-GCM', iv: iv }, key, ciphertext);
+    return new TextDecoder().decode(decrypted);
+  } catch (e) {
+    return null;
+  }
+}
+
 async function bounded(operation, ms, stage, onTimeout) {
   let timer;
   try {
@@ -42,47 +70,40 @@ async function bounded(operation, ms, stage, onTimeout) {
     clearTimeout(timer);
   }
 }
+
 async function getClient(env) {
   const apiId = Number(String(env.TELEGRAM_API_ID ?? '').trim());
   const apiHash = String(env.TELEGRAM_API_HASH ?? '').trim();
   const session = String(env.TELEGRAM_SESSION ?? '').trim();
+  
   if (!Number.isSafeInteger(apiId) || apiId <= 0 || !apiHash || !session) {
-    console.error('FilmGo configuration check', JSON.stringify({
-      apiIdPresent: env.TELEGRAM_API_ID !== undefined && env.TELEGRAM_API_ID !== null,
-      apiIdValid: Number.isSafeInteger(apiId) && apiId > 0,
-      apiHashPresent: apiHash.length > 0,
-      sessionPresent: session.length > 0,
-      channelPresent: Boolean(String(env.TELEGRAM_CHANNEL_ID ?? '').trim())
-    }));
     throw Error('Telegram Worker bindings missing or invalid');
   }
+  
   if (!pending) {
     pending = (async () => {
       let client;
       try {
-        console.info('FilmGo Telegram stage', 'client-init');
         client = new TelegramClient(new StringSession(session), apiId, apiHash, {
-          connectionRetries: 0, useWSSecure: true, autoReconnect: false,
-          timeout: 10000
+          connectionRetries: 5, 
+          useWSSecure: true, 
+          autoReconnect: true,
+          timeout: 15000
         });
-        console.info('FilmGo Telegram stage', 'connect-start');
-        await bounded(() => client.connect(), CONNECT_TIMEOUT_MS, 'connect', () => { void client.disconnect().catch(() => {}); });
-        console.info('FilmGo Telegram stage', 'connect-complete');
-        // A successful socket connect does not prove that Telegram RPC is working.
-        // getMe provides a single, observable authorization/RPC probe without starting a login flow.
-        console.info('FilmGo Telegram stage', 'authorization-probe-start');
-        const me = await bounded(() => client.getMe(), AUTH_TIMEOUT_MS, 'authorization-rpc');
-        if (!me?.id) throw Error('Telegram session unauthorized or invalid');
-        console.info('FilmGo Telegram stage', 'authorization-probe-complete');
+        
+        await bounded(() => client.connect(), CONNECT_TIMEOUT_MS, 'connect', () => { 
+          void client.disconnect().catch(() => {}); 
+        });
+        
         return client;
       } catch (err) {
         diagnostic('telegram-client-lifecycle', err);
-        // Do not await a potentially stuck GramJS disconnect inside a failing request.
         if (client) { try { void client.disconnect().catch(() => {}); } catch {} }
         throw err;
       }
     })().catch(err => { pending = null; throw err; });
   }
+  
   const client = await pending;
   if (!client.connected) {
     pending = null;
@@ -90,6 +111,7 @@ async function getClient(env) {
   }
   return client;
 }
+
 async function catalog(env) {
   if (cachedCatalog && Date.now() - cachedAt < 60000) return cachedCatalog;
   const response = await fetch(env.CATALOG_URL, { cf: { cacheTtl: 60 } });
@@ -99,6 +121,7 @@ async function catalog(env) {
   cachedCatalog = data.movies; cachedAt = Date.now();
   return cachedCatalog;
 }
+
 function rangeOf(value, size) {
   if (!value) return { start: 0, end: Math.min(size - 1, MAX_RANGE - 1) };
   const match = /^bytes=(\d+)-(\d*)$/.exec(value);
@@ -108,25 +131,33 @@ function rangeOf(value, size) {
   if (!Number.isSafeInteger(start) || !Number.isSafeInteger(requestedEnd) || start >= size || requestedEnd < start) return null;
   return { start, end: Math.min(size - 1, requestedEnd, start + MAX_RANGE - 1) };
 }
+
 function safeName(movie) {
   const raw = String(movie.file_name || (movie.title || 'video') + '.mp4');
   return raw.replace(/[^a-zA-Z0-9 ._()-]/g, '_').slice(0, 180) || 'video.mp4';
 }
+
 function mime(name, movie) {
   const ext = name.toLowerCase().split('.').pop();
   return ({ mp4: 'video/mp4', m4v: 'video/mp4', webm: 'video/webm', mkv: 'video/x-matroska', mov: 'video/quicktime' })[ext] || movie.mime_type || 'application/octet-stream';
 }
-async function media(request, env, id, download) {
+
+async function media(request, env, slug, download) {
+  const decryptedId = await decryptSlug(slug);
+  if (!decryptedId) return failure(403, 'Forbidden: Invalid or expired secure token');
+
   let movies;
   try { movies = await catalog(env); } catch (err) { diagnostic('catalog', err); throw err; }
-  const movie = movies.find(m => m.slug_id === id);
+  const movie = movies.find(m => m.slug_id === decryptedId);
   if (!movie || !Number.isSafeInteger(movie.telegram_message_id) || !Number.isSafeInteger(movie.file_size) || movie.file_size <= 0) return failure(404, 'Movie unavailable');
+  
   const size = movie.file_size;
   const selected = rangeOf(request.headers.get('range'), size);
   if (!selected) return new Response(null, { status: 416, headers: { 'Content-Range': 'bytes */' + size } });
   const { start, end } = selected;
   const length = end - start + 1;
   const name = safeName(movie);
+  
   const headers = new Headers({
     'Content-Type': mime(name, movie),
     'Content-Length': String(length),
@@ -136,36 +167,64 @@ async function media(request, env, id, download) {
     'X-Content-Type-Options': 'nosniff',
     'Content-Disposition': (download ? 'attachment' : 'inline') + '; filename="' + name + '"'
   });
+  
   if (env.PUBLIC_ORIGIN) {
     headers.set('Access-Control-Allow-Origin', env.PUBLIC_ORIGIN);
     headers.set('Vary', 'Origin');
   }
   if (request.method === 'HEAD') return new Response(null, { status: 206, headers });
-  let client, entity, messages;
+  
+  let client, messages;
   try { client = await getClient(env); } catch (err) { diagnostic('telegram-connect', err); throw err; }
-  try { console.info('FilmGo Telegram stage', 'channel-lookup-start'); entity = await bounded(() => client.getEntity(env.TELEGRAM_CHANNEL_ID), RPC_TIMEOUT_MS, 'channel-lookup'); console.info('FilmGo Telegram stage', 'channel-lookup-complete'); } catch (err) { diagnostic('telegram-channel', err); throw err; }
-  try { console.info('FilmGo Telegram stage', 'message-lookup-start'); messages = await bounded(() => client.getMessages(entity, { ids: [movie.telegram_message_id] }), RPC_TIMEOUT_MS, 'message-lookup'); console.info('FilmGo Telegram stage', 'message-lookup-complete'); } catch (err) { diagnostic('telegram-message', err); throw err; }
-  const message = messages?.[0];
+
+  let channelTarget = env.TELEGRAM_CHANNEL_ID;
+  if (typeof channelTarget === 'string') {
+    channelTarget = channelTarget.trim();
+    if (!channelTarget.startsWith('-100') && /^\d+$/.test(channelTarget)) {
+      channelTarget = '-100' + channelTarget;
+    }
+  }
+  
+  try { 
+    console.info('FilmGo Telegram stage', 'message-lookup-start'); 
+    messages = await bounded(() => client.getMessages(channelTarget, { ids: [movie.telegram_message_id] }), RPC_TIMEOUT_MS, 'message-lookup'); 
+    console.info('FilmGo Telegram stage', 'message-lookup-complete'); 
+  } catch (err) { 
+    diagnostic('telegram-message', err); 
+    throw err; 
+  }
+  
+  const message = (messages && Array.isArray(messages)) ? messages[0] : (messages ? messages : null);
   const document = message?.media?.document;
   if (!(document instanceof Api.Document)) return failure(404, 'Telegram document unavailable');
   console.info('FilmGo Telegram stage', 'document-resolved');
-  // Start fetching before responding so failures do not produce an empty 206 response.
-  // Explicit TL location avoids GramJS document-to-location casting failures.
+  
   const location = new Api.InputDocumentFileLocation({
     id: document.id,
     accessHash: document.accessHash,
     fileReference: document.fileReference,
     thumbSize: ''
   });
+  
   const iterator = client.iterDownload({
     file: location, offset: BigInt(start),
     limit: Math.ceil(length / CHUNK),
     chunkSize: CHUNK, requestSize: CHUNK,
     dcId: document.dcId, fileSize: document.size
   })[Symbol.asyncIterator]();
+  
   let first;
-  try { console.info('FilmGo Telegram stage', 'first-chunk-start'); first = await bounded(() => iterator.next(), RPC_TIMEOUT_MS, 'first-chunk'); console.info('FilmGo Telegram stage', 'first-chunk-complete'); } catch (err) { diagnostic('telegram-first-chunk', err); return failure(502, 'Telegram media fetch failed'); }
+  try { 
+    console.info('FilmGo Telegram stage', 'first-chunk-start'); 
+    first = await bounded(() => iterator.next(), RPC_TIMEOUT_MS, 'first-chunk'); 
+    console.info('FilmGo Telegram stage', 'first-chunk-complete'); 
+  } catch (err) { 
+    diagnostic('telegram-first-chunk', err); 
+    return failure(502, 'Telegram media fetch failed'); 
+  }
+  
   if (first.done || !first.value?.length) return failure(502, 'Telegram returned no media bytes');
+  
   let remaining = length;
   const stream = new ReadableStream({
     async pull(controller) {
@@ -187,18 +246,36 @@ async function media(request, env, id, download) {
     },
     async cancel() { try { await iterator.return?.(); } catch {} }
   });
+  
   return new Response(stream, { status: 206, headers });
 }
+
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
     if (url.pathname === '/health') return json({ status: 'ok', provider: 'cloudflare-worker', experimental: true });
+    
     const match = /^\/(stream|download)\/([a-zA-Z0-9_-]+)$/.exec(url.pathname);
     if (!match) return failure(404, 'Not found');
     if (!['GET', 'HEAD', 'OPTIONS'].includes(request.method)) return failure(405, 'Method not allowed');
     if (env.PUBLIC_ORIGIN && request.headers.get('origin') && request.headers.get('origin') !== env.PUBLIC_ORIGIN) return failure(403, 'Origin not allowed');
-    if (request.method === 'OPTIONS') return new Response(null, { status: 204, headers: { 'Access-Control-Allow-Origin': env.PUBLIC_ORIGIN || 'null', 'Access-Control-Allow-Methods': 'GET, HEAD, OPTIONS', 'Access-Control-Allow-Headers': 'Range' } });
-    try { return await media(request, env, match[2], match[1] === 'download'); }
-    catch (err) { diagnostic('request', err); return failure(502, 'Streaming gateway unavailable'); }
+    
+    if (request.method === 'OPTIONS') {
+      return new Response(null, { 
+        status: 204, 
+        headers: { 
+          'Access-Control-Allow-Origin': env.PUBLIC_ORIGIN || 'null', 
+          'Access-Control-Allow-Methods': 'GET, HEAD, OPTIONS', 
+          'Access-Control-Allow-Headers': 'Range' 
+        } 
+      });
+    }
+    
+    try { 
+      return await media(request, env, match[2], match[1] === 'download'); 
+    } catch (err) { 
+      diagnostic('request', err); 
+      return failure(502, 'Streaming gateway unavailable'); 
+    }
   }
 };
