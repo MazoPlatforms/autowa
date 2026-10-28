@@ -88,12 +88,14 @@ const server=http.createServer(async(req,res)=>{
   if(typeof data.title!=='string'||data.title.trim().length<2||data.title.length>140||typeof data.source_url!=='string'||data.source_url.length>2048||data.rights_confirmed!==true)return send(res,400,{error:'Title, HTTPS URL and rights confirmation required'});
   let source;try{source=new URL(data.source_url);}catch{return send(res,400,{error:'Invalid URL'});}
   if(source.protocol!=='https:'||source.username||source.password||source.port||source.hostname==='localhost')return send(res,400,{error:'Public HTTPS URL required'});
+  const expectedSizeMiB=data.expected_size_mib;
+  if(expectedSizeMiB!=null&&(!Number.isFinite(expectedSizeMiB)||expectedSizeMiB<1||expectedSizeMiB>1907))return send(res,400,{error:'Expected size must be between 1 and 1907 MiB'});
   const claim=await redis('SET','claim:'+hmac(session.nonce),'1','EX',900,'NX');
   if(claim!=='OK')return send(res,409,{error:'Request already submitted'});
   const requestId=crypto.randomUUID();
   const [owner,repo]=process.env.GITHUB_REPOSITORY.split('/');
   if(!owner||!repo)throw Error('Invalid GITHUB_REPOSITORY');
-  const payload={request_id:requestId,title:data.title.trim(),source_url:source.toString(),recipient_jid:session.number.slice(1)+'@s.whatsapp.net',rights_confirmed:true};
+  const payload={request_id:requestId,title:data.title.trim(),source_url:source.toString(),recipient_jid:session.number.slice(1)+'@s.whatsapp.net',rights_confirmed:true,expected_size_bytes:expectedSizeMiB==null?null:Math.round(expectedSizeMiB*1048576)};
   const result=await fetch('https://api.github.com/repos/'+encodeURIComponent(owner)+'/'+encodeURIComponent(repo)+'/dispatches',{
    method:'POST',headers:{Authorization:'Bearer '+process.env.GITHUB_DISPATCH_TOKEN,Accept:'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28','Content-Type':'application/json'},
    body:JSON.stringify({event_type:'autowa-verified-request',client_payload:payload}),signal:AbortSignal.timeout(15000)
