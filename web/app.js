@@ -1,6 +1,6 @@
-const $=id=>document.getElementById(id);let number='',token='',signedIn=false,authVersion=0;const msg=t=>{$('message').textContent=t;};async function api(route,payload){const r=await fetch('/api/'+route,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});const d=await r.json();if(!r.ok)throw Error(d.error||'Request failed');return d;}function phoneNumber(){let raw=$('phone').value.replace(/[^0-9+]/g,'');if(raw.startsWith('+'))return raw;if(raw.startsWith('00'))return '+'+raw.slice(2);raw=raw.replace(/^0+/,'');const dial=$('country').value;return '+'+(raw.startsWith(dial)?raw:dial+raw);}fetch('/countries.json').then(r=>r.json()).then(d=>{const sel=$('country');sel.replaceChildren();for(const c of d.countries){const o=document.createElement('option');o.value=c.dial;o.textContent=c.name+' (+'+c.dial+')';if(c.iso==='LK')o.selected=true;sel.append(o);}}).catch(()=>msg('Country list unavailable; Sri Lanka is the default.'));
+const $=id=>document.getElementById(id);let number='',token='',signedIn=false,authVersion=0;const loginHintKey='tfw_login_hint_v1';const storedLogin=()=>{try{return localStorage.getItem(loginHintKey)==='1';}catch{return false;}};const saveLoginHint=value=>{try{if(value)localStorage.setItem(loginHintKey,'1');else localStorage.removeItem(loginHintKey);}catch{}};const msg=t=>{$('message').textContent=t;};async function api(route,payload){const r=await fetch('/api/'+route,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});const d=await r.json();if(!r.ok)throw Error(d.error||'Request failed');return d;}function phoneNumber(){let raw=$('phone').value.replace(/[^0-9+]/g,'');if(raw.startsWith('+'))return raw;if(raw.startsWith('00'))return '+'+raw.slice(2);raw=raw.replace(/^0+/,'');const dial=$('country').value;return '+'+(raw.startsWith(dial)?raw:dial+raw);}fetch('/countries.json').then(r=>r.json()).then(d=>{const sel=$('country');sel.replaceChildren();for(const c of d.countries){const o=document.createElement('option');o.value=c.dial;o.textContent=c.name+' (+'+c.dial+')';if(c.iso==='LK')o.selected=true;sel.append(o);}}).catch(()=>msg('Country list unavailable; Sri Lanka is the default.'));
 $('start').addEventListener('submit',async e=>{e.preventDefault();const btn=e.target.querySelector('button');btn.disabled=true;try{number=phoneNumber();const version=authVersion;await api('otp/start',{number});if(version!==authVersion)return;$('start').classList.add('hidden');$('verify').classList.remove('hidden');msg('Verification code sent to '+number);}catch(err){msg(err.message)}finally{btn.disabled=false;}});
-$('verify').addEventListener('submit',async e=>{e.preventDefault();const btn=e.target.querySelector('button');btn.disabled=true;try{const d=await api('otp/verify',{number,code:$('code').value});authVersion++;await showAccount();msg('Signed in successfully.');}catch(err){msg(err.message)}finally{btn.disabled=false;}});
+$('verify').addEventListener('submit',async e=>{e.preventDefault();const btn=e.target.querySelector('button');btn.disabled=true;try{const d=await api('otp/verify',{number,code:$('code').value});authVersion++;await showAccount();saveLoginHint(true);msg('Signed in successfully.');}catch(err){msg(err.message)}finally{btn.disabled=false;}});
 $('request').addEventListener('submit',async e=>{e.preventDefault();const btn=e.target.querySelector('button');btn.disabled=true;try{const d=await api('request',{movie_id:Number($('movie-id').value),rights_confirmed:$('rights').checked});await refreshAccount();msg('Request '+d.request_id+' submitted for review. This does not guarantee delivery.');}catch(err){msg(err.message)}finally{btn.disabled=false;}});
 
 let movieResults=[];
@@ -86,7 +86,23 @@ $('save-profile').addEventListener('click',async()=>{
  catch(e){msg(e.message);}finally{btn.disabled=false;}
 });
 $('logout').addEventListener('click',async()=>{
- try{await api('logout',{});authVersion++;signedIn=false;navigate('/');msg('Signed out.');}
+ try{await api('logout',{});authVersion++;signedIn=false;saveLoginHint(false);navigate('/');msg('Signed out.');}
  catch(e){msg(e.message);}
 });
-showAccount().catch(()=>{signedIn=false;routeView();}).finally(()=>document.documentElement.classList.add('auth-ready'));
+const initialAuthVersion=authVersion;
+if(storedLogin()){
+ signedIn=true;
+ routeView();
+ document.documentElement.classList.add('auth-ready');
+ $('movie-hint').textContent='Restoring your session…';
+}
+showAccount().then(()=>{
+ if(initialAuthVersion!==authVersion)return;
+ saveLoginHint(true);
+}).catch(()=>{
+ if(initialAuthVersion!==authVersion)return;
+ signedIn=false;
+ saveLoginHint(false);
+ routeView();
+ msg('Please sign in to continue.');
+}).finally(()=>document.documentElement.classList.add('auth-ready'));
