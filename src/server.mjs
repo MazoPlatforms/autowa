@@ -11,7 +11,7 @@ const required=['APP_SECRET','UPSTASH_REDIS_REST_URL','UPSTASH_REDIS_REST_TOKEN'
 const missing=required.filter(k=>!process.env[k]);
 const secret=process.env.APP_SECRET||'';
 const configured=missing.length===0&&secret.length>=32;
-if(!configured)console.warn('AutoWA setup incomplete: configure APP_SECRET and required storage/GitHub secrets; API will fail closed. Missing:',missing.join(', ')||'APP_SECRET length < 32');
+if(!configured)console.warn('FilmGo setup incomplete: configure APP_SECRET and required storage/GitHub secrets; API will fail closed. Missing:',missing.join(', ')||'APP_SECRET length < 32');
 const redisBase=(process.env.UPSTASH_REDIS_REST_URL||'').replace(/\/$/,'');
 const redisToken=process.env.UPSTASH_REDIS_REST_TOKEN;
 const hmac=s=>crypto.createHmac('sha256',secret).update(s).digest('hex');
@@ -95,7 +95,24 @@ const catalogHtml=fs.readFileSync(new URL('../web/catalog.html',import.meta.url)
 const catalogJs=fs.readFileSync(new URL('../web/catalog.js',import.meta.url));
 const catalogCss=fs.readFileSync(new URL('../web/catalog.css',import.meta.url));
 const tailwindCss=fs.readFileSync(new URL('../web/tailwind.css',import.meta.url));
-const publishedMovies=fs.readFileSync(new URL('../data/movies.json',import.meta.url));
+let publicCatalog=JSON.parse(fs.readFileSync(new URL('../data/movies.json',import.meta.url),'utf8'));
+let catalogChecked=0,catalogPending=null;
+async function getPublicCatalog(){
+ if(Date.now()-catalogChecked<10000)return publicCatalog;
+ if(catalogPending)return catalogPending;
+ catalogPending=(async()=>{
+  try{
+   const response=await fetch('https://raw.githubusercontent.com/MazoPlatforms/autowa/main/data/movies.json?ts='+Date.now(),{cache:'no-store',headers:{'Cache-Control':'no-cache'},signal:AbortSignal.timeout(6000)});
+   if(!response.ok)throw Error('Catalog HTTP '+response.status);
+   const data=await response.json();
+   if(!Array.isArray(data.movies)||data.movies.some(m=>!m||typeof m.slug_id!=='string'||!Number.isSafeInteger(m.telegram_message_id)))throw Error('Invalid catalog');
+   publicCatalog=data;
+  }catch(err){console.warn('FilmGo catalog update failed; serving last valid copy:',err.message);}
+  finally{catalogChecked=Date.now();catalogPending=null;}
+  return publicCatalog;
+ })();
+ return catalogPending;
+}
 const countries=fs.readFileSync(new URL('../site/countries.json',import.meta.url));
 const appJs=fs.readFileSync(new URL('../web/app.js',import.meta.url));
 const stylesheet=fs.readFileSync(new URL('../web/style.css',import.meta.url));
@@ -103,22 +120,13 @@ const server=http.createServer(async(req,res)=>{
  try{
   const url=new URL(req.url,'http://localhost');
   if(req.method==='GET'&&url.pathname==='/api/movies'){
-   if(!configured||!telegramReady)return send(res,503,{error:'Movie catalog not configured'});
-   if(!await limit('search-ip:'+(req.socket.remoteAddress||'unknown'),30,60))return send(res,429,{error:'Search rate limit reached'});
-   const query=(url.searchParams.get('q')||'').trim().toLowerCase().slice(0,100);
-   const catalog=await getCatalog()||{movies:[],indexed_at:null};
-   const recentRaw=!query?await redis('GET','telegram:recent:v1'):null;
-   const recent=recentRaw?JSON.parse(recentRaw):null;
-   let matches=(query?catalog.movies:(recent?.movies||catalog.movies)).filter(m=>!query||m.title.toLowerCase().includes(query)||String(m.year||'').includes(query)).slice(0,query?50:15);
-   let live=false;
-   if(!catalog.movies.length)void refreshCatalog();
-   if(query.length>=2){
-    // Return indexed matches immediately. Telegram refreshes the index in the background.
-    if(!matches.length)void refreshCatalog();
+    const query=(url.searchParams.get('q')||'').trim().toLowerCase().slice(0,100);
+    const catalog=await getPublicCatalog();
+    const matches=catalog.movies.filter(m=>!query||String(m.title||'').toLowerCase().includes(query)||String(m.year||'').includes(query))
+      .slice(0,query?50:100).map(m=>({id:m.telegram_message_id,title:m.title,year:m.year,quality:m.quality,size:m.file_size,slug_id:m.slug_id}));
+    return send(res,200,{movies:matches,indexed_at:catalog.updated_at||null,source:'published'});
    }
-   return send(res,200,{movies:matches,indexed_at:catalog.indexed_at,live,syncing:!catalog.movies.length&&!recent?.movies?.length,catalog_status:telegramCatalogStatus.state});
-  }
-  if(req.method==='GET'&&url.pathname==='/api/me'){
+   if(req.method==='GET'&&url.pathname==='/api/me'){
    const session=await authenticated(req);
    if(!session)return send(res,401,{error:'Not signed in'});
    const user=await profile(session.number);
@@ -130,14 +138,14 @@ const server=http.createServer(async(req,res)=>{
   if(req.method==='GET'&&url.pathname==='/health'){return send(res,200,{ok:true});}
   if(req.method==='GET'&&url.pathname.startsWith('/api/stream-availability/')){
    const id=url.pathname.slice('/api/stream-availability/'.length);
-   const movie=(JSON.parse(publishedMovies.toString()).movies||[]).find(m=>m.slug_id===id);
+   const movie=(await getPublicCatalog().movies||[]).find(m=>m.slug_id===id);
    const ext=String(movie?.file_name||'').toLowerCase();
    const format=ext.endsWith('.mkv')?'mkv':ext.endsWith('.webm')?'webm':ext.endsWith('.mp4')?'mp4':'unknown';
    return send(res,200,{available:telegramReady&&!!movie,format});
   }
   if((req.method==='GET'||req.method==='HEAD')&&url.pathname.startsWith('/api/stream/')){
    const publicId=url.pathname.slice('/api/stream/'.length);
-   const catalog=JSON.parse(publishedMovies.toString());
+   const catalog=await getPublicCatalog();
    const movie=(catalog.movies||[]).find(m=>m.slug_id===publicId);
    if(!movie||!Number.isSafeInteger(movie.telegram_message_id)||!Number.isSafeInteger(movie.file_size)||movie.file_size<=0)return send(res,404,{error:'Video unavailable'});
    if(!telegramReady)return send(res,503,{error:'Telegram not configured'});
@@ -189,7 +197,7 @@ const server=http.createServer(async(req,res)=>{
    });
    return;
   }
-  if(req.method==='GET'&&url.pathname==='/movies.json'){res.writeHead(200,{'Content-Type':'application/json; charset=utf-8','Cache-Control':'public, max-age=300','X-Content-Type-Options':'nosniff'});return res.end(publishedMovies);}
+   if(req.method==='GET'&&url.pathname==='/movies.json'){const catalog=await getPublicCatalog();res.writeHead(200,{'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store, max-age=0','X-Content-Type-Options':'nosniff'});return res.end(JSON.stringify(catalog));}
   if(req.method==='GET'&&url.pathname==='/tailwind.css'){res.writeHead(200,{'Content-Type':'text/css; charset=utf-8','Cache-Control':'public, max-age=86400','X-Content-Type-Options':'nosniff'});return res.end(tailwindCss);}
   if(req.method==='GET'&&url.pathname==='/catalog.css'){res.writeHead(200,{'Content-Type':'text/css; charset=utf-8','Cache-Control':'public, max-age=300','X-Content-Type-Options':'nosniff'});return res.end(catalogCss);}
   if(req.method==='GET'&&url.pathname==='/catalog.js'){res.writeHead(200,{'Content-Type':'text/javascript; charset=utf-8','Cache-Control':'public, max-age=300','X-Content-Type-Options':'nosniff'});return res.end(catalogJs);}
@@ -268,5 +276,5 @@ const server=http.createServer(async(req,res)=>{
   return send(res,202,{request_id:requestId,status:'pending_review',message:'Request queued for review; delivery is not guaranteed'});
  }catch(err){console.error('API error',String(err.message));return send(res,500,{error:'Request could not be completed'});}
 });
-server.listen(PORT,'0.0.0.0',()=>console.log('AutoWA API listening on',PORT));
+server.listen(PORT,'0.0.0.0',()=>console.log('FilmGo API listening on',PORT));
 if(configured)startWhatsApp().catch(e=>console.error('WhatsApp initialization failed',e.message));
