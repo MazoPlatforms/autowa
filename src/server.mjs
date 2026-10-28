@@ -86,12 +86,20 @@ const server=http.createServer(async(req,res)=>{
    }
    const query=(url.searchParams.get('q')||'').trim().toLowerCase().slice(0,100);
    let matches=catalog.movies.filter(m=>!query||m.title.toLowerCase().includes(query)||String(m.year||'').includes(query)).slice(0,query?50:15);
+   if(!query){
+    try{
+     const {stdout}=await execFileAsync('python3',['src/telegram_media.py','recent'],{timeout:60000,maxBuffer:256*1024,env:process.env});
+     const fresh=JSON.parse(stdout);
+     matches=fresh.movies||[];
+     await redis('SET','telegram:catalog:v2',JSON.stringify(fresh),'EX',120);
+    }catch(err){console.warn('Recent movie refresh failed:',err.message);return send(res,503,{error:'Unable to verify recent movies. Please retry.'});}
+   }
    let live=false;
    if(query.length>=2){
     try{
      const {stdout}=await execFileAsync('python3',['src/telegram_media.py','search',query],{timeout:90000,maxBuffer:1024*1024,env:process.env});
      const remote=JSON.parse(stdout).movies||[];
-     matches=[...new Map([...remote,...matches].map(m=>[m.id,m])).values()].slice(0,50);
+     matches=remote.slice(0,50);
      live=true;
     }catch(err){console.warn('Telegram live search unavailable:',err.message);matches=[];}
 
