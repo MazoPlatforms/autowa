@@ -7,10 +7,10 @@ import pino from 'pino';
 import { setTimeout as sleep } from 'node:timers/promises';
 const jobs=fs.readdirSync('movies').filter(f=>f.endsWith('.json')).sort()
   .map(f=>JSON.parse(fs.readFileSync(path.join('movies',f),'utf8')))
-  .filter(j=>j.enabled);
+  .filter(j=>j.enabled && j.license_confirmed);
 const selected=process.env.JOB_ID;
-const queue=selected?jobs.filter(j=>j.id===selected):jobs;
-if(selected&&!queue.length) throw Error('No enabled job with ID '+selected);
+const queue=selected?jobs.filter(j=>j.id===selected || j.job_id===selected):jobs.filter(j=>!j.job_id);
+if(selected&&!queue.length) throw Error('No eligible movie with ID '+selected);
 if(!queue.length){console.log('No enabled jobs');process.exit(0);}
 if(process.env.DRY_RUN==='1'){
   for(const j of queue) console.log(`DRY RUN: ${j.id} => ${j.group_ids.length} group(s), ${j.source_url}`);
@@ -40,6 +40,13 @@ const groups=await sock.groupFetchAllParticipating();
 let failures=0;
 try{
  for(const j of queue){
+  const file=path.join('movies',j.id+'.json');
+  j.job_id=j.job_id || ('job-'+(process.env.GITHUB_RUN_ID||Date.now())+'-'+(process.env.GITHUB_RUN_ATTEMPT||'1')+'-'+j.id);
+  j.status='processing';
+  j.started_at=new Date().toISOString();
+  fs.writeFileSync(file,JSON.stringify(j,null,2)+'\n');
+  let movieFailures=0;
+  try {
   const dest=path.join('downloads',j.id+'.'+j.file_type);
   fs.mkdirSync('downloads',{recursive:true});
   console.log('Downloading',j.id);
@@ -58,7 +65,7 @@ try{
   }
   if(thumbnail && !(thumbnail[0]===255&&thumbnail[1]===216&&thumbnail[2]===255)) thumbnail=undefined;
   for(const groupId of [...new Set(j.group_ids)]){
-   if(!groups[groupId]){console.error('Not a member of group',groupId);failures++;continue;}
+   if(!groups[groupId]){console.error('Not a member of group',groupId);failures++;movieFailures++;continue;}
    let ok=false;
    for(let attempt=1;attempt<=3;attempt++){
     try{
@@ -70,10 +77,14 @@ try{
      console.log('Submitted',j.id,groupId,result.key.id);ok=true;break;
     }catch(e){console.error('Send failed',j.id,groupId,attempt,e.message);if(attempt<3)await sleep(10000*attempt);}
    }
-   if(!ok)failures++;
+   if(!ok){failures++;movieFailures++;}
    await sleep(3000);
   }
   fs.rmSync(dest,{force:true});
+  j.status=movieFailures?'failed':'submitted';
+  } catch(err) { j.status='failed'; j.error=String(err.message).slice(0,250); failures++; console.error('Job failed',j.id,err.message); }
+  j.finished_at=new Date().toISOString();
+  fs.writeFileSync(file,JSON.stringify(j,null,2)+'\n');
  }
 }finally{
  sock.end();
