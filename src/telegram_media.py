@@ -55,7 +55,7 @@ def media_item(message, enrich=False):
     caption = message.message or ''
     fields = {}
     for line in caption.splitlines():
-        match = re.match(r'^\\s*(Movie|Year|Quality)\\s*:\\s*(.*?)\\s*$', line, re.I)
+        match = re.match(r'^\s*(Movie|Year|Quality)\s*:\s*(.*?)\s*$', line, re.I)
         if match and match.group(2):
             fields[match.group(1).lower()] = match.group(2).strip()
     if not all(fields.get(key) for key in ('movie', 'year', 'quality')):
@@ -63,9 +63,9 @@ def media_item(message, enrich=False):
     title = fields['movie'][:140]
     year = fields['year']
     quality = fields['quality'][:40]
-    if not re.fullmatch(r'(?:19|20)\\d{2}', year):
+    if not re.fullmatch(r'(?:19|20)\d{2}', year):
         return None
-    if not re.fullmatch(r'[\\w .+-]{2,40}', quality):
+    if not re.fullmatch(r'[\w .+-]{2,40}', quality):
         return None
     return {'id': message.id, 'title': title, 'year': year, 'quality': quality, 'size': int(getattr(message.file, 'size', 0) or 0)}
 
@@ -101,6 +101,11 @@ async def main():
                     item = media_item(message)
                     if item: items.append(item)
             print(json.dumps({'movies': items}), flush=True)
+        elif mode == 'check':
+            message_id = int(sys.argv[2])
+            message = await client.get_messages(entity, ids=message_id)
+            item = media_item(message) if message and message.file else None
+            print(json.dumps({'movie': item}), flush=True)
         elif mode == 'download':
             message_id = int(sys.argv[2])
             destination = sys.argv[3]
