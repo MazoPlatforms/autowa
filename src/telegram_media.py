@@ -52,11 +52,22 @@ def enrich_title(raw):
     return candidate, None
 
 def media_item(message, enrich=False):
-    filename = (getattr(message.file, 'name', None) or '')[:180]
-    caption = next((line.strip() for line in (message.message or '').splitlines() if line.strip()), '')
-    raw = filename or caption or ('Movie ' + str(message.id))
-    title, imdb_id = enrich_title(raw) if enrich else (clean_title(raw), None)
-    return {'id': message.id, 'title': title, 'filename': filename, 'size': int(getattr(message.file, 'size', 0) or 0), 'imdb_id': imdb_id}
+    caption = message.message or ''
+    fields = {}
+    for line in caption.splitlines():
+        match = re.match(r'^\\s*(Movie|Year|Quality)\\s*:\\s*(.*?)\\s*$', line, re.I)
+        if match and match.group(2):
+            fields[match.group(1).lower()] = match.group(2).strip()
+    if not all(fields.get(key) for key in ('movie', 'year', 'quality')):
+        return None
+    title = fields['movie'][:140]
+    year = fields['year']
+    quality = fields['quality'][:40]
+    if not re.fullmatch(r'(?:19|20)\\d{2}', year):
+        return None
+    if not re.fullmatch(r'[\\w .+-]{2,40}', quality):
+        return None
+    return {'id': message.id, 'title': title, 'year': year, 'quality': quality, 'size': int(getattr(message.file, 'size', 0) or 0)}
 
 async def main():
     mode = sys.argv[1]
@@ -73,7 +84,8 @@ async def main():
                     continue
                 size = int(getattr(message.file, 'size', 0) or 0)
                 if 0 < size <= 2000000000:
-                    items.append(media_item(message))
+                    item = media_item(message)
+                    if item: items.append(item)
             print(json.dumps({'movies': items, 'indexed_at': int(time.time())}), flush=True)
         elif mode == 'search':
             query = sys.argv[2].strip()[:100]
@@ -86,7 +98,8 @@ async def main():
                     continue
                 size = int(getattr(message.file, 'size', 0) or 0)
                 if 0 < size <= 2000000000:
-                    items.append(media_item(message, enrich=len(items) < 5))
+                    item = media_item(message)
+                    if item: items.append(item)
             print(json.dumps({'movies': items}), flush=True)
         elif mode == 'download':
             message_id = int(sys.argv[2])
