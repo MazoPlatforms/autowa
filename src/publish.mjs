@@ -57,6 +57,32 @@ const FORWARDING_SCORE = 127; // arbitrary score must not be asserted as real
 // await sock.sendMessage(destinationJid, messagePayload, { quoted: realQuotedMessage });
 */
 
+// OPTIONAL AUTHENTIC QUOTE — disabled by block comment.
+// To activate: remove the /* and */ immediately below, then configure
+// QUOTE_MESSAGE_ID with the ID of a REAL existing message in the destination chat.
+// Do not claim a participant requested a movie unless their actual message says so.
+/*
+const QUOTE_MESSAGE_ID = process.env.QUOTE_MESSAGE_ID;
+const QUOTE_ENABLED = Boolean(QUOTE_MESSAGE_ID);
+const quoteStore = new Map();
+sock.ev.on('messages.upsert', ({ messages }) => {
+  for (const message of messages || []) {
+    if (message?.key?.remoteJid && message?.key?.id) {
+      quoteStore.set(message.key.remoteJid + ':' + message.key.id, message);
+    }
+  }
+});
+const quoteOptionsFor = (destinationJid) => {
+  if (!QUOTE_ENABLED) return {};
+  const original = quoteStore.get(destinationJid + ':' + QUOTE_MESSAGE_ID);
+  if (!original) throw Error('Original quoted message not available in this session');
+  return { quoted: original };
+};
+const originalSendMessage = sock.sendMessage.bind(sock);
+sock.sendMessage = (jid, content, options = {}) =>
+  originalSendMessage(jid, content, { ...options, ...quoteOptionsFor(jid) });
+*/
+
 const groups=await sock.groupFetchAllParticipating();
 let failures=0;
 try{
