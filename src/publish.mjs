@@ -133,7 +133,13 @@ try{
   const isMp4=formats.includes('mov')||formats.includes('mp4')||formats.includes('m4a')||formats.includes('3gp')||formats.includes('3g2')||formats.includes('mj2');
   if(!isMkv&&!isMp4)throw Error('Unsupported downloaded media container: '+formats.join(','));
   const type=isMkv?'mkv':'mp4';
-  const filename=('Tamil Films World - '+j.title+'.'+type).replace(/[\\/\x00-\x1f]/g,'').slice(0,180);
+  const sourceName=String(j.original_filename||'');
+  const qualityMatch=/(?:^|[^0-9])(2160p|1080p|720p|480p|4k)(?:[^a-z0-9]|$)/i.exec(sourceName);
+  const quality=qualityMatch?(qualityMatch[1].toLowerCase()==='4k'?'2160p':qualityMatch[1].toLowerCase()):'Unknown Quality';
+  const yearMatch=/\\b(19\\d{2}|20\\d{2})\\b/.exec(String(j.title));
+  const year=yearMatch?yearMatch[1]:'Unknown Year';
+  const movieName=String(j.title).replace(/\\s*[([]?(?:19\\d{2}|20\\d{2})[)\\]]?\\s*/g,' ').trim();
+  const filename=('mzn.is-a.dev - '+movieName+' ('+year+') - '+quality+'.'+type).replace(/[\\/\\x00-\\x1f]/g,'').slice(0,180);
   const caption=['🎬 TAMIL FILMS WORLD','','🎞️ '+j.title,'','🍿 Enjoy the Movie!','','⚡ Powered by Itz Maazin','🌐 https://mzn.is-a.dev/'].join('\n');
   j.file_type=type;j.filename=filename;j.caption=caption;
   const thumbUrl='https://i.ibb.co/8L3RB6Qh/Itz-Maazin-20261027-155011.jpg';
