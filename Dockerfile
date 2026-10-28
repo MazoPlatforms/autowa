@@ -1,6 +1,7 @@
 FROM node:22-alpine
 WORKDIR /app
 COPY package.json ./
+RUN npm install --omit=dev --no-audit --no-fund
 COPY src/server.mjs ./src/server.mjs
 COPY web/ ./web/
 COPY site/countries.json ./site/countries.json
