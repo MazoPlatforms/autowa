@@ -26,6 +26,6 @@ jobs:
       - run: sudo apt-get update && sudo apt-get install -y ffmpeg
       - name: Publish
         env:
-          WA_AUTH_B64: ${{ secrets.WA_AUTH_B64 }}
+          WA_AUTH_CREDS: ${{ secrets.WA_AUTH_CREDS }}
           JOB_ID: ${{ inputs.job_id }}
         run: node src/publish.mjs
