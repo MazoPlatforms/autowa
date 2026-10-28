@@ -3,7 +3,7 @@ const esc = v => String(v ?? '').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;',
 const movies = fs.readdirSync('movies').filter(n=>n.endsWith('.json')).sort().map(n=>JSON.parse(fs.readFileSync('movies/'+n,'utf8')));
 const counts={total:movies.length,done:movies.filter(x=>x.status==='submitted').length,active:movies.filter(x=>x.status==='processing').length};
 const rows=movies.map(m=>'<tr><td><strong>'+esc(m.title)+'</strong><span class="muted sub">'+esc(m.id)+'</span></td><td><code>'+esc(m.job_id||'Not assigned')+'</code></td><td><span class="status '+(m.status==='submitted'?'good':m.status==='failed'?'bad':m.status==='processing'?'busy':'idle')+'">'+esc(m.status||(m.enabled?'Pending':'Disabled'))+'</span></td><td>'+esc(m.started_at?new Date(m.started_at).toLocaleString('en-GB',{timeZone:'UTC'}):'—')+'</td></tr>').join('');
-const html=String.raw\`<!doctype html>
+const html=String.raw`<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="color-scheme" content="dark"><meta name="description" content="AutoWA community media submission and processing dashboard">
 <title>AutoWA — Community Publisher</title>
@@ -43,7 +43,7 @@ return {id,title:document.getElementById('title').value.trim(),source_url:docume
 }
 form.addEventListener('submit',e=>{e.preventDefault();const data=makeMovie();if(!data)return;const blob=new Blob([JSON.stringify(data,null,2)+'\\n'],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=data.id+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);msg.textContent='JSON downloaded. Add it to movies/ through a reviewed GitHub contribution.';});
 document.getElementById('copy').addEventListener('click',async()=>{const data=makeMovie();if(!data)return;try{await navigator.clipboard.writeText(JSON.stringify(data,null,2)+'\\n');msg.textContent='JSON copied to clipboard.';}catch{msg.textContent='Clipboard unavailable; use Download movie JSON.';}});
-</script></body></html>\`;
+</script></body></html>`;
 fs.mkdirSync('site',{recursive:true});
 fs.writeFileSync('site/index.html',html.replace('\${COUNTS_TOTAL}',String(counts.total)).replace('\${COUNTS_DONE}',String(counts.done)).replace('\${COUNTS_ACTIVE}',String(counts.active)).replace('\${ROWS}',rows).replace('\${EMPTY}',movies.length?'':'<p class="empty">No movie entries yet.</p>'));
 console.log('Generated premium dashboard for '+movies.length+' movies');
