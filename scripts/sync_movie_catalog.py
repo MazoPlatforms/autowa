@@ -5,6 +5,7 @@ import json
 import os
 import pathlib
 import re
+import secrets
 import urllib.parse
 import urllib.request
 from datetime import datetime, timezone
@@ -83,6 +84,7 @@ async def main():
             if not item:
                 continue
             prior = old.get(item["id"], {})
+            item["slug_id"] = prior.get("slug_id") or secrets.token_urlsafe(12)
             if all(prior.get(k) == item[k] for k in ("title", "year", "quality", "file_size")):
                 for key in ("imdb_id", "poster", "genre", "runtime", "director", "cast", "plot", "imdb_rating", "metadata_status"):
                     if key in prior:
