@@ -1,41 +1,50 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
-:root{font-family:Inter,system-ui,sans-serif;color:#182033;background:#f5f6fa}
+:root{font-family:Inter,system-ui,sans-serif;color:#20252d;background:#f7f8fa}
 *{box-sizing:border-box}
-body{margin:0;min-height:100vh;background:#f5f6fa}
-main{max-width:640px;margin:0 auto;padding:26px 20px 50px}
-.app-header{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:32px;min-height:48px}
-h1{font-size:clamp(22px,5vw,28px);font-weight:800;letter-spacing:-.9px;line-height:1.2;margin:0}
+body{margin:0;min-height:100vh;background:#f7f8fa}
+main{max-width:660px;margin:0 auto;padding:36px 22px 60px}
+.app-header{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:30px;min-height:48px}
+h1{font-size:clamp(22px,5vw,27px);font-weight:750;letter-spacing:-.85px;line-height:1.2;margin:0}
 h2{font-size:21px;letter-spacing:-.5px;margin:0 0 20px}
 p{color:#697286;font-size:14px;line-height:1.6}
-.card{background:white;border:1px solid #e4e7ee;border-radius:20px;padding:24px;box-shadow:0 8px 32px #1b245008}
+.card{background:white;border:1px solid #e6e8ec;border-radius:16px;padding:30px;box-shadow:0 3px 18px #20252d08}
 label{display:block;font-size:13px;font-weight:600;margin:18px 0 8px}
 input,select,button{font:inherit}
-input:not([type=checkbox]),select{width:100%;height:48px;padding:0 14px;border:1px solid #d9dfe9;border-radius:11px;background:#fff;color:#182033;font-size:14px}
-input:focus,select:focus{outline:2px solid #d4cdfb;border-color:#6d51d5}
+input:not([type=checkbox]),select{width:100%;height:48px;padding:0 14px;border:1px solid #d8dde5;border-radius:9px;background:#fff;color:#20252d;font-size:14px}
+input:focus,select:focus{outline:2px solid #d9dfe6;border-color:#596271}
 button{cursor:pointer}
-.primary-button{width:100%;min-height:48px;background:#5235c6;color:white;border:0;border-radius:11px;font-weight:700;margin-top:24px;padding:12px}
+.primary-button{width:100%;min-height:48px;background:#252b35;color:white;border:0;border-radius:9px;font-weight:700;margin-top:24px;padding:12px}
 .primary-button:disabled{opacity:.5;cursor:not-allowed}
-.secondary-button{width:100%;min-height:44px;background:#fff;color:#4c5264;border:1px solid #d9dfe9;border-radius:11px;margin-top:14px}
+.secondary-button{width:100%;min-height:44px;background:#fff;color:#4c5264;border:1px solid #d9dfe9;border-radius:9px;margin-top:14px}
 .hidden{display:none!important}
-#profile-avatar.avatar-button{appearance:none!important;display:grid!important;place-items:center!important;position:static!important;width:42px!important;height:42px!important;min-width:42px!important;max-width:42px!important;min-height:42px!important;max-height:42px!important;flex:0 0 42px!important;padding:0!important;margin:0!important;border-radius:50%!important;background:#ece7ff!important;color:#5032b7!important;border:1px solid #d9cdfd!important;box-shadow:none!important;line-height:1!important;font-size:13px!important;font-weight:800!important;overflow:hidden!important}
+#profile-avatar.avatar-button{appearance:none!important;display:grid!important;place-items:center!important;position:static!important;width:42px!important;height:42px!important;min-width:42px!important;max-width:42px!important;min-height:42px!important;max-height:42px!important;flex:0 0 42px!important;padding:0!important;margin:0!important;border-radius:50%!important;background:#eef0f3!important;color:#343b46!important;border:1px solid #dce0e6!important;box-shadow:none!important;line-height:1!important;font-size:13px!important;font-weight:800!important;overflow:hidden!important}
 #profile-avatar.hidden{display:none!important}
 #profile-avatar span{line-height:1}
 #profile-back.back-button{width:auto;min-height:38px;padding:8px 13px;margin:0;background:#fff;color:#343d50;border:1px solid #dce0e9;border-radius:10px}
 #auth-intro{margin:0 0 20px}
 #account{padding:0}
 #account-number{margin:0 0 12px}
-#account-limits{padding:14px;background:#f5f3ff;border-radius:12px;color:#4936a3}
+#account-limits{padding:14px;background:#f5f6f8;border-radius:10px;color:#49515d}
 .movie-picker{position:relative}
 .movie-options{position:absolute;top:calc(100% + 7px);left:0;right:0;background:#fff;border:1px solid #e0e4ec;border-radius:12px;box-shadow:0 14px 32px #20294a22;max-height:300px;overflow:auto;padding:5px;z-index:20}
 .movie-option{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;width:100%;padding:13px 10px;margin:0;background:white;color:#1f2738;border:0;border-radius:8px;text-align:left}
-.movie-option:hover{background:#f5f3ff}
+.movie-option:hover{background:#f4f5f7}
 .movie-option strong{font-size:13px}
 .movie-option span{font-size:11px;color:#727b8e;text-align:right}
 #movie-hint{margin:10px 0;font-size:12px}
 .check{display:flex;gap:11px;align-items:flex-start;margin-top:22px}
-.check input{width:18px;height:18px;flex:none;accent-color:#5235c6;margin-top:3px}
+.check input{width:18px;height:18px;flex:none;accent-color:#303744;margin-top:3px}
 .check label{margin:0;line-height:1.6;font-weight:400}
-#message{min-height:20px;font-size:13px;color:#5032b7;margin:16px 0}
+#message{min-height:20px;font-size:13px;color:#374151;margin:16px 0}
 footer{font-size:12px;line-height:1.7;color:#8790a0;margin-top:26px;text-align:center}
 html:not(.auth-ready) #start,html:not(.auth-ready) #verify,html:not(.auth-ready) #request,html:not(.auth-ready) #account{display:none!important}
 @media(max-width:480px){main{padding:22px 16px 40px}.card{padding:21px 18px;border-radius:17px}.app-header{margin-bottom:24px}}
+
+/* Quiet premium refinements */
+button,input,select{transition:background-color .15s ease,border-color .15s ease,box-shadow .15s ease}
+.primary-button:hover:not(:disabled){background:#39414e}
+.secondary-button:hover,#profile-back:hover{background:#f5f6f8}
+.movie-option:focus-visible,button:focus-visible{outline:2px solid #87909e;outline-offset:2px}
+#movie-hint{line-height:1.5}
+.card>form:first-child label:first-child{margin-top:0}
+@media(prefers-reduced-motion:reduce){button,input,select{transition:none}}
