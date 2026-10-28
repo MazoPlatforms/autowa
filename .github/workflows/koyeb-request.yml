@@ -28,7 +28,7 @@ jobs:
       - name: Send authorized media
         env:
           WA_AUTH_CREDS: ${{ secrets.WA_AUTH_CREDS }}
-          JOB_ID: ${{ github.event.client_payload.request_id }}
+          JOB_ID: request-${{ github.event.client_payload.request_id }}
         run: node src/publish.mjs
       - name: Remove private staged request
         if: always()
