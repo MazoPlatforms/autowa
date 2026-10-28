@@ -14,14 +14,16 @@ if(process.env.DRY_RUN==='1'){
   for(const j of queue) console.log(`DRY RUN: ${j.id} => ${j.group_ids.length} group(s), ${j.source_url}`);
   process.exit(0);
 }
-if(!process.env.WA_AUTH_B64) throw Error('WA_AUTH_B64 missing. See README.');
-fs.mkdirSync('.auth',{recursive:true,mode:0o700});
-const auth=JSON.parse(Buffer.from(process.env.WA_AUTH_B64,'base64').toString('utf8'));
-if(!auth||typeof auth!=='object'||Array.isArray(auth)||!auth['creds.json']) throw Error('WA_AUTH_B64 must contain a filename-to-JSON auth bundle');
-for(const [name,obj] of Object.entries(auth)){
-  if(!/^[a-zA-Z0-9_.-]+\.json$/.test(name)) throw Error('Invalid auth filename');
-  fs.writeFileSync(path.join('.auth',name),JSON.stringify(obj),{mode:0o600});
+const raw=process.env.WA_AUTH_CREDS;
+if(!raw) throw Error('WA_AUTH_CREDS missing from production environment');
+let creds;
+try { creds=JSON.parse(raw); } catch { throw Error('WA_AUTH_CREDS is not valid JSON'); }
+if(!creds || typeof creds!=='object' || Array.isArray(creds) || creds.registered!==true || !creds.noiseKey) {
+  throw Error('WA_AUTH_CREDS must be the plain-text contents of a registered Baileys creds.json');
 }
+fs.mkdirSync('.auth',{recursive:true,mode:0o700});
+fs.writeFileSync(path.join('.auth','creds.json'),JSON.stringify(creds),{mode:0o600});
+console.warn('Using creds.json-only auth: missing Signal key files or rotated session keys may cause authentication failures.');
 const {state,saveCreds}=await useMultiFileAuthState('.auth');
 const sock=makeWASocket({auth:state,logger:pino({level:'silent'}),markOnlineOnConnect:false,syncFullHistory:false});
 sock.ev.on('creds.update',saveCreds);
