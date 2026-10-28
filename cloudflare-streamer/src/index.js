@@ -144,7 +144,16 @@ function mime(name, movie) {
 // ---------------------------------------------------------------------------
 function openClient(config, ctx) {
   const client = new TelegramClient(new StringSession(config.session), config.apiId, config.apiHash, {
-    connectionRetries: 0, autoReconnect: false, timeout: 10000
+    // connectionRetries MUST be >= 1. With 0, GramJS never attempts the TCP
+    // connection yet connect() still resolves, so the next RPC (getMe /
+    // getEntity) waits forever (seen in logs on 2026-10-28 22:53: connect-start
+    // and connect-complete had the same timestamp and the lookup timed out).
+    connectionRetries: 2,
+    requestRetries: 1,
+    // Throw FLOOD_WAIT immediately instead of sleeping inside the request.
+    floodSleepThreshold: 0,
+    autoReconnect: false,
+    timeout: 10 // seconds
   });
   try { client.setLogLevel(globalThis.__GRAMJS_LOG_LEVEL || 'warn'); } catch {}
 
@@ -162,12 +171,19 @@ function openClient(config, ctx) {
 
 async function connectClient(session) {
   stage('connect-start');
-  // connect() already performs the InitConnection/GetConfig round trip, which
-  // proves the transport works. An extra getMe() probe is NOT needed: an
-  // unauthorized session fails on the first real RPC with AUTH_KEY_UNREGISTERED,
-  // which describeError() reports clearly.
+  const began = Date.now();
+  // connect() performs the TCP handshake and the InitConnection/GetConfig round
+  // trip. An extra getMe() probe is NOT needed: an unauthorized session fails
+  // on the first real RPC with AUTH_KEY_UNREGISTERED, which describeError()
+  // reports clearly.
   await bounded(() => session.client.connect(), CONNECT_TIMEOUT_MS, 'connect', session.close);
-  stage('connect-complete');
+  const elapsed = Date.now() - began;
+  // Fail fast with a clear error instead of letting the next RPC hang.
+  if (session.client.connected === false) {
+    throw new GatewayError(502, 'Telegram connection was not established');
+  }
+  // A real network connect takes tens of ms; elapsed=0 means no I/O happened.
+  stage('connect-complete connected=' + session.client.connected + ' ms=' + elapsed);
 }
 
 async function resolveChannel(client, channel) {
