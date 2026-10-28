@@ -1,5 +1,51 @@
 # Community WhatsApp Media Uploader
 
+## Koyeb web service: verified public requests (deployment-ready configuration)
+
+This repository includes a separate **Koyeb API + public web form**. Visitors do not need GitHub accounts. The Koyeb service does **not** download or upload movies: it verifies WhatsApp ownership, then sends a private `repository_dispatch` event to GitHub Actions. The `Process verified AutoWA request` workflow stages the request in the runner (not in Git), awaits the `production` environment approval gate, and runs the existing publisher.
+
+### Deploy
+1. Create an **Upstash Redis** database with its REST endpoint and token. Redis stores short-lived hashed OTPs, verification sessions, cooldowns and rate limits; do not use Koyeb's ephemeral filesystem for this.
+2. Configure an approved **WhatsApp Cloud API authentication template** in Meta Business Manager. The current implementation sends a 6-digit body template parameter; adjust the template components if your approved template uses different authentication components. Set the corresponding phone-number ID, permanent access token, template name and language. **Baileys is not used for OTP.**
+3. Create a GitHub fine-grained PAT scoped to this repository with **Contents: read/write** permission sufficient to invoke `repository_dispatch` (or use a GitHub App token with equivalent permission). Keep it **only in Koyeb secrets**.
+4. In GitHub, configure the **production environment** with **required reviewers** (if supported by the repository plan/settings), and set the existing `WA_AUTH_CREDS` environment secret. Do not remove the human approval gate for arbitrary user-supplied media URLs. The WhatsApp publisher still uses Baileys, and its creds-only auth may fail without persisted Signal keys.
+5. Create a **Koyeb Web Service** from this GitHub repository, using the root **Dockerfile**. HTTP port: **8000**, health path: **/health**. The container is a lightweight Node 22 service and does not require FFmpeg or WhatsApp auth keys.
+6. Set these **Koyeb secrets/environment variables**:
+
+| Variable | Purpose |
+|---|---|
+| `APP_SECRET` | Random secret, **at least 32 characters**, for HMAC OTP hashes and signed session tokens |
+| `UPSTASH_REDIS_REST_URL` | Upstash Redis REST endpoint |
+| `UPSTASH_REDIS_REST_TOKEN` | Upstash Redis REST token |
+| `WHATSAPP_CLOUD_TOKEN` | Meta WhatsApp Cloud API access token |
+| `WHATSAPP_PHONE_NUMBER_ID` | WhatsApp Cloud API sending phone number ID |
+| `WHATSAPP_OTP_TEMPLATE` | Approved template name containing the OTP body variable |
+| `WHATSAPP_OTP_LANGUAGE` | Optional, defaults to `en_US` |
+| `WHATSAPP_GRAPH_VERSION` | Optional, defaults to `v22.0`; update to a supported Meta Graph version |
+| `GITHUB_DISPATCH_TOKEN` | GitHub credential for repository dispatch |
+| `GITHUB_REPOSITORY` | `MazoPlatforms/autowa` |
+| `PORT` | Optional, defaults to `8000` |
+
+### Security and limitations
+- OTP: six digits, 5-minute expiry, 60-second resend cooldown, bounded verification attempts, 15-minute one-time signed session. Each verified session submits at most one request; daily per-number limits apply.
+- A request can **only target the verified WhatsApp number**; no arbitrary personal recipients or public group selection in the new Koyeb form. The publisher still includes its two preconfigured internal groups. These must be authorized distribution destinations.
+- Public form requires explicit distribution-rights confirmation, but **self-attestation is not proof**. A trusted reviewer must approve every media job before GitHub Actions processes it.
+- Request details are passed as GitHub event payload and exist in GitHub Actions event context and runner filesystem; they are **not public movie JSON commits**. Restrict repository/workflow visibility and access, and be mindful of Actions event retention. Avoid putting personal phone numbers in workflow logs.
+- `repository_dispatch` acceptance is **queue submission, not delivery**. No cross-system status callback, retry deduplication, or production-tested WhatsApp delivery guarantee exists yet.
+- Do not place `WA_AUTH_CREDS`, Meta credentials, Redis tokens or GitHub tokens in the frontend or repository. For a public rollout, add moderation, abuse monitoring and robust session-key persistence.
+- Koyeb/Upstash/Meta/GitHub free allowances and billing eligibility can change; verify current account limits before deployment.
+- Existing GitHub Pages generator is separate and remains available for operator use. Public users should use the Koyeb URL instead.
+
+### Local syntax / launch
+```sh
+node --check src/server.mjs
+node --check src/stage-request.mjs
+node --check web/app.js
+# Set all required environment variables before running:
+npm start
+```
+
+
 Simple GitHub Actions + JSON queue for **media you own or are authorized to redistribute**.
 
 ## Setup
