@@ -1,7 +1,322 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-28T20:19:16.310759+00:00",
+  "updated_at": "2026-10-28T23:17:54.766963+00:00",
   "movies": [
+    {
+      "id": "telegram-21",
+      "telegram_message_id": 21,
+      "title": "Parimala and Co",
+      "year": 2026,
+      "quality": "720p",
+      "file_size": 1638237191,
+      "file_name": "Parimala and Co (2026) Tamil v2 HQ HDRip - 720p - x264 -.mkv",
+      "mime_type": "video/x-matroska",
+      "slug_id": "l5KufMadVJT4dy14",
+      "imdb_id": "tt39385419",
+      "poster": "https://m.media-amazon.com/images/M/MV5BNGJmODQ0ODYtOWQ3Zi00M2VhLWIwNzYtYzRmMGI0NmE5ZWEwXkEyXkFqcGc@._V1_QL75_UY562_CR35,0,380,562_.jpg",
+      "genre": [
+        "Comedy",
+        "Crime",
+        "Mystery"
+      ],
+      "runtime": "146 min",
+      "director": "Pandiraaj",
+      "cast": [
+        "Sanjana",
+        "Yogi Babu",
+        "Harshad"
+      ],
+      "plot": "Follows a family who, after committing murder, must navigate the predicament they face while trying to maintain their everyday lives.",
+      "imdb_rating": "6.0",
+      "metadata_status": "matched"
+    },
+    {
+      "id": "telegram-20",
+      "telegram_message_id": 20,
+      "title": "Kanguva",
+      "year": 2024,
+      "quality": "720p",
+      "file_size": 1198913890,
+      "file_name": "Kanguva (2024) Tamil HQ HDRip - 720p - HEVC - x265 - (DD.mkv",
+      "mime_type": "video/x-matroska",
+      "slug_id": "WZmzZOkmdBBLH3uz",
+      "imdb_id": "tt22036406",
+      "poster": "https://m.media-amazon.com/images/M/MV5BNjE2OGYyMTctY2ZkYy00ZWMzLWIzNjEtMWIzNjkxZTMyM2QwXkEyXkFqcGc@._V1_QL75_UY562_CR35,0,380,562_.jpg",
+      "genre": [
+        "Action",
+        "Adventure",
+        "Fantasy"
+      ],
+      "runtime": "152 min",
+      "director": "Siva",
+      "cast": [
+        "Suriya",
+        "Disha Patani",
+        "Bobby Deol"
+      ],
+      "plot": "A tribal warrior's fierce struggle to save his people a millennium ago is mysteriously linked to a bounty hunter's perilous quest in the present.",
+      "imdb_rating": "4.5",
+      "metadata_status": "matched"
+    },
+    {
+      "id": "telegram-19",
+      "telegram_message_id": 19,
+      "title": "Idhayam Murali",
+      "year": 2026,
+      "quality": "720p",
+      "file_size": 1235934013,
+      "file_name": "Idhayam Murali (2026) Tamil HQ HDRip - 720p - HEVC - x26.mkv",
+      "mime_type": "video/x-matroska",
+      "slug_id": "Vc8wIb-s_zQiF8QB",
+      "imdb_id": "tt35723557",
+      "poster": "https://m.media-amazon.com/images/M/MV5BZGRiZmZlOGQtMWMyMS00Yjk2LTkyMjAtYzI5ZGQxMjdhYTBmXkEyXkFqcGc@._V1_SX300.jpg",
+      "genre": [
+        "N/A"
+      ],
+      "runtime": null,
+      "director": null,
+      "cast": [
+        "Angeline",
+        "Fahadh Faasil",
+        "Jonita Gandhi"
+      ],
+      "plot": null,
+      "imdb_rating": null,
+      "metadata_status": "matched"
+    },
+    {
+      "id": "telegram-18",
+      "telegram_message_id": 18,
+      "title": "Mandaadi",
+      "year": 2026,
+      "quality": "720p",
+      "file_size": 1249155145,
+      "file_name": "Mandaadi (2026) Tamil HQ HDRip - 720p - HEVC - x265 - (D.mkv",
+      "mime_type": "video/x-matroska",
+      "slug_id": "RuE12mEj1YavJB5Y",
+      "imdb_id": "tt36596965",
+      "poster": "https://m.media-amazon.com/images/M/MV5BM2NjYTUwMjEtZmYzNy00MTYxLWE1OGYtNWVmMjYzOWViZGJmXkEyXkFqcGc@._V1_QL75_UY562_CR35,0,380,562_.jpg",
+      "genre": [
+        "Action",
+        "Drama",
+        "Sport"
+      ],
+      "runtime": "154 min",
+      "director": "Pugazhendhi Mathimaran",
+      "cast": [
+        "Soori",
+        "Mahima Nambiar",
+        "Suhas"
+      ],
+      "plot": "A fishing captain applies his maritime knowledge in a traditional boat race along Tamil Nadu's coast during a festival, leading a six-person team against other crews.",
+      "imdb_rating": null,
+      "metadata_status": "matched"
+    },
+    {
+      "id": "telegram-17",
+      "telegram_message_id": 17,
+      "title": "Jana Nayagan",
+      "year": 2026,
+      "quality": "720p",
+      "file_size": 1313951942,
+      "file_name": "Jana_Nayagan_2026_Tamil HQ_HDRip_720p_ HEVC _ x265 .mkv",
+      "mime_type": "video/x-matroska",
+      "slug_id": "dMKO31p9R83Umzgj",
+      "imdb_id": "tt33379543",
+      "poster": "https://m.media-amazon.com/images/M/MV5BOTE1M2ZkZjYtNzExNi00MTQwLTg3ZDYtYTA3YmQyMDgyZjU4XkEyXkFqcGc@._V1_SX300.jpg",
+      "genre": [
+        "Action",
+        "Thriller"
+      ],
+      "runtime": "186 min",
+      "director": "H. Vinoth",
+      "cast": [
+        "Joseph Vijay",
+        "Pooja Hegde",
+        "Bobby Deol"
+      ],
+      "plot": "Thalapthy Vijay is adamant about getting even with a powerful businessman who cost him money. He is prepared to square off against the formidable foe and resolve their issues amicably.",
+      "imdb_rating": null,
+      "metadata_status": "matched"
+    },
+    {
+      "id": "telegram-16",
+      "telegram_message_id": 16,
+      "title": "Bethlehem Kudumba Unit",
+      "year": 2026,
+      "quality": "720p",
+      "file_size": 1701205856,
+      "file_name": "Bethlehem.Kudumba.Unit.2026.720p.JioHotStar.WEB-DL.Tamil.mkv",
+      "mime_type": "video/x-matroska",
+      "slug_id": "N_U6dLmAfN8cZcNH",
+      "imdb_id": "tt37535100",
+      "poster": "https://m.media-amazon.com/images/M/MV5BMTU5OWQ4YTgtZTZiMi00ZjE2LTk1MjgtYjcyNDZiODBjYTQ3XkEyXkFqcGc@._V1_QL75_UY562_CR21,0,380,562_.jpg",
+      "genre": [
+        "Comedy",
+        "Drama",
+        "Romance"
+      ],
+      "runtime": null,
+      "director": "Girish A.D.",
+      "cast": [
+        "Mamitha Baiju",
+        "Nivin Pauly",
+        "Sangeeth Prathap"
+      ],
+      "plot": "Follows a couple with a significant age difference as they navigate their romantic relationship.",
+      "imdb_rating": null,
+      "metadata_status": "matched"
+    },
+    {
+      "id": "telegram-15",
+      "telegram_message_id": 15,
+      "title": "Euphoria",
+      "year": 2026,
+      "quality": "1080p",
+      "file_size": 1910419091,
+      "file_name": "Euphoria (2026) Tamil HQ HDRip - 1080p - x265 - HEVC - (.mkv",
+      "mime_type": "video/x-matroska",
+      "slug_id": "w0PsrykiH8AYNQ1g",
+      "imdb_id": "tt33737583",
+      "poster": "https://m.media-amazon.com/images/M/MV5BMTRiMGMzOWUtNGFmZC00ODY4LWJlNmEtODJjNDdmNTBlYTgwXkEyXkFqcGc@._V1_QL75_UX380_CR0,4,380,562_.jpg",
+      "genre": [
+        "Drama"
+      ],
+      "runtime": "150 min",
+      "director": "Gunasekhar",
+      "cast": [
+        "Saandip",
+        "Mohammad Anas",
+        "Rajasekhar Aningi"
+      ],
+      "plot": "In a time of rising youth crime and fading values, society confronts hard questions about raising children and seeking justice, as a new generation struggles with the costs of ambition and moral choices.",
+      "imdb_rating": "7.2",
+      "metadata_status": "matched"
+    },
+    {
+      "id": "telegram-14",
+      "telegram_message_id": 14,
+      "title": "Kali",
+      "year": 2026,
+      "quality": "1080p",
+      "file_size": 814005412,
+      "file_name": "Kali (2026) Tamil TRUE WEB-DL - 1080p - AVC - AAC - 750M.mkv",
+      "mime_type": "video/x-matroska",
+      "slug_id": "fOACu0saZdk9iLO4",
+      "metadata_status": "unmatched"
+    },
+    {
+      "id": "telegram-13",
+      "telegram_message_id": 13,
+      "title": "The Paradise",
+      "year": 2026,
+      "quality": "720p",
+      "file_size": 1355379133,
+      "file_name": "The Paradise (2026) Tamil HQ HDRip - 720p - HEVC - x265 .mkv",
+      "mime_type": "video/x-matroska",
+      "slug_id": "GvcRjLKGPkTXTBrX",
+      "imdb_id": "tt31969655",
+      "poster": "https://m.media-amazon.com/images/M/MV5BZWVlYjQ1NzktY2VmZC00NzhlLTg1NTItZTRhNDNmYzQyNWQxXkEyXkFqcGc@._V1_QL75_UX380_CR0,16,380,562_.jpg",
+      "genre": [
+        "Action",
+        "Adventure",
+        "Drama"
+      ],
+      "runtime": "165 min",
+      "director": "Srikanth Odela",
+      "cast": [
+        "Nani",
+        "Raghav Juyal",
+        "Kayadu Lohar"
+      ],
+      "plot": "In 1980s Secunderabad, a marginalized tribe battles discrimination and fights for citizenship under an unexpected leader's guidance, challenging systemic oppression.",
+      "imdb_rating": null,
+      "metadata_status": "matched"
+    },
+    {
+      "id": "telegram-12",
+      "telegram_message_id": 12,
+      "title": "Amaran",
+      "year": 2024,
+      "quality": "720p",
+      "file_size": 1216867624,
+      "file_name": "Amaran (2024) Tamil HQ HDRip - 720p - HEVC - x265 - (DD+5.1 .mkv",
+      "mime_type": "video/x-matroska",
+      "slug_id": "XjXv0JfGfDBYFiaq",
+      "imdb_id": "tt27118357",
+      "poster": "https://m.media-amazon.com/images/M/MV5BZGQyYTA0Y2EtYTA1NC00YTkzLWJiMmQtNzUzZGMzNjc5ZjM1XkEyXkFqcGc@._V1_QL75_UX380_CR0,4,380,562_.jpg",
+      "genre": [
+        "Action",
+        "Biography",
+        "Drama"
+      ],
+      "runtime": "167 min",
+      "director": "Rajkumar Periasamy",
+      "cast": [
+        "Sivakarthikeyan",
+        "Sai Pallavi",
+        "Bhuvan Arora"
+      ],
+      "plot": "The life of Major Mukund Varadarajan and is set against the backdrop of the Qazipathri Operation in Shopian, Kashmir, which took place back in 2014.",
+      "imdb_rating": "8.1",
+      "metadata_status": "matched"
+    },
+    {
+      "id": "telegram-11",
+      "telegram_message_id": 11,
+      "title": "The Invite",
+      "year": 2026,
+      "quality": "720p",
+      "file_size": 1342360460,
+      "file_name": "The Invite (2026) BluRay - 720p - x264 - [Tamil + Telugu.mkv",
+      "mime_type": "video/x-matroska",
+      "slug_id": "SmOQp-opnWPnNGzG",
+      "imdb_id": "tt14173636",
+      "poster": "https://m.media-amazon.com/images/M/MV5BMjI0MzJjMjctNmQzZi00Y2U4LWEwZGItMmE3NDUzNzk1YzY3XkEyXkFqcGc@._V1_QL75_UX380_CR0,15,380,562_.jpg",
+      "genre": [
+        "Comedy",
+        "Drama",
+        "Romance"
+      ],
+      "runtime": "107 min",
+      "director": "Olivia Wilde",
+      "cast": [
+        "Seth Rogen",
+        "Olivia Wilde",
+        "Penélope Cruz"
+      ],
+      "plot": "Joe and Angela's marriage is on thin ice. When they invite their enigmatic upstairs neighbors for a dinner party, the night spirals into unexpected places.",
+      "imdb_rating": "7.5",
+      "metadata_status": "matched"
+    },
+    {
+      "id": "telegram-10",
+      "telegram_message_id": 10,
+      "title": "The Tomorrow War",
+      "year": 2021,
+      "quality": "720p",
+      "file_size": 1018322674,
+      "file_name": "The Tomorrow War (2021) Tamil HD Rip.mkv",
+      "mime_type": "video/x-matroska",
+      "slug_id": "CrEpFWZUORSez5eu",
+      "imdb_id": "tt9777666",
+      "poster": "https://m.media-amazon.com/images/M/MV5BYmUyNzY2YWYtNWQ0My00ODMwLTkwOTQtOTA0ZjM0MjRmYjJiXkEyXkFqcGc@._V1_QL75_UX380_CR0,0,380,562_.jpg",
+      "genre": [
+        "Action",
+        "Adventure",
+        "Drama"
+      ],
+      "runtime": "138 min",
+      "director": "Chris McKay",
+      "cast": [
+        "Chris Pratt",
+        "Yvonne Strahovski",
+        "J.K. Simmons"
+      ],
+      "plot": "A family man travels to the year 2051 to join a global war against a deadly alien species.",
+      "imdb_rating": "6.6",
+      "metadata_status": "matched"
+    },
     {
       "id": "telegram-9",
       "telegram_message_id": 9,
