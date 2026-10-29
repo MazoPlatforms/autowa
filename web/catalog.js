@@ -134,13 +134,22 @@ function render(){
 function showDetail(m){const root=$('detail-content');root.replaceChildren();const layout=el('div','detail-hero');layout.append(image(m,'detail-poster',true,true));const info=el('div');info.append(el('p','mb-2 text-xs font-semibold uppercase tracking-[.18em] text-zinc-500','MOVIE DETAILS'),el('h1','text-2xl font-extrabold leading-tight tracking-tight sm:text-5xl',m.title),el('p','mt-3 text-sm text-zinc-400',[m.year,m.runtime].filter(Boolean).join(' · ')));if(m.imdb_rating)info.append(el('p','mt-3 text-sm font-semibold text-zinc-200','★ IMDb '+m.imdb_rating));if(m.genre?.length)info.append(el('p','mt-3 text-sm text-zinc-400',m.genre.join(' · ')));layout.append(info);root.append(layout);const body=el('div','mt-9 max-w-3xl border-t border-zinc-800 pt-8');body.append(el('h2','text-lg font-bold','Overview'),el('p','mt-3 text-sm leading-7 text-zinc-400',m.plot||'No synopsis available yet.'));if(m.director)body.append(el('p','mt-5 text-sm text-zinc-400','Director: '+m.director));if(m.cast?.length)body.append(el('p','mt-2 text-sm text-zinc-400','Cast: '+m.cast.join(', ')));root.append(body);
 const section=el('section','mt-9 max-w-3xl border-t border-zinc-800 pt-8 filmgo-watch');
 section.append(el('h2','mb-4 text-lg font-bold','Watch & download'));
+const player=el('div','filmgo-player-shell');
 const video=el('video','filmgo-player');
-video.controls=true;video.preload='none';video.playsInline=true;video.setAttribute('playsinline','');video.style.backgroundColor='#09090b';
+video.preload='none';video.playsInline=true;video.setAttribute('playsinline','');video.style.backgroundColor='#09090b';
 video.setAttribute('controlsList','nodownload');
 video.poster='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 9%22%3E%3Crect width=%2216%22 height=%229%22 fill=%22%2309090b%22/%3E%3C/svg%3E';video.setAttribute('aria-label','FilmGo built-in movie player');
-section.append(video);
-const status=el('p','filmgo-stream-status','Checking streaming availability…');
-status.setAttribute('role','status');
+const controls=el('div','filmgo-controls');
+const progress=el('input','filmgo-progress');progress.type='range';progress.min='0';progress.max='1000';progress.value='0';progress.setAttribute('aria-label','Seek');
+const controlRow=el('div','filmgo-control-row');
+const play=el('button','filmgo-control-button filmgo-play','▶');play.type='button';play.setAttribute('aria-label','Play');
+const time=el('span','filmgo-time','0:00 / 0:00');
+const volumeIcon=el('span','filmgo-volume-icon','◖))');volumeIcon.setAttribute('aria-hidden','true');
+const volume=el('input','filmgo-volume');volume.type='range';volume.min='0';volume.max='1';volume.step='0.05';volume.value='1';volume.setAttribute('aria-label','Volume');
+const fullscreen=el('button','filmgo-control-button filmgo-fullscreen','⛶');fullscreen.type='button';fullscreen.setAttribute('aria-label','Full screen');
+controlRow.append(play,time,volumeIcon,volume,fullscreen);controls.append(progress,controlRow);player.append(video,controls);section.append(player);
+const status=el('p','filmgo-stream-status sr-only','');
+status.setAttribute('role','status');status.setAttribute('aria-live','polite');
 const actions=el('div','filmgo-player-actions');
 const download=el('a','filmgo-download-button','Download');
 download.setAttribute('download','');
@@ -158,10 +167,19 @@ const streamBase='';
 const qualities=Object.keys(m.qualities||{[m.quality]:m}).filter(Boolean).sort((a,b)=>parseInt(a)-parseInt(b));
 let selected=qualities.find(q=>q.toLowerCase()==='720p')||qualities[0];
 const qualityRow=el('div','filmgo-quality-options');
-const qualityLabel=el('p','filmgo-stream-status','Choose quality');
-if(qualities.length>1){section.insertBefore(qualityLabel,actions);section.insertBefore(qualityRow,actions);}
+const qualityLabel=el('p','filmgo-quality-label','Quality');
+if(qualities.length>1){section.append(qualityLabel,qualityRow);}
 const isActive=()=>root.isConnected&&location.pathname==='/title/'+slug;
 const setStatus=value=>{if(isActive())status.textContent=value;};
+const formatTime=value=>{if(!Number.isFinite(value)||value<0)return '0:00';const minutes=Math.floor(value/60),seconds=Math.floor(value%60);return minutes+':'+String(seconds).padStart(2,'0');};
+const updateControls=()=>{const duration=video.duration||0;time.textContent=formatTime(video.currentTime)+' / '+formatTime(duration);progress.value=String(duration?Math.round(video.currentTime/duration*1000):0);play.textContent=video.paused?'▶':'Ⅱ';play.setAttribute('aria-label',video.paused?'Play':'Pause');player.classList.toggle('is-playing',!video.paused);};
+play.addEventListener('click',()=>{if(video.paused)video.play().catch(()=>{});else video.pause();});
+video.addEventListener('click',()=>{if(video.paused)video.play().catch(()=>{});else video.pause();});
+video.addEventListener('play',updateControls);video.addEventListener('pause',updateControls);video.addEventListener('timeupdate',updateControls);video.addEventListener('durationchange',updateControls);
+progress.addEventListener('input',()=>{if(Number.isFinite(video.duration))video.currentTime=video.duration*Number(progress.value)/1000;});
+volume.addEventListener('input',()=>{video.volume=Number(volume.value);video.muted=video.volume===0;});
+fullscreen.addEventListener('click',()=>{if(document.fullscreenElement)document.exitFullscreen?.().catch(()=>{});else if(player.requestFullscreen)player.requestFullscreen().catch(()=>{});else if(video.webkitEnterFullscreen)video.webkitEnterFullscreen();});
+player.addEventListener('fullscreenchange',()=>{const active=document.fullscreenElement===player;fullscreen.textContent=active?'⛶':'⛶';fullscreen.setAttribute('aria-label',active?'Exit full screen':'Full screen');});
 const setQuality=q=>{
  if(!qualities.includes(q))return;
  const position=video.currentTime||0,wasPlaying=!video.paused;
@@ -190,18 +208,18 @@ for(const q of qualities){
  qualityRow.append(button);
 }
 video.addEventListener('error',()=>{const file=m.qualities?.[selected]||m;const ext=String(file.file_name||'').toLowerCase();const code=video.error?.code;setStatus(/\.mkv(?:$|\?)/.test(ext)?'This video is MKV, which this browser cannot decode. Download it to watch in a compatible player.':code===2?'The stream was interrupted. Check your connection and try again.':code===3||code===4?'This video format is not supported by your browser. Try another quality or download it.':'Playback failed. Please retry or download the movie.');});
-video.addEventListener('stalled',()=>setStatus('Buffering video…'));
-video.addEventListener('loadedmetadata',()=>setStatus('Ready to play.'));
-video.addEventListener('canplay',()=>setStatus('Ready to play.'));
-video.addEventListener('playing',()=>setStatus('Now playing.'));
-video.addEventListener('waiting',()=>setStatus('Buffering…'));
+video.addEventListener('stalled',()=>{});
+video.addEventListener('loadedmetadata',updateControls);
+video.addEventListener('canplay',()=>{});
+video.addEventListener('playing',updateControls);
+video.addEventListener('waiting',()=>{});
 fetch('/api/stream-availability/'+slug,{cache:'no-store'}).then(r=>r.ok?r.json():null).then(data=>{
  if(!isActive())return;
  if(!data?.available){setStatus('Streaming is currently unavailable.');actions.classList.add('hidden');qualityRow.classList.add('hidden');return;}
  if(!selected){setStatus('No quality available.');return;}
  setQuality(selected);
 }).catch(()=>{if(isActive()&&selected){setQuality(selected);setStatus('Availability check failed. You can still try streaming or downloading.');}});
-document.title=m.title+' — FilmGo';}function route(){const match=location.pathname.match(/^\/title\/([^/]+)\/?$/);if(match){const m=movies.find(x=>x.slug_id===decodeURIComponent(match[1])||x.id===decodeURIComponent(match[1]));home.classList.add('hidden');detail.classList.remove('hidden');if(m)showDetail(m);else{$('detail-content').replaceChildren(el('p','text-zinc-400','Movie not found.'));document.title='Movie not found — FilmGo';}}else{home.classList.remove('hidden');detail.classList.add('hidden');document.title='FilmGo — Explore';if(catalogLoaded)render();}window.scrollTo(0,0);}search.addEventListener('input',()=>{page=1;render();});for(const select of [yearFilter,genreFilter,sortFilter])select.addEventListener('change',()=>{page=1;render();});window.addEventListener('popstate',route);$('detail-back').addEventListener('click',e=>{e.preventDefault();history.pushState({},'','/');route();});skeleton();
+document.title=m.title+' — FilmGo';}function route(){const match=location.pathname.match(/^\/title\/([^/]+)\/?$/);$('catalog-back')?.classList.toggle('visible',!!match);if(match){const m=movies.find(x=>x.slug_id===decodeURIComponent(match[1])||x.id===decodeURIComponent(match[1]));home.classList.add('hidden');detail.classList.remove('hidden');if(m)showDetail(m);else{$('detail-content').replaceChildren(el('p','text-zinc-400','Movie not found.'));document.title='Movie not found — FilmGo';}}else{home.classList.remove('hidden');detail.classList.add('hidden');document.title='FilmGo — Explore';if(catalogLoaded)render();}window.scrollTo(0,0);}search.addEventListener('input',()=>{page=1;render();});for(const select of [yearFilter,genreFilter,sortFilter])select.addEventListener('change',()=>{page=1;render();});window.addEventListener('popstate',route);$('catalog-back')?.addEventListener('click',e=>{if(location.pathname.startsWith('/title/')){e.preventDefault();history.pushState({},'','/');route();}});skeleton();
 let catalogFingerprint='',catalogLoading=false;
 async function refreshCatalog(){
  if(catalogLoading||document.hidden)return;

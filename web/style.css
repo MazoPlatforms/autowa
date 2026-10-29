@@ -216,3 +216,5 @@ input:not([type=checkbox]),select{border-radius:12px}
 .usage-tile{background:#222226;border-color:#35353b}
 @media(max-width:520px){.catalog-nav-link{min-height:38px;padding:0 10px;font-size:11px}.app-nav{gap:8px!important}.history-card{padding:17px 15px 17px 19px}}
 @media(prefers-reduced-motion:reduce){.primary-button,.secondary-button,.catalog-nav-link,.history-page-button{transition:none}.primary-button:hover:not(:disabled),.secondary-button:hover{transform:none}}
+
+#profile-avatar.avatar-button{flex-basis:36px!important;width:36px!important;height:36px!important;min-width:36px!important;max-width:36px!important;min-height:36px!important;max-height:36px!important}

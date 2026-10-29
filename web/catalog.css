@@ -101,3 +101,26 @@
 @keyframes catalog-view-in{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
 @media(max-width:480px){.filmgo-watch{margin-top:30px;padding-top:24px}.filmgo-player{border-radius:14px}.filmgo-player-actions{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:9px!important}.filmgo-player-actions>.filmgo-download-button{grid-column:1/-1!important}.filmgo-player-actions>*{min-width:0!important;padding:11px 10px;font-size:13px}.filmgo-player-actions svg{width:18px;height:18px}}
 @media(prefers-reduced-motion:reduce){#catalog-detail{animation:none}}
+
+
+/* Compact header, navigation back control and VLC-style built-in player. */
+.catalog-header-leading{display:flex;align-items:center;gap:10px;min-width:0}
+.catalog-back-button{display:none;place-items:center;width:36px;height:36px;flex:0 0 36px;border:1px solid #3f3f46;border-radius:11px;background:#18181b;color:#f4f4f5}
+.catalog-back-button.visible{display:grid}
+#catalog-account-link.catalog-account-avatar{flex-basis:36px!important;width:36px!important;height:36px!important;min-width:36px!important;max-width:36px!important;min-height:36px!important;max-height:36px!important}
+.filmgo-player-shell{position:relative;width:100%;aspect-ratio:16/9;max-height:72vh;overflow:hidden;border:1px solid #303036;border-radius:16px;background:#050506;isolation:isolate}
+.filmgo-player{width:100%;height:100%;max-height:none;aspect-ratio:auto;border:0;border-radius:0;object-fit:contain;background:#050506!important;cursor:pointer}
+.filmgo-controls{position:absolute;inset:auto 0 0;padding:28px 14px 12px;background:linear-gradient(transparent,#050506e8);color:#fff;opacity:1;transition:opacity .18s ease}
+.filmgo-control-row{display:flex;align-items:center;gap:12px;min-height:34px}
+.filmgo-control-button{display:inline-flex;align-items:center;justify-content:center;min-width:38px;height:34px;padding:0 8px;border:0;border-radius:8px;background:transparent;color:#fafafa;font-size:12px;font-weight:700}
+.filmgo-control-button:hover{background:#ffffff18}
+.filmgo-time{min-width:86px;color:#e4e4e7;font-size:12px;font-variant-numeric:tabular-nums}
+.filmgo-progress,.filmgo-volume{height:4px;accent-color:#fafafa;cursor:pointer}
+.filmgo-progress{display:block;width:100%;margin:0 0 9px}
+.filmgo-volume{width:78px}
+.filmgo-quality-label{margin:18px 0 8px;color:#a1a1aa;font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+.filmgo-stream-status{display:none!important}
+@media(max-width:520px){.filmgo-player-shell{border-radius:13px}.filmgo-controls{padding:24px 9px 8px}.filmgo-control-row{gap:6px}.filmgo-time{min-width:74px;font-size:11px}.filmgo-volume{width:56px}.filmgo-control-button{min-width:34px;padding:0 5px;font-size:11px}}
+@media(prefers-reduced-motion:reduce){.filmgo-controls{transition:none}}
+
+.filmgo-play,.filmgo-fullscreen{font-size:19px;line-height:1}.filmgo-volume-icon{color:#e4e4e7;font-size:15px;white-space:nowrap}.filmgo-control-button:focus-visible,.filmgo-progress:focus-visible,.filmgo-volume:focus-visible{outline:2px solid #fafafa;outline-offset:3px}
