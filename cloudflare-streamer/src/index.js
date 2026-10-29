@@ -89,7 +89,7 @@ export default {
     if (!base) return json({ error: 'Streaming gateway is not configured' }, 503);
 
     const [, kind, id] = match;
-    const target = base + '/api/stream/' + id;
+    const target = base + (kind === 'download' ? '/api/download/' : '/api/stream/') + id;
 
     // MODE=redirect: the browser fetches bytes straight from the origin. The Worker
     // only validates the request, so no video bytes pass through Cloudflare at all.
