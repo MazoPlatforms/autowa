@@ -163,6 +163,14 @@ const stylesheet=fs.readFileSync(new URL('../web/style.css',import.meta.url));
 const server=http.createServer(async(req,res)=>{
  try{
   const url=new URL(req.url,'http://localhost');
+  const directDownload=url.pathname.match(/^\/download\/([A-Za-z0-9_-]{1,80})$/);
+  if(req.method==='GET'&&directDownload){
+   const quality=url.searchParams.get('quality')||'';
+   if(quality&&!/^[A-Za-z0-9._+-]{1,40}$/.test(quality))return send(res,400,{error:'Invalid quality'});
+   const returnPath='/download/'+directDownload[1]+(quality?'?quality='+encodeURIComponent(quality):'');
+   if(!await authenticated(req)){res.writeHead(302,{'Location':'/profile?return='+encodeURIComponent(returnPath),'Cache-Control':'no-store'});return res.end();}
+   res.writeHead(302,{'Location':'/api/download/'+directDownload[1]+(quality?'?quality='+encodeURIComponent(quality):''),'Cache-Control':'no-store'});return res.end();
+  }
   if(req.method==='GET'&&/^\/posters\/[a-f0-9]{24}\.jpg$/.test(url.pathname)){
    const upstream=await fetch('https://raw.githubusercontent.com/MazoPlatforms/autowa/main/web'+url.pathname,{signal:AbortSignal.timeout(8000)});
    if(!upstream.ok)return send(res,404,{error:'Poster unavailable'});
@@ -173,6 +181,8 @@ const server=http.createServer(async(req,res)=>{
    if(!configured)return send(res,503,{error:'Service setup incomplete'});
    const session=await authenticated(req);
    if(!session)return send(res,401,{error:'Sign in with WhatsApp first'});
+   let publicBase;
+   try{const origin=new URL(req.headers.origin||'');if(origin.protocol!=='https:'||origin.host!==req.headers.host||origin.username||origin.password)return send(res,403,{error:'Origin rejected'});publicBase=origin.origin;}catch{return send(res,403,{error:'Origin rejected'});}
    if(req.headers['content-type']?.split(';')[0]!=='application/json')return send(res,415,{error:'JSON required'});
    const input=await body(req);
    const slug=String(input.slug_id||'');
@@ -180,7 +190,7 @@ const server=http.createServer(async(req,res)=>{
    const movie=(await getPublicCatalog()).movies.find(m=>m.slug_id===slug);
    if(!movie)return send(res,404,{error:'Movie unavailable'});
    const token=crypto.randomBytes(12).toString('base64url');
-   await redis('SET','filmgo:deeplink:'+token,JSON.stringify({slug_id:slug,account_hash:hmac(session.number),unlimited:unlimitedRequests(session.number)}),'EX',600);
+   await redis('SET','filmgo:deeplink:'+token,JSON.stringify({slug_id:slug,account_hash:hmac(session.number),unlimited:unlimitedRequests(session.number),base_url:publicBase}),'EX',600);
    return send(res,200,{url:'https://t.me/mzn_filmgobot?start=m_'+token});
   }
   if(req.method==='GET'&&url.pathname==='/api/movies'){

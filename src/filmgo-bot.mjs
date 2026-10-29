@@ -10,6 +10,7 @@ const GH_TOKEN=process.env.GITHUB_DISPATCH_TOKEN||'';
 const REPO=process.env.GITHUB_REPOSITORY||'';
 const prefix='filmgo:bot:v1:';
 const MAX_BYTES=2_000_000_000;
+const REFUND_TOKEN_SCRIPT="local raw=redis.call('GET',KEYS[1]); if not raw then return 0 end; local used=tonumber(raw); local cost=tonumber(ARGV[1]); if used<=cost then redis.call('DEL',KEYS[1]); return 0 end; return redis.call('INCRBY',KEYS[1],-cost)";
 const QUALITY=/\b(360|480|720|1080|1440|2160)p\b|\b4k\b/i;
 const DRAFT_KEY=prefix+'draft:';
 const OPTIONAL_FIELDS=[['imdb_id','IMDb ID'],['poster','Poster'],['genre','Genre'],['runtime','Runtime'],['director','Director'],['cast','Cast'],['plot','Plot']];
@@ -99,6 +100,23 @@ export function guessMovie(file,movies){
  const winner=scored[0];
  return {parts:p,best:winner?.score>=0.7&&(!scored[1]||winner.score-scored[1].score>=0.1)?winner.movie:null,confidence:winner?.score||0};
 }
+const captionValue=(value,max)=>String(value||'').replace(/\s+/g,' ').trim().slice(0,max);
+export function telegramMovieCaption(movie,quality){
+ const title=captionValue(movie.title,150),year=Number(movie.year),lines=['🎬 FilmGo','','🎞️ '+title+(Number.isInteger(year)?' ('+year+')':''),'','📺 Quality: '+captionValue(quality,30)];
+ const genre=Array.isArray(movie.genre)?movie.genre.join(', '):movie.genre;
+ for(const [label,value,max] of [['🎭 Genre',genre,120],['⏱ Runtime',movie.runtime,40],['🎬 Director',movie.director,100],['⭐ IMDb',movie.imdb_rating,20],['👥 Cast',Array.isArray(movie.cast)?movie.cast.join(', '):movie.cast,150]]){
+  const text=captionValue(value,max);if(text)lines.push(label+': '+text);
+ }
+ const plot=captionValue(movie.plot,260);if(plot)lines.push('','📝 '+plot);
+ lines.push('','Enjoy the movie!','','> Powered by Itz Maazin • https://mzn.is-a.dev/');
+ return Array.from(lines.join('\n')).slice(0,1024).join('');
+}
+export function telegramMovieButtons(baseUrl,slug,quality){
+ const base=new URL(baseUrl);
+ if(base.protocol!=='https:'||!/^[-A-Za-z0-9_]{1,80}$/.test(String(slug||'')))throw Error('Invalid FilmGo action link');
+ const id=encodeURIComponent(slug),q=encodeURIComponent(String(quality||''));
+ return {inline_keyboard:[[{text:'▶️ Stream on FilmGo',url:new URL('/title/'+id,base).href},{text:'⬇️ Download',url:new URL('/download/'+id+'?quality='+q,base).href}]]};
+}
 async function omdbSearch(title,year){const key=process.env.OMDB_API_KEY;if(!key)return null;const url='https://www.omdbapi.com/?'+new URLSearchParams({apikey:key,t:title,...(year?{y:String(year)}:{})});const r=await fetch(url,{signal:AbortSignal.timeout(10000)});const j=await r.json();return j.Response==='True'?j:null;}
 function movieFields(x){return {title:x.Title,year:Number(String(x.Year).slice(0,4)),imdb_id:x.imdbID,poster:x.Poster?.startsWith('https://')?x.Poster:null,genre:x.Genre,runtime:x.Runtime,director:x.Director,cast:x.Actors,plot:x.Plot};}
 async function draftPrompt(d){const text=['FilmGo movie draft',d.title+' ('+d.year+')', 'Quality: '+d.quality,'File: '+d.file_name,'Metadata: '+(d.imdb_id?'OMDb '+d.imdb_id:'manual / existing'),d.replace?'Existing quality — replacement requires confirmation':d.existing?'New quality for existing movie':'New movie', 'Use /edit to change metadata, /poster to upload a JPEG poster, /cancel to discard.'].join('\n');await say(ADMIN_ID,text,{reply_markup:{inline_keyboard:[[{text:d.replace?'Confirm replacement':'Publish movie',callback_data:'fg:publish'},{text:'Cancel',callback_data:'fg:cancel'}]]}});}
@@ -185,11 +203,17 @@ async function onMessage(message,refresh){
   const size=Number(variant.file_size||movie.file_size||0);
   if(!Number.isSafeInteger(size)||size<=0){await redis('DEL',claimKey);return say(chat,'Movie file size is unavailable. Please try again later.');}
   const cost=Math.max(1,Math.ceil((size/(512*1024*1024)*0.75+1)*1000));
+  const refundTokens=async()=>{if(!grant.unlimited)await redis('EVAL',REFUND_TOKEN_SCRIPT,1,usageKey,cost).catch(()=>{});};
   const script="local used=tonumber(redis.call('GET',KEYS[1]) or '0'); local cost=tonumber(ARGV[1]); if used+cost>50000 then return -1 end; local next=redis.call('INCRBY',KEYS[1],cost); if next==cost then redis.call('EXPIREAT',KEYS[1],ARGV[2]) end; return next";
   const used=grant.unlimited?0:Number(await redis('EVAL',script,1,usageKey,cost,expireAt));
   if(!grant.unlimited&&used<0){await redis('DEL',claimKey);return say(chat,'Daily token limit reached. Your tokens reset at 00:00:00 UTC.');}
-  try{await tg('copyMessage',{chat_id:chat,from_chat_id:CHANNEL_ID,message_id:variant.telegram_message_id});}
-  catch(err){if(!grant.unlimited){const refund="local raw=redis.call('GET',KEYS[1]); if not raw then return 0 end; local used=tonumber(raw); local cost=tonumber(ARGV[1]); if used<=cost then redis.call('DEL',KEYS[1]); return 0 end; return redis.call('INCRBY',KEYS[1],-cost)";await redis('EVAL',refund,1,usageKey,cost).catch(()=>{});}await redis('DEL',claimKey);await say(chat,'Could not deliver this movie right now. You can open the same FilmGo link and retry.');return;}
+  const baseUrl=grant.base_url||process.env.FILMGO_PUBLIC_URL;
+  if(!baseUrl){await refundTokens();await redis('DEL',claimKey);return say(chat,'FilmGo links are temporarily unavailable. Please request a new link later.');}
+  let replyMarkup;
+  try{replyMarkup=telegramMovieButtons(baseUrl,movie.slug_id,chosen);}
+  catch{await refundTokens();await redis('DEL',claimKey);return say(chat,'FilmGo links are temporarily unavailable. Please request a new link later.');}
+  try{await tg('copyMessage',{chat_id:chat,from_chat_id:CHANNEL_ID,message_id:variant.telegram_message_id,caption:telegramMovieCaption(movie,chosen),reply_markup:replyMarkup});}
+  catch(err){await refundTokens();await redis('DEL',claimKey);await say(chat,'Could not deliver this movie right now. You can open the same FilmGo link and retry.');return;}
   await redis('DEL',key);
   void logFilmGo('downloads','Telegram movie requested: '+movie.title+' ('+movie.year+')');
   return;
