@@ -1,7 +1,41 @@
 {
   "schema_version": 2,
-  "updated_at": "2026-10-29T19:32:10.218141+00:00",
+  "updated_at": "2026-10-29T21:04:12.545465+00:00",
   "movies": [
+    {
+      "id": "telegram-50",
+      "slug_id": "yKlpicjluThkTGA3",
+      "title": "Soorarai Pottru",
+      "year": 2020,
+      "qualities": {
+        "720p": {
+          "telegram_message_id": 50,
+          "file_size": 1468283111,
+          "file_name": "[CC].Soorarai.Pottru.2020.Tamil.720p.HDRip.x264.ESubs.mkv",
+          "mime_type": "video/x-matroska"
+        }
+      },
+      "imdb_id": "tt10189514",
+      "poster": "https://m.media-amazon.com/images/M/MV5BZTU5NTNmMjAtODM0Mi00YzU5LTk1OWQtZWU1NzZhMzBjYjY1XkEyXkFqcGc@._V1_QL75_UX380_CR0,35,380,562_.jpg",
+      "genre": [
+        "Drama"
+      ],
+      "runtime": "153 min",
+      "director": "Sudha Kongara",
+      "cast": [
+        "Suriya",
+        "Aparna Balamurali",
+        "Paresh Rawal"
+      ],
+      "plot": "A determined villager challenges the aviation industry's elite by pursuing his vision of affordable air travel for all, despite numerous obstacles and setbacks",
+      "imdb_rating": "8.6",
+      "metadata_status": "matched",
+      "telegram_message_id": 50,
+      "file_size": 1468283111,
+      "file_name": "[CC].Soorarai.Pottru.2020.Tamil.720p.HDRip.x264.ESubs.mkv",
+      "mime_type": "video/x-matroska",
+      "quality": "720p"
+    },
     {
       "id": "telegram-49",
       "slug_id": "-eCaeLYUzno2q4rG",
