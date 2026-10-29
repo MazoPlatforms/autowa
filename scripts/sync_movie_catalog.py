@@ -13,6 +13,41 @@ from telethon import TelegramClient
 from telethon.sessions import StringSession
 
 PATH = pathlib.Path("data/movies.json")
+FALLBACK_POSTER = "https://i.ibb.co/TMJ6YCC4/IMG-33a2f581-8ff4-4a5e-9e64-e43c900000c2.png"
+
+def wikipedia_json(url):
+    request = urllib.request.Request(url, headers={"User-Agent": "FilmGoCatalogSync/1.0 (+https://github.com/MazoPlatforms/autowa)"})
+    with urllib.request.urlopen(request, timeout=15) as response:
+        return json.load(response)
+
+def wikipedia_poster(title, year):
+    """Find a likely Wikipedia film page image; catalog sync falls back if absent."""
+    params = urllib.parse.urlencode({
+        "action": "query", "list": "search", "srsearch": f"{title} {year} film",
+        "srlimit": 10, "format": "json",
+    })
+    try:
+        results = wikipedia_json("https://en.wikipedia.org/w/api.php?" + params).get("query", {}).get("search", [])
+        for candidate in results:
+            page = urllib.parse.quote(str(candidate.get("title", "")).replace(" ", "_"), safe="()")
+            if not page:
+                continue
+            try:
+                summary = wikipedia_json("https://en.wikipedia.org/api/rest_v1/page/summary/" + page)
+            except Exception:
+                continue
+            match = re.search(r"\b(19|20)\d{2}\b", str(summary.get("extract", "")))
+            if match and int(match.group(0)) != int(year):
+                continue
+            image = summary.get("originalimage") or summary.get("thumbnail") or {}
+            source = image.get("source", "") if isinstance(image, dict) else ""
+            if source.startswith("https://"):
+                print("Wikipedia poster found for", title, "(" + str(year) + "):", summary.get("title", candidate.get("title")))
+                return source
+    except Exception as exc:
+        print("Wikipedia poster lookup unavailable for", title, type(exc).__name__)
+    return None
+
 def omdb(title, year):
     key = os.environ.get("OMDB_API_KEY", "")
     if not key:
@@ -141,6 +176,10 @@ async def main():
             caption_items[message.id] = {**item, "slug_id": slug}
         if duplicates:
             print("Duplicate qualities skipped (newest Telegram file wins):", duplicates)
+        for movie in groups.values():
+            poster = str(movie.get("poster") or "")
+            if not (poster.startswith("https://") or re.fullmatch(r"/posters/[a-f0-9]{24}\.jpg", poster)) or poster == FALLBACK_POSTER:
+                movie["poster"] = wikipedia_poster(movie["title"], movie["year"]) or FALLBACK_POSTER
         current = []
         for movie in groups.values():
             variants = sorted(movie["qualities"].items(), key=lambda pair: (pair[0].lower() != "720p", pair[0].lower()))
