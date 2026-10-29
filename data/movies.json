@@ -1,7 +1,42 @@
 {
   "schema_version": 2,
-  "updated_at": "2026-10-29T21:04:12.545465+00:00",
+  "updated_at": "2026-10-29T21:06:02.899037+00:00",
   "movies": [
+    {
+      "id": "telegram-51",
+      "slug_id": "UOivoIk0IUY4qgYV",
+      "title": "Joe",
+      "year": 2023,
+      "qualities": {
+        "720p": {
+          "telegram_message_id": 51,
+          "file_size": 1631313656,
+          "file_name": "Joe (2023) Tamil HQ HDRip - 720p - x264 - (DD+5.1 - 192Kbps .mkv",
+          "mime_type": "video/x-matroska"
+        }
+      },
+      "imdb_id": "tt23475032",
+      "poster": "https://m.media-amazon.com/images/M/MV5BZjYxZjI4N2EtODE3OC00YjE3LTkwYjctMzhlMmU0OGY1ZTA2XkEyXkFqcGc@._V1_QL75_UY562_CR224,0,380,562_.jpg",
+      "genre": [
+        "Drama",
+        "Romance"
+      ],
+      "runtime": "147 min",
+      "director": "Hariharan Ram",
+      "cast": [
+        "Rio Raj",
+        "Malavika Manoj",
+        "Bhavya Trikha"
+      ],
+      "plot": "The emotional journey of a young man navigating the depths of love, heartbreak and hope.",
+      "imdb_rating": "7.4",
+      "metadata_status": "matched",
+      "telegram_message_id": 51,
+      "file_size": 1631313656,
+      "file_name": "Joe (2023) Tamil HQ HDRip - 720p - x264 - (DD+5.1 - 192Kbps .mkv",
+      "mime_type": "video/x-matroska",
+      "quality": "720p"
+    },
     {
       "id": "telegram-50",
       "slug_id": "yKlpicjluThkTGA3",
@@ -1283,32 +1318,6 @@
       "file_name": "Modha Rathri (2026) Tamil HQ HDRip - 720p - x264 - (DD+5.mkv",
       "mime_type": "video/x-matroska",
       "quality": "720p"
-    },
-    {
-      "id": "telegram-51",
-      "slug_id": "UOivoIk0IUY4qgYV",
-      "title": "Joe",
-      "year": 2023,
-      "qualities": {
-        "720p": {
-          "telegram_message_id": 51,
-          "file_name": "Joe (2023) Tamil HQ HDRip - 720p - x264 - (DD+5.1 - 192Kbps .mkv",
-          "file_size": 0,
-          "mime_type": ""
-        }
-      },
-      "telegram_message_id": 51,
-      "quality": "720p",
-      "file_name": "Joe (2023) Tamil HQ HDRip - 720p - x264 - (DD+5.1 - 192Kbps .mkv",
-      "file_size": 0,
-      "mime_type": "",
-      "imdb_id": "tt23475032",
-      "poster": "https://m.media-amazon.com/images/M/MV5BZjYxZjI4N2EtODE3OC00YjE3LTkwYjctMzhlMmU0OGY1ZTA2XkEyXkFqcGc@._V1_QL75_UY562_CR224,0,380,562_.jpg",
-      "genre": "Drama, Romance",
-      "runtime": "147 min",
-      "director": "Hariharan Ram",
-      "cast": "Rio Raj, Malavika Manoj, Bhavya Trikha",
-      "plot": "The emotional journey of a young man navigating the depths of love, heartbreak and hope."
     }
   ]
 }
