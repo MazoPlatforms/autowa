@@ -46,7 +46,7 @@ def download(url, destination):
         if size and int(size) > MAX_BYTES:
             raise ValueError("Remote file exceeds 2 GB")
         disposition = response.headers.get("Content-Disposition", "")
-        match = re.search(r"filename\\*?=(?:UTF-8''|\\\")?([^\\\";]+)", disposition, re.I)
+        match = re.search(r'filename="?([^";]+)', disposition, re.I)
         filename = urllib.parse.unquote(match.group(1)) if match else pathlib.PurePosixPath(urllib.parse.urlsplit(response.url).path).name
         filename = pathlib.PurePosixPath(filename.replace("\\", "/")).name[:180]
         if pathlib.Path(filename).suffix.lower() not in ALLOWED_EXT:
