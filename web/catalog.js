@@ -98,26 +98,43 @@ function render(){
  renderPagination(rows.length);
 }
 function showDetail(m){const root=$('detail-content');root.replaceChildren();const layout=el('div','detail-hero');layout.append(image(m,'detail-poster'));const info=el('div');info.append(el('p','mb-2 text-xs font-semibold uppercase tracking-[.18em] text-zinc-500','MOVIE DETAILS'),el('h1','text-2xl font-extrabold leading-tight tracking-tight sm:text-5xl',m.title),el('p','mt-3 text-sm text-zinc-400',[m.year,m.runtime,m.quality].filter(Boolean).join(' · ')));if(m.imdb_rating)info.append(el('p','mt-3 text-sm font-semibold text-zinc-200','★ IMDb '+m.imdb_rating));if(m.genre?.length)info.append(el('p','mt-3 text-sm text-zinc-400',m.genre.join(' · ')));layout.append(info);root.append(layout);const body=el('div','mt-9 max-w-3xl border-t border-zinc-800 pt-8');body.append(el('h2','text-lg font-bold','Overview'),el('p','mt-3 text-sm leading-7 text-zinc-400',m.plot||'No synopsis available yet.'));if(m.director)body.append(el('p','mt-5 text-sm text-zinc-400','Director: '+m.director));if(m.cast?.length)body.append(el('p','mt-2 text-sm text-zinc-400','Cast: '+m.cast.join(', ')));const a=el('a','mt-8 inline-flex rounded-xl bg-white px-5 py-3 text-sm font-bold text-zinc-950 hover:bg-zinc-200','Request via WhatsApp');a.href='/request';body.append(a);root.append(body);
-const section=el('section','mt-9 max-w-3xl border-t border-zinc-800 pt-8');
-section.append(el('h2','mb-4 text-lg font-bold','Watch movie'));
-const video=el('video','w-full rounded-xl bg-black');
-video.controls=true;video.preload='metadata';video.playsInline=true;
-video.removeAttribute('poster');
+const section=el('section','mt-9 max-w-3xl border-t border-zinc-800 pt-8 filmgo-watch');
+section.append(el('h2','mb-4 text-lg font-bold','Watch & download'));
+const video=el('video','filmgo-player');
+video.controls=true;video.preload='none';video.playsInline=true;
+video.setAttribute('controlsList','nodownload');
+video.poster=poster(m);
 section.append(video);
-video.addEventListener('error',()=>{status.textContent='Playback failed. The video format may be unsupported or the Telegram media stream may have stopped.';});
-video.addEventListener('stalled',()=>{status.textContent='Video stalled while loading. Check the Telegram streaming connection.';});
-const status=el('p','mt-3 text-xs text-zinc-500','Checking playback availability…');
-section.append(status);
+const status=el('p','filmgo-stream-status','Checking streaming availability…');
+status.setAttribute('role','status');
+const actions=el('div','filmgo-player-actions');
+const download=el('a','filmgo-download-button','↓ Download movie');
+download.setAttribute('download','');
+download.setAttribute('aria-label','Download '+m.title);
+const external=el('a','filmgo-open-button','Open in player ↗');
+external.target='_blank';external.rel='noopener noreferrer';
+actions.append(download,external);
+section.append(actions,status);
 root.append(section);
-fetch('/api/stream-availability/'+encodeURIComponent(m.slug_id||''),{cache:'no-store'}).then(r=>r.ok?r.json():null).then(data=>{
- if(!root.isConnected||location.pathname!=='/title/'+encodeURIComponent(m.slug_id))return;
- if(data?.available){
-  video.src='/api/stream/'+encodeURIComponent(m.slug_id);
-  status.textContent=data.format==='mkv'?'This is an MKV file. Many mobile browsers cannot decode MKV video. Use a compatible external player or provide an MP4 (H.264/AAC) source.':data.format==='unknown'?'Video format is unknown. Playback depends on the file container and codecs.':'Press play to stream. Playback requires browser-compatible video codecs.';
-  const open=el('a','mt-4 inline-flex rounded-xl border border-zinc-700 px-5 py-3 text-sm font-semibold text-zinc-100','Open video');
-  open.href=video.src;open.target='_blank';open.rel='noopener';section.append(open);
- }else{status.textContent='Streaming is not available for this title.';}
-}).catch(()=>{status.textContent='Streaming availability could not be checked.';});
+const slug=encodeURIComponent(m.slug_id||'');
+const streamBase='https://filmgo-streamer.mazo.workers.dev';
+const streamUrl=streamBase+'/stream/'+slug;
+const downloadUrl=streamBase+'/download/'+slug;
+const isActive=()=>root.isConnected&&location.pathname==='/title/'+slug;
+const setStatus=value=>{if(isActive())status.textContent=value;};
+video.addEventListener('error',()=>setStatus('Playback failed. The file may use a format or codec unsupported by this browser. You can download it and open it with VLC or another compatible player.'));
+video.addEventListener('stalled',()=>setStatus('Buffering video… Please wait or check your connection.'));
+video.addEventListener('playing',()=>setStatus('Streaming video.'));
+video.addEventListener('waiting',()=>setStatus('Buffering…'));
+video.addEventListener('loadedmetadata',()=>setStatus('Ready to play.'));
+fetch('/api/stream-availability/'+slug,{cache:'no-store'}).then(r=>r.ok?r.json():null).then(data=>{
+ if(!isActive())return;
+ if(!data?.available){setStatus('Streaming is currently unavailable for this title.');actions.classList.add('hidden');return;}
+ video.src=streamUrl;
+ download.href=downloadUrl;
+ external.href=streamUrl;
+ setStatus(data.format==='mkv'?'MKV playback is not supported by many browsers. If playback fails, download the original movie and use VLC or another compatible player.':'Press play to watch online, or download the original movie file.');
+}).catch(()=>{if(isActive()){download.href=downloadUrl;external.href=streamUrl;video.src=streamUrl;setStatus('Could not check availability. Try playing or downloading the movie.');}});
 document.title=m.title+' — FilmGo';}function route(){const match=location.pathname.match(/^\/title\/([^/]+)\/?$/);if(match){const m=movies.find(x=>x.slug_id===decodeURIComponent(match[1])||x.id===decodeURIComponent(match[1]));home.classList.add('hidden');detail.classList.remove('hidden');if(m)showDetail(m);else{$('detail-content').replaceChildren(el('p','text-zinc-400','Movie not found.'));document.title='Movie not found — FilmGo';}}else{home.classList.remove('hidden');detail.classList.add('hidden');document.title='FilmGo — Explore';if(catalogLoaded)render();}window.scrollTo(0,0);}search.addEventListener('input',()=>{page=1;render();});for(const select of [yearFilter,genreFilter,sortFilter])select.addEventListener('change',()=>{page=1;render();});window.addEventListener('popstate',route);$('detail-back').addEventListener('click',e=>{e.preventDefault();history.pushState({},'','/');route();});skeleton();
 let catalogFingerprint='',catalogLoading=false;
 async function refreshCatalog(){
