@@ -40,3 +40,15 @@
 .catalog-filter .filter-chevron{flex:0 0 18px;width:18px;height:18px;align-self:center;display:grid;place-items:center;margin:0}
 .catalog-filter .filter-chevron svg{width:16px;height:16px;vertical-align:middle}
 @media(max-width:640px){.catalog-filter .filter-trigger{padding:0 10px;gap:6px}.catalog-filter .filter-chevron{flex-basis:16px;width:16px;height:16px}}
+
+/* Movie playback and download */
+.filmgo-watch{width:100%}
+.filmgo-player{display:block;width:100%;aspect-ratio:16/9;max-height:70vh;background:#000;border:1px solid #27272a;border-radius:16px;object-fit:contain}
+.filmgo-player-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:16px}
+.filmgo-download-button,.filmgo-open-button{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:12px 18px;border-radius:12px;font-size:13px;font-weight:700;transition:background .2s,border-color .2s}
+.filmgo-download-button{background:#f4f4f5;color:#09090b}
+.filmgo-download-button:hover{background:#d4d4d8}
+.filmgo-open-button{border:1px solid #3f3f46;color:#f4f4f5;background:#18181b}
+.filmgo-open-button:hover{background:#27272a;border-color:#71717a}
+.filmgo-stream-status{margin-top:12px;color:#a1a1aa;font-size:12px;line-height:1.7}
+@media(max-width:480px){.filmgo-player{border-radius:12px}.filmgo-player-actions{flex-direction:column}.filmgo-download-button,.filmgo-open-button{width:100%}}
