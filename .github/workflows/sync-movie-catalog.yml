@@ -1,5 +1,7 @@
 name: Sync movie metadata catalog
 on:
+  repository_dispatch:
+    types: [filmgo-catalog-sync]
   workflow_dispatch:
   schedule:
     - cron: '17 */6 * * *'
