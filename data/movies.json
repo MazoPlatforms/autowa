@@ -1,7 +1,43 @@
 {
   "schema_version": 2,
-  "updated_at": "2026-10-29T22:50:50.097997+00:00",
+  "updated_at": "2026-10-29T23:49:16.558210+00:00",
   "movies": [
+    {
+      "id": "telegram-54",
+      "slug_id": "XUyARtTtFagutk-M",
+      "title": "K.G.F: Chapter 2",
+      "year": 2022,
+      "qualities": {
+        "720p": {
+          "telegram_message_id": 54,
+          "file_size": 1581667098,
+          "file_name": "[MM] KGF 2 (2022) Tamil HDRip - 720p- -ESub.mkv",
+          "mime_type": "video/x-matroska"
+        }
+      },
+      "imdb_id": "tt10698680",
+      "poster": "https://m.media-amazon.com/images/M/MV5BZmQzZjVkZTUtYjI4ZC00ZDJmLWI0ZDUtZTFmMGM1Mzc5ZjIyXkEyXkFqcGc@._V1_.jpg",
+      "genre": [
+        "Action",
+        "Crime",
+        "Drama"
+      ],
+      "runtime": "166 min",
+      "director": "Prashanth Neel",
+      "cast": [
+        "Yash",
+        "Sanjay Dutt",
+        "Raveena Tandon"
+      ],
+      "plot": "In the blood-soaked Kolar Gold Fields, Rocky's name strikes fear into his foes, while the government sees him as a threat to law and order. Rocky must battle threats from all sides for unchallenged supremacy.",
+      "imdb_rating": "8.2",
+      "metadata_status": "matched",
+      "telegram_message_id": 54,
+      "file_size": 1581667098,
+      "file_name": "[MM] KGF 2 (2022) Tamil HDRip - 720p- -ESub.mkv",
+      "mime_type": "video/x-matroska",
+      "quality": "720p"
+    },
     {
       "id": "telegram-53",
       "slug_id": "1VzWjtKKCL5VYEO0",
@@ -1390,32 +1426,6 @@
       "file_name": "Modha Rathri (2026) Tamil HQ HDRip - 720p - x264 - (DD+5.mkv",
       "mime_type": "video/x-matroska",
       "quality": "720p"
-    },
-    {
-      "id": "telegram-54",
-      "slug_id": "XUyARtTtFagutk-M",
-      "title": "K.G.F: Chapter 2",
-      "year": 2022,
-      "qualities": {
-        "720p": {
-          "telegram_message_id": 54,
-          "file_name": "[MM] KGF 2 (2022) Tamil HDRip - 720p- -ESub.mkv",
-          "file_size": 0,
-          "mime_type": ""
-        }
-      },
-      "telegram_message_id": 54,
-      "quality": "720p",
-      "file_name": "[MM] KGF 2 (2022) Tamil HDRip - 720p- -ESub.mkv",
-      "file_size": 0,
-      "mime_type": "",
-      "imdb_id": "tt10698680",
-      "poster": "https://m.media-amazon.com/images/M/MV5BZmQzZjVkZTUtYjI4ZC00ZDJmLWI0ZDUtZTFmMGM1Mzc5ZjIyXkEyXkFqcGc@._V1_QL75_UY562_CR9,0,380,562_.jpg",
-      "genre": "Action, Crime, Drama",
-      "runtime": "166 min",
-      "director": "Prashanth Neel",
-      "cast": "Yash, Sanjay Dutt, Raveena Tandon",
-      "plot": "In the blood-soaked Kolar Gold Fields, Rocky's name strikes fear into his foes, while the government sees him as a threat to law and order. Rocky must battle threats from all sides for unchallenged supremacy."
     }
   ]
 }
