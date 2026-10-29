@@ -31,3 +31,12 @@
 .filter-chevron{display:inline-flex;align-items:center;justify-content:center;flex:0 0 16px;width:16px;height:16px;line-height:1}.filter-chevron svg{display:block;width:16px;height:16px}.catalog-account-avatar{display:grid;place-items:center;width:40px;height:40px;min-width:40px;border-radius:50%;padding:0;background:#27272a;color:#f4f4f5;font-weight:800}
 
 .catalog-account-avatar{position:relative;overflow:hidden}.catalog-avatar-image{position:absolute;inset:0;width:100%;height:100%;border-radius:50%;object-fit:cover}
+
+/* Avatar is strictly contained in the header; never render full-size image overlays. */
+#catalog-account-link.catalog-account-avatar{position:relative!important;display:grid!important;place-items:center!important;flex:0 0 40px!important;width:40px!important;height:40px!important;min-width:40px!important;max-width:40px!important;min-height:40px!important;max-height:40px!important;overflow:hidden!important;padding:0!important;border-radius:50%!important;isolation:isolate}
+#catalog-account-link .catalog-avatar-image{position:absolute!important;inset:0!important;display:block!important;width:100%!important;height:100%!important;min-width:0!important;max-width:100%!important;min-height:0!important;max-height:100%!important;object-fit:cover!important;border-radius:50%!important;z-index:1}
+.catalog-filter .filter-trigger{min-width:0;align-items:center}
+.catalog-filter .filter-trigger-label{flex:1;min-width:0}
+.catalog-filter .filter-chevron{flex:0 0 18px;width:18px;height:18px;align-self:center;display:grid;place-items:center;margin:0}
+.catalog-filter .filter-chevron svg{width:16px;height:16px;vertical-align:middle}
+@media(max-width:640px){.catalog-filter .filter-trigger{padding:0 10px;gap:6px}.catalog-filter .filter-chevron{flex-basis:16px;width:16px;height:16px}}
