@@ -140,7 +140,7 @@ section.append(video);
 const status=el('p','filmgo-stream-status','Checking streaming availability…');
 status.setAttribute('role','status');
 const actions=el('div','filmgo-player-actions');
-const download=el('a','filmgo-download-button','Download movie');
+const download=el('a','filmgo-download-button','Download');
 download.setAttribute('download','');
 download.setAttribute('aria-label','Download '+m.title);
 const whatsapp=el('button','filmgo-open-button','WhatsApp');
@@ -178,7 +178,7 @@ const setQuality=q=>{
 
  const file=m.qualities?.[q]||m;
  const format=String(file.file_name||'').split('.').pop().toLowerCase();
- setStatus(format==='mkv'?'MKV may not play in this browser. Download and open with VLC if needed.':'Selected '+q+'. Press play to stream.');
+ setStatus(format==='mkv'?'MKV may not play in this browser. Download and open with VLC if needed.':'Press play to watch.');
  if(position>0)video.addEventListener('loadedmetadata',()=>{if(Number.isFinite(video.duration)&&position<video.duration)video.currentTime=position;if(wasPlaying)video.play().catch(()=>{});},{once:true});
 };
 for(const q of qualities){
