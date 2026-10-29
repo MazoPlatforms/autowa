@@ -1,6 +1,3 @@
-Warning: truncated output (original token count: 6997)
-Total output lines: 339
-
 import crypto from 'node:crypto';
 import {logFilmGo} from './filmgo-logs.mjs';
 
@@ -135,7 +132,58 @@ async function saveMovieMetadata(id,d){
  }
  throw Error('Catalog update conflict');
 }
-async function publishDraft(d){const lock=prefix+'publishing:'+ADMIN_ID;if(await redis('SET',lock,'1','NX','EX',90)!=='OK')return say(ADMIN_ID,'Publishing is already running.');try{const caption=['Movie: '+d.title,'Year: '+d.year,'Quality: '+d.quality,...(d.slug_id?['Slug ID: '+d.slug_id]:[])].join('\n');const sent=await tg('copyMes…997 tokens truncated… size is unavailable. Please try again later.');}
+async function publishDraft(d){const lock=prefix+'publishing:'+ADMIN_ID;if(await redis('SET',lock,'1','NX','EX',90)!=='OK')return say(ADMIN_ID,'Publishing is already running.');try{const caption=['Movie: '+d.title,'Year: '+d.year,'Quality: '+d.quality,...(d.slug_id?['Slug ID: '+d.slug_id]:[])].join('\n');const sent=await tg('copyMessage',{chat_id:CHANNEL_ID,from_chat_id:ADMIN_ID,message_id:d.message_id,caption},30000);await saveMovieMetadata(sent.message_id,d);await redis('DEL',DRAFT_KEY+ADMIN_ID);void logFilmGo('movies','🎬 Published: '+d.title+' ('+d.year+') · '+d.quality+' · channel #'+sent.message_id);await dispatch('filmgo-catalog-sync',{message_id:sent.message_id});}finally{await redis('DEL',lock);}}
+
+let running=false;
+async function redis(...args){
+ const r=await fetch(REDIS_URL,{method:'POST',headers:{Authorization:'Bearer '+REDIS_TOKEN,'Content-Type':'application/json'},body:JSON.stringify(args),signal:AbortSignal.timeout(12000)});
+ if(!r.ok)throw Error('Bot Redis unavailable');
+ const j=await r.json();if(j.error)throw Error('Bot Redis error');return j.result;
+}
+async function tg(method,data={},timeout=20000){
+ const r=await fetch('https://api.telegram.org/bot'+TOKEN+'/'+method,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data),signal:AbortSignal.timeout(timeout)});
+ const j=await r.json();if(!j.ok)throw Error('Telegram '+method+': '+String(j.description).slice(0,160));return j.result;
+}
+async function say(chat_id,text,extra={}){return tg('sendMessage',{chat_id,text,disable_web_page_preview:true,...extra});}
+async function dispatch(type,payload){
+ if(!/^[\w.-]+\/[\w.-]+$/.test(REPO))throw Error('GitHub repository missing');
+ const [owner,name]=REPO.split('/');
+ const r=await fetch('https://api.github.com/repos/'+owner+'/'+name+'/dispatches',{method:'POST',headers:{Authorization:'Bearer '+GH_TOKEN,Accept:'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28','Content-Type':'application/json'},body:JSON.stringify({event_type:type,client_payload:payload}),signal:AbortSignal.timeout(15000)});
+ if(!r.ok)throw Error('GitHub dispatch rejected ('+r.status+')');
+}
+function source(url){
+ try{const u=new URL(url);if(u.protocol!=='https:'||u.username||u.password||u.port||u.hostname==='localhost')return null;
+ const drive=/^(drive|docs)\.google\.com$/.test(u.hostname);
+ if(!drive&&!/^https?:$/.test(u.protocol))return null;
+ return {url:u.href,drive};
+ }catch{return null;}
+}
+async function probe(input){
+ const u=source(input);if(!u)return {error:'Only HTTPS direct links and Google Drive links are accepted.'};
+ if(u.drive)return {size:null,drive:true,url:u.url};
+ // Never fetch arbitrary URLs from the Koyeb service. GitHub runner performs the download.
+ return {size:null,drive:false,url:u.url};
+}
+async function onMessage(message,refresh){
+ const from=String(message.from?.id||''),chat=message.chat?.id;
+ const deep=String(message.text||'').trim().match(/^\/start(?:@\w+)?\s+m_([A-Za-z0-9_-]{16})$/);
+ if(deep&&message.chat?.type==='private'){
+  const key='filmgo:deeplink:'+deep[1];
+  const raw=await redis('GET',key);let grant;
+  try{grant=raw?JSON.parse(raw):null;}catch{}
+  if(!grant||!/^[-a-f0-9]{64}$/.test(grant.account_hash||''))return say(chat,'This movie link has expired. Please sign in on FilmGo and request a new link.');
+  const movie=(await catalog()).find(m=>m.slug_id===grant.slug_id);
+  if(!movie)return say(chat,'Movie is no longer available.');
+  const qualities=Object.keys(movie.qualities||{[movie.quality]:movie});
+  const chosen=qualities.find(q=>q.toLowerCase()==='720p')||qualities[0];
+  const variant=movie.qualities?.[chosen]||movie;
+  if(!Number.isSafeInteger(variant.telegram_message_id))return say(chat,'Movie is unavailable.');
+  const claimKey='filmgo:deeplink-claim:'+deep[1];
+  if(await redis('SET',claimKey,'1','NX','EX',600)!=='OK')return say(chat,'This movie link is already being processed.');
+  const now=new Date(),day=now.toISOString().slice(0,10),resetAt=Date.UTC(now.getUTCFullYear(),now.getUTCMonth(),now.getUTCDate()+1),expireAt=Math.ceil(resetAt/1000);
+  const usageKey='filmgo:daily-tokens:v1:'+grant.account_hash+':'+day;
+  const size=Number(variant.file_size||movie.file_size||0);
+  if(!Number.isSafeInteger(size)||size<=0){await redis('DEL',claimKey);return say(chat,'Movie file size is unavailable. Please try again later.');}
   const cost=Math.max(1,Math.ceil((size/(512*1024*1024)*0.75+1)*1000));
   const script="local used=tonumber(redis.call('GET',KEYS[1]) or '0'); local cost=tonumber(ARGV[1]); if used+cost>50000 then return -1 end; local next=redis.call('INCRBY',KEYS[1],cost); if next==cost then redis.call('EXPIREAT',KEYS[1],ARGV[2]) end; return next";
   const used=grant.unlimited?0:Number(await redis('EVAL',script,1,usageKey,cost,expireAt));
