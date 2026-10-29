@@ -133,9 +133,9 @@ function showDetail(m){const root=$('detail-content');root.replaceChildren();con
 const section=el('section','mt-9 max-w-3xl border-t border-zinc-800 pt-8 filmgo-watch');
 section.append(el('h2','mb-4 text-lg font-bold','Watch & download'));
 const video=el('video','filmgo-player');
-video.controls=true;video.preload='none';video.playsInline=true;video.setAttribute('playsinline','');video.style.backgroundColor='#09090b';
+video.controls=true;video.preload='metadata';video.playsInline=true;video.setAttribute('playsinline','');video.style.backgroundColor='#09090b';
 video.setAttribute('controlsList','nodownload');
-video.removeAttribute('poster');
+video.removeAttribute('poster');video.setAttribute('aria-label','FilmGo built-in movie player');
 section.append(video);
 const status=el('p','filmgo-stream-status','Checking streaming availability…');
 status.setAttribute('role','status');
@@ -189,6 +189,8 @@ for(const q of qualities){
 }
 video.addEventListener('error',()=>{const file=m.qualities?.[selected]||m;const ext=String(file.file_name||'').toLowerCase();setStatus(/\\.mkv(?:$|\\?)/.test(ext)?'This MKV video cannot play directly in this browser. Browser-compatible streaming requires server-side conversion. Download to watch in a compatible player.':'Playback failed. Please retry or download the movie.');});
 video.addEventListener('stalled',()=>setStatus('Buffering video…'));
+video.addEventListener('loadedmetadata',()=>setStatus('Ready to play.'));
+video.addEventListener('canplay',()=>setStatus('Ready to play.'));
 video.addEventListener('playing',()=>setStatus('Now playing.'));
 video.addEventListener('waiting',()=>setStatus('Buffering…'));
 fetch('/api/stream-availability/'+slug,{cache:'no-store'}).then(r=>r.ok?r.json():null).then(data=>{
