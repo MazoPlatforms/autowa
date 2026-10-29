@@ -6,7 +6,7 @@ import {promisify} from 'node:util';
 const execFileAsync=promisify(execFile);
 import {startWhatsApp,isWhatsAppReady,sendWhatsAppOtp,getWhatsAppProfilePicture} from './whatsapp-otp.mjs';
 import {startFilmGoBot} from './filmgo-bot.mjs';
-import {startStreamWorker,proxyRange,streamWorkerState} from './stream-worker.mjs';
+import {startStreamWorker,proxyRange,downloadFile,streamWorkerState} from './stream-worker.mjs';
 
 const PORT=Number(process.env.PORT||8000);
 const required=['APP_SECRET','UPSTASH_REDIS_REST_URL','UPSTASH_REDIS_REST_TOKEN','GITHUB_DISPATCH_TOKEN','GITHUB_REPOSITORY'];
@@ -182,6 +182,23 @@ const server=http.createServer(async(req,res)=>{
    const ext=String(movie?.file_name||'').toLowerCase();
    const format=ext.endsWith('.mkv')?'mkv':ext.endsWith('.webm')?'webm':ext.endsWith('.mp4')?'mp4':'unknown';
    return send(res,200,{available:telegramReady&&!!movie,format});
+  }
+  if((req.method==='GET'||req.method==='HEAD')&&url.pathname.startsWith('/api/download/')){
+   const slug=url.pathname.slice('/api/download/'.length);
+   const catalog=await getPublicCatalog();
+   const movie=(catalog.movies||[]).find(m=>m.slug_id===slug);
+   if(!movie||!Number.isSafeInteger(movie.telegram_message_id)||!Number.isSafeInteger(movie.file_size)||movie.file_size<=0)return send(res,404,{error:'Movie unavailable'});
+   if(!telegramReady)return send(res,503,{error:'Telegram unavailable'});
+   if(streamWorkerState().state!=='ready')return send(res,503,{error:'Download gateway warming up; retry shortly'});
+   const original=String(movie.file_name||'').trim();
+   const ext=/\\.(mkv|mp4|webm|mov|avi|m4v)$/i.exec(original)?.[0]||'.mp4';
+   const filename=(original||[movie.title,movie.year,movie.quality].filter(Boolean).join(' ')+ext).replace(/[\\r\\n"\\\\/]/g,'_').slice(0,180);
+   const ascii=filename.replace(/[^\\x20-\\x7e]/g,'_');
+   const headers={'Content-Type':'application/octet-stream','Content-Length':String(movie.file_size),'Content-Disposition':'attachment; filename="'+ascii+'"; filename*=UTF-8\\'\\''+encodeURIComponent(filename),'Cache-Control':'private, no-store','X-Content-Type-Options':'nosniff'};
+   res.writeHead(200,headers);
+   if(req.method==='HEAD')return res.end();
+   await downloadFile(res,{messageId:movie.telegram_message_id,total:movie.file_size});
+   return;
   }
   if((req.method==='GET'||req.method==='HEAD')&&url.pathname.startsWith('/api/stream/')){
    const publicId=url.pathname.slice('/api/stream/'.length);
