@@ -1,6 +1,6 @@
 const $=id=>document.getElementById(id);let number='',token='',signedIn=false,authVersion=0;const loginHintKey='tfw_login_hint_v1';const storedLogin=()=>{try{return localStorage.getItem(loginHintKey)==='1';}catch{return false;}};const saveLoginHint=value=>{try{if(value)localStorage.setItem(loginHintKey,'1');else localStorage.removeItem(loginHintKey);}catch{}};const msg=t=>{$('message').textContent=t;};async function api(route,payload){const r=await fetch('/api/'+route,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});const d=await r.json();if(!r.ok)throw Error(d.error||'Request failed');return d;}function phoneNumber(){let raw=$('phone').value.replace(/[^0-9+]/g,'');if(raw.startsWith('+'))return raw;if(raw.startsWith('00'))return '+'+raw.slice(2);raw=raw.replace(/^0+/,'');const dial=$('country').value;return '+'+(raw.startsWith(dial)?raw:dial+raw);}fetch('/countries.json').then(r=>r.json()).then(d=>{const sel=$('country');sel.replaceChildren();for(const c of d.countries){const o=document.createElement('option');o.value=c.dial;o.textContent=c.name+' (+'+c.dial+')';if(c.iso==='LK')o.selected=true;sel.append(o);}}).catch(()=>msg('Country list unavailable; Sri Lanka is the default.'));
 $('start').addEventListener('submit',async e=>{e.preventDefault();const btn=e.target.querySelector('button');btn.disabled=true;try{number=phoneNumber();const version=authVersion;await api('otp/start',{number});if(version!==authVersion)return;$('start').classList.add('hidden');$('verify').classList.remove('hidden');msg('Verification code sent to '+number);}catch(err){msg(err.message)}finally{btn.disabled=false;}});
-$('verify').addEventListener('submit',async e=>{e.preventDefault();const btn=e.target.querySelector('button');btn.disabled=true;try{const d=await api('otp/verify',{number,code:$('code').value});authVersion++;try{const selected=$('country').selectedOptions[0]?.textContent||'';const iso=selected.startsWith('India ')?'IN':selected.startsWith('United States ')?'US':selected.startsWith('Sri Lanka ')?'LK':'OTHER';localStorage.setItem('filmgo_pricing_country',iso);}catch{}await showAccount();saveLoginHint(true);msg('Signed in successfully.');}catch(err){msg(err.message)}finally{btn.disabled=false;}});
+$('verify').addEventListener('submit',async e=>{e.preventDefault();const btn=e.target.querySelector('button');btn.disabled=true;try{const d=await api('otp/verify',{number,code:$('code').value});authVersion++;await showAccount();saveLoginHint(true);msg('Signed in successfully.');}catch(err){msg(err.message)}finally{btn.disabled=false;}});
 $('request').addEventListener('submit',async e=>{e.preventDefault();const btn=e.target.querySelector('button');if(btn.disabled)return;btn.disabled=true;btn.querySelector('.submit-label')?.classList.add('hidden');btn.querySelector('.submit-spinner')?.classList.remove('hidden');try{const d=await api('request',{movie_id:Number($('movie-id').value),rights_confirmed:$('rights').checked});await refreshAccount();msg('Request '+d.request_id+' submitted for review. This does not guarantee delivery.');}catch(err){msg(err.message)}finally{btn.disabled=false;btn.querySelector('.submit-label')?.classList.remove('hidden');btn.querySelector('.submit-spinner')?.classList.add('hidden');}});
 
 let movieResults=[];
@@ -85,6 +85,7 @@ async function refreshAccount(){
  const response=await fetch('/api/me',{cache:'no-store'});
  if(!response.ok)throw Error('Session expired');
  const user=await response.json();
+ applyPricingCountry(user.number);
  $('account-number').textContent='WhatsApp: '+user.number;
  $('profile-name').value=user.name||'';
  $('profile-display-name').textContent=user.name||'FilmGo member';
@@ -107,23 +108,31 @@ function routeView(){
  $('profile-back').classList.toggle('hidden',!signedIn||!['/profile','/history','/plans','/request'].includes(location.pathname));
  $('auth-intro').classList.toggle('hidden',signedIn);
 }
+let pricingCountry='OTHER';
 const planPrices={
  LK:{currency:'LKR',plus:890,premium:1790,label:'Sri Lanka'},
  IN:{currency:'INR',plus:249,premium:499,label:'India'},
- US:{currency:'USD',plus:2.99,premium:5.99,label:'United States'},
  OTHER:{currency:'USD',plus:2.99,premium:5.99,label:'Other countries'}
 };
-const plansCountry=$('plans-country');
+function regionForNumber(value){
+ const digits=String(value||'').replace(/[^0-9+]/g,'');
+ if(/^\\+94\\d{9}$/.test(digits))return 'LK';
+ if(/^\\+91\\d{10}$/.test(digits))return 'IN';
+ return 'OTHER';
+}
+function applyPricingCountry(value){
+ pricingCountry=regionForNumber(value);
+ $('pricing-region').textContent='Pricing region: '+planPrices[pricingCountry].label;
+ updatePlanPrices();
+}
 function planQuote(tier){
- const region=planPrices[plansCountry.value]||planPrices.OTHER;
+ const region=planPrices[pricingCountry];
  return {region,price:region[tier],formatted:new Intl.NumberFormat('en',{style:'currency',currency:region.currency,maximumFractionDigits:region.currency==='USD'?2:0}).format(region[tier])};
 }
 function updatePlanPrices(){
  $('price-free').textContent='Free';
  for(const tier of ['plus','premium'])$('price-'+tier).textContent=planQuote(tier).formatted+' / month';
 }
-plansCountry.addEventListener('change',()=>{try{localStorage.setItem('filmgo_pricing_country',plansCountry.value);}catch{}updatePlanPrices();});
-try{const saved=localStorage.getItem('filmgo_pricing_country');if(saved&&planPrices[saved])plansCountry.value=saved;}catch{}
 updatePlanPrices();
 $('continue-free').addEventListener('click',async()=>{
  const button=$('continue-free');button.disabled=true;
