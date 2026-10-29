@@ -89,7 +89,9 @@ export default {
     if (!base) return json({ error: 'Streaming gateway is not configured' }, 503);
 
     const [, kind, id] = match;
-    const target = base + (kind === 'download' ? '/api/download/' : '/api/stream/') + id;
+    const quality = url.searchParams.get('quality');
+    if (quality && !/^(?:360|480|720|1080|1440|2160)p$/i.test(quality)) return json({ error: 'Invalid quality' }, 400);
+    const target = base + (kind === 'download' ? '/api/download/' : '/api/stream/') + id + (quality ? '?quality=' + encodeURIComponent(quality) : '');
 
     // MODE=redirect: the browser fetches bytes straight from the origin. The Worker
     // only validates the request, so no video bytes pass through Cloudflare at all.
