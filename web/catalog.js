@@ -111,7 +111,7 @@ function render(){
    case 'title-asc':return String(a.title).localeCompare(String(b.title));
    case 'title-desc':return String(b.title).localeCompare(String(a.title));
    case 'rating-desc':return rating(b)-rating(a)||String(a.title).localeCompare(String(b.title));
-   default:return 0;
+   default:{const latestId=movie=>Math.max(Number(movie.telegram_message_id)||0,...Object.values(movie.qualities||{}).map(file=>Number(file.telegram_message_id)||0));return latestId(b)-latestId(a)||String(a.title).localeCompare(String(b.title));}
   }
  });
  page=Math.max(1,Math.min(page,Math.ceil(rows.length/PAGE_SIZE)||1));
@@ -235,7 +235,7 @@ async function refreshCatalog(){
  if(catalogLoading||document.hidden)return;
  catalogLoading=true;
  try{
-  const response=await fetch('/movies.json',{cache:'default'});
+  const response=await fetch('/movies.json?_='+Date.now(),{cache:'no-store'});
   if(!response.ok)throw Error('Catalog unavailable');
   const data=await response.json();
   if(!Array.isArray(data.movies))throw Error('Invalid catalog');
@@ -250,7 +250,7 @@ async function refreshCatalog(){
  }finally{catalogLoading=false;}
 }
 route();void refreshCatalog();
-setInterval(()=>{void refreshCatalog();},60000);
+setInterval(()=>{void refreshCatalog();},15000);
 document.addEventListener('visibilitychange',()=>{if(!document.hidden)void refreshCatalog();});
 // Resolve the existing server session before showing the account control.
 // No localStorage login hint is trusted as authentication.
