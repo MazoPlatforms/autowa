@@ -63,7 +63,7 @@ def media_item(message, enrich=False):
     # rather than publishing fabricated metadata.
     filename = str(getattr(message.file, 'name', '') or '')
     if not fields.get('movie') and filename:
-        fields['movie'] = clean_title(filename)
+        fields['movie'] = re.sub(r'\\s*[\\[(]?(?:19\\d{2}|20\\d{2})[\\])]?', ' ', clean_title(filename)).strip()[:140]
     if not fields.get('year'):
         match = re.search(r'(?<!\d)(19\d{2}|20\d{2})(?!\d)', filename)
         if match: fields['year'] = match.group(1)
