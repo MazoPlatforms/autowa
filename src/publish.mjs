@@ -198,7 +198,7 @@ try{
      });
      if(!result?.key?.id)throw Error('No message ID');
      console.log('Submitted',j.id,groupId,result.key.id);ok=true;sentCount++;await progress.update('📤 Submitted to '+sentCount+'/'+targets.length+' destinations…',true);break;
-    }catch(e){console.error('Send failed',j.id,groupId,attempt,e.message);if(attempt<5){if(connectionClosed){console.warn('Reconnecting before retry');}else await sleep(Math.min(30000,5000*attempt));}}
+    }catch(e){console.error('Send failed',j.id,groupId,attempt,e.message);if(/connection closed|socket.*closed|connection lost|not connected/i.test(String(e.message)))connectionClosed=true;if(attempt<5){if(connectionClosed){console.warn('Reconnecting before retry');}else await sleep(Math.min(30000,5000*attempt));}}
    }
    if(!ok){failures++;movieFailures++;}
    await sleep(3000);
