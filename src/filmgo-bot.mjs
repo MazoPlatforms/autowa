@@ -268,6 +268,9 @@ async function onMessage(message,refresh){
   const resolved=existing?null:await resolveOmdbMovie(title,year).catch(()=>null);
   const omdb=resolved?.movie;
   const omdbConfidence=omdb&&Number(String(omdb.Year).slice(0,4))===year?resolved.confidence:0;
+  if(resolved?.source==='imdb-suggestion'&&omdb&&omdbConfidence>=0.5&&omdbConfidence<0.6){
+   return askOmdbConfirmation(d,omdb);
+  }
   Object.assign(d,omdbConfidence>=0.6?movieFields(omdb):{});
   if(omdbConfidence>=0.6){
    d.title=omdb.Title;d.year=Number(String(omdb.Year).slice(0,4));
