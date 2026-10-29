@@ -134,117 +134,95 @@ function render(){
 function showDetail(m){const root=$('detail-content');root.replaceChildren();const layout=el('div','detail-hero');layout.append(image(m,'detail-poster',true,true));const info=el('div');info.append(el('p','mb-2 text-xs font-semibold uppercase tracking-[.18em] text-zinc-500','MOVIE DETAILS'),el('h1','text-2xl font-extrabold leading-tight tracking-tight sm:text-5xl',m.title),el('p','mt-3 text-sm text-zinc-400',[m.year,m.runtime].filter(Boolean).join(' · ')));if(m.imdb_rating)info.append(el('p','mt-3 text-sm font-semibold text-zinc-200','★ IMDb '+m.imdb_rating));if(m.genre?.length)info.append(el('p','mt-3 text-sm text-zinc-400',m.genre.join(' · ')));layout.append(info);root.append(layout);const body=el('div','mt-9 max-w-3xl border-t border-zinc-800 pt-8');body.append(el('h2','text-lg font-bold','Overview'),el('p','mt-3 text-sm leading-7 text-zinc-400',m.plot||'No synopsis available yet.'));if(m.director)body.append(el('p','mt-5 text-sm text-zinc-400','Director: '+m.director));if(m.cast?.length)body.append(el('p','mt-2 text-sm text-zinc-400','Cast: '+m.cast.join(', ')));root.append(body);
 const section=el('section','mt-9 max-w-3xl border-t border-zinc-800 pt-8 filmgo-watch');
 section.append(el('h2','mb-4 text-lg font-bold','Watch & download'));
-const player=el('div','filmgo-player-shell');player.tabIndex=0;player.setAttribute('aria-label','Movie player. Keyboard: Space to play or pause, arrows to seek, F for fullscreen.');
-const video=el('video','filmgo-player');
-video.preload='none';video.playsInline=true;video.setAttribute('playsinline','');video.style.backgroundColor='#09090b';
-video.setAttribute('controlsList','nodownload');
+const player=el('div','filmgo-player-shell');player.tabIndex=0;player.setAttribute('aria-label','Movie player. Space plays or pauses, arrows seek, F toggles fullscreen.');
+const viewport=el('div','filmgo-player-viewport');
+let video=el('video','filmgo-player');
+video.preload='none';video.playsInline=true;video.setAttribute('playsinline','');video.setAttribute('controlsList','nodownload');
 video.poster='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 9%22%3E%3Crect width=%2216%22 height=%229%22 fill=%22%2309090b%22/%3E%3C/svg%3E';video.setAttribute('aria-label','FilmGo built-in movie player');
+const loadingOverlay=el('div','filmgo-loading-overlay');loadingOverlay.hidden=true;loadingOverlay.setAttribute('role','status');loadingOverlay.setAttribute('aria-live','polite');loadingOverlay.append(el('span','filmgo-loading-spinner'),el('span','filmgo-loading-label','Loading video…'));
+const seekFeedback=el('div','filmgo-seek-feedback','');seekFeedback.setAttribute('aria-live','polite');seekFeedback.setAttribute('aria-atomic','true');
+viewport.append(video,loadingOverlay,seekFeedback);
 const controls=el('div','filmgo-controls');
 const progress=el('input','filmgo-progress');progress.type='range';progress.min='0';progress.max='1000';progress.value='0';progress.setAttribute('aria-label','Seek');
 const controlRow=el('div','filmgo-control-row');
 const play=el('button','filmgo-control-button filmgo-play','▶');play.type='button';play.setAttribute('aria-label','Play');
 const time=el('span','filmgo-time','00:00:00 / 00:00:00');
-const volumeIcon=el('span','filmgo-volume-icon','◖))');volumeIcon.setAttribute('aria-hidden','true');
-const volume=el('input','filmgo-volume');volume.type='range';volume.min='0';volume.max='1';volume.step='0.05';volume.value='1';volume.setAttribute('aria-label','Volume');
-const pip=el('button','filmgo-control-button filmgo-pip','▣');pip.type='button';pip.textContent='▣';pip.setAttribute('aria-label','Picture in picture');pip.title='Picture in picture';pip.disabled=!(document.pictureInPictureEnabled&&video.requestPictureInPicture);
 const settingsButton=el('button','filmgo-control-button filmgo-settings-toggle','⚙');settingsButton.type='button';settingsButton.setAttribute('aria-label','Player settings');settingsButton.setAttribute('aria-expanded','false');
 const fullscreen=el('button','filmgo-control-button filmgo-fullscreen','⛶');fullscreen.type='button';fullscreen.setAttribute('aria-label','Full screen');
-const settingsPanel=el('div','filmgo-settings-panel');settingsPanel.hidden=true;settingsPanel.setAttribute('aria-label','Player settings');
-controlRow.append(play,time,volumeIcon,volume,pip,settingsButton,fullscreen);controls.append(progress,controlRow);player.append(video,settingsPanel,controls);section.append(player);
+const settingsPanel=el('div','filmgo-settings-panel');settingsPanel.hidden=true;settingsPanel.setAttribute('aria-label','Player settings');settingsPanel.setAttribute('role','group');
+controlRow.append(play,time,settingsButton,fullscreen);controls.append(progress,controlRow);player.append(viewport,settingsPanel,controls);section.append(player);
 const makeSetting=(label,id)=>{const wrap=el('label','filmgo-setting');wrap.append(el('span','',label));const select=el('select','filmgo-setting-select');select.id=id;wrap.append(select);settingsPanel.append(wrap);return select;};
+const volumeWrap=el('label','filmgo-setting');volumeWrap.append(el('span','','Player volume'));const volume=el('input','filmgo-setting-range');volume.type='range';volume.min='0';volume.max='1';volume.step='0.01';volume.value='1';volume.setAttribute('aria-label','Player volume');volumeWrap.append(volume);settingsPanel.append(volumeWrap);
+const pip=el('button','filmgo-settings-action','▣  Picture in picture');pip.type='button';pip.setAttribute('aria-label','Picture in picture');pip.disabled=!(document.pictureInPictureEnabled&&video.requestPictureInPicture);settingsPanel.append(pip);
 const speedSelect=makeSetting('Playback speed','filmgo-speed');for(const rate of [0.25,0.5,0.75,1,1.25,1.5,1.75,2]){const option=el('option','',rate===1?'Normal':rate+'×');option.value=String(rate);if(rate===1)option.selected=true;speedSelect.append(option);}
 speedSelect.addEventListener('change',()=>{video.playbackRate=Number(speedSelect.value);});
 const audioSelect=makeSetting('Audio track','filmgo-audio-track');const subtitleSelect=makeSetting('Subtitles','filmgo-subtitles');
-const status=el('p','filmgo-stream-status sr-only','');
-status.setAttribute('role','status');status.setAttribute('aria-live','polite');
+const status=el('p','filmgo-stream-status sr-only','');status.setAttribute('role','status');status.setAttribute('aria-live','polite');
 const actions=el('div','filmgo-player-actions');
-const download=el('a','filmgo-download-button','Download');
-download.setAttribute('download','');
-download.setAttribute('aria-label','Download '+m.title);
-const whatsapp=el('button','filmgo-open-button','WhatsApp');
-whatsapp.type='button';whatsapp.addEventListener('click',()=>confirmMovieRequest(m,'whatsapp'));
-const telegram=el('button','filmgo-open-button','Telegram');
-telegram.type='button';telegram.addEventListener('click',()=>confirmMovieRequest(m,'telegram'));
+const download=el('a','filmgo-download-button','Download');download.setAttribute('download','');download.setAttribute('aria-label','Download '+m.title);
+const whatsapp=el('button','filmgo-open-button','WhatsApp');whatsapp.type='button';whatsapp.addEventListener('click',()=>confirmMovieRequest(m,'whatsapp'));
+const telegram=el('button','filmgo-open-button','Telegram');telegram.type='button';telegram.addEventListener('click',()=>confirmMovieRequest(m,'telegram'));
 for(const [button,kind] of [[download,'download'],[whatsapp,'whatsapp'],[telegram,'telegram']]){button.prepend(actionIcon(kind));button.style.gap='8px';}
-actions.append(download,whatsapp,telegram);
-section.append(actions,status);
-root.append(section);
-const slug=encodeURIComponent(m.slug_id||'');
-const streamBase='';
-const qualities=Object.keys(m.qualities||{[m.quality]:m}).filter(Boolean).sort((a,b)=>parseInt(a)-parseInt(b));
-let selected=qualities.find(q=>q.toLowerCase()==='720p')||qualities[0];
-const qualityRow=el('div','filmgo-quality-options');
-const qualityLabel=el('p','filmgo-quality-label','Quality');
-if(qualities.length>1){settingsPanel.prepend(qualityLabel,qualityRow);}
+actions.append(download,whatsapp,telegram);section.append(actions,status);root.append(section);
+const slug=encodeURIComponent(m.slug_id||'');const qualities=Object.keys(m.qualities||{[m.quality]:m}).filter(Boolean).sort((a,b)=>parseInt(a)-parseInt(b));
+let selected=qualities.find(q=>q.toLowerCase()==='720p')||qualities[0],activeQuality=null,stagedVideo=null;
+const qualityRow=el('div','filmgo-quality-options');const qualityLabel=el('p','filmgo-quality-label','Quality');
+if(qualities.length>1)settingsPanel.prepend(qualityLabel,qualityRow);
+for(const q of qualities){const button=el('button','filmgo-quality-button',q);button.type='button';button.addEventListener('click',()=>setQuality(q));qualityRow.append(button);}
 const isActive=()=>root.isConnected&&location.pathname==='/title/'+slug;
 const setStatus=value=>{if(isActive())status.textContent=value;};
+const setLoading=(value,show=true)=>{if(!isActive())return;loadingOverlay.hidden=!show;loadingOverlay.querySelector('.filmgo-loading-label').textContent=value||'';};
 const formatTime=value=>{if(!Number.isFinite(value)||value<0)return '--:--:--';const total=Math.floor(value),hours=Math.floor(total/3600),minutes=Math.floor(total%3600/60),seconds=total%60;return String(hours).padStart(2,'0')+':'+String(minutes).padStart(2,'0')+':'+String(seconds).padStart(2,'0');};
-const updateControls=()=>{const duration=video.duration||0;time.textContent=formatTime(video.currentTime)+' / '+formatTime(duration);progress.value=String(duration?Math.round(video.currentTime/duration*1000):0);play.textContent=video.paused?'▶':'Ⅱ';play.setAttribute('aria-label',video.paused?'Play':'Pause');player.classList.toggle('is-playing',!video.paused);};
-play.addEventListener('click',()=>{if(video.paused)video.play().catch(()=>{});else video.pause();});
-player.addEventListener('keydown',event=>{if(event.target.matches('input,select,button'))return;const key=event.key.toLowerCase();if(key===' '||key==='k'){event.preventDefault();if(video.paused)video.play().catch(()=>{});else video.pause();}else if(key==='arrowleft'||key==='arrowright'){event.preventDefault();const delta=key==='arrowleft'?-10:10;video.currentTime=Math.max(0,Math.min(video.duration||Infinity,video.currentTime+delta));showFeedback((delta<0?'−':'+')+'10 seconds');}else if(key==='f'){event.preventDefault();fullscreen.click();}else if(key==='m'){video.muted=!video.muted;volume.value=video.muted?'0':String(video.volume);}else if(key==='['||key===']'){const rates=[.25,.5,.75,1,1.25,1.5,1.75,2],index=rates.indexOf(video.playbackRate),next=Math.max(0,Math.min(rates.length-1,index+(key==='['?-1:1)));video.playbackRate=rates[next];speedSelect.value=String(rates[next]);showFeedback(rates[next]+'×');}});
-settingsButton.addEventListener('click',()=>{settingsPanel.hidden=!settingsPanel.hidden;settingsButton.setAttribute('aria-expanded',String(!settingsPanel.hidden));showControls();});
-pip.addEventListener('click',async()=>{try{if(document.pictureInPictureElement)await document.exitPictureInPicture();else await video.requestPictureInPicture();}catch{}});
-const syncOrientation=async()=>{if(document.fullscreenElement===player){try{await screen.orientation?.lock?.('landscape');}catch{}}else{try{screen.orientation?.unlock?.();}catch{}}};
-video.addEventListener('play',updateControls);video.addEventListener('pause',updateControls);video.addEventListener('timeupdate',updateControls);video.addEventListener('durationchange',updateControls);
-progress.addEventListener('input',()=>{if(Number.isFinite(video.duration))video.currentTime=video.duration*Number(progress.value)/1000;});
-volume.addEventListener('input',()=>{video.volume=Number(volume.value);video.muted=video.volume===0;});
-fullscreen.addEventListener('click',async()=>{try{if(document.fullscreenElement){await document.exitFullscreen?.();}else if(player.requestFullscreen){await player.requestFullscreen();await syncOrientation();}else if(video.webkitEnterFullscreen){video.webkitEnterFullscreen();}}catch{}});
-player.addEventListener('fullscreenchange',()=>{const active=document.fullscreenElement===player;fullscreen.setAttribute('aria-label',active?'Exit full screen':'Full screen');void syncOrientation();});
-
-const setQuality=q=>{
- if(!qualities.includes(q))return;
- const position=video.currentTime||0,wasPlaying=!video.paused;
- selected=q;
- for(const button of qualityRow.children){
-  const active=button.textContent===q;
-  button.classList.toggle('active',active);
-  button.setAttribute('aria-pressed',String(active));
- }
- const suffix='?quality='+encodeURIComponent(q);
- video.pause();
- video.src=streamBase+'/api/stream/'+slug+suffix;
- video.load();
- download.href=streamBase+'/api/download/'+slug+suffix;
- download.removeAttribute('download');
-
- const file=m.qualities?.[q]||m;
- const format=String(file.file_name||'').split('.').pop().toLowerCase();
- setStatus(format==='mkv'?'MKV playback depends on your browser and video codec.':'Press play to watch.');
- refreshTracks();
- if(position>0)video.addEventListener('loadedmetadata',()=>{if(Number.isFinite(video.duration)&&position<video.duration)video.currentTime=position;if(wasPlaying)video.play().catch(()=>{});},{once:true});
-};
-for(const q of qualities){
- const button=el('button','filmgo-quality-button',q);
- button.type='button';
- button.addEventListener('click',()=>setQuality(q));
- qualityRow.append(button);
-}
-const refreshTracks=()=>{
- const audioTracks=video.audioTracks?Array.from(video.audioTracks):[];audioSelect.replaceChildren();
- const audioNone=el('option','',audioTracks.length?'Select audio track':'No audio tracks exposed by this browser');audioNone.value='';audioSelect.append(audioNone);audioSelect.disabled=!audioTracks.length;
- audioTracks.forEach((track,index)=>{const option=el('option','',track.label||track.language||'Audio '+(index+1));option.value=String(index);option.selected=!!track.enabled;audioSelect.append(option);});
- audioSelect.onchange=()=>{audioTracks.forEach((track,index)=>{track.enabled=index===Number(audioSelect.value);});};
- const textTracks=video.textTracks?Array.from(video.textTracks).filter(track=>['subtitles','captions'].includes(track.kind)):[];subtitleSelect.replaceChildren();
- const off=el('option','','Off');off.value='off';subtitleSelect.append(off);
- if(!textTracks.length){const unavailable=el('option','','No subtitle tracks available');unavailable.value='';unavailable.disabled=true;subtitleSelect.append(unavailable);subtitleSelect.value='off';subtitleSelect.disabled=true;}else{subtitleSelect.disabled=false;textTracks.forEach((track,index)=>{const option=el('option','',track.label||track.language||'Subtitle '+(index+1));option.value=String(index);if(track.mode==='showing')option.selected=true;subtitleSelect.append(option);});}
- subtitleSelect.onchange=()=>textTracks.forEach((track,index)=>{track.mode=subtitleSelect.value==='off'?'disabled':index===Number(subtitleSelect.value)?'showing':'disabled';});
-};
-if(video.audioTracks){video.audioTracks.addEventListener?.('addtrack',refreshTracks);video.audioTracks.addEventListener?.('change',refreshTracks);}
-if(video.textTracks)video.textTracks.addEventListener?.('addtrack',refreshTracks);
-refreshTracks();
-const seekFeedback=el('div','filmgo-seek-feedback','');seekFeedback.setAttribute('aria-live','polite');seekFeedback.setAttribute('aria-atomic','true');player.append(seekFeedback);
+const updateControls=()=>{const duration=video.duration||0;time.textContent=formatTime(video.currentTime)+' / '+formatTime(duration);progress.value=String(duration?Math.round(video.currentTime/duration*1000):0);progress.style.setProperty('--progress',duration?((video.currentTime/duration)*100)+'%':'0%');play.textContent=video.paused?'▶':'Ⅱ';play.setAttribute('aria-label',video.paused?'Play':'Pause');player.classList.toggle('is-playing',!video.paused);};
 let tapTimer=0,lastTap=0,lastTapX=0,feedbackTimer=0,controlsTimer=0;
 const showFeedback=message=>{seekFeedback.textContent=message;seekFeedback.classList.add('visible');clearTimeout(feedbackTimer);feedbackTimer=setTimeout(()=>seekFeedback.classList.remove('visible'),650);};
-const showControls=()=>{player.classList.remove('controls-hidden');clearTimeout(controlsTimer);if(!video.paused&&!settingsPanel.hidden) return;if(!video.paused)controlsTimer=setTimeout(()=>{if(settingsPanel.hidden)player.classList.add('controls-hidden');},3200);};
+const showControls=()=>{player.classList.remove('controls-hidden');clearTimeout(controlsTimer);if(!video.paused&&!settingsPanel.hidden)return;if(!video.paused)controlsTimer=setTimeout(()=>{if(settingsPanel.hidden)player.classList.add('controls-hidden');},3200);};
 player.addEventListener('pointermove',showControls);player.addEventListener('pointerdown',showControls);
-video.addEventListener('pointerup',event=>{const now=Date.now(),rect=video.getBoundingClientRect(),x=event.clientX-rect.left,ratio=x/rect.width;showControls();if(now-lastTap<320&&Math.abs(x-lastTapX)<rect.width*.22){clearTimeout(tapTimer);lastTap=0;if(ratio<.33){video.currentTime=Math.max(0,video.currentTime-10);showFeedback('−10 seconds');}else if(ratio>.67){video.currentTime=Math.min(video.duration||video.currentTime+10,video.currentTime+10);showFeedback('+10 seconds');}else if(video.paused){video.play().catch(()=>{});showFeedback('Play');}else{video.pause();showFeedback('Pause');}return;}lastTap=now;lastTapX=x;clearTimeout(tapTimer);tapTimer=setTimeout(()=>{if(video.paused)video.play().catch(()=>{});else video.pause();},320);});
-video.addEventListener('play',showControls);
-video.addEventListener('error',()=>{const file=m.qualities?.[selected]||m;const ext=String(file.file_name||'').toLowerCase();const code=video.error?.code;setStatus(/\.mkv(?:$|\?)/.test(ext)?'This video is MKV, which this browser cannot decode. Download it to watch in a compatible player.':code===2?'The stream was interrupted. Check your connection and try again.':code===3||code===4?'This video format is not supported by your browser. Try another quality or download it.':'Playback failed. Please retry or download the movie.');});
-video.addEventListener('stalled',()=>{});
-video.addEventListener('loadedmetadata',()=>{updateControls();refreshTracks();});
-video.addEventListener('canplay',()=>{});
-video.addEventListener('playing',updateControls);
-video.addEventListener('waiting',()=>{});
+let volumeValue=1,audioContext=null,selectedAudioId='',selectedSubtitleId='off';const audioGains=new WeakMap(),trackListeners=new WeakSet();
+const applyPlayerVolume=target=>{const node=audioGains.get(target);if(node)node.gain.gain.value=volumeValue;else{try{target.volume=volumeValue;target.muted=volumeValue===0;}catch{}}volume.value=String(volumeValue);};
+const enableMobileVolume=target=>{const AudioContextClass=window.AudioContext||window.webkitAudioContext;if(!AudioContextClass)return;try{if(!audioContext)audioContext=new AudioContextClass();if(!audioGains.has(target)){const source=audioContext.createMediaElementSource(target),gain=audioContext.createGain();source.connect(gain);gain.connect(audioContext.destination);audioGains.set(target,{source,gain});}audioContext.resume().catch(()=>{});target.volume=1;target.muted=false;applyPlayerVolume(target);}catch{applyPlayerVolume(target);}};
+volume.addEventListener('input',()=>{volumeValue=Number(volume.value);applyPlayerVolume(video);});
+const refreshTracks=()=>{
+ const list=video.audioTracks||video.webkitAudioTracks||video.mozAudioTracks;const audioTracks=list?Array.from(list):[];if(selectedAudioId&&!audioTracks.some((track,index)=>(track.language||track.label||String(index))===selectedAudioId))selectedAudioId='';audioSelect.replaceChildren();const audioNone=el('option','',audioTracks.length?'Select audio track':'No audio tracks exposed by this browser');audioNone.value='';audioSelect.append(audioNone);audioSelect.disabled=!audioTracks.length;
+ audioTracks.forEach((track,index)=>{const option=el('option','',track.label||track.language||'Audio '+(index+1));option.value=track.language||track.label||String(index);const enabled=selectedAudioId?option.value===selectedAudioId:!!track.enabled;option.selected=enabled;track.enabled=enabled;audioSelect.append(option);});audioSelect.onchange=()=>{selectedAudioId=audioSelect.value;audioTracks.forEach((track,index)=>{track.enabled=(track.language||track.label||String(index))===selectedAudioId;});};
+ const textTracks=video.textTracks?Array.from(video.textTracks).filter(track=>['subtitles','captions'].includes(track.kind)):[];if(selectedSubtitleId!=='off'&&!textTracks.some((track,index)=>(track.language||track.label||String(index))===selectedSubtitleId))selectedSubtitleId='off';subtitleSelect.replaceChildren();const off=el('option','','Off');off.value='off';off.selected=selectedSubtitleId==='off';subtitleSelect.append(off);
+ if(!textTracks.length){const unavailable=el('option','','No subtitle tracks exposed by this browser');unavailable.value='';unavailable.disabled=true;subtitleSelect.append(unavailable);subtitleSelect.value='off';subtitleSelect.disabled=true;}else{subtitleSelect.disabled=false;textTracks.forEach((track,index)=>{const option=el('option','',track.label||track.language||'Subtitle '+(index+1));option.value=track.language||track.label||String(index);option.selected=selectedSubtitleId===option.value||(!selectedSubtitleId&&track.mode==='showing');subtitleSelect.append(option);});}
+ subtitleSelect.onchange=()=>{selectedSubtitleId=subtitleSelect.value;textTracks.forEach((track,index)=>{track.mode=selectedSubtitleId==='off'?'disabled':(track.language||track.label||String(index))===selectedSubtitleId?'showing':'disabled';});};
+};
+const registerTrackListeners=target=>{if(trackListeners.has(target))return;const list=target.audioTracks||target.webkitAudioTracks||target.mozAudioTracks;list?.addEventListener?.('addtrack',refreshTracks);list?.addEventListener?.('change',refreshTracks);target.textTracks?.addEventListener?.('addtrack',refreshTracks);trackListeners.add(target);};
+const attachVideoListeners=target=>{
+ registerTrackListeners(target);
+ target.addEventListener('play',()=>{if(target!==video)return;enableMobileVolume(target);updateControls();showControls();});
+ target.addEventListener('pause',()=>{if(target===video){updateControls();player.classList.remove('controls-hidden');}});
+ for(const eventName of ['timeupdate','durationchange'])target.addEventListener(eventName,()=>{if(target===video)updateControls();});
+ target.addEventListener('volumechange',()=>{if(target===video&&!audioGains.has(target)&&Number.isFinite(target.volume)){volumeValue=target.muted?0:target.volume;volume.value=String(volumeValue);}});
+ target.addEventListener('loadedmetadata',()=>{if(target===video){registerTrackListeners(target);updateControls();refreshTracks();}});
+ target.addEventListener('canplay',()=>{if(target===video&&!stagedVideo)setLoading('',false);});
+ target.addEventListener('playing',()=>{if(target===video){setLoading('',false);updateControls();}});
+ for(const eventName of ['waiting','stalled'])target.addEventListener(eventName,()=>{if(target===video)setLoading('Buffering…');});
+ target.addEventListener('error',()=>{if(target===video){setLoading('',false);const file=m.qualities?.[selected]||m,ext=String(file.file_name||'').toLowerCase(),code=target.error?.code;setStatus(/\.mkv(?:$|\?)/.test(ext)?'This video is MKV, which this browser cannot decode. Download it to watch in a compatible player.':code===2?'The stream was interrupted. Check your connection and try again.':code===3||code===4?'This video format is not supported by your browser. Try another quality or download it.':'Playback failed. Please retry or download the movie.');}});
+ target.addEventListener('pointerup',event=>{if(target!==video)return;const now=Date.now(),rect=target.getBoundingClientRect(),x=event.clientX-rect.left,ratio=x/rect.width;showControls();if(now-lastTap<320&&Math.abs(x-lastTapX)<rect.width*.22){clearTimeout(tapTimer);lastTap=0;if(ratio<.33){target.currentTime=Math.max(0,target.currentTime-10);showFeedback('−10 seconds');}else if(ratio>.67){target.currentTime=Math.min(target.duration||target.currentTime+10,target.currentTime+10);showFeedback('+10 seconds');}else if(target.paused){enableMobileVolume(target);target.play().catch(()=>{});showFeedback('Play');}else{target.pause();showFeedback('Pause');}return;}lastTap=now;lastTapX=x;clearTimeout(tapTimer);tapTimer=setTimeout(()=>{if(target!==video)return;if(target.paused){enableMobileVolume(target);target.play().catch(()=>{});}else target.pause();},300);});
+};
+attachVideoListeners(video);
+play.addEventListener('click',()=>{if(video.paused){enableMobileVolume(video);video.play().catch(()=>{});}else video.pause();});
+progress.addEventListener('input',()=>{if(Number.isFinite(video.duration))video.currentTime=video.duration*Number(progress.value)/1000;});
+settingsButton.addEventListener('click',()=>{settingsPanel.hidden=!settingsPanel.hidden;settingsButton.setAttribute('aria-expanded',String(!settingsPanel.hidden));player.classList.toggle('settings-open',!settingsPanel.hidden);showControls();});
+pip.addEventListener('click',async()=>{try{if(document.pictureInPictureElement)await document.exitPictureInPicture();else await video.requestPictureInPicture();}catch{}});
+const syncOrientation=async()=>{if(document.fullscreenElement===player){try{await screen.orientation?.lock?.('landscape');}catch{}}else{try{screen.orientation?.unlock?.();}catch{}}};
+fullscreen.addEventListener('click',async()=>{try{if(document.fullscreenElement)await document.exitFullscreen?.();else if(player.requestFullscreen){await player.requestFullscreen();await syncOrientation();}else if(video.webkitEnterFullscreen)video.webkitEnterFullscreen();}catch{}});
+player.addEventListener('fullscreenchange',()=>{const active=document.fullscreenElement===player;fullscreen.setAttribute('aria-label',active?'Exit full screen':'Full screen');void syncOrientation();});
+player.addEventListener('keydown',event=>{if(event.target.matches('input,select,button'))return;const key=event.key.toLowerCase();if(key===' '||key==='k'){event.preventDefault();if(video.paused){enableMobileVolume(video);video.play().catch(()=>{});}else video.pause();}else if(key==='arrowleft'||key==='arrowright'){event.preventDefault();const delta=key==='arrowleft'?-10:10;video.currentTime=Math.max(0,Math.min(video.duration||Infinity,video.currentTime+delta));showFeedback((delta<0?'−':'+')+'10 seconds');}else if(key==='f'){event.preventDefault();fullscreen.click();}else if(key==='m'){volumeValue=volumeValue===0?1:0;applyPlayerVolume(video);}else if(key==='['||key===']'){const rates=[.25,.5,.75,1,1.25,1.5,1.75,2],index=rates.indexOf(video.playbackRate),next=Math.max(0,Math.min(rates.length-1,index+(key==='['?-1:1)));video.playbackRate=rates[next];speedSelect.value=String(rates[next]);showFeedback(rates[next]+'×');}});
+pip.title='Picture in picture';
+const updateQualityButtons=()=>{for(const button of qualityRow.children){const q=button.textContent;button.classList.toggle('active',q===activeQuality);button.classList.toggle('pending',q===selected&&q!==activeQuality);button.setAttribute('aria-pressed',String(q===activeQuality));}};
+const streamUrl=q=>'/api/stream/'+slug+'?quality='+encodeURIComponent(q);
+const cancelStaging=()=>{if(stagedVideo){stagedVideo.pause();stagedVideo.removeAttribute('src');stagedVideo.load();stagedVideo.remove();stagedVideo=null;}};
+const switchToStaged=(stage,q,wasPlaying)=>{if(stage!==stagedVideo)return;const desired=video.currentTime;if(Number.isFinite(desired)&&Math.abs((stage.currentTime||0)-desired)>2&&desired<(stage.duration||Infinity)){if(!stage.seeking){stage.currentTime=desired;stage.addEventListener('seeked',()=>switchToStaged(stage,q,wasPlaying),{once:true});}return;}if(stage.seeking||stage.readyState<2)return;const old=video;old.pause();const oldAudio=audioGains.get(old);if(oldAudio){oldAudio.source.disconnect();oldAudio.gain.disconnect();audioGains.delete(old);}stage.className='filmgo-player';stage.muted=false;stage.playbackRate=Number(speedSelect.value)||1;viewport.replaceChild(stage,old);video=stage;stagedVideo=null;activeQuality=q;attachVideoListeners(video);enableMobileVolume(video);refreshTracks();updateQualityButtons();setLoading('',false);updateControls();if(wasPlaying)video.play().catch(()=>{});};
+const setQuality=q=>{if(!qualities.includes(q))return;const targetUrl=streamUrl(q);selected=q;download.href='/api/download/'+slug+'?quality='+encodeURIComponent(q);download.removeAttribute('download');if(q===activeQuality){if(stagedVideo){cancelStaging();selected=activeQuality;updateQualityButtons();setLoading('',false);}return;}updateQualityButtons();cancelStaging();const file=m.qualities?.[q]||m,format=String(file.file_name||'').split('.').pop().toLowerCase();setStatus(format==='mkv'?'MKV playback depends on your browser and video codec.':'');
+ if(!activeQuality||!video.currentSrc){activeQuality=q;updateQualityButtons();video.src=targetUrl;video.load();setLoading('Loading video…');return;}
+ const old=video,position=old.currentTime||0,wasPlaying=!old.paused,stage=el('video','filmgo-player filmgo-staging-video');stage.preload='auto';stage.playsInline=true;stage.muted=true;stage.setAttribute('playsinline','');stage.setAttribute('controlsList','nodownload');stage.poster=video.poster;stage.src=targetUrl;stagedVideo=stage;viewport.append(stage);setLoading('Switching to '+q+'…');let canPlay=false;
+ const maybeSwitch=()=>{canPlay=stage.readyState>=2;if(canPlay&&!stage.seeking)switchToStaged(stage,q,wasPlaying);};
+ stage.addEventListener('loadedmetadata',()=>{if(stage!==stagedVideo)return;if(position>0&&position<stage.duration){stage.currentTime=position;stage.addEventListener('seeked',maybeSwitch,{once:true});}maybeSwitch();},{once:true});stage.addEventListener('canplay',maybeSwitch);stage.addEventListener('seeked',maybeSwitch);stage.addEventListener('error',()=>{if(stage!==stagedVideo)return;cancelStaging();selected=activeQuality;updateQualityButtons();setLoading('',false);setStatus('Could not switch quality. Playback continues at '+activeQuality+'.');},{once:true});stage.load();
+};
 fetch('/api/stream-availability/'+slug,{cache:'no-store'}).then(r=>r.ok?r.json():null).then(data=>{
  if(!isActive())return;
  if(!data?.available){setStatus('Streaming is currently unavailable.');actions.classList.add('hidden');qualityRow.classList.add('hidden');return;}

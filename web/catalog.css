@@ -147,3 +147,37 @@
 @media(orientation:landscape) and (max-height:600px){.filmgo-player-shell:fullscreen .filmgo-controls,.filmgo-player-shell:-webkit-full-screen .filmgo-controls{padding-bottom:max(12px,env(safe-area-inset-bottom))}.filmgo-settings-panel{max-height:70vh}}
 @media(max-width:520px){.filmgo-settings-panel{right:8px;bottom:68px;max-height:56vh;padding:13px}.filmgo-setting{grid-template-columns:.85fr 1.15fr}.filmgo-settings-panel .filmgo-quality-options{gap:5px}}
 @media(prefers-reduced-motion:reduce){.filmgo-seek-feedback{transition:none}}
+
+/* Keep the settings popover outside the clipped video viewport. */
+.filmgo-player-shell{overflow:visible;z-index:1}
+.filmgo-player-shell.settings-open{z-index:30}
+.filmgo-player-viewport{position:absolute;inset:0;z-index:0;overflow:hidden;border-radius:inherit;background:#050506}
+.filmgo-player{position:absolute;inset:0;width:100%;height:100%;max-height:none;aspect-ratio:auto;border:0;border-radius:inherit;object-fit:contain;background:#050506!important;cursor:pointer}
+.filmgo-player-staging-video{position:absolute!important;inset:auto auto 0 0!important;width:2px!important;height:2px!important;opacity:.01!important;pointer-events:none!important}
+.filmgo-settings-panel{z-index:12;bottom:76px;max-height:min(68vh,500px);overscroll-behavior:contain}
+.filmgo-loading-overlay{position:absolute;z-index:5;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;border-radius:inherit;background:#05050662;color:#fafafa;font-size:13px;font-weight:650;backdrop-filter:blur(2px);pointer-events:none}
+.filmgo-loading-overlay[hidden]{display:none!important}
+.filmgo-loading-spinner{width:34px;height:34px;border:3px solid #ffffff40;border-top-color:#fff;border-radius:50%;animation:filmgo-spin .8s linear infinite}
+@keyframes filmgo-spin{to{transform:rotate(360deg)}}
+.filmgo-loading-label{padding:6px 11px;border-radius:999px;background:#09090bc9}
+.filmgo-progress{background:linear-gradient(to right,#fafafa var(--progress,0%),#ffffff55 var(--progress,0%));height:5px;border-radius:9px;appearance:none;-webkit-appearance:none}
+.filmgo-progress::-webkit-slider-thumb{appearance:none;-webkit-appearance:none;width:13px;height:13px;border:0;border-radius:50%;background:#fafafa}
+.filmgo-progress::-moz-range-thumb{width:13px;height:13px;border:0;border-radius:50%;background:#fafafa}
+.filmgo-settings-panel{gap:13px;padding:17px}
+.filmgo-setting-range{width:100%;accent-color:#fafafa}
+.filmgo-settings-action{width:100%;min-height:42px;padding:0 12px;border:1px solid #3f3f46;border-radius:10px;background:#202024;color:#f4f4f5;text-align:left;font-size:12px;font-weight:650}
+.filmgo-settings-action:hover:not(:disabled){background:#303036}
+.filmgo-settings-action:disabled{opacity:.5;cursor:not-allowed}
+.filmgo-quality-button.pending{border-color:#fafafa;color:#fff;box-shadow:0 0 0 2px #ffffff20}
+.filmgo-player-shell.settings-open .filmgo-controls{opacity:1!important;pointer-events:auto!important}
+.filmgo-control-button{min-width:46px;height:42px;font-size:22px}
+.filmgo-control-row{gap:16px;min-height:46px}
+.filmgo-time{min-width:142px;font-size:13px;white-space:nowrap}
+.filmgo-player-shell:fullscreen .filmgo-control-row,.filmgo-player-shell:-webkit-full-screen .filmgo-control-row{gap:clamp(20px,3vw,42px);min-height:64px}
+.filmgo-player-shell:fullscreen .filmgo-control-button,.filmgo-player-shell:-webkit-full-screen .filmgo-control-button{min-width:58px;height:58px;font-size:28px;border-radius:14px}
+.filmgo-player-shell:fullscreen .filmgo-time,.filmgo-player-shell:-webkit-full-screen .filmgo-time{min-width:180px;font-size:17px}
+.filmgo-player-shell:fullscreen .filmgo-progress,.filmgo-player-shell:-webkit-full-screen .filmgo-progress{height:7px;margin-bottom:18px}
+.filmgo-player-shell:fullscreen .filmgo-progress::-webkit-slider-thumb,.filmgo-player-shell:-webkit-full-screen .filmgo-progress::-webkit-slider-thumb{width:18px;height:18px}
+.filmgo-player-shell:fullscreen .filmgo-loading-spinner,.filmgo-player-shell:-webkit-full-screen .filmgo-loading-spinner{width:48px;height:48px;border-width:4px}
+@media(max-width:520px){.filmgo-control-row{gap:8px;min-height:42px}.filmgo-control-button{min-width:42px;height:40px;font-size:21px}.filmgo-time{min-width:140px;font-size:12px}.filmgo-player-shell:fullscreen .filmgo-control-row,.filmgo-player-shell:-webkit-full-screen .filmgo-control-row{justify-content:center;gap:clamp(12px,4vw,28px);min-height:58px}.filmgo-player-shell:fullscreen .filmgo-control-button,.filmgo-player-shell:-webkit-full-screen .filmgo-control-button{min-width:52px;height:52px;font-size:26px}.filmgo-player-shell:fullscreen .filmgo-time,.filmgo-player-shell:-webkit-full-screen .filmgo-time{min-width:150px;font-size:15px}.filmgo-settings-panel{right:10px;bottom:78px;width:min(320px,calc(100vw - 36px));max-height:68vh;padding:15px}}
+@media(prefers-reduced-motion:reduce){.filmgo-loading-spinner{animation:none}}
