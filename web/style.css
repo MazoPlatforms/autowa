@@ -210,3 +210,12 @@ footer a{color:#a1a1aa}
 #open-plans .ui-icon,#open-history .ui-icon{margin-left:auto}
 #edit-display-name .ui-icon{width:15px;height:15px}
 #open-plans,#open-history{display:flex;align-items:center;justify-content:space-between;gap:10px}
+
+/* Minimal header: back on the left, account avatar on the far right. */
+.app-header{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:12px!important}
+.header-leading{display:flex;align-items:center;gap:10px;min-width:0}
+.app-header .app-nav{display:flex;align-items:center;justify-content:flex-end;margin-left:auto;gap:0}
+#profile-back.back-button{display:grid;place-items:center;flex:0 0 38px;width:38px;height:38px;min-width:38px;min-height:38px;max-width:38px;padding:0;margin:0;border:1px solid #3f3f46;border-radius:11px;background:#27272a;color:#f4f4f5}
+#profile-back.back-button.hidden{display:none!important}
+#profile-back.back-button svg{display:block;flex:none}
+#profile-avatar.avatar-button.hidden{display:none!important}
