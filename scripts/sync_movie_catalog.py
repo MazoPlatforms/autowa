@@ -51,15 +51,15 @@ def parse(message):
             fields[match.group(1).lower()] = match.group(2).strip()
     filename = str(getattr(message.file, "name", "") or "")
     if not fields.get("movie") and filename:
-        value = re.sub(r"(?i)\\.(mkv|mp4|avi|mov|webm|m4v)$", "", filename)
+        value = re.sub(r"(?i)\.(mkv|mp4|avi|mov|webm|m4v)$", "", filename)
         value = re.sub(r"[._]+", " ", value)
-        value = re.split(r"(?i)\\b(?:2160p|1080p|720p|480p|4k|web[- ]?dl|bluray|webrip|x264|x265)\\b", value, maxsplit=1)[0]
+        value = re.split(r"(?i)\b(?:2160p|1080p|720p|480p|4k|web[- ]?dl|bluray|webrip|x264|x265)\b", value, maxsplit=1)[0]
         fields["movie"] = value.strip(" -[]()")[:140]
     if not fields.get("year"):
-        match = re.search(r"(?<!\\d)(19\\d{2}|20\\d{2})(?!\\d)", filename)
+        match = re.search(r"(?<!\d)(19\d{2}|20\d{2})(?!\d)", filename)
         if match: fields["year"] = match.group(1)
     if not fields.get("quality"):
-        match = re.search(r"(?i)\\b(2160p|1080p|720p|480p|4k)\\b", filename)
+        match = re.search(r"(?i)\b(2160p|1080p|720p|480p|4k)\b", filename)
         if match: fields["quality"] = match.group(1).upper()
     if not all(fields.get(k) for k in ("movie", "year", "quality")):
         return None
