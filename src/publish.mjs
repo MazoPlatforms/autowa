@@ -186,8 +186,11 @@ try{
    await progress.update('📤 Uploading to WhatsApp: '+sentCount+'/'+targets.length+' destinations…',true);
    if(groupId.endsWith('@g.us')&&!groups[groupId]){console.error('Not a member of group',groupId);failures++;movieFailures++;continue;}
    let ok=false;
-   for(let attempt=1;attempt<=3;attempt++){
-    if(connectionClosed){console.error('Stopping retries: WhatsApp socket is disconnected; a new authenticated connection is required');break;}
+   for(let attempt=1;attempt<=5;attempt++){
+    if(connectionClosed){
+     if(!await reconnectWhatsApp())break;
+     if(groupId.endsWith('@g.us')){try{groups=await sock.groupFetchAllParticipating();}catch(err){console.warn('Group membership refresh failed:',err.message);}}
+    }
     try{
      const result=await sock.sendMessage(groupId,{
       document:{url:path.resolve(dest)},mimetype:type==='mp4'?'video/mp4':'video/x-matroska',
