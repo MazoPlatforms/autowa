@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "updated_at": "2026-10-29T22:14:23.430945+00:00",
+  "updated_at": "2026-10-29T22:50:50.097997+00:00",
   "movies": [
     {
       "id": "telegram-53",
@@ -16,7 +16,7 @@
         }
       },
       "imdb_id": "tt6485666",
-      "poster": "https://m.media-amazon.com/images/M/MV5BNzQ3ZGJkMTUtMjU4YS00ZjkyLTg5YTItOGEwMjFhMDljOTQ4XkEyXkFqcGc@._V1_QL75_UX380_CR0,3,380,562_.jpg",
+      "poster": "https://m.media-amazon.com/images/M/MV5BNzQ3ZGJkMTUtMjU4YS00ZjkyLTg5YTItOGEwMjFhMDljOTQ4XkEyXkFqcGc@._V1_.jpg",
       "genre": [
         "Action",
         "Crime",
@@ -52,7 +52,7 @@
         }
       },
       "imdb_id": "tt6126294",
-      "poster": "https://m.media-amazon.com/images/M/MV5BMmYwZjc3MTYtZjg4Ni00MWY3LThiNzctN2ZkOTVlMTMyOWMwXkEyXkFqcGc@._V1_QL75_UY562_CR15,0,380,562_.jpg",
+      "poster": "https://m.media-amazon.com/images/M/MV5BMmYwZjc3MTYtZjg4Ni00MWY3LThiNzctN2ZkOTVlMTMyOWMwXkEyXkFqcGc@._V1_.jpg",
       "genre": [
         "Comedy",
         "Romance"
@@ -87,7 +87,7 @@
         }
       },
       "imdb_id": "tt23475032",
-      "poster": "https://m.media-amazon.com/images/M/MV5BZjYxZjI4N2EtODE3OC00YjE3LTkwYjctMzhlMmU0OGY1ZTA2XkEyXkFqcGc@._V1_QL75_UY562_CR224,0,380,562_.jpg",
+      "poster": "https://m.media-amazon.com/images/M/MV5BZjYxZjI4N2EtODE3OC00YjE3LTkwYjctMzhlMmU0OGY1ZTA2XkEyXkFqcGc@._V1_.jpg",
       "genre": [
         "Drama",
         "Romance"
@@ -122,7 +122,7 @@
         }
       },
       "imdb_id": "tt10189514",
-      "poster": "https://m.media-amazon.com/images/M/MV5BZTU5NTNmMjAtODM0Mi00YzU5LTk1OWQtZWU1NzZhMzBjYjY1XkEyXkFqcGc@._V1_QL75_UX380_CR0,35,380,562_.jpg",
+      "poster": "https://m.media-amazon.com/images/M/MV5BZTU5NTNmMjAtODM0Mi00YzU5LTk1OWQtZWU1NzZhMzBjYjY1XkEyXkFqcGc@._V1_.jpg",
       "genre": [
         "Drama"
       ],
@@ -156,7 +156,7 @@
         }
       },
       "imdb_id": "tt2211173",
-      "poster": "https://m.media-amazon.com/images/M/MV5BYjIxNDk4YjMtOWZkNC00Mzk1LWEyYmMtMzU5MGQ1OWRmZGJmXkEyXkFqcGc@._V1_QL75_UX380_CR0,7,380,562_.jpg",
+      "poster": "https://m.media-amazon.com/images/M/MV5BYjIxNDk4YjMtOWZkNC00Mzk1LWEyYmMtMzU5MGQ1OWRmZGJmXkEyXkFqcGc@._V1_.jpg",
       "genre": [
         "Action",
         "Thriller"
@@ -197,7 +197,7 @@
         }
       },
       "imdb_id": "tt37894980",
-      "poster": "https://m.media-amazon.com/images/M/MV5BNzg3MzhiMTMtNGU2NC00YjViLTk2MWMtNTYyZWU4YWQxM2IxXkEyXkFqcGdeQXRyYW5zY29kZS13b3JrZmxvdw@@._V1_QL75_UY563_CR172,0,1000,563_.jpg",
+      "poster": "https://m.media-amazon.com/images/M/MV5BNWEyMWFmNDktZjc5Ni00NGNkLTkyYWQtMTdlOGNiNTljZjcyXkEyXkFqcGc@._V1_.jpg",
       "genre": [
         "N/A"
       ],
@@ -231,7 +231,7 @@
         }
       },
       "imdb_id": "tt11444698",
-      "poster": "https://m.media-amazon.com/images/M/MV5BMzdmNDliOWItNWE3YS00NjNhLThiODAtNzhkODVlOGFlYzI2XkEyXkFqcGc@._V1_QL75_UY562_CR19,0,380,562_.jpg",
+      "poster": "https://m.media-amazon.com/images/M/MV5BMzdmNDliOWItNWE3YS00NjNhLThiODAtNzhkODVlOGFlYzI2XkEyXkFqcGc@._V1_.jpg",
       "genre": [
         "Horror",
         "Sci-Fi",
@@ -267,7 +267,7 @@
         }
       },
       "imdb_id": "tt11143400",
-      "poster": "https://m.media-amazon.com/images/M/MV5BNWI5NGZmNjgtNTdkOC00MWYzLWE3MWEtMTVlZGRkZTA5NGFhXkEyXkFqcGc@._V1_SX300.jpg",
+      "poster": "https://m.media-amazon.com/images/M/MV5BNWI5NGZmNjgtNTdkOC00MWYzLWE3MWEtMTVlZGRkZTA5NGFhXkEyXkFqcGc@._V1_.jpg",
       "genre": [
         "Comedy",
         "Romance",
@@ -303,7 +303,7 @@
         }
       },
       "imdb_id": "tt7892066",
-      "poster": "https://m.media-amazon.com/images/M/MV5BMDcwMjFlNWYtNGFiYy00YmNmLTllZWUtNDM3ZjQ3YjhhZTg0XkEyXkFqcGc@._V1_QL75_UX380_CR0,4,380,562_.jpg",
+      "poster": "https://m.media-amazon.com/images/M/MV5BMDcwMjFlNWYtNGFiYy00YmNmLTllZWUtNDM3ZjQ3YjhhZTg0XkEyXkFqcGc@._V1_.jpg",
       "genre": [
         "Action",
         "Adventure",
@@ -339,7 +339,7 @@
         }
       },
       "imdb_id": "tt22170036",
-      "poster": "https://m.media-amazon.com/images/M/MV5BZWU2MjQ1MzAtNGMyOC00ZTFjLThkMjEtNmM1OWM3ZmM0YmI2XkEyXkFqcGc@._V1_QL75_UY562_CR23,0,380,562_.jpg",
+      "poster": "https://m.media-amazon.com/images/M/MV5BZWU2MjQ1MzAtNGMyOC00ZTFjLThkMjEtNmM1OWM3ZmM0YmI2XkEyXkFqcGc@._V1_.jpg",
       "genre": [
         "Action",
         "Adventure",
@@ -410,7 +410,7 @@
         }
       },
       "imdb_id": "tt5440700",
-      "poster": "https://m.media-amazon.com/images/M/MV5BZDBlNGEyZDAtZjFhYS00YWU2LWFkYzEtNTlmYTIxZjJhNzI3XkEyXkFqcGc@._V1_SX300.jpg",
+      "poster": "https://m.media-amazon.com/images/M/MV5BMjU0Y2NmYmQtZGY1MS00MTVlLTliMTgtMzkwN2I0NGQ2NzYxXkEyXkFqcGc@._V1_.jpg",
       "genre": [
         "Action",
         "Crime",
@@ -452,7 +452,7 @@
         }
       },
       "imdb_id": "tt44090278",
-      "poster": "https://m.media-amazon.com/images/M/MV5BNjRmZGFjMDctMzRiNS00MmIwLTliYmMtODY5ZGFkOTE5YmFkXkEyXkFqcGc@._V1_QL75_UX380_CR0,4,380,562_.jpg",
+      "poster": "https://m.media-amazon.com/images/M/MV5BNjRmZGFjMDctMzRiNS00MmIwLTliYmMtODY5ZGFkOTE5YmFkXkEyXkFqcGc@._V1_.jpg",
       "genre": [
         "Action",
         "Drama",
@@ -488,7 +488,7 @@
         }
       },
       "imdb_id": "tt9260636",
-      "poster": "https://m.media-amazon.com/images/M/MV5BNTQ5ZDgwYzMtOTBjYi00NTQ5LWE2ZjUtZmM3MTk2OTcyMjliXkEyXkFqcGc@._V1_QL75_UY562_CR21,0,380,562_.jpg",
+      "poster": "https://m.media-amazon.com/images/M/MV5BNTQ5ZDgwYzMtOTBjYi00NTQ5LWE2ZjUtZmM3MTk2OTcyMjliXkEyXkFqcGc@._V1_.jpg",
       "genre": [
         "Action",
         "Drama",
@@ -524,7 +524,7 @@
         }
       },
       "imdb_id": "tt11998558",
-      "poster": "https://m.media-amazon.com/images/M/MV5BZDM4NDBkNGEtNzI2Yi00ODkwLTliNzAtODkwMmRhNTEzZmVlXkEyXkFqcGc@._V1_QL75_UX380_CR0,4,380,562_.jpg",
+      "poster": "https://m.media-amazon.com/images/M/MV5BZDM4NDBkNGEtNzI2Yi00ODkwLTliNzAtODkwMmRhNTEzZmVlXkEyXkFqcGc@._V1_.jpg",
       "genre": [
         "Action",
         "Comedy",
@@ -560,7 +560,7 @@
         }
       },
       "imdb_id": "tt10701074",
-      "poster": "https://m.media-amazon.com/images/M/MV5BYjI2ZmRmODEtZmEyYS00OWY3LTlhNWEtODhlZjQyNjVlMWU0XkEyXkFqcGc@._V1_SX300.jpg",
+      "poster": "https://m.media-amazon.com/images/M/MV5BOWIyNWE0MGMtNzczMS00Yzg1LWEyOTMtNGFkZGRmNmJkMGUxXkEyXkFqcGc@._V1_.jpg",
       "genre": [
         "Action",
         "Adventure",
@@ -596,7 +596,7 @@
         }
       },
       "imdb_id": "tt33095205",
-      "poster": "https://m.media-amazon.com/images/M/MV5BNmY1MzM2ZTMtZmJmYS00NGI2LTllYzktN2NlMGMzZGNkYjc0XkEyXkFqcGc@._V1_QL75_UY562_CR27,0,380,562_.jpg",
+      "poster": "https://m.media-amazon.com/images/M/MV5BNmY1MzM2ZTMtZmJmYS00NGI2LTllYzktN2NlMGMzZGNkYjc0XkEyXkFqcGc@._V1_.jpg",
       "genre": [
         "Drama",
         "Thriller"
@@ -631,7 +631,7 @@
         }
       },
       "imdb_id": "tt35448218",
-      "poster": "https://m.media-amazon.com/images/M/MV5BYzRmMDQ1MjAtOWEwMi00YWMxLTg0YTQtZmRkMjM5MjgwYmZlXkEyXkFqcGc@._V1_QL75_UX380_CR0,4,380,562_.jpg",
+      "poster": "https://m.media-amazon.com/images/M/MV5BYzRmMDQ1MjAtOWEwMi00YWMxLTg0YTQtZmRkMjM5MjgwYmZlXkEyXkFqcGc@._V1_.jpg",
       "genre": [
         "Comedy",
         "Drama",
@@ -667,7 +667,7 @@
         }
       },
       "imdb_id": "tt27419466",
-      "poster": "https://m.media-amazon.com/images/M/MV5BMTQ1OTQ2Y2UtMzllNS00ODFiLWFkNGItNGRjOWRlMjIwNTRlXkEyXkFqcGc@._V1_QL75_UX380_CR0,0,380,562_.jpg",
+      "poster": "https://m.media-amazon.com/images/M/MV5BNWEyZDViMGYtZjcyNy00OWI3LWJmOWUtNTUzMmJmMWI3ZGNmXkEyXkFqcGc@._V1_.jpg",
       "genre": [
         "Action",
         "Adventure",
@@ -703,7 +703,7 @@
         }
       },
       "imdb_id": "tt34385135",
-      "poster": "https://m.media-amazon.com/images/M/MV5BNzI5YWViNGUtNGRiMy00OThhLWIwOGUtZjkyZDk2NjliODY2XkEyXkFqcGc@._V1_QL75_UX380_CR0,0,380,562_.jpg",
+      "poster": "https://m.media-amazon.com/images/M/MV5BNzI5YWViNGUtNGRiMy00OThhLWIwOGUtZjkyZDk2NjliODY2XkEyXkFqcGc@._V1_.jpg",
       "genre": [
         "Action",
         "Adventure",
@@ -739,7 +739,7 @@
         }
       },
       "imdb_id": "tt37180686",
-      "poster": "https://m.media-amazon.com/images/M/MV5BMTNmN2EzMGQtNDIyMi00ZDljLTk5N2ItMTA0NGJmZTJmMTEyXkEyXkFqcGc@._V1_QL75_UX656_.jpg",
+      "poster": "https://m.media-amazon.com/images/M/MV5BMDgzNGNhMjktZjA0MC00NGQ2LWJlNWMtM2NiMDQ3OWI2MzRmXkEyXkFqcGc@._V1_.jpg",
       "genre": [
         "Drama",
         "Romance"
@@ -774,7 +774,7 @@
         }
       },
       "imdb_id": "tt38915678",
-      "poster": "https://m.media-amazon.com/images/M/MV5BODdiOGNiOTktY2Y5NC00N2U4LWI1YzctM2RmZmEzMzc1OGY5XkEyXkFqcGc@._V1_QL75_UY562_CR35,0,380,562_.jpg",
+      "poster": "https://m.media-amazon.com/images/M/MV5BZGZmZmEyZjMtYTJkZC00ZmVjLTg1OGEtOGUwMjgzNGQ4MGYxXkEyXkFqcGc@._V1_.jpg",
       "genre": [
         "Action",
         "Adventure",
@@ -865,7 +865,7 @@
         }
       },
       "imdb_id": "tt21308888",
-      "poster": "https://m.media-amazon.com/images/M/MV5BODYxYTRkZWEtZjdhNS00ZWFmLTljNDItNTk2NWM4Mjc5NjYzXkEyXkFqcGc@._V1_QL75_UX380_CR0,0,380,562_.jpg",
+      "poster": "https://m.media-amazon.com/images/M/MV5BODYxYTRkZWEtZjdhNS00ZWFmLTljNDItNTk2NWM4Mjc5NjYzXkEyXkFqcGc@._V1_.jpg",
       "genre": [
         "Action",
         "Sci-Fi",
@@ -937,7 +937,7 @@
         }
       },
       "imdb_id": "tt39385419",
-      "poster": "https://m.media-amazon.com/images/M/MV5BNGJmODQ0ODYtOWQ3Zi00M2VhLWIwNzYtYzRmMGI0NmE5ZWEwXkEyXkFqcGc@._V1_QL75_UY562_CR35,0,380,562_.jpg",
+      "poster": "https://m.media-amazon.com/images/M/MV5BNGJmODQ0ODYtOWQ3Zi00M2VhLWIwNzYtYzRmMGI0NmE5ZWEwXkEyXkFqcGc@._V1_.jpg",
       "genre": [
         "Comedy",
         "Crime",
@@ -973,7 +973,7 @@
         }
       },
       "imdb_id": "tt22036406",
-      "poster": "https://m.media-amazon.com/images/M/MV5BNjE2OGYyMTctY2ZkYy00ZWMzLWIzNjEtMWIzNjkxZTMyM2QwXkEyXkFqcGc@._V1_QL75_UY562_CR35,0,380,562_.jpg",
+      "poster": "https://m.media-amazon.com/images/M/MV5BNjE2OGYyMTctY2ZkYy00ZWMzLWIzNjEtMWIzNjkxZTMyM2QwXkEyXkFqcGc@._V1_.jpg",
       "genre": [
         "Action",
         "Adventure",
@@ -1009,7 +1009,7 @@
         }
       },
       "imdb_id": "tt35723557",
-      "poster": "https://m.media-amazon.com/images/M/MV5BZGRiZmZlOGQtMWMyMS00Yjk2LTkyMjAtYzI5ZGQxMjdhYTBmXkEyXkFqcGc@._V1_SX300.jpg",
+      "poster": "https://m.media-amazon.com/images/M/MV5BZTFjOTAwZjYtMjdiMC00NmY4LWE2ZWUtNGY3Zjk4Yjk2MGZjXkEyXkFqcGc@._V1_.jpg",
       "genre": [
         "N/A"
       ],
@@ -1043,7 +1043,7 @@
         }
       },
       "imdb_id": "tt36596965",
-      "poster": "https://m.media-amazon.com/images/M/MV5BM2NjYTUwMjEtZmYzNy00MTYxLWE1OGYtNWVmMjYzOWViZGJmXkEyXkFqcGc@._V1_QL75_UY562_CR35,0,380,562_.jpg",
+      "poster": "https://m.media-amazon.com/images/M/MV5BYjdjYjVkY2ItOGM4Yy00OGQ3LTg3ZDAtNmYzMWZkYzg3NGZhXkEyXkFqcGc@._V1_.jpg",
       "genre": [
         "Action",
         "Drama",
@@ -1079,7 +1079,7 @@
         }
       },
       "imdb_id": "tt33379543",
-      "poster": "https://m.media-amazon.com/images/M/MV5BOTE1M2ZkZjYtNzExNi00MTQwLTg3ZDYtYTA3YmQyMDgyZjU4XkEyXkFqcGc@._V1_SX300.jpg",
+      "poster": "https://m.media-amazon.com/images/M/MV5BZWFmMGQ4YjUtNmNjYS00MWRlLWI1YzMtMmMyZGIzMmE1NWYwXkEyXkFqcGc@._V1_.jpg",
       "genre": [
         "Action",
         "Thriller"
@@ -1114,7 +1114,7 @@
         }
       },
       "imdb_id": "tt37535100",
-      "poster": "https://m.media-amazon.com/images/M/MV5BMTU5OWQ4YTgtZTZiMi00ZjE2LTk1MjgtYjcyNDZiODBjYTQ3XkEyXkFqcGc@._V1_QL75_UY562_CR21,0,380,562_.jpg",
+      "poster": "https://m.media-amazon.com/images/M/MV5BYzI3MDJiZmQtNDg3ZC00Y2MwLWE5ZDMtNGRiOTA5OTQzMjQ4XkEyXkFqcGc@._V1_.jpg",
       "genre": [
         "Comedy",
         "Drama",
@@ -1150,7 +1150,7 @@
         }
       },
       "imdb_id": "tt33737583",
-      "poster": "https://m.media-amazon.com/images/M/MV5BMTRiMGMzOWUtNGFmZC00ODY4LWJlNmEtODJjNDdmNTBlYTgwXkEyXkFqcGc@._V1_QL75_UX380_CR0,4,380,562_.jpg",
+      "poster": "https://m.media-amazon.com/images/M/MV5BMTRiMGMzOWUtNGFmZC00ODY4LWJlNmEtODJjNDdmNTBlYTgwXkEyXkFqcGc@._V1_.jpg",
       "genre": [
         "Drama"
       ],
@@ -1190,7 +1190,7 @@
         }
       },
       "imdb_id": "tt31969655",
-      "poster": "https://m.media-amazon.com/images/M/MV5BZWVlYjQ1NzktY2VmZC00NzhlLTg1NTItZTRhNDNmYzQyNWQxXkEyXkFqcGc@._V1_QL75_UX380_CR0,16,380,562_.jpg",
+      "poster": "https://m.media-amazon.com/images/M/MV5BMGI3N2I1ZWUtYzMyZS00MTRlLThlNDUtNWZhY2MxZTlmMDJjXkEyXkFqcGc@._V1_.jpg",
       "genre": [
         "Action",
         "Adventure",
@@ -1226,7 +1226,7 @@
         }
       },
       "imdb_id": "tt27118357",
-      "poster": "https://m.media-amazon.com/images/M/MV5BZGQyYTA0Y2EtYTA1NC00YTkzLWJiMmQtNzUzZGMzNjc5ZjM1XkEyXkFqcGc@._V1_QL75_UX380_CR0,4,380,562_.jpg",
+      "poster": "https://m.media-amazon.com/images/M/MV5BNTAzMGQ2MGItMjk5OC00YWIwLThmMjUtYmNjMTIxNzVlZWQ4XkEyXkFqcGc@._V1_.jpg",
       "genre": [
         "Action",
         "Biography",
@@ -1262,7 +1262,7 @@
         }
       },
       "imdb_id": "tt14173636",
-      "poster": "https://m.media-amazon.com/images/M/MV5BMjI0MzJjMjctNmQzZi00Y2U4LWEwZGItMmE3NDUzNzk1YzY3XkEyXkFqcGc@._V1_QL75_UX380_CR0,15,380,562_.jpg",
+      "poster": "https://m.media-amazon.com/images/M/MV5BMjI0MzJjMjctNmQzZi00Y2U4LWEwZGItMmE3NDUzNzk1YzY3XkEyXkFqcGc@._V1_.jpg",
       "genre": [
         "Comedy",
         "Drama",
@@ -1298,7 +1298,7 @@
         }
       },
       "imdb_id": "tt9777666",
-      "poster": "https://m.media-amazon.com/images/M/MV5BYmUyNzY2YWYtNWQ0My00ODMwLTkwOTQtOTA0ZjM0MjRmYjJiXkEyXkFqcGc@._V1_QL75_UX380_CR0,0,380,562_.jpg",
+      "poster": "https://m.media-amazon.com/images/M/MV5BYmUyNzY2YWYtNWQ0My00ODMwLTkwOTQtOTA0ZjM0MjRmYjJiXkEyXkFqcGc@._V1_.jpg",
       "genre": [
         "Action",
         "Adventure",
@@ -1334,7 +1334,7 @@
         }
       },
       "imdb_id": "tt0357905",
-      "poster": "https://m.media-amazon.com/images/M/MV5BZTkyZTE3MzktMTlmMy00ZGE5LWJkZGEtMmU3YzhlNGJlM2E0XkEyXkFqcGc@._V1_SX300.jpg",
+      "poster": "https://m.media-amazon.com/images/M/MV5BZTkyZTE3MzktMTlmMy00ZGE5LWJkZGEtMmU3YzhlNGJlM2E0XkEyXkFqcGc@._V1_.jpg",
       "genre": [
         "Comedy",
         "Drama",
@@ -1370,7 +1370,7 @@
         }
       },
       "imdb_id": "tt42262473",
-      "poster": "https://m.media-amazon.com/images/M/MV5BOTc1NmUxZDMtNTYzOS00ZmYwLTlmZjgtZDg2NjIyYTU0ZWVkXkEyXkFqcGc@._V1_QL75_UX380_CR0,4,380,562_.jpg",
+      "poster": "https://m.media-amazon.com/images/M/MV5BOTc1NmUxZDMtNTYzOS00ZmYwLTlmZjgtZDg2NjIyYTU0ZWVkXkEyXkFqcGc@._V1_.jpg",
       "genre": [
         "Comedy",
         "Drama"
