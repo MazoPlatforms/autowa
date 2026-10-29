@@ -141,27 +141,33 @@ async function refreshCatalog(){
 route();void refreshCatalog();
 setInterval(()=>{void refreshCatalog();},15000);
 document.addEventListener('visibilitychange',()=>{if(!document.hidden)void refreshCatalog();});
-// Public catalog remains available to guests; private avatar URL is session-only.
+// Resolve the existing server session before showing the account control.
+// No localStorage login hint is trusted as authentication.
 (async()=>{
+ const link=document.getElementById('catalog-account-link');
+ if(!link)return;
+ const guest=()=>{link.href='/request';link.classList.remove('catalog-account-avatar');link.replaceChildren(document.createTextNode('Sign in'));link.removeAttribute('title');link.setAttribute('aria-label','Sign in');link.setAttribute('aria-busy','false');};
  try{
-  const response=await fetch('/api/me',{cache:'no-store'});
-  if(!response.ok)return;
-  const user=await response.json(),link=document.getElementById('catalog-account-link');
-  if(!link)return;
+  const response=await fetch('/api/me',{credentials:'same-origin',cache:'no-store'});
+  if(!response.ok){guest();return;}
+  const user=await response.json();
+  if(!user.number){guest();return;}
   link.href='/profile';link.classList.add('catalog-account-avatar');
-  link.textContent=(user.name||user.number||'?').trim().split(/\s+/).slice(0,2).map(v=>v[0]||'').join('').toUpperCase();
+  link.replaceChildren(document.createTextNode((user.name||user.number||'?').trim().split(/\s+/).slice(0,2).map(v=>v[0]||'').join('').toUpperCase()));
   link.setAttribute('aria-label','Open profile');link.title=user.name||'My profile';
+  link.setAttribute('aria-busy','false');
   const cacheKey='filmgo-avatar:'+user.number;
   let avatar=null;
   try{avatar=sessionStorage.getItem(cacheKey);}catch{}
   if(!avatar){
    try{
-    const result=await fetch('/api/avatar',{cache:'no-store'});
+    const result=await fetch('/api/avatar',{credentials:'same-origin',cache:'no-store'});
     if(result.ok){const data=await result.json();if(typeof data.url==='string'&&data.url.startsWith('https://')){avatar=data.url;try{sessionStorage.setItem(cacheKey,avatar);}catch{}}}
    }catch{}
   }
   if(avatar){
-   const img=document.createElement('img');img.alt='WhatsApp profile picture';img.className='catalog-avatar-image';img.referrerPolicy='no-referrer';img.onerror=()=>img.remove();img.src=avatar;link.append(img);
+   const img=document.createElement('img');img.alt='';img.className='catalog-avatar-image';img.referrerPolicy='no-referrer';img.decoding='async';
+   img.onerror=()=>img.remove();img.src=avatar;link.append(img);
   }
- }catch{}
+ }catch{guest();}
 })();
