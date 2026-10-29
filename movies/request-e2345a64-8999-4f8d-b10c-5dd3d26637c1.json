@@ -1,0 +1,17 @@
+{
+  "id": "request-e2345a64-8999-4f8d-b10c-5dd3d26637c1",
+  "title": "Yevadu",
+  "year": "2014",
+  "quality": "720p",
+  "license_confirmed": true,
+  "enabled": false,
+  "status": "submitted",
+  "started_at": "2026-10-29T19:45:53.712Z",
+  "file_type": "mkv",
+  "filename": "mzn.is-a.dev - Yevadu (2014) - 720p.mkv",
+  "caption": "🎬 FilmGo\n\n🎞️ Yevadu (2014)\n\nEnjoy the movie!\n\n> Powered by Itz Maazin • https://mzn.is-a.dev/",
+  "finished_at": "2026-10-29T20:03:52.146Z",
+  "request_origin": "koyeb_verified",
+  "workflow_run_id": "40942763345",
+  "workflow_run_url": "https://github.com/MazoPlatforms/autowa/actions/runs/40942763345"
+}
