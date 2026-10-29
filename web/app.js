@@ -63,7 +63,7 @@ async function refreshAccount(){
  $('account-number').textContent='WhatsApp: '+user.number;
  $('profile-name').value=user.name||'';
  $('avatar-initials').textContent=(user.name||user.number||'?').trim().split(/\s+/).slice(0,2).map(v=>v[0]||'').join('').toUpperCase();
- $('account-limits').textContent='Requests: '+user.used+' / '+user.limit+' used · '+user.remaining+' remaining ('+user.period+')';
+ $('account-limits').textContent=user.unlimited?'Requests: Unlimited · No daily quota':'Requests: '+user.used+' / '+user.limit+' used · '+user.remaining+' remaining ('+user.period+')';
  return user;
 }
 function routeView(){
