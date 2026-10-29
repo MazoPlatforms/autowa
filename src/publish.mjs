@@ -92,7 +92,7 @@ const miB=n=>(n/1048576).toFixed(1);
 const FALLBACK_POSTER='https://i.ibb.co/TMJ6YCC4/IMG-33a2f581-8ff4-4a5e-9e64-e43c900000c2.png';
 const STATUS_FOOTER='> Powered by Itz Maazin • https://mzn.is-a.dev/';
 const formatDuration=seconds=>!Number.isFinite(seconds)||seconds<0?'Calculating…':seconds<60?Math.ceil(seconds)+'s':Math.floor(seconds/3600)?Math.floor(seconds/3600)+'h '+Math.floor(seconds%3600/60)+'m':Math.ceil(seconds/60)+'m';
-const asciiBar=(done,total)=>{const pct=total>0?Math.max(0,Math.min(1,done/total)):0;const count=Math.round(pct*16);return '╭─ DOWNLOAD ─╮\n'+'┃ '+('■'.repeat(count)+'·'.repeat(16-count))+' ┃ '+Math.round(pct*100)+'%\n╰────────────╯';};
+const asciiBar=(done,total)=>{const pct=total>0?Math.max(0,Math.min(1,done/total)):0;const count=Math.round(pct*16);return '▏'+'▰'.repeat(count)+'▱'.repeat(16-count)+'▕ '+Math.round(pct*100)+'%';};
 let posterCatalog=[];
 try{const catalog=JSON.parse(fs.readFileSync('data/movies.json','utf8'));posterCatalog=Array.isArray(catalog)?catalog:Array.isArray(catalog.movies)?catalog.movies:[];}catch(err){console.warn('Poster catalog unavailable:',err.message);}
 function requesterProgress(j){
