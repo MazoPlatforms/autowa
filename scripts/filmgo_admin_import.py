@@ -71,14 +71,17 @@ def google_drive(url, destination):
     if not file_id or not re.fullmatch(r"[\w-]{10,128}", file_id):
         raise ValueError("Unsupported Google Drive file URL")
     # gdown handles Drive's large-file confirmation page.
-    result = gdown.download(id=file_id, output=str(destination), quiet=False, fuzzy=False)
+    # Let gdown preserve the real Drive filename (including year and quality).
+    result = gdown.download(id=file_id, output=str(destination.parent) + os.sep, quiet=False, fuzzy=False)
     if not result: raise ValueError("Google Drive download failed (permissions, quota or confirmation)")
-    size = destination.stat().st_size
+    downloaded = pathlib.Path(result)
+    if not downloaded.is_file(): raise ValueError("Google Drive did not return a file")
+    size = downloaded.stat().st_size
     if not 0 < size <= MAX_BYTES: raise ValueError("Google Drive file exceeds 2 GB or is empty")
-    # Drive filenames are not trustworthy until verified; use the file ID when absent.
-    filename = os.environ.get("FILMGO_IMPORT_FILENAME", "").strip() or file_id + ".mp4"
+    filename = downloaded.name[:180]
     if pathlib.Path(filename).suffix.lower() not in ALLOWED_EXT: raise ValueError("Unsupported media extension")
-    return filename[:180], size
+    downloaded.replace(destination)
+    return filename, size
 
 async def main():
     payload = json.loads(os.environ["FILMGO_IMPORT_JSON"])
