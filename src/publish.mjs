@@ -104,7 +104,7 @@ function requesterProgress(j){
  const year=String(j.year||movie.year||'—'),quality=String(j.quality||movie.quality||'—');
  const size=Number(j.file_size||movie.file_size||0);
  const details=['*FilmGo*','', '*'+title+'*','Year: '+year,'Quality: '+quality,...(movie.genre?.length?['Genre: '+(Array.isArray(movie.genre)?movie.genre.join(', '):movie.genre)]:[]),''];
- let key=null,last='',lastAt=0,chain=Promise.resolve(),started=Date.now(),lastBytes=0,lastSample=started,rate=0;
+ let key=null,posterSent=false,last='',lastAt=0,chain=Promise.resolve(),started=Date.now(),lastBytes=0,lastSample=started,rate=0;
  const render=(message,stats)=>{
   if(!stats)return details.join('\n')+message+(size?'\nFile size: '+miB(size)+' MiB':'')+'\n\n'+STATUS_FOOTER;
   const now=Date.now(),elapsed=Math.max(.001,(now-lastSample)/1000);
@@ -119,16 +119,20 @@ function requesterProgress(j){
    if(!force&&(caption===last||Date.now()-lastAt<12000))return;
    try{
     if(!key){
-     let sent;
-     try{sent=await sock.sendMessage(jid,{image:{url:posterUrl},caption});}
-     catch(err){
-      if(posterUrl!==FALLBACK_POSTER){
-       console.warn('Movie poster unavailable, trying fallback image:',err.message);
-       try{sent=await sock.sendMessage(jid,{image:{url:FALLBACK_POSTER},caption});}
-       catch(fallbackErr){console.warn('Fallback poster unavailable, using text status:',fallbackErr.message);}
-      }else console.warn('Fallback poster unavailable, using text status:',err.message);
+     // Send the poster only once; keep a separate editable text message.
+     // This also ensures the first "Preparing" update is the message edited later.
+     if(!posterSent){
+      try{await sock.sendMessage(jid,{image:{url:posterUrl},caption:'FilmGo · '+title+(year!=='—'?' ('+year+')':'')});}
+      catch(err){
+       if(posterUrl!==FALLBACK_POSTER){
+        console.warn('Movie poster unavailable, trying fallback:',err.message);
+        try{await sock.sendMessage(jid,{image:{url:FALLBACK_POSTER},caption:'FilmGo · '+title});}
+        catch(fallbackErr){console.warn('Fallback poster unavailable:',fallbackErr.message);}
+       }else console.warn('Fallback poster unavailable:',err.message);
+      }
+      posterSent=true;
      }
-     if(!sent)sent=await sock.sendMessage(jid,{text:caption});
+     const sent=await sock.sendMessage(jid,{text:caption});
      if(!sent?.key?.id)throw Error('Requester progress message has no message ID');
      key=sent.key;
     }else{
