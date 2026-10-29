@@ -84,8 +84,6 @@ def parse(message):
 async def main():
     previous = json.loads(PATH.read_text()) if PATH.exists() else {"movies": []}
     old_movies = previous.get("movies", [])
-    metadata_path = pathlib.Path("data/movie-metadata.json")
-    metadata = json.loads(metadata_path.read_text()).get("messages", {}) if metadata_path.exists() else {}
     old = {}
     old_groups = {}
     def identity(title, year):
@@ -116,8 +114,6 @@ async def main():
         duplicates = []
         async for message in client.iter_messages(entity, limit=None):
             item = parse(message)
-            if item:
-                item.update({k:v for k,v in metadata.get(str(message.id), {}).items() if v})
             if not item:
                 continue
             key = identity(item["title"], item["year"])
