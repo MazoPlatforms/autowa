@@ -1,21 +1,23 @@
 name = "filmgo-streamer"
 main = "src/index.js"
 compatibility_date = "2026-10-28"
-compatibility_flags = ["nodejs_compat"]
 
 [vars]
-CATALOG_URL = "https://raw.githubusercontent.com/MazoPlatforms/autowa/main/data/movies.json"
-# GramJS log verbosity: "error", "warn" (default), "info" or "debug".
-# Use "debug" only while diagnosing; it is very noisy.
-GRAMJS_LOG_LEVEL = "warn"
-# Set PUBLIC_ORIGIN to your deployed site origin to restrict browser requests.
-# Store TELEGRAM_API_ID, TELEGRAM_API_HASH, TELEGRAM_SESSION and TELEGRAM_CHANNEL_ID as secrets.
+# REQUIRED: public https URL of the origin backend (the Koyeb app that runs
+# src/server.mjs), with no trailing path. Example: https://your-app.koyeb.app
+ORIGIN_URL = ""
+# "proxy"    = bytes flow browser <- Worker <- origin (default, hides the origin URL)
+# "redirect" = Worker answers 307 and the browser streams straight from the origin
+#              (no video bytes through Cloudflare; the origin URL becomes visible)
+MODE = "proxy"
+# Optional: restrict browser (CORS) requests to your site, e.g. https://example.com
+# PUBLIC_ORIGIN = ""
 
 [observability]
 enabled = true
 
 [observability.logs]
 enabled = true
-head_sampling_rate = 1
+head_sampling_rate = 0.25
 invocation_logs = true
 persist = true
