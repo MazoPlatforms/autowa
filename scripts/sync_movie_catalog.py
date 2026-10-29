@@ -46,7 +46,7 @@ def parse(message):
         return None
     fields = {}
     for line in (message.message or "").splitlines():
-        match = re.match(r"^\s*(Movie|Year|Quality)\s*:\s*(.*?)\s*$", line, re.I)
+        match = re.match(r"^\s*(Movie|Year|Quality|Slug ID|imdb_id|poster|genre|runtime|director|cast|plot)\s*:\s*(.*?)\s*$", line, re.I)
         if match:
             fields[match.group(1).lower()] = match.group(2).strip()
     filename = str(getattr(message.file, "name", "") or "")
@@ -65,7 +65,12 @@ def parse(message):
         return None
     if not re.fullmatch(r"(19|20)\d{2}", fields["year"]):
         return None
+    extra = {k: fields[k] for k in ("imdb_id", "poster", "genre", "runtime", "director", "cast", "plot") if fields.get(k)}
+    for k in ("genre", "cast"):
+        if k in extra: extra[k] = [v.strip() for v in extra[k].split(",") if v.strip()]
     return {
+        **extra,
+        "caption_slug": fields.get("slug id"),
         "id": "telegram-" + str(message.id),
         "telegram_message_id": message.id,
         "title": fields["movie"][:140],
@@ -114,7 +119,7 @@ async def main():
             key = identity(item["title"], item["year"])
             quality = item["quality"].strip().lower()
             prior = old.get(item["id"], {})
-            slug = slug_by_identity.get(key) or prior.get("slug_id") or secrets.token_urlsafe(12)
+            slug = slug_by_identity.get(key) or item.get("caption_slug") or prior.get("slug_id") or secrets.token_urlsafe(12)
             slug_by_identity[key] = slug
             variant = {k: item[k] for k in ("telegram_message_id", "file_size", "file_name", "mime_type")}
             if key not in groups:
@@ -127,6 +132,8 @@ async def main():
                 movie.setdefault("metadata_status", "unmatched")
                 groups[key] = movie
             movie = groups[key]
+            for field in ("imdb_id", "poster", "genre", "runtime", "director", "cast", "plot"):
+                if item.get(field): movie[field] = item[field]
             if quality in (q.lower() for q in movie["qualities"]):
                 duplicates.append((item["title"], item["year"], item["quality"], message.id))
                 continue
@@ -166,6 +173,7 @@ async def main():
                 "Year: " + str(item["year"]),
                 "Quality: " + item["quality"],
                 "Slug ID: " + item["slug_id"],
+                *(key + ": " + (", ".join(item[key]) if isinstance(item[key], list) else str(item[key])) for key in ("imdb_id", "poster", "genre", "runtime", "director", "cast", "plot") if item.get(key)),
             ))
             if (message.message or "").strip() == caption:
                 continue
