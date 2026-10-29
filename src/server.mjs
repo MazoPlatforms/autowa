@@ -90,6 +90,12 @@ function verifyToken(token){
 function cookieToken(req){return (req.headers.cookie||'').split(';').map(v=>v.trim()).find(v=>v.startsWith('tfw_session='))?.slice(12)||'';}
 async function authenticated(req){const session=verifyToken(cookieToken(req));return session&&await redis('GET','session:'+hmac(session.nonce))===session.number?session:null;}
 function sessionCookie(token,age){return 'tfw_session='+token+'; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age='+age;}
+// Private per-account request history. Never expose a public phone-indexed endpoint.
+const historyKey=number=>'request-history:'+hmac(number);
+async function requestHistory(number){
+ const raw=await redis('LRANGE',historyKey(number),0,99);
+ return (Array.isArray(raw)?raw:[]).map(value=>{try{return JSON.parse(value);}catch{return null;}}).filter(Boolean);
+}
 async function profile(number){const raw=await redis('GET','profile:'+hmac(number));return raw?JSON.parse(raw):{name:'',created_at:new Date().toISOString()};}
 async function sendOtp(number,code){return sendWhatsAppOtp(number,code);}
 const index=fs.readFileSync(new URL('../web/index.html',import.meta.url));
@@ -135,6 +141,12 @@ const server=http.createServer(async(req,res)=>{
    const exempt=unlimitedRequests(session.number);
     const used=exempt?0:Number(await redis('GET','rate:'+hmac('submit:'+session.number))||0);
    return send(res,200,{number:session.number,name:user.name||'',limit:exempt?null:3,used:exempt?0:Math.min(used,3),remaining:exempt?null:Math.max(0,3-used),period:exempt?'unlimited':'rolling rate window (up to 24 hours)',unlimited:exempt});
+  }
+  if(req.method==='GET'&&url.pathname==='/api/request-history'){
+   const session=await authenticated(req);
+   if(!session)return send(res,401,{error:'Not signed in'});
+   const requests=await requestHistory(session.number);
+   return send(res,200,{requests});
   }
   if(req.method==='GET'&&url.pathname==='/api/version')return send(res,200,{version:'20261028-3',catalog_sync:'single-flight'});
   if(req.method==='GET'&&url.pathname==='/api/catalog-status')return send(res,200,{state:telegramCatalogStatus.state,updated_at:telegramCatalogStatus.updated_at,error:telegramCatalogStatus.error,telegram_configured:telegramReady});
@@ -276,6 +288,12 @@ const server=http.createServer(async(req,res)=>{
    body:JSON.stringify({event_type:'autowa-verified-request',client_payload:payload}),signal:AbortSignal.timeout(15000)
   });
   if(!result.ok){await redis('DEL','claim:'+hmac(session.nonce));return send(res,503,{error:'Queue unavailable; try again later'});}
+  // Queue accepted; store only minimal metadata in the user's private Redis list.
+  // GitHub dispatch acceptance does not imply media delivery.
+  try{
+   await redis('LPUSH',historyKey(session.number),JSON.stringify({id:requestId,title:movie.title,year:movie.year,quality:movie.quality,status:'pending_review',created_at:new Date().toISOString()}));
+   await redis('LTRIM',historyKey(session.number),0,99);
+  }catch(err){console.error('FilmGo request history persistence failed',err.message);}
   return send(res,202,{request_id:requestId,status:'pending_review',message:'Request queued for review; delivery is not guaranteed'});
  }catch(err){console.error('API error',String(err.message));return send(res,500,{error:'Request could not be completed'});}
 });
