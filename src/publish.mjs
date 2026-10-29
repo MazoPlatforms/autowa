@@ -104,7 +104,7 @@ function requesterProgress(j){
  const year=String(j.year||movie.year||'—'),quality=String(j.quality||movie.quality||'—');
  const size=Number(j.file_size||movie.file_size||0);
  const details=['*FILMGO*','', '*'+title+'*','Year: '+year,'Quality: '+quality,...(movie.genre?.length?['Genre: '+(Array.isArray(movie.genre)?movie.genre.join(', '):movie.genre)]:[]),''];
- let key=null,last='',lastAt=0,chain=Promise.resolve(),posterAttached=false,posterSent=false,started=Date.now(),lastBytes=0,lastSample=started,rate=0;
+ let key=null,last='',lastAt=0,chain=Promise.resolve(),started=Date.now(),lastBytes=0,lastSample=started,rate=0;
  const render=(message,stats)=>{
   if(!stats)return details.join('\n')+message+(size?'\nFile size: '+miB(size)+' MiB':'')+'\n\n'+STATUS_FOOTER;
   const now=Date.now(),elapsed=Math.max(.001,(now-lastSample)/1000);
@@ -118,22 +118,21 @@ function requesterProgress(j){
    const caption=render(message,stats);
    if(!force&&(caption===last||Date.now()-lastAt<12000))return;
    try{
-    let result;
-    if(!posterSent&&posterUrl){
-     try{result=await sock.sendMessage(jid,{image:{url:posterUrl},caption});posterAttached=!!result?.key?.id;posterSent=posterAttached;}
-     catch(err){console.warn('Movie poster unavailable, trying fallback image:',err.message);if(posterUrl!==FALLBACK_POSTER){try{result=await sock.sendMessage(jid,{image:{url:FALLBACK_POSTER},caption});posterAttached=!!result?.key?.id;posterSent=posterAttached;}catch(fallbackErr){console.warn('Fallback poster unavailable, using text status:',fallbackErr.message);}}}
-    }
-    if(!result){
-     const payload={text:caption};
-     if(key)payload.edit=key;
-     // WhatsApp does not reliably support editing image captions via Baileys.
-     // Keep the poster as the first message, and edit one text progress message.
-     if(posterAttached&&!key)posterAttached=false;
-     result=await sock.sendMessage(jid,payload);
-    }
-    if(!key&&result?.key?.id){
-     if(posterAttached){posterAttached=false;key=null;}
-     else key=result.key;
+    if(!key){
+     let sent;
+     try{sent=await sock.sendMessage(jid,{image:{url:posterUrl},caption});}
+     catch(err){
+      if(posterUrl!==FALLBACK_POSTER){
+       console.warn('Movie poster unavailable, trying fallback image:',err.message);
+       try{sent=await sock.sendMessage(jid,{image:{url:FALLBACK_POSTER},caption});}
+       catch(fallbackErr){console.warn('Fallback poster unavailable, using text status:',fallbackErr.message);}
+      }else console.warn('Fallback poster unavailable, using text status:',err.message);
+     }
+     if(!sent)sent=await sock.sendMessage(jid,{text:caption});
+     if(!sent?.key?.id)throw Error('Requester progress message has no message ID');
+     key=sent.key;
+    }else{
+     await sock.sendMessage(jid,{text:caption,edit:key});
     }
     last=caption;lastAt=Date.now();
    }catch(err){console.warn('Requester status update unavailable:',err.message);if(/connection closed|socket.*closed/i.test(String(err.message)))connectionClosed=true;}
