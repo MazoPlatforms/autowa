@@ -6,6 +6,7 @@ import {promisify} from 'node:util';
 const execFileAsync=promisify(execFile);
 import {startWhatsApp,isWhatsAppReady,sendWhatsAppOtp,getWhatsAppProfilePicture} from './whatsapp-otp.mjs';
 import {startFilmGoBot} from './filmgo-bot.mjs';
+import {logFilmGo} from './filmgo-logs.mjs';
 import {startStreamWorker,proxyRange,downloadFile,streamWorkerState} from './stream-worker.mjs';
 
 const PORT=Number(process.env.PORT||8000);
@@ -215,6 +216,7 @@ const server=http.createServer(async(req,res)=>{
    const headers={'Content-Type':'application/octet-stream','Content-Length':String(movie.file_size),'Content-Disposition':'attachment; filename="'+ascii+'"','Cache-Control':'private, no-store','X-Content-Type-Options':'nosniff'};
    res.writeHead(200,headers);
    if(req.method==='HEAD')return res.end();
+   void logFilmGo('downloads','⬇️ Download started · '+record.title+' ('+record.year+') · '+(movie.quality||url.searchParams.get('quality')||'default'));
    await downloadFile(res,{messageId:movie.telegram_message_id,total:movie.file_size});
    return;
   }
@@ -249,6 +251,7 @@ const server=http.createServer(async(req,res)=>{
    const disposition='inline; filename="'+asciiName+'"; filename*=UTF-8\'\''+encodeURIComponent(safeName);
    const headers={'Content-Type':mediaType,'Content-Length':String(length),'Content-Range':'bytes '+start+'-'+end+'/'+total,'Accept-Ranges':'bytes','Cache-Control':'no-store','X-Content-Type-Options':'nosniff','Content-Disposition':disposition};
    if(req.method==='HEAD'){res.writeHead(206,headers);return res.end();}
+   if(start===0)void logFilmGo('streams','▶️ Stream started · '+record.title+' ('+record.year+') · '+(movie.quality||url.searchParams.get('quality')||'default'));
    // Prefer one persistent Telethon connection; legacy subprocess remains a fallback.
    if(await proxyRange(res,headers,{messageId:movie.telegram_message_id,start,length},send))return;
    const child=spawn('python3',['src/telegram_stream.py',String(movie.telegram_message_id),String(start),String(length)],{env:process.env,stdio:['ignore','pipe','pipe']});
@@ -357,6 +360,7 @@ const server=http.createServer(async(req,res)=>{
    body:JSON.stringify({event_type:'autowa-verified-request',client_payload:payload}),signal:AbortSignal.timeout(15000)
   });
   if(!result.ok){await redis('DEL','claim:'+hmac(session.nonce));return send(res,503,{error:'Queue unavailable; try again later'});}
+  void logFilmGo('requests','📨 WhatsApp movie request queued · '+movie.title+' ('+movie.year+') · '+movie.quality+' · request '+requestId);
   // Queue accepted; store only minimal metadata in the user's private Redis list.
   // GitHub dispatch acceptance does not imply media delivery.
   try{
