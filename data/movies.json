@@ -1,17 +1,56 @@
 {
-  "schema_version": 1,
-  "updated_at": "2026-10-29T11:23:07.265170+00:00",
+  "schema_version": 2,
+  "updated_at": "2026-10-29T13:36:36.908325+00:00",
   "movies": [
     {
+      "id": "telegram-40",
+      "slug_id": "YE5d-vEu049kM3Nn",
+      "title": "Baththa",
+      "year": 2026,
+      "qualities": {
+        "720p": {
+          "telegram_message_id": 40,
+          "file_size": 1190375835,
+          "file_name": "@CinemasTrend - Baththa (2026) Tamil HQ HDRip - 720p - HEVC .mkv",
+          "mime_type": "video/x-matroska"
+        }
+      },
+      "imdb_id": "tt44090278",
+      "poster": "https://m.media-amazon.com/images/M/MV5BNjRmZGFjMDctMzRiNS00MmIwLTliYmMtODY5ZGFkOTE5YmFkXkEyXkFqcGc@._V1_QL75_UX380_CR0,4,380,562_.jpg",
+      "genre": [
+        "Action",
+        "Drama",
+        "Family"
+      ],
+      "runtime": "157 min",
+      "director": "Balaji Tharaneetharan",
+      "cast": [
+        "Vijay Sethupathi",
+        "Lijo Mol Jose",
+        "Hari Krishnan"
+      ],
+      "plot": "In 1986 Madras, a timid eight-year-old boy accidentally locks a feared criminal inside a school restroom. As the man faces hunger and isolation, an unexpected friendship forms between them, transforming both their lives.",
+      "imdb_rating": "9.2",
+      "metadata_status": "matched",
+      "telegram_message_id": 40,
+      "file_size": 1190375835,
+      "file_name": "@CinemasTrend - Baththa (2026) Tamil HQ HDRip - 720p - HEVC .mkv",
+      "mime_type": "video/x-matroska",
+      "quality": "720p"
+    },
+    {
       "id": "telegram-38",
-      "telegram_message_id": 38,
+      "slug_id": "LKNjsbHLKU86Imw6",
       "title": "Bigil",
       "year": 2019,
-      "quality": "720p",
-      "file_size": 1571403393,
-      "file_name": "@FBM_Tamil.Bigil.2019.Proper.HDrip.720p.mkv",
-      "mime_type": "video/x-matroska",
-      "slug_id": "LKNjsbHLKU86Imw6",
+      "qualities": {
+        "720p": {
+          "telegram_message_id": 38,
+          "file_size": 1571403393,
+          "file_name": "@FBM_Tamil.Bigil.2019.Proper.HDrip.720p.mkv",
+          "mime_type": "video/x-matroska"
+        }
+      },
       "imdb_id": "tt9260636",
       "poster": "https://m.media-amazon.com/images/M/MV5BNTQ5ZDgwYzMtOTBjYi00NTQ5LWE2ZjUtZmM3MTk2OTcyMjliXkEyXkFqcGc@._V1_QL75_UY562_CR21,0,380,562_.jpg",
       "genre": [
@@ -28,18 +67,26 @@
       ],
       "plot": "Michael gives up his dream of becoming a footballer after his father's murder. However, a friend convinces him to coach a women's football team and turn his life around.",
       "imdb_rating": "6.7",
-      "metadata_status": "matched"
+      "metadata_status": "matched",
+      "telegram_message_id": 38,
+      "file_size": 1571403393,
+      "file_name": "@FBM_Tamil.Bigil.2019.Proper.HDrip.720p.mkv",
+      "mime_type": "video/x-matroska",
+      "quality": "720p"
     },
     {
       "id": "telegram-37",
-      "telegram_message_id": 37,
+      "slug_id": "jLAX6xPO-A35WxOM",
       "title": "Varisu",
       "year": 2023,
-      "quality": "720p",
-      "file_size": 1922597086,
-      "file_name": "Varisu.2023.720p.AMZN.WEB-DL.DDP5.1.HEVC-SH3LBY.mkv",
-      "mime_type": "video/x-matroska",
-      "slug_id": "jLAX6xPO-A35WxOM",
+      "qualities": {
+        "720p": {
+          "telegram_message_id": 37,
+          "file_size": 1922597086,
+          "file_name": "Varisu.2023.720p.AMZN.WEB-DL.DDP5.1.HEVC-SH3LBY.mkv",
+          "mime_type": "video/x-matroska"
+        }
+      },
       "imdb_id": "tt11998558",
       "poster": "https://m.media-amazon.com/images/M/MV5BZDM4NDBkNGEtNzI2Yi00ODkwLTliNzAtODkwMmRhNTEzZmVlXkEyXkFqcGc@._V1_QL75_UX380_CR0,4,380,562_.jpg",
       "genre": [
@@ -56,18 +103,26 @@
       ],
       "plot": "Vijay Rajendran is a happy to-go lucky man. Things change when his father becomes terminally ill, and he is left to manage his business empire.",
       "imdb_rating": "5.9",
-      "metadata_status": "matched"
+      "metadata_status": "matched",
+      "telegram_message_id": 37,
+      "file_size": 1922597086,
+      "file_name": "Varisu.2023.720p.AMZN.WEB-DL.DDP5.1.HEVC-SH3LBY.mkv",
+      "mime_type": "video/x-matroska",
+      "quality": "720p"
     },
     {
       "id": "telegram-35",
-      "telegram_message_id": 35,
+      "slug_id": "Soofsf_fRo1smgrT",
       "title": "Ponniyin Selvan: Part I",
       "year": 2022,
-      "quality": "720p",
-      "file_size": 1688737299,
-      "file_name": "[MM] Ponniyin Selvan Part 1 (2022) Tamil HDRip - 720p .mkv",
-      "mime_type": "video/x-matroska",
-      "slug_id": "Soofsf_fRo1smgrT",
+      "qualities": {
+        "720p": {
+          "telegram_message_id": 35,
+          "file_size": 1688737299,
+          "file_name": "[MM] Ponniyin Selvan Part 1 (2022) Tamil HDRip - 720p .mkv",
+          "mime_type": "video/x-matroska"
+        }
+      },
       "imdb_id": "tt10701074",
       "poster": "https://m.media-amazon.com/images/M/MV5BYjI2ZmRmODEtZmEyYS00OWY3LTlhNWEtODhlZjQyNjVlMWU0XkEyXkFqcGc@._V1_SX300.jpg",
       "genre": [
@@ -84,18 +139,26 @@
       ],
       "plot": "Vandiyathevan crosses the Chola land to deliver a message from the Crown Prince Aditha Karikalan, while Kundavai attempts to establish political peace as vassals and petty chieftains plot against the throne.",
       "imdb_rating": "7.6",
-      "metadata_status": "matched"
+      "metadata_status": "matched",
+      "telegram_message_id": 35,
+      "file_size": 1688737299,
+      "file_name": "[MM] Ponniyin Selvan Part 1 (2022) Tamil HDRip - 720p .mkv",
+      "mime_type": "video/x-matroska",
+      "quality": "720p"
     },
     {
       "id": "telegram-34",
-      "telegram_message_id": 34,
+      "slug_id": "YKiVbnUM0akNHLYS",
       "title": "Enna Vilai",
       "year": 2026,
-      "quality": "720p",
-      "file_size": 1514369885,
-      "file_name": "@CinemasTrend - Enna Vilai (2026) Tamil HQ HDRip - 720p - x2.mkv",
-      "mime_type": "video/x-matroska",
-      "slug_id": "YKiVbnUM0akNHLYS",
+      "qualities": {
+        "720p": {
+          "telegram_message_id": 34,
+          "file_size": 1514369885,
+          "file_name": "@CinemasTrend - Enna Vilai (2026) Tamil HQ HDRip - 720p - x2.mkv",
+          "mime_type": "video/x-matroska"
+        }
+      },
       "imdb_id": "tt33095205",
       "poster": "https://m.media-amazon.com/images/M/MV5BNmY1MzM2ZTMtZmJmYS00NGI2LTllYzktN2NlMGMzZGNkYjc0XkEyXkFqcGc@._V1_QL75_UY562_CR27,0,380,562_.jpg",
       "genre": [
@@ -111,18 +174,26 @@
       ],
       "plot": "A gold pendant washed ashore transforms fisherman Thavasi's life. What seems like good fortune becomes false accusations, forcing him to battle a corrupt system to protect his family.",
       "imdb_rating": "8.7",
-      "metadata_status": "matched"
+      "metadata_status": "matched",
+      "telegram_message_id": 34,
+      "file_size": 1514369885,
+      "file_name": "@CinemasTrend - Enna Vilai (2026) Tamil HQ HDRip - 720p - x2.mkv",
+      "mime_type": "video/x-matroska",
+      "quality": "720p"
     },
     {
       "id": "telegram-33",
-      "telegram_message_id": 33,
+      "slug_id": "zMV4KVKTcmPGFIq7",
       "title": "Epic - First Semester",
       "year": 2026,
-      "quality": "720p",
-      "file_size": 1648701884,
-      "file_name": "@CinemasTrend - Epic (2026) Tamil HQ HDRip - 720p - x264 - (.mkv",
-      "mime_type": "video/x-matroska",
-      "slug_id": "zMV4KVKTcmPGFIq7",
+      "qualities": {
+        "720p": {
+          "telegram_message_id": 33,
+          "file_size": 1648701884,
+          "file_name": "@CinemasTrend - Epic (2026) Tamil HQ HDRip - 720p - x264 - (.mkv",
+          "mime_type": "video/x-matroska"
+        }
+      },
       "imdb_id": "tt35448218",
       "poster": "https://m.media-amazon.com/images/M/MV5BYzRmMDQ1MjAtOWEwMi00YWMxLTg0YTQtZmRkMjM5MjgwYmZlXkEyXkFqcGc@._V1_QL75_UX380_CR0,4,380,562_.jpg",
       "genre": [
@@ -139,18 +210,26 @@
       ],
       "plot": "Rohan, a middle-class student studying abroad due to family expectations, explores romance, identity, and growing up with honesty and emotional depth.",
       "imdb_rating": null,
-      "metadata_status": "matched"
+      "metadata_status": "matched",
+      "telegram_message_id": 33,
+      "file_size": 1648701884,
+      "file_name": "@CinemasTrend - Epic (2026) Tamil HQ HDRip - 720p - x264 - (.mkv",
+      "mime_type": "video/x-matroska",
+      "quality": "720p"
     },
     {
       "id": "telegram-32",
-      "telegram_message_id": 32,
+      "slug_id": "o5WjUYRoa3leridi",
       "title": "Moana",
       "year": 2026,
-      "quality": "720p",
-      "file_size": 1608394105,
-      "file_name": "@CinemasTrend - Moana (2026) BluRay - 720p - x264 - [Tam + T.mkv",
-      "mime_type": "video/x-matroska",
-      "slug_id": "o5WjUYRoa3leridi",
+      "qualities": {
+        "720p": {
+          "telegram_message_id": 32,
+          "file_size": 1608394105,
+          "file_name": "@CinemasTrend - Moana (2026) BluRay - 720p - x264 - [Tam + T.mkv",
+          "mime_type": "video/x-matroska"
+        }
+      },
       "imdb_id": "tt27419466",
       "poster": "https://m.media-amazon.com/images/M/MV5BMTQ1OTQ2Y2UtMzllNS00ODFiLWFkNGItNGRjOWRlMjIwNTRlXkEyXkFqcGc@._V1_QL75_UX380_CR0,0,380,562_.jpg",
       "genre": [
@@ -167,18 +246,26 @@
       ],
       "plot": "A brave teenager named Moana leaves her island for the first time and sails with a shape-shifting demigod named Maui to fix a dangerous curse.",
       "imdb_rating": "5.8",
-      "metadata_status": "matched"
+      "metadata_status": "matched",
+      "telegram_message_id": 32,
+      "file_size": 1608394105,
+      "file_name": "@CinemasTrend - Moana (2026) BluRay - 720p - x264 - [Tam + T.mkv",
+      "mime_type": "video/x-matroska",
+      "quality": "720p"
     },
     {
       "id": "telegram-31",
-      "telegram_message_id": 31,
+      "slug_id": "lWmytMdg0goRmh0v",
       "title": "Colony",
       "year": 2026,
-      "quality": "720p",
-      "file_size": 1531409197,
-      "file_name": "@CinemasTrend_Colony_2026_BluRay _720p_x264_Tamil_.mkv",
-      "mime_type": "video/x-matroska",
-      "slug_id": "lWmytMdg0goRmh0v",
+      "qualities": {
+        "720p": {
+          "telegram_message_id": 31,
+          "file_size": 1531409197,
+          "file_name": "@CinemasTrend_Colony_2026_BluRay _720p_x264_Tamil_.mkv",
+          "mime_type": "video/x-matroska"
+        }
+      },
       "imdb_id": "tt34385135",
       "poster": "https://m.media-amazon.com/images/M/MV5BNzI5YWViNGUtNGRiMy00OThhLWIwOGUtZjkyZDk2NjliODY2XkEyXkFqcGc@._V1_QL75_UX380_CR0,0,380,562_.jpg",
       "genre": [
@@ -195,18 +282,26 @@
       ],
       "plot": "Professor Se Jeong attends a biotech conference, only to witness it spiral into catastrophe when a rapidly mutating virus is unleashed. As the outbreak spreads and the infected begin to transform, authorities seal off the entire f...",
       "imdb_rating": "6.5",
-      "metadata_status": "matched"
+      "metadata_status": "matched",
+      "telegram_message_id": 31,
+      "file_size": 1531409197,
+      "file_name": "@CinemasTrend_Colony_2026_BluRay _720p_x264_Tamil_.mkv",
+      "mime_type": "video/x-matroska",
+      "quality": "720p"
     },
     {
       "id": "telegram-30",
-      "telegram_message_id": 30,
+      "slug_id": "Zfdz4xVDDosbeEbJ",
       "title": "Drive – The Pretenders",
       "year": 2026,
-      "quality": "720p",
-      "file_size": 1808510103,
-      "file_name": "@CinemasTrend - Drive The Pretenders (2026) HQ HDRip - 720p .mkv",
-      "mime_type": "video/x-matroska",
-      "slug_id": "Zfdz4xVDDosbeEbJ",
+      "qualities": {
+        "720p": {
+          "telegram_message_id": 30,
+          "file_size": 1808510103,
+          "file_name": "@CinemasTrend - Drive The Pretenders (2026) HQ HDRip - 720p .mkv",
+          "mime_type": "video/x-matroska"
+        }
+      },
       "imdb_id": "tt37180686",
       "poster": "https://m.media-amazon.com/images/M/MV5BMTNmN2EzMGQtNDIyMi00ZDljLTk5N2ItMTA0NGJmZTJmMTEyXkEyXkFqcGc@._V1_QL75_UX656_.jpg",
       "genre": [
@@ -222,18 +317,26 @@
       ],
       "plot": "A young race car mechanic pretends to be engaged to the most scandalous racing star in the scene - officially for his reputation, but secretly for her own chance behind the wheel. Soon the lie threatens to destroy everything.",
       "imdb_rating": null,
-      "metadata_status": "matched"
+      "metadata_status": "matched",
+      "telegram_message_id": 30,
+      "file_size": 1808510103,
+      "file_name": "@CinemasTrend - Drive The Pretenders (2026) HQ HDRip - 720p .mkv",
+      "mime_type": "video/x-matroska",
+      "quality": "720p"
     },
     {
       "id": "telegram-29",
-      "telegram_message_id": 29,
+      "slug_id": "uoPpVtHa1ZtAUulf",
       "title": "Dorothy",
       "year": 2026,
-      "quality": "720p",
-      "file_size": 1671482773,
-      "file_name": "@CinemasTrend - Dorothy (2026) Tamil HQ HDRip - 720p - x264 .mkv",
-      "mime_type": "video/x-matroska",
-      "slug_id": "uoPpVtHa1ZtAUulf",
+      "qualities": {
+        "720p": {
+          "telegram_message_id": 29,
+          "file_size": 1671482773,
+          "file_name": "@CinemasTrend - Dorothy (2026) Tamil HQ HDRip - 720p - x264 .mkv",
+          "mime_type": "video/x-matroska"
+        }
+      },
       "imdb_id": "tt38915678",
       "poster": "https://m.media-amazon.com/images/M/MV5BODdiOGNiOTktY2Y5NC00N2U4LWI1YzctM2RmZmEzMzc1OGY5XkEyXkFqcGc@._V1_QL75_UY562_CR35,0,380,562_.jpg",
       "genre": [
@@ -250,18 +353,26 @@
       ],
       "plot": "Set in a world shaped by caste, violence, and toxic masculinity, two friends grow up inseparable in rural Tamil Nadu. Their lives are transformed by the arrival of Dorothy, a woman whose compassion challenges the world around them.",
       "imdb_rating": null,
-      "metadata_status": "matched"
+      "metadata_status": "matched",
+      "telegram_message_id": 29,
+      "file_size": 1671482773,
+      "file_name": "@CinemasTrend - Dorothy (2026) Tamil HQ HDRip - 720p - x264 .mkv",
+      "mime_type": "video/x-matroska",
+      "quality": "720p"
     },
     {
       "id": "telegram-28",
-      "telegram_message_id": 28,
+      "slug_id": "6bEvVbZlFxXWFWrX",
       "title": "Vaazhthugal",
       "year": 2008,
-      "quality": "720p",
-      "file_size": 1524993803,
-      "file_name": "Vaazhthugal (2008) [Tamil - 720p HQ HDRip - x264 - AAC - 1..mkv",
-      "mime_type": "video/x-matroska",
-      "slug_id": "6bEvVbZlFxXWFWrX",
+      "qualities": {
+        "720p": {
+          "telegram_message_id": 28,
+          "file_size": 1524993803,
+          "file_name": "Vaazhthugal (2008) [Tamil - 720p HQ HDRip - x264 - AAC - 1..mkv",
+          "mime_type": "video/x-matroska"
+        }
+      },
       "imdb_id": "tt1509832",
       "poster": "https://m.media-amazon.com/images/M/MV5BY2M2YWZkYzAtMDI5Mi00MTJlLWI0YWMtMTE4MjBiNDYxZmFkXkEyXkFqcGdeQXVyNDQxNzQ2OTY@._V1_SX300.jpg",
       "genre": [
@@ -276,30 +387,46 @@
       ],
       "plot": "Kadhiravan, a businessman, desires a wife who should respect his parents. After seeing Kayalvizhi on TV, he meets her on the pretext of being a home contractor and slowly makes his way into her heart.",
       "imdb_rating": "4.5",
-      "metadata_status": "matched"
+      "metadata_status": "matched",
+      "telegram_message_id": 28,
+      "file_size": 1524993803,
+      "file_name": "Vaazhthugal (2008) [Tamil - 720p HQ HDRip - x264 - AAC - 1..mkv",
+      "mime_type": "video/x-matroska",
+      "quality": "720p"
     },
     {
       "id": "telegram-27",
-      "telegram_message_id": 27,
+      "slug_id": "1hUIcqDSrejGxTqi",
       "title": "Thaalam",
       "year": 1999,
-      "quality": "720p",
+      "qualities": {
+        "720p": {
+          "telegram_message_id": 27,
+          "file_size": 1902856708,
+          "file_name": "- Thaalam (1999) [Tamil - 720p HQ HDTVRip - x264 - [DD5.1(1.mkv",
+          "mime_type": "video/x-matroska"
+        }
+      },
+      "metadata_status": "unmatched",
+      "telegram_message_id": 27,
       "file_size": 1902856708,
       "file_name": "- Thaalam (1999) [Tamil - 720p HQ HDTVRip - x264 - [DD5.1(1.mkv",
       "mime_type": "video/x-matroska",
-      "slug_id": "1hUIcqDSrejGxTqi",
-      "metadata_status": "unmatched"
+      "quality": "720p"
     },
     {
       "id": "telegram-26",
-      "telegram_message_id": 26,
+      "slug_id": "7RFx4VZ-TlptNvUX",
       "title": "Paradise",
       "year": 2023,
-      "quality": "720p",
-      "file_size": 433591591,
-      "file_name": "Paradise_2023_HQ_HDRip_x264_Original_Audios_AAC_2_0_Tamil_+_Hindi.mkv",
-      "mime_type": "video/x-matroska",
-      "slug_id": "7RFx4VZ-TlptNvUX",
+      "qualities": {
+        "720p": {
+          "telegram_message_id": 26,
+          "file_size": 433591591,
+          "file_name": "Paradise_2023_HQ_HDRip_x264_Original_Audios_AAC_2_0_Tamil_+_Hindi.mkv",
+          "mime_type": "video/x-matroska"
+        }
+      },
       "imdb_id": "tt21308888",
       "poster": "https://m.media-amazon.com/images/M/MV5BODYxYTRkZWEtZjdhNS00ZWFmLTljNDItNTk2NWM4Mjc5NjYzXkEyXkFqcGc@._V1_QL75_UX380_CR0,0,380,562_.jpg",
       "genre": [
@@ -316,18 +443,26 @@
       ],
       "plot": "After his wife is forced to give up 40 years of her life as payment for an insurance debt, a man desperately searches for a way to get the years back.",
       "imdb_rating": "6.3",
-      "metadata_status": "matched"
+      "metadata_status": "matched",
+      "telegram_message_id": 26,
+      "file_size": 433591591,
+      "file_name": "Paradise_2023_HQ_HDRip_x264_Original_Audios_AAC_2_0_Tamil_+_Hindi.mkv",
+      "mime_type": "video/x-matroska",
+      "quality": "720p"
     },
     {
       "id": "telegram-25",
-      "telegram_message_id": 25,
+      "slug_id": "gSJC6jBiNE5Oe_ts",
       "title": "Bubblegum",
       "year": 2023,
-      "quality": "720p",
-      "file_size": 1911506509,
-      "file_name": "Bubblegum.2023.720p.SS.WEB-DL.DD+5.1.x264-SH3LBY.mkv",
-      "mime_type": "video/x-matroska",
-      "slug_id": "gSJC6jBiNE5Oe_ts",
+      "qualities": {
+        "720p": {
+          "telegram_message_id": 25,
+          "file_size": 1911506509,
+          "file_name": "Bubblegum.2023.720p.SS.WEB-DL.DD+5.1.x264-SH3LBY.mkv",
+          "mime_type": "video/x-matroska"
+        }
+      },
       "imdb_id": "tt29436996",
       "poster": "https://m.media-amazon.com/images/M/MV5BNGM2MTBmMGUtYTg1Yi00NThiLWJlM2UtYmY3YzAxYjQ5OTVkXkEyXkFqcGdeQXVyMTUzNTgzNzM0._V1_SX300.jpg",
       "genre": [
@@ -344,46 +479,26 @@
       ],
       "plot": "Aadi and Jhanvi, from different backgrounds, struggle with doubts and challenges in their relationship, questioning if love can overcome their differences.",
       "imdb_rating": "6.6",
-      "metadata_status": "matched"
-    },
-    {
-      "id": "telegram-24",
-      "telegram_message_id": 24,
-      "title": "The Paradise",
-      "year": 2026,
-      "quality": "1080p",
-      "file_size": 1355379133,
-      "file_name": "The Paradise (2026) Tamil HQ HDRip - 720p - HEVC - x265 .mkv",
+      "metadata_status": "matched",
+      "telegram_message_id": 25,
+      "file_size": 1911506509,
+      "file_name": "Bubblegum.2023.720p.SS.WEB-DL.DD+5.1.x264-SH3LBY.mkv",
       "mime_type": "video/x-matroska",
-      "slug_id": "gMjzivI2JCH9YhG2",
-      "imdb_id": "tt31969655",
-      "poster": "https://m.media-amazon.com/images/M/MV5BZWVlYjQ1NzktY2VmZC00NzhlLTg1NTItZTRhNDNmYzQyNWQxXkEyXkFqcGc@._V1_QL75_UX380_CR0,16,380,562_.jpg",
-      "genre": [
-        "Action",
-        "Adventure",
-        "Drama"
-      ],
-      "runtime": "165 min",
-      "director": "Srikanth Odela",
-      "cast": [
-        "Nani",
-        "Raghav Juyal",
-        "Kayadu Lohar"
-      ],
-      "plot": "In 1980s Secunderabad, a marginalized tribe battles discrimination and fights for citizenship under an unexpected leader's guidance, challenging systemic oppression.",
-      "imdb_rating": null,
-      "metadata_status": "matched"
+      "quality": "720p"
     },
     {
       "id": "telegram-23",
-      "telegram_message_id": 23,
+      "slug_id": "BgWLSGwpdmYTzltS",
       "title": "Aasha",
       "year": 2026,
-      "quality": "1080p",
-      "file_size": 1722793634,
-      "file_name": "Aasha (2026) Tamil HQ HDRip - 1080p - x264 - (DD+5.1 - 1.mkv",
-      "mime_type": "video/x-matroska",
-      "slug_id": "BgWLSGwpdmYTzltS",
+      "qualities": {
+        "1080p": {
+          "telegram_message_id": 23,
+          "file_size": 1722793634,
+          "file_name": "Aasha (2026) Tamil HQ HDRip - 1080p - x264 - (DD+5.1 - 1.mkv",
+          "mime_type": "video/x-matroska"
+        }
+      },
       "imdb_id": "tt37894980",
       "poster": "https://m.media-amazon.com/images/M/MV5BNzg3MzhiMTMtNGU2NC00YjViLTk2MWMtNTYyZWU4YWQxM2IxXkEyXkFqcGdeQXRyYW5zY29kZS13b3JrZmxvdw@@._V1_QL75_UY563_CR172,0,1000,563_.jpg",
       "genre": [
@@ -398,18 +513,26 @@
       ],
       "plot": "A stubborn, short-tempered woman named Aasha gets into an altercation with Jeemon over a road accident. She is resolved to pursue a case against him, while he threatens her with serious consequences.",
       "imdb_rating": null,
-      "metadata_status": "matched"
+      "metadata_status": "matched",
+      "telegram_message_id": 23,
+      "file_size": 1722793634,
+      "file_name": "Aasha (2026) Tamil HQ HDRip - 1080p - x264 - (DD+5.1 - 1.mkv",
+      "mime_type": "video/x-matroska",
+      "quality": "1080p"
     },
     {
       "id": "telegram-21",
-      "telegram_message_id": 21,
+      "slug_id": "yjRD0Ru3AZUfPpC3",
       "title": "Parimala and Co",
       "year": 2026,
-      "quality": "720p",
-      "file_size": 1638237191,
-      "file_name": "Parimala and Co (2026) Tamil v2 HQ HDRip - 720p - x264 -.mkv",
-      "mime_type": "video/x-matroska",
-      "slug_id": "yjRD0Ru3AZUfPpC3",
+      "qualities": {
+        "720p": {
+          "telegram_message_id": 21,
+          "file_size": 1638237191,
+          "file_name": "Parimala and Co (2026) Tamil v2 HQ HDRip - 720p - x264 -.mkv",
+          "mime_type": "video/x-matroska"
+        }
+      },
       "imdb_id": "tt39385419",
       "poster": "https://m.media-amazon.com/images/M/MV5BNGJmODQ0ODYtOWQ3Zi00M2VhLWIwNzYtYzRmMGI0NmE5ZWEwXkEyXkFqcGc@._V1_QL75_UY562_CR35,0,380,562_.jpg",
       "genre": [
@@ -426,18 +549,26 @@
       ],
       "plot": "Follows a family who, after committing murder, must navigate the predicament they face while trying to maintain their everyday lives.",
       "imdb_rating": "6.0",
-      "metadata_status": "matched"
+      "metadata_status": "matched",
+      "telegram_message_id": 21,
+      "file_size": 1638237191,
+      "file_name": "Parimala and Co (2026) Tamil v2 HQ HDRip - 720p - x264 -.mkv",
+      "mime_type": "video/x-matroska",
+      "quality": "720p"
     },
     {
       "id": "telegram-20",
-      "telegram_message_id": 20,
+      "slug_id": "Gg-2TQiHnqmAF0sX",
       "title": "Kanguva",
       "year": 2024,
-      "quality": "720p",
-      "file_size": 1198913890,
-      "file_name": "Kanguva (2024) Tamil HQ HDRip - 720p - HEVC - x265 - (DD.mkv",
-      "mime_type": "video/x-matroska",
-      "slug_id": "Gg-2TQiHnqmAF0sX",
+      "qualities": {
+        "720p": {
+          "telegram_message_id": 20,
+          "file_size": 1198913890,
+          "file_name": "Kanguva (2024) Tamil HQ HDRip - 720p - HEVC - x265 - (DD.mkv",
+          "mime_type": "video/x-matroska"
+        }
+      },
       "imdb_id": "tt22036406",
       "poster": "https://m.media-amazon.com/images/M/MV5BNjE2OGYyMTctY2ZkYy00ZWMzLWIzNjEtMWIzNjkxZTMyM2QwXkEyXkFqcGc@._V1_QL75_UY562_CR35,0,380,562_.jpg",
       "genre": [
@@ -454,18 +585,26 @@
       ],
       "plot": "A tribal warrior's fierce struggle to save his people a millennium ago is mysteriously linked to a bounty hunter's perilous quest in the present.",
       "imdb_rating": "4.5",
-      "metadata_status": "matched"
+      "metadata_status": "matched",
+      "telegram_message_id": 20,
+      "file_size": 1198913890,
+      "file_name": "Kanguva (2024) Tamil HQ HDRip - 720p - HEVC - x265 - (DD.mkv",
+      "mime_type": "video/x-matroska",
+      "quality": "720p"
     },
     {
       "id": "telegram-19",
-      "telegram_message_id": 19,
+      "slug_id": "N7zgxckT8Ah85_zv",
       "title": "Idhayam Murali",
       "year": 2026,
-      "quality": "720p",
-      "file_size": 1235934013,
-      "file_name": "Idhayam Murali (2026) Tamil HQ HDRip - 720p - HEVC - x26.mkv",
-      "mime_type": "video/x-matroska",
-      "slug_id": "N7zgxckT8Ah85_zv",
+      "qualities": {
+        "720p": {
+          "telegram_message_id": 19,
+          "file_size": 1235934013,
+          "file_name": "Idhayam Murali (2026) Tamil HQ HDRip - 720p - HEVC - x26.mkv",
+          "mime_type": "video/x-matroska"
+        }
+      },
       "imdb_id": "tt35723557",
       "poster": "https://m.media-amazon.com/images/M/MV5BZGRiZmZlOGQtMWMyMS00Yjk2LTkyMjAtYzI5ZGQxMjdhYTBmXkEyXkFqcGc@._V1_SX300.jpg",
       "genre": [
@@ -480,18 +619,26 @@
       ],
       "plot": null,
       "imdb_rating": null,
-      "metadata_status": "matched"
+      "metadata_status": "matched",
+      "telegram_message_id": 19,
+      "file_size": 1235934013,
+      "file_name": "Idhayam Murali (2026) Tamil HQ HDRip - 720p - HEVC - x26.mkv",
+      "mime_type": "video/x-matroska",
+      "quality": "720p"
     },
     {
       "id": "telegram-18",
-      "telegram_message_id": 18,
+      "slug_id": "lT4kPFz1yRXVtpuu",
       "title": "Mandaadi",
       "year": 2026,
-      "quality": "720p",
-      "file_size": 1249155145,
-      "file_name": "Mandaadi (2026) Tamil HQ HDRip - 720p - HEVC - x265 - (D.mkv",
-      "mime_type": "video/x-matroska",
-      "slug_id": "lT4kPFz1yRXVtpuu",
+      "qualities": {
+        "720p": {
+          "telegram_message_id": 18,
+          "file_size": 1249155145,
+          "file_name": "Mandaadi (2026) Tamil HQ HDRip - 720p - HEVC - x265 - (D.mkv",
+          "mime_type": "video/x-matroska"
+        }
+      },
       "imdb_id": "tt36596965",
       "poster": "https://m.media-amazon.com/images/M/MV5BM2NjYTUwMjEtZmYzNy00MTYxLWE1OGYtNWVmMjYzOWViZGJmXkEyXkFqcGc@._V1_QL75_UY562_CR35,0,380,562_.jpg",
       "genre": [
@@ -508,18 +655,26 @@
       ],
       "plot": "A fishing captain applies his maritime knowledge in a traditional boat race along Tamil Nadu's coast during a festival, leading a six-person team against other crews.",
       "imdb_rating": null,
-      "metadata_status": "matched"
+      "metadata_status": "matched",
+      "telegram_message_id": 18,
+      "file_size": 1249155145,
+      "file_name": "Mandaadi (2026) Tamil HQ HDRip - 720p - HEVC - x265 - (D.mkv",
+      "mime_type": "video/x-matroska",
+      "quality": "720p"
     },
     {
       "id": "telegram-17",
-      "telegram_message_id": 17,
+      "slug_id": "RL5g9YLstwS10Irw",
       "title": "Jana Nayagan",
       "year": 2026,
-      "quality": "720p",
-      "file_size": 1313951942,
-      "file_name": "Jana_Nayagan_2026_Tamil HQ_HDRip_720p_ HEVC _ x265 .mkv",
-      "mime_type": "video/x-matroska",
-      "slug_id": "RL5g9YLstwS10Irw",
+      "qualities": {
+        "720p": {
+          "telegram_message_id": 17,
+          "file_size": 1313951942,
+          "file_name": "Jana_Nayagan_2026_Tamil HQ_HDRip_720p_ HEVC _ x265 .mkv",
+          "mime_type": "video/x-matroska"
+        }
+      },
       "imdb_id": "tt33379543",
       "poster": "https://m.media-amazon.com/images/M/MV5BOTE1M2ZkZjYtNzExNi00MTQwLTg3ZDYtYTA3YmQyMDgyZjU4XkEyXkFqcGc@._V1_SX300.jpg",
       "genre": [
@@ -535,18 +690,26 @@
       ],
       "plot": "Thalapthy Vijay is adamant about getting even with a powerful businessman who cost him money. He is prepared to square off against the formidable foe and resolve their issues amicably.",
       "imdb_rating": null,
-      "metadata_status": "matched"
+      "metadata_status": "matched",
+      "telegram_message_id": 17,
+      "file_size": 1313951942,
+      "file_name": "Jana_Nayagan_2026_Tamil HQ_HDRip_720p_ HEVC _ x265 .mkv",
+      "mime_type": "video/x-matroska",
+      "quality": "720p"
     },
     {
       "id": "telegram-16",
-      "telegram_message_id": 16,
+      "slug_id": "5QNhU753BwLO3En6",
       "title": "Bethlehem Kudumba Unit",
       "year": 2026,
-      "quality": "720p",
-      "file_size": 1701205856,
-      "file_name": "Bethlehem.Kudumba.Unit.2026.720p.JioHotStar.WEB-DL.Tamil.mkv",
-      "mime_type": "video/x-matroska",
-      "slug_id": "5QNhU753BwLO3En6",
+      "qualities": {
+        "720p": {
+          "telegram_message_id": 16,
+          "file_size": 1701205856,
+          "file_name": "Bethlehem.Kudumba.Unit.2026.720p.JioHotStar.WEB-DL.Tamil.mkv",
+          "mime_type": "video/x-matroska"
+        }
+      },
       "imdb_id": "tt37535100",
       "poster": "https://m.media-amazon.com/images/M/MV5BMTU5OWQ4YTgtZTZiMi00ZjE2LTk1MjgtYjcyNDZiODBjYTQ3XkEyXkFqcGc@._V1_QL75_UY562_CR21,0,380,562_.jpg",
       "genre": [
@@ -563,18 +726,26 @@
       ],
       "plot": "Follows a couple with a significant age difference as they navigate their romantic relationship.",
       "imdb_rating": null,
-      "metadata_status": "matched"
+      "metadata_status": "matched",
+      "telegram_message_id": 16,
+      "file_size": 1701205856,
+      "file_name": "Bethlehem.Kudumba.Unit.2026.720p.JioHotStar.WEB-DL.Tamil.mkv",
+      "mime_type": "video/x-matroska",
+      "quality": "720p"
     },
     {
       "id": "telegram-15",
-      "telegram_message_id": 15,
+      "slug_id": "Mh3Fna5ba1K3lrWa",
       "title": "Euphoria",
       "year": 2026,
-      "quality": "1080p",
-      "file_size": 1910419091,
-      "file_name": "Euphoria (2026) Tamil HQ HDRip - 1080p - x265 - HEVC - (.mkv",
-      "mime_type": "video/x-matroska",
-      "slug_id": "Mh3Fna5ba1K3lrWa",
+      "qualities": {
+        "1080p": {
+          "telegram_message_id": 15,
+          "file_size": 1910419091,
+          "file_name": "Euphoria (2026) Tamil HQ HDRip - 1080p - x265 - HEVC - (.mkv",
+          "mime_type": "video/x-matroska"
+        }
+      },
       "imdb_id": "tt33737583",
       "poster": "https://m.media-amazon.com/images/M/MV5BMTRiMGMzOWUtNGFmZC00ODY4LWJlNmEtODJjNDdmNTBlYTgwXkEyXkFqcGc@._V1_QL75_UX380_CR0,4,380,562_.jpg",
       "genre": [
@@ -589,18 +760,32 @@
       ],
       "plot": "In a time of rising youth crime and fading values, society confronts hard questions about raising children and seeking justice, as a new generation struggles with the costs of ambition and moral choices.",
       "imdb_rating": "7.2",
-      "metadata_status": "matched"
+      "metadata_status": "matched",
+      "telegram_message_id": 15,
+      "file_size": 1910419091,
+      "file_name": "Euphoria (2026) Tamil HQ HDRip - 1080p - x265 - HEVC - (.mkv",
+      "mime_type": "video/x-matroska",
+      "quality": "1080p"
     },
     {
-      "id": "telegram-13",
-      "telegram_message_id": 13,
+      "id": "telegram-24",
+      "slug_id": "N9vf8wpOst7TO2WC",
       "title": "The Paradise",
       "year": 2026,
-      "quality": "720p",
-      "file_size": 1355379133,
-      "file_name": "The Paradise (2026) Tamil HQ HDRip - 720p - HEVC - x265 .mkv",
-      "mime_type": "video/x-matroska",
-      "slug_id": "N9vf8wpOst7TO2WC",
+      "qualities": {
+        "1080p": {
+          "telegram_message_id": 24,
+          "file_size": 1355379133,
+          "file_name": "The Paradise (2026) Tamil HQ HDRip - 720p - HEVC - x265 .mkv",
+          "mime_type": "video/x-matroska"
+        },
+        "720p": {
+          "telegram_message_id": 13,
+          "file_size": 1355379133,
+          "file_name": "The Paradise (2026) Tamil HQ HDRip - 720p - HEVC - x265 .mkv",
+          "mime_type": "video/x-matroska"
+        }
+      },
       "imdb_id": "tt31969655",
       "poster": "https://m.media-amazon.com/images/M/MV5BZWVlYjQ1NzktY2VmZC00NzhlLTg1NTItZTRhNDNmYzQyNWQxXkEyXkFqcGc@._V1_QL75_UX380_CR0,16,380,562_.jpg",
       "genre": [
@@ -617,18 +802,26 @@
       ],
       "plot": "In 1980s Secunderabad, a marginalized tribe battles discrimination and fights for citizenship under an unexpected leader's guidance, challenging systemic oppression.",
       "imdb_rating": null,
-      "metadata_status": "matched"
+      "metadata_status": "matched",
+      "telegram_message_id": 13,
+      "file_size": 1355379133,
+      "file_name": "The Paradise (2026) Tamil HQ HDRip - 720p - HEVC - x265 .mkv",
+      "mime_type": "video/x-matroska",
+      "quality": "720p"
     },
     {
       "id": "telegram-12",
-      "telegram_message_id": 12,
+      "slug_id": "zlNebfHD37Vt5WHe",
       "title": "Amaran",
       "year": 2024,
-      "quality": "720p",
-      "file_size": 1216867624,
-      "file_name": "Amaran (2024) Tamil HQ HDRip - 720p - HEVC - x265 - (DD+5.1 .mkv",
-      "mime_type": "video/x-matroska",
-      "slug_id": "zlNebfHD37Vt5WHe",
+      "qualities": {
+        "720p": {
+          "telegram_message_id": 12,
+          "file_size": 1216867624,
+          "file_name": "Amaran (2024) Tamil HQ HDRip - 720p - HEVC - x265 - (DD+5.1 .mkv",
+          "mime_type": "video/x-matroska"
+        }
+      },
       "imdb_id": "tt27118357",
       "poster": "https://m.media-amazon.com/images/M/MV5BZGQyYTA0Y2EtYTA1NC00YTkzLWJiMmQtNzUzZGMzNjc5ZjM1XkEyXkFqcGc@._V1_QL75_UX380_CR0,4,380,562_.jpg",
       "genre": [
@@ -645,18 +838,26 @@
       ],
       "plot": "The life of Major Mukund Varadarajan and is set against the backdrop of the Qazipathri Operation in Shopian, Kashmir, which took place back in 2014.",
       "imdb_rating": "8.1",
-      "metadata_status": "matched"
+      "metadata_status": "matched",
+      "telegram_message_id": 12,
+      "file_size": 1216867624,
+      "file_name": "Amaran (2024) Tamil HQ HDRip - 720p - HEVC - x265 - (DD+5.1 .mkv",
+      "mime_type": "video/x-matroska",
+      "quality": "720p"
     },
     {
       "id": "telegram-11",
-      "telegram_message_id": 11,
+      "slug_id": "NQ6rMc34RPM5_GXq",
       "title": "The Invite",
       "year": 2026,
-      "quality": "720p",
-      "file_size": 1342360460,
-      "file_name": "The Invite (2026) BluRay - 720p - x264 - [Tamil + Telugu.mkv",
-      "mime_type": "video/x-matroska",
-      "slug_id": "NQ6rMc34RPM5_GXq",
+      "qualities": {
+        "720p": {
+          "telegram_message_id": 11,
+          "file_size": 1342360460,
+          "file_name": "The Invite (2026) BluRay - 720p - x264 - [Tamil + Telugu.mkv",
+          "mime_type": "video/x-matroska"
+        }
+      },
       "imdb_id": "tt14173636",
       "poster": "https://m.media-amazon.com/images/M/MV5BMjI0MzJjMjctNmQzZi00Y2U4LWEwZGItMmE3NDUzNzk1YzY3XkEyXkFqcGc@._V1_QL75_UX380_CR0,15,380,562_.jpg",
       "genre": [
@@ -673,18 +874,26 @@
       ],
       "plot": "Joe and Angela's marriage is on thin ice. When they invite their enigmatic upstairs neighbors for a dinner party, the night spirals into unexpected places.",
       "imdb_rating": "7.5",
-      "metadata_status": "matched"
+      "metadata_status": "matched",
+      "telegram_message_id": 11,
+      "file_size": 1342360460,
+      "file_name": "The Invite (2026) BluRay - 720p - x264 - [Tamil + Telugu.mkv",
+      "mime_type": "video/x-matroska",
+      "quality": "720p"
     },
     {
       "id": "telegram-10",
-      "telegram_message_id": 10,
+      "slug_id": "9I8OnKHFJ9f9qJiB",
       "title": "The Tomorrow War",
       "year": 2021,
-      "quality": "720p",
-      "file_size": 1018322674,
-      "file_name": "The Tomorrow War (2021) Tamil HD Rip.mkv",
-      "mime_type": "video/x-matroska",
-      "slug_id": "9I8OnKHFJ9f9qJiB",
+      "qualities": {
+        "720p": {
+          "telegram_message_id": 10,
+          "file_size": 1018322674,
+          "file_name": "The Tomorrow War (2021) Tamil HD Rip.mkv",
+          "mime_type": "video/x-matroska"
+        }
+      },
       "imdb_id": "tt9777666",
       "poster": "https://m.media-amazon.com/images/M/MV5BYmUyNzY2YWYtNWQ0My00ODMwLTkwOTQtOTA0ZjM0MjRmYjJiXkEyXkFqcGc@._V1_QL75_UX380_CR0,0,380,562_.jpg",
       "genre": [
@@ -701,18 +910,26 @@
       ],
       "plot": "A family man travels to the year 2051 to join a global war against a deadly alien species.",
       "imdb_rating": "6.6",
-      "metadata_status": "matched"
+      "metadata_status": "matched",
+      "telegram_message_id": 10,
+      "file_size": 1018322674,
+      "file_name": "The Tomorrow War (2021) Tamil HD Rip.mkv",
+      "mime_type": "video/x-matroska",
+      "quality": "720p"
     },
     {
       "id": "telegram-9",
-      "telegram_message_id": 9,
+      "slug_id": "tfw-ydqusmlrw02bcfc3",
       "title": "Minnale",
       "year": 2001,
-      "quality": "1080p",
-      "file_size": 1882840647,
-      "file_name": "Minnale (2001) Tamil HQ DVDRip - 1080p - HEVC - x265 - (.mkv",
-      "mime_type": "video/x-matroska",
-      "slug_id": "tfw-ydqusmlrw02bcfc3",
+      "qualities": {
+        "1080p": {
+          "telegram_message_id": 9,
+          "file_size": 1882840647,
+          "file_name": "Minnale (2001) Tamil HQ DVDRip - 1080p - HEVC - x265 - (.mkv",
+          "mime_type": "video/x-matroska"
+        }
+      },
       "imdb_id": "tt0357905",
       "poster": "https://m.media-amazon.com/images/M/MV5BZTkyZTE3MzktMTlmMy00ZGE5LWJkZGEtMmU3YzhlNGJlM2E0XkEyXkFqcGc@._V1_SX300.jpg",
       "genre": [
@@ -729,18 +946,26 @@
       ],
       "plot": "A young girl is torn between an obsessive lover and a mild-mannered suitor.",
       "imdb_rating": "7.6",
-      "metadata_status": "matched"
+      "metadata_status": "matched",
+      "telegram_message_id": 9,
+      "file_size": 1882840647,
+      "file_name": "Minnale (2001) Tamil HQ DVDRip - 1080p - HEVC - x265 - (.mkv",
+      "mime_type": "video/x-matroska",
+      "quality": "1080p"
     },
     {
       "id": "telegram-8",
-      "telegram_message_id": 8,
+      "slug_id": "tfw-kl0aqkpzj64icj2q",
       "title": "Modha Rathiri",
       "year": 2026,
-      "quality": "720p",
-      "file_size": 1660708170,
-      "file_name": "Modha Rathri (2026) Tamil HQ HDRip - 720p - x264 - (DD+5.mkv",
-      "mime_type": "video/x-matroska",
-      "slug_id": "tfw-kl0aqkpzj64icj2q",
+      "qualities": {
+        "720p": {
+          "telegram_message_id": 8,
+          "file_size": 1660708170,
+          "file_name": "Modha Rathri (2026) Tamil HQ HDRip - 720p - x264 - (DD+5.mkv",
+          "mime_type": "video/x-matroska"
+        }
+      },
       "imdb_id": "tt42262473",
       "poster": "https://m.media-amazon.com/images/M/MV5BOTc1NmUxZDMtNTYzOS00ZmYwLTlmZjgtZDg2NjIyYTU0ZWVkXkEyXkFqcGc@._V1_QL75_UX380_CR0,4,380,562_.jpg",
       "genre": [
@@ -756,7 +981,12 @@
       ],
       "plot": "Follows two strangers brought together at an unusual wedding where, in one night, too many surprises unfold and several lies are told, spiraling into chaos that changes everything.",
       "imdb_rating": "8.9",
-      "metadata_status": "matched"
+      "metadata_status": "matched",
+      "telegram_message_id": 8,
+      "file_size": 1660708170,
+      "file_name": "Modha Rathri (2026) Tamil HQ HDRip - 720p - x264 - (DD+5.mkv",
+      "mime_type": "video/x-matroska",
+      "quality": "720p"
     }
   ]
 }
