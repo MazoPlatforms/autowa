@@ -122,9 +122,9 @@ const catalogJs=fs.readFileSync(new URL('../web/catalog.js',import.meta.url));
 const catalogCss=fs.readFileSync(new URL('../web/catalog.css',import.meta.url));
 const tailwindCss=fs.readFileSync(new URL('../web/tailwind.css',import.meta.url));
 let publicCatalog=JSON.parse(fs.readFileSync(new URL('../data/movies.json',import.meta.url),'utf8'));
+let publicCatalogEtag='"'+crypto.createHash('sha256').update(JSON.stringify(publicCatalog)).digest('base64url')+'"';
 let catalogChecked=0,catalogPending=null;
-async function getPublicCatalog(){
- if(Date.now()-catalogChecked<10000)return publicCatalog;
+function refreshPublicCatalog(){
  if(catalogPending)return catalogPending;
  catalogPending=(async()=>{
   try{
@@ -133,12 +133,19 @@ async function getPublicCatalog(){
    const data=await response.json();
    if(!Array.isArray(data.movies)||data.movies.some(m=>!m||typeof m.slug_id!=='string'||!Number.isSafeInteger(m.telegram_message_id)))throw Error('Invalid catalog');
    publicCatalog=data;
+   publicCatalogEtag='"'+crypto.createHash('sha256').update(JSON.stringify(publicCatalog)).digest('base64url')+'"';
   }catch(err){console.warn('FilmGo catalog update failed; serving last valid copy:',err.message);}
   finally{catalogChecked=Date.now();catalogPending=null;}
   return publicCatalog;
  })();
  return catalogPending;
 }
+function getPublicCatalog(){
+ if(Date.now()-catalogChecked>=60000)void refreshPublicCatalog();
+ return Promise.resolve(publicCatalog);
+}
+void refreshPublicCatalog();
+setInterval(()=>{void refreshPublicCatalog();},120000).unref();
 function selectMovieVariant(movie, quality){
  if(!movie)return null;
  const entries=movie.qualities||{[movie.quality]:movie};
@@ -158,7 +165,7 @@ const server=http.createServer(async(req,res)=>{
   if(req.method==='GET'&&/^\/posters\/[a-f0-9]{24}\.jpg$/.test(url.pathname)){
    const upstream=await fetch('https://raw.githubusercontent.com/MazoPlatforms/autowa/main/web'+url.pathname,{signal:AbortSignal.timeout(8000)});
    if(!upstream.ok)return send(res,404,{error:'Poster unavailable'});
-   res.writeHead(200,{'Content-Type':'image/jpeg','Cache-Control':'public, max-age=3600','X-Content-Type-Options':'nosniff'});
+   res.writeHead(200,{'Content-Type':'image/jpeg','Cache-Control':'public, max-age=86400, stale-while-revalidate=604800','X-Content-Type-Options':'nosniff'});
    return res.end(Buffer.from(await upstream.arrayBuffer()));
   }
   if(req.method==='POST'&&url.pathname==='/api/telegram-link'){
@@ -289,7 +296,12 @@ const server=http.createServer(async(req,res)=>{
    });
    return;
   }
-   if(req.method==='GET'&&url.pathname==='/movies.json'){const catalog=await getPublicCatalog();res.writeHead(200,{'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store, max-age=0','X-Content-Type-Options':'nosniff'});return res.end(JSON.stringify(catalog));}
+   if(req.method==='GET'&&url.pathname==='/movies.json'){
+    const catalog=await getPublicCatalog();
+    const headers={'Content-Type':'application/json; charset=utf-8','Cache-Control':'public, max-age=30, stale-while-revalidate=120','ETag':publicCatalogEtag,'X-Content-Type-Options':'nosniff'};
+    if(req.headers['if-none-match']===publicCatalogEtag){res.writeHead(304,headers);return res.end();}
+    res.writeHead(200,headers);return res.end(JSON.stringify(catalog));
+   }
   if(req.method==='GET'&&url.pathname==='/tailwind.css'){res.writeHead(200,{'Content-Type':'text/css; charset=utf-8','Cache-Control':'public, max-age=86400','X-Content-Type-Options':'nosniff'});return res.end(tailwindCss);}
   if(req.method==='GET'&&url.pathname==='/catalog.css'){res.writeHead(200,{'Content-Type':'text/css; charset=utf-8','Cache-Control':'public, max-age=300','X-Content-Type-Options':'nosniff'});return res.end(catalogCss);}
   if(req.method==='GET'&&url.pathname==='/catalog.js'){res.writeHead(200,{'Content-Type':'text/javascript; charset=utf-8','Cache-Control':'public, max-age=300','X-Content-Type-Options':'nosniff'});return res.end(catalogJs);}
