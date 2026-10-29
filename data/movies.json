@@ -1,7 +1,43 @@
 {
   "schema_version": 2,
-  "updated_at": "2026-10-29T13:37:24.996161+00:00",
+  "updated_at": "2026-10-29T14:32:15.737138+00:00",
   "movies": [
+    {
+      "id": "telegram-42",
+      "slug_id": "oZkXR0s5htZgb9ZY",
+      "title": "Theri",
+      "year": 2016,
+      "qualities": {
+        "720p": {
+          "telegram_message_id": 42,
+          "file_size": 1466069294,
+          "file_name": "Theri (2016) Tamil HQ HDRip - 720p - x264 - (DD_5.1 - 224Kbp.mkv",
+          "mime_type": "video/x-matroska"
+        }
+      },
+      "imdb_id": "tt5440700",
+      "poster": "https://m.media-amazon.com/images/M/MV5BZDBlNGEyZDAtZjFhYS00YWU2LWFkYzEtNTlmYTIxZjJhNzI3XkEyXkFqcGc@._V1_SX300.jpg",
+      "genre": [
+        "Action",
+        "Crime",
+        "Thriller"
+      ],
+      "runtime": "157 min",
+      "director": "Atlee",
+      "cast": [
+        "Joseph Vijay",
+        "Samantha Ruth Prabhu",
+        "Amy Jackson"
+      ],
+      "plot": "When his daughter's life is endangered by a local gang, Joseph Kuruvilla will do whatever it takes to stop them. However, at the same time, his dangerous past slowly resurfaces.",
+      "imdb_rating": "7.3",
+      "metadata_status": "matched",
+      "telegram_message_id": 42,
+      "file_size": 1466069294,
+      "file_name": "Theri (2016) Tamil HQ HDRip - 720p - x264 - (DD_5.1 - 224Kbp.mkv",
+      "mime_type": "video/x-matroska",
+      "quality": "720p"
+    },
     {
       "id": "telegram-40",
       "slug_id": "YE5d-vEu049kM3Nn",
