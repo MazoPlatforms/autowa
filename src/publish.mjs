@@ -103,7 +103,7 @@ function requesterProgress(j){
  const title=String(j.title||movie.title||'Movie').slice(0,130);
  const year=String(j.year||movie.year||'—'),quality=String(j.quality||movie.quality||'—');
  const size=Number(j.file_size||movie.file_size||0);
- const details=['*FILMGO*','', '*'+title+'*','Year: '+year,'Quality: '+quality,...(movie.genre?.length?['Genre: '+(Array.isArray(movie.genre)?movie.genre.join(', '):movie.genre)]:[]),''];
+ const details=['*FilmGo*','', '*'+title+'*','Year: '+year,'Quality: '+quality,...(movie.genre?.length?['Genre: '+(Array.isArray(movie.genre)?movie.genre.join(', '):movie.genre)]:[]),''];
  let key=null,last='',lastAt=0,chain=Promise.resolve(),started=Date.now(),lastBytes=0,lastSample=started,rate=0;
  const render=(message,stats)=>{
   if(!stats)return details.join('\n')+message+(size?'\nFile size: '+miB(size)+' MiB':'')+'\n\n'+STATUS_FOOTER;
@@ -193,10 +193,10 @@ try{
   if(!isMkv&&!isMp4)throw Error('Unsupported downloaded media container: '+formats.join(','));
   const type=isMkv?'mkv':'mp4';
   const movieName=String(j.title||'Untitled').trim();
-  const year=String(j.year||'Unknown Year');
+  const year=/^(19|20)\d{2}$/.test(String(j.year||''))?String(j.year):'';
   const quality=String(j.quality||'Unknown Quality');
-  const filename=('mzn.is-a.dev - '+movieName+' ('+year+') - '+quality+'.'+type).replace(/[\\/\\x00-\\x1f]/g,'').slice(0,180);
-  const caption=['🎬 FILMGO','','🎞️ '+j.title,'','🍿 Enjoy the Movie!','','⚡ Powered by Itz Maazin','🌐 https://mzn.is-a.dev/'].join('\n');
+  const filename=('mzn.is-a.dev - '+movieName+(year?' ('+year+')':'')+' - '+quality+'.'+type).split('').filter(ch=>ch!=='/'&&ch!=='\\'&&ch.charCodeAt(0)>=32).join('').slice(0,180);
+  const caption=['🎬 FilmGo','','🎞️ '+movieName+(year?' ('+year+')':''),'','Enjoy the movie!','','> Powered by Itz Maazin • https://mzn.is-a.dev/'].join('\n');
   j.file_type=type;j.filename=filename;j.caption=caption;
   const thumbUrl='https://i.ibb.co/8L3RB6Qh/Itz-Maazin-20261027-155011.jpg';
   let thumbnail;
