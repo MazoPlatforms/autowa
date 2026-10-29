@@ -96,8 +96,10 @@ async def main():
         else:
             filename, size = download(url, path)
         print("Media downloaded:", filename, size, "bytes", flush=True)
-        from src.telegram_media import clean_title
-        title = clean_title(filename)
+        title = re.sub(r"(?i)\\.(mkv|mp4|avi|mov|webm|m4v)$", "", filename)
+        title = re.sub(r"[._]+", " ", title)
+        title = re.split(r"(?i)\\b(?:2160p|1080p|720p|480p|4k|web[- ]?dl|webrip|bluray|x264|x265)\\b", title, maxsplit=1)[0]
+        title = re.sub(r"\\s*[\\[(]?(?:19\\d{2}|20\\d{2})[\\])]?", " ", title).strip(" -[]()")[:140] or "Untitled movie"
         year_match = re.search(r"\b(19\d{2}|20\d{2})\b", filename)
         quality_match = re.search(r"\b(2160p|1080p|720p|480p|4k)\b", filename, re.I)
         year = year_match.group(1) if year_match else None
