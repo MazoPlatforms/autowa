@@ -98,3 +98,19 @@ export async function sendWhatsAppOtp(number,code){
  const result=await socket.sendMessage(jid,{text:'Your FilmGo verification code is: '+code+'\nExpires in 5 minutes. Never share this code.'});
  if(!result?.key?.id)throw Error('WhatsApp did not acknowledge OTP submission');
 }
+
+export async function getWhatsAppProfilePicture(number){
+ if(!ready||!socket)return null;
+ if(typeof number!=='string'||!/^\+[1-9]\d{7,14}$/.test(number))return null;
+ try{
+  const url=await socket.profilePictureUrl(number.slice(1)+'@s.whatsapp.net','image');
+  if(typeof url!=='string')return null;
+  const parsed=new URL(url);
+  if(parsed.protocol!=='https:')return null;
+  return url;
+ }catch(err){
+  // A missing picture, privacy settings, or disconnected socket is not an auth failure.
+  console.warn('WhatsApp profile picture unavailable:',err?.message||'unknown');
+  return null;
+ }
+}
