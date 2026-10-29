@@ -93,7 +93,7 @@ async def main():
         if entity is None:
             entity = await client.get_entity(channel)
         current = []
-        async for message in client.iter_messages(entity, limit=500):
+        async for message in client.iter_messages(entity, limit=None):
             item = parse(message)
             if not item:
                 continue
@@ -124,7 +124,7 @@ async def main():
         by_message_id = {item["telegram_message_id"]: item for item in current}
         edited = 0
         failures = 0
-        async for message in client.iter_messages(entity, limit=500):
+        async for message in client.iter_messages(entity, limit=None):
             item = by_message_id.get(message.id)
             if not item or not message.file:
                 continue
@@ -144,6 +144,8 @@ async def main():
                 failures += 1
                 print("Caption edit failed for message", message.id, type(exc).__name__, str(exc)[:160])
         print("Caption synchronization:", edited, "updated;", failures, "failed")
+        if failures:
+            print("Some existing captions could not be edited; future scheduled or event-triggered syncs will retry.")
 
     finally:
         await client.disconnect()
