@@ -56,6 +56,31 @@ movieSearch.addEventListener('keydown',e=>{if(e.key==='Escape'){movieOptions.cla
 document.addEventListener('click',e=>{if(!e.target.closest('.movie-picker')){movieOptions.classList.add('hidden');movieSearch.setAttribute('aria-expanded','false');}});
 $('request').addEventListener('submit',e=>{if(!$('movie-id').value){e.preventDefault();msg('Please select a movie from the dropdown.');}},true);
 
+const avatarCacheKey=n=>'filmgo-avatar:'+n;
+function paintAvatar(url){
+ for(const id of ['profile-avatar','profile-monogram']){
+  const root=$(id);if(!root)continue;
+  root.querySelector('.wa-avatar-image')?.remove();
+  if(!url)continue;
+  const img=document.createElement('img');img.className='wa-avatar-image';img.alt='WhatsApp profile picture';img.referrerPolicy='no-referrer';
+  img.onerror=()=>{img.remove();};
+  img.src=url;root.append(img);
+ }
+}
+async function refreshAvatar(number){
+ let cached=null;
+ try{cached=sessionStorage.getItem(avatarCacheKey(number));}catch{}
+ if(cached){paintAvatar(cached);return;}
+ try{
+  const response=await fetch('/api/avatar',{cache:'no-store'});
+  if(!response.ok)return;
+  const data=await response.json();
+  if(typeof data.url==='string'&&data.url.startsWith('https://')){
+   try{sessionStorage.setItem(avatarCacheKey(number),data.url);}catch{}
+   paintAvatar(data.url);
+  }
+ }catch{/* Letter avatar is the privacy-safe fallback. */}
+}
 async function refreshAccount(){
  const response=await fetch('/api/me',{cache:'no-store'});
  if(!response.ok)throw Error('Session expired');
@@ -67,6 +92,7 @@ async function refreshAccount(){
  for(const [label,value] of [['Used today',user.unlimited?'—':user.used],['Remaining',user.unlimited?'∞':user.remaining],['Daily limit',user.unlimited?'∞':user.limit]]){const tile=document.createElement('div');tile.className='usage-tile';const n=document.createElement('strong');n.textContent=String(value);const t=document.createElement('span');t.textContent=label;tile.append(n,t);$('usage-stats').append(tile);}
  $('avatar-initials').textContent=(user.name||user.number||'?').trim().split(/\s+/).slice(0,2).map(v=>v[0]||'').join('').toUpperCase();
  $('profile-monogram').textContent=$('avatar-initials').textContent;
+ void refreshAvatar(user.number);
  $('account-limits').textContent=user.unlimited?'Requests: Unlimited · No daily quota':'Requests: '+user.used+' / '+user.limit+' used · '+user.remaining+' remaining ('+user.period+')';
  return user;
 }
@@ -166,7 +192,7 @@ $('save-profile').addEventListener('click',async()=>{
  catch(e){msg(e.message);}finally{btn.disabled=false;}
 });
 $('logout').addEventListener('click',async()=>{
- try{await api('logout',{});authVersion++;signedIn=false;saveLoginHint(false);navigate('/request');msg('Signed out.');}
+ try{await api('logout',{});authVersion++;signedIn=false;saveLoginHint(false);paintAvatar(null);try{for(const key of Object.keys(sessionStorage)){if(key.startsWith('filmgo-avatar:'))sessionStorage.removeItem(key);}}catch{}navigate('/request');msg('Signed out.');}
  catch(e){msg(e.message);}
 });
 setInterval(()=>{if(signedIn&&location.pathname==='/history'&&!document.hidden)void loadHistory();},12000);
