@@ -133,7 +133,7 @@ function showDetail(m){const root=$('detail-content');root.replaceChildren();con
 const section=el('section','mt-9 max-w-3xl border-t border-zinc-800 pt-8 filmgo-watch');
 section.append(el('h2','mb-4 text-lg font-bold','Watch & download'));
 const video=el('video','filmgo-player');
-video.controls=true;video.preload='metadata';video.playsInline=true;
+video.controls=true;video.preload='none';video.playsInline=true;video.setAttribute('playsinline','');video.style.backgroundColor='#09090b';
 video.setAttribute('controlsList','nodownload');
 video.removeAttribute('poster');
 section.append(video);
@@ -178,7 +178,7 @@ const setQuality=q=>{
 
  const file=m.qualities?.[q]||m;
  const format=String(file.file_name||'').split('.').pop().toLowerCase();
- setStatus(format==='mkv'?'MKV may not play in this browser. Download and open with VLC if needed.':'Press play to watch.');
+ setStatus(format==='mkv'?'MKV playback depends on your browser and video codec.':'Press play to watch.');
  if(position>0)video.addEventListener('loadedmetadata',()=>{if(Number.isFinite(video.duration)&&position<video.duration)video.currentTime=position;if(wasPlaying)video.play().catch(()=>{});},{once:true});
 };
 for(const q of qualities){
@@ -187,7 +187,7 @@ for(const q of qualities){
  button.addEventListener('click',()=>setQuality(q));
  qualityRow.append(button);
 }
-video.addEventListener('error',()=>setStatus('This file may use a format or codec unsupported by your browser. Download it to watch in a compatible player.'));
+video.addEventListener('error',()=>{const file=m.qualities?.[selected]||m;const ext=String(file.file_name||'').toLowerCase();setStatus(/\\.mkv(?:$|\\?)/.test(ext)?'This MKV video cannot play directly in this browser. Browser-compatible streaming requires server-side conversion. Download to watch in a compatible player.':'Playback failed. Please retry or download the movie.');});
 video.addEventListener('stalled',()=>setStatus('Buffering video…'));
 video.addEventListener('playing',()=>setStatus('Now playing.'));
 video.addEventListener('waiting',()=>setStatus('Buffering…'));
