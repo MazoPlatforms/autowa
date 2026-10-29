@@ -1,0 +1,17 @@
+{
+  "id": "request-e3267fb5-8a59-40cb-8d23-9a7d0320b6bb",
+  "title": "Moana",
+  "year": "2026",
+  "quality": "720p",
+  "license_confirmed": true,
+  "enabled": false,
+  "status": "submitted",
+  "started_at": "2026-10-29T03:14:31.605Z",
+  "file_type": "mkv",
+  "filename": "mzn.is-a.dev - Moana (2026) - 720p.mkv",
+  "caption": "🎬 FilmGo\n\n🎞️ Moana (2026)\n\nEnjoy the movie!\n\n> Powered by Itz Maazin • https://mzn.is-a.dev/",
+  "finished_at": "2026-10-29T03:30:24.929Z",
+  "request_origin": "koyeb_verified",
+  "workflow_run_id": "40810232838",
+  "workflow_run_url": "https://github.com/MazoPlatforms/autowa/actions/runs/40810232838"
+}
