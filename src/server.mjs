@@ -154,6 +154,12 @@ const stylesheet=fs.readFileSync(new URL('../web/style.css',import.meta.url));
 const server=http.createServer(async(req,res)=>{
  try{
   const url=new URL(req.url,'http://localhost');
+  if(req.method==='GET'&&/^\/posters\/[a-f0-9]{24}\.jpg$/.test(url.pathname)){
+   const upstream=await fetch('https://raw.githubusercontent.com/MazoPlatforms/autowa/main/web'+url.pathname,{signal:AbortSignal.timeout(8000)});
+   if(!upstream.ok)return send(res,404,{error:'Poster unavailable'});
+   res.writeHead(200,{'Content-Type':'image/jpeg','Cache-Control':'public, max-age=3600','X-Content-Type-Options':'nosniff'});
+   return res.end(Buffer.from(await upstream.arrayBuffer()));
+  }
   if(req.method==='GET'&&url.pathname==='/api/movies'){
     const query=(url.searchParams.get('q')||'').trim().toLowerCase().slice(0,100);
     const catalog=await getPublicCatalog();
