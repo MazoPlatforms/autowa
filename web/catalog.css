@@ -11,3 +11,19 @@
 .page-button:disabled{opacity:.35;cursor:not-allowed}
 .page-ellipsis{padding:0 4px;color:#71717a}
 @media(max-width:640px){.catalog-filters{gap:8px}.catalog-filter select{padding-left:9px;padding-right:23px;font-size:11px;background-position:right 6px center}.catalog-filter{font-size:11px}.page-button{min-width:36px;height:36px;padding:0 8px}}
+
+/* FilmGo custom filter popovers */
+.catalog-filter{position:relative}
+.visually-hidden-select{position:absolute!important;width:1px!important;height:1px!important;opacity:0!important;pointer-events:none!important;overflow:hidden!important}
+.filter-trigger{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;height:46px;padding:0 14px;border:1px solid #3f3f46;border-radius:13px;background:linear-gradient(135deg,#202024,#18181b);color:#fafafa;text-align:left;font-size:13px;font-weight:600;transition:border-color .18s,background .18s,box-shadow .18s}
+.filter-trigger:hover,.catalog-filter.open .filter-trigger{border-color:#71717a;background:#27272a}
+.catalog-filter.open .filter-trigger{box-shadow:0 0 0 3px #ffffff0a}
+.filter-trigger-label{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.filter-chevron{font-size:19px;line-height:1;color:#a1a1aa;transition:transform .18s}
+.catalog-filter.open .filter-chevron{transform:rotate(180deg)}
+.filter-panel{display:none;position:absolute;top:calc(100% + 8px);left:0;z-index:40;width:max(100%,180px);max-width:min(280px,90vw);max-height:260px;overflow-y:auto;padding:6px;border:1px solid #3f3f46;border-radius:14px;background:#202024;box-shadow:0 18px 45px #0009;overscroll-behavior:contain}
+.catalog-filter.open .filter-panel{display:flex;flex-direction:column;gap:2px}
+.filter-option{width:100%;padding:11px 12px;border:0;border-radius:9px;background:transparent;color:#d4d4d8;text-align:left;font-size:13px;font-weight:500}
+.filter-option:hover,.filter-option:focus-visible{background:#3f3f46;color:#fff;outline:none}
+.filter-option.selected{background:#f4f4f5;color:#18181b;font-weight:700}
+@media(max-width:640px){.filter-trigger{height:42px;padding:0 9px;font-size:11px;gap:4px}.filter-chevron{font-size:16px}.filter-panel{width:max(100%,150px)}.catalog-filter:last-child .filter-panel{left:auto;right:0}}
