@@ -146,7 +146,7 @@ async def main():
         changed = current != old_movies or previous.get("schema_version") != 2
         if changed:
             PATH.parent.mkdir(parents=True, exist_ok=True)
-            PATH.write_text(json.dumps({"schema_version": 2, "updated_at": datetime.now(timezone.utc).isoformat(), "movies": current}, ensure_ascii=False, indent=2) + "\\n")
+            PATH.write_text(json.dumps({"schema_version": 2, "updated_at": datetime.now(timezone.utc).isoformat(), "movies": current}, ensure_ascii=False, indent=2) + "\n")
             print("Catalog updated:", len(current), "movies")
         else:
             print("No catalog changes")
