@@ -277,7 +277,7 @@ async function onMessage(message,refresh){
    if(!existing&&omdb.imdbID)existing=movies.find(m=>m.imdb_id===omdb.imdbID)||null;
    if(existing){d.existing=true;d.slug_id=existing.slug_id;d.replace=Object.keys(existing.qualities||{}).some(q=>q.toLowerCase()===String(d.quality).toLowerCase());}
   }
-  const trusted=!!existing||(resolved?.source==='omdb'&&omdbConfidence>=0.7);
+  const trusted=!!existing||omdbConfidence>=0.7;
   d.stage='await-publish';
   await draftSave(d);
   if(trusted&&!d.replace){
