@@ -89,3 +89,54 @@ export async function proxyRange(res,headers,{messageId,start,length},send){
   socket.write(messageId+' '+start+' '+length+'\n');
  });
 }
+
+export async function downloadFile(res,{messageId,total}){
+ if(state!=='ready')return false;
+ // Use a single HTTP response, but request bounded 32 MiB segments from the
+ // persistent Telegram gateway. Never buffer the complete movie in memory.
+ const SIZE=32*1024*1024;
+ let sent=0;
+ try{
+  while(sent<total&&!res.destroyed){
+   const expected=Math.min(SIZE,total-sent);
+   await new Promise((resolve,reject)=>{
+    const socket=net.createConnection({host:'127.0.0.1',port:PORT});
+    let header=Buffer.alloc(0),accepted=false,count=0,finished=false;
+    const timeout=setTimeout(()=>fail(Error('Download segment timeout')),45000);
+    const cleanup=()=>{clearTimeout(timeout);socket.destroy();res.off('close',abort);res.off('drain',resume);};
+    const fail=err=>{if(finished)return;finished=true;cleanup();reject(err);};
+    const abort=()=>fail(Error('Download cancelled'));
+    const resume=()=>socket.resume();
+    res.once('close',abort);res.on('drain',resume);
+    socket.once('connect',()=>socket.write(messageId+' '+sent+' '+expected+'\\n'));
+    socket.on('data',chunk=>{
+     if(finished)return;
+     if(!accepted){
+      header=Buffer.concat([header,chunk]);
+      const index=header.indexOf(10);
+      if(index<0){if(header.length>512)fail(Error('Invalid worker response'));return;}
+      const response=header.subarray(0,index).toString().trim();
+      if(response!=='OK'){fail(Error('Worker rejected segment: '+response));return;}
+      accepted=true;chunk=header.subarray(index+1);header=Buffer.alloc(0);
+     }
+     if(chunk.length){
+      if(count+chunk.length>expected){fail(Error('Worker sent excess bytes'));return;}
+      count+=chunk.length;
+      if(!res.write(chunk))socket.pause();
+      if(count===expected){finished=true;cleanup();resolve();}
+     }
+    });
+    socket.on('error',fail);
+    socket.on('end',()=>{if(!finished)fail(Error('Incomplete download segment'));});
+   });
+   sent+=expected;
+  }
+  if(sent!==total)throw Error('Download incomplete');
+  res.end();return true;
+ }catch(err){
+  lastError=err.message;
+  if(res.headersSent)res.destroy(err);
+  else{res.writeHead(502,{'Content-Type':'application/json','Cache-Control':'no-store'});res.end(JSON.stringify({error:'Download unavailable'}));}
+  return true;
+ }
+}
