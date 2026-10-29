@@ -21,6 +21,8 @@ async function redis(...args){
  if(!r.ok)throw Error('Persistent store unavailable');
  const data=await r.json();if(data.error)throw Error('Persistent store error');return data.result;
 }
+const UNLIMITED_REQUEST_NUMBER="+94779290433";
+const unlimitedRequests=number=>number===UNLIMITED_REQUEST_NUMBER;
 const telegramReady=['TELEGRAM_API_ID','TELEGRAM_API_HASH','TELEGRAM_SESSION','TELEGRAM_CHANNEL_ID'].every(k=>!!process.env[k]);
 let syncPromise=null;
 let telegramAuthBlocked=false;
@@ -130,8 +132,9 @@ const server=http.createServer(async(req,res)=>{
    const session=await authenticated(req);
    if(!session)return send(res,401,{error:'Not signed in'});
    const user=await profile(session.number);
-   const used=Number(await redis('GET','rate:'+hmac('submit:'+session.number))||0);
-   return send(res,200,{number:session.number,name:user.name||'',limit:3,used:Math.min(used,3),remaining:Math.max(0,3-used),period:'rolling rate window (up to 24 hours)'});
+   const exempt=unlimitedRequests(session.number);
+    const used=exempt?0:Number(await redis('GET','rate:'+hmac('submit:'+session.number))||0);
+   return send(res,200,{number:session.number,name:user.name||'',limit:exempt?null:3,used:exempt?0:Math.min(used,3),remaining:exempt?null:Math.max(0,3-used),period:exempt?'unlimited':'rolling rate window (up to 24 hours)',unlimited:exempt});
   }
   if(req.method==='GET'&&url.pathname==='/api/version')return send(res,200,{version:'20261028-3',catalog_sync:'single-flight'});
   if(req.method==='GET'&&url.pathname==='/api/catalog-status')return send(res,200,{state:telegramCatalogStatus.state,updated_at:telegramCatalogStatus.updated_at,error:telegramCatalogStatus.error,telegram_configured:telegramReady});
@@ -261,7 +264,7 @@ const server=http.createServer(async(req,res)=>{
    movie=fresh;
   }catch(err){console.warn('Movie verification failed:',err.message);return send(res,503,{error:'Unable to verify movie availability right now'});}
 
-  if(!await limit('submit:'+session.number,3,86400))return send(res,429,{error:'Daily request limit reached'});
+  if(!unlimitedRequests(session.number)&&!await limit('submit:'+session.number,3,86400))return send(res,429,{error:'Daily request limit reached'});
   const claim=await redis('SET','claim:'+hmac(session.nonce),'1','EX',900,'NX');
   if(claim!=='OK')return send(res,409,{error:'Request already submitted'});
   const requestId=crypto.randomUUID();
