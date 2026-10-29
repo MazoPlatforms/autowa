@@ -219,3 +219,8 @@ footer a{color:#a1a1aa}
 #profile-back.back-button.hidden{display:none!important}
 #profile-back.back-button svg{display:block;flex:none}
 #profile-avatar.avatar-button.hidden{display:none!important}
+
+.history-skeleton{display:grid;gap:12px;margin:16px 0}
+.history-shimmer{height:86px;border-radius:16px;background:linear-gradient(105deg,#18181b 10%,#303035 25%,#18181b 40%);background-size:220% 100%;animation:history-pulse 1.35s linear infinite}
+@keyframes history-pulse{to{background-position-x:-220%}}
+@media(prefers-reduced-motion:reduce){.history-shimmer{animation:none}}
