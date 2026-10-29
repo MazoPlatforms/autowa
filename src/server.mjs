@@ -6,6 +6,7 @@ import {promisify} from 'node:util';
 const execFileAsync=promisify(execFile);
 import {startWhatsApp,isWhatsAppReady,sendWhatsAppOtp,getWhatsAppProfilePicture} from './whatsapp-otp.mjs';
 import {startFilmGoBot} from './filmgo-bot.mjs';
+import {startStreamWorker,proxyRange,streamWorkerState} from './stream-worker.mjs';
 
 const PORT=Number(process.env.PORT||8000);
 const required=['APP_SECRET','UPSTASH_REDIS_REST_URL','UPSTASH_REDIS_REST_TOKEN','GITHUB_DISPATCH_TOKEN','GITHUB_REPOSITORY'];
@@ -63,6 +64,7 @@ async function refreshCatalog(){
 if(configured&&telegramReady){
  void refreshCatalog();
  setInterval(()=>{void refreshCatalog();},120000).unref();
+ startStreamWorker();
 }
 async function getCatalog(){
  const raw=await redis('GET','telegram:catalog:v2');
@@ -211,6 +213,8 @@ const server=http.createServer(async(req,res)=>{
    const disposition='inline; filename="'+asciiName+'"; filename*=UTF-8\'\''+encodeURIComponent(safeName);
    const headers={'Content-Type':mediaType,'Content-Length':String(length),'Content-Range':'bytes '+start+'-'+end+'/'+total,'Accept-Ranges':'bytes','Cache-Control':'no-store','X-Content-Type-Options':'nosniff','Content-Disposition':disposition};
    if(req.method==='HEAD'){res.writeHead(206,headers);return res.end();}
+   // Prefer one persistent Telethon connection; legacy subprocess remains a fallback.
+   if(await proxyRange(res,headers,{messageId:movie.telegram_message_id,start,length},send))return;
    const child=spawn('python3',['src/telegram_stream.py',String(movie.telegram_message_id),String(start),String(length)],{env:process.env,stdio:['ignore','pipe','pipe']});
    let started=false,bytes=0,closed=false;
    const startedAt=Date.now();
