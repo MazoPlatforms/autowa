@@ -161,6 +161,17 @@ const server=http.createServer(async(req,res)=>{
    res.writeHead(200,{'Content-Type':'image/jpeg','Cache-Control':'public, max-age=3600','X-Content-Type-Options':'nosniff'});
    return res.end(Buffer.from(await upstream.arrayBuffer()));
   }
+  if(req.method==='POST'&&url.pathname==='/api/telegram-link'){
+   if(req.headers['content-type']?.split(';')[0]!=='application/json')return send(res,415,{error:'JSON required'});
+   const input=await body(req);
+   const slug=String(input.slug_id||'');
+   if(!/^[A-Za-z0-9_-]{1,80}$/.test(slug))return send(res,400,{error:'Invalid movie'});
+   const movie=(await getPublicCatalog()).movies.find(m=>m.slug_id===slug);
+   if(!movie)return send(res,404,{error:'Movie unavailable'});
+   const token=crypto.randomBytes(12).toString('base64url');
+   await redis('SET','filmgo:deeplink:'+token,slug,'EX',600);
+   return send(res,200,{url:'https://t.me/mzn_filmgobot?start=m_'+token});
+  }
   if(req.method==='GET'&&url.pathname==='/api/movies'){
     const query=(url.searchParams.get('q')||'').trim().toLowerCase().slice(0,100);
     const catalog=await getPublicCatalog();
