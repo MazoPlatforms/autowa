@@ -141,3 +141,5 @@ async function refreshCatalog(){
 route();void refreshCatalog();
 setInterval(()=>{void refreshCatalog();},15000);
 document.addEventListener('visibilitychange',()=>{if(!document.hidden)void refreshCatalog();});
+// The public catalog remains available without authentication.
+(async()=>{try{const response=await fetch('/api/me',{cache:'no-store'});if(!response.ok)return;const user=await response.json();const link=document.getElementById('catalog-account-link');if(!link)return;link.href='/profile';link.classList.add('catalog-account-avatar');link.textContent=(user.name||user.number||'?').trim().split(/\s+/).slice(0,2).map(v=>v[0]||'').join('').toUpperCase();link.setAttribute('aria-label','Open profile');link.title=user.name||'My profile';}catch{}})();
