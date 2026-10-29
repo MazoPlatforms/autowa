@@ -37,21 +37,33 @@ function movieFields(x){return {title:x.Title,year:Number(String(x.Year).slice(0
 async function draftPrompt(d){const text=['FilmGo movie draft',d.title+' ('+d.year+')', 'Quality: '+d.quality,'File: '+d.file_name,'Metadata: '+(d.imdb_id?'OMDb '+d.imdb_id:'manual / existing'),d.replace?'Existing quality — replacement requires confirmation':d.existing?'New quality for existing movie':'New movie', 'Use /edit to change metadata, /poster to upload a poster, /cancel to discard.'].join('\n');await say(ADMIN_ID,text,{reply_markup:{inline_keyboard:[[{text:d.replace?'Confirm replacement':'Publish movie',callback_data:'fg:publish'},{text:'Cancel',callback_data:'fg:cancel'}]]}});}
 async function posterUpload(d,photo){const info=await tg('getFile',{file_id:photo.file_id});if(!info.file_path||photo.file_size>5_000_000)throw Error('Poster too large or unavailable');const file=await fetch('https://api.telegram.org/file/bot'+TOKEN+'/'+info.file_path,{signal:AbortSignal.timeout(15000)});if(!file.ok)throw Error('Poster fetch failed');const bytes=new Uint8Array(await file.arrayBuffer());if(bytes.length>5_000_000||bytes[0]!==255||bytes[1]!==216)throw Error('Only JPEG posters under 5 MB');const path='web/posters/'+crypto.randomBytes(12).toString('hex')+'.jpg';const [owner,name]=REPO.split('/');const result=await fetch('https://api.github.com/repos/'+owner+'/'+name+'/contents/'+path,{method:'PUT',headers:{Authorization:'Bearer '+GH_TOKEN,Accept:'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28','Content-Type':'application/json'},body:JSON.stringify({message:'Add FilmGo movie poster',content:Buffer.from(bytes).toString('base64')}),signal:AbortSignal.timeout(20000)});if(!result.ok)throw Error('GitHub poster upload failed: '+result.status);d.poster='/posters/'+path.split('/').pop();await draftSave(d);}
 async function saveMovieMetadata(id,d){
- const metadata={};for(const k of ['imdb_id','poster','genre','runtime','director','cast','plot'])if(d[k])metadata[k]=d[k];
- if(!Object.keys(metadata).length)return;
+ const fields={};for(const k of ['imdb_id','poster','genre','runtime','director','cast','plot'])if(d[k])fields[k]=d[k];
+ if(!Object.keys(fields).length)return;
  const [owner,name]=REPO.split('/');
- const url='https://api.github.com/repos/'+owner+'/'+name+'/contents/data/movie-metadata.json';
+ const url='https://api.github.com/repos/'+owner+'/'+name+'/contents/data/movies.json';
  const headers={Authorization:'Bearer '+GH_TOKEN,Accept:'application/vnd.github+json','Content-Type':'application/json'};
- for(let attempt=0;attempt<5;attempt++){
-  const response=await fetch(url,{headers});if(!response.ok&&response.status!==404)throw Error('Metadata read '+response.status);
-  const file=response.ok?await response.json():null;
-  const content=file?JSON.parse(Buffer.from(file.content.replace(/\\s/g,''),'base64').toString('utf8')):{schema_version:1,messages:{}};
-  content.messages[String(id)]=metadata;
-  const result=await fetch(url,{method:'PUT',headers,body:JSON.stringify({message:'Save FilmGo movie metadata',content:Buffer.from(JSON.stringify(content,null,2)).toString('base64'),...(file?{sha:file.sha}:{})})});
+ for(let attempt=0;attempt<6;attempt++){
+  const response=await fetch(url,{headers,signal:AbortSignal.timeout(15000)});
+  if(!response.ok)throw Error('Catalog read '+response.status);
+  const file=await response.json();
+  const content=JSON.parse(Buffer.from(file.content.replace(/\s/g,''),'base64').toString('utf8'));
+  const movie=(content.movies||[]).find(m=>
+   (d.slug_id&&m.slug_id===d.slug_id)||
+   (Number(m.year)===Number(d.year)&&normalize(m.title)===normalize(d.title))||
+   Object.values(m.qualities||{}).some(v=>Number(v.telegram_message_id)===Number(id))
+  );
+  if(movie){Object.assign(movie,fields);}
+  else{
+   // The Telegram sync will discover the new message; store metadata in the
+   // canonical catalog now so the subsequent sync can preserve it.
+   content.movies ||= [];
+   content.movies.push({id:'telegram-'+id,slug_id:d.slug_id||crypto.randomBytes(12).toString('base64url'),title:d.title,year:Number(d.year),qualities:{[d.quality]:{telegram_message_id:id,file_name:d.file_name||'',file_size:0,mime_type:''}},telegram_message_id:id,quality:d.quality,file_name:d.file_name||'',file_size:0,mime_type:'',...fields});
+  }
+  const result=await fetch(url,{method:'PUT',headers,body:JSON.stringify({message:'Update FilmGo movie metadata in canonical movies.json',content:Buffer.from(JSON.stringify(content,null,2)+'\n').toString('base64'),sha:file.sha}),signal:AbortSignal.timeout(15000)});
   if(result.ok)return;
-  if(result.status!==409&&result.status!==422)throw Error('Metadata write '+result.status);
+  if(result.status!==409&&result.status!==422)throw Error('Catalog write '+result.status);
  }
- throw Error('Metadata conflict');
+ throw Error('Catalog update conflict');
 }
 async function publishDraft(d){const lock=prefix+'publishing:'+ADMIN_ID;if(await redis('SET',lock,'1','NX','EX',90)!=='OK')return say(ADMIN_ID,'Publishing is already running.');try{const caption=['Movie: '+d.title,'Year: '+d.year,'Quality: '+d.quality,...(d.slug_id?['Slug ID: '+d.slug_id]:[])].join('\n');const sent=await tg('copyMessage',{chat_id:CHANNEL_ID,from_chat_id:ADMIN_ID,message_id:d.message_id,caption},30000);await saveMovieMetadata(sent.message_id,d);await redis('DEL',DRAFT_KEY+ADMIN_ID);await say(ADMIN_ID,'Published to database channel as message #'+sent.message_id+'. Syncing catalog.');await dispatch('filmgo-catalog-sync',{message_id:sent.message_id});}finally{await redis('DEL',lock);}}
 
