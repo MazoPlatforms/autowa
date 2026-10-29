@@ -20,24 +20,44 @@ def wikipedia_json(url):
     with urllib.request.urlopen(request, timeout=15) as response:
         return json.load(response)
 
+def normalize_title(value):
+    """Normalize a title for safe comparison, while preserving its words."""
+    value = re.sub(r"\([^)]*\)", " ", str(value or ""))
+    return re.sub(r"[^a-z0-9]+", " ", value.casefold()).strip()
+
+def is_candidate_film(candidate_title, summary, requested_title, year):
+    """Reject unrelated search hits such as actor/director biography pages."""
+    wanted = normalize_title(requested_title)
+    candidate = normalize_title(candidate_title)
+    if not wanted or (wanted not in candidate and candidate not in wanted):
+        return False
+
+    description = str(summary.get("description", "")).casefold()
+    extract = str(summary.get("extract", ""))
+    if "film" not in description and "movie" not in description:
+        return False
+
+    year_match = re.search(r"\b(19|20)\d{2}\b", extract)
+    return bool(year_match and int(year_match.group(0)) == int(year))
+
 def wikipedia_poster(title, year):
-    """Find a likely Wikipedia film page image; catalog sync falls back if absent."""
+    """Return an image only from a title-matching Wikipedia film page."""
     params = urllib.parse.urlencode({
-        "action": "query", "list": "search", "srsearch": f"{title} {year} film",
+        "action": "query", "list": "search", "srsearch": f'intitle:"{title}" {year} film',
         "srlimit": 10, "format": "json",
     })
     try:
         results = wikipedia_json("https://en.wikipedia.org/w/api.php?" + params).get("query", {}).get("search", [])
         for candidate in results:
-            page = urllib.parse.quote(str(candidate.get("title", "")).replace(" ", "_"), safe="()")
-            if not page:
+            candidate_title = str(candidate.get("title", "")).strip()
+            if not candidate_title:
                 continue
+            page = urllib.parse.quote(candidate_title.replace(" ", "_"), safe="()")
             try:
                 summary = wikipedia_json("https://en.wikipedia.org/api/rest_v1/page/summary/" + page)
             except Exception:
                 continue
-            match = re.search(r"\b(19|20)\d{2}\b", str(summary.get("extract", "")))
-            if match and int(match.group(0)) != int(year):
+            if not is_candidate_film(candidate_title, summary, title, year):
                 continue
             image = summary.get("originalimage") or summary.get("thumbnail") or {}
             source = image.get("source", "") if isinstance(image, dict) else ""
