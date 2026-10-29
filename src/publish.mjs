@@ -28,15 +28,44 @@ fs.mkdirSync('.auth',{recursive:true,mode:0o700});
 fs.writeFileSync(path.join('.auth','creds.json'),JSON.stringify(creds),{mode:0o600});
 console.warn('Using creds.json-only auth: missing Signal key files or rotated session keys may cause authentication failures.');
 const {state,saveCreds}=await useMultiFileAuthState('.auth');
-const sock=makeWASocket({auth:state,logger:pino({level:'silent'}),markOnlineOnConnect:false,syncFullHistory:false,connectTimeoutMs:120000,defaultQueryTimeoutMs:120000});
-sock.ev.on('creds.update',saveCreds);
-await new Promise((resolve,reject)=>{
- const timeout=setTimeout(()=>reject(Error('WhatsApp connection timed out')),130000);
- sock.ev.on('connection.update',u=>{
-  if(u.connection==='open'){clearTimeout(timeout);resolve();}
-  if(u.connection==='close'){clearTimeout(timeout);reject(Error('WhatsApp connection closed: '+(u.lastDisconnect?.error?.message||'unknown')));}
+let sock,connectionClosed=true;
+const logger=pino({level:'silent'});
+async function connectWhatsApp(){
+ const next=makeWASocket({auth:state,logger,markOnlineOnConnect:false,syncFullHistory:false,connectTimeoutMs:120000,defaultQueryTimeoutMs:120000});
+ next.ev.on('creds.update',saveCreds);
+ next.ev.on('connection.update',u=>{
+  if(u.connection==='close'){
+   if(sock===next)connectionClosed=true;
+   console.error('WhatsApp disconnected during publishing:',u.lastDisconnect?.error?.message||'unknown','status:',u.lastDisconnect?.error?.output?.statusCode||'unknown');
+  }
  });
-});
+ await new Promise((resolve,reject)=>{
+  const timer=setTimeout(()=>reject(Error('WhatsApp connection timed out')),130000);
+  const listener=u=>{
+   if(u.connection==='open'){clearTimeout(timer);resolve();}
+   if(u.connection==='close'){clearTimeout(timer);reject(Error('WhatsApp connection closed: '+(u.lastDisconnect?.error?.message||'unknown')));}
+  };
+  next.ev.on('connection.update',listener);
+ }).catch(err=>{try{next.end();}catch{}throw err;});
+ sock=next;connectionClosed=false;
+ return next;
+}
+await connectWhatsApp();
+async function reconnectWhatsApp(){
+ for(let attempt=1;attempt<=5;attempt++){
+  console.warn('WhatsApp reconnect attempt',attempt,'of 5');
+  try{
+   try{sock?.end();}catch{}
+   await connectWhatsApp();
+   console.log('WhatsApp reconnected successfully');
+   return true;
+  }catch(err){
+   console.warn('WhatsApp reconnect failed:',err.message);
+   if(attempt<5)await sleep(Math.min(30000,3000*2**(attempt-1)));
+  }
+ }
+ return false;
+}
 // ARCHIVED REFERENCE — FAKE QUOTED REPLY / FORWARDING (INACTIVE).
 // Kept solely as historical project notes. This block is not executed,
 // imported, or attached to the WhatsApp message payload.
@@ -57,12 +86,10 @@ const archivedMetadata = {
 };
 */
 
-const groups=await sock.groupFetchAllParticipating();
-let connectionClosed=false;
-sock.ev.on('connection.update',u=>{if(u.connection==='close'){connectionClosed=true;console.error('WhatsApp disconnected during publishing:',u.lastDisconnect?.error?.message||'unknown','status:',u.lastDisconnect?.error?.output?.statusCode||'unknown');}});
+let groups=await sock.groupFetchAllParticipating();
 
 const miB=n=>(n/1048576).toFixed(1);
-function requesterProgress(sock,j){
+function requesterProgress(j){
  const jid=(j.recipient_jids||[]).find(v=>/^\d{8,15}@s\.whatsapp\.net$/.test(v));
  let key=null,last='',lastAt=0,chain=Promise.resolve();
  const label=String(j.title||'Movie').slice(0,100);
@@ -112,7 +139,7 @@ try{
   j.started_at=new Date().toISOString();
   fs.writeFileSync(file,JSON.stringify(j,null,2)+'\n');
   let movieFailures=0;
-  const progress=requesterProgress(sock,j);
+  const progress=requesterProgress(j);
   try {
   await progress.update('⏳ Preparing your request…',true);
   const dest=path.join('downloads',j.id+'.download');
@@ -168,7 +195,7 @@ try{
      });
      if(!result?.key?.id)throw Error('No message ID');
      console.log('Submitted',j.id,groupId,result.key.id);ok=true;sentCount++;await progress.update('📤 Submitted to '+sentCount+'/'+targets.length+' destinations…',true);break;
-    }catch(e){console.error('Send failed',j.id,groupId,attempt,e.message);if(attempt<3)await sleep(10000*attempt);}
+    }catch(e){console.error('Send failed',j.id,groupId,attempt,e.message);if(attempt<5){if(connectionClosed){console.warn('Reconnecting before retry');}else await sleep(Math.min(30000,5000*attempt));}}
    }
    if(!ok){failures++;movieFailures++;}
    await sleep(3000);
