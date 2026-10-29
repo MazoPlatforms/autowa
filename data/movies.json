@@ -1,7 +1,74 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-29T00:10:56.867316+00:00",
+  "updated_at": "2026-10-29T02:16:25.386081+00:00",
   "movies": [
+    {
+      "id": "telegram-34",
+      "telegram_message_id": 34,
+      "title": "Enna Vilai",
+      "year": 2026,
+      "quality": "720p",
+      "file_size": 1514369885,
+      "file_name": "@CinemasTrend - Enna Vilai (2026) Tamil HQ HDRip - 720p - x2.mkv",
+      "mime_type": "video/x-matroska",
+      "slug_id": "YKiVbnUM0akNHLYS",
+      "imdb_id": "tt33095205",
+      "poster": "https://m.media-amazon.com/images/M/MV5BNmY1MzM2ZTMtZmJmYS00NGI2LTllYzktN2NlMGMzZGNkYjc0XkEyXkFqcGc@._V1_QL75_UY562_CR27,0,380,562_.jpg",
+      "genre": [
+        "Drama",
+        "Thriller"
+      ],
+      "runtime": "124 min",
+      "director": "Sajeev Pazhoor",
+      "cast": [
+        "Kamalesh",
+        "Chethan Cheenu",
+        "Chiththa Darshan"
+      ],
+      "plot": "A gold pendant washed ashore transforms fisherman Thavasi's life. What seems like good fortune becomes false accusations, forcing him to battle a corrupt system to protect his family.",
+      "imdb_rating": "8.7",
+      "metadata_status": "matched"
+    },
+    {
+      "id": "telegram-33",
+      "telegram_message_id": 33,
+      "title": "Epic",
+      "year": 2026,
+      "quality": "720p",
+      "file_size": 1648701884,
+      "file_name": "@CinemasTrend - Epic (2026) Tamil HQ HDRip - 720p - x264 - (.mkv",
+      "mime_type": "video/x-matroska",
+      "slug_id": "zMV4KVKTcmPGFIq7",
+      "metadata_status": "unmatched"
+    },
+    {
+      "id": "telegram-32",
+      "telegram_message_id": 32,
+      "title": "Moana",
+      "year": 2026,
+      "quality": "720p",
+      "file_size": 1608394105,
+      "file_name": "@CinemasTrend - Moana (2026) BluRay - 720p - x264 - [Tam + T.mkv",
+      "mime_type": "video/x-matroska",
+      "slug_id": "o5WjUYRoa3leridi",
+      "imdb_id": "tt27419466",
+      "poster": "https://m.media-amazon.com/images/M/MV5BMTQ1OTQ2Y2UtMzllNS00ODFiLWFkNGItNGRjOWRlMjIwNTRlXkEyXkFqcGc@._V1_QL75_UX380_CR0,0,380,562_.jpg",
+      "genre": [
+        "Action",
+        "Adventure",
+        "Comedy"
+      ],
+      "runtime": "115 min",
+      "director": "Thomas Kail",
+      "cast": [
+        "Dwayne Johnson",
+        "Catherine Laga&apos;aia",
+        "Rena Owen"
+      ],
+      "plot": "A brave teenager named Moana leaves her island for the first time and sails with a shape-shifting demigod named Maui to fix a dangerous curse.",
+      "imdb_rating": "5.8",
+      "metadata_status": "matched"
+    },
     {
       "id": "telegram-31",
       "telegram_message_id": 31,
@@ -11,7 +78,7 @@
       "file_size": 1531409197,
       "file_name": "@CinemasTrend_Colony_2026_BluRay _720p_x264_Tamil_.mkv",
       "mime_type": "video/x-matroska",
-      "slug_id": "9ISNpD3T4k3P0BDn",
+      "slug_id": "lWmytMdg0goRmh0v",
       "imdb_id": "tt34385135",
       "poster": "https://m.media-amazon.com/images/M/MV5BNzI5YWViNGUtNGRiMy00OThhLWIwOGUtZjkyZDk2NjliODY2XkEyXkFqcGc@._V1_QL75_UX380_CR0,0,380,562_.jpg",
       "genre": [
@@ -39,7 +106,7 @@
       "file_size": 1808510103,
       "file_name": "@CinemasTrend - Drive The Pretenders (2026) HQ HDRip - 720p .mkv",
       "mime_type": "video/x-matroska",
-      "slug_id": "WZUC_MGRZNgx2IMl",
+      "slug_id": "Zfdz4xVDDosbeEbJ",
       "imdb_id": "tt37180686",
       "poster": "https://m.media-amazon.com/images/M/MV5BMTNmN2EzMGQtNDIyMi00ZDljLTk5N2ItMTA0NGJmZTJmMTEyXkEyXkFqcGc@._V1_QL75_UX656_.jpg",
       "genre": [
@@ -66,7 +133,7 @@
       "file_size": 1671482773,
       "file_name": "@CinemasTrend - Dorothy (2026) Tamil HQ HDRip - 720p - x264 .mkv",
       "mime_type": "video/x-matroska",
-      "slug_id": "S_uSllrB5jW6kTey",
+      "slug_id": "uoPpVtHa1ZtAUulf",
       "imdb_id": "tt38915678",
       "poster": "https://m.media-amazon.com/images/M/MV5BODdiOGNiOTktY2Y5NC00N2U4LWI1YzctM2RmZmEzMzc1OGY5XkEyXkFqcGc@._V1_QL75_UY562_CR35,0,380,562_.jpg",
       "genre": [
@@ -94,7 +161,7 @@
       "file_size": 1524993803,
       "file_name": "Vaazhthugal (2008) [Tamil - 720p HQ HDRip - x264 - AAC - 1..mkv",
       "mime_type": "video/x-matroska",
-      "slug_id": "hdmecXzLk_CbQLib",
+      "slug_id": "6bEvVbZlFxXWFWrX",
       "imdb_id": "tt1509832",
       "poster": "https://m.media-amazon.com/images/M/MV5BY2M2YWZkYzAtMDI5Mi00MTJlLWI0YWMtMTE4MjBiNDYxZmFkXkEyXkFqcGdeQXVyNDQxNzQ2OTY@._V1_SX300.jpg",
       "genre": [
@@ -120,7 +187,7 @@
       "file_size": 1902856708,
       "file_name": "- Thaalam (1999) [Tamil - 720p HQ HDTVRip - x264 - [DD5.1(1.mkv",
       "mime_type": "video/x-matroska",
-      "slug_id": "eBnXodJFS6E72XSB",
+      "slug_id": "1hUIcqDSrejGxTqi",
       "metadata_status": "unmatched"
     },
     {
@@ -132,7 +199,7 @@
       "file_size": 433591591,
       "file_name": "Paradise_2023_HQ_HDRip_x264_Original_Audios_AAC_2_0_Tamil_+_Hindi.mkv",
       "mime_type": "video/x-matroska",
-      "slug_id": "yqV9gGE5Le3uDNbP",
+      "slug_id": "7RFx4VZ-TlptNvUX",
       "imdb_id": "tt21308888",
       "poster": "https://m.media-amazon.com/images/M/MV5BODYxYTRkZWEtZjdhNS00ZWFmLTljNDItNTk2NWM4Mjc5NjYzXkEyXkFqcGc@._V1_QL75_UX380_CR0,0,380,562_.jpg",
       "genre": [
@@ -160,7 +227,7 @@
       "file_size": 1911506509,
       "file_name": "Bubblegum.2023.720p.SS.WEB-DL.DD+5.1.x264-SH3LBY.mkv",
       "mime_type": "video/x-matroska",
-      "slug_id": "K30sOqgUrjePhiET",
+      "slug_id": "gSJC6jBiNE5Oe_ts",
       "imdb_id": "tt29436996",
       "poster": "https://m.media-amazon.com/images/M/MV5BNGM2MTBmMGUtYTg1Yi00NThiLWJlM2UtYmY3YzAxYjQ5OTVkXkEyXkFqcGdeQXVyMTUzNTgzNzM0._V1_SX300.jpg",
       "genre": [
@@ -188,7 +255,7 @@
       "file_size": 1355379133,
       "file_name": "The Paradise (2026) Tamil HQ HDRip - 720p - HEVC - x265 .mkv",
       "mime_type": "video/x-matroska",
-      "slug_id": "buQ3SGpolEi6rJJo",
+      "slug_id": "gMjzivI2JCH9YhG2",
       "imdb_id": "tt31969655",
       "poster": "https://m.media-amazon.com/images/M/MV5BZWVlYjQ1NzktY2VmZC00NzhlLTg1NTItZTRhNDNmYzQyNWQxXkEyXkFqcGc@._V1_QL75_UX380_CR0,16,380,562_.jpg",
       "genre": [
@@ -216,7 +283,7 @@
       "file_size": 1722793634,
       "file_name": "Aasha (2026) Tamil HQ HDRip - 1080p - x264 - (DD+5.1 - 1.mkv",
       "mime_type": "video/x-matroska",
-      "slug_id": "d-hbl1wF0WNP-VY8",
+      "slug_id": "BgWLSGwpdmYTzltS",
       "imdb_id": "tt37894980",
       "poster": "https://m.media-amazon.com/images/M/MV5BNzg3MzhiMTMtNGU2NC00YjViLTk2MWMtNTYyZWU4YWQxM2IxXkEyXkFqcGdeQXRyYW5zY29kZS13b3JrZmxvdw@@._V1_QL75_UY563_CR172,0,1000,563_.jpg",
       "genre": [
@@ -242,7 +309,7 @@
       "file_size": 1638237191,
       "file_name": "Parimala and Co (2026) Tamil v2 HQ HDRip - 720p - x264 -.mkv",
       "mime_type": "video/x-matroska",
-      "slug_id": "65zENYGoQP35zEDf",
+      "slug_id": "yjRD0Ru3AZUfPpC3",
       "imdb_id": "tt39385419",
       "poster": "https://m.media-amazon.com/images/M/MV5BNGJmODQ0ODYtOWQ3Zi00M2VhLWIwNzYtYzRmMGI0NmE5ZWEwXkEyXkFqcGc@._V1_QL75_UY562_CR35,0,380,562_.jpg",
       "genre": [
@@ -270,7 +337,7 @@
       "file_size": 1198913890,
       "file_name": "Kanguva (2024) Tamil HQ HDRip - 720p - HEVC - x265 - (DD.mkv",
       "mime_type": "video/x-matroska",
-      "slug_id": "6lDogCMV6mqlOrNw",
+      "slug_id": "Gg-2TQiHnqmAF0sX",
       "imdb_id": "tt22036406",
       "poster": "https://m.media-amazon.com/images/M/MV5BNjE2OGYyMTctY2ZkYy00ZWMzLWIzNjEtMWIzNjkxZTMyM2QwXkEyXkFqcGc@._V1_QL75_UY562_CR35,0,380,562_.jpg",
       "genre": [
@@ -298,7 +365,7 @@
       "file_size": 1235934013,
       "file_name": "Idhayam Murali (2026) Tamil HQ HDRip - 720p - HEVC - x26.mkv",
       "mime_type": "video/x-matroska",
-      "slug_id": "XdSOHQQhda0x6YD-",
+      "slug_id": "N7zgxckT8Ah85_zv",
       "imdb_id": "tt35723557",
       "poster": "https://m.media-amazon.com/images/M/MV5BZGRiZmZlOGQtMWMyMS00Yjk2LTkyMjAtYzI5ZGQxMjdhYTBmXkEyXkFqcGc@._V1_SX300.jpg",
       "genre": [
@@ -324,7 +391,7 @@
       "file_size": 1249155145,
       "file_name": "Mandaadi (2026) Tamil HQ HDRip - 720p - HEVC - x265 - (D.mkv",
       "mime_type": "video/x-matroska",
-      "slug_id": "LE0bsGJpwGTXSxHr",
+      "slug_id": "lT4kPFz1yRXVtpuu",
       "imdb_id": "tt36596965",
       "poster": "https://m.media-amazon.com/images/M/MV5BM2NjYTUwMjEtZmYzNy00MTYxLWE1OGYtNWVmMjYzOWViZGJmXkEyXkFqcGc@._V1_QL75_UY562_CR35,0,380,562_.jpg",
       "genre": [
@@ -352,7 +419,7 @@
       "file_size": 1313951942,
       "file_name": "Jana_Nayagan_2026_Tamil HQ_HDRip_720p_ HEVC _ x265 .mkv",
       "mime_type": "video/x-matroska",
-      "slug_id": "nk__k0ZAOvIv85Z5",
+      "slug_id": "RL5g9YLstwS10Irw",
       "imdb_id": "tt33379543",
       "poster": "https://m.media-amazon.com/images/M/MV5BOTE1M2ZkZjYtNzExNi00MTQwLTg3ZDYtYTA3YmQyMDgyZjU4XkEyXkFqcGc@._V1_SX300.jpg",
       "genre": [
@@ -379,7 +446,7 @@
       "file_size": 1701205856,
       "file_name": "Bethlehem.Kudumba.Unit.2026.720p.JioHotStar.WEB-DL.Tamil.mkv",
       "mime_type": "video/x-matroska",
-      "slug_id": "QF0LNARIONJEaog3",
+      "slug_id": "5QNhU753BwLO3En6",
       "imdb_id": "tt37535100",
       "poster": "https://m.media-amazon.com/images/M/MV5BMTU5OWQ4YTgtZTZiMi00ZjE2LTk1MjgtYjcyNDZiODBjYTQ3XkEyXkFqcGc@._V1_QL75_UY562_CR21,0,380,562_.jpg",
       "genre": [
@@ -407,7 +474,7 @@
       "file_size": 1910419091,
       "file_name": "Euphoria (2026) Tamil HQ HDRip - 1080p - x265 - HEVC - (.mkv",
       "mime_type": "video/x-matroska",
-      "slug_id": "8FFNUmIfnr_6uvm1",
+      "slug_id": "Mh3Fna5ba1K3lrWa",
       "imdb_id": "tt33737583",
       "poster": "https://m.media-amazon.com/images/M/MV5BMTRiMGMzOWUtNGFmZC00ODY4LWJlNmEtODJjNDdmNTBlYTgwXkEyXkFqcGc@._V1_QL75_UX380_CR0,4,380,562_.jpg",
       "genre": [
@@ -433,7 +500,7 @@
       "file_size": 1355379133,
       "file_name": "The Paradise (2026) Tamil HQ HDRip - 720p - HEVC - x265 .mkv",
       "mime_type": "video/x-matroska",
-      "slug_id": "8uYCokdRFRu_RVqM",
+      "slug_id": "N9vf8wpOst7TO2WC",
       "imdb_id": "tt31969655",
       "poster": "https://m.media-amazon.com/images/M/MV5BZWVlYjQ1NzktY2VmZC00NzhlLTg1NTItZTRhNDNmYzQyNWQxXkEyXkFqcGc@._V1_QL75_UX380_CR0,16,380,562_.jpg",
       "genre": [
@@ -461,7 +528,7 @@
       "file_size": 1216867624,
       "file_name": "Amaran (2024) Tamil HQ HDRip - 720p - HEVC - x265 - (DD+5.1 .mkv",
       "mime_type": "video/x-matroska",
-      "slug_id": "54dGdSj1urBsrXjm",
+      "slug_id": "zlNebfHD37Vt5WHe",
       "imdb_id": "tt27118357",
       "poster": "https://m.media-amazon.com/images/M/MV5BZGQyYTA0Y2EtYTA1NC00YTkzLWJiMmQtNzUzZGMzNjc5ZjM1XkEyXkFqcGc@._V1_QL75_UX380_CR0,4,380,562_.jpg",
       "genre": [
@@ -489,7 +556,7 @@
       "file_size": 1342360460,
       "file_name": "The Invite (2026) BluRay - 720p - x264 - [Tamil + Telugu.mkv",
       "mime_type": "video/x-matroska",
-      "slug_id": "gaNpa8s5ogLktWyr",
+      "slug_id": "NQ6rMc34RPM5_GXq",
       "imdb_id": "tt14173636",
       "poster": "https://m.media-amazon.com/images/M/MV5BMjI0MzJjMjctNmQzZi00Y2U4LWEwZGItMmE3NDUzNzk1YzY3XkEyXkFqcGc@._V1_QL75_UX380_CR0,15,380,562_.jpg",
       "genre": [
@@ -517,7 +584,7 @@
       "file_size": 1018322674,
       "file_name": "The Tomorrow War (2021) Tamil HD Rip.mkv",
       "mime_type": "video/x-matroska",
-      "slug_id": "hdqtj1fIe-ul5Vd_",
+      "slug_id": "9I8OnKHFJ9f9qJiB",
       "imdb_id": "tt9777666",
       "poster": "https://m.media-amazon.com/images/M/MV5BYmUyNzY2YWYtNWQ0My00ODMwLTkwOTQtOTA0ZjM0MjRmYjJiXkEyXkFqcGc@._V1_QL75_UX380_CR0,0,380,562_.jpg",
       "genre": [
