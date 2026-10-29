@@ -94,7 +94,21 @@ function sessionCookie(token,age){return 'tfw_session='+token+'; Path=/; HttpOnl
 const historyKey=number=>'request-history:'+hmac(number);
 async function requestHistory(number){
  const raw=await redis('LRANGE',historyKey(number),0,99);
- return (Array.isArray(raw)?raw:[]).map(value=>{try{return JSON.parse(value);}catch{return null;}}).filter(Boolean);
+ const records=(Array.isArray(raw)?raw:[]).map(value=>{try{return JSON.parse(value);}catch{return null;}}).filter(Boolean);
+ // Workflow completion is stored in sanitized repository files; never look it up by phone.
+ // Only check request IDs already present in this authenticated user's Redis list.
+ const token=process.env.GITHUB_DISPATCH_TOKEN,repository=process.env.GITHUB_REPOSITORY;
+ if(!token||!repository||!/^[A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+$/.test(repository))return records;
+ await Promise.all(records.slice(0,30).map(async record=>{
+  if(!/^[a-f0-9-]{36}$/.test(record.id||''))return;
+  try{
+   const response=await fetch('https://api.github.com/repos/'+repository+'/contents/movies/request-'+record.id+'.json',{headers:{Authorization:'Bearer '+token,Accept:'application/vnd.github.raw+json','X-GitHub-Api-Version':'2022-11-28'},signal:AbortSignal.timeout(3000)});
+   if(!response.ok)return;
+   const saved=await response.json();
+   if(['submitted','failed'].includes(saved.status)){record.status=saved.status;record.finished_at=saved.finished_at||null;}
+  }catch{/* Keep last known status when GitHub is unavailable. */}
+ }));
+ return records;
 }
 async function profile(number){const raw=await redis('GET','profile:'+hmac(number));return raw?JSON.parse(raw):{name:'',created_at:new Date().toISOString()};}
 async function sendOtp(number,code){return sendWhatsAppOtp(number,code);}
@@ -217,7 +231,7 @@ const server=http.createServer(async(req,res)=>{
   if(req.method==='GET'&&url.pathname==='/catalog.css'){res.writeHead(200,{'Content-Type':'text/css; charset=utf-8','Cache-Control':'public, max-age=300','X-Content-Type-Options':'nosniff'});return res.end(catalogCss);}
   if(req.method==='GET'&&url.pathname==='/catalog.js'){res.writeHead(200,{'Content-Type':'text/javascript; charset=utf-8','Cache-Control':'public, max-age=300','X-Content-Type-Options':'nosniff'});return res.end(catalogJs);}
   if(req.method==='GET'&&(url.pathname==='/'||(url.pathname.startsWith('/title/')&&/^[-a-zA-Z0-9_]+$/.test(url.pathname.slice(7).replace(/\/$/,''))))){res.writeHead(200,{'Content-Type':'text/html; charset=utf-8','Cache-Control':'no-store','Content-Security-Policy':"default-src 'self'; img-src 'self' https: data:; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src 'self'; base-uri 'none'; frame-ancestors 'none'"});return res.end(catalogHtml);}
-  if(req.method==='GET'&&(url.pathname==='/request'||url.pathname==='/profile')){res.writeHead(200,{'Content-Type':'text/html; charset=utf-8','Cache-Control':'no-store','X-Content-Type-Options':'nosniff','Content-Security-Policy':"default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src 'self'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'"});return res.end(index);}
+  if(req.method==='GET'&&(url.pathname==='/request'||url.pathname==='/profile'||url.pathname==='/history')){res.writeHead(200,{'Content-Type':'text/html; charset=utf-8','Cache-Control':'no-store','X-Content-Type-Options':'nosniff','Content-Security-Policy':"default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src 'self'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'"});return res.end(index);}
   if(req.method==='GET'&&url.pathname==='/style.css'){res.writeHead(200,{'Content-Type':'text/css; charset=utf-8','Cache-Control':'no-store','X-Content-Type-Options':'nosniff'});return res.end(stylesheet);}
   if(req.method==='GET'&&url.pathname==='/app.js'){res.writeHead(200,{'Content-Type':'text/javascript; charset=utf-8','Cache-Control':'no-store','X-Content-Type-Options':'nosniff'});return res.end(appJs);}
   if(req.method==='GET'&&url.pathname==='/countries.json'){res.writeHead(200,{'Content-Type':'application/json','Cache-Control':'public, max-age=86400'});return res.end(countries);}
