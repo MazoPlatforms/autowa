@@ -105,3 +105,47 @@ footer{color:#71717a}
 .plan-card .primary-button{margin:0;font-size:12px;min-height:44px;padding:10px 7px}
 #plans-country{max-width:100%;margin-top:0}
 @media(max-width:650px){.plans-grid{grid-template-columns:1fr}.plan-card{padding:20px}.plan-card h3{font-size:23px}.plan-price{font-size:24px}.plan-card .primary-button{font-size:13px}}
+
+/* FilmGo 2026 editorial layout refresh: profile, requests and history */
+main{max-width:760px}
+.card{padding:clamp(20px,4vw,36px);border-radius:24px}
+.page-kicker{font-size:10px;font-weight:800;letter-spacing:.19em;color:#a1a1aa;margin:0 0 15px}
+.profile-hero{display:flex;align-items:center;gap:20px;padding:22px;margin-bottom:20px;border-radius:20px;background:radial-gradient(circle at 95% 5%,#4b3d733b,transparent 65%),linear-gradient(135deg,#2c2b36,#202024);border:1px solid #484650}
+.profile-monogram{display:grid;place-items:center;flex:0 0 70px;height:70px;border-radius:22px;background:#f5f3ff;color:#272139;font-size:24px;font-weight:800;letter-spacing:-1px}
+.profile-hero h2{font-size:26px;margin:0 0 4px}.profile-hero #account-number{font-size:12px;color:#c4c4cc;overflow-wrap:anywhere;margin:0 0 9px}
+.member-pill{display:inline-block;border-radius:999px;background:#ffffff14;border:1px solid #ffffff24;color:#e8e2ff;font-size:10px;padding:5px 10px;font-weight:700}
+.profile-panel{border:1px solid #35353b;background:#202024;border-radius:18px;padding:20px;margin:14px 0}
+.panel-heading{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.panel-heading h3{margin:0;font-size:15px;font-weight:750;letter-spacing:-.25px}
+.panel-heading>span{font-size:10px;font-weight:750;letter-spacing:.12em;color:#85858f}
+.profile-panel label{margin-top:18px}.profile-panel .primary-button{margin-top:14px}
+.profile-panel #account-limits{margin:16px 0 0;background:#2d2d33;border:1px solid #41414a}
+.profile-panel .secondary-button{display:flex;align-items:center;justify-content:space-between;padding:0 16px;text-align:left}
+.profile-logout{margin-top:22px;border-color:#5d383c;color:#f5b9bf;background:#3c2428}
+.profile-logout:hover{background:#503034}
+.request-hero{position:relative;overflow:hidden;padding:28px 24px 24px;margin-bottom:22px;border:1px solid #484650;border-radius:20px;background:radial-gradient(circle at 90% 0%,#55437660,transparent 60%),linear-gradient(135deg,#2b2733,#1d1d22)}
+.request-hero h2{font-size:clamp(25px,5vw,34px);letter-spacing:-1.3px;max-width:420px;line-height:1.15;margin:0 0 10px}
+.request-hero p{max-width:400px;margin:0 0 22px;color:#c3bfcb}
+.request-spark{position:absolute;right:24px;top:15px;font-size:32px;color:#b9a4ff}
+.request-steps{display:flex;flex-wrap:wrap;gap:8px}
+.request-steps span{font-size:11px;color:#dedbe7;background:#ffffff10;border:1px solid #ffffff1b;border-radius:999px;padding:8px 10px}
+.request-steps b{color:#c5b4ff;margin-right:4px}
+.request-field,.request-confirm{background:#202024;border:1px solid #35353b;border-radius:18px;padding:21px;margin-bottom:16px}
+.request-field label{margin:0 0 4px;font-size:15px}
+.request-field .small{margin:0 0 14px}
+.request-field .movie-picker input{height:54px;border-radius:12px;padding-left:17px}
+.request-confirm .check{margin-top:16px}
+.request-submit{display:flex;align-items:center;justify-content:center;gap:12px;border-radius:12px;margin-top:18px}
+.request-footnote{text-align:center;font-size:11px;margin:13px 0 0}
+.history-heading{align-items:center}.history-heading h2{font-size:clamp(24px,5vw,31px);letter-spacing:-1px}
+.history-subtitle{margin:6px 0 0}
+#history-list{gap:10px}
+.history-card{position:relative;overflow:hidden;background:#202024;border:1px solid #383840;border-radius:17px;padding:19px 19px 19px 22px}
+.history-card:before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:#77718c}
+.history-card:has(.history-status-submitted):before{background:#52b788}
+.history-card:has(.history-status-failed):before{background:#e87979}
+.history-card-top strong{font-size:15px;letter-spacing:-.2px}
+.history-meta{margin:12px 0 8px}
+.history-id{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;overflow-wrap:anywhere;font-size:11px}
+.history-empty{padding:32px 18px;text-align:center;border:1px dashed #52525b;border-radius:17px}
+@media(max-width:520px){.profile-hero{padding:17px;gap:14px}.profile-monogram{flex-basis:58px;height:58px;font-size:20px}.profile-panel{padding:17px}.request-hero{padding:24px 18px}.request-field,.request-confirm{padding:17px}.history-heading{align-items:flex-start}.history-heading #refresh-history{flex-shrink:0}}
