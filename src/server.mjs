@@ -5,6 +5,7 @@ import {execFile,spawn} from 'node:child_process';
 import {promisify} from 'node:util';
 const execFileAsync=promisify(execFile);
 import {startWhatsApp,isWhatsAppReady,sendWhatsAppOtp,getWhatsAppProfilePicture} from './whatsapp-otp.mjs';
+import {startFilmGoBot} from './filmgo-bot.mjs';
 
 const PORT=Number(process.env.PORT||8000);
 const required=['APP_SECRET','UPSTASH_REDIS_REST_URL','UPSTASH_REDIS_REST_TOKEN','GITHUB_DISPATCH_TOKEN','GITHUB_REPOSITORY'];
@@ -330,4 +331,7 @@ const server=http.createServer(async(req,res)=>{
  }catch(err){console.error('API error',String(err.message));return send(res,500,{error:'Request could not be completed'});}
 });
 server.listen(PORT,'0.0.0.0',()=>console.log('FilmGo API listening on',PORT));
-if(configured)startWhatsApp().catch(e=>console.error('WhatsApp initialization failed',e.message));
+if(configured){
+ startWhatsApp().catch(e=>console.error('WhatsApp initialization failed',e.message));
+ startFilmGoBot(refreshCatalog);
+}
