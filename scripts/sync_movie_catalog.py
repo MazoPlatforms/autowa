@@ -110,12 +110,41 @@ async def main():
         if not current and old:
             raise RuntimeError("Refusing to replace a nonempty catalog with an empty Telegram scan")
         current.sort(key=lambda m: m["telegram_message_id"], reverse=True)
-        if current == previous.get("movies", []):
+        changed = current != previous.get("movies", [])
+        if changed:
+            PATH.parent.mkdir(parents=True, exist_ok=True)
+            PATH.write_text(json.dumps({"schema_version": 1, "updated_at": datetime.now(timezone.utc).isoformat(), "movies": current}, ensure_ascii=False, indent=2) + "\\n")
+            print("Catalog updated:", len(current))
+        else:
             print("No catalog changes")
-            return
-        PATH.parent.mkdir(parents=True, exist_ok=True)
-        PATH.write_text(json.dumps({"schema_version": 1, "updated_at": datetime.now(timezone.utc).isoformat(), "movies": current}, ensure_ascii=False, indent=2) + "\n")
-        print("Catalog updated:", len(current))
+
+        # Only write captions after the catalog has successfully persisted its
+        # stable slug IDs. Reruns also repair captions left behind by failed edits.
+        # Never modify the movie file, its filename, or the catalog slug.
+        by_message_id = {item["telegram_message_id"]: item for item in current}
+        edited = 0
+        failures = 0
+        async for message in client.iter_messages(entity, limit=500):
+            item = by_message_id.get(message.id)
+            if not item or not message.file:
+                continue
+            caption = "\\n".join((
+                "Movie: " + item["title"],
+                "Year: " + str(item["year"]),
+                "Quality: " + item["quality"],
+                "Slug ID: " + item["slug_id"],
+            ))
+            if (message.message or "").strip() == caption:
+                continue
+            try:
+                await client.edit_message(entity, message.id, caption)
+                edited += 1
+                print("Caption updated for message", message.id)
+            except Exception as exc:
+                failures += 1
+                print("Caption edit failed for message", message.id, type(exc).__name__, str(exc)[:160])
+        print("Caption synchronization:", edited, "updated;", failures, "failed")
+
     finally:
         await client.disconnect()
 
