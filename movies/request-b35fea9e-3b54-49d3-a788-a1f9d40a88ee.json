@@ -1,0 +1,17 @@
+{
+  "id": "request-b35fea9e-3b54-49d3-a788-a1f9d40a88ee",
+  "title": "Trip",
+  "year": "2021",
+  "quality": "720p",
+  "license_confirmed": true,
+  "enabled": false,
+  "status": "submitted",
+  "started_at": "2026-10-29T18:51:58.777Z",
+  "file_type": "mkv",
+  "filename": "mzn.is-a.dev - Trip (2021) - 720p.mkv",
+  "caption": "🎬 FilmGo\n\n🎞️ Trip (2021)\n\nEnjoy the movie!\n\n> Powered by Itz Maazin • https://mzn.is-a.dev/",
+  "finished_at": "2026-10-29T19:20:46.180Z",
+  "request_origin": "koyeb_verified",
+  "workflow_run_id": "40934663455",
+  "workflow_run_url": "https://github.com/MazoPlatforms/autowa/actions/runs/40934663455"
+}
