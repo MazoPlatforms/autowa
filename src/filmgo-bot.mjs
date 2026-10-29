@@ -9,6 +9,20 @@ const GH_TOKEN=process.env.GITHUB_DISPATCH_TOKEN||'';
 const REPO=process.env.GITHUB_REPOSITORY||'';
 const prefix='filmgo:bot:v1:';
 const MAX_BYTES=2_000_000_000;
+const QUALITY=/\b(360|480|720|1080|1440|2160)p\b/i;
+const DRAFT_KEY=prefix+'draft:';
+const normalize=v=>String(v||'').normalize('NFKD').toLowerCase().replace(/[^a-z0-9]+/g,'');
+const filenameParts=name=>{const raw=String(name||'').replace(/\.[^.]+$/,'').replace(/[._-]+/g,' ');const year=raw.match(/\b(?:19|20)\d{2}\b/)?.[0];const quality=raw.match(QUALITY)?.[0]?.toLowerCase();const title=raw.split(/\b(?:19|20)\d{2}\b|\b(?:360|480|720|1080|1440|2160)p\b/i)[0].replace(/^@\S+\s*/,'').trim();return {title,year:Number(year)||null,quality};};
+async function catalog(){const r=await fetch('https://raw.githubusercontent.com/'+REPO+'/main/data/movies.json?ts='+Date.now(),{signal:AbortSignal.timeout(10000),cache:'no-store'});if(!r.ok)throw Error('Catalog unavailable');return (await r.json()).movies||[];}
+async function draftGet(){const raw=await redis('GET',DRAFT_KEY+ADMIN_ID);return raw?JSON.parse(raw):null;}
+async function draftSave(d){await redis('SET',DRAFT_KEY+ADMIN_ID,JSON.stringify(d),'EX',86400*7);}
+function guessMovie(file,movies){const p=filenameParts(file.file_name||'');const scored=movies.filter(m=>!p.year||m.year===p.year).map(m=>{const n=normalize(m.title),t=normalize(p.title);let score=t===n?1:t.includes(n)&&n.length>3?.9:n.includes(t)&&t.length>3?.8:0;for(const v of Object.values(m.qualities||{})){const other=normalize(filenameParts(v.file_name).title);if(t===other)score=Math.max(score,.95);}return {movie:m,score};}).sort((a,b)=>b.score-a.score);return {parts:p,best:scored[0]?.score>=.7?scored[0].movie:null,confidence:scored[0]?.score||0};}
+async function omdbSearch(title,year){const key=process.env.OMDB_API_KEY;if(!key)return null;const url='https://www.omdbapi.com/?'+new URLSearchParams({apikey:key,t:title,...(year?{y:String(year)}:{})});const r=await fetch(url,{signal:AbortSignal.timeout(10000)});const j=await r.json();return j.Response==='True'?j:null;}
+function movieFields(x){return {title:x.Title,year:Number(String(x.Year).slice(0,4)),imdb_id:x.imdbID,poster:x.Poster?.startsWith('https://')?x.Poster:null,genre:x.Genre,runtime:x.Runtime,director:x.Director,cast:x.Actors,plot:x.Plot};}
+async function draftPrompt(d){const text=['FilmGo movie draft',d.title+' ('+d.year+')', 'Quality: '+d.quality,'File: '+d.file_name,'Metadata: '+(d.imdb_id?'OMDb '+d.imdb_id:'manual / existing'),d.replace?'Existing quality — replacement requires confirmation':d.existing?'New quality for existing movie':'New movie', 'Use /edit to change metadata, /poster to upload a poster, /cancel to discard.'].join('\n');await say(ADMIN_ID,text,{reply_markup:{inline_keyboard:[[{text:d.replace?'Confirm replacement':'Publish movie',callback_data:'fg:publish'},{text:'Cancel',callback_data:'fg:cancel'}]]}});}
+async function posterUpload(d,photo){const info=await tg('getFile',{file_id:photo.file_id});if(!info.file_path||photo.file_size>5_000_000)throw Error('Poster too large or unavailable');const file=await fetch('https://api.telegram.org/file/bot'+TOKEN+'/'+info.file_path,{signal:AbortSignal.timeout(15000)});if(!file.ok)throw Error('Poster fetch failed');const bytes=new Uint8Array(await file.arrayBuffer());if(bytes.length>5_000_000||bytes[0]!==255||bytes[1]!==216)throw Error('Only JPEG posters under 5 MB');const path='web/posters/'+crypto.randomBytes(12).toString('hex')+'.jpg';const [owner,name]=REPO.split('/');const result=await fetch('https://api.github.com/repos/'+owner+'/'+name+'/contents/'+path,{method:'PUT',headers:{Authorization:'Bearer '+GH_TOKEN,Accept:'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28','Content-Type':'application/json'},body:JSON.stringify({message:'Add FilmGo movie poster',content:Buffer.from(bytes).toString('base64')}),signal:AbortSignal.timeout(20000)});if(!result.ok)throw Error('GitHub poster upload failed: '+result.status);d.poster='/posters/'+path.split('/').pop();await draftSave(d);}
+async function publishDraft(d){const lock=prefix+'publishing:'+ADMIN_ID;if(await redis('SET',lock,'1','NX','EX',90)!=='OK')return say(ADMIN_ID,'Publishing is already running.');try{const caption=['Movie: '+d.title,'Year: '+d.year,'Quality: '+d.quality,...(d.slug_id?['Slug ID: '+d.slug_id]:[]),...['imdb_id','poster','genre','runtime','director','cast','plot'].filter(k=>d[k]).map(k=>k+': '+String(d[k]).replace(/[\r\n]+/g,' ').slice(0,400))].join('\n');const sent=await tg('copyMessage',{chat_id:CHANNEL_ID,from_chat_id:ADMIN_ID,message_id:d.message_id,caption},30000);await redis('DEL',DRAFT_KEY+ADMIN_ID);await say(ADMIN_ID,'Published to database channel as message #'+sent.message_id+'. Syncing catalog.');await dispatch('filmgo-catalog-sync',{message_id:sent.message_id});}finally{await redis('DEL',lock);}}
+
 let running=false;
 async function redis(...args){
  const r=await fetch(REDIS_URL,{method:'POST',headers:{Authorization:'Bearer '+REDIS_TOKEN,'Content-Type':'application/json'},body:JSON.stringify(args),signal:AbortSignal.timeout(12000)});
@@ -43,20 +57,40 @@ async function onMessage(message,refresh){
  const from=String(message.from?.id||''),chat=message.chat?.id;
  if(from!==ADMIN_ID||String(chat)!==ADMIN_ID)return;
  const text=String(message.text||'').trim();
- if(/^\/start(?:@\w+)?$/.test(text)||/^\/help(?:@\w+)?$/.test(text)){
-  await say(chat,'FilmGo Admin Bot\n\n/download <HTTPS URL> — review a direct or Google Drive download and confirm before GitHub Actions starts.\n/status — bot status.\n\nNew channel files trigger a catalog refresh automatically.');return;
+ if(/^\\/(start|help)(?:@\\w+)?$/.test(text)){await say(chat,'Send a movie file to create a draft. /draft shows current draft, /edit field=value changes metadata, /poster requests a JPEG poster, /cancel discards it. /download URL keeps the remote import workflow.');return;}
+ if(/^\\/status(?:@\\w+)?$/.test(text)){await say(chat,'FilmGo bot online.');return;}
+ if(/^\\/draft(?:@\\w+)?$/.test(text)){const d=await draftGet();return d?draftPrompt(d):say(chat,'No active draft. Send a movie file.');}
+ if(/^\\/cancel(?:@\\w+)?$/.test(text)){await redis('DEL',DRAFT_KEY+ADMIN_ID);return say(chat,'Draft cancelled.');}
+ const file=message.document||message.video;
+ if(file){
+  if(file.file_size>MAX_BYTES)return say(chat,'File exceeds the current 2 GB limit.');
+  const name=file.file_name||'',parts=filenameParts(name);
+  if(!parts.quality)return say(chat,'Cannot identify quality from filename. Rename the file with 360p, 480p, 720p, 1080p or 2160p and resend.');
+  const movies=await catalog(),found=guessMovie(file,movies),existing=found.best;
+  const title=existing?.title||parts.title,year=existing?.year||parts.year;
+  if(!title||!year)return say(chat,'Unable to identify title and year. Rename the file with movie title and release year, then resend.');
+  const omdb=existing?null:await omdbSearch(title,year).catch(()=>null);
+  const d={message_id:message.message_id,file_name:name,title,year,quality:parts.quality,existing:!!existing,replace:!!(existing&&Object.keys(existing.qualities||{}).some(q=>q.toLowerCase()===parts.quality)),slug_id:existing?.slug_id,...(omdb?movieFields(omdb):{})};
+  if(omdb){d.title=omdb.Title;d.year=Number(String(omdb.Year).slice(0,4));}
+  await draftSave(d);return draftPrompt(d);
  }
- if(/^\/status(?:@\w+)?$/.test(text)){await say(chat,'FilmGo bot online on Koyeb. Channel monitoring enabled.');return;}
- const match=text.match(/^\/download(?:@\w+)?\s+(\S+)$/i);
+ const d=await draftGet();
+ if(message.photo?.length&&d){await posterUpload(d,message.photo.at(-1));return draftPrompt(d);}
+ if(/^\\/poster(?:@\\w+)?$/.test(text))return say(chat,'Send a JPEG photo in this chat to save it as the draft poster.');
+ const edit=text.match(/^\\/edit\\s+(title|year|genre|runtime|director|cast|plot|poster|imdb_id|quality)=(.+)$/is);
+ if(edit&&d){const field=edit[1],value=edit[2].trim();if(field==='year'&&!/^(19|20)\\d{2}$/.test(value))return say(chat,'Invalid year');if(field==='quality'&&!/^(360|480|720|1080|1440|2160)p$/i.test(value))return say(chat,'Invalid quality');d[field]=field==='year'?Number(value):value.slice(0,1000);await draftSave(d);return draftPrompt(d);}
+ const match=text.match(/^\\/download(?:@\\w+)?\\s+(\\S+)$/i);
  if(!match){if(text.startsWith('/download'))await say(chat,'Usage: /download https://example.com/movie.mp4');return;}
  const data=await probe(match[1]);if(data.error){await say(chat,data.error);return;}
  const id=crypto.randomBytes(12).toString('hex');
  await redis('SET',prefix+'pending:'+id,JSON.stringify({url:data.url,admin:from,created:Date.now()}),'EX',900);
- await say(chat,'Confirm remote file import\n\nSource: '+(data.drive?'Google Drive':'Direct HTTPS')+'\nURL: '+data.url.slice(0,400)+'\nSize: unknown (checked before download in GitHub Actions)\nMaximum: 2 GB\n\nOnly import media you have permission to distribute.',{reply_markup:{inline_keyboard:[[{text:'Confirm import',callback_data:'fg:yes:'+id},{text:'Cancel',callback_data:'fg:no:'+id}]]}});
+ await say(chat,'Confirm remote file import\\n\\nSource: '+(data.drive?'Google Drive':'Direct HTTPS')+'\\nURL: '+data.url.slice(0,400)+'\\nSize: unknown\\nMaximum: 2 GB',{reply_markup:{inline_keyboard:[[{text:'Confirm import',callback_data:'fg:yes:'+id},{text:'Cancel',callback_data:'fg:no:'+id}]]}});
 }
 async function onCallback(q){
  if(String(q.from?.id)!==ADMIN_ID||String(q.message?.chat?.id)!==ADMIN_ID)return;
- const m=String(q.data||'').match(/^fg:(yes|no):([a-f0-9]{24})$/);if(!m)return;
+ const action=String(q.data||'');
+ if(action==='fg:publish'||action==='fg:cancel'){await tg('answerCallbackQuery',{callback_query_id:q.id});const d=await draftGet();if(!d)return say(ADMIN_ID,'Draft expired.');if(action==='fg:cancel'){await redis('DEL',DRAFT_KEY+ADMIN_ID);return say(ADMIN_ID,'Draft cancelled.');}return publishDraft(d);}
+ const m=action.match(/^fg:(yes|no):([a-f0-9]{24})$/);if(!m)return;
  await tg('answerCallbackQuery',{callback_query_id:q.id});
  const key=prefix+'pending:'+m[2],raw=await redis('GET',key);
  if(!raw){await say(ADMIN_ID,'Import confirmation expired or already used.');return;}
@@ -69,7 +103,9 @@ async function onCallback(q){
  catch(err){await say(ADMIN_ID,'Unable to queue import: '+err.message);}
 }
 async function onChannel(message,refresh){
- if(String(message.chat?.id)!==CHANNEL_ID||!message.document&&!message.video)return;
+ if(String(message.chat?.id)!==CHANNEL_ID)return;
+ if(String(message.sender_chat?.id)!==CHANNEL_ID && String(message.from?.id)!==String((await tg('getMe')).id)){try{await tg('deleteMessage',{chat_id:CHANNEL_ID,message_id:message.message_id});}catch(e){console.warn('Unauthorized channel post could not be deleted:',e.message);}return;}
+ if(!message.document&&!message.video)return;
  const file=message.document||message.video;
  if(!file.file_id)return;
  const dedupe=prefix+'channel:'+message.chat.id+':'+message.message_id;
