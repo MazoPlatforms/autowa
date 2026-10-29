@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "updated_at": "2026-10-29T13:36:36.908325+00:00",
+  "updated_at": "2026-10-29T13:37:24.996161+00:00",
   "movies": [
     {
       "id": "telegram-40",
@@ -8,6 +8,12 @@
       "title": "Baththa",
       "year": 2026,
       "qualities": {
+        "1080p": {
+          "telegram_message_id": 41,
+          "file_size": 2077682806,
+          "file_name": "@CinemasTrend - Baththa (2026) Tamil HQ HDRip - 1080p - HEVC.mkv",
+          "mime_type": "video/x-matroska"
+        },
         "720p": {
           "telegram_message_id": 40,
           "file_size": 1190375835,
