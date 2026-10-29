@@ -105,7 +105,7 @@ async function requestHistory(number){
    const response=await fetch('https://api.github.com/repos/'+repository+'/contents/movies/request-'+record.id+'.json',{headers:{Authorization:'Bearer '+token,Accept:'application/vnd.github.raw+json','X-GitHub-Api-Version':'2022-11-28'},signal:AbortSignal.timeout(3000)});
    if(!response.ok)return;
    const saved=await response.json();
-   if(['submitted','failed'].includes(saved.status)){record.status=saved.status;record.finished_at=saved.finished_at||null;}
+   if(['processing','downloading','submitted','failed'].includes(saved.status)){record.status=saved.status;record.finished_at=saved.finished_at||null;}
   }catch{/* Keep last known status when GitHub is unavailable. */}
  }));
  return records;
@@ -154,7 +154,9 @@ const server=http.createServer(async(req,res)=>{
    const user=await profile(session.number);
    const exempt=unlimitedRequests(session.number);
     const used=exempt?0:Number(await redis('GET','rate:'+hmac('submit:'+session.number))||0);
-   return send(res,200,{number:session.number,name:user.name||'',plan_onboarded:user.plan_onboarded!==false,plan:user.plan||'free',limit:exempt?null:3,used:exempt?0:Math.min(used,3),remaining:exempt?null:Math.max(0,3-used),period:exempt?'unlimited':'rolling rate window (up to 24 hours)',unlimited:exempt});
+   const month=new Date().toISOString().slice(0,7);
+   const monthlyUsed=Number(await redis('GET','monthly-requests:'+hmac(session.number)+':'+month)||0);
+   return send(res,200,{number:session.number,name:user.name||'',plan_onboarded:user.plan_onboarded!==false,plan:user.plan||'free',limit:exempt?null:3,used:exempt?0:Math.min(used,3),remaining:exempt?null:Math.max(0,3-used),period:exempt?'unlimited':'rolling rate window (up to 24 hours)',unlimited:exempt,monthly_used:monthlyUsed,monthly_period:month});
   }
   if(req.method==='GET'&&url.pathname==='/api/request-history'){
    const session=await authenticated(req);
@@ -313,6 +315,10 @@ const server=http.createServer(async(req,res)=>{
   try{
    await redis('LPUSH',historyKey(session.number),JSON.stringify({id:requestId,title:movie.title,year:movie.year,quality:movie.quality,status:'pending_review',created_at:new Date().toISOString()}));
    await redis('LTRIM',historyKey(session.number),0,99);
+   const month=new Date().toISOString().slice(0,7);
+   const monthlyKey='monthly-requests:'+hmac(session.number)+':'+month;
+   await redis('INCR',monthlyKey);
+   await redis('EXPIRE',monthlyKey,60*86400);
   }catch(err){console.error('FilmGo request history persistence failed',err.message);}
   return send(res,202,{request_id:requestId,status:'pending_review',message:'Request queued for review; delivery is not guaranteed'});
  }catch(err){console.error('API error',String(err.message));return send(res,500,{error:'Request could not be completed'});}
