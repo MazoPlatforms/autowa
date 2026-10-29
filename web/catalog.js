@@ -1,3 +1,9 @@
+function actionIcon(kind){
+ const paths={download:'M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4 M7 10l5 5 5-5 M12 15V3',whatsapp:'M21 11.5a8.5 8.5 0 0 1-12.4 7.5L3 21l2-5.6A8.5 8.5 0 1 1 21 11.5Z M9 9c1 3 3 5 6 6',telegram:'M22 2 11 13 M22 2 15 22l-4-9-9-4 20-7Z'};
+ const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');
+ svg.setAttribute('viewBox','0 0 24 24');svg.setAttribute('width','17');svg.setAttribute('height','17');svg.setAttribute('fill','none');svg.setAttribute('stroke','currentColor');svg.setAttribute('stroke-width','1.8');svg.setAttribute('stroke-linecap','round');svg.setAttribute('stroke-linejoin','round');svg.setAttribute('aria-hidden','true');
+ const path=document.createElementNS('http://www.w3.org/2000/svg','path');path.setAttribute('d',paths[kind]);svg.append(path);return svg;
+}
 function confirmMovieRequest(movie,channel){
  const overlay=el('div','filmgo-sheet-overlay');const sheet=el('div','filmgo-sheet');
  sheet.setAttribute('role','dialog');sheet.setAttribute('aria-modal','true');
@@ -141,6 +147,7 @@ const whatsapp=el('button','filmgo-open-button','WhatsApp');
 whatsapp.type='button';whatsapp.addEventListener('click',()=>confirmMovieRequest(m,'whatsapp'));
 const telegram=el('button','filmgo-open-button','Telegram');
 telegram.type='button';telegram.addEventListener('click',()=>confirmMovieRequest(m,'telegram'));
+for(const [button,kind] of [[download,'download'],[whatsapp,'whatsapp'],[telegram,'telegram']]){button.prepend(actionIcon(kind));button.style.gap='8px';}
 actions.append(download,whatsapp,telegram);
 section.append(actions,status);
 root.append(section);
