@@ -95,6 +95,9 @@ async def main():
             filename, size = google_drive(url, path)
         else:
             filename, size = download(url, path)
+        filename = pathlib.PurePosixPath(filename.replace("\\\\", "/")).name
+        upload_path = path.with_name(filename)
+        path.replace(upload_path)
         print("Media downloaded:", filename, size, "bytes", flush=True)
         title = re.sub(r"(?i)\\.(mkv|mp4|avi|mov|webm|m4v)$", "", filename)
         title = re.sub(r"[._]+", " ", title)
@@ -109,7 +112,7 @@ async def main():
         await client.connect()
         try:
             if not await client.is_user_authorized(): raise ValueError("Telegram uploader session unauthorized")
-            await client.send_file(int(os.environ["TELEGRAM_CHANNEL_ID"]), str(path), caption=caption, attributes=None, force_document=True, file_size=size)
+            await client.send_file(int(os.environ["TELEGRAM_CHANNEL_ID"]), str(upload_path), caption=caption, attributes=None, force_document=True, file_size=size)
             print("Uploaded to Telegram channel", flush=True)
         finally:
             await client.disconnect()
