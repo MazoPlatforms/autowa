@@ -73,3 +73,10 @@
 .filmgo-player-actions>*{display:inline-flex;align-items:center;justify-content:center;min-height:50px}
 .filmgo-player{background:#09090b;object-fit:contain}
 @media(max-width:480px){.filmgo-player-actions{flex-direction:unset!important}.filmgo-player-actions>*{min-width:0!important}}
+
+/* Movie actions: one full-width download and two equally sized messengers. */
+.filmgo-player-actions{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important;align-items:stretch}
+.filmgo-player-actions>.filmgo-download-button{grid-column:1/-1!important;width:100%!important}
+.filmgo-player-actions>.filmgo-open-button{grid-column:auto!important;min-width:0!important;width:100%!important}
+.filmgo-player-actions svg{flex:none;width:19px;height:19px}
+.filmgo-player{background-color:#09090b!important}
