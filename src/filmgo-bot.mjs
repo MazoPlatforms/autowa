@@ -100,6 +100,22 @@ async function probe(input){
 }
 async function onMessage(message,refresh){
  const from=String(message.from?.id||''),chat=message.chat?.id;
+ const deep=String(message.text||'').trim().match(/^\/start(?:@\\w+)?\\s+m_([A-Za-z0-9_-]{16})$/);
+ if(deep&&message.chat?.type==='private'){
+  const key='filmgo:deeplink:'+deep[1];
+  const slug=await redis('GET',key);
+  if(!slug)return say(chat,'This movie link has expired. Please open FilmGo and request a new link.');
+  const movie=(await catalog()).find(m=>m.slug_id===slug);
+  if(!movie)return say(chat,'Movie is no longer available.');
+  const qualities=Object.keys(movie.qualities||{[movie.quality]:movie});
+  const chosen=qualities.find(q=>q.toLowerCase()==='720p')||qualities[0];
+  const variant=movie.qualities?.[chosen]||movie;
+  if(!Number.isSafeInteger(variant.telegram_message_id))return say(chat,'Movie is unavailable.');
+  await tg('copyMessage',{chat_id:chat,from_chat_id:CHANNEL_ID,message_id:variant.telegram_message_id});
+  await redis('DEL',key);
+  void logFilmGo('downloads','Telegram movie requested: '+movie.title+' ('+movie.year+')');
+  return;
+ }
  if(from!==ADMIN_ID||String(chat)!==ADMIN_ID)return;
  const text=String(message.text||'').trim();
  if(/^\/(start|help)(?:@\w+)?$/.test(text)){await say(chat,'Send a movie file to create a draft. /draft shows current draft, /edit field=value changes metadata, /poster requests a JPEG poster, /cancel discards it. /download URL keeps the remote import workflow.');return;}
