@@ -200,3 +200,13 @@ footer a{color:#a1a1aa}
 .request-field,.request-confirm,.profile-panel,.history-card,.plan-card{background:#18181b;border-color:#303036}
 @media(min-width:640px){main{padding-left:32px;padding-right:32px}}
 @media(max-width:520px){.app-header{height:64px;min-height:64px;margin-bottom:24px}.catalog-nav-link{padding:8px 10px}.card{padding:0}.profile-hero{gap:12px}.profile-hero h2{font-size:21px}}
+
+/* Contain every WhatsApp avatar, including nested header/profile contexts. */
+#profile-avatar.avatar-button{position:relative!important;display:grid!important;place-items:center!important;isolation:isolate;overflow:hidden!important;flex:0 0 42px!important;width:42px!important;height:42px!important;min-width:42px!important;max-width:42px!important;min-height:42px!important;max-height:42px!important}
+#profile-monogram.profile-monogram{position:relative!important;isolation:isolate;overflow:hidden!important;flex:0 0 70px!important;width:70px!important;height:70px!important;min-width:70px!important;max-width:70px!important;border-radius:50%!important}
+#profile-avatar .wa-avatar-image,#profile-monogram .wa-avatar-image{position:absolute!important;inset:0!important;display:block!important;width:100%!important;height:100%!important;min-width:0!important;max-width:100%!important;min-height:0!important;max-height:100%!important;object-fit:cover!important;border-radius:inherit!important;z-index:1}
+@media(max-width:520px){#profile-monogram.profile-monogram{flex-basis:58px!important;width:58px!important;height:58px!important;min-width:58px!important;max-width:58px!important;min-height:58px!important;max-height:58px!important}}
+.ui-icon{display:inline-block;width:18px;height:18px;flex:0 0 18px;vertical-align:middle;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+#open-plans .ui-icon,#open-history .ui-icon{margin-left:auto}
+#edit-display-name .ui-icon{width:15px;height:15px}
+#open-plans,#open-history{display:flex;align-items:center;justify-content:space-between;gap:10px}
