@@ -89,21 +89,52 @@ const archivedMetadata = {
 let groups=await sock.groupFetchAllParticipating();
 
 const miB=n=>(n/1048576).toFixed(1);
+const formatDuration=seconds=>!Number.isFinite(seconds)||seconds<0?'Calculating…':seconds<60?Math.ceil(seconds)+'s':Math.floor(seconds/3600)?Math.floor(seconds/3600)+'h '+Math.floor(seconds%3600/60)+'m':Math.ceil(seconds/60)+'m';
+const asciiBar=(done,total)=>{const pct=total>0?Math.max(0,Math.min(1,done/total)):0;const count=Math.round(pct*20);return '['+'#'.repeat(count)+'-'.repeat(20-count)+'] '+Math.round(pct*100)+'%';};
+let posterCatalog=[];
+try{const catalog=JSON.parse(fs.readFileSync('data/movies.json','utf8'));posterCatalog=Array.isArray(catalog)?catalog:Array.isArray(catalog.movies)?catalog.movies:[];}catch(err){console.warn('Poster catalog unavailable:',err.message);}
 function requesterProgress(j){
  const jid=(j.recipient_jids||[]).find(v=>/^\d{8,15}@s\.whatsapp\.net$/.test(v));
- let key=null,last='',lastAt=0,chain=Promise.resolve();
- const label=String(j.title||'Movie').slice(0,100);
- const update=(message,force=false)=>{
+ const movie=posterCatalog.find(m=>m.telegram_message_id===j.telegram_message_id)||{};
+ const poster=String(j.poster||j.poster_url||movie.poster||'');
+ const posterUrl=/^https:\/\/[^\s]+$/i.test(poster)?poster:null;
+ const title=String(j.title||movie.title||'Movie').slice(0,130);
+ const year=String(j.year||movie.year||'—'),quality=String(j.quality||movie.quality||'—');
+ const size=Number(j.file_size||movie.file_size||0);
+ const details=['🎬 *FILMGO*','', '🎞️ *'+title+'*','📅 Year: '+year,'📺 Quality: '+quality,...(movie.genre?.length?['🎭 Genre: '+(Array.isArray(movie.genre)?movie.genre.join(', '):movie.genre)]:[]),''];
+ let key=null,last='',lastAt=0,chain=Promise.resolve(),posterAttached=false,started=Date.now(),lastBytes=0,lastSample=started,rate=0;
+ const render=(message,stats)=>{
+  if(!stats)return details.join('\n')+message+(size?'\n📦 File size: '+miB(size)+' MiB':'');
+  const now=Date.now(),elapsed=Math.max(.001,(now-lastSample)/1000);
+  if(stats.done>=lastBytes&&elapsed>=1){const instant=(stats.done-lastBytes)/elapsed;rate=rate?rate*.65+instant*.35:instant;lastBytes=stats.done;lastSample=now;}
+  const total=stats.total||size,remaining=Math.max(0,total-stats.done);
+  return details.join('\n')+'📥 *Downloading movie*\n'+asciiBar(stats.done,total)+'\n\n📦 '+miB(stats.done)+' / '+(total?miB(total):'?')+' MiB\n⚡ Speed: '+(rate>0?miB(rate)+' MiB/s':'Calculating…')+'\n⏳ ETA: '+(rate>0?formatDuration(remaining/rate):'Calculating…')+'\n🕒 Elapsed: '+formatDuration((now-started)/1000);
+ };
+ const update=(message,force=false,stats=null)=>{
   if(!jid)return Promise.resolve();
   chain=chain.then(async()=>{
-   if(!force&&(message===last||Date.now()-lastAt<12000))return;
+   const caption=render(message,stats);
+   if(!force&&(caption===last||Date.now()-lastAt<12000))return;
    try{
-    const payload={text:'🎬 FilmGo\n\n🎞️ '+label+'\n\n'+message};
-    if(key)payload.edit=key;
-    const result=await sock.sendMessage(jid,payload);
-    if(!key&&result?.key?.id)key=result.key;
-    last=message;lastAt=Date.now();
-   }catch(err){console.warn('Requester status update unavailable:',err.message);}
+    let result;
+    if(!key&&posterUrl){
+     try{result=await sock.sendMessage(jid,{image:{url:posterUrl},caption});posterAttached=!!result?.key?.id;}
+     catch(err){console.warn('Movie poster unavailable, using text status:',err.message);}
+    }
+    if(!result){
+     const payload={text:caption};
+     if(key)payload.edit=key;
+     // WhatsApp does not reliably support editing image captions via Baileys.
+     // Keep the poster as the first message, and edit one text progress message.
+     if(posterAttached&&!key)posterAttached=false;
+     result=await sock.sendMessage(jid,payload);
+    }
+    if(!key&&result?.key?.id){
+     if(posterAttached){posterAttached=false;key=null;}
+     else key=result.key;
+    }
+    last=caption;lastAt=Date.now();
+   }catch(err){console.warn('Requester status update unavailable:',err.message);if(/connection closed|socket.*closed/i.test(String(err.message)))connectionClosed=true;}
   });
   return chain;
  };
@@ -149,7 +180,7 @@ try{
   if(!Number.isSafeInteger(j.telegram_message_id)||j.telegram_message_id<=0)throw Error('Telegram media ID required');
   await downloadWithProgress(['telegram',String(j.telegram_message_id),dest],(bytes,total)=>{
    const pct=total?Math.min(100,Math.floor(bytes/total*100)):null;
-   void progress.update('📥 Downloading: '+(pct===null?'':pct+'% · ')+miB(bytes)+' MiB'+(total?' / '+miB(total)+' MiB':''));
+   void progress.update('📥 Downloading your movie…',false,{done:bytes,total});
   });
   await progress.update('✅ Download complete. Preparing upload…',true);
   const mediaBytes=fs.statSync(dest).size;
