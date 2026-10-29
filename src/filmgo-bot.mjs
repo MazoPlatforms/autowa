@@ -1,4 +1,5 @@
 import crypto from 'node:crypto';
+import {logFilmGo} from './filmgo-logs.mjs';
 
 const TOKEN=process.env.BOT_TOKEN||'';
 const ADMIN_ID=String(process.env.FILMGO_BOT_ADMIN_ID||'7744742903');
@@ -65,7 +66,7 @@ async function saveMovieMetadata(id,d){
  }
  throw Error('Catalog update conflict');
 }
-async function publishDraft(d){const lock=prefix+'publishing:'+ADMIN_ID;if(await redis('SET',lock,'1','NX','EX',90)!=='OK')return say(ADMIN_ID,'Publishing is already running.');try{const caption=['Movie: '+d.title,'Year: '+d.year,'Quality: '+d.quality,...(d.slug_id?['Slug ID: '+d.slug_id]:[])].join('\n');const sent=await tg('copyMessage',{chat_id:CHANNEL_ID,from_chat_id:ADMIN_ID,message_id:d.message_id,caption},30000);await saveMovieMetadata(sent.message_id,d);await redis('DEL',DRAFT_KEY+ADMIN_ID);await say(ADMIN_ID,'Published to database channel as message #'+sent.message_id+'. Syncing catalog.');await dispatch('filmgo-catalog-sync',{message_id:sent.message_id});}finally{await redis('DEL',lock);}}
+async function publishDraft(d){const lock=prefix+'publishing:'+ADMIN_ID;if(await redis('SET',lock,'1','NX','EX',90)!=='OK')return say(ADMIN_ID,'Publishing is already running.');try{const caption=['Movie: '+d.title,'Year: '+d.year,'Quality: '+d.quality,...(d.slug_id?['Slug ID: '+d.slug_id]:[])].join('\n');const sent=await tg('copyMessage',{chat_id:CHANNEL_ID,from_chat_id:ADMIN_ID,message_id:d.message_id,caption},30000);await saveMovieMetadata(sent.message_id,d);await redis('DEL',DRAFT_KEY+ADMIN_ID);void logFilmGo('movies','🎬 Published: '+d.title+' ('+d.year+') · '+d.quality+' · channel #'+sent.message_id);await dispatch('filmgo-catalog-sync',{message_id:sent.message_id});}finally{await redis('DEL',lock);}}
 
 let running=false;
 async function redis(...args){
@@ -150,7 +151,7 @@ async function onCallback(q){
  if(await redis('SET',prefix+'claimed:'+m[2],'1','EX',3600,'NX')!=='OK')return;
  await redis('DEL',key);
  if(m[1]==='no'){await say(ADMIN_ID,'Import cancelled.');return;}
- try{await dispatch('filmgo-admin-import',{import_id:m[2],source_url:data.url,admin_id:ADMIN_ID});await say(ADMIN_ID,'Import queued in GitHub Actions. The runner will validate size and upload to the configured channel.');}
+ try{await dispatch('filmgo-admin-import',{import_id:m[2],source_url:data.url,admin_id:ADMIN_ID});void logFilmGo('movies','📥 Remote movie import queued · job '+m[2]);}
  catch(err){await say(ADMIN_ID,'Unable to queue import: '+err.message);}
 }
 async function onChannel(message,refresh){
@@ -161,7 +162,7 @@ async function onChannel(message,refresh){
  if(!file.file_id)return;
  const dedupe=prefix+'channel:'+message.chat.id+':'+message.message_id+':'+(message.edit_date||message.date||0);
  if(await redis('SET',dedupe,'1','EX',86400*30,'NX')!=='OK')return;
- try{await refresh();await dispatch('filmgo-catalog-sync',{message_id:message.message_id});await say(ADMIN_ID,'New channel media detected (#'+message.message_id+'). Website catalog refresh and metadata sync requested.');}
+ try{await refresh();await dispatch('filmgo-catalog-sync',{message_id:message.message_id});void logFilmGo('movies','🎬 Channel movie '+(message.edit_date?'edited':'detected')+' · message #'+message.message_id+' · catalog sync queued');}
  catch(err){await redis('DEL',dedupe);throw err;}
 }
 export function startFilmGoBot(refresh){
@@ -185,7 +186,7 @@ export function startFilmGoBot(refresh){
       if(u.edited_channel_post)await onChannel(u.edited_channel_post,refresh);
       if(u.message)await onMessage(u.message,refresh);
       if(u.callback_query)await onCallback(u.callback_query);
-     }catch(err){console.error('FilmGo bot update error:',err.message);}
+     }catch(err){console.error('FilmGo bot update error:',err.message);void logFilmGo('errors','Bot update error: '+err.message);}
      await redis('SET',prefix+'offset',String(u.update_id+1));
     }
    }catch(err){console.error('FilmGo bot polling error:',err.message);await new Promise(r=>setTimeout(r,5000));}
