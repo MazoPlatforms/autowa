@@ -1,7 +1,42 @@
 {
   "schema_version": 2,
-  "updated_at": "2026-10-29T18:58:24.094304+00:00",
+  "updated_at": "2026-10-29T19:32:10.218141+00:00",
   "movies": [
+    {
+      "id": "telegram-49",
+      "slug_id": "-eCaeLYUzno2q4rG",
+      "title": "Yevadu",
+      "year": 2014,
+      "qualities": {
+        "720p": {
+          "telegram_message_id": 49,
+          "file_size": 1982654865,
+          "file_name": "Yevadu (2014) BDRip 720p Tamil 1.8GB.mkv",
+          "mime_type": "video/x-matroska"
+        }
+      },
+      "imdb_id": "tt2211173",
+      "poster": "https://m.media-amazon.com/images/M/MV5BYjIxNDk4YjMtOWZkNC00Mzk1LWEyYmMtMzU5MGQ1OWRmZGJmXkEyXkFqcGc@._V1_QL75_UX380_CR0,7,380,562_.jpg",
+      "genre": [
+        "Action",
+        "Thriller"
+      ],
+      "runtime": "165 min",
+      "director": "Vamshi Paidipally",
+      "cast": [
+        "Ram Charan",
+        "Allu Arjun",
+        "Shruti Haasan"
+      ],
+      "plot": "A man wakes up from coma and takes revenge on Veeru, a dreaded criminal, for murdering his lover, Deepthi, and comes to know that his face has been exchanged with someone else as his face was severely damaged due to facial burn in...",
+      "imdb_rating": "6.0",
+      "metadata_status": "matched",
+      "telegram_message_id": 49,
+      "file_size": 1982654865,
+      "file_name": "Yevadu (2014) BDRip 720p Tamil 1.8GB.mkv",
+      "mime_type": "video/x-matroska",
+      "quality": "720p"
+    },
     {
       "id": "telegram-23",
       "slug_id": "BgWLSGwpdmYTzltS",
@@ -1214,32 +1249,6 @@
       "file_name": "Modha Rathri (2026) Tamil HQ HDRip - 720p - x264 - (DD+5.mkv",
       "mime_type": "video/x-matroska",
       "quality": "720p"
-    },
-    {
-      "id": "telegram-49",
-      "slug_id": "-eCaeLYUzno2q4rG",
-      "title": "Yevadu",
-      "year": 2014,
-      "qualities": {
-        "720p": {
-          "telegram_message_id": 49,
-          "file_name": "Yevadu (2014) BDRip 720p Tamil 1.8GB.mkv",
-          "file_size": 0,
-          "mime_type": ""
-        }
-      },
-      "telegram_message_id": 49,
-      "quality": "720p",
-      "file_name": "Yevadu (2014) BDRip 720p Tamil 1.8GB.mkv",
-      "file_size": 0,
-      "mime_type": "",
-      "imdb_id": "tt2211173",
-      "poster": "https://m.media-amazon.com/images/M/MV5BYjIxNDk4YjMtOWZkNC00Mzk1LWEyYmMtMzU5MGQ1OWRmZGJmXkEyXkFqcGc@._V1_QL75_UX380_CR0,7,380,562_.jpg",
-      "genre": "Action, Thriller",
-      "runtime": "165 min",
-      "director": "Vamshi Paidipally",
-      "cast": "Ram Charan, Allu Arjun, Shruti Haasan",
-      "plot": "A man wakes up from coma and takes revenge on Veeru, a dreaded criminal, for murdering his lover, Deepthi, and comes to know that his face has been exchanged with someone else as his face was severely damaged due to facial burn in..."
     }
   ]
 }
