@@ -118,23 +118,51 @@ section.append(actions,status);
 root.append(section);
 const slug=encodeURIComponent(m.slug_id||'');
 const streamBase='https://filmgo-streamer.mazo.workers.dev';
-const streamUrl=streamBase+'/stream/'+slug;
-const downloadUrl=streamBase+'/download/'+slug;
+const qualities=Object.keys(m.qualities||{[m.quality]:m}).filter(Boolean).sort((a,b)=>parseInt(a)-parseInt(b));
+let selected=qualities.find(q=>q.toLowerCase()==='720p')||qualities[0];
+const qualityRow=el('div','filmgo-quality-options');
+const qualityLabel=el('p','filmgo-stream-status','Choose quality');
+section.insertBefore(qualityLabel,actions);
+section.insertBefore(qualityRow,actions);
 const isActive=()=>root.isConnected&&location.pathname==='/title/'+slug;
 const setStatus=value=>{if(isActive())status.textContent=value;};
-video.addEventListener('error',()=>setStatus('Playback failed. The file may use a format or codec unsupported by this browser. You can download it and open it with VLC or another compatible player.'));
-video.addEventListener('stalled',()=>setStatus('Buffering video… Please wait or check your connection.'));
-video.addEventListener('playing',()=>setStatus('Streaming video.'));
+const setQuality=q=>{
+ if(!qualities.includes(q))return;
+ const position=video.currentTime||0,wasPlaying=!video.paused;
+ selected=q;
+ for(const button of qualityRow.children){
+  const active=button.textContent===q;
+  button.classList.toggle('active',active);
+  button.setAttribute('aria-pressed',String(active));
+ }
+ const suffix='?quality='+encodeURIComponent(q);
+ video.pause();
+ video.src=streamBase+'/stream/'+slug+suffix;
+ video.load();
+ download.href=streamBase+'/download/'+slug+suffix;
+ download.removeAttribute('download');
+ external.href=video.src;
+ const file=m.qualities?.[q]||m;
+ const format=String(file.file_name||'').split('.').pop().toLowerCase();
+ setStatus(format==='mkv'?'MKV may not play in this browser. Download and open with VLC if needed.':'Selected '+q+'. Press play to stream.');
+ if(position>0)video.addEventListener('loadedmetadata',()=>{if(Number.isFinite(video.duration)&&position<video.duration)video.currentTime=position;if(wasPlaying)video.play().catch(()=>{});},{once:true});
+};
+for(const q of qualities){
+ const button=el('button','filmgo-quality-button',q);
+ button.type='button';
+ button.addEventListener('click',()=>setQuality(q));
+ qualityRow.append(button);
+}
+video.addEventListener('error',()=>setStatus('Playback failed. Try downloading this quality and opening it with VLC.'));
+video.addEventListener('stalled',()=>setStatus('Buffering video…'));
+video.addEventListener('playing',()=>setStatus('Streaming '+selected+'.'));
 video.addEventListener('waiting',()=>setStatus('Buffering…'));
-video.addEventListener('loadedmetadata',()=>setStatus('Ready to play.'));
 fetch('/api/stream-availability/'+slug,{cache:'no-store'}).then(r=>r.ok?r.json():null).then(data=>{
  if(!isActive())return;
- if(!data?.available){setStatus('Streaming is currently unavailable for this title.');actions.classList.add('hidden');return;}
- video.src=streamUrl;
- download.href=downloadUrl;
- external.href=streamUrl;
- setStatus(data.format==='mkv'?'MKV playback is not supported by many browsers. If playback fails, download the original movie and use VLC or another compatible player.':'Press play to watch online, or download the original movie file.');
-}).catch(()=>{if(isActive()){download.href=downloadUrl;external.href=streamUrl;video.src=streamUrl;setStatus('Could not check availability. Try playing or downloading the movie.');}});
+ if(!data?.available){setStatus('Streaming is currently unavailable.');actions.classList.add('hidden');qualityRow.classList.add('hidden');return;}
+ if(!selected){setStatus('No quality available.');return;}
+ setQuality(selected);
+}).catch(()=>{if(isActive()&&selected){setQuality(selected);setStatus('Availability check failed. You can still try streaming or downloading.');}});
 document.title=m.title+' — FilmGo';}function route(){const match=location.pathname.match(/^\/title\/([^/]+)\/?$/);if(match){const m=movies.find(x=>x.slug_id===decodeURIComponent(match[1])||x.id===decodeURIComponent(match[1]));home.classList.add('hidden');detail.classList.remove('hidden');if(m)showDetail(m);else{$('detail-content').replaceChildren(el('p','text-zinc-400','Movie not found.'));document.title='Movie not found — FilmGo';}}else{home.classList.remove('hidden');detail.classList.add('hidden');document.title='FilmGo — Explore';if(catalogLoaded)render();}window.scrollTo(0,0);}search.addEventListener('input',()=>{page=1;render();});for(const select of [yearFilter,genreFilter,sortFilter])select.addEventListener('change',()=>{page=1;render();});window.addEventListener('popstate',route);$('detail-back').addEventListener('click',e=>{e.preventDefault();history.pushState({},'','/');route();});skeleton();
 let catalogFingerprint='',catalogLoading=false;
 async function refreshCatalog(){
@@ -145,7 +173,7 @@ async function refreshCatalog(){
   if(!response.ok)throw Error('Catalog unavailable');
   const data=await response.json();
   if(!Array.isArray(data.movies))throw Error('Invalid catalog');
-  const fingerprint=JSON.stringify(data.movies.map(m=>[m.slug_id,m.title,m.poster,m.file_size,m.metadata_status]));
+  const fingerprint=JSON.stringify(data.movies.map(m=>[m.slug_id,m.title,m.poster,m.file_size,m.metadata_status,JSON.stringify(m.qualities)]));
   if(fingerprint!==catalogFingerprint||!catalogLoaded){
    catalogFingerprint=fingerprint;movies=data.movies;catalogLoaded=true;updateFilters();
    if(!location.pathname.startsWith('/title/'))render();
