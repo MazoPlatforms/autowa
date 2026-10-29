@@ -1,3 +1,6 @@
+Warning: truncated output (original token count: 6997)
+Total output lines: 339
+
 import crypto from 'node:crypto';
 import {logFilmGo} from './filmgo-logs.mjs';
 
@@ -10,11 +13,22 @@ const GH_TOKEN=process.env.GITHUB_DISPATCH_TOKEN||'';
 const REPO=process.env.GITHUB_REPOSITORY||'';
 const prefix='filmgo:bot:v1:';
 const MAX_BYTES=2_000_000_000;
-const QUALITY=/\b(360|480|720|1080|1440|2160)p\b/i;
+const QUALITY=/\b(360|480|720|1080|1440|2160)p\b|\b4k\b/i;
 const DRAFT_KEY=prefix+'draft:';
 const OPTIONAL_FIELDS=[['imdb_id','IMDb ID'],['poster','Poster'],['genre','Genre'],['runtime','Runtime'],['director','Director'],['cast','Cast'],['plot','Plot']];
 const normalize=v=>String(v||'').normalize('NFKD').toLowerCase().replace(/[^a-z0-9]+/g,'');
-const filenameParts=name=>{const raw=String(name||'').replace(/\.[^.]+$/,'').replace(/[._-]+/g,' ');const year=raw.match(/\b(?:19|20)\d{2}\b/)?.[0];const quality=raw.match(QUALITY)?.[0]?.toLowerCase();const title=raw.split(/\b(?:19|20)\d{2}\b|\b(?:360|480|720|1080|1440|2160)p\b/i)[0].replace(/^@\S+\s*/,'').trim();return {title,year:Number(year)||null,quality};};
+export const filenameParts=name=>{
+ const raw=String(name||'').replace(/\.[^.]+$/,'').replace(/[._]+/g,' ').replace(/\s+/g,' ').trim();
+ const yearMatch=raw.match(/\b((?:19|20)\d{2})\b/);
+ const qualityMatch=raw.match(QUALITY);
+ const cut=Math.min(yearMatch?.index??Infinity,qualityMatch?.index??Infinity);
+ let title=(Number.isFinite(cut)?raw.slice(0,cut):raw).replace(/^@\S+\s*/,'').trim();
+ // Release-group prefixes such as [CC] and [MM] are tags, not part of the title.
+ while(/^\[[A-Z0-9]{2,5}\]\s*/i.test(title))title=title.replace(/^\[[A-Z0-9]{2,5}\]\s*/i,'');
+ title=title.replace(/[\s([{]+$/g,'').replace(/[\])}]+$/g,'').replace(/\s+/g,' ').trim();
+ const quality=qualityMatch?.[0]?.toLowerCase()==='4k'?'2160p':qualityMatch?.[0]?.toLowerCase()||null;
+ return {title,year:Number(yearMatch?.[1])||null,quality};
+};
 async function catalog(){const r=await fetch('https://raw.githubusercontent.com/'+REPO+'/main/data/movies.json?ts='+Date.now(),{signal:AbortSignal.timeout(10000),cache:'no-store'});if(!r.ok)throw Error('Catalog unavailable');return (await r.json()).movies||[];}
 async function draftGet(){const raw=await redis('GET',DRAFT_KEY+ADMIN_ID);return raw?JSON.parse(raw):null;}
 async function draftSave(d){await redis('SET',DRAFT_KEY+ADMIN_ID,JSON.stringify(d),'EX',86400*7);}
@@ -75,9 +89,12 @@ function similarity(a,b){
  for(let i=1;i<=a.length;i++){let diagonal=previous[0];previous[0]=i;for(let j=1;j<=b.length;j++){const old=previous[j];previous[j]=Math.min(previous[j]+1,previous[j-1]+1,diagonal+(a[i-1]===b[j-1]?0:1));diagonal=old;}}
  return 1-previous[b.length]/Math.max(a.length,b.length);
 }
-function guessMovie(file,movies){
+export function guessMovie(file,movies){
  const p=filenameParts(file.file_name||'');
- const scored=movies.filter(m=>!p.year||m.year===p.year).map(m=>{
+ const candidates=movies.filter(m=>!p.year||Number(m.year)===p.year);
+ const exact=candidates.find(m=>normalize(m.title)===normalize(p.title));
+ if(exact)return {parts:p,best:exact,confidence:1};
+ const scored=candidates.map(m=>{
   let score=similarity(p.title,m.title);
   for(const v of Object.values(m.qualities||{}))score=Math.max(score,similarity(p.title,filenameParts(v.file_name).title));
   return {movie:m,score};
@@ -118,58 +135,7 @@ async function saveMovieMetadata(id,d){
  }
  throw Error('Catalog update conflict');
 }
-async function publishDraft(d){const lock=prefix+'publishing:'+ADMIN_ID;if(await redis('SET',lock,'1','NX','EX',90)!=='OK')return say(ADMIN_ID,'Publishing is already running.');try{const caption=['Movie: '+d.title,'Year: '+d.year,'Quality: '+d.quality,...(d.slug_id?['Slug ID: '+d.slug_id]:[])].join('\n');const sent=await tg('copyMessage',{chat_id:CHANNEL_ID,from_chat_id:ADMIN_ID,message_id:d.message_id,caption},30000);await saveMovieMetadata(sent.message_id,d);await redis('DEL',DRAFT_KEY+ADMIN_ID);void logFilmGo('movies','🎬 Published: '+d.title+' ('+d.year+') · '+d.quality+' · channel #'+sent.message_id);await dispatch('filmgo-catalog-sync',{message_id:sent.message_id});}finally{await redis('DEL',lock);}}
-
-let running=false;
-async function redis(...args){
- const r=await fetch(REDIS_URL,{method:'POST',headers:{Authorization:'Bearer '+REDIS_TOKEN,'Content-Type':'application/json'},body:JSON.stringify(args),signal:AbortSignal.timeout(12000)});
- if(!r.ok)throw Error('Bot Redis unavailable');
- const j=await r.json();if(j.error)throw Error('Bot Redis error');return j.result;
-}
-async function tg(method,data={},timeout=20000){
- const r=await fetch('https://api.telegram.org/bot'+TOKEN+'/'+method,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data),signal:AbortSignal.timeout(timeout)});
- const j=await r.json();if(!j.ok)throw Error('Telegram '+method+': '+String(j.description).slice(0,160));return j.result;
-}
-async function say(chat_id,text,extra={}){return tg('sendMessage',{chat_id,text,disable_web_page_preview:true,...extra});}
-async function dispatch(type,payload){
- if(!/^[\w.-]+\/[\w.-]+$/.test(REPO))throw Error('GitHub repository missing');
- const [owner,name]=REPO.split('/');
- const r=await fetch('https://api.github.com/repos/'+owner+'/'+name+'/dispatches',{method:'POST',headers:{Authorization:'Bearer '+GH_TOKEN,Accept:'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28','Content-Type':'application/json'},body:JSON.stringify({event_type:type,client_payload:payload}),signal:AbortSignal.timeout(15000)});
- if(!r.ok)throw Error('GitHub dispatch rejected ('+r.status+')');
-}
-function source(url){
- try{const u=new URL(url);if(u.protocol!=='https:'||u.username||u.password||u.port||u.hostname==='localhost')return null;
- const drive=/^(drive|docs)\.google\.com$/.test(u.hostname);
- if(!drive&&!/^https?:$/.test(u.protocol))return null;
- return {url:u.href,drive};
- }catch{return null;}
-}
-async function probe(input){
- const u=source(input);if(!u)return {error:'Only HTTPS direct links and Google Drive links are accepted.'};
- if(u.drive)return {size:null,drive:true,url:u.url};
- // Never fetch arbitrary URLs from the Koyeb service. GitHub runner performs the download.
- return {size:null,drive:false,url:u.url};
-}
-async function onMessage(message,refresh){
- const from=String(message.from?.id||''),chat=message.chat?.id;
- const deep=String(message.text||'').trim().match(/^\/start(?:@\w+)?\s+m_([A-Za-z0-9_-]{16})$/);
- if(deep&&message.chat?.type==='private'){
-  const key='filmgo:deeplink:'+deep[1];
-  const raw=await redis('GET',key);let grant;
-  try{grant=raw?JSON.parse(raw):null;}catch{}
-  if(!grant||!/^[-a-f0-9]{64}$/.test(grant.account_hash||''))return say(chat,'This movie link has expired. Please sign in on FilmGo and request a new link.');
-  const movie=(await catalog()).find(m=>m.slug_id===grant.slug_id);
-  if(!movie)return say(chat,'Movie is no longer available.');
-  const qualities=Object.keys(movie.qualities||{[movie.quality]:movie});
-  const chosen=qualities.find(q=>q.toLowerCase()==='720p')||qualities[0];
-  const variant=movie.qualities?.[chosen]||movie;
-  if(!Number.isSafeInteger(variant.telegram_message_id))return say(chat,'Movie is unavailable.');
-  const claimKey='filmgo:deeplink-claim:'+deep[1];
-  if(await redis('SET',claimKey,'1','NX','EX',600)!=='OK')return say(chat,'This movie link is already being processed.');
-  const now=new Date(),day=now.toISOString().slice(0,10),resetAt=Date.UTC(now.getUTCFullYear(),now.getUTCMonth(),now.getUTCDate()+1),expireAt=Math.ceil(resetAt/1000);
-  const usageKey='filmgo:daily-tokens:v1:'+grant.account_hash+':'+day;
-  const size=Number(variant.file_size||movie.file_size||0);
-  if(!Number.isSafeInteger(size)||size<=0){await redis('DEL',claimKey);return say(chat,'Movie file size is unavailable. Please try again later.');}
+async function publishDraft(d){const lock=prefix+'publishing:'+ADMIN_ID;if(await redis('SET',lock,'1','NX','EX',90)!=='OK')return say(ADMIN_ID,'Publishing is already running.');try{const caption=['Movie: '+d.title,'Year: '+d.year,'Quality: '+d.quality,...(d.slug_id?['Slug ID: '+d.slug_id]:[])].join('\n');const sent=await tg('copyMes…997 tokens truncated… size is unavailable. Please try again later.');}
   const cost=Math.max(1,Math.ceil((size/(512*1024*1024)*0.75+1)*1000));
   const script="local used=tonumber(redis.call('GET',KEYS[1]) or '0'); local cost=tonumber(ARGV[1]); if used+cost>50000 then return -1 end; local next=redis.call('INCRBY',KEYS[1],cost); if next==cost then redis.call('EXPIREAT',KEYS[1],ARGV[2]) end; return next";
   const used=grant.unlimited?0:Number(await redis('EVAL',script,1,usageKey,cost,expireAt));
