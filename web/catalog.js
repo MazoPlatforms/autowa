@@ -1,3 +1,29 @@
+function confirmMovieRequest(movie,channel){
+ const overlay=el('div','filmgo-sheet-overlay');const sheet=el('div','filmgo-sheet');
+ sheet.setAttribute('role','dialog');sheet.setAttribute('aria-modal','true');
+ sheet.append(el('h2','','Confirm movie request'),el('p','filmgo-sheet-description',movie.title+' ('+movie.year+') via '+(channel==='telegram'?'Telegram':'WhatsApp')+'?'));
+ const buttons=el('div','filmgo-sheet-buttons');
+ const cancel=el('button','filmgo-open-button','Cancel');const confirm=el('button','filmgo-download-button','Confirm');
+ const close=()=>{document.removeEventListener('keydown',esc);overlay.remove();};
+ const esc=e=>{if(e.key==='Escape')close();};
+ cancel.addEventListener('click',close);overlay.addEventListener('click',e=>{if(e.target===overlay)close();});
+ confirm.addEventListener('click',async()=>{
+  confirm.disabled=true;confirm.textContent='Preparing…';
+  try{
+   if(channel==='telegram'){
+    const response=await fetch('/api/telegram-link',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({slug_id:movie.slug_id})});
+    const data=await response.json();if(!response.ok)throw Error(data.error||'Unable to create Telegram link');
+    close();location.href=data.url;return;
+   }
+   const response=await fetch('/api/request',{method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json'},body:JSON.stringify({movie_id:movie.telegram_message_id,rights_confirmed:true})});
+   const data=await response.json();if(response.status===401){close();location.href='/profile';return;}
+   if(!response.ok)throw Error(data.error||'Request failed');
+   sheet.replaceChildren(el('h2','','Request received'),el('p','filmgo-sheet-description','Your WhatsApp movie request has been queued.'));
+   const done=el('button','filmgo-download-button','Done');done.addEventListener('click',close);sheet.append(done);
+  }catch(err){confirm.disabled=false;confirm.textContent='Try again';sheet.querySelector('.filmgo-sheet-error')?.remove();sheet.append(el('p','filmgo-sheet-error',err.message));}
+ });
+ buttons.append(cancel,confirm);sheet.append(buttons);overlay.append(sheet);document.body.append(overlay);document.addEventListener('keydown',esc);cancel.focus();
+}
 const $=id=>document.getElementById(id);const grid=$('catalog-grid'),search=$('catalog-search'),empty=$('catalog-empty'),home=$('catalog-home'),detail=$('catalog-detail');let movies=[];const el=(tag,cls,text)=>{const e=document.createElement(tag);if(cls)e.className=cls;if(text!==undefined)e.textContent=text;return e;};const FALLBACK_POSTER='https://i.ibb.co/TMJ6YCC4/IMG-33a2f581-8ff4-4a5e-9e64-e43c900000c2.png';const poster=m=>m.poster&&(/^https:\/\//.test(m.poster)||/^\/posters\/[a-f0-9]{24}\.jpg$/.test(m.poster))?m.poster:FALLBACK_POSTER;function image(m,cls){const img=el('img',cls);img.alt=m.title+' poster';img.loading='lazy';img.src=poster(m);img.onerror=()=>{if(img.src!==FALLBACK_POSTER){img.src=FALLBACK_POSTER;}else{img.onerror=null;img.removeAttribute('src');}};return img;}function skeleton(){grid.replaceChildren();for(let i=0;i<8;i++){const box=el('div');box.append(el('div','shimmer aspect-[2/3] rounded-2xl'),el('div','shimmer mt-3 h-4 w-3/4 rounded-md'),el('div','shimmer mt-2 h-3 w-1/2 rounded-md'));grid.append(box);}}const PAGE_SIZE=20;let page=1,catalogLoaded=false;
 const yearFilter=$('filter-year'),genreFilter=$('filter-genre'),sortFilter=$('filter-sort'),pagination=$('catalog-pagination');
 // Accessible custom popovers; native selects remain as the state source.
@@ -97,7 +123,7 @@ function render(){
  }
  renderPagination(rows.length);
 }
-function showDetail(m){const root=$('detail-content');root.replaceChildren();const layout=el('div','detail-hero');layout.append(image(m,'detail-poster'));const info=el('div');info.append(el('p','mb-2 text-xs font-semibold uppercase tracking-[.18em] text-zinc-500','MOVIE DETAILS'),el('h1','text-2xl font-extrabold leading-tight tracking-tight sm:text-5xl',m.title),el('p','mt-3 text-sm text-zinc-400',[m.year,m.runtime].filter(Boolean).join(' · ')));if(m.imdb_rating)info.append(el('p','mt-3 text-sm font-semibold text-zinc-200','★ IMDb '+m.imdb_rating));if(m.genre?.length)info.append(el('p','mt-3 text-sm text-zinc-400',m.genre.join(' · ')));layout.append(info);root.append(layout);const body=el('div','mt-9 max-w-3xl border-t border-zinc-800 pt-8');body.append(el('h2','text-lg font-bold','Overview'),el('p','mt-3 text-sm leading-7 text-zinc-400',m.plot||'No synopsis available yet.'));if(m.director)body.append(el('p','mt-5 text-sm text-zinc-400','Director: '+m.director));if(m.cast?.length)body.append(el('p','mt-2 text-sm text-zinc-400','Cast: '+m.cast.join(', ')));const a=el('a','mt-8 inline-flex rounded-xl bg-white px-5 py-3 text-sm font-bold text-zinc-950 hover:bg-zinc-200','Request via WhatsApp');a.href='/request';body.append(a);root.append(body);
+function showDetail(m){const root=$('detail-content');root.replaceChildren();const layout=el('div','detail-hero');layout.append(image(m,'detail-poster'));const info=el('div');info.append(el('p','mb-2 text-xs font-semibold uppercase tracking-[.18em] text-zinc-500','MOVIE DETAILS'),el('h1','text-2xl font-extrabold leading-tight tracking-tight sm:text-5xl',m.title),el('p','mt-3 text-sm text-zinc-400',[m.year,m.runtime].filter(Boolean).join(' · ')));if(m.imdb_rating)info.append(el('p','mt-3 text-sm font-semibold text-zinc-200','★ IMDb '+m.imdb_rating));if(m.genre?.length)info.append(el('p','mt-3 text-sm text-zinc-400',m.genre.join(' · ')));layout.append(info);root.append(layout);const body=el('div','mt-9 max-w-3xl border-t border-zinc-800 pt-8');body.append(el('h2','text-lg font-bold','Overview'),el('p','mt-3 text-sm leading-7 text-zinc-400',m.plot||'No synopsis available yet.'));if(m.director)body.append(el('p','mt-5 text-sm text-zinc-400','Director: '+m.director));if(m.cast?.length)body.append(el('p','mt-2 text-sm text-zinc-400','Cast: '+m.cast.join(', ')));root.append(body);
 const section=el('section','mt-9 max-w-3xl border-t border-zinc-800 pt-8 filmgo-watch');
 section.append(el('h2','mb-4 text-lg font-bold','Watch & download'));
 const video=el('video','filmgo-player');
@@ -111,7 +137,11 @@ const actions=el('div','filmgo-player-actions');
 const download=el('a','filmgo-download-button','Download movie');
 download.setAttribute('download','');
 download.setAttribute('aria-label','Download '+m.title);
-actions.append(download);
+const whatsapp=el('button','filmgo-open-button','WhatsApp');
+whatsapp.type='button';whatsapp.addEventListener('click',()=>confirmMovieRequest(m,'whatsapp'));
+const telegram=el('button','filmgo-open-button','Telegram');
+telegram.type='button';telegram.addEventListener('click',()=>confirmMovieRequest(m,'telegram'));
+actions.append(download,whatsapp,telegram);
 section.append(actions,status);
 root.append(section);
 const slug=encodeURIComponent(m.slug_id||'');
@@ -188,7 +218,7 @@ document.addEventListener('visibilitychange',()=>{if(!document.hidden)void refre
 (async()=>{
  const link=document.getElementById('catalog-account-link');
  if(!link)return;
- const guest=()=>{link.href='/request';link.classList.remove('catalog-account-avatar');link.replaceChildren(document.createTextNode('Sign in'));link.removeAttribute('title');link.setAttribute('aria-label','Sign in');link.setAttribute('aria-busy','false');};
+ const guest=()=>{link.href='/profile';link.classList.remove('catalog-account-avatar');link.replaceChildren(document.createTextNode('Sign in'));link.removeAttribute('title');link.setAttribute('aria-label','Sign in');link.setAttribute('aria-busy','false');};
  try{
   const response=await fetch('/api/me',{credentials:'same-origin',cache:'no-store'});
   if(!response.ok){guest();return;}
