@@ -1,7 +1,35 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-29T10:43:57.172675+00:00",
+  "updated_at": "2026-10-29T11:19:45.030139+00:00",
   "movies": [
+    {
+      "id": "telegram-37",
+      "telegram_message_id": 37,
+      "title": "Varisu",
+      "year": 2023,
+      "quality": "720p",
+      "file_size": 1922597086,
+      "file_name": "Varisu.2023.720p.AMZN.WEB-DL.DDP5.1.HEVC-SH3LBY.mkv",
+      "mime_type": "video/x-matroska",
+      "slug_id": "jLAX6xPO-A35WxOM",
+      "imdb_id": "tt11998558",
+      "poster": "https://m.media-amazon.com/images/M/MV5BZDM4NDBkNGEtNzI2Yi00ODkwLTliNzAtODkwMmRhNTEzZmVlXkEyXkFqcGc@._V1_QL75_UX380_CR0,4,380,562_.jpg",
+      "genre": [
+        "Action",
+        "Comedy",
+        "Drama"
+      ],
+      "runtime": "169 min",
+      "director": "Vamshi Paidipally",
+      "cast": [
+        "Joseph Vijay",
+        "Rashmika Mandanna",
+        "Shaam"
+      ],
+      "plot": "Vijay Rajendran is a happy to-go lucky man. Things change when his father becomes terminally ill, and he is left to manage his business empire.",
+      "imdb_rating": "5.9",
+      "metadata_status": "matched"
+    },
     {
       "id": "telegram-35",
       "telegram_message_id": 35,
