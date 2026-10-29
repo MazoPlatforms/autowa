@@ -265,7 +265,7 @@ const server=http.createServer(async(req,res)=>{
   }catch(err){console.warn('Movie verification failed:',err.message);return send(res,503,{error:'Unable to verify movie availability right now'});}
 
   if(!unlimitedRequests(session.number)&&!await limit('submit:'+session.number,3,86400))return send(res,429,{error:'Daily request limit reached'});
-  const claim=await redis('SET','claim:'+hmac(session.nonce),'1','EX',900,'NX');
+  const claim=unlimitedRequests(session.number)?'OK':await redis('SET','claim:'+hmac(session.nonce),'1','EX',900,'NX');
   if(claim!=='OK')return send(res,409,{error:'Request already submitted'});
   const requestId=crypto.randomUUID();
   const [owner,repo]=process.env.GITHUB_REPOSITORY.split('/');
