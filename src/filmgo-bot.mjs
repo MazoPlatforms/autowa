@@ -85,9 +85,16 @@ async function onMessage(message,refresh){
   const title=existing?.title||parts.title,year=existing?.year||parts.year;
   if(!title||!year)return say(chat,'Unable to identify title and year. Rename the file with movie title and release year, then resend.');
   const omdb=existing?null:await omdbSearch(title,year).catch(()=>null);
-  const d={message_id:message.message_id,file_name:name,title,year,quality:parts.quality,existing:!!existing,replace:!!(existing&&Object.keys(existing.qualities||{}).some(q=>q.toLowerCase()===parts.quality)),slug_id:existing?.slug_id,...(omdb?movieFields(omdb):{})};
-  if(omdb){d.title=omdb.Title;d.year=Number(String(omdb.Year).slice(0,4));}
-  await draftSave(d);return draftPrompt(d);
+  const omdbConfidence=omdb&&Number(String(omdb.Year).slice(0,4))===year?similarity(title,omdb.Title):0;
+  const trusted=!!existing||omdbConfidence>=0.7;
+  const d={message_id:message.message_id,file_name:name,title,year,quality:parts.quality,existing:!!existing,replace:!!(existing&&Object.keys(existing.qualities||{}).some(q=>q.toLowerCase()===parts.quality)),slug_id:existing?.slug_id,...(omdbConfidence>=0.7?movieFields(omdb):{})};
+  if(omdbConfidence>=0.7){d.title=omdb.Title;d.year=Number(String(omdb.Year).slice(0,4));}
+  await draftSave(d);
+  if(trusted&&!d.replace){
+   await say(chat,'Recognized '+d.title+' ('+d.year+') at '+Math.round((existing?found.confidence:omdbConfidence)*100)+'% confidence. Publishing automatically.');
+   return publishDraft(d);
+  }
+  return draftPrompt(d);
  }
  const d=await draftGet();
  if(message.photo?.length&&d){await posterUpload(d,message.photo.at(-1));return draftPrompt(d);}
@@ -119,7 +126,7 @@ async function onCallback(q){
 }
 async function onChannel(message,refresh){
  if(String(message.chat?.id)!==CHANNEL_ID)return;
- if(String(message.sender_chat?.id)!==CHANNEL_ID && String(message.from?.id)!==String((await tg('getMe')).id)){try{await tg('deleteMessage',{chat_id:CHANNEL_ID,message_id:message.message_id});}catch(e){console.warn('Unauthorized channel post could not be deleted:',e.message);}return;}
+ if(message.from?.id && String(message.from.id)!==String((await tg('getMe')).id)){try{await tg('deleteMessage',{chat_id:CHANNEL_ID,message_id:message.message_id});}catch(e){console.warn('Unauthorized channel post could not be deleted:',e.message);}return;}
  if(!message.document&&!message.video)return;
  const file=message.document||message.video;
  if(!file.file_id)return;
