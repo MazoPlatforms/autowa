@@ -3,12 +3,10 @@ import asyncio
 import difflib
 import json
 import os
-import socket
 import re
 import sys
 import time
 import traceback
-import logging
 import urllib.parse
 import urllib.request
 from telethon import TelegramClient
@@ -82,13 +80,7 @@ async def main():
     started = time.monotonic()
     trace('start', mode=mode, elapsed='0s')
     print('Telegram: connecting', file=sys.stderr, flush=True)
-    try:
-        socket.getaddrinfo('149.154.167.51',443)
-        with socket.create_connection(('149.154.167.51',443),timeout=5):
-            print('Telegram: DC TCP 443 reachable', file=sys.stderr, flush=True)
-    except OSError as exc:
-        print('Telegram: DC TCP 443 unreachable: '+type(exc).__name__+': '+str(exc),file=sys.stderr,flush=True)
-    
+    trace('preflight probe skipped')
     client = TelegramClient(StringSession(session), api_id, api_hash, receive_updates=False, timeout=None, connection_retries=-1, request_retries=-1, auto_reconnect=True)
     trace('client configured', rpc_timeout='none', connection_retries='unlimited', request_retries='unlimited')
     try:
