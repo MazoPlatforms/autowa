@@ -154,7 +154,7 @@ const server=http.createServer(async(req,res)=>{
    const user=await profile(session.number);
    const exempt=unlimitedRequests(session.number);
     const used=exempt?0:Number(await redis('GET','rate:'+hmac('submit:'+session.number))||0);
-   return send(res,200,{number:session.number,name:user.name||'',limit:exempt?null:3,used:exempt?0:Math.min(used,3),remaining:exempt?null:Math.max(0,3-used),period:exempt?'unlimited':'rolling rate window (up to 24 hours)',unlimited:exempt});
+   return send(res,200,{number:session.number,name:user.name||'',plan_onboarded:user.plan_onboarded===true,plan:user.plan||'free',limit:exempt?null:3,used:exempt?0:Math.min(used,3),remaining:exempt?null:Math.max(0,3-used),period:exempt?'unlimited':'rolling rate window (up to 24 hours)',unlimited:exempt});
   }
   if(req.method==='GET'&&url.pathname==='/api/request-history'){
    const session=await authenticated(req);
@@ -231,11 +231,11 @@ const server=http.createServer(async(req,res)=>{
   if(req.method==='GET'&&url.pathname==='/catalog.css'){res.writeHead(200,{'Content-Type':'text/css; charset=utf-8','Cache-Control':'public, max-age=300','X-Content-Type-Options':'nosniff'});return res.end(catalogCss);}
   if(req.method==='GET'&&url.pathname==='/catalog.js'){res.writeHead(200,{'Content-Type':'text/javascript; charset=utf-8','Cache-Control':'public, max-age=300','X-Content-Type-Options':'nosniff'});return res.end(catalogJs);}
   if(req.method==='GET'&&(url.pathname==='/'||(url.pathname.startsWith('/title/')&&/^[-a-zA-Z0-9_]+$/.test(url.pathname.slice(7).replace(/\/$/,''))))){res.writeHead(200,{'Content-Type':'text/html; charset=utf-8','Cache-Control':'no-store','Content-Security-Policy':"default-src 'self'; img-src 'self' https: data:; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src 'self'; base-uri 'none'; frame-ancestors 'none'"});return res.end(catalogHtml);}
-  if(req.method==='GET'&&(url.pathname==='/request'||url.pathname==='/profile'||url.pathname==='/history')){res.writeHead(200,{'Content-Type':'text/html; charset=utf-8','Cache-Control':'no-store','X-Content-Type-Options':'nosniff','Content-Security-Policy':"default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src 'self'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'"});return res.end(index);}
+  if(req.method==='GET'&&(url.pathname==='/request'||url.pathname==='/profile'||url.pathname==='/history'||url.pathname==='/plans')){res.writeHead(200,{'Content-Type':'text/html; charset=utf-8','Cache-Control':'no-store','X-Content-Type-Options':'nosniff','Content-Security-Policy':"default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src 'self'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'"});return res.end(index);}
   if(req.method==='GET'&&url.pathname==='/style.css'){res.writeHead(200,{'Content-Type':'text/css; charset=utf-8','Cache-Control':'no-store','X-Content-Type-Options':'nosniff'});return res.end(stylesheet);}
   if(req.method==='GET'&&url.pathname==='/app.js'){res.writeHead(200,{'Content-Type':'text/javascript; charset=utf-8','Cache-Control':'no-store','X-Content-Type-Options':'nosniff'});return res.end(appJs);}
   if(req.method==='GET'&&url.pathname==='/countries.json'){res.writeHead(200,{'Content-Type':'application/json','Cache-Control':'public, max-age=86400'});return res.end(countries);}
-  if(req.method!=='POST'||!['/api/otp/start','/api/otp/verify','/api/request','/api/profile','/api/logout'].includes(url.pathname))return send(res,404,{error:'Not found'});
+  if(req.method!=='POST'||!['/api/otp/start','/api/otp/verify','/api/request','/api/profile','/api/plans/continue','/api/logout'].includes(url.pathname))return send(res,404,{error:'Not found'});
   if(!configured)return send(res,503,{error:'Service setup incomplete; contact operator'});
   if(url.pathname==='/api/otp/start'&&!isWhatsAppReady())return send(res,503,{error:'WhatsApp OTP bot is offline. Try again later.'});
   if(req.headers['content-type']?.split(';')[0]!=='application/json')return send(res,415,{error:'JSON required'});
@@ -265,8 +265,9 @@ const server=http.createServer(async(req,res)=>{
    const nonce=crypto.randomBytes(16).toString('hex'),age=30*86400,exp=Date.now()+age*1000;
    await redis('SET','session:'+hmac(nonce),number,'EX',age);
    const key='profile:'+hmac(number);
-   await redis('SET',key,JSON.stringify(await profile(number)));
-   return send(res,200,{ok:true,expires_in:age},{'Set-Cookie':sessionCookie(tokenFor(number,nonce,exp),age)});
+   const existing=await redis('GET',key);
+   if(!existing)await redis('SET',key,JSON.stringify({name:'',plan:'free',plan_onboarded:false,created_at:new Date().toISOString()}));
+   return send(res,200,{ok:true,first_registration:!existing,expires_in:age},{'Set-Cookie':sessionCookie(tokenFor(number,nonce,exp),age)});
   }
   const session=await authenticated(req);
   if(!session)return send(res,401,{error:'Sign in with WhatsApp first'});
@@ -274,10 +275,15 @@ const server=http.createServer(async(req,res)=>{
    await redis('DEL','session:'+hmac(session.nonce));
    return send(res,200,{ok:true},{'Set-Cookie':sessionCookie('',0)});
   }
+  if(url.pathname==='/api/plans/continue'){
+   const existing=await profile(session.number);
+   await redis('SET','profile:'+hmac(session.number),JSON.stringify({...existing,plan:'free',plan_onboarded:true}));
+   return send(res,200,{ok:true,plan:'free'});
+  }
   if(url.pathname==='/api/profile'){
    if(typeof data.name!=='string'||data.name.trim().length<2||data.name.trim().length>60)return send(res,400,{error:'Name must contain 2–60 characters'});
    const name=data.name.trim().replace(/[\x00-\x1f]/g,'');
-   await redis('SET','profile:'+hmac(session.number),JSON.stringify({name,updated_at:new Date().toISOString()}));
+   await redis('SET','profile:'+hmac(session.number),JSON.stringify({...await profile(session.number),name,updated_at:new Date().toISOString()}));
    return send(res,200,{ok:true,name});
   }
   if(data.rights_confirmed!==true||!Number.isSafeInteger(data.movie_id)||data.movie_id<=0)return send(res,400,{error:'Select a movie and confirm distribution rights'});
