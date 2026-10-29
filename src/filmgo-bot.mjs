@@ -81,6 +81,8 @@ export function startFilmGoBot(refresh){
  if(!TOKEN||!GH_TOKEN||!REPO||!REDIS_URL||!REDIS_TOKEN||!CHANNEL_ID){console.warn('FilmGo Telegram bot disabled: missing configuration');return;}
  if(running)return;running=true;
  (async()=>{
+  // Koyeb is the only Bot API update consumer; retain pending updates.
+  try{await tg('deleteWebhook',{drop_pending_updates:false});}catch(err){console.warn('Bot webhook cleanup:',err.message);}
   // Only one Koyeb replica can poll at a time; lease is renewed each cycle.
   const owner=crypto.randomBytes(16).toString('hex');
   while(running){
