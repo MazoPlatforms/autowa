@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import {execFile,spawn} from 'node:child_process';
 import {promisify} from 'node:util';
 const execFileAsync=promisify(execFile);
-import {startWhatsApp,isWhatsAppReady,sendWhatsAppOtp} from './whatsapp-otp.mjs';
+import {startWhatsApp,isWhatsAppReady,sendWhatsAppOtp,getWhatsAppProfilePicture} from './whatsapp-otp.mjs';
 
 const PORT=Number(process.env.PORT||8000);
 const required=['APP_SECRET','UPSTASH_REDIS_REST_URL','UPSTASH_REDIS_REST_TOKEN','GITHUB_DISPATCH_TOKEN','GITHUB_REPOSITORY'];
@@ -157,6 +157,12 @@ const server=http.createServer(async(req,res)=>{
    const month=new Date().toISOString().slice(0,7);
    const monthlyUsed=Number(await redis('GET','monthly-requests:'+hmac(session.number)+':'+month)||0);
    return send(res,200,{number:session.number,name:user.name||'',plan_onboarded:user.plan_onboarded!==false,plan:user.plan||'free',limit:exempt?null:3,used:exempt?0:Math.min(used,3),remaining:exempt?null:Math.max(0,3-used),period:exempt?'unlimited':'rolling rate window (up to 24 hours)',unlimited:exempt,monthly_used:monthlyUsed,monthly_period:month});
+  }
+  if(req.method==='GET'&&url.pathname==='/api/avatar'){
+   const session=await authenticated(req);
+   if(!session)return send(res,401,{error:'Not signed in'});
+   const url=await getWhatsAppProfilePicture(session.number);
+   return send(res,200,{url});
   }
   if(req.method==='GET'&&url.pathname==='/api/request-history'){
    const session=await authenticated(req);
