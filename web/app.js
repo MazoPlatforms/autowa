@@ -102,7 +102,7 @@ $('continue-free').addEventListener('click',async()=>{
 });
 for(const tier of ['plus','premium'])$('upgrade-'+tier).addEventListener('click',()=>{
  const quote=planQuote(tier);
- const message=['Hello FilmGo!','I would like to enquire about upgrading my account.','Plan: '+(tier==='plus'?'Plus':'Premium'),'Country: '+quote.region.label,'Displayed price: '+quote.formatted+' per month','Please confirm availability, benefits and payment instructions.'].join('\\n');
+ const message=['Hello FilmGo!','I would like to enquire about upgrading my account.','Plan: '+(tier==='plus'?'Plus':'Premium'),'Country: '+quote.region.label,'Displayed price: '+quote.formatted+' per month','Please confirm availability, benefits and payment instructions.'].join('\n');
  window.open('https://wa.me/94779290433?text='+encodeURIComponent(message),'_blank','noopener,noreferrer');
 });
 
