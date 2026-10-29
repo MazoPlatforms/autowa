@@ -113,7 +113,7 @@ async def main():
         changed = current != previous.get("movies", [])
         if changed:
             PATH.parent.mkdir(parents=True, exist_ok=True)
-            PATH.write_text(json.dumps({"schema_version": 1, "updated_at": datetime.now(timezone.utc).isoformat(), "movies": current}, ensure_ascii=False, indent=2) + "\\n")
+            PATH.write_text(json.dumps({"schema_version": 1, "updated_at": datetime.now(timezone.utc).isoformat(), "movies": current}, ensure_ascii=False, indent=2) + "\n")
             print("Catalog updated:", len(current))
         else:
             print("No catalog changes")
@@ -128,7 +128,7 @@ async def main():
             item = by_message_id.get(message.id)
             if not item or not message.file:
                 continue
-            caption = "\\n".join((
+            caption = "\n".join((
                 "Movie: " + item["title"],
                 "Year: " + str(item["year"]),
                 "Quality: " + item["quality"],
