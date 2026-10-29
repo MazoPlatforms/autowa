@@ -191,10 +191,10 @@ const server=http.createServer(async(req,res)=>{
    if(!telegramReady)return send(res,503,{error:'Telegram unavailable'});
    if(streamWorkerState().state!=='ready')return send(res,503,{error:'Download gateway warming up; retry shortly'});
    const original=String(movie.file_name||'').trim();
-   const ext=/\\.(mkv|mp4|webm|mov|avi|m4v)$/i.exec(original)?.[0]||'.mp4';
-   const filename=(original||[movie.title,movie.year,movie.quality].filter(Boolean).join(' ')+ext).replace(/[\\r\\n"\\\\/]/g,'_').slice(0,180);
+   const ext=original.toLowerCase().match(/\\.(mkv|mp4|webm|mov|avi|m4v)$/)?.[0]||'.mp4';
+   const filename=(original||[movie.title,movie.year,movie.quality].filter(Boolean).join(' ')+ext).replace(/[\\r\\n"\\/]/g,'_').slice(0,180);
    const ascii=filename.replace(/[^\\x20-\\x7e]/g,'_');
-   const headers={'Content-Type':'application/octet-stream','Content-Length':String(movie.file_size),'Content-Disposition':'attachment; filename="'+ascii+'"; filename*=UTF-8\\'\\''+encodeURIComponent(filename),'Cache-Control':'private, no-store','X-Content-Type-Options':'nosniff'};
+   const headers={'Content-Type':'application/octet-stream','Content-Length':String(movie.file_size),'Content-Disposition':'attachment; filename="'+ascii+'"','Cache-Control':'private, no-store','X-Content-Type-Options':'nosniff'};
    res.writeHead(200,headers);
    if(req.method==='HEAD')return res.end();
    await downloadFile(res,{messageId:movie.telegram_message_id,total:movie.file_size});
