@@ -46,7 +46,7 @@ def download(url, destination):
         if size and int(size) > MAX_BYTES:
             raise ValueError("Remote file exceeds 2 GB")
         disposition = response.headers.get("Content-Disposition", "")
-        match = re.search(r'filename\*?=(?:UTF-8\'\')?"?([^";]+)', disposition, re.I)
+        match = re.search(r"filename\\*?=(?:UTF-8''|\\\")?([^\\\";]+)", disposition, re.I)
         filename = urllib.parse.unquote(match.group(1)) if match else pathlib.PurePosixPath(urllib.parse.urlsplit(response.url).path).name
         filename = pathlib.PurePosixPath(filename.replace("\\", "/")).name[:180]
         if pathlib.Path(filename).suffix.lower() not in ALLOWED_EXT:
@@ -75,7 +75,7 @@ def google_drive(url, destination):
     if not result: raise ValueError("Google Drive download failed (permissions, quota or confirmation)")
     size = destination.stat().st_size
     if not 0 < size <= MAX_BYTES: raise ValueError("Google Drive file exceeds 2 GB or is empty")
-    filename = pathlib.PurePosixPath(gdown.download.__name__).name  # overwritten below
+    # Drive filenames are not trustworthy until verified; use the file ID when absent.
     filename = os.environ.get("FILMGO_IMPORT_FILENAME", "").strip() or file_id + ".mp4"
     if pathlib.Path(filename).suffix.lower() not in ALLOWED_EXT: raise ValueError("Unsupported media extension")
     return filename[:180], size
