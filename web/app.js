@@ -104,7 +104,7 @@ function routeView(){
  $('history').classList.toggle('hidden',!signedIn||location.pathname!=='/history');
  $('request').classList.toggle('hidden',!signedIn||!['/request','/'].includes(location.pathname));
  $('profile-avatar').classList.toggle('hidden',!signedIn||location.pathname==='/profile');
- $('profile-back').classList.toggle('hidden',!signedIn||!['/profile','/history','/plans'].includes(location.pathname));
+ $('profile-back').classList.toggle('hidden',!signedIn||!['/profile','/history','/plans','/request'].includes(location.pathname));
  $('auth-intro').classList.toggle('hidden',signedIn);
 }
 const planPrices={
@@ -180,7 +180,7 @@ async function showAccount(){
 }
 function navigate(path){history.pushState({},'',path);routeView();if(path==='/profile'&&signedIn)refreshAccount().catch(e=>msg(e.message));if(path==='/history'&&signedIn)void loadHistory();}
 $('profile-avatar').addEventListener('click',()=>navigate('/profile'));
-$('profile-back').addEventListener('click',()=>navigate(location.pathname==='/history'||location.pathname==='/plans'?'/profile':'/request'));
+$('profile-back').addEventListener('click',()=>navigate(location.pathname==='/history'||location.pathname==='/plans'?'/profile':'/'));
 $('open-plans').addEventListener('click',()=>navigate('/plans'));
 
 $('open-history').addEventListener('click',()=>navigate('/history'));
