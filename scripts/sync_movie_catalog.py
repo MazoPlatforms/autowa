@@ -78,7 +78,19 @@ def parse(message):
 
 async def main():
     previous = json.loads(PATH.read_text()) if PATH.exists() else {"movies": []}
-    old = {m["id"]: m for m in previous.get("movies", [])}
+    old_movies = previous.get("movies", [])
+    old = {}
+    old_groups = {}
+    def identity(title, year):
+        return (re.sub(r"[^a-z0-9]+", "", str(title).casefold()), int(year))
+    for movie in old_movies:
+        key = identity(movie["title"], movie["year"])
+        old_groups.setdefault(key, movie)
+        for quality, variant in movie.get("qualities", {}).items():
+            old["telegram-" + str(variant["telegram_message_id"])] = {**movie, **variant, "quality": quality}
+        if movie.get("telegram_message_id"):
+            old.setdefault("telegram-" + str(movie["telegram_message_id"]), movie)
+    slug_by_identity = {identity(m["title"], m["year"]): m["slug_id"] for m in old_movies if m.get("slug_id")}
     api_id = int(os.environ["TELEGRAM_API_ID"])
     client = TelegramClient(StringSession(os.environ["TELEGRAM_SESSION"]), api_id, os.environ["TELEGRAM_API_HASH"], receive_updates=False)
     await client.connect()
@@ -92,36 +104,57 @@ async def main():
         entity = next((d.entity for d in dialogs if d.id == channel or getattr(d.entity, "id", None) == channel_id), None)
         if entity is None:
             entity = await client.get_entity(channel)
-        current = []
+        groups = {}
+        caption_items = {}
+        duplicates = []
         async for message in client.iter_messages(entity, limit=None):
             item = parse(message)
             if not item:
                 continue
+            key = identity(item["title"], item["year"])
+            quality = item["quality"].strip().lower()
             prior = old.get(item["id"], {})
-            item["slug_id"] = prior.get("slug_id") or secrets.token_urlsafe(12)
-            if all(prior.get(k) == item[k] for k in ("title", "year", "quality", "file_size")):
-                for key in ("imdb_id", "poster", "genre", "runtime", "director", "cast", "plot", "imdb_rating", "metadata_status"):
-                    if key in prior:
-                        item[key] = prior[key]
-            else:
-                item.update(omdb(item["title"], item["year"]))
-            item.setdefault("metadata_status", "unmatched")
-            current.append(item)
-        if not current and old:
+            slug = slug_by_identity.get(key) or prior.get("slug_id") or secrets.token_urlsafe(12)
+            slug_by_identity[key] = slug
+            variant = {k: item[k] for k in ("telegram_message_id", "file_size", "file_name", "mime_type")}
+            if key not in groups:
+                base = old_groups.get(key, {})
+                movie = {"id": base.get("id", item["id"]), "slug_id": slug, "title": base.get("title", item["title"]), "year": item["year"], "qualities": {}}
+                for field in ("imdb_id", "poster", "genre", "runtime", "director", "cast", "plot", "imdb_rating", "metadata_status"):
+                    if field in base: movie[field] = base[field]
+                if not movie.get("metadata_status"):
+                    movie.update(omdb(movie["title"], movie["year"]))
+                movie.setdefault("metadata_status", "unmatched")
+                groups[key] = movie
+            movie = groups[key]
+            if quality in (q.lower() for q in movie["qualities"]):
+                duplicates.append((item["title"], item["year"], item["quality"], message.id))
+                continue
+            movie["qualities"][item["quality"]] = variant
+            caption_items[message.id] = {**item, "slug_id": slug}
+        if duplicates:
+            print("Duplicate qualities skipped (newest Telegram file wins):", duplicates)
+        current = []
+        for movie in groups.values():
+            variants = sorted(movie["qualities"].items(), key=lambda pair: (pair[0].lower() != "720p", pair[0].lower()))
+            preferred_quality, preferred = variants[0]
+            movie.update({**preferred, "quality": preferred_quality})
+            current.append(movie)
+        if not current and old_movies:
             raise RuntimeError("Refusing to replace a nonempty catalog with an empty Telegram scan")
         current.sort(key=lambda m: m["telegram_message_id"], reverse=True)
-        changed = current != previous.get("movies", [])
+        changed = current != old_movies or previous.get("schema_version") != 2
         if changed:
             PATH.parent.mkdir(parents=True, exist_ok=True)
-            PATH.write_text(json.dumps({"schema_version": 1, "updated_at": datetime.now(timezone.utc).isoformat(), "movies": current}, ensure_ascii=False, indent=2) + "\n")
-            print("Catalog updated:", len(current))
+            PATH.write_text(json.dumps({"schema_version": 2, "updated_at": datetime.now(timezone.utc).isoformat(), "movies": current}, ensure_ascii=False, indent=2) + "\\n")
+            print("Catalog updated:", len(current), "movies")
         else:
             print("No catalog changes")
 
         # Only write captions after the catalog has successfully persisted its
         # stable slug IDs. Reruns also repair captions left behind by failed edits.
         # Never modify the movie file, its filename, or the catalog slug.
-        by_message_id = {item["telegram_message_id"]: item for item in current}
+        by_message_id = caption_items
         edited = 0
         failures = 0
         async for message in client.iter_messages(entity, limit=None):
