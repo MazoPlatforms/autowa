@@ -76,7 +76,10 @@ function routeView(){
  $('profile-back').classList.toggle('hidden',!signedIn||!['/profile','/history'].includes(location.pathname));
  $('auth-intro').classList.toggle('hidden',signedIn);
 }
+let historyLoading=false;
 async function loadHistory(){
+ if(historyLoading)return;
+ historyLoading=true;
  const root=$('history-list');
  root.replaceChildren();
  const loading=document.createElement('p');loading.className='small';loading.textContent='Loading requests…';root.append(loading);
@@ -94,13 +97,13 @@ async function loadHistory(){
    const card=document.createElement('article');card.className='history-card';
    const top=document.createElement('div');top.className='history-card-top';
    const title=document.createElement('strong');title.textContent=item.title||'Movie request';
-   const badge=document.createElement('span');badge.className='history-status';badge.textContent=item.status==='pending_review'?'Pending review':String(item.status||'Queued').replaceAll('_',' ');
+   const badge=document.createElement('span');badge.className='history-status history-status-'+(item.status==='submitted'?'submitted':item.status==='failed'?'failed':'pending');badge.textContent=item.status==='submitted'?'Submitted':item.status==='failed'?'Failed':item.status==='pending_review'?'Pending review':String(item.status||'Queued').replaceAll('_',' ');
    top.append(title,badge);
    const meta=document.createElement('p');meta.className='small';meta.textContent=[item.year,item.quality,item.created_at?new Date(item.created_at).toLocaleString():null].filter(Boolean).join(' · ');
    const id=document.createElement('p');id.className='history-id';id.textContent='Request ID: '+item.id;
-   card.append(top,meta,id);root.append(card);
+   card.append(top,meta,id);if(item.finished_at){const done=document.createElement('p');done.className='small';done.textContent='Last updated: '+new Date(item.finished_at).toLocaleString();card.append(done);}root.append(card);
   }
- }catch(err){root.replaceChildren();const error=document.createElement('p');error.className='small';error.textContent=err.message;root.append(error);}
+ }catch(err){root.replaceChildren();const error=document.createElement('p');error.className='small';error.textContent=err.message;root.append(error);}finally{historyLoading=false;}
 }
 async function showAccount(){
  await refreshAccount();
@@ -124,6 +127,7 @@ $('logout').addEventListener('click',async()=>{
  try{await api('logout',{});authVersion++;signedIn=false;saveLoginHint(false);navigate('/request');msg('Signed out.');}
  catch(e){msg(e.message);}
 });
+setInterval(()=>{if(signedIn&&location.pathname==='/history'&&!document.hidden)void loadHistory();},30000);
 const initialAuthVersion=authVersion;
 if(storedLogin()){
  signedIn=true;
