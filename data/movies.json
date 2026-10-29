@@ -1,7 +1,42 @@
 {
   "schema_version": 2,
-  "updated_at": "2026-10-29T14:32:15.737138+00:00",
+  "updated_at": "2026-10-29T14:34:26.431273+00:00",
   "movies": [
+    {
+      "id": "telegram-43",
+      "slug_id": "x2NjvLc2hu3fcdwI",
+      "title": "Aambala",
+      "year": 2015,
+      "qualities": {
+        "720p": {
+          "telegram_message_id": 43,
+          "file_size": 1533013900,
+          "file_name": "Aambala 2015 Tamil 720p HQ HDRip-Ram.mkv",
+          "mime_type": "video/x-matroska"
+        }
+      },
+      "imdb_id": "tt4312676",
+      "poster": "https://m.media-amazon.com/images/M/MV5BYzAzZTgyZTEtNGIwZi00NmIyLWI4YTYtZjJiYzQyNTRhODVkXkEyXkFqcGdeQXVyMTEzNzg0Mjkx._V1_SX300.jpg",
+      "genre": [
+        "Action",
+        "Comedy"
+      ],
+      "runtime": "146 min",
+      "director": "Sundar C.",
+      "cast": [
+        "Vishal",
+        "Hansika Motwani",
+        "Prabhu"
+      ],
+      "plot": "Saravanan and his two brothers go to their native village to make peace between their estranged father and three aunts, who hate their brother for having murdered their father.",
+      "imdb_rating": "4.8",
+      "metadata_status": "matched",
+      "telegram_message_id": 43,
+      "file_size": 1533013900,
+      "file_name": "Aambala 2015 Tamil 720p HQ HDRip-Ram.mkv",
+      "mime_type": "video/x-matroska",
+      "quality": "720p"
+    },
     {
       "id": "telegram-42",
       "slug_id": "oZkXR0s5htZgb9ZY",
