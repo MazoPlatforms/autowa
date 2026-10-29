@@ -89,16 +89,17 @@ for(const tier of ['plus','premium'])$('upgrade-'+tier).addEventListener('click'
  window.open('https://wa.me/94779290433?text='+encodeURIComponent(message),'_blank','noopener,noreferrer');
 });
 
-let historyLoading=false,historyPage=1;const HISTORY_PAGE_SIZE=10;
+let historyLoading=false,historyHasSnapshot=false,historyPage=1;const HISTORY_PAGE_SIZE=10;
 async function loadHistory(){
  if(historyLoading)return;
  historyLoading=true;
  const root=$('history-list');
- root.replaceChildren();const loading=document.createElement('div');loading.className='history-skeleton';loading.setAttribute('aria-label','Loading request history');loading.setAttribute('role','status');for(let i=0;i<3;i++){const shimmer=document.createElement('div');shimmer.className='history-shimmer';loading.append(shimmer);}root.append(loading);
+ if(!historyHasSnapshot){root.replaceChildren();const loading=document.createElement('div');loading.className='history-skeleton';loading.setAttribute('aria-label','Loading request history');loading.setAttribute('role','status');for(let i=0;i<3;i++){const shimmer=document.createElement('div');shimmer.className='history-shimmer';loading.append(shimmer);}root.append(loading);}
  try{
   const response=await fetch('/api/request-history',{cache:'no-store'});
   if(!response.ok)throw Error(response.status===401?'Please sign in again.':'Could not load request history.');
-  const data=await response.json();root.replaceChildren();
+  const data=await response.json();historyHasSnapshot=true;root.replaceChildren();
+  const nav=$('history-pagination');nav.replaceChildren();nav.classList.add('hidden');
   if(!Array.isArray(data.requests)||!data.requests.length){
    const empty=document.createElement('div');empty.className='history-empty';
    const title=document.createElement('strong');title.textContent='No requests yet';
@@ -106,7 +107,7 @@ async function loadHistory(){
    empty.append(title,description);root.append(empty);return;
   }
   const pages=Math.max(1,Math.ceil(data.requests.length/HISTORY_PAGE_SIZE));historyPage=Math.min(historyPage,pages);
-  const nav=$('history-pagination');nav.replaceChildren();
+  nav.classList.toggle('hidden',pages<=1);
   for(let p=1;p<=pages;p++){const button=document.createElement('button');button.type='button';button.className='history-page-button'+(p===historyPage?' active':'');button.textContent=String(p);button.setAttribute('aria-label','Page '+p);button.disabled=p===historyPage;button.addEventListener('click',()=>{historyPage=p;void loadHistory();});nav.append(button);}
   for(const item of data.requests.slice((historyPage-1)*HISTORY_PAGE_SIZE,historyPage*HISTORY_PAGE_SIZE)){
    const card=document.createElement('article');card.className='history-card';
@@ -118,7 +119,7 @@ async function loadHistory(){
    const id=document.createElement('p');id.className='history-id';id.textContent='Request ID: '+item.id;
    card.append(top,meta,id);if(item.finished_at){const done=document.createElement('p');done.className='small';done.textContent='Last updated: '+new Date(item.finished_at).toLocaleString();card.append(done);}root.append(card);
   }
- }catch(err){root.replaceChildren();const error=document.createElement('p');error.className='small';error.textContent=err.message;root.append(error);}finally{historyLoading=false;}
+ }catch(err){if(!historyHasSnapshot){root.replaceChildren();const error=document.createElement('p');error.className='small';error.textContent=err.message;root.append(error);}}finally{historyLoading=false;}
 }
 async function showAccount(){
  const account=await refreshAccount();
@@ -142,7 +143,7 @@ $('save-profile').addEventListener('click',async()=>{
  catch(e){msg(e.message);}finally{btn.disabled=false;}
 });
 $('logout').addEventListener('click',async()=>{
- try{await api('logout',{});authVersion++;signedIn=false;saveLoginHint(false);paintAvatar(null);try{for(const key of Object.keys(sessionStorage)){if(key.startsWith('filmgo-avatar:'))sessionStorage.removeItem(key);}}catch{}navigate('/profile');msg('Signed out.');}
+ try{await api('logout',{});authVersion++;signedIn=false;historyHasSnapshot=false;$('history-list').replaceChildren();saveLoginHint(false);paintAvatar(null);try{for(const key of Object.keys(sessionStorage)){if(key.startsWith('filmgo-avatar:'))sessionStorage.removeItem(key);}}catch{}navigate('/profile');msg('Signed out.');}
  catch(e){msg(e.message);}
 });
 setInterval(()=>{if(signedIn&&location.pathname==='/history'&&!document.hidden)void loadHistory();},12000);
