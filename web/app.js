@@ -1,61 +1,6 @@
 const $=id=>document.getElementById(id);let number='',token='',signedIn=false,authVersion=0;const loginHintKey='tfw_login_hint_v1';const storedLogin=()=>{try{return localStorage.getItem(loginHintKey)==='1';}catch{return false;}};const saveLoginHint=value=>{try{if(value)localStorage.setItem(loginHintKey,'1');else localStorage.removeItem(loginHintKey);}catch{}};const msg=t=>{$('message').textContent=t;};async function api(route,payload){const r=await fetch('/api/'+route,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});const d=await r.json();if(!r.ok)throw Error(d.error||'Request failed');return d;}function phoneNumber(){let raw=$('phone').value.replace(/[^0-9+]/g,'');if(raw.startsWith('+'))return raw;if(raw.startsWith('00'))return '+'+raw.slice(2);raw=raw.replace(/^0+/,'');const dial=$('country').value;return '+'+(raw.startsWith(dial)?raw:dial+raw);}fetch('/countries.json').then(r=>r.json()).then(d=>{const sel=$('country');sel.replaceChildren();for(const c of d.countries){const o=document.createElement('option');o.value=c.dial;o.textContent=c.name+' (+'+c.dial+')';if(c.iso==='LK')o.selected=true;sel.append(o);}}).catch(()=>msg('Country list unavailable; Sri Lanka is the default.'));
 $('start').addEventListener('submit',async e=>{e.preventDefault();const btn=e.target.querySelector('button');btn.disabled=true;try{number=phoneNumber();const version=authVersion;await api('otp/start',{number});if(version!==authVersion)return;$('start').classList.add('hidden');$('verify').classList.remove('hidden');msg('Verification code sent to '+number);}catch(err){msg(err.message)}finally{btn.disabled=false;}});
 $('verify').addEventListener('submit',async e=>{e.preventDefault();const btn=e.target.querySelector('button');btn.disabled=true;try{const d=await api('otp/verify',{number,code:$('code').value});authVersion++;await showAccount();saveLoginHint(true);msg('Signed in successfully.');}catch(err){msg(err.message)}finally{btn.disabled=false;}});
-$('request').addEventListener('submit',async e=>{e.preventDefault();const btn=e.target.querySelector('button');if(btn.disabled)return;btn.disabled=true;btn.querySelector('.submit-label')?.classList.add('hidden');btn.querySelector('.submit-spinner')?.classList.remove('hidden');try{const d=await api('request',{movie_id:Number($('movie-id').value),rights_confirmed:$('rights').checked});await refreshAccount();msg('Request '+d.request_id+' submitted for review. This does not guarantee delivery.');}catch(err){msg(err.message)}finally{btn.disabled=false;btn.querySelector('.submit-label')?.classList.remove('hidden');btn.querySelector('.submit-spinner')?.classList.add('hidden');}});
-
-let movieResults=[];
-const movieSearch=$('movie-search'),movieOptions=$('movie-options');
-function renderMovies(){
- const q=movieSearch.value.trim().toLowerCase();
- const rows=movieResults.filter(m=>m.title.toLowerCase().includes(q)||String(m.year||'').includes(q)).slice(0,30);
- movieOptions.replaceChildren();
- for(const movie of rows){
-  const option=document.createElement('button');
-  option.type='button';option.className='movie-option';option.setAttribute('role','option');
-  const title=document.createElement('strong');title.textContent=movie.title;
-  const meta=document.createElement('span');meta.textContent=movie.year+' · '+movie.quality+' · '+(movie.size/1048576).toFixed(1)+' MiB';
-  option.append(title,meta);
-  option.addEventListener('click',()=>{movieSearch.value=movie.title;$('movie-id').value=String(movie.id);movieOptions.classList.add('hidden');movieSearch.setAttribute('aria-expanded','false');});
-  movieOptions.append(option);
- }
- if(!rows.length){const empty=document.createElement('p');empty.className='small';empty.textContent='No matching movies';movieOptions.append(empty);}
- movieOptions.classList.remove('hidden');movieSearch.setAttribute('aria-expanded','true');
-}
-let catalogLoading=false;
-async function loadMovies(){
- if(catalogLoading)return;
- catalogLoading=true;
- try{
-  const response=await fetch('/api/movies',{cache:'no-store'});
-  if(!response.ok)return;
-  const data=await response.json();
-  if(!movieSearch.value.trim())movieResults=Array.isArray(data.movies)?data.movies:[];
- }catch{/* Background catalog refresh is intentionally silent. */}
- finally{catalogLoading=false;}
-}
-
-setInterval(()=>{if(!document.hidden&&!movieSearch.value.trim())void loadMovies();},15000);
-document.addEventListener('visibilitychange',()=>{if(!document.hidden&&!movieSearch.value.trim())void loadMovies();});
-let movieTimer=0,movieQuerySequence=0;
-movieSearch.addEventListener('input',()=>{
- $('movie-id').value='';
- clearTimeout(movieTimer);
- const query=movieSearch.value.trim(),sequence=++movieQuerySequence;
- movieTimer=setTimeout(async()=>{
-  try{
-   const response=await fetch('/api/movies?q='+encodeURIComponent(query),{cache:'no-store'});
-   if(!response.ok)throw Error('Catalog search unavailable');
-   const data=await response.json();
-   if(sequence!==movieQuerySequence)return;
-   movieResults=data.movies||[];renderMovies();
-  }catch(e){movieOptions.replaceChildren();movieOptions.classList.add('hidden');}
- },250);
-});
-movieSearch.addEventListener('focus',()=>{if(movieResults.length)renderMovies();else if(!movieSearch.value.trim())void loadMovies();});
-movieSearch.addEventListener('keydown',e=>{if(e.key==='Escape'){movieOptions.classList.add('hidden');movieSearch.setAttribute('aria-expanded','false');}});
-document.addEventListener('click',e=>{if(!e.target.closest('.movie-picker')){movieOptions.classList.add('hidden');movieSearch.setAttribute('aria-expanded','false');}});
-$('request').addEventListener('submit',e=>{if(!$('movie-id').value){e.preventDefault();msg('Please select a movie from the dropdown.');}},true);
-
 const avatarCacheKey=n=>'filmgo-avatar:'+n;
 function paintAvatar(url){
  for(const id of ['profile-avatar','profile-monogram']){
@@ -103,9 +48,8 @@ function routeView(){
  $('verify').classList.add('hidden');
  $('account').classList.toggle('hidden',!signedIn||location.pathname!=='/profile');
  $('history').classList.toggle('hidden',!signedIn||location.pathname!=='/history');
- $('request').classList.toggle('hidden',!signedIn||!['/request','/'].includes(location.pathname));
  $('profile-avatar').classList.toggle('hidden',!signedIn||location.pathname==='/profile');
- $('profile-back').classList.toggle('hidden',!signedIn||!['/profile','/history','/plans','/request'].includes(location.pathname));
+ $('profile-back').classList.toggle('hidden',!signedIn||!['/profile','/history','/plans'].includes(location.pathname));
  $('auth-intro').classList.toggle('hidden',signedIn);
 }
 let pricingCountry='OTHER';
@@ -135,7 +79,7 @@ function updatePlanPrices(){
 updatePlanPrices();
 $('continue-free').addEventListener('click',async()=>{
  const button=$('continue-free');button.disabled=true;
- try{await api('plans/continue',{});navigate('/request');msg('You are continuing with the Free plan.');}
+ try{await api('plans/continue',{});navigate('/profile');msg('You are continuing with the Free plan.');}
  catch(err){msg(err.message);}
  finally{button.disabled=false;}
 });
@@ -150,9 +94,7 @@ async function loadHistory(){
  if(historyLoading)return;
  historyLoading=true;
  const root=$('history-list');
- if(!root.childElementCount){const loading=document.createElement('p');loading.className='small';loading.textContent='Loading requests…';root.append(loading);}
- /* Keep the current list visible while auto-refreshing. */
- const loading=document.createElement('p');loading.className='small';loading.textContent='Loading requests…';
+ if(!root.childElementCount){root.innerHTML='<div class="history-skeleton"><div class="history-shimmer"></div><div class="history-shimmer"></div><div class="history-shimmer"></div></div>';}
  try{
   const response=await fetch('/api/request-history',{cache:'no-store'});
   if(!response.ok)throw Error(response.status===401?'Please sign in again.':'Could not load request history.');
@@ -183,7 +125,7 @@ async function showAccount(){
  signedIn=true;
  if(!account.plan_onboarded&&location.pathname!=='/plans')history.replaceState({},'','/plans');
  routeView();
- await loadMovies();
+
  if(location.pathname==='/history')await loadHistory();
 }
 function navigate(path){history.pushState({},'',path);routeView();if(path==='/profile'&&signedIn)refreshAccount().catch(e=>msg(e.message));if(path==='/history'&&signedIn)void loadHistory();}
@@ -200,7 +142,7 @@ $('save-profile').addEventListener('click',async()=>{
  catch(e){msg(e.message);}finally{btn.disabled=false;}
 });
 $('logout').addEventListener('click',async()=>{
- try{await api('logout',{});authVersion++;signedIn=false;saveLoginHint(false);paintAvatar(null);try{for(const key of Object.keys(sessionStorage)){if(key.startsWith('filmgo-avatar:'))sessionStorage.removeItem(key);}}catch{}navigate('/request');msg('Signed out.');}
+ try{await api('logout',{});authVersion++;signedIn=false;saveLoginHint(false);paintAvatar(null);try{for(const key of Object.keys(sessionStorage)){if(key.startsWith('filmgo-avatar:'))sessionStorage.removeItem(key);}}catch{}navigate('/profile');msg('Signed out.');}
  catch(e){msg(e.message);}
 });
 setInterval(()=>{if(signedIn&&location.pathname==='/history'&&!document.hidden)void loadHistory();},12000);
