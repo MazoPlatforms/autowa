@@ -39,7 +39,11 @@ async function askOptional(d,index=0){
 }
 async function findCatalogMovie(d){
  const movies=await catalog();
- return movies.find(m=>Number(m.year)===Number(d.year)&&normalize(m.title)===normalize(d.title))||null;
+ const exact=movies.find(m=>Number(m.year)===Number(d.year)&&normalize(m.title)===normalize(d.title));
+ if(exact)return exact;
+ const resolved=await resolveOmdbMovie(d.title,d.year).catch(()=>null);
+ const imdbId=resolved?.movie?.imdbID;
+ return imdbId?movies.find(m=>m.imdb_id===imdbId)||null:null;
 }
 async function askOmdbConfirmation(d,result){
  d.omdb_candidate=movieFields(result);d.stage='await-omdb-confirm';await draftSave(d);
@@ -120,7 +124,14 @@ export function telegramMovieButtons(baseUrl,slug,quality){
 async function omdbSearch(title,year){const key=process.env.OMDB_API_KEY;if(!key)return null;const url='https://www.omdbapi.com/?'+new URLSearchParams({apikey:key,t:title,...(year?{y:String(year)}:{})});const r=await fetch(url,{signal:AbortSignal.timeout(10000)});const j=await r.json();return j.Response==='True'?j:null;}
 async function omdbById(imdbId){const key=process.env.OMDB_API_KEY;if(!key||!/^tt\d+$/.test(String(imdbId||'')))return null;const url='https://www.omdbapi.com/?'+new URLSearchParams({apikey:key,i:imdbId});const r=await fetch(url,{signal:AbortSignal.timeout(10000)});const j=await r.json();return j.Response==='True'?j:null;}
 async function imdbSuggestionSearch(title){const query=encodeURIComponent(String(title||'').trim().replace(/\s+/g,'_'));if(!query)return[];const r=await fetch('https://v3.sg.media-imdb.com/suggestion/x/'+query+'.json',{signal:AbortSignal.timeout(10000)});if(!r.ok)return[];const j=await r.json();return Array.isArray(j.d)?j.d.filter(x=>x.qid==='movie'&&x.id&&x.l):[];}
-function sequelKey(value){return normalize(value).replace(/chapter|part|volume|season/g,'');}
+function sequelKey(value){
+ const tokens=String(value||'').toLowerCase().match(/[a-z0-9]+/g)||[];
+ const suffixes=new Set(['chapter','part','volume','season']);
+ const roman={i:'1',ii:'2',iii:'3',iv:'4',v:'5',vi:'6',vii:'7',viii:'8',ix:'9',x:'10'};
+ const last=tokens.at(-1),before=tokens.at(-2);
+ if(tokens.length>1&&suffixes.has(before)&&(/^(?:\d+|i{1,3}|iv|v|vi|vii|viii|ix|x)$/i.test(last)))return tokens.slice(0,-2).join('')+(roman[last]||last);
+ return tokens.join('');
+}
 function suggestionScore(input,candidate,year){if(Number(candidate.y)!==Number(year))return 0;const a=normalize(input),b=normalize(candidate.l),sa=sequelKey(input),sb=sequelKey(candidate.l);if(a===b)return 1;if(sa&&sa===sb)return .98;return similarity(input,candidate.l);}
 async function resolveOmdbMovie(title,year){
  const direct=await omdbSearch(title,year).catch(()=>null);
@@ -132,7 +143,7 @@ async function resolveOmdbMovie(title,year){
  }
  const ranked=Array.from(new Map(candidates.map(x=>[x.item.id,x])).values()).sort((a,b)=>b.score-a.score);
  const winner=ranked[0];
- if(!winner||winner.score<.5||(!ranked[1]||winner.score-ranked[1].score<.1))return null;
+ if(!winner||winner.score<.5||(ranked[1]&&winner.score-ranked[1].score<.1))return null;
  const movie=await omdbById(winner.item.id).catch(()=>null);
  if(!movie||Number(String(movie.Year).slice(0,4))!==Number(year))return null;
  return {movie,confidence:winner.score,source:'imdb-suggestion'};
@@ -249,7 +260,7 @@ async function onMessage(message,refresh){
   if(file.file_size>MAX_BYTES)return say(chat,'File exceeds the current 2 GB limit.');
   const name=file.file_name||'',parts=filenameParts(name);
   if(!parts.quality)return say(chat,'Cannot identify quality from filename. Rename the file with 360p, 480p, 720p, 1080p or 2160p and resend.');
-  const movies=await catalog(),found=guessMovie(file,movies),existing=found.best;
+  const movies=await catalog(),found=guessMovie(file,movies);let existing=found.best;
   const title=existing?.title||parts.title,year=existing?.year||parts.year;
   const d={message_id:message.message_id,file_name:name,title:title||'',year:year||null,quality:parts.quality,existing:!!existing,replace:!!(existing&&Object.keys(existing.qualities||{}).some(q=>q.toLowerCase()===parts.quality)),slug_id:existing?.slug_id,manual_identity:!existing&&(!title||!year)};
   if(!title)return askForTitle(d);
@@ -257,9 +268,13 @@ async function onMessage(message,refresh){
   const resolved=existing?null:await resolveOmdbMovie(title,year).catch(()=>null);
   const omdb=resolved?.movie;
   const omdbConfidence=omdb&&Number(String(omdb.Year).slice(0,4))===year?resolved.confidence:0;
-  const trusted=!!existing||(resolved?.source==='omdb'&&omdbConfidence>=0.7);
   Object.assign(d,omdbConfidence>=0.6?movieFields(omdb):{});
-  if(omdbConfidence>=0.6){d.title=omdb.Title;d.year=Number(String(omdb.Year).slice(0,4));}
+  if(omdbConfidence>=0.6){
+   d.title=omdb.Title;d.year=Number(String(omdb.Year).slice(0,4));
+   if(!existing&&omdb.imdbID)existing=movies.find(m=>m.imdb_id===omdb.imdbID)||null;
+   if(existing){d.existing=true;d.slug_id=existing.slug_id;d.replace=Object.keys(existing.qualities||{}).some(q=>q.toLowerCase()===String(d.quality).toLowerCase());}
+  }
+  const trusted=!!existing||(resolved?.source==='omdb'&&omdbConfidence>=0.7);
   d.stage='await-publish';
   await draftSave(d);
   if(trusted&&!d.replace){
