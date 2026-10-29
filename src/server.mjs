@@ -154,7 +154,7 @@ const server=http.createServer(async(req,res)=>{
    const user=await profile(session.number);
    const exempt=unlimitedRequests(session.number);
     const used=exempt?0:Number(await redis('GET','rate:'+hmac('submit:'+session.number))||0);
-   return send(res,200,{number:session.number,name:user.name||'',plan_onboarded:user.plan_onboarded===true,plan:user.plan||'free',limit:exempt?null:3,used:exempt?0:Math.min(used,3),remaining:exempt?null:Math.max(0,3-used),period:exempt?'unlimited':'rolling rate window (up to 24 hours)',unlimited:exempt});
+   return send(res,200,{number:session.number,name:user.name||'',plan_onboarded:user.plan_onboarded!==false,plan:user.plan||'free',limit:exempt?null:3,used:exempt?0:Math.min(used,3),remaining:exempt?null:Math.max(0,3-used),period:exempt?'unlimited':'rolling rate window (up to 24 hours)',unlimited:exempt});
   }
   if(req.method==='GET'&&url.pathname==='/api/request-history'){
    const session=await authenticated(req);
