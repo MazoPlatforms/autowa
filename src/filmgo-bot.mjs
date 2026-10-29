@@ -36,7 +36,24 @@ async function omdbSearch(title,year){const key=process.env.OMDB_API_KEY;if(!key
 function movieFields(x){return {title:x.Title,year:Number(String(x.Year).slice(0,4)),imdb_id:x.imdbID,poster:x.Poster?.startsWith('https://')?x.Poster:null,genre:x.Genre,runtime:x.Runtime,director:x.Director,cast:x.Actors,plot:x.Plot};}
 async function draftPrompt(d){const text=['FilmGo movie draft',d.title+' ('+d.year+')', 'Quality: '+d.quality,'File: '+d.file_name,'Metadata: '+(d.imdb_id?'OMDb '+d.imdb_id:'manual / existing'),d.replace?'Existing quality — replacement requires confirmation':d.existing?'New quality for existing movie':'New movie', 'Use /edit to change metadata, /poster to upload a poster, /cancel to discard.'].join('\n');await say(ADMIN_ID,text,{reply_markup:{inline_keyboard:[[{text:d.replace?'Confirm replacement':'Publish movie',callback_data:'fg:publish'},{text:'Cancel',callback_data:'fg:cancel'}]]}});}
 async function posterUpload(d,photo){const info=await tg('getFile',{file_id:photo.file_id});if(!info.file_path||photo.file_size>5_000_000)throw Error('Poster too large or unavailable');const file=await fetch('https://api.telegram.org/file/bot'+TOKEN+'/'+info.file_path,{signal:AbortSignal.timeout(15000)});if(!file.ok)throw Error('Poster fetch failed');const bytes=new Uint8Array(await file.arrayBuffer());if(bytes.length>5_000_000||bytes[0]!==255||bytes[1]!==216)throw Error('Only JPEG posters under 5 MB');const path='web/posters/'+crypto.randomBytes(12).toString('hex')+'.jpg';const [owner,name]=REPO.split('/');const result=await fetch('https://api.github.com/repos/'+owner+'/'+name+'/contents/'+path,{method:'PUT',headers:{Authorization:'Bearer '+GH_TOKEN,Accept:'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28','Content-Type':'application/json'},body:JSON.stringify({message:'Add FilmGo movie poster',content:Buffer.from(bytes).toString('base64')}),signal:AbortSignal.timeout(20000)});if(!result.ok)throw Error('GitHub poster upload failed: '+result.status);d.poster='/posters/'+path.split('/').pop();await draftSave(d);}
-async function publishDraft(d){const lock=prefix+'publishing:'+ADMIN_ID;if(await redis('SET',lock,'1','NX','EX',90)!=='OK')return say(ADMIN_ID,'Publishing is already running.');try{const caption=['Movie: '+d.title,'Year: '+d.year,'Quality: '+d.quality,...(d.slug_id?['Slug ID: '+d.slug_id]:[])].join('\n');const sent=await tg('copyMessage',{chat_id:CHANNEL_ID,from_chat_id:ADMIN_ID,message_id:d.message_id,caption},30000);await redis('DEL',DRAFT_KEY+ADMIN_ID);await say(ADMIN_ID,'Published to database channel as message #'+sent.message_id+'. Syncing catalog.');await dispatch('filmgo-catalog-sync',{message_id:sent.message_id});}finally{await redis('DEL',lock);}}
+async function saveMovieMetadata(id,d){
+ const metadata={};for(const k of ['imdb_id','poster','genre','runtime','director','cast','plot'])if(d[k])metadata[k]=d[k];
+ if(!Object.keys(metadata).length)return;
+ const [owner,name]=REPO.split('/');
+ const url='https://api.github.com/repos/'+owner+'/'+name+'/contents/data/movie-metadata.json';
+ const headers={Authorization:'Bearer '+GH_TOKEN,Accept:'application/vnd.github+json','Content-Type':'application/json'};
+ for(let attempt=0;attempt<5;attempt++){
+  const response=await fetch(url,{headers});if(!response.ok&&response.status!==404)throw Error('Metadata read '+response.status);
+  const file=response.ok?await response.json():null;
+  const content=file?JSON.parse(Buffer.from(file.content.replace(/\\s/g,''),'base64').toString('utf8')):{schema_version:1,messages:{}};
+  content.messages[String(id)]=metadata;
+  const result=await fetch(url,{method:'PUT',headers,body:JSON.stringify({message:'Save FilmGo movie metadata',content:Buffer.from(JSON.stringify(content,null,2)).toString('base64'),...(file?{sha:file.sha}:{})})});
+  if(result.ok)return;
+  if(result.status!==409&&result.status!==422)throw Error('Metadata write '+result.status);
+ }
+ throw Error('Metadata conflict');
+}
+async function publishDraft(d){const lock=prefix+'publishing:'+ADMIN_ID;if(await redis('SET',lock,'1','NX','EX',90)!=='OK')return say(ADMIN_ID,'Publishing is already running.');try{const caption=['Movie: '+d.title,'Year: '+d.year,'Quality: '+d.quality,...(d.slug_id?['Slug ID: '+d.slug_id]:[])].join('\n');const sent=await tg('copyMessage',{chat_id:CHANNEL_ID,from_chat_id:ADMIN_ID,message_id:d.message_id,caption},30000);await saveMovieMetadata(sent.message_id,d);await redis('DEL',DRAFT_KEY+ADMIN_ID);await say(ADMIN_ID,'Published to database channel as message #'+sent.message_id+'. Syncing catalog.');await dispatch('filmgo-catalog-sync',{message_id:sent.message_id});}finally{await redis('DEL',lock);}}
 
 let running=false;
 async function redis(...args){
