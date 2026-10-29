@@ -1,12 +1,44 @@
 const $=id=>document.getElementById(id);const grid=$('catalog-grid'),search=$('catalog-search'),empty=$('catalog-empty'),home=$('catalog-home'),detail=$('catalog-detail');let movies=[];const el=(tag,cls,text)=>{const e=document.createElement(tag);if(cls)e.className=cls;if(text!==undefined)e.textContent=text;return e;};const poster=m=>m.poster&&/^https:\/\//.test(m.poster)?m.poster:null;function image(m,cls){const img=el('img',cls);img.alt=m.title+' poster';img.loading='lazy';if(poster(m))img.src=poster(m);img.onerror=()=>{img.removeAttribute('src');img.onerror=null};return img;}function skeleton(){grid.replaceChildren();for(let i=0;i<8;i++){const box=el('div');box.append(el('div','shimmer aspect-[2/3] rounded-2xl'),el('div','shimmer mt-3 h-4 w-3/4 rounded-md'),el('div','shimmer mt-2 h-3 w-1/2 rounded-md'));grid.append(box);}}const PAGE_SIZE=20;let page=1,catalogLoaded=false;
 const yearFilter=$('filter-year'),genreFilter=$('filter-genre'),sortFilter=$('filter-sort'),pagination=$('catalog-pagination');
+// Accessible custom popovers; native selects remain as the state source.
+function initCustomFilters(){
+ const filters=[yearFilter,genreFilter,sortFilter];
+ const closeAll=()=>{for(const select of filters){const box=select.closest('.catalog-filter');box.classList.remove('open');box.querySelector('.filter-trigger').setAttribute('aria-expanded','false');}};
+ for(const select of filters){
+  const box=select.closest('.catalog-filter');
+  select.classList.add('visually-hidden-select');
+  const trigger=el('button','filter-trigger');trigger.type='button';trigger.setAttribute('aria-haspopup','listbox');trigger.setAttribute('aria-expanded','false');
+  const label=el('span','filter-trigger-label');const arrow=el('span','filter-chevron','⌄');trigger.append(label,arrow);
+  const panel=el('div','filter-panel');panel.setAttribute('role','listbox');panel.setAttribute('aria-label',select.getAttribute('aria-label')||'Filter options');
+  box.append(trigger,panel);
+  const refresh=()=>{
+   label.textContent=select.selectedOptions[0]?.textContent||'All';
+   panel.replaceChildren();
+   for(const option of select.options){
+    const item=el('button','filter-option'+(option.value===select.value?' selected':''),option.textContent);
+    item.type='button';item.setAttribute('role','option');item.setAttribute('aria-selected',String(option.value===select.value));
+    item.addEventListener('click',()=>{select.value=option.value;select.dispatchEvent(new Event('change'));closeAll();trigger.focus();});
+    panel.append(item);
+   }
+  };
+  select.addEventListener('change',refresh);
+  trigger.addEventListener('click',()=>{const open=box.classList.contains('open');closeAll();if(!open){box.classList.add('open');trigger.setAttribute('aria-expanded','true');}});
+  trigger.addEventListener('keydown',event=>{if(event.key==='ArrowDown'||event.key==='Enter'&& !box.classList.contains('open')){event.preventDefault();closeAll();box.classList.add('open');trigger.setAttribute('aria-expanded','true');panel.querySelector('button')?.focus();}});
+  panel.addEventListener('keydown',event=>{const buttons=[...panel.querySelectorAll('button')],index=buttons.indexOf(document.activeElement);if(event.key==='ArrowDown'||event.key==='ArrowUp'){event.preventDefault();buttons[(index+(event.key==='ArrowDown'?1:-1)+buttons.length)%buttons.length]?.focus();}if(event.key==='Escape'){closeAll();trigger.focus();}});
+  refresh();
+ }
+ document.addEventListener('click',event=>{if(!event.target.closest('.catalog-filter'))closeAll();});
+ document.addEventListener('keydown',event=>{if(event.key==='Escape')closeAll();});
+}
+initCustomFilters();
 function updateFilters(){
  const oldYear=yearFilter.value,oldGenre=genreFilter.value;
- const years=[...new Set(movies.map(m=>String(m.year||'').trim()).filter(y=>/^\\d{4}$/.test(y)))].sort((a,b)=>Number(b)-Number(a));
+ const years=[...new Set(movies.map(m=>String(m.year||'').trim()).filter(y=>/^\d{4}$/.test(y)))].sort((a,b)=>Number(b)-Number(a));
  const genres=[...new Set(movies.flatMap(m=>Array.isArray(m.genre)?m.genre:typeof m.genre==='string'?m.genre.split(','):[]).map(g=>String(g).trim()).filter(Boolean))].sort((a,b)=>a.localeCompare(b));
  const fill=(select,values,label)=>{select.replaceChildren(new Option(label,''));for(const value of values)select.add(new Option(value,value));};
  fill(yearFilter,years,'All years');fill(genreFilter,genres,'All genres');
  yearFilter.value=years.includes(oldYear)?oldYear:'';genreFilter.value=genres.includes(oldGenre)?oldGenre:'';
+ yearFilter.dispatchEvent(new Event('change'));genreFilter.dispatchEvent(new Event('change'));
 }
 function renderPagination(total){
  pagination.replaceChildren();
