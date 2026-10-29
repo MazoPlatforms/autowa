@@ -102,7 +102,7 @@ function requesterProgress(j){
  const year=String(j.year||movie.year||'—'),quality=String(j.quality||movie.quality||'—');
  const size=Number(j.file_size||movie.file_size||0);
  const details=['🎬 *FILMGO*','', '🎞️ *'+title+'*','📅 Year: '+year,'📺 Quality: '+quality,...(movie.genre?.length?['🎭 Genre: '+(Array.isArray(movie.genre)?movie.genre.join(', '):movie.genre)]:[]),''];
- let key=null,last='',lastAt=0,chain=Promise.resolve(),posterAttached=false,started=Date.now(),lastBytes=0,lastSample=started,rate=0;
+ let key=null,last='',lastAt=0,chain=Promise.resolve(),posterAttached=false,posterSent=false,started=Date.now(),lastBytes=0,lastSample=started,rate=0;
  const render=(message,stats)=>{
   if(!stats)return details.join('\n')+message+(size?'\n📦 File size: '+miB(size)+' MiB':'');
   const now=Date.now(),elapsed=Math.max(.001,(now-lastSample)/1000);
@@ -117,8 +117,8 @@ function requesterProgress(j){
    if(!force&&(caption===last||Date.now()-lastAt<12000))return;
    try{
     let result;
-    if(!key&&posterUrl){
-     try{result=await sock.sendMessage(jid,{image:{url:posterUrl},caption});posterAttached=!!result?.key?.id;}
+    if(!posterSent&&posterUrl){
+     try{result=await sock.sendMessage(jid,{image:{url:posterUrl},caption});posterAttached=!!result?.key?.id;posterSent=posterAttached;}
      catch(err){console.warn('Movie poster unavailable, using text status:',err.message);}
     }
     if(!result){
