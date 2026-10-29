@@ -89,26 +89,28 @@ const archivedMetadata = {
 let groups=await sock.groupFetchAllParticipating();
 
 const miB=n=>(n/1048576).toFixed(1);
+const FALLBACK_POSTER='https://i.ibb.co/TMJ6YCC4/IMG-33a2f581-8ff4-4a5e-9e64-e43c900000c2.png';
+const STATUS_FOOTER='> Powered by Itz Maazin • https://mzn.is-a.dev/';
 const formatDuration=seconds=>!Number.isFinite(seconds)||seconds<0?'Calculating…':seconds<60?Math.ceil(seconds)+'s':Math.floor(seconds/3600)?Math.floor(seconds/3600)+'h '+Math.floor(seconds%3600/60)+'m':Math.ceil(seconds/60)+'m';
-const asciiBar=(done,total)=>{const pct=total>0?Math.max(0,Math.min(1,done/total)):0;const count=Math.round(pct*20);return '['+'#'.repeat(count)+'-'.repeat(20-count)+'] '+Math.round(pct*100)+'%';};
+const asciiBar=(done,total)=>{const pct=total>0?Math.max(0,Math.min(1,done/total)):0;const count=Math.round(pct*16);return '╭─ DOWNLOAD ─╮\n'+'┃ '+('■'.repeat(count)+'·'.repeat(16-count))+' ┃ '+Math.round(pct*100)+'%\n╰────────────╯';};
 let posterCatalog=[];
 try{const catalog=JSON.parse(fs.readFileSync('data/movies.json','utf8'));posterCatalog=Array.isArray(catalog)?catalog:Array.isArray(catalog.movies)?catalog.movies:[];}catch(err){console.warn('Poster catalog unavailable:',err.message);}
 function requesterProgress(j){
  const jid=(j.recipient_jids||[]).find(v=>/^\d{8,15}@s\.whatsapp\.net$/.test(v));
  const movie=posterCatalog.find(m=>m.telegram_message_id===j.telegram_message_id)||{};
  const poster=String(j.poster||j.poster_url||movie.poster||'');
- const posterUrl=/^https:\/\/[^\s]+$/i.test(poster)?poster:null;
+ const posterUrl=/^https:\/\/[^\s]+$/i.test(poster)?poster:FALLBACK_POSTER;
  const title=String(j.title||movie.title||'Movie').slice(0,130);
  const year=String(j.year||movie.year||'—'),quality=String(j.quality||movie.quality||'—');
  const size=Number(j.file_size||movie.file_size||0);
- const details=['🎬 *FILMGO*','', '🎞️ *'+title+'*','📅 Year: '+year,'📺 Quality: '+quality,...(movie.genre?.length?['🎭 Genre: '+(Array.isArray(movie.genre)?movie.genre.join(', '):movie.genre)]:[]),''];
+ const details=['*FILMGO*','', '*'+title+'*','Year: '+year,'Quality: '+quality,...(movie.genre?.length?['Genre: '+(Array.isArray(movie.genre)?movie.genre.join(', '):movie.genre)]:[]),''];
  let key=null,last='',lastAt=0,chain=Promise.resolve(),posterAttached=false,posterSent=false,started=Date.now(),lastBytes=0,lastSample=started,rate=0;
  const render=(message,stats)=>{
-  if(!stats)return details.join('\n')+message+(size?'\n📦 File size: '+miB(size)+' MiB':'');
+  if(!stats)return details.join('\n')+message+(size?'\nFile size: '+miB(size)+' MiB':'')+'\n\n'+STATUS_FOOTER;
   const now=Date.now(),elapsed=Math.max(.001,(now-lastSample)/1000);
   if(stats.done>=lastBytes&&elapsed>=1){const instant=(stats.done-lastBytes)/elapsed;rate=rate?rate*.65+instant*.35:instant;lastBytes=stats.done;lastSample=now;}
   const total=stats.total||size,remaining=Math.max(0,total-stats.done);
-  return details.join('\n')+'📥 *Downloading movie*\n'+asciiBar(stats.done,total)+'\n\n📦 '+miB(stats.done)+' / '+(total?miB(total):'?')+' MiB\n⚡ Speed: '+(rate>0?miB(rate)+' MiB/s':'Calculating…')+'\n⏳ ETA: '+(rate>0?formatDuration(remaining/rate):'Calculating…')+'\n🕒 Elapsed: '+formatDuration((now-started)/1000);
+  return details.join('\n')+'*Downloading movie*\n'+asciiBar(stats.done,total)+'\n\nSize: '+miB(stats.done)+' / '+(total?miB(total):'?')+' MiB\nSpeed: '+(rate>0?miB(rate)+' MiB/s':'Calculating…')+'\nETA: '+(rate>0?formatDuration(remaining/rate):'Calculating…')+'\nElapsed: '+formatDuration((now-started)/1000)+'\n\n'+STATUS_FOOTER;
  };
  const update=(message,force=false,stats=null)=>{
   if(!jid)return Promise.resolve();
@@ -119,7 +121,7 @@ function requesterProgress(j){
     let result;
     if(!posterSent&&posterUrl){
      try{result=await sock.sendMessage(jid,{image:{url:posterUrl},caption});posterAttached=!!result?.key?.id;posterSent=posterAttached;}
-     catch(err){console.warn('Movie poster unavailable, using text status:',err.message);}
+     catch(err){console.warn('Movie poster unavailable, trying fallback image:',err.message);if(posterUrl!==FALLBACK_POSTER){try{result=await sock.sendMessage(jid,{image:{url:FALLBACK_POSTER},caption});posterAttached=!!result?.key?.id;posterSent=posterAttached;}catch(fallbackErr){console.warn('Fallback poster unavailable, using text status:',fallbackErr.message);}}}
     }
     if(!result){
      const payload={text:caption};
