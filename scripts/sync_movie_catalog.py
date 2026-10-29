@@ -20,6 +20,30 @@ def wikipedia_json(url):
     with urllib.request.urlopen(request, timeout=15) as response:
         return json.load(response)
 
+def poster_is_valid(url):
+    """Verify that a remote poster is reachable and returns image bytes."""
+    if not str(url).startswith("https://"):
+        return bool(re.fullmatch(r"/posters/[a-f0-9]{24}\.jpg", str(url)))
+    try:
+        request = urllib.request.Request(url, headers={"User-Agent": "FilmGoCatalogSync/1.0 (+https://github.com/MazoPlatforms/autowa)"})
+        with urllib.request.urlopen(request, timeout=15) as response:
+            content_type = response.headers.get_content_type()
+            return response.status == 200 and content_type.startswith("image/") and bool(response.read(1))
+    except Exception:
+        return False
+
+def imdb_poster(imdb_id):
+    """Return the current IMDb poster for an IMDb title ID, when available."""
+    if not re.fullmatch(r"tt\d+", str(imdb_id or "")):
+        return None
+    try:
+        data = wikipedia_json("https://v3.sg.media-imdb.com/suggestion/x/" + urllib.parse.quote(str(imdb_id)) + ".json")
+        item = next((entry for entry in data.get("d", []) if entry.get("id") == imdb_id), None)
+        source = item.get("i", {}).get("imageUrl", "") if item else ""
+        return source if poster_is_valid(source) else None
+    except Exception:
+        return None
+
 def normalize_title(value):
     """Normalize a title for safe comparison, while preserving its words."""
     value = re.sub(r"\([^)]*\)", " ", str(value or ""))
@@ -198,7 +222,16 @@ async def main():
             print("Duplicate qualities skipped (newest Telegram file wins):", duplicates)
         for movie in groups.values():
             poster = str(movie.get("poster") or "")
-            if not (poster.startswith("https://") or re.fullmatch(r"/posters/[a-f0-9]{24}\.jpg", poster)) or poster == FALLBACK_POSTER:
+            preferred = imdb_poster(movie.get("imdb_id"))
+            if preferred:
+                movie["poster"] = preferred
+                continue
+            needs_wikipedia = (
+                poster == FALLBACK_POSTER
+                or poster.startswith("https://upload.wikimedia.org/")
+                or not poster_is_valid(poster)
+            )
+            if needs_wikipedia:
                 movie["poster"] = wikipedia_poster(movie["title"], movie["year"]) or FALLBACK_POSTER
         current = []
         for movie in groups.values():
