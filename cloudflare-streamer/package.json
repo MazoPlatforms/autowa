@@ -1,5 +1,5 @@
 {
-  "name": "filmgo-streamer",
+  "name": "tamil-films-world-streamer",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -7,10 +7,6 @@
     "dev": "wrangler dev",
     "deploy": "wrangler deploy",
     "check": "wrangler deploy --dry-run"
-  },
-  "dependencies": {
-    "big-integer": "^1.6.52",
-    "telegram": "2.26.22"
   },
   "devDependencies": {
     "wrangler": "^4.0.0"
