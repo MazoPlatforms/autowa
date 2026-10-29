@@ -67,15 +67,45 @@ async function refreshAccount(){
  return user;
 }
 function routeView(){
+ $('plans').classList.toggle('hidden',!signedIn||location.pathname!=='/plans');
  $('start').classList.toggle('hidden',signedIn);
  $('verify').classList.add('hidden');
  $('account').classList.toggle('hidden',!signedIn||location.pathname!=='/profile');
  $('history').classList.toggle('hidden',!signedIn||location.pathname!=='/history');
  $('request').classList.toggle('hidden',!signedIn||!['/request','/'].includes(location.pathname));
  $('profile-avatar').classList.toggle('hidden',!signedIn||location.pathname==='/profile');
- $('profile-back').classList.toggle('hidden',!signedIn||!['/profile','/history'].includes(location.pathname));
+ $('profile-back').classList.toggle('hidden',!signedIn||!['/profile','/history','/plans'].includes(location.pathname));
  $('auth-intro').classList.toggle('hidden',signedIn);
 }
+const planPrices={
+ LK:{currency:'LKR',plus:890,premium:1790,label:'Sri Lanka'},
+ IN:{currency:'INR',plus:249,premium:499,label:'India'},
+ US:{currency:'USD',plus:2.99,premium:5.99,label:'United States'},
+ OTHER:{currency:'USD',plus:2.99,premium:5.99,label:'Other countries'}
+};
+const plansCountry=$('plans-country');
+function planQuote(tier){
+ const region=planPrices[plansCountry.value]||planPrices.OTHER;
+ return {region,price:region[tier],formatted:new Intl.NumberFormat('en',{style:'currency',currency:region.currency,maximumFractionDigits:region.currency==='USD'?2:0}).format(region[tier])};
+}
+function updatePlanPrices(){
+ $('price-free').textContent='Free';
+ for(const tier of ['plus','premium'])$('price-'+tier).textContent=planQuote(tier).formatted+' / month';
+}
+plansCountry.addEventListener('change',updatePlanPrices);
+updatePlanPrices();
+$('continue-free').addEventListener('click',async()=>{
+ const button=$('continue-free');button.disabled=true;
+ try{await api('plans/continue',{});navigate('/request');msg('You are continuing with the Free plan.');}
+ catch(err){msg(err.message);}
+ finally{button.disabled=false;}
+});
+for(const tier of ['plus','premium'])$('upgrade-'+tier).addEventListener('click',()=>{
+ const quote=planQuote(tier);
+ const message=['Hello FilmGo!','I would like to enquire about upgrading my account.','Plan: '+(tier==='plus'?'Plus':'Premium'),'Country: '+quote.region.label,'Displayed price: '+quote.formatted+' per month','Please confirm availability, benefits and payment instructions.'].join('\\n');
+ window.open('https://wa.me/94779290433?text='+encodeURIComponent(message),'_blank','noopener,noreferrer');
+});
+
 let historyLoading=false;
 async function loadHistory(){
  if(historyLoading)return;
@@ -106,15 +136,18 @@ async function loadHistory(){
  }catch(err){root.replaceChildren();const error=document.createElement('p');error.className='small';error.textContent=err.message;root.append(error);}finally{historyLoading=false;}
 }
 async function showAccount(){
- await refreshAccount();
+ const account=await refreshAccount();
  signedIn=true;
+ if(!account.plan_onboarded&&location.pathname!=='/plans')history.replaceState({},'','/plans');
  routeView();
  await loadMovies();
  if(location.pathname==='/history')await loadHistory();
 }
 function navigate(path){history.pushState({},'',path);routeView();if(path==='/profile'&&signedIn)refreshAccount().catch(e=>msg(e.message));if(path==='/history'&&signedIn)void loadHistory();}
 $('profile-avatar').addEventListener('click',()=>navigate('/profile'));
-$('profile-back').addEventListener('click',()=>navigate(location.pathname==='/history'?'/profile':'/request'));
+$('profile-back').addEventListener('click',()=>navigate(location.pathname==='/history'||location.pathname==='/plans'?'/profile':'/request'));
+$('open-plans').addEventListener('click',()=>navigate('/plans'));
+
 $('open-history').addEventListener('click',()=>navigate('/history'));
 $('refresh-history').addEventListener('click',()=>void loadHistory());
 window.addEventListener('popstate',()=>{routeView();if(location.pathname==='/history'&&signedIn)void loadHistory();});
