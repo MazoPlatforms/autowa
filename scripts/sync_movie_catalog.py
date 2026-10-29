@@ -28,7 +28,7 @@ def poster_is_valid(url):
         request = urllib.request.Request(url, headers={"User-Agent": "FilmGoCatalogSync/1.0 (+https://github.com/MazoPlatforms/autowa)"})
         with urllib.request.urlopen(request, timeout=15) as response:
             content_type = response.headers.get_content_type()
-            return response.status == 200 and content_type.startswith("image/") and bool(response.read(1))
+            return response.status == 200 and content_type.startswith("image/") and bool(response.read())
     except Exception:
         return False
 
