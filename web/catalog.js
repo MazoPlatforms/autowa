@@ -8,7 +8,7 @@ function initCustomFilters(){
   const box=select.closest('.catalog-filter');
   select.classList.add('visually-hidden-select');
   const trigger=el('button','filter-trigger');trigger.type='button';trigger.setAttribute('aria-haspopup','listbox');trigger.setAttribute('aria-expanded','false');
-  const label=el('span','filter-trigger-label');const arrow=el('span','filter-chevron','⌄');trigger.append(label,arrow);
+  const label=el('span','filter-trigger-label');const arrow=el('span','filter-chevron');arrow.innerHTML='<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>';trigger.append(label,arrow);
   const panel=el('div','filter-panel');panel.setAttribute('role','listbox');panel.setAttribute('aria-label',select.getAttribute('aria-label')||'Filter options');
   box.append(trigger,panel);
   const refresh=()=>{
