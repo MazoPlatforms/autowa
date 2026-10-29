@@ -1,18 +1,34 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-29T10:42:51.855695+00:00",
+  "updated_at": "2026-10-29T10:43:57.172675+00:00",
   "movies": [
     {
       "id": "telegram-35",
       "telegram_message_id": 35,
-      "title": "Ponniyin Selvan",
+      "title": "Ponniyin Selvan: Part I",
       "year": 2022,
       "quality": "720p",
       "file_size": 1688737299,
       "file_name": "[MM] Ponniyin Selvan Part 1 (2022) Tamil HDRip - 720p .mkv",
       "mime_type": "video/x-matroska",
-      "slug_id": "6v-lNusWjdm0vjws",
-      "metadata_status": "unmatched"
+      "slug_id": "Soofsf_fRo1smgrT",
+      "imdb_id": "tt10701074",
+      "poster": "https://m.media-amazon.com/images/M/MV5BYjI2ZmRmODEtZmEyYS00OWY3LTlhNWEtODhlZjQyNjVlMWU0XkEyXkFqcGc@._V1_SX300.jpg",
+      "genre": [
+        "Action",
+        "Adventure",
+        "Drama"
+      ],
+      "runtime": "167 min",
+      "director": "Mani Ratnam, Sruti Harihara Subramanian",
+      "cast": [
+        "Vikram",
+        "Aishwarya Rai Bachchan",
+        "Trisha Krishnan"
+      ],
+      "plot": "Vandiyathevan crosses the Chola land to deliver a message from the Crown Prince Aditha Karikalan, while Kundavai attempts to establish political peace as vassals and petty chieftains plot against the throne.",
+      "imdb_rating": "7.6",
+      "metadata_status": "matched"
     },
     {
       "id": "telegram-34",
