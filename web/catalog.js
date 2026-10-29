@@ -97,7 +97,7 @@ function render(){
  }
  renderPagination(rows.length);
 }
-function showDetail(m){const root=$('detail-content');root.replaceChildren();const layout=el('div','detail-hero');layout.append(image(m,'detail-poster'));const info=el('div');info.append(el('p','mb-2 text-xs font-semibold uppercase tracking-[.18em] text-zinc-500','MOVIE DETAILS'),el('h1','text-2xl font-extrabold leading-tight tracking-tight sm:text-5xl',m.title),el('p','mt-3 text-sm text-zinc-400',[m.year,m.runtime,m.quality].filter(Boolean).join(' · ')));if(m.imdb_rating)info.append(el('p','mt-3 text-sm font-semibold text-zinc-200','★ IMDb '+m.imdb_rating));if(m.genre?.length)info.append(el('p','mt-3 text-sm text-zinc-400',m.genre.join(' · ')));layout.append(info);root.append(layout);const body=el('div','mt-9 max-w-3xl border-t border-zinc-800 pt-8');body.append(el('h2','text-lg font-bold','Overview'),el('p','mt-3 text-sm leading-7 text-zinc-400',m.plot||'No synopsis available yet.'));if(m.director)body.append(el('p','mt-5 text-sm text-zinc-400','Director: '+m.director));if(m.cast?.length)body.append(el('p','mt-2 text-sm text-zinc-400','Cast: '+m.cast.join(', ')));const a=el('a','mt-8 inline-flex rounded-xl bg-white px-5 py-3 text-sm font-bold text-zinc-950 hover:bg-zinc-200','Request via WhatsApp');a.href='/request';body.append(a);root.append(body);
+function showDetail(m){const root=$('detail-content');root.replaceChildren();const layout=el('div','detail-hero');layout.append(image(m,'detail-poster'));const info=el('div');info.append(el('p','mb-2 text-xs font-semibold uppercase tracking-[.18em] text-zinc-500','MOVIE DETAILS'),el('h1','text-2xl font-extrabold leading-tight tracking-tight sm:text-5xl',m.title),el('p','mt-3 text-sm text-zinc-400',[m.year,m.runtime].filter(Boolean).join(' · ')));if(m.imdb_rating)info.append(el('p','mt-3 text-sm font-semibold text-zinc-200','★ IMDb '+m.imdb_rating));if(m.genre?.length)info.append(el('p','mt-3 text-sm text-zinc-400',m.genre.join(' · ')));layout.append(info);root.append(layout);const body=el('div','mt-9 max-w-3xl border-t border-zinc-800 pt-8');body.append(el('h2','text-lg font-bold','Overview'),el('p','mt-3 text-sm leading-7 text-zinc-400',m.plot||'No synopsis available yet.'));if(m.director)body.append(el('p','mt-5 text-sm text-zinc-400','Director: '+m.director));if(m.cast?.length)body.append(el('p','mt-2 text-sm text-zinc-400','Cast: '+m.cast.join(', ')));const a=el('a','mt-8 inline-flex rounded-xl bg-white px-5 py-3 text-sm font-bold text-zinc-950 hover:bg-zinc-200','Request via WhatsApp');a.href='/request';body.append(a);root.append(body);
 const section=el('section','mt-9 max-w-3xl border-t border-zinc-800 pt-8 filmgo-watch');
 section.append(el('h2','mb-4 text-lg font-bold','Watch & download'));
 const video=el('video','filmgo-player');
@@ -108,12 +108,10 @@ section.append(video);
 const status=el('p','filmgo-stream-status','Checking streaming availability…');
 status.setAttribute('role','status');
 const actions=el('div','filmgo-player-actions');
-const download=el('a','filmgo-download-button','↓ Download movie');
+const download=el('a','filmgo-download-button','Download movie');
 download.setAttribute('download','');
 download.setAttribute('aria-label','Download '+m.title);
-const external=el('a','filmgo-open-button','Open in player ↗');
-external.target='_blank';external.rel='noopener noreferrer';
-actions.append(download,external);
+actions.append(download);
 section.append(actions,status);
 root.append(section);
 const slug=encodeURIComponent(m.slug_id||'');
@@ -122,8 +120,7 @@ const qualities=Object.keys(m.qualities||{[m.quality]:m}).filter(Boolean).sort((
 let selected=qualities.find(q=>q.toLowerCase()==='720p')||qualities[0];
 const qualityRow=el('div','filmgo-quality-options');
 const qualityLabel=el('p','filmgo-stream-status','Choose quality');
-section.insertBefore(qualityLabel,actions);
-section.insertBefore(qualityRow,actions);
+if(qualities.length>1){section.insertBefore(qualityLabel,actions);section.insertBefore(qualityRow,actions);}
 const isActive=()=>root.isConnected&&location.pathname==='/title/'+slug;
 const setStatus=value=>{if(isActive())status.textContent=value;};
 const setQuality=q=>{
@@ -141,7 +138,7 @@ const setQuality=q=>{
  video.load();
  download.href=streamBase+'/download/'+slug+suffix;
  download.removeAttribute('download');
- external.href=video.src;
+
  const file=m.qualities?.[q]||m;
  const format=String(file.file_name||'').split('.').pop().toLowerCase();
  setStatus(format==='mkv'?'MKV may not play in this browser. Download and open with VLC if needed.':'Selected '+q+'. Press play to stream.');
@@ -155,7 +152,7 @@ for(const q of qualities){
 }
 video.addEventListener('error',()=>setStatus('Playback failed. Try downloading this quality and opening it with VLC.'));
 video.addEventListener('stalled',()=>setStatus('Buffering video…'));
-video.addEventListener('playing',()=>setStatus('Streaming '+selected+'.'));
+video.addEventListener('playing',()=>setStatus('Now playing.'));
 video.addEventListener('waiting',()=>setStatus('Buffering…'));
 fetch('/api/stream-availability/'+slug,{cache:'no-store'}).then(r=>r.ok?r.json():null).then(data=>{
  if(!isActive())return;
