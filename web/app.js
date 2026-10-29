@@ -70,21 +70,51 @@ function routeView(){
  $('start').classList.toggle('hidden',signedIn);
  $('verify').classList.add('hidden');
  $('account').classList.toggle('hidden',!signedIn||location.pathname!=='/profile');
- $('request').classList.toggle('hidden',!signedIn||location.pathname==='/profile');
+ $('history').classList.toggle('hidden',!signedIn||location.pathname!=='/history');
+ $('request').classList.toggle('hidden',!signedIn||!['/request','/'].includes(location.pathname));
  $('profile-avatar').classList.toggle('hidden',!signedIn||location.pathname==='/profile');
- $('profile-back').classList.toggle('hidden',!signedIn||location.pathname!=='/profile');
+ $('profile-back').classList.toggle('hidden',!signedIn||!['/profile','/history'].includes(location.pathname));
  $('auth-intro').classList.toggle('hidden',signedIn);
+}
+async function loadHistory(){
+ const root=$('history-list');
+ root.replaceChildren();
+ const loading=document.createElement('p');loading.className='small';loading.textContent='Loading requests…';root.append(loading);
+ try{
+  const response=await fetch('/api/request-history',{cache:'no-store'});
+  if(!response.ok)throw Error(response.status===401?'Please sign in again.':'Could not load request history.');
+  const data=await response.json();root.replaceChildren();
+  if(!Array.isArray(data.requests)||!data.requests.length){
+   const empty=document.createElement('div');empty.className='history-empty';
+   const title=document.createElement('strong');title.textContent='No requests yet';
+   const description=document.createElement('p');description.textContent='Movies you request will appear here after they are queued.';
+   empty.append(title,description);root.append(empty);return;
+  }
+  for(const item of data.requests){
+   const card=document.createElement('article');card.className='history-card';
+   const top=document.createElement('div');top.className='history-card-top';
+   const title=document.createElement('strong');title.textContent=item.title||'Movie request';
+   const badge=document.createElement('span');badge.className='history-status';badge.textContent=item.status==='pending_review'?'Pending review':String(item.status||'Queued').replaceAll('_',' ');
+   top.append(title,badge);
+   const meta=document.createElement('p');meta.className='small';meta.textContent=[item.year,item.quality,item.created_at?new Date(item.created_at).toLocaleString():null].filter(Boolean).join(' · ');
+   const id=document.createElement('p');id.className='history-id';id.textContent='Request ID: '+item.id;
+   card.append(top,meta,id);root.append(card);
+  }
+ }catch(err){root.replaceChildren();const error=document.createElement('p');error.className='small';error.textContent=err.message;root.append(error);}
 }
 async function showAccount(){
  await refreshAccount();
  signedIn=true;
  routeView();
  await loadMovies();
+ if(location.pathname==='/history')await loadHistory();
 }
-function navigate(path){history.pushState({},'',path);routeView();if(path==='/profile'&&signedIn)refreshAccount().catch(e=>msg(e.message));}
+function navigate(path){history.pushState({},'',path);routeView();if(path==='/profile'&&signedIn)refreshAccount().catch(e=>msg(e.message));if(path==='/history'&&signedIn)void loadHistory();}
 $('profile-avatar').addEventListener('click',()=>navigate('/profile'));
-$('profile-back').addEventListener('click',()=>navigate('/request'));
-window.addEventListener('popstate',routeView);
+$('profile-back').addEventListener('click',()=>navigate(location.pathname==='/history'?'/profile':'/request'));
+$('open-history').addEventListener('click',()=>navigate('/history'));
+$('refresh-history').addEventListener('click',()=>void loadHistory());
+window.addEventListener('popstate',()=>{routeView();if(location.pathname==='/history'&&signedIn)void loadHistory();});
 $('save-profile').addEventListener('click',async()=>{
  const btn=$('save-profile');btn.disabled=true;
  try{await api('profile',{name:$('profile-name').value});await refreshAccount();msg('Profile saved.');}
