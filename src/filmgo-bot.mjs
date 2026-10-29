@@ -152,7 +152,7 @@ async function probe(input){
 }
 async function onMessage(message,refresh){
  const from=String(message.from?.id||''),chat=message.chat?.id;
- const deep=String(message.text||'').trim().match(/^\/start(?:@\\w+)?\\s+m_([A-Za-z0-9_-]{16})$/);
+ const deep=String(message.text||'').trim().match(/^\/start(?:@\w+)?\s+m_([A-Za-z0-9_-]{16})$/);
  if(deep&&message.chat?.type==='private'){
   const key='filmgo:deeplink:'+deep[1];
   const slug=await redis('GET',key);
