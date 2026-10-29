@@ -172,6 +172,7 @@ const server=http.createServer(async(req,res)=>{
    await redis('SET','filmgo:deeplink:'+token,slug,'EX',600);
    return send(res,200,{url:'https://t.me/mzn_filmgobot?start=m_'+token});
   }
+  if(req.method==='GET'&&url.pathname==='/request'){res.writeHead(302,{Location:'/profile','Cache-Control':'no-store'});return res.end();}
   if(req.method==='GET'&&url.pathname==='/api/movies'){
     const query=(url.searchParams.get('q')||'').trim().toLowerCase().slice(0,100);
     const catalog=await getPublicCatalog();
