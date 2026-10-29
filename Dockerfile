@@ -3,7 +3,7 @@ WORKDIR /app
 COPY package.json ./
 RUN apk add --no-cache git openssh-client ca-certificates python3 py3-pip && npm install --no-audit --no-fund
 RUN python3 -m pip install --break-system-packages --no-cache-dir telethon==1.42.0
-COPY src/server.mjs src/whatsapp-otp.mjs src/telegram_media.py src/telegram_stream.py ./src/
+COPY src/server.mjs src/filmgo-bot.mjs src/whatsapp-otp.mjs src/telegram_media.py src/telegram_stream.py ./src/
 COPY web/ ./web/
 COPY tailwind.config.cjs ./tailwind.config.cjs
 RUN npm run build:css && npm prune --omit=dev
