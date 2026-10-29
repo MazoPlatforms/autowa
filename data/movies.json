@@ -1,7 +1,35 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-29T11:19:45.030139+00:00",
+  "updated_at": "2026-10-29T11:23:07.265170+00:00",
   "movies": [
+    {
+      "id": "telegram-38",
+      "telegram_message_id": 38,
+      "title": "Bigil",
+      "year": 2019,
+      "quality": "720p",
+      "file_size": 1571403393,
+      "file_name": "@FBM_Tamil.Bigil.2019.Proper.HDrip.720p.mkv",
+      "mime_type": "video/x-matroska",
+      "slug_id": "LKNjsbHLKU86Imw6",
+      "imdb_id": "tt9260636",
+      "poster": "https://m.media-amazon.com/images/M/MV5BNTQ5ZDgwYzMtOTBjYi00NTQ5LWE2ZjUtZmM3MTk2OTcyMjliXkEyXkFqcGc@._V1_QL75_UY562_CR21,0,380,562_.jpg",
+      "genre": [
+        "Action",
+        "Drama",
+        "Sport"
+      ],
+      "runtime": "179 min",
+      "director": "Atlee",
+      "cast": [
+        "Joseph Vijay",
+        "Nayanthara",
+        "Jackie Shroff"
+      ],
+      "plot": "Michael gives up his dream of becoming a footballer after his father's murder. However, a friend convinces him to coach a women's football team and turn his life around.",
+      "imdb_rating": "6.7",
+      "metadata_status": "matched"
+    },
     {
       "id": "telegram-37",
       "telegram_message_id": 37,
