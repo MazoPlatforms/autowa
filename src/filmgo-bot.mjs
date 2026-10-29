@@ -155,15 +155,27 @@ async function onMessage(message,refresh){
  const deep=String(message.text||'').trim().match(/^\/start(?:@\w+)?\s+m_([A-Za-z0-9_-]{16})$/);
  if(deep&&message.chat?.type==='private'){
   const key='filmgo:deeplink:'+deep[1];
-  const slug=await redis('GET',key);
-  if(!slug)return say(chat,'This movie link has expired. Please open FilmGo and request a new link.');
-  const movie=(await catalog()).find(m=>m.slug_id===slug);
+  const raw=await redis('GET',key);let grant;
+  try{grant=raw?JSON.parse(raw):null;}catch{}
+  if(!grant||!/^[-a-f0-9]{64}$/.test(grant.account_hash||''))return say(chat,'This movie link has expired. Please sign in on FilmGo and request a new link.');
+  const movie=(await catalog()).find(m=>m.slug_id===grant.slug_id);
   if(!movie)return say(chat,'Movie is no longer available.');
   const qualities=Object.keys(movie.qualities||{[movie.quality]:movie});
   const chosen=qualities.find(q=>q.toLowerCase()==='720p')||qualities[0];
   const variant=movie.qualities?.[chosen]||movie;
   if(!Number.isSafeInteger(variant.telegram_message_id))return say(chat,'Movie is unavailable.');
-  await tg('copyMessage',{chat_id:chat,from_chat_id:CHANNEL_ID,message_id:variant.telegram_message_id});
+  const claimKey='filmgo:deeplink-claim:'+deep[1];
+  if(await redis('SET',claimKey,'1','NX','EX',600)!=='OK')return say(chat,'This movie link is already being processed.');
+  const now=new Date(),day=now.toISOString().slice(0,10),resetAt=Date.UTC(now.getUTCFullYear(),now.getUTCMonth(),now.getUTCDate()+1),expireAt=Math.ceil(resetAt/1000);
+  const usageKey='filmgo:daily-tokens:v1:'+grant.account_hash+':'+day;
+  const size=Number(variant.file_size||movie.file_size||0);
+  if(!Number.isSafeInteger(size)||size<=0){await redis('DEL',claimKey);return say(chat,'Movie file size is unavailable. Please try again later.');}
+  const cost=Math.max(1,Math.ceil((size/(512*1024*1024)*0.75+1)*1000));
+  const script="local used=tonumber(redis.call('GET',KEYS[1]) or '0'); local cost=tonumber(ARGV[1]); if used+cost>50000 then return -1 end; local next=redis.call('INCRBY',KEYS[1],cost); if next==cost then redis.call('EXPIREAT',KEYS[1],ARGV[2]) end; return next";
+  const used=grant.unlimited?0:Number(await redis('EVAL',script,1,usageKey,cost,expireAt));
+  if(!grant.unlimited&&used<0){await redis('DEL',claimKey);return say(chat,'Daily token limit reached. Your tokens reset at 00:00:00 UTC.');}
+  try{await tg('copyMessage',{chat_id:chat,from_chat_id:CHANNEL_ID,message_id:variant.telegram_message_id});}
+  catch(err){if(!grant.unlimited){const refund="local raw=redis.call('GET',KEYS[1]); if not raw then return 0 end; local used=tonumber(raw); local cost=tonumber(ARGV[1]); if used<=cost then redis.call('DEL',KEYS[1]); return 0 end; return redis.call('INCRBY',KEYS[1],-cost)";await redis('EVAL',refund,1,usageKey,cost).catch(()=>{});}await redis('DEL',claimKey);await say(chat,'Could not deliver this movie right now. You can open the same FilmGo link and retry.');return;}
   await redis('DEL',key);
   void logFilmGo('downloads','Telegram movie requested: '+movie.title+' ('+movie.year+')');
   return;

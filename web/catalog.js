@@ -8,7 +8,7 @@ function actionIcon(kind){
 function confirmMovieRequest(movie,channel){
  const overlay=el('div','filmgo-sheet-overlay');const sheet=el('div','filmgo-sheet');
  sheet.setAttribute('role','dialog');sheet.setAttribute('aria-modal','true');
- sheet.append(el('h2','','Confirm movie request'),el('p','filmgo-sheet-description',movie.title+' ('+movie.year+') via '+(channel==='telegram'?'Telegram':'WhatsApp')+'?'));
+ sheet.append(el('h2','','Confirm movie request'),el('p','filmgo-sheet-description',movie.title+' ('+movie.year+') via '+(channel==='telegram'?'Telegram':'WhatsApp')+'? Daily tokens are charged by file size and delivery method. Free accounts receive 50 tokens per UTC day.'));
  const buttons=el('div','filmgo-sheet-buttons');
  const cancel=el('button','filmgo-open-button','Cancel');const confirm=el('button','filmgo-download-button','Confirm');
  const close=()=>{document.removeEventListener('keydown',esc);overlay.remove();};
@@ -18,12 +18,13 @@ function confirmMovieRequest(movie,channel){
   confirm.disabled=true;confirm.textContent='Preparing…';
   try{
    if(channel==='telegram'){
-    const response=await fetch('/api/telegram-link',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({slug_id:movie.slug_id})});
+    const response=await fetch('/api/telegram-link',{method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json'},body:JSON.stringify({slug_id:movie.slug_id})});
+    if(response.status===401){close();location.href='/profile?return='+encodeURIComponent(location.pathname);return;}
     const data=await response.json();if(!response.ok)throw Error(data.error||'Unable to create Telegram link');
     close();location.href=data.url;return;
    }
    const response=await fetch('/api/request',{method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json'},body:JSON.stringify({movie_id:movie.telegram_message_id,rights_confirmed:true})});
-   const data=await response.json();if(response.status===401){close();location.href='/profile';return;}
+   const data=await response.json();if(response.status===401){close();location.href='/profile?return='+encodeURIComponent(location.pathname);return;}
    if(!response.ok)throw Error(data.error||'Request failed');
    sheet.replaceChildren(el('h2','','Request received'),el('p','filmgo-sheet-description','Your WhatsApp movie request has been queued.'));
    const done=el('button','filmgo-download-button','Done');done.addEventListener('click',close);sheet.append(done);
@@ -158,12 +159,14 @@ const speedSelect=makeSetting('Playback speed','filmgo-speed');for(const rate of
 speedSelect.addEventListener('change',()=>{video.playbackRate=Number(speedSelect.value);});
 const audioSelect=makeSetting('Audio track','filmgo-audio-track');const subtitleSelect=makeSetting('Subtitles','filmgo-subtitles');
 const status=el('p','filmgo-stream-status sr-only','');status.setAttribute('role','status');status.setAttribute('aria-live','polite');
+const accessNotice=el('p','filmgo-token-notice');accessNotice.hidden=true;accessNotice.setAttribute('role','status');
 const actions=el('div','filmgo-player-actions');
 const download=el('a','filmgo-download-button','Download');download.setAttribute('download','');download.setAttribute('aria-label','Download '+m.title);
 const whatsapp=el('button','filmgo-open-button','WhatsApp');whatsapp.type='button';whatsapp.addEventListener('click',()=>confirmMovieRequest(m,'whatsapp'));
 const telegram=el('button','filmgo-open-button','Telegram');telegram.type='button';telegram.addEventListener('click',()=>confirmMovieRequest(m,'telegram'));
 for(const [button,kind] of [[download,'download'],[whatsapp,'whatsapp'],[telegram,'telegram']]){button.prepend(actionIcon(kind));button.style.gap='8px';}
-actions.append(download,whatsapp,telegram);section.append(actions,status);root.append(section);
+actions.append(download,whatsapp,telegram);section.append(accessNotice,actions,status);root.append(section);
+download.addEventListener('click',async event=>{event.preventDefault();try{const response=await fetch('/api/me',{cache:'no-store'});if(!response.ok){location.href='/profile?return='+encodeURIComponent(location.pathname);return;}location.href=download.href;}catch{accessNotice.hidden=false;accessNotice.textContent='Unable to verify your account. Check your connection and try again.';}});
 const slug=encodeURIComponent(m.slug_id||'');const qualities=Object.keys(m.qualities||{[m.quality]:m}).filter(Boolean).sort((a,b)=>parseInt(a)-parseInt(b));
 let selected=qualities.find(q=>q.toLowerCase()==='720p')||qualities[0],activeQuality=null,stagedVideo=null;
 const qualityRow=el('div','filmgo-quality-options');const qualityLabel=el('p','filmgo-quality-label','Quality');
@@ -223,10 +226,13 @@ const setQuality=q=>{if(!qualities.includes(q))return;const targetUrl=streamUrl(
  const maybeSwitch=()=>{canPlay=stage.readyState>=2;if(canPlay&&!stage.seeking)switchToStaged(stage,q,wasPlaying);};
  stage.addEventListener('loadedmetadata',()=>{if(stage!==stagedVideo)return;if(position>0&&position<stage.duration){stage.currentTime=position;stage.addEventListener('seeked',maybeSwitch,{once:true});}maybeSwitch();},{once:true});stage.addEventListener('canplay',maybeSwitch);stage.addEventListener('seeked',maybeSwitch);stage.addEventListener('error',()=>{if(stage!==stagedVideo)return;cancelStaging();selected=activeQuality;updateQualityButtons();setLoading('',false);setStatus('Could not switch quality. Playback continues at '+activeQuality+'.');},{once:true});stage.load();
 };
-fetch('/api/stream-availability/'+slug,{cache:'no-store'}).then(r=>r.ok?r.json():null).then(data=>{
+fetch('/api/stream-availability/'+slug,{cache:'no-store'}).then(r=>r.ok?r.json():null).then(async data=>{
  if(!isActive())return;
  if(!data?.available){setStatus('Streaming is currently unavailable.');actions.classList.add('hidden');qualityRow.classList.add('hidden');return;}
  if(!selected){setStatus('No quality available.');return;}
+ const auth=await fetch('/api/me',{cache:'no-store'});
+ if(!auth.ok){accessNotice.hidden=false;accessNotice.replaceChildren(el('span','','Sign in to stream or download. Free accounts receive 50 tokens per UTC day; reset is 00:00:00 UTC. '));const signIn=el('a','','Sign in');signIn.href='/profile?return='+encodeURIComponent(location.pathname);accessNotice.append(signIn);return;}
+ accessNotice.hidden=true;
  setQuality(selected);
 }).catch(()=>{if(isActive()&&selected){setQuality(selected);setStatus('Availability check failed. You can still try streaming or downloading.');}});
 document.title=m.title+' — FilmGo';}function route(){const match=location.pathname.match(/^\/title\/([^/]+)\/?$/);$('catalog-back')?.classList.toggle('visible',!!match);if(match){const m=movies.find(x=>x.slug_id===decodeURIComponent(match[1])||x.id===decodeURIComponent(match[1]));home.classList.add('hidden');detail.classList.remove('hidden');if(m)showDetail(m);else{$('detail-content').replaceChildren(el('p','text-zinc-400','Movie not found.'));document.title='Movie not found — FilmGo';}}else{home.classList.remove('hidden');detail.classList.add('hidden');document.title='FilmGo — Explore';if(catalogLoaded)render();}window.scrollTo(0,0);}search.addEventListener('input',()=>{page=1;render();});for(const select of [yearFilter,genreFilter,sortFilter])select.addEventListener('change',()=>{page=1;render();});window.addEventListener('popstate',route);$('catalog-back')?.addEventListener('click',e=>{if(location.pathname.startsWith('/title/')){e.preventDefault();history.pushState({},'','/');route();}});skeleton();

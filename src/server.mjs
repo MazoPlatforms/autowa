@@ -8,6 +8,7 @@ import {startWhatsApp,isWhatsAppReady,sendWhatsAppOtp,getWhatsAppProfilePicture}
 import {startFilmGoBot} from './filmgo-bot.mjs';
 import {logFilmGo} from './filmgo-logs.mjs';
 import {startStreamWorker,proxyRange,downloadFile,streamWorkerState} from './stream-worker.mjs';
+import {DAILY_TOKEN_LIMIT,DAILY_TOKEN_LIMIT_MILLI,tokenCostMilli,tokenAmount,reserveDailyTokens,releaseDailyTokens,dailyTokenUsage} from './daily-tokens.mjs';
 
 const PORT=Number(process.env.PORT||8000);
 const required=['APP_SECRET','UPSTASH_REDIS_REST_URL','UPSTASH_REDIS_REST_TOKEN','GITHUB_DISPATCH_TOKEN','GITHUB_REPOSITORY'];
@@ -169,6 +170,9 @@ const server=http.createServer(async(req,res)=>{
    return res.end(Buffer.from(await upstream.arrayBuffer()));
   }
   if(req.method==='POST'&&url.pathname==='/api/telegram-link'){
+   if(!configured)return send(res,503,{error:'Service setup incomplete'});
+   const session=await authenticated(req);
+   if(!session)return send(res,401,{error:'Sign in with WhatsApp first'});
    if(req.headers['content-type']?.split(';')[0]!=='application/json')return send(res,415,{error:'JSON required'});
    const input=await body(req);
    const slug=String(input.slug_id||'');
@@ -176,7 +180,7 @@ const server=http.createServer(async(req,res)=>{
    const movie=(await getPublicCatalog()).movies.find(m=>m.slug_id===slug);
    if(!movie)return send(res,404,{error:'Movie unavailable'});
    const token=crypto.randomBytes(12).toString('base64url');
-   await redis('SET','filmgo:deeplink:'+token,slug,'EX',600);
+   await redis('SET','filmgo:deeplink:'+token,JSON.stringify({slug_id:slug,account_hash:hmac(session.number),unlimited:unlimitedRequests(session.number)}),'EX',600);
    return send(res,200,{url:'https://t.me/mzn_filmgobot?start=m_'+token});
   }
   if(req.method==='GET'&&url.pathname==='/api/movies'){
@@ -190,11 +194,11 @@ const server=http.createServer(async(req,res)=>{
    const session=await authenticated(req);
    if(!session)return send(res,401,{error:'Not signed in'});
    const user=await profile(session.number);
-   const exempt=unlimitedRequests(session.number);
-    const used=exempt?0:Number(await redis('GET','rate:'+hmac('submit:'+session.number))||0);
+    const exempt=unlimitedRequests(session.number);
+    const usage=exempt?null:await dailyTokenUsage(redis,hmac(session.number));
    const month=new Date().toISOString().slice(0,7);
    const monthlyUsed=Number(await redis('GET','monthly-requests:'+hmac(session.number)+':'+month)||0);
-   return send(res,200,{number:session.number,name:user.name||'',plan_onboarded:user.plan_onboarded!==false,plan:user.plan||'free',limit:exempt?null:3,used:exempt?0:Math.min(used,3),remaining:exempt?null:Math.max(0,3-used),period:exempt?'unlimited':'rolling rate window (up to 24 hours)',unlimited:exempt,monthly_used:monthlyUsed,monthly_period:month});
+   return send(res,200,{number:session.number,name:user.name||'',plan_onboarded:user.plan_onboarded!==false,plan:user.plan||'free',limit:exempt?null:DAILY_TOKEN_LIMIT,used:exempt?0:tokenAmount(usage.usedMilli),remaining:exempt?null:tokenAmount(usage.remainingMilli),token_limit:exempt?null:DAILY_TOKEN_LIMIT,tokens_used:exempt?0:tokenAmount(usage.usedMilli),tokens_remaining:exempt?null:tokenAmount(usage.remainingMilli),token_reset_at:exempt?null:usage.resetAt,period:exempt?'unlimited':'UTC day · resets 00:00:00 UTC',unlimited:exempt,monthly_used:monthlyUsed,monthly_period:month});
   }
   if(req.method==='GET'&&url.pathname==='/api/avatar'){
    const session=await authenticated(req);
@@ -225,17 +229,26 @@ const server=http.createServer(async(req,res)=>{
    const record=(catalog.movies||[]).find(m=>m.slug_id===slug);
    const movie=selectMovieVariant(record,url.searchParams.get('quality'));
    if(!movie||!Number.isSafeInteger(movie.telegram_message_id)||!Number.isSafeInteger(movie.file_size)||movie.file_size<=0)return send(res,404,{error:'Movie unavailable'});
+   const session=await authenticated(req);
+   if(!session)return send(res,401,{error:'Sign in with WhatsApp to download movies'});
    if(!telegramReady)return send(res,503,{error:'Telegram unavailable'});
    if(streamWorkerState().state!=='ready')return send(res,503,{error:'Download gateway warming up; retry shortly'});
+   if(req.method==='HEAD')return send(res,405,{error:'HEAD is not available'});
+   const exempt=unlimitedRequests(session.number),cost=tokenCostMilli(movie.file_size,'download');
+   const reservation=await reserveDailyTokens(redis,hmac(session.number),cost,{unlimited:exempt});
+   if(!reservation.allowed)return send(res,429,{error:'Daily tokens exhausted; reset is 00:00:00 UTC'});
+   let delivered=0,settled=false;
+   const settle=async()=>{if(settled)return;settled=true;const actual=delivered?tokenCostMilli(delivered,'download'):0;if(!exempt&&reservation.costMilli>actual)await releaseDailyTokens(redis,reservation,reservation.costMilli-actual).catch(()=>{});};
+   res.once('finish',()=>{void settle();});res.once('close',()=>{void settle();});
    const original=String(movie.file_name||'').trim();
    const ext=original.toLowerCase().match(/\\.(mkv|mp4|webm|mov|avi|m4v)$/)?.[0]||'.mp4';
    const filename=(original||[movie.title,movie.year,movie.quality].filter(Boolean).join(' ')+ext).replace(/[\\r\\n"\\/]/g,'_').slice(0,180);
    const ascii=filename.replace(/[^\\x20-\\x7e]/g,'_');
    const headers={'Content-Type':'application/octet-stream','Content-Length':String(movie.file_size),'Content-Disposition':'attachment; filename="'+ascii+'"','Cache-Control':'private, no-store','X-Content-Type-Options':'nosniff'};
    res.writeHead(200,headers);
-   if(req.method==='HEAD')return res.end();
    void logFilmGo('downloads','⬇️ Download started · '+record.title+' ('+record.year+') · '+(movie.quality||url.searchParams.get('quality')||'default'));
-   await downloadFile(res,{messageId:movie.telegram_message_id,total:movie.file_size});
+   await downloadFile(res,{messageId:movie.telegram_message_id,total:movie.file_size,onChunk:n=>{delivered+=n;}});
+   await settle();
    return;
   }
   if((req.method==='GET'||req.method==='HEAD')&&url.pathname.startsWith('/api/stream/')){
@@ -244,6 +257,8 @@ const server=http.createServer(async(req,res)=>{
    const record=(catalog.movies||[]).find(m=>m.slug_id===publicId);
    const movie=selectMovieVariant(record,url.searchParams.get('quality'));
    if(!movie||!Number.isSafeInteger(movie.telegram_message_id)||!Number.isSafeInteger(movie.file_size)||movie.file_size<=0)return send(res,404,{error:'Video unavailable'});
+   const session=await authenticated(req);
+   if(!session)return send(res,401,{error:'Sign in with WhatsApp to stream movies'});
    if(!telegramReady)return send(res,503,{error:'Telegram not configured'});
    const total=movie.file_size;
    const range=req.headers.range;
@@ -258,6 +273,12 @@ const server=http.createServer(async(req,res)=>{
     end=Math.min(requested,total-1,start+32*1024*1024-1);
    }
    const length=end-start+1;
+   if(req.method==='HEAD')return send(res,405,{error:'HEAD is not available'});
+   const exempt=unlimitedRequests(session.number),reservation=await reserveDailyTokens(redis,hmac(session.number),tokenCostMilli(length,'stream'),{unlimited:exempt});
+   if(!reservation.allowed)return send(res,429,{error:'Daily tokens exhausted; reset is 00:00:00 UTC'});
+   let delivered=0,settled=false;
+   const settle=async()=>{if(settled)return;settled=true;const actual=delivered?tokenCostMilli(delivered,'stream'):0;if(!exempt&&reservation.costMilli>actual)await releaseDailyTokens(redis,reservation,reservation.costMilli-actual).catch(()=>{});};
+   res.once('finish',()=>{void settle();});res.once('close',()=>{void settle();});
    const originalName=String(movie.file_name||'').trim();
    const originalExt=/\\.(mp4|mkv|webm|mov|avi|m4v)$/i.exec(originalName)?.[1]?.toLowerCase();
    const mime=String(movie.mime_type||'').toLowerCase();
@@ -271,7 +292,7 @@ const server=http.createServer(async(req,res)=>{
    if(req.method==='HEAD'){res.writeHead(206,headers);return res.end();}
    if(start===0)void logFilmGo('streams','▶️ Stream started · '+record.title+' ('+record.year+') · '+(movie.quality||url.searchParams.get('quality')||'default'));
    // Prefer one persistent Telethon connection; legacy subprocess remains a fallback.
-   if(await proxyRange(res,headers,{messageId:movie.telegram_message_id,start,length},send))return;
+   if(await proxyRange(res,headers,{messageId:movie.telegram_message_id,start,length,onChunk:n=>{delivered+=n;}},send)){await settle();return;}
    const child=spawn('python3',['src/telegram_stream.py',String(movie.telegram_message_id),String(start),String(length)],{env:process.env,stdio:['ignore','pipe','pipe']});
    let started=false,bytes=0,closed=false;
    const startedAt=Date.now();
@@ -281,6 +302,7 @@ const server=http.createServer(async(req,res)=>{
     if(closed)return;
     if(!started){res.writeHead(206,headers);started=true;console.info('Telegram stream first byte',movie.slug_id,Date.now()-startedAt,'ms');}
     bytes+=chunk.length;
+    delivered+=chunk.length;
     if(!res.write(chunk))child.stdout.pause();
    });
    res.on('drain',()=>child.stdout.resume());
@@ -371,18 +393,21 @@ const server=http.createServer(async(req,res)=>{
    movie=fresh;
   }catch(err){console.warn('Movie verification failed:',err.message);return send(res,503,{error:'Unable to verify movie availability right now'});}
 
-  if(!unlimitedRequests(session.number)&&!await limit('submit:'+session.number,3,86400))return send(res,429,{error:'Daily request limit reached'});
   const claim=unlimitedRequests(session.number)?'OK':await redis('SET','claim:'+hmac(session.nonce),'1','EX',900,'NX');
   if(claim!=='OK')return send(res,409,{error:'Request already submitted'});
+  if(!Number.isSafeInteger(movie.size)||movie.size<=0){if(!unlimitedRequests(session.number))await redis('DEL','claim:'+hmac(session.nonce));return send(res,503,{error:'Movie size unavailable; try again later'});}
+  const tokenReservation=await reserveDailyTokens(redis,hmac(session.number),tokenCostMilli(movie.size||0,'whatsapp'),{unlimited:unlimitedRequests(session.number)});
+  if(!tokenReservation.allowed){await redis('DEL','claim:'+hmac(session.nonce));return send(res,429,{error:'Daily tokens exhausted; reset is 00:00:00 UTC'});}
   const requestId=crypto.randomUUID();
   const [owner,repo]=process.env.GITHUB_REPOSITORY.split('/');
   if(!owner||!repo)throw Error('Invalid GITHUB_REPOSITORY');
   const payload={request_id:requestId,title:movie.title,movie_id:movie.id,year:movie.year,quality:movie.quality,recipient_jid:session.number.slice(1)+'@s.whatsapp.net',rights_confirmed:true};
-  const result=await fetch('https://api.github.com/repos/'+encodeURIComponent(owner)+'/'+encodeURIComponent(repo)+'/dispatches',{
+  let result;
+  try{result=await fetch('https://api.github.com/repos/'+encodeURIComponent(owner)+'/'+encodeURIComponent(repo)+'/dispatches',{
    method:'POST',headers:{Authorization:'Bearer '+process.env.GITHUB_DISPATCH_TOKEN,Accept:'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28','Content-Type':'application/json'},
    body:JSON.stringify({event_type:'autowa-verified-request',client_payload:payload}),signal:AbortSignal.timeout(15000)
-  });
-  if(!result.ok){await redis('DEL','claim:'+hmac(session.nonce));return send(res,503,{error:'Queue unavailable; try again later'});}
+  });}catch(err){await releaseDailyTokens(redis,tokenReservation).catch(()=>{});await redis('DEL','claim:'+hmac(session.nonce));throw err;}
+  if(!result.ok){await releaseDailyTokens(redis,tokenReservation).catch(()=>{});await redis('DEL','claim:'+hmac(session.nonce));return send(res,503,{error:'Queue unavailable; try again later'});}
   void logFilmGo('requests','📨 WhatsApp movie request queued · '+movie.title+' ('+movie.year+') · '+movie.quality+' · request '+requestId);
   // Queue accepted; store only minimal metadata in the user's private Redis list.
   // GitHub dispatch acceptance does not imply media delivery.
@@ -394,7 +419,7 @@ const server=http.createServer(async(req,res)=>{
    await redis('INCR',monthlyKey);
    await redis('EXPIRE',monthlyKey,60*86400);
   }catch(err){console.error('FilmGo request history persistence failed',err.message);}
-  return send(res,202,{request_id:requestId,status:'pending_review',message:'Request queued for review; delivery is not guaranteed'});
+  return send(res,202,{request_id:requestId,status:'pending_review',message:'Request queued for review; delivery is not guaranteed',tokens_used:tokenAmount(tokenReservation.costMilli),tokens_remaining:tokenReservation.unlimited?null:tokenAmount(Math.max(0,DAILY_TOKEN_LIMIT_MILLI-tokenReservation.usedMilli))});
  }catch(err){console.error('API error',String(err.message));return send(res,500,{error:'Request could not be completed'});}
 });
 server.listen(PORT,'0.0.0.0',()=>console.log('FilmGo API listening on',PORT));

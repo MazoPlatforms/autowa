@@ -38,7 +38,7 @@ export function startStreamWorker(){
 process.once('SIGTERM',()=>{stopping=true;if(retryTimer)clearTimeout(retryTimer);worker?.kill('SIGTERM');});
 process.once('SIGINT',()=>{stopping=true;if(retryTimer)clearTimeout(retryTimer);worker?.kill('SIGINT');});
 
-export async function proxyRange(res,headers,{messageId,start,length},send){
+export async function proxyRange(res,headers,{messageId,start,length,onChunk},send){
  if(state!=='ready')return false;
  let socket;
  try{
@@ -76,6 +76,7 @@ export async function proxyRange(res,headers,{messageId,start,length},send){
    if(chunk.length){
     bytes+=chunk.length;
     if(bytes>length){res.destroy(new Error('Worker sent excess data'));done(true);return;}
+    onChunk?.(chunk.length);
     if(!res.write(chunk))socket.pause();
    }
    clearTimeout(timer);
@@ -90,7 +91,7 @@ export async function proxyRange(res,headers,{messageId,start,length},send){
  });
 }
 
-export async function downloadFile(res,{messageId,total}){
+export async function downloadFile(res,{messageId,total,onChunk}){
  if(state!=='ready')return false;
  // Use a single HTTP response, but request bounded 32 MiB segments from the
  // persistent Telegram gateway. Never buffer the complete movie in memory.
@@ -122,6 +123,7 @@ export async function downloadFile(res,{messageId,total}){
      if(chunk.length){
       if(count+chunk.length>expected){fail(Error('Worker sent excess bytes'));return;}
       count+=chunk.length;
+      onChunk?.(chunk.length);
       if(!res.write(chunk))socket.pause();
       if(count===expected){finished=true;cleanup();resolve();}
      }
