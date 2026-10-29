@@ -87,3 +87,21 @@ footer{color:#71717a}
 .history-empty strong{font-size:15px}
 .history-empty p{font-size:12px;line-height:1.7}
 @media(max-width:480px){.history-card{padding:14px}.history-card-top{flex-wrap:wrap}}
+
+/* FilmGo membership plans */
+.plans-intro{text-align:center;margin:4px 0 24px}
+.plans-eyebrow{font-size:10px;font-weight:800;letter-spacing:.18em;color:#a1a1aa;margin-bottom:10px}
+.plans-intro h2{font-size:clamp(25px,5vw,32px);letter-spacing:-1px;margin-bottom:8px}
+.plans-intro p{max-width:450px;margin:0 auto}
+.plans-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:24px 0}
+.plan-card{display:flex;flex-direction:column;min-width:0;padding:19px 14px;border:1px solid #3f3f46;border-radius:18px;background:#222226}
+.plan-card.plan-featured{border-color:#a1a1aa;background:linear-gradient(145deg,#303035,#202024);box-shadow:0 8px 28px #0004}
+.plan-kicker{font-size:10px;letter-spacing:.12em;font-weight:800;color:#a1a1aa}
+.plan-card h3{margin:10px 0 8px;font-size:21px;letter-spacing:-.6px}
+.plan-price{font-size:clamp(16px,2.8vw,22px);font-weight:800;color:#fafafa;letter-spacing:-.6px;margin:0}
+.plan-card .small{margin:7px 0 13px;font-size:11px}
+.plan-card ul{padding-left:18px;margin:6px 0 18px;flex:1}
+.plan-card li{font-size:12px;color:#d4d4d8;line-height:1.55;margin-bottom:10px}
+.plan-card .primary-button{margin:0;font-size:12px;min-height:44px;padding:10px 7px}
+#plans-country{max-width:100%;margin-top:0}
+@media(max-width:650px){.plans-grid{grid-template-columns:1fr}.plan-card{padding:20px}.plan-card h3{font-size:23px}.plan-price{font-size:24px}.plan-card .primary-button{font-size:13px}}
