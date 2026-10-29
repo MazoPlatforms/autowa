@@ -94,7 +94,7 @@ async function loadHistory(){
  if(historyLoading)return;
  historyLoading=true;
  const root=$('history-list');
- if(!root.childElementCount){root.innerHTML='<div class="history-skeleton"><div class="history-shimmer"></div><div class="history-shimmer"></div><div class="history-shimmer"></div></div>';}
+ root.replaceChildren();const loading=document.createElement('div');loading.className='history-skeleton';loading.setAttribute('aria-label','Loading request history');loading.setAttribute('role','status');for(let i=0;i<3;i++){const shimmer=document.createElement('div');shimmer.className='history-shimmer';loading.append(shimmer);}root.append(loading);
  try{
   const response=await fetch('/api/request-history',{cache:'no-store'});
   if(!response.ok)throw Error(response.status===401?'Please sign in again.':'Could not load request history.');
