@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-29T02:16:25.386081+00:00",
+  "updated_at": "2026-10-29T05:55:23.942479+00:00",
   "movies": [
     {
       "id": "telegram-34",
@@ -32,14 +32,30 @@
     {
       "id": "telegram-33",
       "telegram_message_id": 33,
-      "title": "Epic",
+      "title": "Epic - First Semester",
       "year": 2026,
       "quality": "720p",
       "file_size": 1648701884,
       "file_name": "@CinemasTrend - Epic (2026) Tamil HQ HDRip - 720p - x264 - (.mkv",
       "mime_type": "video/x-matroska",
       "slug_id": "zMV4KVKTcmPGFIq7",
-      "metadata_status": "unmatched"
+      "imdb_id": "tt35448218",
+      "poster": "https://m.media-amazon.com/images/M/MV5BYzRmMDQ1MjAtOWEwMi00YWMxLTg0YTQtZmRkMjM5MjgwYmZlXkEyXkFqcGc@._V1_QL75_UX380_CR0,4,380,562_.jpg",
+      "genre": [
+        "Comedy",
+        "Drama",
+        "Musical"
+      ],
+      "runtime": "150 min",
+      "director": "Aditya Haasan",
+      "cast": [
+        "Sivaji",
+        "Vaishnavi Chaitanya",
+        "Anand Deverakonda"
+      ],
+      "plot": "Rohan, a middle-class student studying abroad due to family expectations, explores romance, identity, and growing up with honesty and emotional depth.",
+      "imdb_rating": null,
+      "metadata_status": "matched"
     },
     {
       "id": "telegram-32",
