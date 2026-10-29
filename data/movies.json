@@ -1,7 +1,238 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-28T23:17:54.766963+00:00",
+  "updated_at": "2026-10-29T00:10:56.867316+00:00",
   "movies": [
+    {
+      "id": "telegram-31",
+      "telegram_message_id": 31,
+      "title": "Colony",
+      "year": 2026,
+      "quality": "720p",
+      "file_size": 1531409197,
+      "file_name": "@CinemasTrend_Colony_2026_BluRay _720p_x264_Tamil_.mkv",
+      "mime_type": "video/x-matroska",
+      "slug_id": "9ISNpD3T4k3P0BDn",
+      "imdb_id": "tt34385135",
+      "poster": "https://m.media-amazon.com/images/M/MV5BNzI5YWViNGUtNGRiMy00OThhLWIwOGUtZjkyZDk2NjliODY2XkEyXkFqcGc@._V1_QL75_UX380_CR0,0,380,562_.jpg",
+      "genre": [
+        "Action",
+        "Adventure",
+        "Crime"
+      ],
+      "runtime": "123 min",
+      "director": "Yeon Sang-ho",
+      "cast": [
+        "Jun Ji-hyun",
+        "Koo Kyo-hwan",
+        "Ji Chang-wook"
+      ],
+      "plot": "Professor Se Jeong attends a biotech conference, only to witness it spiral into catastrophe when a rapidly mutating virus is unleashed. As the outbreak spreads and the infected begin to transform, authorities seal off the entire f...",
+      "imdb_rating": "6.5",
+      "metadata_status": "matched"
+    },
+    {
+      "id": "telegram-30",
+      "telegram_message_id": 30,
+      "title": "Drive – The Pretenders",
+      "year": 2026,
+      "quality": "720p",
+      "file_size": 1808510103,
+      "file_name": "@CinemasTrend - Drive The Pretenders (2026) HQ HDRip - 720p .mkv",
+      "mime_type": "video/x-matroska",
+      "slug_id": "WZUC_MGRZNgx2IMl",
+      "imdb_id": "tt37180686",
+      "poster": "https://m.media-amazon.com/images/M/MV5BMTNmN2EzMGQtNDIyMi00ZDljLTk5N2ItMTA0NGJmZTJmMTEyXkEyXkFqcGc@._V1_QL75_UX656_.jpg",
+      "genre": [
+        "Drama",
+        "Romance"
+      ],
+      "runtime": null,
+      "director": "Sergej Moya",
+      "cast": [
+        "Jeanette Hain",
+        "Misel Maticevic",
+        "Philippe Brenninkmeyer"
+      ],
+      "plot": "A young race car mechanic pretends to be engaged to the most scandalous racing star in the scene - officially for his reputation, but secretly for her own chance behind the wheel. Soon the lie threatens to destroy everything.",
+      "imdb_rating": null,
+      "metadata_status": "matched"
+    },
+    {
+      "id": "telegram-29",
+      "telegram_message_id": 29,
+      "title": "Dorothy",
+      "year": 2026,
+      "quality": "720p",
+      "file_size": 1671482773,
+      "file_name": "@CinemasTrend - Dorothy (2026) Tamil HQ HDRip - 720p - x264 .mkv",
+      "mime_type": "video/x-matroska",
+      "slug_id": "S_uSllrB5jW6kTey",
+      "imdb_id": "tt38915678",
+      "poster": "https://m.media-amazon.com/images/M/MV5BODdiOGNiOTktY2Y5NC00N2U4LWI1YzctM2RmZmEzMzc1OGY5XkEyXkFqcGc@._V1_QL75_UY562_CR35,0,380,562_.jpg",
+      "genre": [
+        "Action",
+        "Adventure",
+        "Drama"
+      ],
+      "runtime": "150 min",
+      "director": "Karthik Subbaraj",
+      "cast": [
+        "Rishikanth",
+        "Sananth",
+        "Jeeva Subramanian"
+      ],
+      "plot": "Set in a world shaped by caste, violence, and toxic masculinity, two friends grow up inseparable in rural Tamil Nadu. Their lives are transformed by the arrival of Dorothy, a woman whose compassion challenges the world around them.",
+      "imdb_rating": null,
+      "metadata_status": "matched"
+    },
+    {
+      "id": "telegram-28",
+      "telegram_message_id": 28,
+      "title": "Vaazhthugal",
+      "year": 2008,
+      "quality": "720p",
+      "file_size": 1524993803,
+      "file_name": "Vaazhthugal (2008) [Tamil - 720p HQ HDRip - x264 - AAC - 1..mkv",
+      "mime_type": "video/x-matroska",
+      "slug_id": "hdmecXzLk_CbQLib",
+      "imdb_id": "tt1509832",
+      "poster": "https://m.media-amazon.com/images/M/MV5BY2M2YWZkYzAtMDI5Mi00MTJlLWI0YWMtMTE4MjBiNDYxZmFkXkEyXkFqcGdeQXVyNDQxNzQ2OTY@._V1_SX300.jpg",
+      "genre": [
+        "Drama"
+      ],
+      "runtime": "151 min",
+      "director": "Seeman",
+      "cast": [
+        "Bhavana",
+        "Radha Krishnan Chidambaram",
+        "Deva"
+      ],
+      "plot": "Kadhiravan, a businessman, desires a wife who should respect his parents. After seeing Kayalvizhi on TV, he meets her on the pretext of being a home contractor and slowly makes his way into her heart.",
+      "imdb_rating": "4.5",
+      "metadata_status": "matched"
+    },
+    {
+      "id": "telegram-27",
+      "telegram_message_id": 27,
+      "title": "Thaalam",
+      "year": 1999,
+      "quality": "720p",
+      "file_size": 1902856708,
+      "file_name": "- Thaalam (1999) [Tamil - 720p HQ HDTVRip - x264 - [DD5.1(1.mkv",
+      "mime_type": "video/x-matroska",
+      "slug_id": "eBnXodJFS6E72XSB",
+      "metadata_status": "unmatched"
+    },
+    {
+      "id": "telegram-26",
+      "telegram_message_id": 26,
+      "title": "Paradise",
+      "year": 2023,
+      "quality": "720p",
+      "file_size": 433591591,
+      "file_name": "Paradise_2023_HQ_HDRip_x264_Original_Audios_AAC_2_0_Tamil_+_Hindi.mkv",
+      "mime_type": "video/x-matroska",
+      "slug_id": "yqV9gGE5Le3uDNbP",
+      "imdb_id": "tt21308888",
+      "poster": "https://m.media-amazon.com/images/M/MV5BODYxYTRkZWEtZjdhNS00ZWFmLTljNDItNTk2NWM4Mjc5NjYzXkEyXkFqcGc@._V1_QL75_UX380_CR0,0,380,562_.jpg",
+      "genre": [
+        "Action",
+        "Sci-Fi",
+        "Thriller"
+      ],
+      "runtime": "117 min",
+      "director": "Boris Kunz",
+      "cast": [
+        "Kostja Ullmann",
+        "Corinna Kirchhoff",
+        "Marlene Tanczik"
+      ],
+      "plot": "After his wife is forced to give up 40 years of her life as payment for an insurance debt, a man desperately searches for a way to get the years back.",
+      "imdb_rating": "6.3",
+      "metadata_status": "matched"
+    },
+    {
+      "id": "telegram-25",
+      "telegram_message_id": 25,
+      "title": "Bubblegum",
+      "year": 2023,
+      "quality": "720p",
+      "file_size": 1911506509,
+      "file_name": "Bubblegum.2023.720p.SS.WEB-DL.DD+5.1.x264-SH3LBY.mkv",
+      "mime_type": "video/x-matroska",
+      "slug_id": "K30sOqgUrjePhiET",
+      "imdb_id": "tt29436996",
+      "poster": "https://m.media-amazon.com/images/M/MV5BNGM2MTBmMGUtYTg1Yi00NThiLWJlM2UtYmY3YzAxYjQ5OTVkXkEyXkFqcGdeQXVyMTUzNTgzNzM0._V1_SX300.jpg",
+      "genre": [
+        "Action",
+        "Drama",
+        "Romance"
+      ],
+      "runtime": "146 min",
+      "director": "Ravikanth Perepu",
+      "cast": [
+        "Roshan Kanakala",
+        "Manasa Chowdary",
+        "Harsha Chemudu"
+      ],
+      "plot": "Aadi and Jhanvi, from different backgrounds, struggle with doubts and challenges in their relationship, questioning if love can overcome their differences.",
+      "imdb_rating": "6.6",
+      "metadata_status": "matched"
+    },
+    {
+      "id": "telegram-24",
+      "telegram_message_id": 24,
+      "title": "The Paradise",
+      "year": 2026,
+      "quality": "1080p",
+      "file_size": 1355379133,
+      "file_name": "The Paradise (2026) Tamil HQ HDRip - 720p - HEVC - x265 .mkv",
+      "mime_type": "video/x-matroska",
+      "slug_id": "buQ3SGpolEi6rJJo",
+      "imdb_id": "tt31969655",
+      "poster": "https://m.media-amazon.com/images/M/MV5BZWVlYjQ1NzktY2VmZC00NzhlLTg1NTItZTRhNDNmYzQyNWQxXkEyXkFqcGc@._V1_QL75_UX380_CR0,16,380,562_.jpg",
+      "genre": [
+        "Action",
+        "Adventure",
+        "Drama"
+      ],
+      "runtime": "165 min",
+      "director": "Srikanth Odela",
+      "cast": [
+        "Nani",
+        "Raghav Juyal",
+        "Kayadu Lohar"
+      ],
+      "plot": "In 1980s Secunderabad, a marginalized tribe battles discrimination and fights for citizenship under an unexpected leader's guidance, challenging systemic oppression.",
+      "imdb_rating": null,
+      "metadata_status": "matched"
+    },
+    {
+      "id": "telegram-23",
+      "telegram_message_id": 23,
+      "title": "Aasha",
+      "year": 2026,
+      "quality": "1080p",
+      "file_size": 1722793634,
+      "file_name": "Aasha (2026) Tamil HQ HDRip - 1080p - x264 - (DD+5.1 - 1.mkv",
+      "mime_type": "video/x-matroska",
+      "slug_id": "d-hbl1wF0WNP-VY8",
+      "imdb_id": "tt37894980",
+      "poster": "https://m.media-amazon.com/images/M/MV5BNzg3MzhiMTMtNGU2NC00YjViLTk2MWMtNTYyZWU4YWQxM2IxXkEyXkFqcGdeQXRyYW5zY29kZS13b3JrZmxvdw@@._V1_QL75_UY563_CR172,0,1000,563_.jpg",
+      "genre": [
+        "N/A"
+      ],
+      "runtime": null,
+      "director": "Safar Sanal",
+      "cast": [
+        "Ajayan Adat",
+        "Bhagyalakshmi",
+        "Joju George"
+      ],
+      "plot": "A stubborn, short-tempered woman named Aasha gets into an altercation with Jeemon over a road accident. She is resolved to pursue a case against him, while he threatens her with serious consequences.",
+      "imdb_rating": null,
+      "metadata_status": "matched"
+    },
     {
       "id": "telegram-21",
       "telegram_message_id": 21,
@@ -11,7 +242,7 @@
       "file_size": 1638237191,
       "file_name": "Parimala and Co (2026) Tamil v2 HQ HDRip - 720p - x264 -.mkv",
       "mime_type": "video/x-matroska",
-      "slug_id": "l5KufMadVJT4dy14",
+      "slug_id": "65zENYGoQP35zEDf",
       "imdb_id": "tt39385419",
       "poster": "https://m.media-amazon.com/images/M/MV5BNGJmODQ0ODYtOWQ3Zi00M2VhLWIwNzYtYzRmMGI0NmE5ZWEwXkEyXkFqcGc@._V1_QL75_UY562_CR35,0,380,562_.jpg",
       "genre": [
@@ -39,7 +270,7 @@
       "file_size": 1198913890,
       "file_name": "Kanguva (2024) Tamil HQ HDRip - 720p - HEVC - x265 - (DD.mkv",
       "mime_type": "video/x-matroska",
-      "slug_id": "WZmzZOkmdBBLH3uz",
+      "slug_id": "6lDogCMV6mqlOrNw",
       "imdb_id": "tt22036406",
       "poster": "https://m.media-amazon.com/images/M/MV5BNjE2OGYyMTctY2ZkYy00ZWMzLWIzNjEtMWIzNjkxZTMyM2QwXkEyXkFqcGc@._V1_QL75_UY562_CR35,0,380,562_.jpg",
       "genre": [
@@ -67,7 +298,7 @@
       "file_size": 1235934013,
       "file_name": "Idhayam Murali (2026) Tamil HQ HDRip - 720p - HEVC - x26.mkv",
       "mime_type": "video/x-matroska",
-      "slug_id": "Vc8wIb-s_zQiF8QB",
+      "slug_id": "XdSOHQQhda0x6YD-",
       "imdb_id": "tt35723557",
       "poster": "https://m.media-amazon.com/images/M/MV5BZGRiZmZlOGQtMWMyMS00Yjk2LTkyMjAtYzI5ZGQxMjdhYTBmXkEyXkFqcGc@._V1_SX300.jpg",
       "genre": [
@@ -93,7 +324,7 @@
       "file_size": 1249155145,
       "file_name": "Mandaadi (2026) Tamil HQ HDRip - 720p - HEVC - x265 - (D.mkv",
       "mime_type": "video/x-matroska",
-      "slug_id": "RuE12mEj1YavJB5Y",
+      "slug_id": "LE0bsGJpwGTXSxHr",
       "imdb_id": "tt36596965",
       "poster": "https://m.media-amazon.com/images/M/MV5BM2NjYTUwMjEtZmYzNy00MTYxLWE1OGYtNWVmMjYzOWViZGJmXkEyXkFqcGc@._V1_QL75_UY562_CR35,0,380,562_.jpg",
       "genre": [
@@ -121,7 +352,7 @@
       "file_size": 1313951942,
       "file_name": "Jana_Nayagan_2026_Tamil HQ_HDRip_720p_ HEVC _ x265 .mkv",
       "mime_type": "video/x-matroska",
-      "slug_id": "dMKO31p9R83Umzgj",
+      "slug_id": "nk__k0ZAOvIv85Z5",
       "imdb_id": "tt33379543",
       "poster": "https://m.media-amazon.com/images/M/MV5BOTE1M2ZkZjYtNzExNi00MTQwLTg3ZDYtYTA3YmQyMDgyZjU4XkEyXkFqcGc@._V1_SX300.jpg",
       "genre": [
@@ -148,7 +379,7 @@
       "file_size": 1701205856,
       "file_name": "Bethlehem.Kudumba.Unit.2026.720p.JioHotStar.WEB-DL.Tamil.mkv",
       "mime_type": "video/x-matroska",
-      "slug_id": "N_U6dLmAfN8cZcNH",
+      "slug_id": "QF0LNARIONJEaog3",
       "imdb_id": "tt37535100",
       "poster": "https://m.media-amazon.com/images/M/MV5BMTU5OWQ4YTgtZTZiMi00ZjE2LTk1MjgtYjcyNDZiODBjYTQ3XkEyXkFqcGc@._V1_QL75_UY562_CR21,0,380,562_.jpg",
       "genre": [
@@ -176,7 +407,7 @@
       "file_size": 1910419091,
       "file_name": "Euphoria (2026) Tamil HQ HDRip - 1080p - x265 - HEVC - (.mkv",
       "mime_type": "video/x-matroska",
-      "slug_id": "w0PsrykiH8AYNQ1g",
+      "slug_id": "8FFNUmIfnr_6uvm1",
       "imdb_id": "tt33737583",
       "poster": "https://m.media-amazon.com/images/M/MV5BMTRiMGMzOWUtNGFmZC00ODY4LWJlNmEtODJjNDdmNTBlYTgwXkEyXkFqcGc@._V1_QL75_UX380_CR0,4,380,562_.jpg",
       "genre": [
@@ -194,18 +425,6 @@
       "metadata_status": "matched"
     },
     {
-      "id": "telegram-14",
-      "telegram_message_id": 14,
-      "title": "Kali",
-      "year": 2026,
-      "quality": "1080p",
-      "file_size": 814005412,
-      "file_name": "Kali (2026) Tamil TRUE WEB-DL - 1080p - AVC - AAC - 750M.mkv",
-      "mime_type": "video/x-matroska",
-      "slug_id": "fOACu0saZdk9iLO4",
-      "metadata_status": "unmatched"
-    },
-    {
       "id": "telegram-13",
       "telegram_message_id": 13,
       "title": "The Paradise",
@@ -214,7 +433,7 @@
       "file_size": 1355379133,
       "file_name": "The Paradise (2026) Tamil HQ HDRip - 720p - HEVC - x265 .mkv",
       "mime_type": "video/x-matroska",
-      "slug_id": "GvcRjLKGPkTXTBrX",
+      "slug_id": "8uYCokdRFRu_RVqM",
       "imdb_id": "tt31969655",
       "poster": "https://m.media-amazon.com/images/M/MV5BZWVlYjQ1NzktY2VmZC00NzhlLTg1NTItZTRhNDNmYzQyNWQxXkEyXkFqcGc@._V1_QL75_UX380_CR0,16,380,562_.jpg",
       "genre": [
@@ -242,7 +461,7 @@
       "file_size": 1216867624,
       "file_name": "Amaran (2024) Tamil HQ HDRip - 720p - HEVC - x265 - (DD+5.1 .mkv",
       "mime_type": "video/x-matroska",
-      "slug_id": "XjXv0JfGfDBYFiaq",
+      "slug_id": "54dGdSj1urBsrXjm",
       "imdb_id": "tt27118357",
       "poster": "https://m.media-amazon.com/images/M/MV5BZGQyYTA0Y2EtYTA1NC00YTkzLWJiMmQtNzUzZGMzNjc5ZjM1XkEyXkFqcGc@._V1_QL75_UX380_CR0,4,380,562_.jpg",
       "genre": [
@@ -270,7 +489,7 @@
       "file_size": 1342360460,
       "file_name": "The Invite (2026) BluRay - 720p - x264 - [Tamil + Telugu.mkv",
       "mime_type": "video/x-matroska",
-      "slug_id": "SmOQp-opnWPnNGzG",
+      "slug_id": "gaNpa8s5ogLktWyr",
       "imdb_id": "tt14173636",
       "poster": "https://m.media-amazon.com/images/M/MV5BMjI0MzJjMjctNmQzZi00Y2U4LWEwZGItMmE3NDUzNzk1YzY3XkEyXkFqcGc@._V1_QL75_UX380_CR0,15,380,562_.jpg",
       "genre": [
@@ -298,7 +517,7 @@
       "file_size": 1018322674,
       "file_name": "The Tomorrow War (2021) Tamil HD Rip.mkv",
       "mime_type": "video/x-matroska",
-      "slug_id": "CrEpFWZUORSez5eu",
+      "slug_id": "hdqtj1fIe-ul5Vd_",
       "imdb_id": "tt9777666",
       "poster": "https://m.media-amazon.com/images/M/MV5BYmUyNzY2YWYtNWQ0My00ODMwLTkwOTQtOTA0ZjM0MjRmYjJiXkEyXkFqcGc@._V1_QL75_UX380_CR0,0,380,562_.jpg",
       "genre": [
