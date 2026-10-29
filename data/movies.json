@@ -1,7 +1,43 @@
 {
   "schema_version": 2,
-  "updated_at": "2026-10-29T18:26:54.457829+00:00",
+  "updated_at": "2026-10-29T18:38:48.736735+00:00",
   "movies": [
+    {
+      "id": "telegram-47",
+      "slug_id": "ITOqhWcbuCZzdDoe",
+      "title": "Trip",
+      "year": 2021,
+      "qualities": {
+        "720p": {
+          "telegram_message_id": 47,
+          "file_size": 774386842,
+          "file_name": "TRIP (2021) Tamil HDRip 720p HEVC.mkv",
+          "mime_type": "video/x-matroska"
+        }
+      },
+      "imdb_id": "tt11444698",
+      "poster": "https://m.media-amazon.com/images/M/MV5BMzdmNDliOWItNWE3YS00NjNhLThiODAtNzhkODVlOGFlYzI2XkEyXkFqcGc@._V1_QL75_UY562_CR19,0,380,562_.jpg",
+      "genre": [
+        "Horror",
+        "Sci-Fi",
+        "Thriller"
+      ],
+      "runtime": "121 min",
+      "director": "Dennis Manjunath",
+      "cast": [
+        "Yogi Babu",
+        "Karunakaran",
+        "VJ Siddhu"
+      ],
+      "plot": "A group of friends traveling in a dense forest accidentally meet two strangers, who they think are the killers. Things get complicated when they get caught by real killers.",
+      "imdb_rating": "3.6",
+      "metadata_status": "matched",
+      "telegram_message_id": 47,
+      "file_size": 774386842,
+      "file_name": "TRIP (2021) Tamil HDRip 720p HEVC.mkv",
+      "mime_type": "video/x-matroska",
+      "quality": "720p"
+    },
     {
       "id": "telegram-46",
       "slug_id": "zHZ4v4DMHsc8Mk3Z",
