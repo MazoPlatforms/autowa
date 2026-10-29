@@ -63,6 +63,7 @@ async function refreshAccount(){
  $('account-number').textContent='WhatsApp: '+user.number;
  $('profile-name').value=user.name||'';
  $('avatar-initials').textContent=(user.name||user.number||'?').trim().split(/\s+/).slice(0,2).map(v=>v[0]||'').join('').toUpperCase();
+ $('profile-monogram').textContent=$('avatar-initials').textContent;
  $('account-limits').textContent=user.unlimited?'Requests: Unlimited · No daily quota':'Requests: '+user.used+' / '+user.limit+' used · '+user.remaining+' remaining ('+user.period+')';
  return user;
 }
@@ -130,7 +131,7 @@ async function loadHistory(){
    const title=document.createElement('strong');title.textContent=item.title||'Movie request';
    const badge=document.createElement('span');badge.className='history-status history-status-'+(item.status==='submitted'?'submitted':item.status==='failed'?'failed':'pending');badge.textContent=item.status==='submitted'?'Submitted':item.status==='failed'?'Failed':item.status==='pending_review'?'Pending review':String(item.status||'Queued').replaceAll('_',' ');
    top.append(title,badge);
-   const meta=document.createElement('p');meta.className='small';meta.textContent=[item.year,item.quality,item.created_at?new Date(item.created_at).toLocaleString():null].filter(Boolean).join(' · ');
+   const meta=document.createElement('p');meta.className='small history-meta';meta.textContent=[item.year,item.quality,item.created_at?new Date(item.created_at).toLocaleString():null].filter(Boolean).join(' · ');
    const id=document.createElement('p');id.className='history-id';id.textContent='Request ID: '+item.id;
    card.append(top,meta,id);if(item.finished_at){const done=document.createElement('p');done.className='small';done.textContent='Last updated: '+new Date(item.finished_at).toLocaleString();card.append(done);}root.append(card);
   }
