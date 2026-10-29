@@ -138,6 +138,16 @@ async function getPublicCatalog(){
  })();
  return catalogPending;
 }
+function selectMovieVariant(movie, quality){
+ if(!movie)return null;
+ const entries=movie.qualities||{[movie.quality]:movie};
+ if(quality){
+  const key=Object.keys(entries).find(k=>k.toLowerCase()===quality.toLowerCase());
+  return key?{...entries[key],quality:key}:null;
+ }
+ const key=Object.keys(entries).find(k=>k.toLowerCase()==='720p')||Object.keys(entries)[0];
+ return key?{...entries[key],quality:key}:null;
+}
 const countries=fs.readFileSync(new URL('../site/countries.json',import.meta.url));
 const appJs=fs.readFileSync(new URL('../web/app.js',import.meta.url));
 const stylesheet=fs.readFileSync(new URL('../web/style.css',import.meta.url));
@@ -148,7 +158,7 @@ const server=http.createServer(async(req,res)=>{
     const query=(url.searchParams.get('q')||'').trim().toLowerCase().slice(0,100);
     const catalog=await getPublicCatalog();
     const matches=catalog.movies.filter(m=>!query||String(m.title||'').toLowerCase().includes(query)||String(m.year||'').includes(query))
-      .slice(0,query?50:100).map(m=>({id:m.telegram_message_id,title:m.title,year:m.year,quality:m.quality,size:m.file_size,slug_id:m.slug_id}));
+      .slice(0,query?50:100).map(m=>({id:m.telegram_message_id,title:m.title,year:m.year,quality:m.quality,qualities:Object.keys(m.qualities||{[m.quality]:m}),size:m.file_size,slug_id:m.slug_id}));
     return send(res,200,{movies:matches,indexed_at:catalog.updated_at||null,source:'published'});
    }
    if(req.method==='GET'&&url.pathname==='/api/me'){
@@ -179,14 +189,16 @@ const server=http.createServer(async(req,res)=>{
   if(req.method==='GET'&&url.pathname.startsWith('/api/stream-availability/')){
    const id=url.pathname.slice('/api/stream-availability/'.length);
    const movie=((await getPublicCatalog()).movies||[]).find(m=>m.slug_id===id);
-   const ext=String(movie?.file_name||'').toLowerCase();
+   const variant=movie?selectMovieVariant(movie,url.searchParams.get('quality')):null;
+   const ext=String(variant?.file_name||'').toLowerCase();
    const format=ext.endsWith('.mkv')?'mkv':ext.endsWith('.webm')?'webm':ext.endsWith('.mp4')?'mp4':'unknown';
-   return send(res,200,{available:telegramReady&&!!movie,format});
+   return send(res,200,{available:telegramReady&&!!variant,format,qualities:movie?Object.keys(movie.qualities||{[movie.quality]:movie}):[]});
   }
   if((req.method==='GET'||req.method==='HEAD')&&url.pathname.startsWith('/api/download/')){
    const slug=url.pathname.slice('/api/download/'.length);
    const catalog=await getPublicCatalog();
-   const movie=(catalog.movies||[]).find(m=>m.slug_id===slug);
+   const record=(catalog.movies||[]).find(m=>m.slug_id===slug);
+   const movie=selectMovieVariant(record,url.searchParams.get('quality'));
    if(!movie||!Number.isSafeInteger(movie.telegram_message_id)||!Number.isSafeInteger(movie.file_size)||movie.file_size<=0)return send(res,404,{error:'Movie unavailable'});
    if(!telegramReady)return send(res,503,{error:'Telegram unavailable'});
    if(streamWorkerState().state!=='ready')return send(res,503,{error:'Download gateway warming up; retry shortly'});
@@ -203,7 +215,8 @@ const server=http.createServer(async(req,res)=>{
   if((req.method==='GET'||req.method==='HEAD')&&url.pathname.startsWith('/api/stream/')){
    const publicId=url.pathname.slice('/api/stream/'.length);
    const catalog=await getPublicCatalog();
-   const movie=(catalog.movies||[]).find(m=>m.slug_id===publicId);
+   const record=(catalog.movies||[]).find(m=>m.slug_id===publicId);
+   const movie=selectMovieVariant(record,url.searchParams.get('quality'));
    if(!movie||!Number.isSafeInteger(movie.telegram_message_id)||!Number.isSafeInteger(movie.file_size)||movie.file_size<=0)return send(res,404,{error:'Video unavailable'});
    if(!telegramReady)return send(res,503,{error:'Telegram not configured'});
    const total=movie.file_size;
