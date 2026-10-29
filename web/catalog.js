@@ -123,7 +123,7 @@ function render(){
   const wrap=el('div','poster-wrap');wrap.append(image(m,'poster'));
   const badge=m.imdb_rating&&m.imdb_rating!=='N/A'?el('span','absolute bottom-2 left-2 rounded-md bg-zinc-950/85 px-2 py-1 text-[11px] font-bold text-white backdrop-blur','★ '+m.imdb_rating):null;
   if(badge)wrap.append(badge);
-  a.append(wrap,el('h3','mt-3 truncate text-sm font-semibold text-zinc-100',m.title),el('p','mt-1 text-xs text-zinc-500',m.year+' · '+m.quality));
+  a.append(wrap,el('h3','mt-3 truncate text-sm font-semibold text-zinc-100',m.title),el('p','mt-1 text-xs text-zinc-500',String(m.year)));
   a.addEventListener('click',e=>{if(e.ctrlKey||e.metaKey||e.shiftKey||e.altKey)return;e.preventDefault();history.pushState({},'',a.href);route();});
   grid.append(a);
  }
@@ -133,9 +133,9 @@ function showDetail(m){const root=$('detail-content');root.replaceChildren();con
 const section=el('section','mt-9 max-w-3xl border-t border-zinc-800 pt-8 filmgo-watch');
 section.append(el('h2','mb-4 text-lg font-bold','Watch & download'));
 const video=el('video','filmgo-player');
-video.controls=true;video.preload='none';video.playsInline=true;
+video.controls=true;video.preload='metadata';video.playsInline=true;
 video.setAttribute('controlsList','nodownload');
-video.poster=poster(m);
+video.removeAttribute('poster');
 section.append(video);
 const status=el('p','filmgo-stream-status','Checking streaming availability…');
 status.setAttribute('role','status');
@@ -152,7 +152,7 @@ actions.append(download,whatsapp,telegram);
 section.append(actions,status);
 root.append(section);
 const slug=encodeURIComponent(m.slug_id||'');
-const streamBase='https://filmgo-streamer.mazo.workers.dev';
+const streamBase='';
 const qualities=Object.keys(m.qualities||{[m.quality]:m}).filter(Boolean).sort((a,b)=>parseInt(a)-parseInt(b));
 let selected=qualities.find(q=>q.toLowerCase()==='720p')||qualities[0];
 const qualityRow=el('div','filmgo-quality-options');
@@ -171,9 +171,9 @@ const setQuality=q=>{
  }
  const suffix='?quality='+encodeURIComponent(q);
  video.pause();
- video.src=streamBase+'/stream/'+slug+suffix;
+ video.src=streamBase+'/api/stream/'+slug+suffix;
  video.load();
- download.href=streamBase+'/download/'+slug+suffix;
+ download.href=streamBase+'/api/download/'+slug+suffix;
  download.removeAttribute('download');
 
  const file=m.qualities?.[q]||m;
@@ -187,7 +187,7 @@ for(const q of qualities){
  button.addEventListener('click',()=>setQuality(q));
  qualityRow.append(button);
 }
-video.addEventListener('error',()=>setStatus('Playback failed. Try downloading this quality and opening it with VLC.'));
+video.addEventListener('error',()=>setStatus('This file may use a format or codec unsupported by your browser. Download it to watch in a compatible player.'));
 video.addEventListener('stalled',()=>setStatus('Buffering video…'));
 video.addEventListener('playing',()=>setStatus('Now playing.'));
 video.addEventListener('waiting',()=>setStatus('Buffering…'));
