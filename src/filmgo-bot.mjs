@@ -16,7 +16,22 @@ const filenameParts=name=>{const raw=String(name||'').replace(/\.[^.]+$/,'').rep
 async function catalog(){const r=await fetch('https://raw.githubusercontent.com/'+REPO+'/main/data/movies.json?ts='+Date.now(),{signal:AbortSignal.timeout(10000),cache:'no-store'});if(!r.ok)throw Error('Catalog unavailable');return (await r.json()).movies||[];}
 async function draftGet(){const raw=await redis('GET',DRAFT_KEY+ADMIN_ID);return raw?JSON.parse(raw):null;}
 async function draftSave(d){await redis('SET',DRAFT_KEY+ADMIN_ID,JSON.stringify(d),'EX',86400*7);}
-function guessMovie(file,movies){const p=filenameParts(file.file_name||'');const scored=movies.filter(m=>!p.year||m.year===p.year).map(m=>{const n=normalize(m.title),t=normalize(p.title);let score=t===n?1:t.includes(n)&&n.length>3 ? 0.9 : n.includes(t)&&t.length>3 ? 0.8 : 0;for(const v of Object.values(m.qualities||{})){const other=normalize(filenameParts(v.file_name).title);if(t===other)score=Math.max(score,.95);}return {movie:m,score};}).sort((a,b)=>b.score-a.score);return {parts:p,best:scored[0]?.score>=.7?scored[0].movie:null,confidence:scored[0]?.score||0};}
+function similarity(a,b){
+ a=normalize(a);b=normalize(b);if(!a||!b)return 0;if(a===b)return 1;
+ const previous=Array.from({length:b.length+1},(_,i)=>i);
+ for(let i=1;i<=a.length;i++){let diagonal=previous[0];previous[0]=i;for(let j=1;j<=b.length;j++){const old=previous[j];previous[j]=Math.min(previous[j]+1,previous[j-1]+1,diagonal+(a[i-1]===b[j-1]?0:1));diagonal=old;}}
+ return 1-previous[b.length]/Math.max(a.length,b.length);
+}
+function guessMovie(file,movies){
+ const p=filenameParts(file.file_name||'');
+ const scored=movies.filter(m=>!p.year||m.year===p.year).map(m=>{
+  let score=similarity(p.title,m.title);
+  for(const v of Object.values(m.qualities||{}))score=Math.max(score,similarity(p.title,filenameParts(v.file_name).title));
+  return {movie:m,score};
+ }).sort((a,b)=>b.score-a.score);
+ const winner=scored[0];
+ return {parts:p,best:winner?.score>=0.7&&(!scored[1]||winner.score-scored[1].score>=0.1)?winner.movie:null,confidence:winner?.score||0};
+}
 async function omdbSearch(title,year){const key=process.env.OMDB_API_KEY;if(!key)return null;const url='https://www.omdbapi.com/?'+new URLSearchParams({apikey:key,t:title,...(year?{y:String(year)}:{})});const r=await fetch(url,{signal:AbortSignal.timeout(10000)});const j=await r.json();return j.Response==='True'?j:null;}
 function movieFields(x){return {title:x.Title,year:Number(String(x.Year).slice(0,4)),imdb_id:x.imdbID,poster:x.Poster?.startsWith('https://')?x.Poster:null,genre:x.Genre,runtime:x.Runtime,director:x.Director,cast:x.Actors,plot:x.Plot};}
 async function draftPrompt(d){const text=['FilmGo movie draft',d.title+' ('+d.year+')', 'Quality: '+d.quality,'File: '+d.file_name,'Metadata: '+(d.imdb_id?'OMDb '+d.imdb_id:'manual / existing'),d.replace?'Existing quality — replacement requires confirmation':d.existing?'New quality for existing movie':'New movie', 'Use /edit to change metadata, /poster to upload a poster, /cancel to discard.'].join('\n');await say(ADMIN_ID,text,{reply_markup:{inline_keyboard:[[{text:d.replace?'Confirm replacement':'Publish movie',callback_data:'fg:publish'},{text:'Cancel',callback_data:'fg:cancel'}]]}});}
