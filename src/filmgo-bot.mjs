@@ -57,10 +57,10 @@ async function onMessage(message,refresh){
  const from=String(message.from?.id||''),chat=message.chat?.id;
  if(from!==ADMIN_ID||String(chat)!==ADMIN_ID)return;
  const text=String(message.text||'').trim();
- if(/^\\/(start|help)(?:@\\w+)?$/.test(text)){await say(chat,'Send a movie file to create a draft. /draft shows current draft, /edit field=value changes metadata, /poster requests a JPEG poster, /cancel discards it. /download URL keeps the remote import workflow.');return;}
- if(/^\\/status(?:@\\w+)?$/.test(text)){await say(chat,'FilmGo bot online.');return;}
- if(/^\\/draft(?:@\\w+)?$/.test(text)){const d=await draftGet();return d?draftPrompt(d):say(chat,'No active draft. Send a movie file.');}
- if(/^\\/cancel(?:@\\w+)?$/.test(text)){await redis('DEL',DRAFT_KEY+ADMIN_ID);return say(chat,'Draft cancelled.');}
+ if(/^\/(start|help)(?:@\w+)?$/.test(text)){await say(chat,'Send a movie file to create a draft. /draft shows current draft, /edit field=value changes metadata, /poster requests a JPEG poster, /cancel discards it. /download URL keeps the remote import workflow.');return;}
+ if(/^\/status(?:@\w+)?$/.test(text)){await say(chat,'FilmGo bot online.');return;}
+ if(/^\/draft(?:@\w+)?$/.test(text)){const d=await draftGet();return d?draftPrompt(d):say(chat,'No active draft. Send a movie file.');}
+ if(/^\/cancel(?:@\w+)?$/.test(text)){await redis('DEL',DRAFT_KEY+ADMIN_ID);return say(chat,'Draft cancelled.');}
  const file=message.document||message.video;
  if(file){
   if(file.file_size>MAX_BYTES)return say(chat,'File exceeds the current 2 GB limit.');
@@ -76,15 +76,15 @@ async function onMessage(message,refresh){
  }
  const d=await draftGet();
  if(message.photo?.length&&d){await posterUpload(d,message.photo.at(-1));return draftPrompt(d);}
- if(/^\\/poster(?:@\\w+)?$/.test(text))return say(chat,'Send a JPEG photo in this chat to save it as the draft poster.');
- const edit=text.match(/^\\/edit\\s+(title|year|genre|runtime|director|cast|plot|poster|imdb_id|quality)=(.+)$/is);
- if(edit&&d){const field=edit[1],value=edit[2].trim();if(field==='year'&&!/^(19|20)\\d{2}$/.test(value))return say(chat,'Invalid year');if(field==='quality'&&!/^(360|480|720|1080|1440|2160)p$/i.test(value))return say(chat,'Invalid quality');d[field]=field==='year'?Number(value):value.slice(0,1000);await draftSave(d);return draftPrompt(d);}
- const match=text.match(/^\\/download(?:@\\w+)?\\s+(\\S+)$/i);
+ if(/^\/poster(?:@\w+)?$/.test(text))return say(chat,'Send a JPEG photo in this chat to save it as the draft poster.');
+ const edit=text.match(/^\/edit\s+(title|year|genre|runtime|director|cast|plot|poster|imdb_id|quality)=(.+)$/is);
+ if(edit&&d){const field=edit[1],value=edit[2].trim();if(field==='year'&&!/^(19|20)\d{2}$/.test(value))return say(chat,'Invalid year');if(field==='quality'&&!/^(360|480|720|1080|1440|2160)p$/i.test(value))return say(chat,'Invalid quality');d[field]=field==='year'?Number(value):value.slice(0,1000);await draftSave(d);return draftPrompt(d);}
+ const match=text.match(/^\/download(?:@\w+)?\s+(\S+)$/i);
  if(!match){if(text.startsWith('/download'))await say(chat,'Usage: /download https://example.com/movie.mp4');return;}
  const data=await probe(match[1]);if(data.error){await say(chat,data.error);return;}
  const id=crypto.randomBytes(12).toString('hex');
  await redis('SET',prefix+'pending:'+id,JSON.stringify({url:data.url,admin:from,created:Date.now()}),'EX',900);
- await say(chat,'Confirm remote file import\\n\\nSource: '+(data.drive?'Google Drive':'Direct HTTPS')+'\\nURL: '+data.url.slice(0,400)+'\\nSize: unknown\\nMaximum: 2 GB',{reply_markup:{inline_keyboard:[[{text:'Confirm import',callback_data:'fg:yes:'+id},{text:'Cancel',callback_data:'fg:no:'+id}]]}});
+ await say(chat,'Confirm remote file import\n\nSource: '+(data.drive?'Google Drive':'Direct HTTPS')+'\nURL: '+data.url.slice(0,400)+'\nSize: unknown\nMaximum: 2 GB',{reply_markup:{inline_keyboard:[[{text:'Confirm import',callback_data:'fg:yes:'+id},{text:'Cancel',callback_data:'fg:no:'+id}]]}});
 }
 async function onCallback(q){
  if(String(q.from?.id)!==ADMIN_ID||String(q.message?.chat?.id)!==ADMIN_ID)return;
