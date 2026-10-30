@@ -132,9 +132,21 @@ function render(){
  for(const [visibleIndex,m] of visibleRows.entries()){
   const a=el('a','movie-card group block min-w-0'+(searching?' search-result-card':''));a.href='/title/'+encodeURIComponent(m.slug_id||m.id);
   const wrap=el('div','poster-wrap');wrap.append(image(m,'poster',visibleIndex<4,visibleIndex===0));
-  const badge=m.imdb_rating&&m.imdb_rating!=='N/A'?el('span','absolute bottom-2 left-2 rounded-md bg-zinc-950/85 px-2 py-1 text-[11px] font-bold text-white backdrop-blur','★ '+m.imdb_rating):null;
+  const badge=!searching&&m.imdb_rating&&m.imdb_rating!=='N/A'?el('span','absolute bottom-2 left-2 rounded-md bg-zinc-950/85 px-2 py-1 text-[11px] font-bold text-white backdrop-blur','★ '+m.imdb_rating):null;
   if(badge)wrap.append(badge);
-  const info=el('div','search-result-info');info.append(el('h3','mt-3 truncate text-sm font-semibold text-zinc-100',m.title),el('p','mt-1 text-xs text-zinc-500',String(m.year)));
+  const info=el('div','search-result-info');info.append(el('h3','truncate text-sm font-semibold text-zinc-100',m.title));
+  if(searching){
+   const genres=Array.isArray(m.genre)?m.genre:typeof m.genre==='string'?m.genre.split(','):[];
+   const facts=el('p','search-result-facts');facts.append(el('span','',''+(m.year||'Year unavailable')));
+   if(m.runtime)facts.append(el('span','','· '+m.runtime));
+   if(m.imdb_rating&&m.imdb_rating!=='N/A')facts.append(el('span','search-result-rating','★ '+m.imdb_rating));
+   info.append(facts);
+   const genreText=genres.map(value=>String(value).trim()).filter(Boolean).join(' · ');
+   if(genreText)info.append(el('p','search-result-genres',genreText));
+   if(m.director)info.append(el('p','search-result-director','Directed by '+m.director));
+   if(Array.isArray(m.cast)&&m.cast.length)info.append(el('p','search-result-cast','Cast: '+m.cast.slice(0,4).join(', ')));
+   if(m.plot)info.append(el('p','search-result-plot',m.plot));
+  }else info.append(el('p','mt-1 text-xs text-zinc-500',String(m.year)));
   a.append(wrap,info);
   a.addEventListener('click',e=>{if(e.ctrlKey||e.metaKey||e.shiftKey||e.altKey)return;e.preventDefault();history.pushState({},'',a.href);route();});
   grid.append(a);
