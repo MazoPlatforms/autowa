@@ -2063,6 +2063,32 @@
       "file_name": "Modha Rathri (2026) Tamil HQ HDRip - 720p - x264 - (DD+5.mkv",
       "mime_type": "video/x-matroska",
       "quality": "720p"
+    },
+    {
+      "id": "telegram-73",
+      "slug_id": "nGbyvbt4NvYcVI_E",
+      "title": "Meesaya Murukku",
+      "year": 2017,
+      "qualities": {
+        "720p": {
+          "telegram_message_id": 73,
+          "file_name": "Meesaya Murukku (2017) Tamil HQ HDRip - 720p - x264 - (D.mkv",
+          "file_size": 0,
+          "mime_type": ""
+        }
+      },
+      "telegram_message_id": 73,
+      "quality": "720p",
+      "file_name": "Meesaya Murukku (2017) Tamil HQ HDRip - 720p - x264 - (D.mkv",
+      "file_size": 0,
+      "mime_type": "",
+      "imdb_id": "tt7161122",
+      "poster": "https://m.media-amazon.com/images/M/MV5BMzIzMjhiNWMtYWQyNC00ZDU2LWFlYWUtMDBlODMxMGMxNDQ4XkEyXkFqcGc@._V1_QL75_UY562_CR35,0,380,562_.jpg",
+      "genre": "Biography, Comedy, Drama",
+      "runtime": "136 min",
+      "director": "Hiphop Tamizha Adhi",
+      "cast": "Hiphop Tamizha Adhi, Aathmika, Ma ka Pa Anand",
+      "plot": "A semi-biopic of how India's first Tamil Hip-Hop band, Hip-hop Tamizha came to be and the struggles frontman Adhi faced in life, both in personal and professional frontiers."
     }
   ]
 }
