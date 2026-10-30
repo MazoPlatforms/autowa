@@ -376,7 +376,9 @@ footer a{color:#c4c6cb!important}
 .filmgo-signin-copy strong{color:#f4f4f5;font-size:14px;font-weight:750}
 .filmgo-signin-copy span{color:#b7b9bf;font-size:13px;line-height:1.55}
 .filmgo-signin-cta{display:inline-flex;align-items:center;justify-content:center;flex:none;min-height:42px;padding:0 15px;border:1px solid #f4f4f5;border-radius:12px;background:#f4f4f5;color:#09090b!important;font-size:12px;font-weight:750;text-decoration:none!important;white-space:nowrap}
+.filmgo-token-notice a.filmgo-signin-cta{color:#09090b!important;background:#f4f4f5!important;border-color:#f4f4f5!important}
 .filmgo-signin-cta:hover{background:#d4d4d8}
+.filmgo-token-notice a.filmgo-signin-cta:hover{color:#09090b!important;background:#d4d4d8!important;border-color:#d4d4d8!important}
 .filmgo-player-shell[inert],.filmgo-player-actions[inert]{opacity:.55;cursor:not-allowed}
 @media(max-width:520px){.filmgo-signin-notice{align-items:stretch;flex-direction:column;gap:12px}.filmgo-signin-cta{width:100%}}
 .detail-loading{min-height:44vh!important;color:#aeb0b6!important}
