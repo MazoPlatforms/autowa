@@ -325,3 +325,80 @@ footer a{color:#c4c6cb!important}
  body:has(#start) .card{padding-top:31px!important}
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.primary-button,.secondary-button,.history-page-button{transition:none!important}.primary-button:hover:not(:disabled),.secondary-button:hover{transform:none!important}}
+
+/* Responsive account surfaces and content widths. */
+html,body{max-width:100%;overflow-x:clip}
+main{padding-inline:clamp(16px,4vw,40px)!important}
+.app-header{padding-inline:clamp(16px,4vw,40px)!important}
+#account,#plans,#history{width:100%;min-width:0}
+#account{max-width:900px}
+#plans{max-width:1080px}
+#history{max-width:960px}
+.profile-hero>div:last-child,.profile-panel,.history-card,.plan-card{min-width:0}
+.profile-name-row{min-width:0;flex-wrap:wrap}
+.profile-name-row h2{max-width:100%;overflow-wrap:anywhere}
+.history-card-top{min-width:0}
+.history-card-top strong{min-width:0;overflow-wrap:anywhere}
+.history-card .small,.history-id,.plan-card li{overflow-wrap:anywhere}
+.plan-card{height:100%}
+.plan-card .primary-button{margin-top:auto}
+
+@media(min-width:1200px){
+ main{padding-top:0}
+ .app-header{margin-bottom:36px!important}
+ #account{max-width:860px}
+ #plans{max-width:1040px}
+ #history{max-width:900px}
+}
+
+@media(max-width:900px){
+ main{padding-inline:clamp(22px,5vw,36px)!important}
+ .plans-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .plan-card:last-child{grid-column:1/-1}
+ .profile-panel{padding:20px!important}
+}
+
+@media(max-width:650px){
+ main{padding-inline:20px!important;padding-bottom:58px!important}
+ .app-header{width:100vw!important;margin-left:calc(50% - 50vw)!important;padding-inline:20px!important;margin-bottom:25px!important}
+ .plans-grid{grid-template-columns:1fr;gap:12px!important}
+ .plan-card:last-child{grid-column:auto}
+ .plan-card{padding:20px!important}
+ .plan-card ul{padding-left:20px}
+ .profile-hero{align-items:flex-start}
+ .profile-panel{margin-block:12px!important}
+ .history-card-top{align-items:flex-start;gap:8px}
+}
+
+@media(max-width:420px){
+ main{padding-inline:16px!important}
+ .app-header{padding-inline:16px!important}
+ .brand-link,.brand-link img{width:100px;flex-basis:100px}
+ #profile-avatar.avatar-button{flex-basis:38px!important;width:38px!important;height:38px!important;min-width:38px!important;max-width:38px!important;min-height:38px!important;max-height:38px!important}
+ .profile-hero{gap:12px!important;padding:16px!important}
+ #profile-monogram.profile-monogram{flex-basis:54px!important;width:54px!important;height:54px!important;min-width:54px!important;max-width:54px!important;min-height:54px!important;max-height:54px!important}
+ .profile-name-row{align-items:center;gap:6px}
+ .profile-name-row h2{font-size:19px!important}
+ .profile-panel{padding:16px!important}
+ .panel-heading{align-items:flex-start}
+ .panel-heading h3{font-size:14px!important}
+ .panel-heading>span{font-size:9px!important;white-space:nowrap}
+ .usage-stats{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px!important}
+ .usage-tile{padding:12px 6px!important}
+ .usage-tile strong{font-size:clamp(17px,5vw,22px)!important}
+ .usage-tile span{font-size:10px!important;line-height:1.35}
+ .history-heading{align-items:flex-start!important}
+ .history-heading h2{font-size:24px!important}
+ .history-heading #refresh-history{min-width:40px;padding-inline:10px!important}
+ .history-card{padding:15px 13px 15px 17px!important}
+ .history-status{font-size:9px!important;padding:5px 8px!important}
+}
+
+@media(max-width:340px){
+ main{padding-inline:12px!important}
+ .app-header{padding-inline:12px!important}
+ .profile-hero{flex-wrap:wrap}
+ #profile-monogram.profile-monogram{flex-basis:48px!important;width:48px!important;height:48px!important;min-width:48px!important;max-width:48px!important;min-height:48px!important;max-height:48px!important}
+ .history-card-top{flex-direction:column}
+ .usage-tile span{font-size:9px!important}
+}
