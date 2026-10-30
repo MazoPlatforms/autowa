@@ -1,17 +1,23 @@
 package com.filmgo.app
 
 import android.app.Activity
+import android.app.DownloadManager
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
+import android.net.Uri
+import android.os.Environment
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.Gravity
 import android.view.View
 import android.webkit.WebChromeClient
+import android.webkit.CookieManager
+import android.webkit.DownloadListener
 import android.webkit.WebResourceError
 import android.webkit.WebResourceRequest
 import android.webkit.WebSettings
@@ -23,6 +29,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
+import android.widget.Toast
 import android.graphics.drawable.GradientDrawable
 
 class MainActivity : Activity() {
@@ -73,9 +80,23 @@ class MainActivity : Activity() {
             saveFormData = false
             offscreenPreRaster = true
             setEnableSmoothTransition(false)
+            setSupportMultipleWindows(false)
+            javaScriptCanOpenWindowsAutomatically = false
             userAgentString = "$userAgentString FilmGoAndroid/1.0"
         }
+        setDownloadListener(DownloadListener { url, userAgent, contentDisposition, mimeType, _ ->
+            downloadFile(url, userAgent, contentDisposition, mimeType)
+        })
         webViewClient = object : WebViewClient() {
+            override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest?): Boolean {
+                return request?.url?.toString()?.let(::openExternalLink) ?: false
+            }
+
+            @Suppress("DEPRECATION")
+            override fun shouldOverrideUrlLoading(view: WebView?, url: String?): Boolean {
+                return url?.let(::openExternalLink) ?: false
+            }
+
             override fun onPageStarted(view: WebView?, url: String?, favicon: android.graphics.Bitmap?) {
                 showWebsite()
                 progressBar.visibility = View.VISIBLE
@@ -105,6 +126,60 @@ class MainActivity : Activity() {
                 }
             }
         }
+    }
+
+    private fun openExternalLink(rawUrl: String): Boolean {
+        val uri = runCatching { Uri.parse(rawUrl) }.getOrNull() ?: return false
+        val scheme = uri.scheme?.lowercase() ?: return false
+        val host = uri.host?.lowercase().orEmpty()
+        val external = scheme in setOf("tel", "mailto", "sms", "tg", "whatsapp", "intent") ||
+            host in setOf("t.me", "telegram.me", "telegram.dog", "wa.me", "api.whatsapp.com")
+        if (!external) return false
+        val intent = runCatching {
+            if (scheme == "intent") Intent.parseUri(rawUrl, Intent.URI_INTENT_SCHEME)
+            else Intent(Intent.ACTION_VIEW, uri)
+        }.getOrNull() ?: return true
+        return try {
+            startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+            true
+        } catch (_: Exception) {
+            Toast.makeText(this, "No compatible app installed", Toast.LENGTH_SHORT).show()
+            true
+        }
+    }
+
+    private fun downloadFile(url: String, userAgent: String, contentDisposition: String, mimeType: String) {
+        val uri = runCatching { Uri.parse(url) }.getOrNull() ?: return
+        if (uri.scheme != "https") {
+            Toast.makeText(this, "Secure downloads only", Toast.LENGTH_SHORT).show()
+            return
+        }
+        val filename = downloadFilename(uri, contentDisposition)
+        val request = DownloadManager.Request(uri).apply {
+            setTitle(filename)
+            setDescription("Downloading from FilmGo")
+            setMimeType(mimeType.ifBlank { "application/octet-stream" })
+            setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
+            setAllowedOverMetered(true)
+            setAllowedOverRoaming(false)
+            if (userAgent.isNotBlank()) addRequestHeader("User-Agent", userAgent)
+            CookieManager.getInstance().getCookie(url)?.let { addRequestHeader("Cookie", it) }
+            setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "FilmGo/$filename")
+        }
+        runCatching {
+            val manager = getSystemService(DownloadManager::class.java)
+            manager.enqueue(request)
+            Toast.makeText(this, "Download started", Toast.LENGTH_SHORT).show()
+        }.onFailure {
+            Toast.makeText(this, "Unable to start download", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun downloadFilename(uri: Uri, contentDisposition: String): String {
+        val dispositionName = Regex("filename\\*=UTF-8''([^;]+)|filename=\\\"?([^;\\\"]+)").find(contentDisposition)
+            ?.groupValues?.drop(1)?.firstOrNull { it.isNotBlank() }
+        val rawName = dispositionName ?: uri.lastPathSegment ?: "FilmGo-download"
+        return rawName.substringAfterLast('/').replace(Regex("[^A-Za-z0-9._()\\[\\] -]"), "_").take(180).ifBlank { "FilmGo-download" }
     }
 
     private fun createOfflineView(): View {
