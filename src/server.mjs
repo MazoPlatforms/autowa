@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import {execFile,spawn} from 'node:child_process';
 import {promisify} from 'node:util';
 const execFileAsync=promisify(execFile);
-import {startWhatsApp,isWhatsAppReady,sendWhatsAppOtp,getWhatsAppProfilePicture} from './whatsapp-otp.mjs';
+import {startWhatsApp,sendWhatsAppOtp,getWhatsAppProfilePicture} from './whatsapp-otp.mjs';
 import {startFilmGoBot} from './filmgo-bot.mjs';
 import {logFilmGo} from './filmgo-logs.mjs';
 import {startStreamWorker,proxyRange,downloadFile,streamWorkerState} from './stream-worker.mjs';
@@ -361,7 +361,6 @@ const server=http.createServer(async(req,res)=>{
   if(req.method==='GET'&&url.pathname==='/countries.json'){res.writeHead(200,{'Content-Type':'application/json','Cache-Control':'public, max-age=86400'});return res.end(countries);}
   if(req.method!=='POST'||!['/api/otp/start','/api/otp/verify','/api/request','/api/profile','/api/plans/continue','/api/logout'].includes(url.pathname))return send(res,404,{error:'Not found'});
   if(!configured)return send(res,503,{error:'Service setup incomplete; contact operator'});
-  if(url.pathname==='/api/otp/start'&&!isWhatsAppReady())return send(res,503,{error:'WhatsApp OTP bot is offline. Try again later.'});
   if(req.headers['content-type']?.split(';')[0]!=='application/json')return send(res,415,{error:'JSON required'});
   const origin=req.headers.origin,host=req.headers.host;
   if(origin&&new URL(origin).host!==host)return send(res,403,{error:'Origin rejected'});
@@ -375,8 +374,9 @@ const server=http.createServer(async(req,res)=>{
    const cooldown=await redis('SET','cool:'+hmac(number),'1','EX',60,'NX');
    if(cooldown!=='OK')return send(res,429,{error:'Wait 60 seconds before requesting another OTP'});
    const code=String(crypto.randomInt(0,1000000)).padStart(6,'0');
-   await redis('SET','otp:'+hmac(number),hmac(number+':'+code),'EX',300);
-   try{await sendOtp(number,code);}catch{await redis('DEL','otp:'+hmac(number));return send(res,503,{error:'OTP delivery unavailable'});}
+   const otpKey='otp:'+hmac(number),cooldownKey='cool:'+hmac(number);
+   try{await redis('SET',otpKey,hmac(number+':'+code),'EX',300);await sendOtp(number,code);}
+   catch{await Promise.allSettled([redis('DEL',otpKey),redis('DEL',cooldownKey)]);return send(res,503,{error:'Could not send the WhatsApp verification code. Please try again.'});}
    return send(res,200,{ok:true,message:'OTP sent'});
   }
   if(url.pathname==='/api/otp/verify'){
