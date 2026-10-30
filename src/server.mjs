@@ -131,6 +131,7 @@ const brandAssets=new Map([
  ['/icons/apple-touch-icon.png',{body:fs.readFileSync(new URL('../web/icons/apple-touch-icon.png',import.meta.url)),type:'image/png',cache:'public, max-age=31536000, immutable'}],
  ['/icons/filmgo-mark.png',{body:fs.readFileSync(new URL('../web/icons/filmgo-mark.png',import.meta.url)),type:'image/png',cache:'public, max-age=31536000, immutable'}],
  ['/icons/filmgo-wordmark.png',{body:fs.readFileSync(new URL('../web/icons/filmgo-wordmark.png',import.meta.url)),type:'image/png',cache:'public, max-age=31536000, immutable'}],
+ ['/icons/filmgo-lockup.png',{body:fs.readFileSync(new URL('../web/icons/filmgo-lockup.png',import.meta.url)),type:'image/png',cache:'public, max-age=31536000, immutable'}],
  ['/icons/filmgo-app.png',{body:fs.readFileSync(new URL('../web/icons/filmgo-app.png',import.meta.url)),type:'image/png',cache:'public, max-age=31536000, immutable'}],
  ['/icons/filmgo-192.png',{body:fs.readFileSync(new URL('../web/icons/filmgo-192.png',import.meta.url)),type:'image/png',cache:'public, max-age=31536000, immutable'}],
  ['/icons/filmgo-512.png',{body:fs.readFileSync(new URL('../web/icons/filmgo-512.png',import.meta.url)),type:'image/png',cache:'public, max-age=31536000, immutable'}],
