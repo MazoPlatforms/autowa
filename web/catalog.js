@@ -6,7 +6,7 @@ function actionIcon(kind){
  const path=document.createElementNS('http://www.w3.org/2000/svg','path');path.setAttribute('d',paths[kind]);svg.append(path);return svg;
 }
 function playerIcon(kind){
- const paths={play:'M8 5v14l11-7L8 5Z',pause:'M7 5h3v14H7V5Zm7 0h3v14h-3V5Z',settings:'M12 8.3a3.7 3.7 0 1 0 0 7.4 3.7 3.7 0 0 0 0-7.4Zm0-5.3 1 2.1 2.1.6 2-.9 1.4 1.4-.9 2 .6 2.1 2.1 1v2l-2.1 1-.6 2.1.9 2-1.4 1.4-2-.9-2.1.6-1 2.1h-2l-1-2.1-2.1-.6-2 .9-1.4-1.4.9-2-.6-2.1-2.1-1v-2l2.1-1 .6-2.1-.9-2L6.8 4.8l2 .9 2.1-.6 1-2.1h2Z',fullscreen:'M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5',pip:'M4 6h16v12H4zM12 12h6v4h-6z'};
+ const paths={play:'M8 5v14l11-7L8 5Z',pause:'M7 5h3v14H7V5Zm7 0h3v14h-3V5Z',settings:'M12 8.3a3.7 3.7 0 1 0 0 7.4 3.7 3.7 0 0 0 0-7.4Zm0-5.3 1 2.1 2.1.6 2-.9 1.4 1.4-.9 2 .6 2.1 2.1 1v2l-2.1 1-.6 2.1.9 2-1.4 1.4-2-.9-2.1.6-1 2.1h-2l-1-2.1-2.1-.6-2 .9-1.4-1.4.9-2-.6-2.1-2.1-1v-2l2.1-1 .6-2.1-.9-2L6.8 4.8l2 .9 2.1-.6 1-2.1h2Z',fullscreen:'M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5',close:'M6 6l12 12M18 6 6 18',pip:'M4 6h16v12H4zM12 12h6v4h-6z'};
  const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');svg.setAttribute('viewBox','0 0 24 24');svg.setAttribute('width','17');svg.setAttribute('height','17');svg.setAttribute('fill',kind==='play'||kind==='pause'?'currentColor':'none');svg.setAttribute('stroke',kind==='play'||kind==='pause'?'none':'currentColor');svg.setAttribute('stroke-width','1.8');svg.setAttribute('stroke-linecap','round');svg.setAttribute('stroke-linejoin','round');svg.setAttribute('aria-hidden','true');
  const path=document.createElementNS('http://www.w3.org/2000/svg','path');path.setAttribute('d',paths[kind]);svg.append(path);return svg;
 }
@@ -156,6 +156,7 @@ const time=el('span','filmgo-time','00:00:00 / 00:00:00');
 const settingsButton=el('button','filmgo-control-button filmgo-settings-toggle');settingsButton.type='button';settingsButton.setAttribute('aria-label','Player settings');settingsButton.setAttribute('aria-expanded','false');settingsButton.append(playerIcon('settings'));
 const fullscreen=el('button','filmgo-control-button filmgo-fullscreen');fullscreen.type='button';fullscreen.setAttribute('aria-label','Full screen');fullscreen.append(playerIcon('fullscreen'));
 const settingsPanel=el('div','filmgo-settings-panel');settingsPanel.hidden=true;settingsPanel.setAttribute('aria-label','Player settings');settingsPanel.setAttribute('role','group');
+const settingsClose=el('button','filmgo-settings-close');settingsClose.type='button';settingsClose.setAttribute('aria-label','Close player settings');settingsClose.append(playerIcon('close'));settingsPanel.append(settingsClose);
 const controlLeft=el('div','filmgo-control-left'),controlRight=el('div','filmgo-control-right');
 controlLeft.append(play,time);controlRight.append(settingsButton,fullscreen);controlRow.append(controlLeft,controlRight);controls.append(progress,controlRow);player.append(viewport,settingsPanel,controls);section.append(player);
 const makeSetting=(label,id)=>{const wrap=el('label','filmgo-setting');wrap.append(el('span','',label));const select=el('select','filmgo-setting-select');select.id=id;wrap.append(select);settingsPanel.append(wrap);return select;};
@@ -187,6 +188,7 @@ let tapTimer=0,lastTap=0,feedbackTimer=0,controlsTimer=0;
 const showFeedback=message=>{seekFeedback.textContent=message;seekFeedback.classList.add('visible');clearTimeout(feedbackTimer);feedbackTimer=setTimeout(()=>seekFeedback.classList.remove('visible'),650);};
 const showControls=()=>{player.classList.remove('controls-hidden');clearTimeout(controlsTimer);if(!video.paused&&!settingsPanel.hidden)return;if(!video.paused)controlsTimer=setTimeout(()=>{if(settingsPanel.hidden)player.classList.add('controls-hidden');},3200);};
 const toggleControls=()=>{if(!settingsPanel.hidden){settingsPanel.hidden=true;settingsButton.setAttribute('aria-expanded','false');player.classList.remove('settings-open');}else if(player.classList.contains('controls-hidden'))showControls();else player.classList.add('controls-hidden');};
+settingsClose.addEventListener('click',()=>{settingsPanel.hidden=true;settingsButton.setAttribute('aria-expanded','false');player.classList.remove('settings-open');showControls();});
 player.addEventListener('pointermove',showControls);player.addEventListener('pointerdown',showControls);
 let volumeValue=1,audioContext=null,selectedAudioId='',selectedSubtitleId='off';const audioGains=new WeakMap(),trackListeners=new WeakSet();
 const applyPlayerVolume=target=>{const node=audioGains.get(target);if(node)node.gain.gain.value=volumeValue;else{try{target.volume=volumeValue;target.muted=volumeValue===0;}catch{}}volume.value=String(volumeValue);};
