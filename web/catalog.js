@@ -123,6 +123,7 @@ function render(){
  page=Math.max(1,Math.min(page,Math.ceil(rows.length/PAGE_SIZE)||1));
  grid.replaceChildren();
  $('movie-count').textContent=rows.length+' '+(rows.length===1?'title':'titles');
+ $('catalog-results-title').textContent=location.pathname==='/search'?'Search results':'All movies';
  empty.classList.toggle('hidden',rows.length>0);
  empty.textContent=movies.length?'No movies match your filters.':'No movies available yet.';
  const visibleRows=rows.slice((page-1)*PAGE_SIZE,page*PAGE_SIZE);
@@ -244,7 +245,21 @@ fetch('/api/stream-availability/'+slug,{cache:'no-store'}).then(r=>r.ok?r.json()
  accessNotice.hidden=true;
  setQuality(selected);
 }).catch(()=>{if(isActive()&&selected){setQuality(selected);setStatus('Availability check failed. You can still try streaming or downloading.');}});
-document.title=m.title+' — FilmGo';}function route(){const match=location.pathname.match(/^\/title\/([^/]+)\/?$/);$('catalog-back')?.classList.toggle('visible',!!match);if(match){const m=movies.find(x=>x.slug_id===decodeURIComponent(match[1])||x.id===decodeURIComponent(match[1]));home.classList.add('hidden');detail.classList.remove('hidden');if(m)showDetail(m);else if(!catalogLoaded){$('detail-content').replaceChildren(el('div','detail-loading','Loading movie details…'));document.title='Loading movie — FilmGo';}else{$('detail-content').replaceChildren(el('p','text-zinc-400','Movie not found.'));document.title='Movie not found — FilmGo';}}else{home.classList.remove('hidden');detail.classList.add('hidden');document.title='FilmGo — Explore';if(catalogLoaded)render();}window.scrollTo(0,0);}search.addEventListener('input',()=>{page=1;render();});for(const select of [yearFilter,genreFilter,sortFilter])select.addEventListener('change',()=>{page=1;render();});window.addEventListener('popstate',route);$('catalog-back')?.addEventListener('click',e=>{if(location.pathname.startsWith('/title/')){e.preventDefault();history.pushState({},'','/');route();}});skeleton();
+document.title=m.title+' — FilmGo';}function route(){
+ const match=location.pathname.match(/^\/title\/([^/]+)\/?$/),searching=location.pathname==='/search';
+ $('catalog-back')?.classList.toggle('visible',!!match);
+ home.classList.toggle('search-fullscreen',searching);
+ document.body.classList.toggle('catalog-search-active',searching);
+ $('catalog-search-close').hidden=!searching;
+ if(match){document.body.classList.remove('catalog-search-active');home.classList.remove('search-fullscreen');const m=movies.find(x=>x.slug_id===decodeURIComponent(match[1])||x.id===decodeURIComponent(match[1]));home.classList.add('hidden');detail.classList.remove('hidden');if(m)showDetail(m);else if(!catalogLoaded){$('detail-content').replaceChildren(el('div','detail-loading','Loading movie details…'));document.title='Loading movie — FilmGo';}else{$('detail-content').replaceChildren(el('p','text-zinc-400','Movie not found.'));document.title='Movie not found — FilmGo';}}
+ else{home.classList.remove('hidden');detail.classList.add('hidden');if(searching){const query=new URLSearchParams(location.search).get('q')||'';if(search.value!==query)search.value=query;document.title='Search — FilmGo';}else{search.value='';document.title='FilmGo — Explore';}if(catalogLoaded)render();}
+ window.scrollTo(0,0);
+}
+search.addEventListener('focus',()=>{if(location.pathname!=='/search'&&!location.pathname.startsWith('/title/')){history.pushState({},'','/search?q='+encodeURIComponent(search.value));route();}});
+search.addEventListener('input',()=>{page=1;if(location.pathname==='/search')history.replaceState({},'','/search?q='+encodeURIComponent(search.value));render();});
+$('catalog-search-close').addEventListener('click',()=>{search.blur();history.replaceState({},'','/');route();});
+window.addEventListener('keydown',event=>{if(event.key==='Escape'&&location.pathname==='/search'){$('catalog-search-close').click();}});
+for(const select of [yearFilter,genreFilter,sortFilter])select.addEventListener('change',()=>{page=1;render();});window.addEventListener('popstate',route);$('catalog-back')?.addEventListener('click',e=>{if(location.pathname.startsWith('/title/')){e.preventDefault();history.pushState({},'','/');route();}});skeleton();
 let catalogFingerprint='',catalogLoading=false;
 async function refreshCatalog(){
  if(catalogLoading||document.hidden)return;
