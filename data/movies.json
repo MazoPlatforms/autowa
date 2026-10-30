@@ -1,7 +1,43 @@
 {
   "schema_version": 2,
-  "updated_at": "2026-10-30T12:06:07.165588+00:00",
+  "updated_at": "2026-10-30T12:07:35.246759+00:00",
   "movies": [
+    {
+      "id": "telegram-62",
+      "slug_id": "wjk55N1IpicDB3VE",
+      "title": "Maanaadu",
+      "year": 2021,
+      "qualities": {
+        "720p": {
+          "telegram_message_id": 62,
+          "file_size": 1505282265,
+          "file_name": "MAANAADU (2021) Tamil HDRip - 720p - x264 - AAC - 1.4GB - H.mkv",
+          "mime_type": "video/x-matroska"
+        }
+      },
+      "imdb_id": "tt4983780",
+      "poster": "https://m.media-amazon.com/images/M/MV5BNGIxY2UxMzMtOTc1MS00NTBkLThhMTAtNTYzMmJlZDA4OGJiXkEyXkFqcGc@._V1_.jpg",
+      "genre": [
+        "Action",
+        "Adventure",
+        "Sci-Fi"
+      ],
+      "runtime": "147 min",
+      "director": "Venkat Prabhu",
+      "cast": [
+        "Silambarasan Rajendar",
+        "S.J. Suryah",
+        "Kalyani Priyadarshan"
+      ],
+      "plot": "On the day of a public conference by the state's Chief Minister, his bodyguard and a police officer are stuck in a time loop.",
+      "imdb_rating": "8.2",
+      "metadata_status": "matched",
+      "telegram_message_id": 62,
+      "file_size": 1505282265,
+      "file_name": "MAANAADU (2021) Tamil HDRip - 720p - x264 - AAC - 1.4GB - H.mkv",
+      "mime_type": "video/x-matroska",
+      "quality": "720p"
+    },
     {
       "id": "telegram-61",
       "slug_id": "eGLTbE_dcCOxPwen",
@@ -1672,32 +1708,6 @@
       "file_name": "Modha Rathri (2026) Tamil HQ HDRip - 720p - x264 - (DD+5.mkv",
       "mime_type": "video/x-matroska",
       "quality": "720p"
-    },
-    {
-      "id": "telegram-62",
-      "slug_id": "wjk55N1IpicDB3VE",
-      "title": "Maanaadu",
-      "year": 2021,
-      "qualities": {
-        "720p": {
-          "telegram_message_id": 62,
-          "file_name": "MAANAADU (2021) Tamil HDRip - 720p - x264 - AAC - 1.4GB - H.mkv",
-          "file_size": 0,
-          "mime_type": ""
-        }
-      },
-      "telegram_message_id": 62,
-      "quality": "720p",
-      "file_name": "MAANAADU (2021) Tamil HDRip - 720p - x264 - AAC - 1.4GB - H.mkv",
-      "file_size": 0,
-      "mime_type": "",
-      "imdb_id": "tt4983780",
-      "poster": "https://m.media-amazon.com/images/M/MV5BZDJiZWVjNDUtNjJmYS00ZGQ1LWExMjUtMjg4ZTI0MDZiNTBjXkEyXkFqcGc@._V1_SX300.jpg",
-      "genre": "Action, Adventure, Sci-Fi",
-      "runtime": "147 min",
-      "director": "Venkat Prabhu",
-      "cast": "Silambarasan Rajendar, S.J. Suryah, Kalyani Priyadarshan",
-      "plot": "On the day of a public conference by the state's Chief Minister, his bodyguard and a police officer are stuck in a time loop."
     }
   ]
 }
