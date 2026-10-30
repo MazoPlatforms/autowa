@@ -8,9 +8,11 @@ import {startWhatsApp,sendWhatsAppOtp,getWhatsAppProfilePicture} from './whatsap
 import {startFilmGoBot} from './filmgo-bot.mjs';
 import {logFilmGo} from './filmgo-logs.mjs';
 import {startStreamWorker,proxyRange,downloadFile,streamWorkerState} from './stream-worker.mjs';
+import {startFastStreamWorker,fastProxyRange} from './fast-stream-worker.mjs';
 import {DAILY_TOKEN_LIMIT,DAILY_TOKEN_LIMIT_MILLI,tokenCostMilli,tokenAmount,reserveDailyTokens,releaseDailyTokens,dailyTokenUsage} from './daily-tokens.mjs';
 
 const PORT=Number(process.env.PORT||8000);
+const fastStreaming=process.env.FILMGO_FAST_STREAM==='1';
 const required=['APP_SECRET','UPSTASH_REDIS_REST_URL','UPSTASH_REDIS_REST_TOKEN','GITHUB_DISPATCH_TOKEN','GITHUB_REPOSITORY'];
 const missing=required.filter(k=>!process.env[k]);
 const secret=process.env.APP_SECRET||'';
@@ -67,6 +69,7 @@ if(configured&&telegramReady){
  void refreshCatalog();
  setInterval(()=>{void refreshCatalog();},120000).unref();
  startStreamWorker();
+ if(fastStreaming)startFastStreamWorker();
 }
 async function getCatalog(){
  const raw=await redis('GET','telegram:catalog:v2');
@@ -320,7 +323,8 @@ const server=http.createServer(async(req,res)=>{
    if(req.method==='HEAD'){res.writeHead(206,headers);return res.end();}
    if(start===0)void logFilmGo('streams','▶️ Stream started · '+record.title+' ('+record.year+') · '+(movie.quality||url.searchParams.get('quality')||'default'));
    // Prefer one persistent Telethon connection; legacy subprocess remains a fallback.
-   if(await proxyRange(res,headers,{messageId:movie.telegram_message_id,start,length,onChunk:n=>{delivered+=n;}},send)){await settle();return;}
+   const rangeProxy=fastStreaming?fastProxyRange:proxyRange;
+   if(await rangeProxy(res,headers,{messageId:movie.telegram_message_id,start,length,onChunk:n=>{delivered+=n;}},send)){await settle();return;}
    const child=spawn('python3',['src/telegram_stream.py',String(movie.telegram_message_id),String(start),String(length)],{env:process.env,stdio:['ignore','pipe','pipe']});
    let started=false,bytes=0,closed=false;
    const startedAt=Date.now();
