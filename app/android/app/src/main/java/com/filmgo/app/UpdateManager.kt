@@ -11,9 +11,13 @@ import android.net.Uri
 import android.os.Build
 import android.os.Environment
 import android.provider.Settings
+import android.graphics.Color
+import android.graphics.Typeface
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.ProgressBar
+import android.widget.TextView
 import androidx.core.content.FileProvider
 import org.json.JSONObject
 import java.io.File
@@ -81,8 +85,25 @@ class UpdateManager(private val activity: Activity) {
             if (config.versionName.isNotBlank()) append("\n\nVersion ${config.versionName}")
             if (notes.isNotBlank()) append("\n\n$notes")
         }
+
+        val title = LinearLayout(activity).apply {
+            orientation = LinearLayout.HORIZONTAL
+            gravity = android.view.Gravity.CENTER_VERTICAL
+            setPadding(28, 22, 28, 8)
+            addView(ImageView(activity).apply {
+                setImageResource(com.filmgo.app.R.drawable.filmgo_app)
+                scaleType = ImageView.ScaleType.CENTER_INSIDE
+            }, LinearLayout.LayoutParams(48, 48))
+            addView(TextView(activity).apply {
+                text = "FilmGo update available"
+                textSize = 20f
+                typeface = Typeface.create(Typeface.DEFAULT, Typeface.BOLD)
+                setTextColor(Color.rgb(244, 244, 245))
+                setPadding(18, 0, 0, 0)
+            }, LinearLayout.LayoutParams(0, -2, 1f))
+        }
         AlertDialog.Builder(activity)
-            .setTitle("FilmGo update available")
+            .setCustomTitle(title)
             .setMessage(body)
             .setCancelable(!config.force)
             .setNegativeButton(if (config.force) null else "Later", null)
@@ -96,13 +117,35 @@ class UpdateManager(private val activity: Activity) {
             return
         }
         val progress = ProgressBar(activity, null, android.R.attr.progressBarStyleHorizontal).apply { max = 100 }
-        val box = LinearLayout(activity).apply { setPadding(32, 0, 32, 12); addView(progress, ViewGroup.LayoutParams(-1, 8)) }
+        val status = android.widget.TextView(activity).apply {
+            text = "Preparing download…"
+            textSize = 13f
+            setTextColor(android.graphics.Color.rgb(161, 161, 170))
+            setPadding(0, 14, 0, 4)
+        }
+        val box = LinearLayout(activity).apply {
+            orientation = LinearLayout.VERTICAL
+            setPadding(32, 0, 32, 12)
+            addView(progress, ViewGroup.LayoutParams(-1, 8))
+            addView(status, ViewGroup.LayoutParams(-1, -2))
+        }
         val dialog = AlertDialog.Builder(activity).setTitle("Downloading FilmGo update").setView(box).setCancelable(false).show()
         executor.execute {
             try {
-                val dir = File(activity.cacheDir, "updates").apply { mkdirs() }
+                val dir = File(activity.filesDir, "updates").apply { mkdirs() }
                 val apk = File(dir, "FilmGo-${config.versionCode}.apk")
+                val partial = File(dir, "FilmGo-${config.versionCode}.apk.part")
+                if (apk.exists() && sha256File(apk) == config.sha256) {
+                    activity.runOnUiThread {
+                        progress.isIndeterminate = true
+                        status.text = "Verified download found. Opening installer…"
+                        dialog.dismiss()
+                        install(apk)
+                    }
+                    return@execute
+                }
                 if (apk.exists()) apk.delete()
+                if (partial.exists()) partial.delete()
                 val connection = URL(config.apkUrl).openConnection() as HttpURLConnection
                 connection.connectTimeout = 10000
                 connection.readTimeout = 20000
@@ -110,9 +153,13 @@ class UpdateManager(private val activity: Activity) {
                 connection.connect()
                 if (connection.responseCode !in 200..299) error("Download failed (${connection.responseCode}).")
                 val total = connection.contentLengthLong
+                activity.runOnUiThread {
+                    progress.isIndeterminate = total <= 0
+                    status.text = if (total > 0) "Downloading 0%" else "Downloading…"
+                }
                 val digest = MessageDigest.getInstance("SHA-256")
                 var received = 0L
-                connection.inputStream.use { input -> FileOutputStream(apk).use { output ->
+                connection.inputStream.use { input -> FileOutputStream(partial).use { output ->
                     val buffer = ByteArray(32 * 1024)
                     while (true) {
                         val read = input.read(buffer)
@@ -120,14 +167,23 @@ class UpdateManager(private val activity: Activity) {
                         output.write(buffer, 0, read)
                         digest.update(buffer, 0, read)
                         received += read
-                        if (total > 0) activity.runOnUiThread { progress.progress = ((received * 100) / total).toInt() }
+                        activity.runOnUiThread {
+                            if (total > 0) {
+                                progress.progress = ((received * 100) / total).toInt()
+                                status.text = "Downloading ${progress.progress}%"
+                            } else {
+                                status.text = "Downloaded ${formatBytes(received)}"
+                            }
+                        }
                     }
                 } }
                 connection.disconnect()
                 val actual = digest.digest().joinToString("") { "%02x".format(it) }
                 if (actual != config.sha256) error("APK verification failed. The downloaded file does not match the published SHA-256.")
+                if (!partial.renameTo(apk)) error("Unable to keep the verified update file.")
                 activity.runOnUiThread { dialog.dismiss(); install(apk) }
             } catch (error: Exception) {
+                runCatching { File(activity.filesDir, "updates/FilmGo-${config.versionCode}.apk.part").delete() }
                 activity.runOnUiThread { dialog.dismiss(); showError(error.message ?: "Unable to download the update.") }
             }
         }
@@ -151,16 +207,39 @@ class UpdateManager(private val activity: Activity) {
     private fun launchInstaller(apk: File) {
         if (!apk.exists()) { pendingInstall = null; return }
         val uri = FileProvider.getUriForFile(activity, "${activity.packageName}.fileprovider", apk)
-        val intent = Intent(Intent.ACTION_VIEW).apply {
+        val intent = Intent(Intent.ACTION_INSTALL_PACKAGE).apply {
             setDataAndType(uri, "application/vnd.android.package-archive")
             addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_ACTIVITY_NEW_TASK)
         }
-        activity.startActivity(intent)
-        pendingInstall = null
+        try {
+            activity.startActivity(intent)
+            pendingInstall = null
+        } catch (error: Exception) {
+            showError(error.message ?: "Unable to open the Android installer.")
+        }
     }
 
     private fun showError(message: String) {
         if (!activity.isFinishing) AlertDialog.Builder(activity).setTitle("Update unavailable").setMessage(message).setPositiveButton("OK", null).show()
+    }
+
+    private fun formatBytes(bytes: Long): String = when {
+        bytes >= 1024 * 1024 -> "%.1f MB".format(bytes / (1024f * 1024f))
+        bytes >= 1024 -> "%.0f KB".format(bytes / 1024f)
+        else -> "$bytes B"
+    }
+
+    private fun sha256File(file: File): String {
+        val digest = MessageDigest.getInstance("SHA-256")
+        file.inputStream().use { input ->
+            val buffer = ByteArray(32 * 1024)
+            while (true) {
+                val read = input.read(buffer)
+                if (read < 0) break
+                digest.update(buffer, 0, read)
+            }
+        }
+        return digest.digest().joinToString("") { "%02x".format(it) }
     }
 
     private fun notifyUpdate(config: UpdateConfig) {
