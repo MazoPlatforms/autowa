@@ -1,7 +1,42 @@
 {
   "schema_version": 2,
-  "updated_at": "2026-10-30T11:21:48.301140+00:00",
+  "updated_at": "2026-10-30T11:53:49.985907+00:00",
   "movies": [
+    {
+      "id": "telegram-58",
+      "slug_id": "eyGv6Rd6NcdyT5VB",
+      "title": "Maaran",
+      "year": 2022,
+      "qualities": {
+        "720p": {
+          "telegram_message_id": 58,
+          "file_size": 1732371720,
+          "file_name": "Maaran 2022 Tam.Tel.Kan.Mal 720p x265 DD5 @MWKOTT.mkv",
+          "mime_type": "video/x-matroska"
+        }
+      },
+      "imdb_id": "tt11730914",
+      "poster": "https://m.media-amazon.com/images/M/MV5BNzRjZGI5MDktM2YwMi00MzFmLWExNTctMTBkMjE1MGRhMDE1XkEyXkFqcGc@._V1_.jpg",
+      "genre": [
+        "Action",
+        "Thriller"
+      ],
+      "runtime": "130 min",
+      "director": "Karthick Naren",
+      "cast": [
+        "Dhanush",
+        "Malavika Mohanan",
+        "Samuthirakani"
+      ],
+      "plot": "An investigative journalist is in trouble when he publishes an article that exposes bitter truths about a corrupt politician.",
+      "imdb_rating": "4.4",
+      "metadata_status": "matched",
+      "telegram_message_id": 58,
+      "file_size": 1732371720,
+      "file_name": "Maaran 2022 Tam.Tel.Kan.Mal 720p x265 DD5 @MWKOTT.mkv",
+      "mime_type": "video/x-matroska",
+      "quality": "720p"
+    },
     {
       "id": "telegram-57",
       "slug_id": "4FaWZw6kLTOrzQoI",
@@ -1532,32 +1567,6 @@
       "file_name": "Modha Rathri (2026) Tamil HQ HDRip - 720p - x264 - (DD+5.mkv",
       "mime_type": "video/x-matroska",
       "quality": "720p"
-    },
-    {
-      "id": "telegram-58",
-      "slug_id": "eyGv6Rd6NcdyT5VB",
-      "title": "Maaran",
-      "year": 2022,
-      "qualities": {
-        "720p": {
-          "telegram_message_id": 58,
-          "file_name": "Maaran 2022 Tam.Tel.Kan.Mal 720p x265 DD5 @MWKOTT.mkv",
-          "file_size": 0,
-          "mime_type": ""
-        }
-      },
-      "telegram_message_id": 58,
-      "quality": "720p",
-      "file_name": "Maaran 2022 Tam.Tel.Kan.Mal 720p x265 DD5 @MWKOTT.mkv",
-      "file_size": 0,
-      "mime_type": "",
-      "imdb_id": "tt11730914",
-      "poster": "https://m.media-amazon.com/images/M/MV5BNzRjZGI5MDktM2YwMi00MzFmLWExNTctMTBkMjE1MGRhMDE1XkEyXkFqcGc@._V1_SX300.jpg",
-      "genre": "Action, Thriller",
-      "runtime": "130 min",
-      "director": "Karthick Naren",
-      "cast": "Dhanush, Malavika Mohanan, Samuthirakani",
-      "plot": "An investigative journalist is in trouble when he publishes an article that exposes bitter truths about a corrupt politician."
     }
   ]
 }
