@@ -1,7 +1,43 @@
 {
   "schema_version": 2,
-  "updated_at": "2026-10-30T15:33:26.505134+00:00",
+  "updated_at": "2026-10-30T15:37:11.781134+00:00",
   "movies": [
+    {
+      "id": "telegram-75",
+      "slug_id": "XNsiHCXxiIpat3Vh",
+      "title": "Mr. Perfect",
+      "year": 2014,
+      "qualities": {
+        "720p": {
+          "telegram_message_id": 75,
+          "file_size": 1229852553,
+          "file_name": "[DnO].Mr.Perfect.2014.720p.HDRip.mkv",
+          "mime_type": "video/x-matroska"
+        }
+      },
+      "imdb_id": "tt5219156",
+      "poster": "https://m.media-amazon.com/images/M/MV5BZGQxNTI0MjYtNzEyMy00ZTdjLWFkYzgtYzY2NDBiNzBmNTIzXkEyXkFqcGc@._V1_.jpg",
+      "genre": [
+        "Comedy",
+        "Drama",
+        "Sport"
+      ],
+      "runtime": "109 min",
+      "director": "Myeong-gyun Kim",
+      "cast": [
+        "Yoon Shi-Yoon",
+        "Yeo Jin-goo",
+        "Chun Ho-jin"
+      ],
+      "plot": "Se-jin, a pro golf player who lost his voice and his career because of an accident, decided to change his life by teaching suburban kids on how to playing golf. He is also known as \"Mr. Perfect\" by the villagers.",
+      "imdb_rating": "6.6",
+      "metadata_status": "matched",
+      "telegram_message_id": 75,
+      "file_size": 1229852553,
+      "file_name": "[DnO].Mr.Perfect.2014.720p.HDRip.mkv",
+      "mime_type": "video/x-matroska",
+      "quality": "720p"
+    },
     {
       "id": "telegram-74",
       "slug_id": "KHbfkkEOCXgl9aZI",
@@ -2135,32 +2171,6 @@
       "file_name": "Modha Rathri (2026) Tamil HQ HDRip - 720p - x264 - (DD+5.mkv",
       "mime_type": "video/x-matroska",
       "quality": "720p"
-    },
-    {
-      "id": "telegram-75",
-      "slug_id": "XNsiHCXxiIpat3Vh",
-      "title": "Mr. Perfect",
-      "year": 2014,
-      "qualities": {
-        "720p": {
-          "telegram_message_id": 75,
-          "file_name": "[DnO].Mr.Perfect.2014.720p.HDRip.mkv",
-          "file_size": 0,
-          "mime_type": ""
-        }
-      },
-      "telegram_message_id": 75,
-      "quality": "720p",
-      "file_name": "[DnO].Mr.Perfect.2014.720p.HDRip.mkv",
-      "file_size": 0,
-      "mime_type": "",
-      "imdb_id": "tt5219156",
-      "poster": "https://m.media-amazon.com/images/M/MV5BZGQxNTI0MjYtNzEyMy00ZTdjLWFkYzgtYzY2NDBiNzBmNTIzXkEyXkFqcGc@._V1_SX300.jpg",
-      "genre": "Comedy, Drama, Sport",
-      "runtime": "109 min",
-      "director": "Myeong-gyun Kim",
-      "cast": "Yoon Shi-Yoon, Yeo Jin-goo, Chun Ho-jin",
-      "plot": "Se-jin, a pro golf player who lost his voice and his career because of an accident, decided to change his life by teaching suburban kids on how to playing golf. He is also known as \"Mr. Perfect\" by the villagers."
     }
   ]
 }
