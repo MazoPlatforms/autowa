@@ -46,7 +46,7 @@ function initCustomFilters(){
  for(const select of filters){
   const box=select.closest('.catalog-filter');
   select.classList.add('visually-hidden-select');
-  const trigger=el('button','filter-trigger');trigger.type='button';trigger.setAttribute('aria-haspopup','listbox');trigger.setAttribute('aria-expanded','false');
+  const trigger=el('button','filter-trigger');trigger.type='button';trigger.setAttribute('aria-label',select.getAttribute('aria-label')||'Filter options');trigger.setAttribute('aria-haspopup','listbox');trigger.setAttribute('aria-expanded','false');
   const label=el('span','filter-trigger-label');const arrow=el('span','filter-chevron');arrow.innerHTML='<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>';trigger.append(label,arrow);
   const panel=el('div','filter-panel');panel.setAttribute('role','listbox');panel.setAttribute('aria-label',select.getAttribute('aria-label')||'Filter options');
   box.append(trigger,panel);
@@ -124,7 +124,7 @@ function render(){
  const pageSize=PAGE_SIZE();
  page=Math.max(1,Math.min(page,Math.ceil(rows.length/pageSize)||1));
  grid.replaceChildren();
- $('movie-count').textContent=rows.length+' '+(rows.length===1?'title':'titles');
+ $('movie-count').textContent=searching&&!query?'':rows.length+' '+(rows.length===1?'title':'titles');
  $('catalog-results-title').textContent=searching?(query?'Search results':'Suggestions'):'All movies';
  empty.classList.toggle('hidden',rows.length>0);
  empty.textContent=searching?'No movies match your search.':movies.length?'No movies match your filters.':'No movies available yet.';
@@ -263,6 +263,7 @@ fetch('/api/stream-availability/'+slug,{cache:'no-store'}).then(r=>r.ok?r.json()
 document.title=m.title+' — FilmGo';}function route(){
  const match=location.pathname.match(/^\/title\/([^/]+)\/?$/),searching=location.pathname==='/search';
  if(!searching){searchSuggestions=[];suggestionsInitialized=false;}
+ if(searching&&!home.classList.contains('search-fullscreen'))home.scrollTop=0;
  $('catalog-back')?.classList.toggle('visible',!!match);
  home.classList.toggle('search-fullscreen',searching);
  document.body.classList.toggle('catalog-search-active',searching);
