@@ -370,6 +370,15 @@ footer a{color:#c4c6cb!important}
 .filmgo-sheet-description{color:#b7b9bf!important}
 .filmgo-token-notice{border-color:var(--fg-line)!important;border-radius:16px!important;background:rgba(255,255,255,.045)!important;color:#c6c8cd!important}
 .filmgo-token-notice a{color:#f4f4f5!important}
+.filmgo-signin-notice{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:0 0 16px!important;padding:16px 18px!important}
+.filmgo-signin-notice[hidden]{display:none!important}
+.filmgo-signin-copy{display:grid;gap:5px;min-width:0}
+.filmgo-signin-copy strong{color:#f4f4f5;font-size:14px;font-weight:750}
+.filmgo-signin-copy span{color:#b7b9bf;font-size:13px;line-height:1.55}
+.filmgo-signin-cta{display:inline-flex;align-items:center;justify-content:center;flex:none;min-height:42px;padding:0 15px;border:1px solid #f4f4f5;border-radius:12px;background:#f4f4f5;color:#09090b!important;font-size:12px;font-weight:750;text-decoration:none!important;white-space:nowrap}
+.filmgo-signin-cta:hover{background:#d4d4d8}
+.filmgo-player-shell[inert],.filmgo-player-actions[inert]{opacity:.55;cursor:not-allowed}
+@media(max-width:520px){.filmgo-signin-notice{align-items:stretch;flex-direction:column;gap:12px}.filmgo-signin-cta{width:100%}}
 .detail-loading{min-height:44vh!important;color:#aeb0b6!important}
 @media(max-width:640px){
  main.mx-auto.max-w-6xl{padding-top:22px;padding-bottom:54px}
