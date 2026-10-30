@@ -5,7 +5,7 @@ compatibility_date = "2026-10-28"
 [vars]
 # REQUIRED: public https URL of the origin backend (the Koyeb app that runs
 # src/server.mjs), with no trailing path. Example: https://your-app.koyeb.app
-ORIGIN_URL = "https://friendly-melodee-mznstudios-d6de1fb0.apps.mistral.run/"
+ORIGIN_URL = "https://filmgo.apps.mistral.run/"
 # "proxy"    = bytes flow browser <- Worker <- origin (default, hides the origin URL)
 # "redirect" = Worker answers 307 and the browser streams straight from the origin
 #              (no video bytes through Cloudflare; the origin URL becomes visible)
