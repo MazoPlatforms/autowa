@@ -21,8 +21,41 @@ $('country-trigger').addEventListener('keydown',event=>{if(event.key==='ArrowDow
 $('country-picker').addEventListener('keydown',event=>{if(event.key==='Escape'&&!$('country-panel').hidden){closeCountryPicker();$('country-trigger').focus();}});
 document.addEventListener('click',event=>{if(!event.target.closest('#country-picker'))closeCountryPicker();});
 $('phone').addEventListener('focus',()=>{void loadCountries();});
-$('start').addEventListener('submit',async e=>{e.preventDefault();const btn=e.target.querySelector('button');btn.disabled=true;try{number=phoneNumber();const version=authVersion;await api('otp/start',{number});if(version!==authVersion)return;$('start').classList.add('hidden');$('verify').classList.remove('hidden');msg('Verification code sent to '+number);}catch(err){msg(err.message)}finally{btn.disabled=false;}});
-$('verify').addEventListener('submit',async e=>{e.preventDefault();const btn=e.target.querySelector('button');btn.disabled=true;try{const back=new URLSearchParams(location.search).get('return');const safeBack=back&&(/^\/title\/[A-Za-z0-9_-]+\/?$/.test(back)||/^\/download\/[A-Za-z0-9_-]{1,80}(?:\?quality=[A-Za-z0-9._+-]{1,40})?$/.test(back));const d=await api('otp/verify',{number,code:$('code').value});authVersion++;await showAccount();saveLoginHint(true);if(safeBack){location.assign(back);return;}msg('Signed in successfully.');}catch(err){msg(err.message)}finally{btn.disabled=false;}});
+const otpFields=Array.from({length:6},(_,i=>$('code-'+(i+1))));
+function syncOtpCode(){ $('code').value=otpFields.map(field=>field.value).join(''); return $('code').value; }
+function fillOtpFrom(value,startAt=0){
+ const digits=String(value||'').replace(/\D/g,'');
+ if(!digits)return;
+ const start=digits.length>=6?0:startAt;
+ otpFields.forEach((field,index)=>{if(index>=start)field.value='';});
+ [...digits].slice(0,6-start).forEach((digit,offset)=>{otpFields[start+offset].value=digit;});
+ syncOtpCode();
+ const next=otpFields.findIndex(field=>!field.value);
+ otpFields[next<0?5:next].focus();
+ if(next<0)otpFields[5].select();
+}
+otpFields.forEach((field,index)=>{
+ field.addEventListener('input',()=>{
+  const value=field.value;
+  if(value.length>1){fillOtpFrom(value,index);return;}
+  field.value=value.replace(/\D/g,'').slice(-1);
+  syncOtpCode();
+  if(field.value&&index<otpFields.length-1)otpFields[index+1].focus();
+ });
+ field.addEventListener('paste',event=>{
+  const pasted=event.clipboardData?.getData('text')||'';
+  if(!/\d/.test(pasted))return;
+  event.preventDefault();
+  fillOtpFrom(pasted,index);
+ });
+ field.addEventListener('keydown',event=>{
+  if(event.key==='Backspace'&&!field.value&&index>0){event.preventDefault();otpFields[index-1].value='';syncOtpCode();otpFields[index-1].focus();}
+  else if(event.key==='ArrowLeft'&&index>0){event.preventDefault();otpFields[index-1].focus();}
+  else if(event.key==='ArrowRight'&&index<otpFields.length-1){event.preventDefault();otpFields[index+1].focus();}
+ });
+});
+$('start').addEventListener('submit',async e=>{e.preventDefault();const btn=e.target.querySelector('button[type="submit"]');btn.disabled=true;try{number=phoneNumber();const version=authVersion;await api('otp/start',{number});if(version!==authVersion)return;$('start').classList.add('hidden');$('verify').classList.remove('hidden');msg('Verification code sent to '+number);otpFields[0].focus();}catch(err){msg(err.message)}finally{btn.disabled=false;}});
+$('verify').addEventListener('submit',async e=>{e.preventDefault();const code=syncOtpCode();if(!/^\d{6}$/.test(code)){otpFields.find(field=>!field.value)?.focus();return;}const btn=e.target.querySelector('button[type="submit"]');btn.disabled=true;try{const back=new URLSearchParams(location.search).get('return');const safeBack=back&&(/^\/title\/[A-Za-z0-9_-]+\/?$/.test(back)||/^\/download\/[A-Za-z0-9_-]{1,80}(?:\?quality=[A-Za-z0-9._+-]{1,40})?$/.test(back));await api('otp/verify',{number,code});authVersion++;await showAccount();saveLoginHint(true);if(safeBack){location.assign(back);return;}msg('Signed in successfully.');}catch(err){msg(err.message)}finally{btn.disabled=false;}});
 const AVATAR_PLACEHOLDER='https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original';
 const avatarCacheKey=n=>'filmgo-avatar:'+n;
 function paintAvatar(url){
