@@ -1,10 +1,45 @@
 {
   "schema_version": 2,
-  "updated_at": "2026-10-30T17:59:58.063091+00:00",
+  "updated_at": "2026-10-30T18:00:22.891584+00:00",
   "movies": [
     {
+      "id": "telegram-89",
+      "slug_id": "z8fX3B76nbMqAsmV",
+      "title": "Mugamoodi",
+      "year": 2012,
+      "qualities": {
+        "720p": {
+          "telegram_message_id": 89,
+          "file_size": 1522402237,
+          "file_name": "@RickyChannel Mugamoodi.2012.Tamil.720p.DVDRip.RC.mp4",
+          "mime_type": "video/mp4"
+        }
+      },
+      "imdb_id": "tt2367996",
+      "poster": "https://m.media-amazon.com/images/M/MV5BNWExMjVkOWUtMjhlZC00YTY5LTkxYTQtZmU2YmQzMTA4NzJhXkEyXkFqcGc@._V1_.jpg",
+      "genre": [
+        "Action",
+        "Adventure"
+      ],
+      "runtime": "150 min",
+      "director": "Mysskin",
+      "cast": [
+        "Jiiva",
+        "Narain",
+        "Nassar"
+      ],
+      "plot": "A hopeless young man uses his \"Kung-fu\" skills and mask to tackle a bank robbery group without revealing his identity.",
+      "imdb_rating": "5.1",
+      "metadata_status": "matched",
+      "telegram_message_id": 89,
+      "file_size": 1522402237,
+      "file_name": "@RickyChannel Mugamoodi.2012.Tamil.720p.DVDRip.RC.mp4",
+      "mime_type": "video/mp4",
+      "quality": "720p"
+    },
+    {
       "id": "telegram-88",
-      "slug_id": "xDxWM6Zkr9M14kP9",
+      "slug_id": "9QJY8V1fOZKeLRC7",
       "title": "Vettai",
       "year": 2012,
       "qualities": {
