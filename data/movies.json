@@ -1,7 +1,42 @@
 {
   "schema_version": 2,
-  "updated_at": "2026-10-30T00:23:54.751739+00:00",
+  "updated_at": "2026-10-30T07:41:00.293381+00:00",
   "movies": [
+    {
+      "id": "telegram-56",
+      "slug_id": "rVMHUCOAXcifePIz",
+      "title": "Sigma",
+      "year": 2026,
+      "qualities": {
+        "720p": {
+          "telegram_message_id": 56,
+          "file_size": 1207837906,
+          "file_name": "@CinemasTrend - Sigma (2026) Tamil HQ HDRip - 720p - x265 - .mkv",
+          "mime_type": "video/x-matroska"
+        }
+      },
+      "imdb_id": "tt28792330",
+      "poster": "https://m.media-amazon.com/images/M/MV5BN2U0ODhiOWEtNzk0Ny00MWFjLWJlNjctMTZkYjA2MmY2NmVhXkEyXkFqcGc@._V1_.jpg",
+      "genre": [
+        "Drama",
+        "Thriller"
+      ],
+      "runtime": null,
+      "director": null,
+      "cast": [
+        "Luis Zahera",
+        "Sundeep Kishan",
+        "Andrea Duro"
+      ],
+      "plot": null,
+      "imdb_rating": null,
+      "metadata_status": "matched",
+      "telegram_message_id": 56,
+      "file_size": 1207837906,
+      "file_name": "@CinemasTrend - Sigma (2026) Tamil HQ HDRip - 720p - x265 - .mkv",
+      "mime_type": "video/x-matroska",
+      "quality": "720p"
+    },
     {
       "id": "telegram-55",
       "slug_id": "Ly4hTUqA0VEgOf9x",
@@ -1461,32 +1496,6 @@
       "file_name": "Modha Rathri (2026) Tamil HQ HDRip - 720p - x264 - (DD+5.mkv",
       "mime_type": "video/x-matroska",
       "quality": "720p"
-    },
-    {
-      "id": "telegram-56",
-      "slug_id": "rVMHUCOAXcifePIz",
-      "title": "Sigma",
-      "year": 2026,
-      "qualities": {
-        "720p": {
-          "telegram_message_id": 56,
-          "file_name": "@CinemasTrend - Sigma (2026) Tamil HQ HDRip - 720p - x265 - .mkv",
-          "file_size": 0,
-          "mime_type": ""
-        }
-      },
-      "telegram_message_id": 56,
-      "quality": "720p",
-      "file_name": "@CinemasTrend - Sigma (2026) Tamil HQ HDRip - 720p - x265 - .mkv",
-      "file_size": 0,
-      "mime_type": "",
-      "imdb_id": "tt28792330",
-      "poster": "https://m.media-amazon.com/images/M/MV5BOGIyMjRjMDUtODFiMi00NmUzLWEyOWQtMDQ0MzU2ZDFlMzg5XkEyXkFqcGc@._V1_SX300.jpg",
-      "genre": "Drama, Thriller",
-      "runtime": "N/A",
-      "director": "N/A",
-      "cast": "Luis Zahera, Sundeep Kishan, Andrea Duro",
-      "plot": "N/A"
     }
   ]
 }
