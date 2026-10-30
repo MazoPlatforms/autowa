@@ -47,7 +47,7 @@ document.addEventListener('click',event=>{if(!event.target.closest('#country-pic
 $('phone').addEventListener('focus',()=>{void loadCountries();});
 $('phone').addEventListener('input',refreshOtpTimers);
 refreshOtpTimers();
-const otpFields=Array.from({length:6},(_,i=>$('code-'+(i+1))));
+const otpFields=Array.from({length:6},(_,i)=>$('code-'+(i+1)));
 function syncOtpCode(){ $('code').value=otpFields.map(field=>field.value).join(''); return $('code').value; }
 function fillOtpFrom(value,startAt=0){
  const digits=String(value||'').replace(/\D/g,'');
