@@ -2557,6 +2557,32 @@
       "file_name": "Modha Rathri (2026) Tamil HQ HDRip - 720p - x264 - (DD+5.mkv",
       "mime_type": "video/x-matroska",
       "quality": "720p"
+    },
+    {
+      "id": "telegram-87",
+      "slug_id": "ScDmqi0UUr8uvRna",
+      "title": "Sathuranga Vettai",
+      "year": 2014,
+      "qualities": {
+        "720p": {
+          "telegram_message_id": 87,
+          "file_name": "Sathuranga Vettai (2014) Tamil HQ HDRip - 720p - HEVC - .mkv",
+          "file_size": 0,
+          "mime_type": ""
+        }
+      },
+      "telegram_message_id": 87,
+      "quality": "720p",
+      "file_name": "Sathuranga Vettai (2014) Tamil HQ HDRip - 720p - HEVC - .mkv",
+      "file_size": 0,
+      "mime_type": "",
+      "imdb_id": "tt3711164",
+      "poster": "https://m.media-amazon.com/images/M/MV5BZTQ2ZmNjOTYtZGU2Ny00NTgxLWE5NmUtMjVlNGU1ZGQxY2ZlXkEyXkFqcGc@._V1_SX300.jpg",
+      "genre": "Crime, Thriller",
+      "runtime": "145 min",
+      "director": "H. Vinoth",
+      "cast": "Natarajan Subramaniam, Ishara Nair, Ponvannan",
+      "plot": "Ace conman Gandhi effortlessly thinks up schemes to swindle gullible and greedy folks. However on a rare occasion, things don't go according to plan and he ends up in the clutches of a ruthless gang who demand schemes from him for..."
     }
   ]
 }
