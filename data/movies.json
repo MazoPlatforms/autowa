@@ -2027,6 +2027,32 @@
       "file_name": "Modha Rathri (2026) Tamil HQ HDRip - 720p - x264 - (DD+5.mkv",
       "mime_type": "video/x-matroska",
       "quality": "720p"
+    },
+    {
+      "id": "telegram-72",
+      "slug_id": "UEFu3umIed3hhlIY",
+      "title": "Enthiran",
+      "year": 2010,
+      "qualities": {
+        "720p": {
+          "telegram_message_id": 72,
+          "file_name": "[CC].Enthiran.2010.Tamil.720p.BluRay.x265.mp4",
+          "file_size": 0,
+          "mime_type": ""
+        }
+      },
+      "telegram_message_id": 72,
+      "quality": "720p",
+      "file_name": "[CC].Enthiran.2010.Tamil.720p.BluRay.x265.mp4",
+      "file_size": 0,
+      "mime_type": "",
+      "imdb_id": "tt1305797",
+      "poster": "https://m.media-amazon.com/images/M/MV5BNDUxOGQ5NzItYmM0ZC00YTg3LWFmZjEtOTEwZDBmMTE5Mzc1XkEyXkFqcGc@._V1_QL75_UX380_CR0,4,380,562_.jpg",
+      "genre": "Action, Sci-Fi, Thriller",
+      "runtime": "174 min",
+      "director": "Shankar Shanmugham",
+      "cast": "Rajinikanth, Aishwarya Rai Bachchan, Danny Denzongpa",
+      "plot": "A brilliant scientist creates a humanoid robot to protect mankind, but things go awry when human emotions are programmed and inner turmoil causes the robot to switch sides."
     }
   ]
 }
