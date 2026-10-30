@@ -1,7 +1,42 @@
 {
   "schema_version": 2,
-  "updated_at": "2026-10-30T18:00:22.891584+00:00",
+  "updated_at": "2026-10-30T18:00:51.090138+00:00",
   "movies": [
+    {
+      "id": "telegram-90",
+      "slug_id": "e_NQjLZUG9zxlcSu",
+      "title": "Thaandavam",
+      "year": 2012,
+      "qualities": {
+        "720p": {
+          "telegram_message_id": 90,
+          "file_size": 1585941988,
+          "file_name": "Thaandavam (2012) Tamil HQ BluRay - 720p - x264 - (DD_5..mkv",
+          "mime_type": "video/x-matroska"
+        }
+      },
+      "imdb_id": "tt2271641",
+      "poster": "https://m.media-amazon.com/images/M/MV5BMGNhMmJiNjYtZTlhMC00YjFjLTk0ZjctZjc4MWQwNTJjNDlmXkEyXkFqcGc@._V1_.jpg",
+      "genre": [
+        "Action",
+        "Thriller"
+      ],
+      "runtime": "160 min",
+      "director": "A.L. Vijay",
+      "cast": [
+        "Vikram",
+        "Jagapathi Babu",
+        "Anushka Shetty"
+      ],
+      "plot": "The identity of a blind church pianist is uncovered. Military officer Shiva Kumar is on the run as an accused fugitive, and is attempting to take revenge against those who killed his wife.",
+      "imdb_rating": "6.1",
+      "metadata_status": "matched",
+      "telegram_message_id": 90,
+      "file_size": 1585941988,
+      "file_name": "Thaandavam (2012) Tamil HQ BluRay - 720p - x264 - (DD_5..mkv",
+      "mime_type": "video/x-matroska",
+      "quality": "720p"
+    },
     {
       "id": "telegram-89",
       "slug_id": "z8fX3B76nbMqAsmV",
@@ -2661,32 +2696,6 @@
       "file_name": "Modha Rathri (2026) Tamil HQ HDRip - 720p - x264 - (DD+5.mkv",
       "mime_type": "video/x-matroska",
       "quality": "720p"
-    },
-    {
-      "id": "telegram-90",
-      "slug_id": "e_NQjLZUG9zxlcSu",
-      "title": "Thaandavam",
-      "year": 2012,
-      "qualities": {
-        "720p": {
-          "telegram_message_id": 90,
-          "file_name": "Thaandavam (2012) Tamil HQ BluRay - 720p - x264 - (DD_5..mkv",
-          "file_size": 0,
-          "mime_type": ""
-        }
-      },
-      "telegram_message_id": 90,
-      "quality": "720p",
-      "file_name": "Thaandavam (2012) Tamil HQ BluRay - 720p - x264 - (DD_5..mkv",
-      "file_size": 0,
-      "mime_type": "",
-      "imdb_id": "tt2271641",
-      "poster": "https://m.media-amazon.com/images/M/MV5BNWRlMTBlZmEtZmNhOC00ZDdlLTkxNmMtODNhMmI4YWQwYzBkXkEyXkFqcGdeQXVyMTEzNzg0Mjkx._V1_SX300.jpg",
-      "genre": "Action, Thriller",
-      "runtime": "160 min",
-      "director": "A.L. Vijay",
-      "cast": "Vikram, Jagapathi Babu, Anushka Shetty",
-      "plot": "The identity of a blind church pianist is uncovered. Military officer Shiva Kumar is on the run as an accused fugitive, and is attempting to take revenge against those who killed his wife."
     }
   ]
 }
