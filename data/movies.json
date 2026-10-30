@@ -1981,6 +1981,32 @@
       "director": "Vetrimaaran",
       "cast": "Soori, Vijay Sethupathi, Bhavani Sre",
       "plot": "A police officer is recruited to capture the leader of a separatist group."
+    },
+    {
+      "id": "telegram-71",
+      "slug_id": "HAyTwkjRXax6MfNv",
+      "title": "Viduthalai Part 2",
+      "year": 2024,
+      "qualities": {
+        "720p": {
+          "telegram_message_id": 71,
+          "file_name": "Viduthalai Part 2 (2024) Tamil HQ HDRip - 720p - x264 - .mkv",
+          "file_size": 0,
+          "mime_type": ""
+        }
+      },
+      "telegram_message_id": 71,
+      "quality": "720p",
+      "file_name": "Viduthalai Part 2 (2024) Tamil HQ HDRip - 720p - x264 - .mkv",
+      "file_size": 0,
+      "mime_type": "",
+      "imdb_id": "tt25434834",
+      "poster": "https://m.media-amazon.com/images/M/MV5BM2ZjNTZjNWYtMDk2MC00YWFhLTg5MGEtMDM3OGIyMWI3YTA0XkEyXkFqcGc@._V1_QL75_UX380_CR0,14,380,562_.jpg",
+      "genre": "Action, Crime, Drama",
+      "runtime": "170 min",
+      "director": "Vetrimaaran",
+      "cast": "Soori, Vijay Sethupathi, Manju Warrier",
+      "plot": "An unassuming school teacher faces extreme circumstances, forcing him to take up arms and lead a fiery rebellion against oppression, becoming an unlikely leader."
     }
   ]
 }
