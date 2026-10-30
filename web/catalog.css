@@ -510,3 +510,23 @@ body.catalog-search-active>div>header,body.catalog-search-active>div>footer{disp
  #catalog-home.search-fullscreen .catalog-filters{margin-bottom:20px}
 }
 @media(prefers-reduced-motion:reduce){#catalog-home.search-fullscreen{scroll-behavior:auto}}
+
+/* Keep the search glyph centered and make the focused search a results-only view. */
+.catalog-search-field{height:54px;display:flex;align-items:center}
+.catalog-search-icon{top:0;bottom:0;margin-block:auto;transform:none;flex:none}
+#catalog-home.search-fullscreen .catalog-filters{display:none!important}
+#catalog-home.search-fullscreen #catalog-grid{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:14px!important;row-gap:14px!important}
+#catalog-home.search-fullscreen .search-result-card{display:grid!important;grid-template-columns:clamp(76px,9vw,112px) minmax(0,1fr);gap:15px;align-items:center;min-height:130px;padding:12px;border:1px solid rgba(255,255,255,.09);border-radius:16px;background:linear-gradient(145deg,rgba(255,255,255,.055),rgba(255,255,255,.025));}
+#catalog-home.search-fullscreen .search-result-card .poster-wrap{width:100%;border-radius:10px}
+#catalog-home.search-fullscreen .search-result-card .poster{border-radius:10px}
+#catalog-home.search-fullscreen .search-result-info{min-width:0}
+#catalog-home.search-fullscreen .search-result-card h3{margin:0!important;overflow:hidden;text-overflow:ellipsis;white-space:normal;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;font-size:14px!important;line-height:1.4}
+#catalog-home.search-fullscreen .search-result-card p{margin-top:7px!important}
+#catalog-home.search-fullscreen .search-result-card:hover{border-color:rgba(255,255,255,.2);background:rgba(255,255,255,.07)}
+@media(max-width:640px){
+ .catalog-search-field{height:54px}
+ #catalog-home.search-fullscreen .catalog-search-field{height:48px}
+ #catalog-home.search-fullscreen #catalog-grid{grid-template-columns:minmax(0,1fr);row-gap:10px!important}
+ #catalog-home.search-fullscreen .search-result-card{grid-template-columns:76px minmax(0,1fr);gap:13px;min-height:112px;padding:10px;border-radius:14px}
+ #catalog-home.search-fullscreen .search-result-card .poster-wrap,#catalog-home.search-fullscreen .search-result-card .poster{border-radius:9px}
+}
