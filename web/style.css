@@ -402,3 +402,17 @@ main{padding-inline:clamp(16px,4vw,40px)!important}
  .history-card-top{flex-direction:column}
  .usage-tile span{font-size:9px!important}
 }
+
+/* Membership plans fill the content width at every breakpoint. */
+#plans .plans-grid{grid-template-columns:minmax(0,1fr)!important;gap:14px!important}
+#plans .plan-card{width:100%;min-width:0}
+@media(min-width:900px){
+ #plans .plan-card{display:grid;grid-template-columns:minmax(175px,.8fr) minmax(0,2fr) minmax(190px,.8fr);align-items:center;column-gap:clamp(22px,4vw,54px);row-gap:4px;min-height:190px;padding:25px 30px!important}
+ #plans .plan-card>.plan-kicker,#plans .plan-card>h3,#plans .plan-card>.plan-price,#plans .plan-card>p.small{grid-column:1;margin-top:0}
+ #plans .plan-card>.plan-kicker{align-self:end}
+ #plans .plan-card>h3{margin-bottom:0}
+ #plans .plan-card>p.small{align-self:start;margin-bottom:0}
+ #plans .plan-card>ul{grid-column:2;grid-row:1/span 4;margin:0;padding-left:20px}
+ #plans .plan-card>.primary-button{grid-column:3;grid-row:1/span 5;align-self:center;width:100%;min-height:50px;margin:0!important;padding-inline:16px;font-size:13px}
+}
+@media(max-width:899px){#plans .plan-card{display:flex;flex-direction:column;align-items:stretch}#plans .plan-card>.primary-button{margin-top:12px!important}}
