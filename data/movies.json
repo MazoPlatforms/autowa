@@ -1744,6 +1744,32 @@
       "file_name": "Modha Rathri (2026) Tamil HQ HDRip - 720p - x264 - (DD+5.mkv",
       "mime_type": "video/x-matroska",
       "quality": "720p"
+    },
+    {
+      "id": "telegram-64",
+      "slug_id": "mlefhQyyZHyAosi3",
+      "title": "Pathu Thala",
+      "year": 2023,
+      "qualities": {
+        "720p": {
+          "telegram_message_id": 64,
+          "file_name": "Pathu_Thala_2023_Tamil_Proper_HQ_HDRip_720p_x264_DD+5_1_192Kbps.mkv",
+          "file_size": 0,
+          "mime_type": ""
+        }
+      },
+      "telegram_message_id": 64,
+      "quality": "720p",
+      "file_name": "Pathu_Thala_2023_Tamil_Proper_HQ_HDRip_720p_x264_DD+5_1_192Kbps.mkv",
+      "file_size": 0,
+      "mime_type": "",
+      "imdb_id": "tt11732164",
+      "poster": "https://m.media-amazon.com/images/M/MV5BZDRlZTM4YjctNzdiNC00ZGI1LWJlMTYtMjY3NjRhM2U3MDc5XkEyXkFqcGc@._V1_QL75_UY562_CR2,0,380,562_.jpg",
+      "genre": "Action, Crime, Drama",
+      "runtime": "151 min",
+      "director": "Obeli N. Krishna",
+      "cast": "Silambarasan TR, Gautham Ram Karthik, Priya Bhavani Shankar",
+      "plot": "An undercover cop goes to find and kill a crime lord. However, when he realizes that the crime lord's business intentions are good and he has his own challenges, he needs to decide his next step and help the crime lord change his ..."
     }
   ]
 }
