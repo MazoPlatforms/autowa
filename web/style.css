@@ -415,3 +415,19 @@ main{padding-inline:clamp(16px,4vw,40px)!important}
 @media(min-width:700px){#plans .plans-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}#plans .plan-card:last-child{grid-column:1/-1}}
 @media(min-width:1024px){#plans .plans-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important;grid-auto-rows:1fr;gap:16px!important}#plans .plan-card{height:100%;padding:24px 22px!important}#plans .plan-card:last-child{grid-column:auto}#plans .plan-card>ul{flex:1}#plans .plan-card>.primary-button{margin-top:auto!important}}
 @media(min-width:1400px){#plans .plan-card{padding:28px 30px!important}}
+
+/* Searchable country code picker for WhatsApp sign-in. */
+#start .country-picker{position:relative;margin-top:8px}
+#start #country.country-native{position:absolute!important;left:0;top:0;width:1px!important;height:1px!important;min-height:1px!important;padding:0!important;border:0!important;opacity:0!important;pointer-events:none!important}
+#start .country-trigger{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;height:50px;padding:0 14px;border:1px solid #3f3f46;border-radius:12px;background:#242428;color:#f4f4f5;text-align:left;font-size:14px;font-weight:600}
+#start .country-trigger:hover,#start .country-picker:has(.country-panel:not([hidden])) .country-trigger{border-color:#71717a;background:#2b2b30}
+#start .country-trigger svg{flex:none;color:#a1a1aa;transition:transform .18s}
+#start .country-trigger[aria-expanded=true] svg{transform:rotate(180deg)}
+#start .country-panel{position:absolute;z-index:60;top:calc(100% + 8px);left:0;right:0;padding:10px;border:1px solid #44444d;border-radius:16px;background:rgba(25,25,29,.98);box-shadow:0 24px 60px #000b;backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px)}
+#start .country-panel[hidden]{display:none!important}
+#start #country-search{height:42px!important;margin:0!important;background:#121215!important;font-size:13px!important}
+#start .country-options{display:flex;flex-direction:column;gap:2px;max-height:min(320px,42vh);overflow-y:auto;margin-top:8px;overscroll-behavior:contain}
+#start .country-option{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;min-height:42px;padding:9px 10px;border:0;border-radius:10px;background:transparent;color:#e4e4e7;text-align:left;font-size:13px}
+#start .country-option:hover,#start .country-option:focus-visible,#start .country-option[aria-selected=true]{background:#ffffff12;outline:none}
+#start .country-option-dial{flex:none;color:#a1a1aa;font-size:12px;font-variant-numeric:tabular-nums}
+#start .country-no-results{margin:12px 8px;color:#a1a1aa;font-size:12px;text-align:center}
