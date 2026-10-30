@@ -1,0 +1,20 @@
+name: Publish FilmGo release asset
+
+on:
+  push:
+    branches: [feat/android-filmgo-app]
+    paths: ['app/android/release/FilmGo.apk']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Replace APK on the existing release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release upload v1.0.0 app/android/release/FilmGo.apk --repo "$GITHUB_REPOSITORY" --clobber
