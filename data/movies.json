@@ -1850,6 +1850,32 @@
       "file_name": "Modha Rathri (2026) Tamil HQ HDRip - 720p - x264 - (DD+5.mkv",
       "mime_type": "video/x-matroska",
       "quality": "720p"
+    },
+    {
+      "id": "telegram-67",
+      "slug_id": "JROTK9EvoLv9MLpW",
+      "title": "Kondraal Paavam",
+      "year": 2023,
+      "qualities": {
+        "720p": {
+          "telegram_message_id": 67,
+          "file_name": "Kondraal_Paavam_2023_Tamil_HQ_HDRip_720p_x264_AAC_2_0_1_3GB_ESub.mkv",
+          "file_size": 0,
+          "mime_type": ""
+        }
+      },
+      "telegram_message_id": 67,
+      "quality": "720p",
+      "file_name": "Kondraal_Paavam_2023_Tamil_HQ_HDRip_720p_x264_AAC_2_0_1_3GB_ESub.mkv",
+      "file_size": 0,
+      "mime_type": "",
+      "imdb_id": "tt23710126",
+      "poster": "https://m.media-amazon.com/images/M/MV5BNTM3YTUyOTAtNWMyNS00NjBhLWI5MDEtMWMxOGU1YWQ2NTE1XkEyXkFqcGc@._V1_SX300.jpg",
+      "genre": "Crime, Drama, Thriller",
+      "runtime": "109 min",
+      "director": "Dayal Padmanabhan",
+      "cast": "Varalaxmi Sarathkumar, Santhosh Prathap, Charle",
+      "plot": "A stranger enters the life of a family that has been suffering in poverty for years. What follows are the events that make their lives even more miserable."
     }
   ]
 }
