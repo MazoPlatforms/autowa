@@ -218,9 +218,7 @@
 .filmgo-player-shell:fullscreen .filmgo-settings-panel,.filmgo-player-shell:-webkit-full-screen .filmgo-settings-panel{top:0;left:auto;right:0;bottom:0;width:min(42vw,520px);padding:62px 28px 28px}
 @media(max-width:520px){.filmgo-settings-panel{top:0;left:auto;right:0;bottom:0;width:82%;padding:52px 14px 18px;grid-template-columns:repeat(3,minmax(58px,1fr));gap:12px 6px}.filmgo-settings-close{top:10px;left:10px}.filmgo-settings-panel .filmgo-setting{padding:7px 2px;font-size:10px}.filmgo-settings-panel .filmgo-setting>svg,.filmgo-settings-panel .filmgo-settings-action svg{width:28px;height:28px}.filmgo-settings-panel .filmgo-settings-action{min-height:78px;font-size:10px}.filmgo-player-shell:fullscreen .filmgo-settings-panel,.filmgo-player-shell:-webkit-full-screen .filmgo-settings-panel{width:82%;padding:54px 14px 20px}}
 
-.detail-loading{display:flex;align-items:center;justify-content:center;min-height:180px;border:1px solid #303036;border-radius:16px;background:linear-gradient(105deg,#18181b 10%,#303035 25%,#18181b 40%);background-size:220% 100%;animation:detail-loading-pulse 1.35s linear infinite;color:#a1a1aa;font-size:14px;font-weight:650}
-@keyframes detail-loading-pulse{to{background-position-x:-220%}}
-@media(prefers-reduced-motion:reduce){.detail-loading{animation:none}}
+.detail-loading{display:flex;align-items:center;justify-content:center;min-height:50vh;color:#a1a1aa;font-size:14px;font-weight:650}
 
 /* Final responsive settings layout: every control stays inside the side sheet. */
 .filmgo-settings-panel{box-sizing:border-box;grid-template-columns:repeat(3,minmax(0,1fr));align-items:start;overflow-x:hidden}
