@@ -1,7 +1,43 @@
 {
   "schema_version": 2,
-  "updated_at": "2026-10-30T12:07:35.246759+00:00",
+  "updated_at": "2026-10-30T12:08:01.896207+00:00",
   "movies": [
+    {
+      "id": "telegram-63",
+      "slug_id": "smPirlDzLSfoe1eM",
+      "title": "Chekka Chivantha Vaanam",
+      "year": 2018,
+      "qualities": {
+        "720p": {
+          "telegram_message_id": 63,
+          "file_size": 1467495161,
+          "file_name": "Chekka Chivantha Vaanam (2018) Tamil HQ HDRip - 720p - x.mkv",
+          "mime_type": "video/x-matroska"
+        }
+      },
+      "imdb_id": "tt7892050",
+      "poster": "https://m.media-amazon.com/images/M/MV5BMTQ3NzUyODktMDA0OS00Y2UwLTlkNDktZTIwMjM4M2VmYWVjXkEyXkFqcGc@._V1_.jpg",
+      "genre": [
+        "Action",
+        "Crime",
+        "Drama"
+      ],
+      "runtime": "146 min",
+      "director": "Mani Ratnam",
+      "cast": [
+        "Arvind Swamy",
+        "Arun Vijay",
+        "Silambarasan TR"
+      ],
+      "plot": "A bloody power struggle erupts between three brothers who are vying to take over the family business following the death of their father.",
+      "imdb_rating": "7.2",
+      "metadata_status": "matched",
+      "telegram_message_id": 63,
+      "file_size": 1467495161,
+      "file_name": "Chekka Chivantha Vaanam (2018) Tamil HQ HDRip - 720p - x.mkv",
+      "mime_type": "video/x-matroska",
+      "quality": "720p"
+    },
     {
       "id": "telegram-62",
       "slug_id": "wjk55N1IpicDB3VE",
@@ -1708,32 +1744,6 @@
       "file_name": "Modha Rathri (2026) Tamil HQ HDRip - 720p - x264 - (DD+5.mkv",
       "mime_type": "video/x-matroska",
       "quality": "720p"
-    },
-    {
-      "id": "telegram-63",
-      "slug_id": "smPirlDzLSfoe1eM",
-      "title": "Chekka Chivantha Vaanam",
-      "year": 2018,
-      "qualities": {
-        "720p": {
-          "telegram_message_id": 63,
-          "file_name": "Chekka Chivantha Vaanam (2018) Tamil HQ HDRip - 720p - x.mkv",
-          "file_size": 0,
-          "mime_type": ""
-        }
-      },
-      "telegram_message_id": 63,
-      "quality": "720p",
-      "file_name": "Chekka Chivantha Vaanam (2018) Tamil HQ HDRip - 720p - x.mkv",
-      "file_size": 0,
-      "mime_type": "",
-      "imdb_id": "tt7892050",
-      "poster": "https://m.media-amazon.com/images/M/MV5BYmRiOWMzOWEtMGZiZC00NjA0LWIzYTMtNjAxM2FmNzlkMjEwXkEyXkFqcGc@._V1_SX300.jpg",
-      "genre": "Action, Crime, Drama",
-      "runtime": "146 min",
-      "director": "Mani Ratnam",
-      "cast": "Arvind Swamy, Arun Vijay, Silambarasan TR",
-      "plot": "A bloody power struggle erupts between three brothers who are vying to take over the family business following the death of their father."
     }
   ]
 }
