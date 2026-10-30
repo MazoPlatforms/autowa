@@ -126,11 +126,13 @@ class MainActivity : Activity() {
             }
 
             override fun onReceivedError(view: WebView?, request: WebResourceRequest?, error: WebResourceError?) {
-                if (request?.isForMainFrame != false) showOfflineReady()
+                if (request?.isForMainFrame != false) {
+                    if (hasNetwork()) showMaintenanceReady() else showOfflineReady()
+                }
             }
 
             override fun onReceivedHttpError(view: WebView?, request: WebResourceRequest?, errorResponse: android.webkit.WebResourceResponse?) {
-                if (request?.isForMainFrame == true && (errorResponse?.statusCode ?: 200) >= 400) showOfflineReady()
+                if (request?.isForMainFrame == true && (errorResponse?.statusCode ?: 200) >= 400) showMaintenanceReady()
             }
         }
         webChromeClient = object : WebChromeClient() {
@@ -239,18 +241,6 @@ class MainActivity : Activity() {
             }
             addView(logo, LinearLayout.LayoutParams(dp(174), dp(58)))
 
-            val eyebrow = TextView(this@MainActivity).apply {
-                text = "●  YOUR MOVIE LIBRARY"
-                textSize = 11f
-                typeface = semi
-                letterSpacing = 0.06f
-                setTextColor(Color.rgb(212, 212, 216))
-                gravity = Gravity.CENTER
-                setPadding(dp(16), dp(10), dp(16), dp(10))
-                background = rounded(Color.rgb(31, 31, 35), 24)
-            }
-            addView(eyebrow, LinearLayout.LayoutParams(-2, dp(38)).apply { topMargin = dp(34) })
-
             offlineTitle = TextView(this@MainActivity).apply {
                 text = "You’re offline"
                 textSize = 30f
@@ -258,7 +248,7 @@ class MainActivity : Activity() {
                 setTextColor(Color.rgb(244, 244, 245))
                 gravity = Gravity.CENTER
             }
-            addView(offlineTitle, LinearLayout.LayoutParams(-1, -2).apply { topMargin = dp(26) })
+            addView(offlineTitle, LinearLayout.LayoutParams(-1, -2).apply { topMargin = dp(34) })
 
             offlineMessage = TextView(this@MainActivity).apply {
                 text = "FilmGo needs an internet connection to load the latest movie library.\nConnect and try again."
@@ -317,6 +307,15 @@ class MainActivity : Activity() {
         webView.stopLoading(); webView.visibility = View.GONE; offlineView.visibility = View.VISIBLE
         offlineTitle.text = "You’re offline"
         offlineMessage.text = "FilmGo needs an internet connection to load the latest movie library.\nConnect and try again."
+        offlineSpinner.visibility = View.GONE
+        retryButton.visibility = View.VISIBLE
+        retryButton.isEnabled = true; retryButton.text = "Try again"; loadingText.visibility = View.GONE; progressBar.visibility = View.GONE
+    }
+
+    private fun showMaintenanceReady() {
+        webView.stopLoading(); webView.visibility = View.GONE; offlineView.visibility = View.VISIBLE
+        offlineTitle.text = "FilmGo is under maintenance"
+        offlineMessage.text = "The FilmGo service can’t be reached right now.\nPlease try again in a moment."
         offlineSpinner.visibility = View.GONE
         retryButton.visibility = View.VISIBLE
         retryButton.isEnabled = true; retryButton.text = "Try again"; loadingText.visibility = View.GONE; progressBar.visibility = View.GONE
