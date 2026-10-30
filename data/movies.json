@@ -1567,6 +1567,32 @@
       "file_name": "Modha Rathri (2026) Tamil HQ HDRip - 720p - x264 - (DD+5.mkv",
       "mime_type": "video/x-matroska",
       "quality": "720p"
+    },
+    {
+      "id": "telegram-59",
+      "slug_id": "h1eYp5q-LWdUHDh_",
+      "title": "Vaathi",
+      "year": 2023,
+      "qualities": {
+        "720p": {
+          "telegram_message_id": 59,
+          "file_name": "Vaathi_2023_Tamil_HQ_HDRip_720p_x264_DD+5_1_192Kbps_&_AAC_2_0_1.mkv",
+          "file_size": 0,
+          "mime_type": ""
+        }
+      },
+      "telegram_message_id": 59,
+      "quality": "720p",
+      "file_name": "Vaathi_2023_Tamil_HQ_HDRip_720p_x264_DD+5_1_192Kbps_&_AAC_2_0_1.mkv",
+      "file_size": 0,
+      "mime_type": "",
+      "imdb_id": "tt15427980",
+      "poster": "https://m.media-amazon.com/images/M/MV5BODhmMTFmNjMtZjMwOS00MjNlLWJkNzQtYTI0MjhiZDMzNzZmXkEyXkFqcGc@._V1_SX300.jpg",
+      "genre": "Action, Drama",
+      "runtime": "139 min",
+      "director": "Venky Atluri",
+      "cast": "Dhanush, Samuthirakani, Ken Karunas",
+      "plot": "When a private school teacher is assigned to a neglected public school, he must overcome personal and political strife in his fight for education."
     }
   ]
 }
