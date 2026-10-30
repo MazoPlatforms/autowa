@@ -2609,6 +2609,32 @@
       "director": "N. Linguswamy",
       "cast": "Arya, Madhavan, Sameera Reddy",
       "plot": "Thiru join hands with his brother Guru to face the mobsters of a city."
+    },
+    {
+      "id": "telegram-89",
+      "slug_id": "z8fX3B76nbMqAsmV",
+      "title": "Mugamoodi",
+      "year": 2012,
+      "qualities": {
+        "720p": {
+          "telegram_message_id": 89,
+          "file_name": "@RickyChannel Mugamoodi.2012.Tamil.720p.DVDRip.RC.mp4",
+          "file_size": 0,
+          "mime_type": ""
+        }
+      },
+      "telegram_message_id": 89,
+      "quality": "720p",
+      "file_name": "@RickyChannel Mugamoodi.2012.Tamil.720p.DVDRip.RC.mp4",
+      "file_size": 0,
+      "mime_type": "",
+      "imdb_id": "tt2367996",
+      "poster": "https://m.media-amazon.com/images/M/MV5BODQ5NGVkMGMtMjU2MS00NDMzLWJiMGYtMGY0MWIxNjM2MGI2XkEyXkFqcGdeQXVyMTEzNzg0Mjkx._V1_SX300.jpg",
+      "genre": "Action, Adventure",
+      "runtime": "150 min",
+      "director": "Mysskin",
+      "cast": "Jiiva, Narain, Nassar",
+      "plot": "A hopeless young man uses his \"Kung-fu\" skills and mask to tackle a bank robbery group without revealing his identity."
     }
   ]
 }
