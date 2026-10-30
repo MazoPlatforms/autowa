@@ -1,7 +1,42 @@
 {
   "schema_version": 2,
-  "updated_at": "2026-10-30T12:09:01.323339+00:00",
+  "updated_at": "2026-10-30T12:09:57.835750+00:00",
   "movies": [
+    {
+      "id": "telegram-65",
+      "slug_id": "TTxK7vz394Zghbcf",
+      "title": "Karuppu",
+      "year": 2026,
+      "qualities": {
+        "720p": {
+          "telegram_message_id": 65,
+          "file_size": 1521811225,
+          "file_name": "Karuppu.2026.720p.AMZN.WEB-DL.DUAL.DDP5.1.H.264-ExtraFlix.Pw.mkv",
+          "mime_type": "video/x-matroska"
+        }
+      },
+      "imdb_id": "tt33988385",
+      "poster": "https://m.media-amazon.com/images/M/MV5BODI1YjQxNDYtZWYzNC00NGJjLWIyMGMtMWJhMDlhZDY2MGYyXkEyXkFqcGc@._V1_.jpg",
+      "genre": [
+        "Action",
+        "Drama"
+      ],
+      "runtime": null,
+      "director": "RJ Balaji",
+      "cast": [
+        "Suriya",
+        "Trisha Krishnan",
+        "Prakash Raj"
+      ],
+      "plot": "",
+      "imdb_rating": null,
+      "metadata_status": "matched",
+      "telegram_message_id": 65,
+      "file_size": 1521811225,
+      "file_name": "Karuppu.2026.720p.AMZN.WEB-DL.DUAL.DDP5.1.H.264-ExtraFlix.Pw.mkv",
+      "mime_type": "video/x-matroska",
+      "quality": "720p"
+    },
     {
       "id": "telegram-64",
       "slug_id": "mlefhQyyZHyAosi3",
@@ -1780,31 +1815,6 @@
       "file_name": "Modha Rathri (2026) Tamil HQ HDRip - 720p - x264 - (DD+5.mkv",
       "mime_type": "video/x-matroska",
       "quality": "720p"
-    },
-    {
-      "id": "telegram-65",
-      "slug_id": "TTxK7vz394Zghbcf",
-      "title": "Karuppu",
-      "year": 2026,
-      "qualities": {
-        "720p": {
-          "telegram_message_id": 65,
-          "file_name": "Karuppu.2026.720p.AMZN.WEB-DL.DUAL.DDP5.1.H.264-ExtraFlix.Pw.mkv",
-          "file_size": 0,
-          "mime_type": ""
-        }
-      },
-      "telegram_message_id": 65,
-      "quality": "720p",
-      "file_name": "Karuppu.2026.720p.AMZN.WEB-DL.DUAL.DDP5.1.H.264-ExtraFlix.Pw.mkv",
-      "file_size": 0,
-      "mime_type": "",
-      "imdb_id": "tt33988385",
-      "poster": "https://m.media-amazon.com/images/M/MV5BNjIwNjY5OTItMmM5Yi00MjM3LTliMzgtNTA0MzRlMDkzZDQ3XkEyXkFqcGc@._V1_SX300.jpg",
-      "genre": "Action, Drama",
-      "runtime": "N/A",
-      "director": "RJ Balaji",
-      "cast": "Suriya, Trisha Krishnan, Prakash Raj"
     }
   ]
 }
