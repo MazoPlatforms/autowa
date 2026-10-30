@@ -1,7 +1,42 @@
 {
   "schema_version": 2,
-  "updated_at": "2026-10-30T15:37:11.781134+00:00",
+  "updated_at": "2026-10-30T17:51:22.143242+00:00",
   "movies": [
+    {
+      "id": "telegram-76",
+      "slug_id": "n0WURym8SB-ck0_p",
+      "title": "Nanban",
+      "year": 2012,
+      "qualities": {
+        "720p": {
+          "telegram_message_id": 76,
+          "file_size": 1609031717,
+          "file_name": "Nanban_2012_Tamil_720p_HDRip_DD5_1_×264_Vijaysm_Kerala.mkv",
+          "mime_type": "video/x-matroska"
+        }
+      },
+      "imdb_id": "tt2180477",
+      "poster": "https://m.media-amazon.com/images/M/MV5BNWY4YThjYzYtNWVhMC00YzZkLWI2ZDktYzAzYzIwNDM5ZjY3XkEyXkFqcGc@._V1_.jpg",
+      "genre": [
+        "Comedy",
+        "Drama"
+      ],
+      "runtime": "188 min",
+      "director": "S. Shankar",
+      "cast": [
+        "Joseph Vijay",
+        "Jiiva",
+        "Srikanth"
+      ],
+      "plot": "10 years after leaving college, two best friends and their rival go on a search for their third friend, while finding out some truths along the way.",
+      "imdb_rating": "7.8",
+      "metadata_status": "matched",
+      "telegram_message_id": 76,
+      "file_size": 1609031717,
+      "file_name": "Nanban_2012_Tamil_720p_HDRip_DD5_1_×264_Vijaysm_Kerala.mkv",
+      "mime_type": "video/x-matroska",
+      "quality": "720p"
+    },
     {
       "id": "telegram-75",
       "slug_id": "XNsiHCXxiIpat3Vh",
@@ -2171,32 +2206,6 @@
       "file_name": "Modha Rathri (2026) Tamil HQ HDRip - 720p - x264 - (DD+5.mkv",
       "mime_type": "video/x-matroska",
       "quality": "720p"
-    },
-    {
-      "id": "telegram-76",
-      "slug_id": "n0WURym8SB-ck0_p",
-      "title": "Nanban",
-      "year": 2012,
-      "qualities": {
-        "720p": {
-          "telegram_message_id": 76,
-          "file_name": "Nanban_2012_Tamil_720p_HDRip_DD5_1_×264_Vijaysm_Kerala.mkv",
-          "file_size": 0,
-          "mime_type": ""
-        }
-      },
-      "telegram_message_id": 76,
-      "quality": "720p",
-      "file_name": "Nanban_2012_Tamil_720p_HDRip_DD5_1_×264_Vijaysm_Kerala.mkv",
-      "file_size": 0,
-      "mime_type": "",
-      "imdb_id": "tt2180477",
-      "poster": "https://m.media-amazon.com/images/M/MV5BNWY4YThjYzYtNWVhMC00YzZkLWI2ZDktYzAzYzIwNDM5ZjY3XkEyXkFqcGc@._V1_SX300.jpg",
-      "genre": "Comedy, Drama",
-      "runtime": "188 min",
-      "director": "S. Shankar",
-      "cast": "Joseph Vijay, Jiiva, Srikanth",
-      "plot": "10 years after leaving college, two best friends and their rival go on a search for their third friend, while finding out some truths along the way."
     }
   ]
 }
