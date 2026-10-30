@@ -1,0 +1,18 @@
+{
+  "id": "request-d1bc34c0-fc15-4e9b-8b50-22d25ce251b7",
+  "title": "Sigma",
+  "year": "2026",
+  "quality": "720p",
+  "license_confirmed": true,
+  "enabled": false,
+  "status": "failed",
+  "started_at": "2026-10-30T18:28:57.084Z",
+  "file_type": "mkv",
+  "filename": "mzn.is-a.dev - Sigma (2026) - 720p.mkv",
+  "caption": "🎬 FilmGo\n\n🎞️ Sigma (2026)\n\nEnjoy the movie!\n\n> Powered by Itz Maazin • https://mzn.is-a.dev/",
+  "finished_at": "2026-10-30T18:44:50.333Z",
+  "failure_stage": "media_publishing",
+  "request_origin": "koyeb_verified",
+  "workflow_run_id": "41107193690",
+  "workflow_run_url": "https://github.com/MazoPlatforms/autowa/actions/runs/41107193690"
+}
