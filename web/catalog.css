@@ -569,3 +569,8 @@ body.catalog-search-active>div>header,body.catalog-search-active>div>footer{disp
  .catalog-filter .filter-chevron,.catalog-filter .filter-chevron svg{width:12px!important;height:12px!important;flex-basis:12px!important}
  .catalog-filter .filter-trigger-label{font-size:10px}
 }
+
+/* Keep poster cards visibly loading while their nearby images are prefetched. */
+.poster-loading,.detail-poster.poster-loading{background-color:#18181b!important;background-image:linear-gradient(105deg,#18181b 10%,#303035 25%,#18181b 40%)!important;background-size:220% 100%!important;animation:shimmer 1.35s linear infinite}
+.poster-failed{background:#18181b!important;background-image:none!important;animation:none!important}
+@media(prefers-reduced-motion:reduce){.poster-loading,.detail-poster.poster-loading{background-image:none!important;animation:none}}
