@@ -217,3 +217,44 @@
 .filmgo-settings-panel .filmgo-settings-action{grid-column:span 1;min-height:92px;flex-direction:column;justify-content:center;padding:10px 5px;border:0;border-radius:10px;background:transparent;color:#f4f4f5;text-align:center;font-size:11px;font-weight:550}.filmgo-settings-panel .filmgo-settings-action:hover:not(:disabled){background:#ffffff12}.filmgo-settings-panel .filmgo-settings-action svg{width:32px;height:32px;flex-basis:32px}.filmgo-settings-panel .filmgo-quality-label{grid-column:1/-1;display:flex;align-items:center;gap:8px;margin:0;color:#fafafa;font-size:13px}.filmgo-settings-panel .filmgo-quality-label svg{width:22px;height:22px}.filmgo-settings-panel .filmgo-quality-options{grid-column:1/-1;display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:0}.filmgo-settings-panel .filmgo-quality-button{min-width:58px;border:1px solid #ffffff28;background:#ffffff10;color:#fafafa}.filmgo-settings-panel .filmgo-quality-button.active{background:#fafafa;color:#111}
 .filmgo-player-shell:fullscreen .filmgo-settings-panel,.filmgo-player-shell:-webkit-full-screen .filmgo-settings-panel{top:0;left:auto;right:0;bottom:0;width:min(42vw,520px);padding:62px 28px 28px}
 @media(max-width:520px){.filmgo-settings-panel{top:0;left:auto;right:0;bottom:0;width:82%;padding:52px 14px 18px;grid-template-columns:repeat(3,minmax(58px,1fr));gap:12px 6px}.filmgo-settings-close{top:10px;left:10px}.filmgo-settings-panel .filmgo-setting{padding:7px 2px;font-size:10px}.filmgo-settings-panel .filmgo-setting>svg,.filmgo-settings-panel .filmgo-settings-action svg{width:28px;height:28px}.filmgo-settings-panel .filmgo-settings-action{min-height:78px;font-size:10px}.filmgo-player-shell:fullscreen .filmgo-settings-panel,.filmgo-player-shell:-webkit-full-screen .filmgo-settings-panel{width:82%;padding:54px 14px 20px}}
+
+/* Final responsive settings layout: every control stays inside the side sheet. */
+.filmgo-settings-panel{box-sizing:border-box;grid-template-columns:repeat(3,minmax(0,1fr));align-items:start;overflow-x:hidden}
+.filmgo-settings-panel .filmgo-setting{box-sizing:border-box;min-width:0;width:100%;overflow:hidden}
+.filmgo-settings-panel .filmgo-setting>span{width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.filmgo-settings-panel .filmgo-setting-select{box-sizing:border-box;min-width:0;max-width:100%;overflow:hidden;text-overflow:ellipsis}
+.filmgo-settings-panel .filmgo-setting-range{min-width:0;max-width:100%}
+.filmgo-settings-panel .filmgo-settings-action{box-sizing:border-box;min-width:0;width:100%}
+.filmgo-settings-panel .filmgo-settings-action>span{display:block;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+@media(max-width:520px){
+ .filmgo-settings-panel{width:min(78%,340px);padding:52px 12px 16px;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 8px}
+ .filmgo-settings-panel .filmgo-setting{padding:8px 4px;gap:6px;font-size:11px}
+ .filmgo-settings-panel .filmgo-setting>svg,.filmgo-settings-panel .filmgo-settings-action svg{width:26px;height:26px}
+ .filmgo-settings-panel .filmgo-settings-action{min-height:76px;padding:8px 4px;font-size:11px}
+ .filmgo-settings-panel .filmgo-settings-action>span{font-size:10px;letter-spacing:-.1px}
+ .filmgo-settings-panel .filmgo-quality-label,.filmgo-settings-panel .filmgo-quality-options{grid-column:1/-1}
+ .filmgo-player-shell:fullscreen .filmgo-settings-panel,.filmgo-player-shell:-webkit-full-screen .filmgo-settings-panel{width:min(78vw,360px);padding:54px 12px 18px;grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+
+/* Settings redesign: a readable vertical side sheet instead of a cramped icon grid. */
+.filmgo-settings-panel{grid-template-columns:1fr;gap:8px;padding:54px 16px 16px;background:linear-gradient(180deg,#17171bf5 0%,#0b0b0ef7 100%)}
+.filmgo-settings-panel::before{content:'Player settings';display:block;margin:0 0 4px;padding:0 2px;color:#fafafa;font-size:15px;font-weight:750;letter-spacing:-.01em}
+.filmgo-settings-panel .filmgo-setting{display:grid;grid-template-columns:28px minmax(0,1fr);grid-template-rows:auto auto;align-items:center;column-gap:10px;row-gap:5px;width:100%;padding:11px 10px;border:1px solid #ffffff18;border-radius:12px;background:#ffffff08;text-align:left;font-size:12px}
+.filmgo-settings-panel .filmgo-setting>svg{grid-row:1 / span 2;width:22px;height:22px}
+.filmgo-settings-panel .filmgo-setting>span{grid-column:2;justify-self:start;min-height:0;width:100%;text-align:left;font-size:12px;font-weight:650}
+.filmgo-settings-panel .filmgo-setting-select,.filmgo-settings-panel .filmgo-setting-range{grid-column:2;width:100%;max-width:none}
+.filmgo-settings-panel .filmgo-setting-select{height:34px;text-align:left}
+.filmgo-settings-panel .filmgo-setting-range{margin:1px 0 2px}
+.filmgo-settings-panel .filmgo-settings-action{display:flex;flex-direction:row;align-items:center;justify-content:flex-start;gap:10px;width:100%;min-height:48px;padding:11px 12px;border:1px solid #ffffff18;border-radius:12px;background:#ffffff08;text-align:left;font-size:12px}
+.filmgo-settings-panel .filmgo-settings-action svg{width:22px;height:22px;flex:0 0 22px}
+.filmgo-settings-panel .filmgo-settings-action>span{flex:1;text-align:left;font-size:12px;white-space:nowrap}
+.filmgo-settings-panel .filmgo-quality-label{display:flex;align-items:center;gap:8px;margin:6px 2px 0;font-size:11px;font-weight:750;letter-spacing:.08em;text-transform:uppercase}
+.filmgo-settings-panel .filmgo-quality-label svg{width:18px;height:18px}
+.filmgo-settings-panel .filmgo-quality-options{display:flex;grid-column:auto;justify-content:flex-start;gap:7px;margin:0;padding:0 2px}
+.filmgo-settings-panel .filmgo-quality-button{min-width:56px;min-height:34px;padding:7px 10px;border-radius:9px;font-size:11px}
+@media(max-width:520px){
+ .filmgo-settings-panel{width:min(78%,340px);grid-template-columns:1fr;padding:54px 12px 14px;gap:8px}
+ .filmgo-settings-panel::before{font-size:14px}
+ .filmgo-settings-panel .filmgo-setting{padding:10px 9px}
+ .filmgo-player-shell:fullscreen .filmgo-settings-panel,.filmgo-player-shell:-webkit-full-screen .filmgo-settings-panel{width:min(78vw,360px);grid-template-columns:1fr;padding:54px 12px 16px}
+}
