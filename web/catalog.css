@@ -551,3 +551,21 @@ body.catalog-search-active>div>header,body.catalog-search-active>div>footer{disp
  #catalog-home.search-fullscreen .search-result-cast{font-size:10px}
  #catalog-home.search-fullscreen .search-result-plot{font-size:11px;line-height:1.4;-webkit-line-clamp:2}
 }
+
+/* Compact the home filters and keep the fullscreen search header pinned above content. */
+.catalog-filters{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:8px!important;margin-bottom:20px!important}
+.catalog-filter{gap:0!important}
+.catalog-filter>span{display:none!important}
+.catalog-filter .filter-trigger{height:40px!important;min-height:40px;padding:0 10px!important;border-radius:12px!important;font-size:11px!important}
+.catalog-filter .filter-chevron,.catalog-filter .filter-chevron svg{width:14px!important;height:14px!important;flex-basis:14px!important}
+.catalog-filter .filter-trigger-label{font-size:11px;letter-spacing:0}
+#catalog-home.search-fullscreen>.catalog-search-shell{top:0;margin-top:0;background:#09090b;}
+@media(max-width:390px){.catalog-filters .catalog-filter:last-child{grid-column:auto!important}}
+
+/* Search results and filters adapt to narrow screens without changing home poster cards. */
+@media(max-width:480px){
+ .catalog-filters{gap:6px!important}
+ .catalog-filter .filter-trigger{padding-inline:7px!important;gap:3px!important;font-size:10px!important}
+ .catalog-filter .filter-chevron,.catalog-filter .filter-chevron svg{width:12px!important;height:12px!important;flex-basis:12px!important}
+ .catalog-filter .filter-trigger-label{font-size:10px}
+}
