@@ -2099,6 +2099,32 @@
       "file_name": "Modha Rathri (2026) Tamil HQ HDRip - 720p - x264 - (DD+5.mkv",
       "mime_type": "video/x-matroska",
       "quality": "720p"
+    },
+    {
+      "id": "telegram-74",
+      "slug_id": "KHbfkkEOCXgl9aZI",
+      "title": "M. Kumaran S/O Mahalakshmi",
+      "year": 2004,
+      "qualities": {
+        "720p": {
+          "telegram_message_id": 74,
+          "file_name": "@WMR_M.Kumaran.Son.of.Mahalakshmi.2004.Tam.720p.HD.x264.mkv",
+          "file_size": 0,
+          "mime_type": ""
+        }
+      },
+      "telegram_message_id": 74,
+      "quality": "720p",
+      "file_name": "@WMR_M.Kumaran.Son.of.Mahalakshmi.2004.Tam.720p.HD.x264.mkv",
+      "file_size": 0,
+      "mime_type": "",
+      "imdb_id": "tt0459449",
+      "poster": "https://m.media-amazon.com/images/M/MV5BOTcyNzYwYjgtN2JhMS00YmViLTg4NDUtMGIxYWMxNTc0NjU1XkEyXkFqcGdeQXVyMTY1MzAyNjU4._V1_SX300.jpg",
+      "genre": "Action, Drama, Sport",
+      "runtime": "166 min",
+      "director": "Mohan Raja",
+      "cast": "Jayam Ravi, Asin Thottumkal, Nadia Moidu",
+      "plot": "Besides his girlfriend, Kumaran is very passionate about kick-boxing. His life is shattered when his dying mother asks him to meet his estranged father in Malaysia."
     }
   ]
 }
