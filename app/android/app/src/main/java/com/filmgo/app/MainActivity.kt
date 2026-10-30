@@ -76,7 +76,9 @@ class MainActivity : Activity() {
             loadWithOverviewMode = false
             builtInZoomControls = false
             displayZoomControls = false
-            cacheMode = WebSettings.LOAD_NO_CACHE
+            // Keep reusable WebView resources cached for faster reopen. The main
+            // document is explicitly revalidated in loadLiveWebsite().
+            cacheMode = WebSettings.LOAD_DEFAULT
             saveFormData = false
             offscreenPreRaster = true
             setEnableSmoothTransition(false)
@@ -214,8 +216,10 @@ class MainActivity : Activity() {
     private fun loadLiveWebsite() {
         showRetryLoading()
         if (hasNetwork()) {
-            showWebsite()
-            webView.loadUrl(liveWebsiteUrl())
+            // Keep the branded loading/offline surface visible until WebView
+            // actually receives the page. This prevents a black frame while a
+            // slow or failed navigation is still pending.
+            webView.loadUrl(liveWebsiteUrl(), mapOf("Cache-Control" to "no-cache"))
         } else {
             mainHandler.postDelayed({ showOfflineReady() }, 650)
         }
