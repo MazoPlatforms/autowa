@@ -1,7 +1,147 @@
 {
   "schema_version": 2,
-  "updated_at": "2026-10-30T17:52:08.065253+00:00",
+  "updated_at": "2026-10-30T17:55:29.500956+00:00",
   "movies": [
+    {
+      "id": "telegram-82",
+      "slug_id": "O-oa6wxPxdFU3RRk",
+      "title": "Kumki",
+      "year": 2012,
+      "qualities": {
+        "720p": {
+          "telegram_message_id": 82,
+          "file_size": 1098223530,
+          "file_name": "Kumki (2012) Tamil HQ HDRip - 720p - HEVC - x265 - (DD+5.mkv",
+          "mime_type": "video/x-matroska"
+        }
+      },
+      "imdb_id": "tt2404801",
+      "poster": "https://m.media-amazon.com/images/M/MV5BNTRhMDA5ZGItNzVlNC00MmVjLTgzZWItY2JhNzFjNDA3NjczXkEyXkFqcGc@._V1_.jpg",
+      "genre": [
+        "Drama"
+      ],
+      "runtime": "148 min",
+      "director": "Prabu Solomon",
+      "cast": [
+        "Vikram Prabhu",
+        "Lakshmi Menon",
+        "Thambi Ramaiah"
+      ],
+      "plot": "The love between a mahout and an elephant.",
+      "imdb_rating": "7.2",
+      "metadata_status": "matched",
+      "telegram_message_id": 82,
+      "file_size": 1098223530,
+      "file_name": "Kumki (2012) Tamil HQ HDRip - 720p - HEVC - x265 - (DD+5.mkv",
+      "mime_type": "video/x-matroska",
+      "quality": "720p"
+    },
+    {
+      "id": "telegram-81",
+      "slug_id": "r9NPio8hMso1pnQ0",
+      "title": "Kalakalappu 2",
+      "year": 2018,
+      "qualities": {
+        "720p": {
+          "telegram_message_id": 81,
+          "file_size": 1527227714,
+          "file_name": "Kalakalappu 2 (2018) Tamil HQ HDRip - 720p - x264 - (DD_.mkv",
+          "mime_type": "video/x-matroska"
+        }
+      },
+      "imdb_id": "tt7483318",
+      "poster": "https://m.media-amazon.com/images/M/MV5BMTg2NTA2NTMtNTAyNy00N2U3LThiYmUtNGQxNDc0MWMxMmY3XkEyXkFqcGc@._V1_.jpg",
+      "genre": [
+        "Comedy",
+        "Drama"
+      ],
+      "runtime": "154 min",
+      "director": "Sundar C.",
+      "cast": [
+        "Jiiva",
+        "Jai",
+        "Catherine Tresa"
+      ],
+      "plot": "A two and a half hours fun ride in which two groups fights for laptop and money suitcase and when siva enters things get even more funny.",
+      "imdb_rating": "5.2",
+      "metadata_status": "matched",
+      "telegram_message_id": 81,
+      "file_size": 1527227714,
+      "file_name": "Kalakalappu 2 (2018) Tamil HQ HDRip - 720p - x264 - (DD_.mkv",
+      "mime_type": "video/x-matroska",
+      "quality": "720p"
+    },
+    {
+      "id": "telegram-80",
+      "slug_id": "IZNB4JOzaoBLCg40",
+      "title": "Kalakalappu",
+      "year": 2012,
+      "qualities": {
+        "720p": {
+          "telegram_message_id": 80,
+          "file_size": 1683104373,
+          "file_name": "Kalakalappu (2012) Tamil HQ BluRay - 720p - x264 - (DD_5.mkv",
+          "mime_type": "video/x-matroska"
+        }
+      },
+      "imdb_id": "tt2262126",
+      "poster": "https://m.media-amazon.com/images/M/MV5BNmVmN2NkM2UtNjE5Ni00ZDZkLThmNzctMmJiYmM4MDRiMDEwXkEyXkFqcGc@._V1_.jpg",
+      "genre": [
+        "Comedy",
+        "Musical"
+      ],
+      "runtime": "135 min",
+      "director": "Sundar C.",
+      "cast": [
+        "Vimal",
+        "Shiva",
+        "Anjali"
+      ],
+      "plot": "A man struggles to save his family-owned restaurant as it is running in loses. He soon falls for a health inspector keen on shutting down the place. When his brother enters the scene, things get worse.",
+      "imdb_rating": "7.1",
+      "metadata_status": "matched",
+      "telegram_message_id": 80,
+      "file_size": 1683104373,
+      "file_name": "Kalakalappu (2012) Tamil HQ BluRay - 720p - x264 - (DD_5.mkv",
+      "mime_type": "video/x-matroska",
+      "quality": "720p"
+    },
+    {
+      "id": "telegram-79",
+      "slug_id": "SziHx9OZ_g_XtnZr",
+      "title": "Maattrraan",
+      "year": 2012,
+      "qualities": {
+        "720p": {
+          "telegram_message_id": 79,
+          "file_size": 1346923959,
+          "file_name": "Maattrraan (2012) [Hindi Tamil] 720p Blu-Ray x264 ESub.mkv",
+          "mime_type": "video/x-matroska"
+        }
+      },
+      "imdb_id": "tt2246837",
+      "poster": "https://m.media-amazon.com/images/M/MV5BYjM3YWU3YmEtZmVkYy00ZTZhLWEyNDAtNTZlMTUxOGRmNTM1XkEyXkFqcGc@._V1_.jpg",
+      "genre": [
+        "Action",
+        "Sci-Fi",
+        "Thriller"
+      ],
+      "runtime": "165 min",
+      "director": "K.V. Anand",
+      "cast": [
+        "Suriya",
+        "Kajal Aggarwal",
+        "Sachin Khedekar"
+      ],
+      "plot": "Conjoined twins Vimalan and Akhilan involve themselves in a series of deaths involving their father's company. However, the truths that they initially uncover lead to a bigger conspiracy, one that spans across the globe.",
+      "imdb_rating": "6.3",
+      "metadata_status": "matched",
+      "telegram_message_id": 79,
+      "file_size": 1346923959,
+      "file_name": "Maattrraan (2012) [Hindi Tamil] 720p Blu-Ray x264 ESub.mkv",
+      "mime_type": "video/x-matroska",
+      "quality": "720p"
+    },
     {
       "id": "telegram-78",
       "slug_id": "m4A2JmVGIi-9bF44",
@@ -2276,110 +2416,6 @@
       "file_name": "Modha Rathri (2026) Tamil HQ HDRip - 720p - x264 - (DD+5.mkv",
       "mime_type": "video/x-matroska",
       "quality": "720p"
-    },
-    {
-      "id": "telegram-79",
-      "slug_id": "SziHx9OZ_g_XtnZr",
-      "title": "Maattrraan",
-      "year": 2012,
-      "qualities": {
-        "720p": {
-          "telegram_message_id": 79,
-          "file_name": "Maattrraan (2012) [Hindi Tamil] 720p Blu-Ray x264 ESub.mkv",
-          "file_size": 0,
-          "mime_type": ""
-        }
-      },
-      "telegram_message_id": 79,
-      "quality": "720p",
-      "file_name": "Maattrraan (2012) [Hindi Tamil] 720p Blu-Ray x264 ESub.mkv",
-      "file_size": 0,
-      "mime_type": "",
-      "imdb_id": "tt2246837",
-      "poster": "https://m.media-amazon.com/images/M/MV5BYjM3YWU3YmEtZmVkYy00ZTZhLWEyNDAtNTZlMTUxOGRmNTM1XkEyXkFqcGc@._V1_QL75_UX380_CR0,4,380,562_.jpg",
-      "genre": "Action, Sci-Fi, Thriller",
-      "runtime": "165 min",
-      "director": "K.V. Anand",
-      "cast": "Suriya, Kajal Aggarwal, Sachin Khedekar",
-      "plot": "Conjoined twins Vimalan and Akhilan involve themselves in a series of deaths involving their father's company. However, the truths that they initially uncover lead to a bigger conspiracy, one that spans across the globe."
-    },
-    {
-      "id": "telegram-80",
-      "slug_id": "IZNB4JOzaoBLCg40",
-      "title": "Kalakalappu",
-      "year": 2012,
-      "qualities": {
-        "720p": {
-          "telegram_message_id": 80,
-          "file_name": "Kalakalappu (2012) Tamil HQ BluRay - 720p - x264 - (DD_5.mkv",
-          "file_size": 0,
-          "mime_type": ""
-        }
-      },
-      "telegram_message_id": 80,
-      "quality": "720p",
-      "file_name": "Kalakalappu (2012) Tamil HQ BluRay - 720p - x264 - (DD_5.mkv",
-      "file_size": 0,
-      "mime_type": "",
-      "imdb_id": "tt2262126",
-      "poster": "https://m.media-amazon.com/images/M/MV5BNmVmN2NkM2UtNjE5Ni00ZDZkLThmNzctMmJiYmM4MDRiMDEwXkEyXkFqcGc@._V1_QL75_UY562_CR244,0,380,562_.jpg",
-      "genre": "Comedy, Musical",
-      "runtime": "135 min",
-      "director": "Sundar C.",
-      "cast": "Vimal, Shiva, Anjali",
-      "plot": "A man struggles to save his family-owned restaurant as it is running in loses. He soon falls for a health inspector keen on shutting down the place. When his brother enters the scene, things get worse."
-    },
-    {
-      "id": "telegram-81",
-      "slug_id": "r9NPio8hMso1pnQ0",
-      "title": "Kalakalappu 2",
-      "year": 2018,
-      "qualities": {
-        "720p": {
-          "telegram_message_id": 81,
-          "file_name": "Kalakalappu 2 (2018) Tamil HQ HDRip - 720p - x264 - (DD_.mkv",
-          "file_size": 0,
-          "mime_type": ""
-        }
-      },
-      "telegram_message_id": 81,
-      "quality": "720p",
-      "file_name": "Kalakalappu 2 (2018) Tamil HQ HDRip - 720p - x264 - (DD_.mkv",
-      "file_size": 0,
-      "mime_type": "",
-      "imdb_id": "tt7483318",
-      "poster": "https://m.media-amazon.com/images/M/MV5BMTg2NTA2NTMtNTAyNy00N2U3LThiYmUtNGQxNDc0MWMxMmY3XkEyXkFqcGc@._V1_SX300.jpg",
-      "genre": "Comedy, Drama",
-      "runtime": "154 min",
-      "director": "Sundar C.",
-      "cast": "Jiiva, Jai, Catherine Tresa",
-      "plot": "A two and a half hours fun ride in which two groups fights for laptop and money suitcase and when siva enters things get even more funny."
-    },
-    {
-      "id": "telegram-82",
-      "slug_id": "9cB8CZ-_oZZRLVmG",
-      "title": "Kumki",
-      "year": 2012,
-      "qualities": {
-        "720p": {
-          "telegram_message_id": 82,
-          "file_name": "Kumki (2012) Tamil HQ HDRip - 720p - HEVC - x265 - (DD+5.mkv",
-          "file_size": 0,
-          "mime_type": ""
-        }
-      },
-      "telegram_message_id": 82,
-      "quality": "720p",
-      "file_name": "Kumki (2012) Tamil HQ HDRip - 720p - HEVC - x265 - (DD+5.mkv",
-      "file_size": 0,
-      "mime_type": "",
-      "imdb_id": "tt2404801",
-      "poster": "https://m.media-amazon.com/images/M/MV5BNTRhMDA5ZGItNzVlNC00MmVjLTgzZWItY2JhNzFjNDA3NjczXkEyXkFqcGc@._V1_QL75_UY562_CR17,0,380,562_.jpg",
-      "genre": "Drama",
-      "runtime": "148 min",
-      "director": "Prabu Solomon",
-      "cast": "Vikram Prabhu, Lakshmi Menon, Thambi Ramaiah",
-      "plot": "The love between a mahout and an elephant."
     }
   ]
 }
