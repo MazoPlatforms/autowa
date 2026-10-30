@@ -1,7 +1,78 @@
 {
   "schema_version": 2,
-  "updated_at": "2026-10-30T12:10:51.108754+00:00",
+  "updated_at": "2026-10-30T12:12:05.857536+00:00",
   "movies": [
+    {
+      "id": "telegram-68",
+      "slug_id": "DrCErkLXsmZdlm-8",
+      "title": "Yaaro",
+      "year": 2022,
+      "qualities": {
+        "720p": {
+          "telegram_message_id": 68,
+          "file_size": 1442190484,
+          "file_name": "Yaaro_2022_Tamil_HQ_HDRip_720p_x264_DD5_1_192Kbps_&_AAC_.mkv",
+          "mime_type": "video/x-matroska"
+        }
+      },
+      "imdb_id": "tt18080968",
+      "poster": "https://m.media-amazon.com/images/M/MV5BMTAyMzE0NmYtMjllNy00ZDhiLWFmYzktMmI5YmFjY2QyYTRlXkEyXkFqcGc@._V1_.jpg",
+      "genre": [
+        "Horror",
+        "Thriller"
+      ],
+      "runtime": "103 min",
+      "director": "Sandeep Sai",
+      "cast": [
+        "Venkat Reddy",
+        "Upasana Roy Chowdhury",
+        "J. Durai Raj"
+      ],
+      "plot": "John (Venkat Reddy), who lives alone in a posh villa in ECR. After his paternal uncle siphons off their property after cheating John's parents, his mother passes away and his father goes missing.",
+      "imdb_rating": "3.7",
+      "metadata_status": "matched",
+      "telegram_message_id": 68,
+      "file_size": 1442190484,
+      "file_name": "Yaaro_2022_Tamil_HQ_HDRip_720p_x264_DD5_1_192Kbps_&_AAC_.mkv",
+      "mime_type": "video/x-matroska",
+      "quality": "720p"
+    },
+    {
+      "id": "telegram-67",
+      "slug_id": "JROTK9EvoLv9MLpW",
+      "title": "Kondraal Paavam",
+      "year": 2023,
+      "qualities": {
+        "720p": {
+          "telegram_message_id": 67,
+          "file_size": 1347464054,
+          "file_name": "Kondraal_Paavam_2023_Tamil_HQ_HDRip_720p_x264_AAC_2_0_1_3GB_ESub.mkv",
+          "mime_type": "video/x-matroska"
+        }
+      },
+      "imdb_id": "tt23710126",
+      "poster": "https://m.media-amazon.com/images/M/MV5BNTM3YTUyOTAtNWMyNS00NjBhLWI5MDEtMWMxOGU1YWQ2NTE1XkEyXkFqcGc@._V1_.jpg",
+      "genre": [
+        "Crime",
+        "Drama",
+        "Thriller"
+      ],
+      "runtime": "109 min",
+      "director": "Dayal Padmanabhan",
+      "cast": [
+        "Varalaxmi Sarathkumar",
+        "Santhosh Prathap",
+        "Charle"
+      ],
+      "plot": "A stranger enters the life of a family that has been suffering in poverty for years. What follows are the events that make their lives even more miserable.",
+      "imdb_rating": "7.3",
+      "metadata_status": "matched",
+      "telegram_message_id": 67,
+      "file_size": 1347464054,
+      "file_name": "Kondraal_Paavam_2023_Tamil_HQ_HDRip_720p_x264_AAC_2_0_1_3GB_ESub.mkv",
+      "mime_type": "video/x-matroska",
+      "quality": "720p"
+    },
     {
       "id": "telegram-66",
       "slug_id": "Kxe0qu37ycK1-ULl",
@@ -1850,58 +1921,6 @@
       "file_name": "Modha Rathri (2026) Tamil HQ HDRip - 720p - x264 - (DD+5.mkv",
       "mime_type": "video/x-matroska",
       "quality": "720p"
-    },
-    {
-      "id": "telegram-67",
-      "slug_id": "JROTK9EvoLv9MLpW",
-      "title": "Kondraal Paavam",
-      "year": 2023,
-      "qualities": {
-        "720p": {
-          "telegram_message_id": 67,
-          "file_name": "Kondraal_Paavam_2023_Tamil_HQ_HDRip_720p_x264_AAC_2_0_1_3GB_ESub.mkv",
-          "file_size": 0,
-          "mime_type": ""
-        }
-      },
-      "telegram_message_id": 67,
-      "quality": "720p",
-      "file_name": "Kondraal_Paavam_2023_Tamil_HQ_HDRip_720p_x264_AAC_2_0_1_3GB_ESub.mkv",
-      "file_size": 0,
-      "mime_type": "",
-      "imdb_id": "tt23710126",
-      "poster": "https://m.media-amazon.com/images/M/MV5BNTM3YTUyOTAtNWMyNS00NjBhLWI5MDEtMWMxOGU1YWQ2NTE1XkEyXkFqcGc@._V1_SX300.jpg",
-      "genre": "Crime, Drama, Thriller",
-      "runtime": "109 min",
-      "director": "Dayal Padmanabhan",
-      "cast": "Varalaxmi Sarathkumar, Santhosh Prathap, Charle",
-      "plot": "A stranger enters the life of a family that has been suffering in poverty for years. What follows are the events that make their lives even more miserable."
-    },
-    {
-      "id": "telegram-68",
-      "slug_id": "LUCfdt7n14OitMSj",
-      "title": "Yaaro",
-      "year": 2022,
-      "qualities": {
-        "720p": {
-          "telegram_message_id": 68,
-          "file_name": "Yaaro_2022_Tamil_HQ_HDRip_720p_x264_DD5_1_192Kbps_&_AAC_.mkv",
-          "file_size": 0,
-          "mime_type": ""
-        }
-      },
-      "telegram_message_id": 68,
-      "quality": "720p",
-      "file_name": "Yaaro_2022_Tamil_HQ_HDRip_720p_x264_DD5_1_192Kbps_&_AAC_.mkv",
-      "file_size": 0,
-      "mime_type": "",
-      "imdb_id": "tt18080968",
-      "poster": "https://m.media-amazon.com/images/M/MV5BMTAyMzE0NmYtMjllNy00ZDhiLWFmYzktMmI5YmFjY2QyYTRlXkEyXkFqcGc@._V1_SX300.jpg",
-      "genre": "Horror, Thriller",
-      "runtime": "103 min",
-      "director": "Sandeep Sai",
-      "cast": "Venkat Reddy, Upasana Roy Chowdhury, J. Durai Raj",
-      "plot": "John (Venkat Reddy), who lives alone in a posh villa in ECR. After his paternal uncle siphons off their property after cheating John's parents, his mother passes away and his father goes missing."
     }
   ]
 }
