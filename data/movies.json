@@ -2354,6 +2354,32 @@
       "director": "Sundar C.",
       "cast": "Jiiva, Jai, Catherine Tresa",
       "plot": "A two and a half hours fun ride in which two groups fights for laptop and money suitcase and when siva enters things get even more funny."
+    },
+    {
+      "id": "telegram-82",
+      "slug_id": "9cB8CZ-_oZZRLVmG",
+      "title": "Kumki",
+      "year": 2012,
+      "qualities": {
+        "720p": {
+          "telegram_message_id": 82,
+          "file_name": "Kumki (2012) Tamil HQ HDRip - 720p - HEVC - x265 - (DD+5.mkv",
+          "file_size": 0,
+          "mime_type": ""
+        }
+      },
+      "telegram_message_id": 82,
+      "quality": "720p",
+      "file_name": "Kumki (2012) Tamil HQ HDRip - 720p - HEVC - x265 - (DD+5.mkv",
+      "file_size": 0,
+      "mime_type": "",
+      "imdb_id": "tt2404801",
+      "poster": "https://m.media-amazon.com/images/M/MV5BNTRhMDA5ZGItNzVlNC00MmVjLTgzZWItY2JhNzFjNDA3NjczXkEyXkFqcGc@._V1_QL75_UY562_CR17,0,380,562_.jpg",
+      "genre": "Drama",
+      "runtime": "148 min",
+      "director": "Prabu Solomon",
+      "cast": "Vikram Prabhu, Lakshmi Menon, Thambi Ramaiah",
+      "plot": "The love between a mahout and an elephant."
     }
   ]
 }
