@@ -184,3 +184,21 @@
 @media(prefers-reduced-motion:reduce){.filmgo-loading-spinner{animation:none}}
 
 .filmgo-token-notice{margin:0 0 1rem;padding:1rem 1.1rem;border:1px solid #3f3f46;border-radius:1rem;background:#18181b;color:#d4d4d8;line-height:1.6}.filmgo-token-notice[hidden]{display:none}.filmgo-token-notice a{color:#fff;font-weight:700;text-decoration:underline;text-underline-offset:3px}
+
+/* Compact MX/VLC-style control layout: transport on the left, actions on the right. */
+.filmgo-control-row{display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:32px}
+.filmgo-control-left,.filmgo-control-center,.filmgo-control-right{display:flex;align-items:center;gap:4px}
+.filmgo-control-left{min-width:0}.filmgo-control-center{margin-inline:auto}.filmgo-control-right{margin-left:auto}
+.filmgo-control-button{min-width:30px;width:30px;height:30px;padding:0;border-radius:7px;font-size:16px;line-height:1}
+.filmgo-play,.filmgo-fullscreen{font-size:16px}.filmgo-seek-button{width:auto;min-width:38px;font-size:11px;font-variant-numeric:tabular-nums}
+.filmgo-time{min-width:112px;font-size:11px}.filmgo-progress{height:3px;margin-bottom:7px}.filmgo-progress::-webkit-slider-thumb{width:10px;height:10px}.filmgo-progress::-moz-range-thumb{width:10px;height:10px}
+.filmgo-settings-panel{right:8px;bottom:58px}
+.filmgo-player-shell:fullscreen .filmgo-controls,.filmgo-player-shell:-webkit-full-screen .filmgo-controls{padding:22px 3vw max(14px,env(safe-area-inset-bottom))}
+.filmgo-player-shell:fullscreen .filmgo-control-row,.filmgo-player-shell:-webkit-full-screen .filmgo-control-row{gap:8px;min-height:36px}
+.filmgo-player-shell:fullscreen .filmgo-control-row,.filmgo-player-shell:-webkit-full-screen .filmgo-control-row{justify-content:space-between}
+.filmgo-player-shell:fullscreen .filmgo-control-button,.filmgo-player-shell:-webkit-full-screen .filmgo-control-button{min-width:34px;width:34px;height:34px;font-size:17px;border-radius:8px}
+.filmgo-player-shell:fullscreen .filmgo-seek-button,.filmgo-player-shell:-webkit-full-screen .filmgo-seek-button{width:auto;min-width:42px;font-size:12px}
+.filmgo-player-shell:fullscreen .filmgo-time,.filmgo-player-shell:-webkit-full-screen .filmgo-time{min-width:126px;font-size:12px}
+.filmgo-player-shell:fullscreen .filmgo-progress,.filmgo-player-shell:-webkit-full-screen .filmgo-progress{height:4px;margin-bottom:9px}
+.filmgo-player-shell:fullscreen .filmgo-progress::-webkit-slider-thumb,.filmgo-player-shell:-webkit-full-screen .filmgo-progress::-webkit-slider-thumb{width:12px;height:12px}
+@media(max-width:520px){.filmgo-control-row{gap:3px}.filmgo-control-left,.filmgo-control-center,.filmgo-control-right{gap:1px}.filmgo-control-button{min-width:28px;width:28px;height:28px;font-size:14px}.filmgo-seek-button{min-width:34px;font-size:10px}.filmgo-time{min-width:92px;font-size:10px}.filmgo-settings-panel{right:8px;bottom:58px}.filmgo-player-shell:fullscreen .filmgo-controls,.filmgo-player-shell:-webkit-full-screen .filmgo-controls{padding-inline:12px}.filmgo-player-shell:fullscreen .filmgo-control-button,.filmgo-player-shell:-webkit-full-screen .filmgo-control-button{min-width:31px;width:31px;height:31px;font-size:15px}.filmgo-player-shell:fullscreen .filmgo-seek-button,.filmgo-player-shell:-webkit-full-screen .filmgo-seek-button{min-width:36px;font-size:10px}.filmgo-player-shell:fullscreen .filmgo-time,.filmgo-player-shell:-webkit-full-screen .filmgo-time{min-width:100px;font-size:10px}}
