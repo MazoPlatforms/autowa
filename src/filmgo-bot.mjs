@@ -15,6 +15,24 @@ const QUALITY=/\b(360|480|720|1080|1440|2160)p\b|\b4k\b/i;
 const DRAFT_KEY=prefix+'draft:';
 const OPTIONAL_FIELDS=[['imdb_id','IMDb ID'],['poster','Poster'],['genre','Genre'],['runtime','Runtime'],['director','Director'],['cast','Cast'],['plot','Plot']];
 const normalize=v=>String(v||'').normalize('NFKD').toLowerCase().replace(/[^a-z0-9]+/g,'');
+const TITLE_STOP_WORDS=new Set(['tamil','telugu','malayalam','kannada','hindi','english','movie','film','web','series','dual','audio','proper','repack','hdrip','webrip','bluray','brrip','dvdrip','hdtv','x264','x265','hevc','aac','esub','esubs','subtitles']);
+function titleCandidates(title){
+ const clean=String(title||'').replace(/\s+/g,' ').trim();
+ const tokens=clean.split(' ').filter(Boolean),out=[];
+ const add=value=>{
+  const candidate=String(value||'').replace(/\s+/g,' ').trim();
+  if(!candidate||candidate.length<2||TITLE_STOP_WORDS.has(candidate.toLowerCase())||out.some(x=>normalize(x)===normalize(candidate)))return;
+  out.push(candidate);
+ };
+ add(clean);
+ // Release names are commonly placed before the actual title (for example
+ // "New.Petta"), so try suffix groups without querying every token blindly.
+ const contentTokens=[...tokens];
+ while(contentTokens.length&&TITLE_STOP_WORDS.has(contentTokens.at(-1).toLowerCase()))contentTokens.pop();
+ add(contentTokens.join(' '));
+ for(let start=1;start<tokens.length;start++)add(tokens.slice(start).join(' '));
+ return out;
+}
 export const filenameParts=name=>{
  const raw=String(name||'').replace(/\.[^.]+$/,'').replace(/[._]+/g,' ').replace(/\s+/g,' ').trim();
  const yearMatch=raw.match(/\b((?:19|20)\d{2})\b/);
@@ -25,7 +43,7 @@ export const filenameParts=name=>{
  while(/^\[[A-Z0-9]{2,5}\]\s*/i.test(title))title=title.replace(/^\[[A-Z0-9]{2,5}\]\s*/i,'');
  title=title.replace(/[\s([{]+$/g,'').replace(/[\])}]+$/g,'').replace(/\s+/g,' ').trim();
  const quality=qualityMatch?.[0]?.toLowerCase()==='4k'?'2160p':qualityMatch?.[0]?.toLowerCase()||null;
- return {title,year:Number(yearMatch?.[1])||null,quality};
+ return {title, titleCandidates:titleCandidates(title), year:Number(yearMatch?.[1])||null,quality};
 };
 async function catalog(){const r=await fetch('https://raw.githubusercontent.com/'+REPO+'/main/data/movies.json?ts='+Date.now(),{signal:AbortSignal.timeout(10000),cache:'no-store'});if(!r.ok)throw Error('Catalog unavailable');return (await r.json()).movies||[];}
 async function draftGet(){const raw=await redis('GET',DRAFT_KEY+ADMIN_ID);return raw?JSON.parse(raw):null;}
@@ -61,7 +79,7 @@ async function resumeDraft(d){
 }
 async function startOmdbLookup(d){
  d.stage='looking-up';await draftSave(d);
- const resolved=await resolveOmdbMovie(d.title,d.year).catch(()=>null);
+ const resolved=await resolveOmdbMovie(d.title,d.year,d.titleCandidates||titleCandidates(d.title)).catch(()=>null);
  if(resolved?.movie&&Number(String(resolved.movie.Year).slice(0,4))===Number(d.year))return askOmdbConfirmation(d,resolved.movie);
  delete d.omdb_candidate;
  await say(ADMIN_ID,'I could not find a matching OMDb result for '+d.title+' ('+d.year+'). You can enter the available movie details manually; unknown fields can be skipped.');
@@ -94,10 +112,10 @@ function similarity(a,b){
 export function guessMovie(file,movies){
  const p=filenameParts(file.file_name||'');
  const candidates=movies.filter(m=>!p.year||Number(m.year)===p.year);
- const exact=candidates.find(m=>normalize(m.title)===normalize(p.title));
+ const exact=candidates.find(m=>p.titleCandidates.some(title=>normalize(m.title)===normalize(title)));
  if(exact)return {parts:p,best:exact,confidence:1};
  const scored=candidates.map(m=>{
-  let score=similarity(p.title,m.title);
+  let score=Math.max(...p.titleCandidates.map(title=>similarity(title,m.title)));
   for(const v of Object.values(m.qualities||{}))score=Math.max(score,similarity(p.title,filenameParts(v.file_name).title));
   return {movie:m,score};
  }).sort((a,b)=>b.score-a.score);
@@ -133,13 +151,14 @@ function sequelKey(value){
  return tokens.join('');
 }
 function suggestionScore(input,candidate,year){if(Number(candidate.y)!==Number(year))return 0;const a=normalize(input),b=normalize(candidate.l),sa=sequelKey(input),sb=sequelKey(candidate.l);if(a===b)return 1;if(sa&&sa===sb)return .98;return similarity(input,candidate.l);}
-async function resolveOmdbMovie(title,year){
+async function resolveOmdbMovie(title,year,extraCandidates=[]){
  const direct=await omdbSearch(title,year).catch(()=>null);
  if(direct&&Number(String(direct.Year).slice(0,4))===Number(year))return {movie:direct,confidence:similarity(title,direct.Title),source:'omdb'};
  const candidates=[];
- for(const query of [title,...(sequelKey(title)!==normalize(title)?[sequelKey(title)]:[])]){
+ const queries=Array.from(new Set([title,...extraCandidates,...(sequelKey(title)!==normalize(title)?[sequelKey(title)]:[])].filter(Boolean)));
+ for(const query of queries){
   const items=await imdbSuggestionSearch(query).catch(()=>[]);
-  for(const item of items){const score=suggestionScore(title,item,year);if(score)candidates.push({item,score});}
+  for(const item of items){const score=suggestionScore(query,item,year);if(score)candidates.push({item,score});}
  }
  const ranked=Array.from(new Map(candidates.map(x=>[x.item.id,x])).values()).sort((a,b)=>b.score-a.score);
  const winner=ranked[0];
@@ -262,10 +281,10 @@ async function onMessage(message,refresh){
   if(!parts.quality)return say(chat,'Cannot identify quality from filename. Rename the file with 360p, 480p, 720p, 1080p or 2160p and resend.');
   const movies=await catalog(),found=guessMovie(file,movies);let existing=found.best;
   const title=existing?.title||parts.title,year=existing?.year||parts.year;
-  const d={message_id:message.message_id,file_name:name,title:title||'',year:year||null,quality:parts.quality,existing:!!existing,replace:!!(existing&&Object.keys(existing.qualities||{}).some(q=>q.toLowerCase()===parts.quality)),slug_id:existing?.slug_id,manual_identity:!existing&&(!title||!year)};
+  const d={message_id:message.message_id,file_name:name,title:title||'',titleCandidates:parts.titleCandidates,year:year||null,quality:parts.quality,existing:!!existing,replace:!!(existing&&Object.keys(existing.qualities||{}).some(q=>q.toLowerCase()===parts.quality)),slug_id:existing?.slug_id,manual_identity:!existing&&(!title||!year)};
   if(!title)return askForTitle(d);
   if(!year)return askForYear(d);
-  const resolved=existing?null:await resolveOmdbMovie(title,year).catch(()=>null);
+  const resolved=existing?null:await resolveOmdbMovie(title,year,parts.titleCandidates).catch(()=>null);
   const omdb=resolved?.movie;
   const omdbConfidence=omdb&&Number(String(omdb.Year).slice(0,4))===year?resolved.confidence:0;
   if(resolved?.source==='imdb-suggestion'&&omdb&&omdbConfidence>=0.5&&omdbConfidence<0.6){
@@ -300,7 +319,7 @@ async function onMessage(message,refresh){
  if(/^\/poster(?:@\w+)?$/.test(text))return say(chat,'Send a JPEG photo in this chat to save it as the draft poster.');
  if(d?.stage==='await-title'){
   if(!text||text.startsWith('/'))return say(chat,'Please send the movie title as a message, or use /cancel to discard this draft.');
-  d.title=text.slice(0,180).trim();
+  d.title=text.slice(0,180).trim();d.titleCandidates=titleCandidates(d.title);
   if(!d.title)return askForTitle(d);
   if(!d.year)return askForYear(d);
   return startOmdbLookup(d);
@@ -330,7 +349,7 @@ async function onMessage(message,refresh){
  }
  if(d?.stage==='await-omdb-confirm'||d?.stage==='looking-up')return say(chat,'Please use the OMDb result buttons above. Use /draft to show the current step or /cancel to discard it.');
  const edit=text.match(/^\/edit\s+(title|year|genre|runtime|director|cast|plot|poster|imdb_id|quality)=(.+)$/is);
- if(edit&&d){const field=edit[1],value=edit[2].trim();if(field==='year'&&!/^(19|20)\d{2}$/.test(value))return say(chat,'Invalid year');if(field==='quality'&&!/^(360|480|720|1080|1440|2160)p$/i.test(value))return say(chat,'Invalid quality');d[field]=field==='year'?Number(value):value.slice(0,1000);d.stage='await-publish';await draftSave(d);return draftPrompt(d);}
+ if(edit&&d){const field=edit[1],value=edit[2].trim();if(field==='year'&&!/^(19|20)\d{2}$/.test(value))return say(chat,'Invalid year');if(field==='quality'&&!/^(360|480|720|1080|1440|2160)p$/i.test(value))return say(chat,'Invalid quality');d[field]=field==='year'?Number(value):value.slice(0,1000);if(field==='title')d.titleCandidates=titleCandidates(d.title);d.stage='await-publish';await draftSave(d);return draftPrompt(d);}
  const match=text.match(/^\/download(?:@\w+)?\s+(\S+)$/i);
  if(!match){if(text.startsWith('/download'))await say(chat,'Usage: /download https://example.com/movie.mp4');return;}
  const data=await probe(match[1]);if(data.error){await say(chat,data.error);return;}
