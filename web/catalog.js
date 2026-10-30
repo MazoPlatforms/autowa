@@ -227,9 +227,13 @@ async function checkMovieAccess(){
  }catch{if(isActive())setMovieAccessState('unavailable');}
 }
 setMovieAccessState('checking');void checkMovieAccess();
-download.addEventListener('click',event=>{
+download.addEventListener('click',async event=>{
  event.preventDefault();
- if(movieAccessState==='signed-in'){location.href=download.href;return;}
+ if(movieAccessState==='signed-in'){
+  try{const response=await fetch('/api/me',{cache:'no-store',credentials:'same-origin'});if(!response.ok){setMovieAccessState('signed-out');location.href='/profile?return='+encodeURIComponent(location.pathname);return;}location.href=download.href;}
+  catch{setMovieAccessState('unavailable');}
+  return;
+ }
  if(movieAccessState==='signed-out')location.href='/profile?return='+encodeURIComponent(location.pathname);
  else if(movieAccessState==='unavailable')void checkMovieAccess();
 });
