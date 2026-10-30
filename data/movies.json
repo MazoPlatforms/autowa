@@ -1,7 +1,42 @@
 {
   "schema_version": 2,
-  "updated_at": "2026-10-30T12:05:33.158498+00:00",
+  "updated_at": "2026-10-30T12:06:07.165588+00:00",
   "movies": [
+    {
+      "id": "telegram-61",
+      "slug_id": "eGLTbE_dcCOxPwen",
+      "title": "DD Returns",
+      "year": 2023,
+      "qualities": {
+        "720p": {
+          "telegram_message_id": 61,
+          "file_size": 1563824077,
+          "file_name": "DD_Returns_2023_Tamil_HQ_HDRip_720p_x264_DD+5_1_192Kbps_&_AAC_2.mkv",
+          "mime_type": "video/x-matroska"
+        }
+      },
+      "imdb_id": "tt27510150",
+      "poster": "https://m.media-amazon.com/images/M/MV5BN2U2NDAzODMtOGUzZC00NDQxLWE2MGYtMzMyZjQ4NTBkMjdiXkEyXkFqcGc@._V1_.jpg",
+      "genre": [
+        "Comedy",
+        "Horror"
+      ],
+      "runtime": "124 min",
+      "director": "S. Prem Anand",
+      "cast": [
+        "Santhanam",
+        "Surbhi",
+        "Fefsi Vijayan"
+      ],
+      "plot": "The protagonist and his friends hides a bag full of money and jewels in a haunted bungalow to ditch the police. When he goes to retrieve the bag, a ghost makes him play a survival game in order to leave with the bag.",
+      "imdb_rating": "6.1",
+      "metadata_status": "matched",
+      "telegram_message_id": 61,
+      "file_size": 1563824077,
+      "file_name": "DD_Returns_2023_Tamil_HQ_HDRip_720p_x264_DD+5_1_192Kbps_&_AAC_2.mkv",
+      "mime_type": "video/x-matroska",
+      "quality": "720p"
+    },
     {
       "id": "telegram-60",
       "slug_id": "BXlEDxODAsibH6Ki",
@@ -1637,32 +1672,6 @@
       "file_name": "Modha Rathri (2026) Tamil HQ HDRip - 720p - x264 - (DD+5.mkv",
       "mime_type": "video/x-matroska",
       "quality": "720p"
-    },
-    {
-      "id": "telegram-61",
-      "slug_id": "eGLTbE_dcCOxPwen",
-      "title": "DD Returns",
-      "year": 2023,
-      "qualities": {
-        "720p": {
-          "telegram_message_id": 61,
-          "file_name": "DD_Returns_2023_Tamil_HQ_HDRip_720p_x264_DD+5_1_192Kbps_&_AAC_2.mkv",
-          "file_size": 0,
-          "mime_type": ""
-        }
-      },
-      "telegram_message_id": 61,
-      "quality": "720p",
-      "file_name": "DD_Returns_2023_Tamil_HQ_HDRip_720p_x264_DD+5_1_192Kbps_&_AAC_2.mkv",
-      "file_size": 0,
-      "mime_type": "",
-      "imdb_id": "tt27510150",
-      "poster": "https://m.media-amazon.com/images/M/MV5BN2U2NDAzODMtOGUzZC00NDQxLWE2MGYtMzMyZjQ4NTBkMjdiXkEyXkFqcGc@._V1_QL75_UX380_CR0,57,380,562_.jpg",
-      "genre": "Comedy, Horror",
-      "runtime": "124 min",
-      "director": "S. Prem Anand",
-      "cast": "Santhanam, Surbhi, Fefsi Vijayan",
-      "plot": "The protagonist and his friends hides a bag full of money and jewels in a haunted bungalow to ditch the police. When he goes to retrieve the bag, a ghost makes him play a survival game in order to leave with the bag."
     }
   ]
 }
