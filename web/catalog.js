@@ -5,6 +5,11 @@ function actionIcon(kind){
  svg.setAttribute('viewBox','0 0 24 24');svg.setAttribute('width','17');svg.setAttribute('height','17');svg.setAttribute('fill',kind==='download'?'none':'currentColor');svg.setAttribute('stroke',kind==='download'?'currentColor':'none');svg.setAttribute('stroke-width','1.8');svg.setAttribute('stroke-linecap','round');svg.setAttribute('stroke-linejoin','round');svg.setAttribute('aria-hidden','true');
  const path=document.createElementNS('http://www.w3.org/2000/svg','path');path.setAttribute('d',paths[kind]);svg.append(path);return svg;
 }
+function playerIcon(kind){
+ const paths={play:'M8 5v14l11-7L8 5Z',pause:'M7 5h3v14H7V5Zm7 0h3v14h-3V5Z',settings:'M12 8.3a3.7 3.7 0 1 0 0 7.4 3.7 3.7 0 0 0 0-7.4Zm0-5.3 1 2.1 2.1.6 2-.9 1.4 1.4-.9 2 .6 2.1 2.1 1v2l-2.1 1-.6 2.1.9 2-1.4 1.4-2-.9-2.1.6-1 2.1h-2l-1-2.1-2.1-.6-2 .9-1.4-1.4.9-2-.6-2.1-2.1-1v-2l2.1-1 .6-2.1-.9-2L6.8 4.8l2 .9 2.1-.6 1-2.1h2Z',fullscreen:'M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5',pip:'M4 6h16v12H4zM12 12h6v4h-6z'};
+ const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');svg.setAttribute('viewBox','0 0 24 24');svg.setAttribute('width','17');svg.setAttribute('height','17');svg.setAttribute('fill',kind==='play'||kind==='pause'?'currentColor':'none');svg.setAttribute('stroke',kind==='play'||kind==='pause'?'none':'currentColor');svg.setAttribute('stroke-width','1.8');svg.setAttribute('stroke-linecap','round');svg.setAttribute('stroke-linejoin','round');svg.setAttribute('aria-hidden','true');
+ const path=document.createElementNS('http://www.w3.org/2000/svg','path');path.setAttribute('d',paths[kind]);svg.append(path);return svg;
+}
 function confirmMovieRequest(movie,channel){
  const overlay=el('div','filmgo-sheet-overlay');const sheet=el('div','filmgo-sheet');
  sheet.setAttribute('role','dialog');sheet.setAttribute('aria-modal','true');
@@ -146,18 +151,16 @@ viewport.append(video,loadingOverlay,seekFeedback);
 const controls=el('div','filmgo-controls');
 const progress=el('input','filmgo-progress');progress.type='range';progress.min='0';progress.max='1000';progress.value='0';progress.setAttribute('aria-label','Seek');
 const controlRow=el('div','filmgo-control-row');
-const play=el('button','filmgo-control-button filmgo-play','▶');play.type='button';play.setAttribute('aria-label','Play');
+const play=el('button','filmgo-control-button filmgo-play');play.type='button';play.setAttribute('aria-label','Play');play.append(playerIcon('play'));
 const time=el('span','filmgo-time','00:00:00 / 00:00:00');
-const settingsButton=el('button','filmgo-control-button filmgo-settings-toggle','⚙');settingsButton.type='button';settingsButton.setAttribute('aria-label','Player settings');settingsButton.setAttribute('aria-expanded','false');
-const fullscreen=el('button','filmgo-control-button filmgo-fullscreen','⛶');fullscreen.type='button';fullscreen.setAttribute('aria-label','Full screen');
-const back10=el('button','filmgo-control-button filmgo-seek-button','↶10');back10.type='button';back10.setAttribute('aria-label','Seek back 10 seconds');
-const forward10=el('button','filmgo-control-button filmgo-seek-button','↷10');forward10.type='button';forward10.setAttribute('aria-label','Seek forward 10 seconds');
+const settingsButton=el('button','filmgo-control-button filmgo-settings-toggle');settingsButton.type='button';settingsButton.setAttribute('aria-label','Player settings');settingsButton.setAttribute('aria-expanded','false');settingsButton.append(playerIcon('settings'));
+const fullscreen=el('button','filmgo-control-button filmgo-fullscreen');fullscreen.type='button';fullscreen.setAttribute('aria-label','Full screen');fullscreen.append(playerIcon('fullscreen'));
 const settingsPanel=el('div','filmgo-settings-panel');settingsPanel.hidden=true;settingsPanel.setAttribute('aria-label','Player settings');settingsPanel.setAttribute('role','group');
-const controlLeft=el('div','filmgo-control-left'),controlCenter=el('div','filmgo-control-center'),controlRight=el('div','filmgo-control-right');
-controlLeft.append(play,time);controlCenter.append(back10,forward10);controlRight.append(settingsButton,fullscreen);controlRow.append(controlLeft,controlCenter,controlRight);controls.append(progress,controlRow);player.append(viewport,settingsPanel,controls);section.append(player);
+const controlLeft=el('div','filmgo-control-left'),controlRight=el('div','filmgo-control-right');
+controlLeft.append(play,time);controlRight.append(settingsButton,fullscreen);controlRow.append(controlLeft,controlRight);controls.append(progress,controlRow);player.append(viewport,settingsPanel,controls);section.append(player);
 const makeSetting=(label,id)=>{const wrap=el('label','filmgo-setting');wrap.append(el('span','',label));const select=el('select','filmgo-setting-select');select.id=id;wrap.append(select);settingsPanel.append(wrap);return select;};
 const volumeWrap=el('label','filmgo-setting');volumeWrap.append(el('span','','Player volume'));const volume=el('input','filmgo-setting-range');volume.type='range';volume.min='0';volume.max='1';volume.step='0.01';volume.value='1';volume.setAttribute('aria-label','Player volume');volumeWrap.append(volume);settingsPanel.append(volumeWrap);
-const pip=el('button','filmgo-settings-action','▣  Picture in picture');pip.type='button';pip.setAttribute('aria-label','Picture in picture');pip.disabled=!(document.pictureInPictureEnabled&&video.requestPictureInPicture);settingsPanel.append(pip);
+const pip=el('button','filmgo-settings-action');pip.type='button';pip.setAttribute('aria-label','Picture in picture');pip.append(playerIcon('pip'),el('span','', 'Picture in picture'));pip.disabled=!(document.pictureInPictureEnabled&&video.requestPictureInPicture);settingsPanel.append(pip);
 const speedSelect=makeSetting('Playback speed','filmgo-speed');for(const rate of [0.25,0.5,0.75,1,1.25,1.5,1.75,2]){const option=el('option','',rate===1?'Normal':rate+'×');option.value=String(rate);if(rate===1)option.selected=true;speedSelect.append(option);}
 speedSelect.addEventListener('change',()=>{video.playbackRate=Number(speedSelect.value);});
 const audioSelect=makeSetting('Audio track','filmgo-audio-track');const subtitleSelect=makeSetting('Subtitles','filmgo-subtitles');
@@ -179,7 +182,7 @@ const isActive=()=>root.isConnected&&location.pathname==='/title/'+slug;
 const setStatus=value=>{if(isActive())status.textContent=value;};
 const setLoading=(value,show=true)=>{if(!isActive())return;loadingOverlay.hidden=!show;loadingOverlay.querySelector('.filmgo-loading-label').textContent=value||'';};
 const formatTime=value=>{if(!Number.isFinite(value)||value<0)return '--:--:--';const total=Math.floor(value),hours=Math.floor(total/3600),minutes=Math.floor(total%3600/60),seconds=total%60;return String(hours).padStart(2,'0')+':'+String(minutes).padStart(2,'0')+':'+String(seconds).padStart(2,'0');};
-const updateControls=()=>{const duration=video.duration||0;time.textContent=formatTime(video.currentTime)+' / '+formatTime(duration);progress.value=String(duration?Math.round(video.currentTime/duration*1000):0);progress.style.setProperty('--progress',duration?((video.currentTime/duration)*100)+'%':'0%');play.textContent=video.paused?'▶':'Ⅱ';play.setAttribute('aria-label',video.paused?'Play':'Pause');player.classList.toggle('is-playing',!video.paused);};
+const updateControls=()=>{const duration=video.duration||0;time.textContent=formatTime(video.currentTime)+' / '+formatTime(duration);progress.value=String(duration?Math.round(video.currentTime/duration*1000):0);progress.style.setProperty('--progress',duration?((video.currentTime/duration)*100)+'%':'0%');play.replaceChildren(playerIcon(video.paused?'play':'pause'));play.setAttribute('aria-label',video.paused?'Play':'Pause');player.classList.toggle('is-playing',!video.paused);};
 let tapTimer=0,lastTap=0,feedbackTimer=0,controlsTimer=0;
 const showFeedback=message=>{seekFeedback.textContent=message;seekFeedback.classList.add('visible');clearTimeout(feedbackTimer);feedbackTimer=setTimeout(()=>seekFeedback.classList.remove('visible'),650);};
 const showControls=()=>{player.classList.remove('controls-hidden');clearTimeout(controlsTimer);if(!video.paused&&!settingsPanel.hidden)return;if(!video.paused)controlsTimer=setTimeout(()=>{if(settingsPanel.hidden)player.classList.add('controls-hidden');},3200);};
@@ -212,8 +215,6 @@ const attachVideoListeners=target=>{
 };
 attachVideoListeners(video);
 play.addEventListener('click',()=>{if(video.paused){enableMobileVolume(video);video.play().catch(()=>{});}else video.pause();});
-const seekBy=seconds=>{if(!Number.isFinite(video.duration))return;video.currentTime=Math.max(0,Math.min(video.duration,video.currentTime+seconds));showFeedback((seconds<0?'−':'+')+Math.abs(seconds)+' seconds');showControls();};
-back10.addEventListener('click',()=>seekBy(-10));forward10.addEventListener('click',()=>seekBy(10));
 progress.addEventListener('input',()=>{if(Number.isFinite(video.duration))video.currentTime=video.duration*Number(progress.value)/1000;});
 settingsButton.addEventListener('click',()=>{settingsPanel.hidden=!settingsPanel.hidden;settingsButton.setAttribute('aria-expanded',String(!settingsPanel.hidden));player.classList.toggle('settings-open',!settingsPanel.hidden);showControls();});
 pip.addEventListener('click',async()=>{try{if(document.pictureInPictureElement)await document.exitPictureInPicture();else await video.requestPictureInPicture();}catch{}});
