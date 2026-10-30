@@ -158,7 +158,9 @@ function render(){
 function showDetail(m){const root=$('detail-content');root.replaceChildren();const layout=el('div','detail-hero');layout.append(image(m,'detail-poster',true,true));const info=el('div');info.append(el('p','mb-2 text-xs font-semibold uppercase tracking-[.18em] text-zinc-500','MOVIE DETAILS'),el('h1','text-2xl font-extrabold leading-tight tracking-tight sm:text-5xl',m.title),el('p','mt-3 text-sm text-zinc-400',[m.year,m.runtime].filter(Boolean).join(' · ')));if(m.imdb_rating)info.append(el('p','mt-3 text-sm font-semibold text-zinc-200','★ IMDb '+m.imdb_rating));if(m.genre?.length)info.append(el('p','mt-3 text-sm text-zinc-400',m.genre.join(' · ')));layout.append(info);root.append(layout);const body=el('div','mt-9 max-w-3xl border-t border-zinc-800 pt-8');body.append(el('h2','text-lg font-bold','Overview'),el('p','mt-3 text-sm leading-7 text-zinc-400',m.plot||'No synopsis available yet.'));if(m.director)body.append(el('p','mt-5 text-sm text-zinc-400','Director: '+m.director));if(m.cast?.length)body.append(el('p','mt-2 text-sm text-zinc-400','Cast: '+m.cast.join(', ')));root.append(body);
 const section=el('section','mt-9 max-w-3xl border-t border-zinc-800 pt-8 filmgo-watch');
 section.append(el('h2','mb-4 text-lg font-bold','Watch & download'));
+const accessNotice=el('div','filmgo-token-notice filmgo-signin-notice');accessNotice.setAttribute('role','status');accessNotice.setAttribute('aria-live','polite');section.append(accessNotice);
 const player=el('div','filmgo-player-shell');player.tabIndex=0;player.setAttribute('aria-label','Movie player. Single tap shows or hides controls, double tap pauses, Space plays or pauses, arrows seek, F toggles fullscreen.');
+player.setAttribute('inert','');
 const viewport=el('div','filmgo-player-viewport');
 let video=el('video','filmgo-player');
 video.preload='none';video.playsInline=true;video.setAttribute('playsinline','');video.setAttribute('controlsList','nodownload');
@@ -184,20 +186,59 @@ const speedSelect=makeSetting('Playback speed','filmgo-speed');for(const rate of
 speedSelect.addEventListener('change',()=>{video.playbackRate=Number(speedSelect.value);});
 const audioSelect=makeSetting('Audio track','filmgo-audio-track');const subtitleSelect=makeSetting('Subtitles','filmgo-subtitles');
 const status=el('p','filmgo-stream-status sr-only','');status.setAttribute('role','status');status.setAttribute('aria-live','polite');
-const accessNotice=el('p','filmgo-token-notice');accessNotice.hidden=true;accessNotice.setAttribute('role','status');
 const actions=el('div','filmgo-player-actions');
+actions.setAttribute('inert','');
 const download=el('a','filmgo-download-button','Download');download.setAttribute('download','');download.setAttribute('aria-label','Download '+m.title);
-const whatsapp=el('button','filmgo-open-button','WhatsApp');whatsapp.type='button';whatsapp.addEventListener('click',()=>confirmMovieRequest(m,'whatsapp'));
-const telegram=el('button','filmgo-open-button','Telegram');telegram.type='button';telegram.addEventListener('click',()=>confirmMovieRequest(m,'telegram'));
+const whatsapp=el('button','filmgo-open-button','WhatsApp');whatsapp.type='button';
+const telegram=el('button','filmgo-open-button','Telegram');telegram.type='button';
 for(const [button,kind] of [[download,'download'],[whatsapp,'whatsapp'],[telegram,'telegram']]){button.prepend(actionIcon(kind));button.style.gap='8px';}
-actions.append(download,whatsapp,telegram);section.append(accessNotice,actions,status);root.append(section);
-download.addEventListener('click',async event=>{event.preventDefault();try{const response=await fetch('/api/me',{cache:'no-store'});if(!response.ok){location.href='/profile?return='+encodeURIComponent(location.pathname);return;}location.href=download.href;}catch{accessNotice.hidden=false;accessNotice.textContent='Unable to verify your account. Check your connection and try again.';}});
+actions.append(download,whatsapp,telegram);section.append(actions,status);root.append(section);
 const slug=encodeURIComponent(m.slug_id||'');const qualities=Object.keys(m.qualities||{[m.quality]:m}).filter(Boolean).sort((a,b)=>parseInt(a)-parseInt(b));
 let selected=qualities.find(q=>q.toLowerCase()==='720p')||qualities[0],activeQuality=null,stagedVideo=null;
 const qualityRow=el('div','filmgo-quality-options');const qualityLabel=el('p','filmgo-quality-label');qualityLabel.append(playerIcon('quality'),el('span','', 'Quality'));
 if(qualities.length>1)settingsPanel.prepend(qualityLabel,qualityRow);
 for(const q of qualities){const button=el('button','filmgo-quality-button',q);button.type='button';button.addEventListener('click',()=>setQuality(q));qualityRow.append(button);}
 const isActive=()=>root.isConnected&&location.pathname==='/title/'+slug;
+let movieAccessState='checking';
+const setMovieAccessState=state=>{
+ movieAccessState=state;
+ const locked=state!=='signed-in';
+ player.toggleAttribute('inert',locked);actions.toggleAttribute('inert',locked);
+ accessNotice.hidden=!locked;
+ if(!locked)return;
+ accessNotice.replaceChildren();
+ const copy=el('div','filmgo-signin-copy');
+ if(state==='checking')copy.append(el('strong','','Checking sign-in status'),el('span','','Sign in is required to use this movie’s player and actions.'));
+ else if(state==='unavailable')copy.append(el('strong','','Unable to verify sign-in'),el('span','','Check your connection, then try again.'));
+ else copy.append(el('strong','','Sign in required'),el('span','','Sign in before streaming, downloading, or requesting this movie through WhatsApp or Telegram.'));
+ accessNotice.append(copy);
+ if(state==='unavailable'){
+  const retry=el('button','filmgo-signin-cta','Try again');retry.type='button';retry.addEventListener('click',checkMovieAccess);accessNotice.append(retry);
+ }else if(state==='signed-out'){
+  const signIn=el('a','filmgo-signin-cta','Sign in with WhatsApp');signIn.href='/profile?return='+encodeURIComponent(location.pathname);accessNotice.append(signIn);
+ }
+};
+async function checkMovieAccess(){
+ setMovieAccessState('checking');
+ try{
+  const response=await fetch('/api/me',{cache:'no-store',credentials:'same-origin'});
+  if(!isActive())return;
+  setMovieAccessState(response.status===401?'signed-out':response.ok?'signed-in':'unavailable');
+ }catch{if(isActive())setMovieAccessState('unavailable');}
+}
+setMovieAccessState('checking');void checkMovieAccess();
+download.addEventListener('click',async event=>{
+ event.preventDefault();
+ if(movieAccessState==='signed-in'){
+  try{const response=await fetch('/api/me',{cache:'no-store',credentials:'same-origin'});if(!response.ok){setMovieAccessState('signed-out');location.href='/profile?return='+encodeURIComponent(location.pathname);return;}location.href=download.href;}
+  catch{setMovieAccessState('unavailable');}
+  return;
+ }
+ if(movieAccessState==='signed-out')location.href='/profile?return='+encodeURIComponent(location.pathname);
+ else if(movieAccessState==='unavailable')void checkMovieAccess();
+});
+whatsapp.addEventListener('click',()=>{if(movieAccessState==='signed-in')confirmMovieRequest(m,'whatsapp');});
+telegram.addEventListener('click',()=>{if(movieAccessState==='signed-in')confirmMovieRequest(m,'telegram');});
 const setStatus=value=>{if(isActive())status.textContent=value;};
 const setLoading=(value,show=true)=>{if(!isActive())return;loadingOverlay.hidden=!show;loadingOverlay.querySelector('.filmgo-loading-label').textContent=value||'';};
 const formatTime=value=>{if(!Number.isFinite(value)||value<0)return '--:--:--';const total=Math.floor(value),hours=Math.floor(total/3600),minutes=Math.floor(total%3600/60),seconds=total%60;return String(hours).padStart(2,'0')+':'+String(minutes).padStart(2,'0')+':'+String(seconds).padStart(2,'0');};
@@ -234,7 +275,7 @@ const attachVideoListeners=target=>{
  target.addEventListener('pointerup',()=>{if(target!==video)return;const now=Date.now();if(now-lastTap<320){clearTimeout(tapTimer);lastTap=0;if(!target.paused){target.pause();showFeedback('Pause');}else showControls();return;}lastTap=now;clearTimeout(tapTimer);tapTimer=setTimeout(()=>{if(target===video)toggleControls();},320);});
 };
 attachVideoListeners(video);
-play.addEventListener('click',()=>{if(video.paused){enableMobileVolume(video);video.play().catch(()=>{});}else video.pause();});
+play.addEventListener('click',()=>{if(movieAccessState!=='signed-in')return;if(video.paused){enableMobileVolume(video);video.play().catch(()=>{});}else video.pause();});
 progress.addEventListener('input',()=>{if(Number.isFinite(video.duration))video.currentTime=video.duration*Number(progress.value)/1000;});
 settingsButton.addEventListener('click',()=>{settingsPanel.hidden=!settingsPanel.hidden;settingsButton.setAttribute('aria-expanded',String(!settingsPanel.hidden));player.classList.toggle('settings-open',!settingsPanel.hidden);showControls();});
 pip.addEventListener('click',async()=>{try{if(document.pictureInPictureElement)await document.exitPictureInPicture();else await video.requestPictureInPicture();}catch{}});
@@ -247,7 +288,7 @@ const updateQualityButtons=()=>{for(const button of qualityRow.children){const q
 const streamUrl=q=>'/api/stream/'+slug+'?quality='+encodeURIComponent(q);
 const cancelStaging=()=>{if(stagedVideo){stagedVideo.pause();stagedVideo.removeAttribute('src');stagedVideo.load();stagedVideo.remove();stagedVideo=null;}};
 const switchToStaged=(stage,q,wasPlaying)=>{if(stage!==stagedVideo)return;const desired=video.currentTime;if(Number.isFinite(desired)&&Math.abs((stage.currentTime||0)-desired)>2&&desired<(stage.duration||Infinity)){if(!stage.seeking){stage.currentTime=desired;stage.addEventListener('seeked',()=>switchToStaged(stage,q,wasPlaying),{once:true});}return;}if(stage.seeking||stage.readyState<2)return;const old=video;old.pause();const oldAudio=audioGains.get(old);if(oldAudio){oldAudio.source.disconnect();oldAudio.gain.disconnect();audioGains.delete(old);}stage.className='filmgo-player';stage.muted=false;stage.playbackRate=Number(speedSelect.value)||1;viewport.replaceChild(stage,old);video=stage;stagedVideo=null;activeQuality=q;attachVideoListeners(video);enableMobileVolume(video);refreshTracks();updateQualityButtons();setLoading('',false);updateControls();if(wasPlaying)video.play().catch(()=>{});};
-const setQuality=q=>{if(!qualities.includes(q))return;const targetUrl=streamUrl(q);selected=q;download.href='/api/download/'+slug+'?quality='+encodeURIComponent(q);download.removeAttribute('download');if(q===activeQuality){if(stagedVideo){cancelStaging();selected=activeQuality;updateQualityButtons();setLoading('',false);}return;}updateQualityButtons();cancelStaging();const file=m.qualities?.[q]||m,format=String(file.file_name||'').split('.').pop().toLowerCase();setStatus(format==='mkv'?'MKV playback depends on your browser and video codec.':'');
+const setQuality=q=>{if(movieAccessState!=='signed-in'||!qualities.includes(q))return;const targetUrl=streamUrl(q);selected=q;download.href='/api/download/'+slug+'?quality='+encodeURIComponent(q);download.removeAttribute('download');if(q===activeQuality){if(stagedVideo){cancelStaging();selected=activeQuality;updateQualityButtons();setLoading('',false);}return;}updateQualityButtons();cancelStaging();const file=m.qualities?.[q]||m,format=String(file.file_name||'').split('.').pop().toLowerCase();setStatus(format==='mkv'?'MKV playback depends on your browser and video codec.':'');
  if(!activeQuality||!video.currentSrc){activeQuality=q;updateQualityButtons();video.src=targetUrl;video.load();setLoading('Loading video…');return;}
  const old=video,position=old.currentTime||0,wasPlaying=!old.paused,stage=el('video','filmgo-player filmgo-staging-video');stage.preload='auto';stage.playsInline=true;stage.muted=true;stage.setAttribute('playsinline','');stage.setAttribute('controlsList','nodownload');stage.poster=video.poster;stage.src=targetUrl;stagedVideo=stage;viewport.append(stage);setLoading('Switching to '+q+'…');let canPlay=false;
  const maybeSwitch=()=>{canPlay=stage.readyState>=2;if(canPlay&&!stage.seeking)switchToStaged(stage,q,wasPlaying);};
@@ -255,12 +296,13 @@ const setQuality=q=>{if(!qualities.includes(q))return;const targetUrl=streamUrl(
 };
 fetch('/api/stream-availability/'+slug,{cache:'no-store'}).then(r=>r.ok?r.json():null).then(data=>{
  if(!isActive())return;
- if(!data?.available){setStatus('Streaming is currently unavailable.');actions.classList.add('hidden');qualityRow.classList.add('hidden');return;}
+if(!data?.available){setStatus('Streaming is currently unavailable.');actions.classList.add('hidden');qualityRow.classList.add('hidden');if(data?.signed_in===false)setMovieAccessState('signed-out');return;}
  if(!selected){setStatus('No quality available.');return;}
- if(!data.signed_in){accessNotice.hidden=false;accessNotice.replaceChildren(el('span','','Sign in to stream or download. Free accounts receive 50 tokens per UTC day; reset is 00:00:00 UTC. '));const signIn=el('a','','Sign in');signIn.href='/profile?return='+encodeURIComponent(location.pathname);accessNotice.append(signIn);return;}
+ if(data.signed_in===false){setMovieAccessState('signed-out');return;}
+ if(movieAccessState!=='signed-in')return;
  accessNotice.hidden=true;
  setQuality(selected);
-}).catch(()=>{if(isActive()&&selected){setQuality(selected);setStatus('Availability check failed. You can still try streaming or downloading.');}});
+}).catch(()=>{if(isActive()&&selected&&movieAccessState==='signed-in'){setQuality(selected);setStatus('Availability check failed. You can still try streaming or downloading.');}});
 document.title=m.title+' — FilmGo';}function route(){
  const match=location.pathname.match(/^\/title\/([^/]+)\/?$/),searching=location.pathname==='/search';
  if(!searching){searchSuggestions=[];suggestionsInitialized=false;}
