@@ -1,7 +1,77 @@
 {
   "schema_version": 2,
-  "updated_at": "2026-10-30T17:51:22.143242+00:00",
+  "updated_at": "2026-10-30T17:52:08.065253+00:00",
   "movies": [
+    {
+      "id": "telegram-78",
+      "slug_id": "m4A2JmVGIi-9bF44",
+      "title": "Thuppakki",
+      "year": 2012,
+      "qualities": {
+        "720p": {
+          "telegram_message_id": 78,
+          "file_size": 1465280344,
+          "file_name": "Thuppakki (2012) Tamil HQ BluRay - 720p - x264 - (DD+5.1.mkv",
+          "mime_type": "video/x-matroska"
+        }
+      },
+      "imdb_id": "tt2187153",
+      "poster": "https://m.media-amazon.com/images/M/MV5BNDhmMWI0OWEtNTY3My00MjcxLTgwNDItMTgzYmJkMWQyMzg0XkEyXkFqcGc@._V1_.jpg",
+      "genre": [
+        "Action",
+        "Thriller"
+      ],
+      "runtime": "165 min",
+      "director": "A.R. Murugadoss",
+      "cast": [
+        "Joseph Vijay",
+        "Kajal Aggarwal",
+        "Vidyut Jammwal"
+      ],
+      "plot": "An army captain is on a mission to track down and destroy a terrorist gang and deactivate the sleeper cells under its command.",
+      "imdb_rating": "8.1",
+      "metadata_status": "matched",
+      "telegram_message_id": 78,
+      "file_size": 1465280344,
+      "file_name": "Thuppakki (2012) Tamil HQ BluRay - 720p - x264 - (DD+5.1.mkv",
+      "mime_type": "video/x-matroska",
+      "quality": "720p"
+    },
+    {
+      "id": "telegram-77",
+      "slug_id": "dexC_fLtwZmI-cwp",
+      "title": "Thuppakki Munai",
+      "year": 2018,
+      "qualities": {
+        "720p": {
+          "telegram_message_id": 77,
+          "file_size": 1500149198,
+          "file_name": "Thuppakki Munai [2018]Tamil 720p.HDRip.[@MM_New].mkv",
+          "mime_type": "video/x-matroska"
+        }
+      },
+      "imdb_id": "tt7852918",
+      "poster": "https://m.media-amazon.com/images/M/MV5BM2VmODU2YjAtMmQ2ZC00NzZhLWFlNzQtNjE3YzZiYTQwOTRjXkEyXkFqcGc@._V1_.jpg",
+      "genre": [
+        "Action",
+        "Thriller"
+      ],
+      "runtime": "128 min",
+      "director": "Dinesh Selvaraj",
+      "cast": [
+        "Vikram Prabhu",
+        "Hansika Motwani",
+        "M.S. Bhaskar"
+      ],
+      "plot": "An encounter specialist's success in hunting down and eliminating criminals takes him to the holy city of Rameshwaram, where he will face the biggest threat of his career.",
+      "imdb_rating": "6.4",
+      "metadata_status": "matched",
+      "telegram_message_id": 77,
+      "file_size": 1500149198,
+      "file_name": "Thuppakki Munai [2018]Tamil 720p.HDRip.[@MM_New].mkv",
+      "mime_type": "video/x-matroska",
+      "quality": "720p"
+    },
     {
       "id": "telegram-76",
       "slug_id": "n0WURym8SB-ck0_p",
@@ -2206,58 +2276,6 @@
       "file_name": "Modha Rathri (2026) Tamil HQ HDRip - 720p - x264 - (DD+5.mkv",
       "mime_type": "video/x-matroska",
       "quality": "720p"
-    },
-    {
-      "id": "telegram-77",
-      "slug_id": "dexC_fLtwZmI-cwp",
-      "title": "Thuppakki Munai",
-      "year": 2018,
-      "qualities": {
-        "720p": {
-          "telegram_message_id": 77,
-          "file_name": "Thuppakki Munai [2018]Tamil 720p.HDRip.[@MM_New].mkv",
-          "file_size": 0,
-          "mime_type": ""
-        }
-      },
-      "telegram_message_id": 77,
-      "quality": "720p",
-      "file_name": "Thuppakki Munai [2018]Tamil 720p.HDRip.[@MM_New].mkv",
-      "file_size": 0,
-      "mime_type": "",
-      "imdb_id": "tt7852918",
-      "poster": "https://m.media-amazon.com/images/M/MV5BM2VmODU2YjAtMmQ2ZC00NzZhLWFlNzQtNjE3YzZiYTQwOTRjXkEyXkFqcGc@._V1_SX300.jpg",
-      "genre": "Action, Thriller",
-      "runtime": "128 min",
-      "director": "Dinesh Selvaraj",
-      "cast": "Vikram Prabhu, Hansika Motwani, M.S. Bhaskar",
-      "plot": "An encounter specialist's success in hunting down and eliminating criminals takes him to the holy city of Rameshwaram, where he will face the biggest threat of his career."
-    },
-    {
-      "id": "telegram-78",
-      "slug_id": "-BjIfQiXRWQ_1MyB",
-      "title": "Thuppakki",
-      "year": 2012,
-      "qualities": {
-        "720p": {
-          "telegram_message_id": 78,
-          "file_name": "Thuppakki (2012) Tamil HQ BluRay - 720p - x264 - (DD+5.1.mkv",
-          "file_size": 0,
-          "mime_type": ""
-        }
-      },
-      "telegram_message_id": 78,
-      "quality": "720p",
-      "file_name": "Thuppakki (2012) Tamil HQ BluRay - 720p - x264 - (DD+5.1.mkv",
-      "file_size": 0,
-      "mime_type": "",
-      "imdb_id": "tt2187153",
-      "poster": "https://m.media-amazon.com/images/M/MV5BNDhmMWI0OWEtNTY3My00MjcxLTgwNDItMTgzYmJkMWQyMzg0XkEyXkFqcGc@._V1_SX300.jpg",
-      "genre": "Action, Thriller",
-      "runtime": "165 min",
-      "director": "A.R. Murugadoss",
-      "cast": "Joseph Vijay, Kajal Aggarwal, Vidyut Jammwal",
-      "plot": "An army captain is on a mission to track down and destroy a terrorist gang and deactivate the sleeper cells under its command."
     }
   ]
 }
