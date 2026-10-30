@@ -17,10 +17,10 @@ const OPTIONAL_FIELDS=[['imdb_id','IMDb ID'],['poster','Poster'],['genre','Genre
 const normalize=v=>String(v||'').normalize('NFKD').toLowerCase().replace(/[^a-z0-9]+/g,'');
 const TITLE_STOP_WORDS=new Set(['tamil','telugu','malayalam','kannada','hindi','english','movie','film','web','series','dual','audio','proper','repack','hdrip','webrip','bluray','brrip','dvdrip','hdtv','x264','x265','hevc','aac','esub','esubs','subtitles']);
 function titleCandidates(title){
- const clean=String(title||'').replace(/\\s+/g,' ').trim();
+ const clean=String(title||'').replace(/\s+/g,' ').trim();
  const tokens=clean.split(' ').filter(Boolean),out=[];
  const add=(value,allowNumeric=false)=>{
-  const candidate=String(value||'').replace(/\\s+/g,' ').trim();
+  const candidate=String(value||'').replace(/\s+/g,' ').trim();
   if(!candidate||candidate.length<2||TITLE_STOP_WORDS.has(candidate.toLowerCase())||(!allowNumeric&&!/[a-z]/i.test(candidate))||out.some(x=>normalize(x)===normalize(candidate)))return;
   out.push(candidate);
  };
@@ -118,7 +118,8 @@ export function guessMovie(file,movies){
  const exact=candidates.find(m=>normalize(m.title)===normalize(p.title));
  if(exact)return {parts:p,best:exact,confidence:1};
  const scored=candidates.map(m=>{
-  let score=Math.max(...p.titleCandidates.map(title=>similarity(title,m.title)*titleCoverage(p.title,title)));
+  const titleOptions=p.titleCandidates.length?p.titleCandidates:[p.title];
+  let score=Math.max(...titleOptions.map(title=>similarity(title,m.title)*titleCoverage(p.title,title)));
   for(const v of Object.values(m.qualities||{}))score=Math.max(score,similarity(p.title,filenameParts(v.file_name).title));
   return {movie:m,score};
  }).sort((a,b)=>b.score-a.score);
