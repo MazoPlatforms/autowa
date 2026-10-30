@@ -1,5 +1,29 @@
 const fontStylesheet=document.createElement('link');fontStylesheet.rel='stylesheet';fontStylesheet.href='https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap';document.head.append(fontStylesheet);
-const $=id=>document.getElementById(id);let number='',token='',signedIn=false,authVersion=0;const loginHintKey='tfw_login_hint_v1';const storedLogin=()=>{try{return localStorage.getItem(loginHintKey)==='1';}catch{return false;}};const saveLoginHint=value=>{try{if(value)localStorage.setItem(loginHintKey,'1');else localStorage.removeItem(loginHintKey);}catch{}};const msg=t=>{$('message').textContent=t;};async function api(route,payload){const r=await fetch('/api/'+route,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});const d=await r.json();if(!r.ok)throw Error(d.error||'Request failed');return d;}function phoneNumber(){let raw=$('phone').value.replace(/[^0-9+]/g,'');if(raw.startsWith('+'))return raw;if(raw.startsWith('00'))return '+'+raw.slice(2);raw=raw.replace(/^0+/,'');const dial=$('country').value;return '+'+(raw.startsWith(dial)?raw:dial+raw);}
+const $=id=>document.getElementById(id);let number='',token='',signedIn=false,authVersion=0,otpRequestPending=false,otpRequestStartedFor='',otpCooldownInterval=null;const loginHintKey='tfw_login_hint_v1',OTP_COOLDOWN_SECONDS=60;const storedLogin=()=>{try{return localStorage.getItem(loginHintKey)==='1';}catch{return false;}};const saveLoginHint=value=>{try{if(value)localStorage.setItem(loginHintKey,'1');else localStorage.removeItem(loginHintKey);}catch{}};const msg=t=>{$('message').textContent=t;};async function api(route,payload){const r=await fetch('/api/'+route,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});const d=await r.json();if(!r.ok){const error=Error(d.error||'Request failed');error.retryAfter=Number(d.retry_after)||0;throw error;}return d;}function phoneNumber(){let raw=$('phone').value.replace(/[^0-9+]/g,'');if(raw.startsWith('+'))return raw;if(raw.startsWith('00'))return '+'+raw.slice(2);raw=raw.replace(/^0+/,'');const dial=$('country').value;return '+'+(raw.startsWith(dial)?raw:dial+raw);}
+const otpCooldownKey=value=>'filmgo-otp-cooldown:'+value;
+function cooldownPhone(){return !$('start').classList.contains('hidden')&&$('phone').value.trim()?phoneNumber():number;}
+function cooldownRemaining(value=cooldownPhone()){if(!value)return 0;try{return Math.max(0,Math.ceil((Number(sessionStorage.getItem(otpCooldownKey(value))||0)-Date.now())/1000));}catch{return 0;}}
+function hasRequestedCode(value=cooldownPhone()){if(!value)return false;if(otpRequestStartedFor===value)return true;try{return sessionStorage.getItem(otpCooldownKey(value))!==null;}catch{return false;}}
+function countdownText(seconds){return String(Math.floor(seconds/60)).padStart(2,'0')+':'+String(seconds%60).padStart(2,'0');}
+function refreshOtpTimers(){
+ const phone=cooldownPhone(),remaining=cooldownRemaining(phone),requested=hasRequestedCode(phone),time=countdownText(remaining),send=$('send-code'),phoneTimer=$('phone-otp-timer'),resend=$('resend-otp'),otpTimer=$('otp-timer');
+ if(send){send.disabled=otpRequestPending||remaining>0;send.textContent=otpRequestPending?'Sending code…':remaining?`Request another code in ${time}`:requested?'Request a new code':'Send verification code';}
+ if(phoneTimer){phoneTimer.hidden=!remaining;phoneTimer.textContent=remaining?`You can request another code in ${time}.`:'';}
+ if(resend){resend.disabled=otpRequestPending||remaining>0;resend.textContent=otpRequestPending?'Sending…':remaining?'Resend code':'Request new code';}
+ if(otpTimer)otpTimer.textContent=remaining?`You can request another code in ${time}.`:'You can request a new code now.';
+ if(remaining>0&&!otpCooldownInterval)otpCooldownInterval=setInterval(refreshOtpTimers,1000);
+ if(!remaining&&otpCooldownInterval){clearInterval(otpCooldownInterval);otpCooldownInterval=null;}
+}
+function startOtpCooldown(value,seconds=OTP_COOLDOWN_SECONDS){
+ otpRequestStartedFor=value;
+ try{sessionStorage.setItem(otpCooldownKey(value),String(Date.now()+Math.max(0,seconds)*1000));}catch{}
+ refreshOtpTimers();
+}
+function applyRetryCooldown(error,value){
+ const match=String(error?.message||'').match(/wait\s+(\d+)\s+seconds?/i);
+ const seconds=Number(error?.retryAfter)||Number(match?.[1])||0;
+ if(seconds>0)startOtpCooldown(value,seconds);
+}
 let countriesLoaded=false,countriesFailed=false,countriesPromise=null,countryList=[];
 function flagFor(iso){return String.fromCodePoint(...String(iso||'').toUpperCase().split('').map(ch=>127397+ch.charCodeAt(0)));}
 function closeCountryPicker(){const panel=$('country-panel');panel.hidden=true;$('country-trigger').setAttribute('aria-expanded','false');}
@@ -10,7 +34,7 @@ function renderCountryOptions(query=''){
  for(const country of matches){
   const option=document.createElement('button');option.type='button';option.className='country-option';option.setAttribute('role','option');option.setAttribute('aria-selected',String($('country').value===country.dial));
   const name=document.createElement('span');name.textContent=flagFor(country.iso)+' '+country.name;const dial=document.createElement('span');dial.className='country-option-dial';dial.textContent='+'+country.dial;option.append(name,dial);
-  option.addEventListener('click',()=>{const select=$('country');select.value=country.dial;for(const item of select.options)item.selected=item.value===country.dial;$('country-value').textContent=flagFor(country.iso)+' '+country.name+' (+'+country.dial+')';closeCountryPicker();$('country-trigger').focus();});root.append(option);
+  option.addEventListener('click',()=>{const select=$('country');select.value=country.dial;for(const item of select.options)item.selected=item.value===country.dial;$('country-value').textContent=flagFor(country.iso)+' '+country.name+' (+'+country.dial+')';closeCountryPicker();refreshOtpTimers();$('country-trigger').focus();});root.append(option);
  }
 }
 function loadCountries(){if(countriesLoaded||countriesPromise)return countriesPromise;countriesPromise=fetch('/countries.json',{cache:'force-cache'}).then(r=>{if(!r.ok)throw Error('Country list unavailable');return r.json();}).then(data=>{countryList=(data.countries||[]).filter(c=>c&&/^[A-Z]{2}$/.test(c.iso)&&/^\d{1,5}$/.test(c.dial));const select=$('country');select.replaceChildren();for(const country of countryList){const option=document.createElement('option');option.value=country.dial;option.dataset.iso=country.iso;option.textContent=flagFor(country.iso)+' '+country.name+' (+'+country.dial+')';if(country.iso==='LK')option.selected=true;select.append(option);}const sriLanka=countryList.find(c=>c.iso==='LK');if(sriLanka){select.value=sriLanka.dial;$('country-value').textContent=flagFor(sriLanka.iso)+' '+sriLanka.name+' (+'+sriLanka.dial+')';}countriesLoaded=true;if(!$('country-panel').hidden)renderCountryOptions($('country-search').value);}).catch(()=>{countriesFailed=true;msg('Country list unavailable; Sri Lanka is the default.');}).finally(()=>{countriesPromise=null;});return countriesPromise;}
@@ -21,6 +45,8 @@ $('country-trigger').addEventListener('keydown',event=>{if(event.key==='ArrowDow
 $('country-picker').addEventListener('keydown',event=>{if(event.key==='Escape'&&!$('country-panel').hidden){closeCountryPicker();$('country-trigger').focus();}});
 document.addEventListener('click',event=>{if(!event.target.closest('#country-picker'))closeCountryPicker();});
 $('phone').addEventListener('focus',()=>{void loadCountries();});
+$('phone').addEventListener('input',refreshOtpTimers);
+refreshOtpTimers();
 const otpFields=Array.from({length:6},(_,i=>$('code-'+(i+1))));
 function syncOtpCode(){ $('code').value=otpFields.map(field=>field.value).join(''); return $('code').value; }
 function fillOtpFrom(value,startAt=0){
@@ -54,7 +80,9 @@ otpFields.forEach((field,index)=>{
   else if(event.key==='ArrowRight'&&index<otpFields.length-1){event.preventDefault();otpFields[index+1].focus();}
  });
 });
-$('start').addEventListener('submit',async e=>{e.preventDefault();const btn=e.target.querySelector('button[type="submit"]');btn.disabled=true;try{number=phoneNumber();const version=authVersion;await api('otp/start',{number});if(version!==authVersion)return;$('start').classList.add('hidden');$('verify').classList.remove('hidden');msg('Verification code sent to '+number);otpFields[0].focus();}catch(err){msg(err.message)}finally{btn.disabled=false;}});
+$('start').addEventListener('submit',async e=>{e.preventDefault();number=phoneNumber();if(cooldownRemaining(number)){refreshOtpTimers();return;}const version=authVersion;otpRequestPending=true;refreshOtpTimers();try{await api('otp/start',{number});if(version!==authVersion)return;startOtpCooldown(number);otpFields.forEach(field=>field.value='');syncOtpCode();$('start').classList.add('hidden');$('verify').classList.remove('hidden');msg('Verification code sent to '+number);otpFields[0].focus();}catch(err){applyRetryCooldown(err,number);msg(err.message)}finally{otpRequestPending=false;refreshOtpTimers();}});
+$('resend-otp').addEventListener('click',async()=>{if(!number||cooldownRemaining(number)||otpRequestPending)return;otpRequestPending=true;refreshOtpTimers();try{await api('otp/start',{number});startOtpCooldown(number);otpFields.forEach(field=>field.value='');syncOtpCode();otpFields[0].focus();msg('A new verification code was sent.');}catch(err){applyRetryCooldown(err,number);msg(err.message)}finally{otpRequestPending=false;refreshOtpTimers();}});
+$('change-phone').addEventListener('click',()=>{otpFields.forEach(field=>field.value='');syncOtpCode();$('verify').classList.add('hidden');$('start').classList.remove('hidden');refreshOtpTimers();$('phone').focus();});
 $('verify').addEventListener('submit',async e=>{e.preventDefault();const code=syncOtpCode();if(!/^\d{6}$/.test(code)){otpFields.find(field=>!field.value)?.focus();return;}const btn=e.target.querySelector('button[type="submit"]');btn.disabled=true;try{const back=new URLSearchParams(location.search).get('return');const safeBack=back&&(/^\/title\/[A-Za-z0-9_-]+\/?$/.test(back)||/^\/download\/[A-Za-z0-9_-]{1,80}(?:\?quality=[A-Za-z0-9._+-]{1,40})?$/.test(back));await api('otp/verify',{number,code});authVersion++;await showAccount();saveLoginHint(true);if(safeBack){location.assign(back);return;}msg('Signed in successfully.');}catch(err){msg(err.message)}finally{btn.disabled=false;}});
 const AVATAR_PLACEHOLDER='https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original';
 const avatarCacheKey=n=>'filmgo-avatar:'+n;
@@ -63,7 +91,7 @@ function paintAvatar(url){
  for(const id of ['profile-avatar','profile-monogram']){
   const root=$(id);if(!root)continue;
   root.querySelector('.wa-avatar-image')?.remove();
-  const img=document.createElement('img');img.className='wa-avatar-image';img.alt='WhatsApp profile picture';img.referrerPolicy='no-referrer';
+  const img=document.createElement('img');img.className='wa-avatar-image';img.alt='Profile picture';img.referrerPolicy='no-referrer';
   img.onerror=()=>{if(img.dataset.fallbackApplied!=='true'&&img.src!==AVATAR_PLACEHOLDER){img.dataset.fallbackApplied='true';img.src=AVATAR_PLACEHOLDER;return;}img.remove();};
   img.src=source;root.append(img);
  }
