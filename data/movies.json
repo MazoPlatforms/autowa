@@ -1876,6 +1876,32 @@
       "director": "Dayal Padmanabhan",
       "cast": "Varalaxmi Sarathkumar, Santhosh Prathap, Charle",
       "plot": "A stranger enters the life of a family that has been suffering in poverty for years. What follows are the events that make their lives even more miserable."
+    },
+    {
+      "id": "telegram-68",
+      "slug_id": "LUCfdt7n14OitMSj",
+      "title": "Yaaro",
+      "year": 2022,
+      "qualities": {
+        "720p": {
+          "telegram_message_id": 68,
+          "file_name": "Yaaro_2022_Tamil_HQ_HDRip_720p_x264_DD5_1_192Kbps_&_AAC_.mkv",
+          "file_size": 0,
+          "mime_type": ""
+        }
+      },
+      "telegram_message_id": 68,
+      "quality": "720p",
+      "file_name": "Yaaro_2022_Tamil_HQ_HDRip_720p_x264_DD5_1_192Kbps_&_AAC_.mkv",
+      "file_size": 0,
+      "mime_type": "",
+      "imdb_id": "tt18080968",
+      "poster": "https://m.media-amazon.com/images/M/MV5BMTAyMzE0NmYtMjllNy00ZDhiLWFmYzktMmI5YmFjY2QyYTRlXkEyXkFqcGc@._V1_SX300.jpg",
+      "genre": "Horror, Thriller",
+      "runtime": "103 min",
+      "director": "Sandeep Sai",
+      "cast": "Venkat Reddy, Upasana Roy Chowdhury, J. Durai Raj",
+      "plot": "John (Venkat Reddy), who lives alone in a posh villa in ECR. After his paternal uncle siphons off their property after cheating John's parents, his mother passes away and his father goes missing."
     }
   ]
 }
