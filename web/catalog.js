@@ -244,7 +244,7 @@ fetch('/api/stream-availability/'+slug,{cache:'no-store'}).then(r=>r.ok?r.json()
  accessNotice.hidden=true;
  setQuality(selected);
 }).catch(()=>{if(isActive()&&selected){setQuality(selected);setStatus('Availability check failed. You can still try streaming or downloading.');}});
-document.title=m.title+' — FilmGo';}function route(){const match=location.pathname.match(/^\/title\/([^/]+)\/?$/);$('catalog-back')?.classList.toggle('visible',!!match);if(match){const m=movies.find(x=>x.slug_id===decodeURIComponent(match[1])||x.id===decodeURIComponent(match[1]));home.classList.add('hidden');detail.classList.remove('hidden');if(m)showDetail(m);else{$('detail-content').replaceChildren(el('p','text-zinc-400','Movie not found.'));document.title='Movie not found — FilmGo';}}else{home.classList.remove('hidden');detail.classList.add('hidden');document.title='FilmGo — Explore';if(catalogLoaded)render();}window.scrollTo(0,0);}search.addEventListener('input',()=>{page=1;render();});for(const select of [yearFilter,genreFilter,sortFilter])select.addEventListener('change',()=>{page=1;render();});window.addEventListener('popstate',route);$('catalog-back')?.addEventListener('click',e=>{if(location.pathname.startsWith('/title/')){e.preventDefault();history.pushState({},'','/');route();}});skeleton();
+document.title=m.title+' — FilmGo';}function route(){const match=location.pathname.match(/^\/title\/([^/]+)\/?$/);$('catalog-back')?.classList.toggle('visible',!!match);if(match){const m=movies.find(x=>x.slug_id===decodeURIComponent(match[1])||x.id===decodeURIComponent(match[1]));home.classList.add('hidden');detail.classList.remove('hidden');if(m)showDetail(m);else if(!catalogLoaded){$('detail-content').replaceChildren(el('div','detail-loading','Loading movie details…'));document.title='Loading movie — FilmGo';}else{$('detail-content').replaceChildren(el('p','text-zinc-400','Movie not found.'));document.title='Movie not found — FilmGo';}}else{home.classList.remove('hidden');detail.classList.add('hidden');document.title='FilmGo — Explore';if(catalogLoaded)render();}window.scrollTo(0,0);}search.addEventListener('input',()=>{page=1;render();});for(const select of [yearFilter,genreFilter,sortFilter])select.addEventListener('change',()=>{page=1;render();});window.addEventListener('popstate',route);$('catalog-back')?.addEventListener('click',e=>{if(location.pathname.startsWith('/title/')){e.preventDefault();history.pushState({},'','/');route();}});skeleton();
 let catalogFingerprint='',catalogLoading=false;
 async function refreshCatalog(){
  if(catalogLoading||document.hidden)return;
@@ -258,7 +258,7 @@ async function refreshCatalog(){
   if(fingerprint!==catalogFingerprint||!catalogLoaded){
    catalogFingerprint=fingerprint;movies=data.movies;catalogLoaded=true;updateFilters();
    if(!location.pathname.startsWith('/title/'))render();
-   else if(!document.querySelector('#detail-content video'))route();
+   else if(location.pathname.startsWith('/title/')){const requested=decodeURIComponent(location.pathname.slice(7).replace(/\/$/,''));const movie=movies.find(item=>item.slug_id===requested||item.id===requested);if(movie)showDetail(movie);else route();}
   }
  }catch(err){
   if(!catalogLoaded){$('movie-count').textContent='Unable to load movies. Retrying…';}
