@@ -53,7 +53,7 @@ async function refreshAccount(){
  if(!response.ok)throw Error('Session expired');
  const user=await response.json();
  applyPricingCountry(user.number);
- $('account-number').textContent='WhatsApp: '+user.number;
+ $('account-number').textContent=user.number;
  $('profile-name').value=user.name||'';
  $('profile-display-name').textContent=user.name||'FilmGo member';
  $('usage-stats').replaceChildren();

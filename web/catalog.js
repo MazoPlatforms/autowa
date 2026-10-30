@@ -38,7 +38,7 @@ function confirmMovieRequest(movie,channel){
  buttons.append(cancel,confirm);sheet.append(buttons);overlay.append(sheet);document.body.append(overlay);document.addEventListener('keydown',esc);cancel.focus();
 }
 const $=id=>document.getElementById(id);const grid=$('catalog-grid'),search=$('catalog-search'),empty=$('catalog-empty'),home=$('catalog-home'),detail=$('catalog-detail');let movies=[];const el=(tag,cls,text)=>{const e=document.createElement(tag);if(cls)e.className=cls;if(text!==undefined)e.textContent=text;return e;};const FALLBACK_POSTER='https://i.ibb.co/TMJ6YCC4/IMG-33a2f581-8ff4-4a5e-9e64-e43c900000c2.png';const poster=m=>m.poster&&(/^https:\/\//.test(m.poster)||/^\/posters\/[a-f0-9]{24}\.jpg$/.test(m.poster))?m.poster:FALLBACK_POSTER;function image(m,cls,eager=false,priority=false){const img=el('img',cls);img.alt=m.title+' poster';img.loading=eager?'eager':'lazy';img.decoding='async';if(priority)img.fetchPriority='high';img.src=poster(m);img.onerror=()=>{if(img.src!==FALLBACK_POSTER){img.src=FALLBACK_POSTER;}else{img.onerror=null;img.removeAttribute('src');}};return img;}function skeleton(){grid.replaceChildren();for(let i=0;i<8;i++){const box=el('div');box.append(el('div','shimmer aspect-[2/3] rounded-2xl'),el('div','shimmer mt-3 h-4 w-3/4 rounded-md'),el('div','shimmer mt-2 h-3 w-1/2 rounded-md'));grid.append(box);}}const PAGE_SIZE=()=>window.matchMedia('(min-width: 768px)').matches?24:20;let page=1,catalogLoaded=false,searchSuggestions=[],suggestionsInitialized=false;
-const yearFilter=$('filter-year'),genreFilter=$('filter-genre'),sortFilter=$('filter-sort'),pagination=$('catalog-pagination');
+const yearFilter=$('filter-year'),genreFilter=$('filter-genre'),sortFilter=$('filter-sort'),pagination=$('catalog-pagination');let updatingFilters=false;
 // Accessible custom popovers; native selects remain as the state source.
 function initCustomFilters(){
  const filters=[yearFilter,genreFilter,sortFilter];
@@ -76,8 +76,9 @@ function updateFilters(){
  const genres=[...new Set(movies.flatMap(m=>Array.isArray(m.genre)?m.genre:typeof m.genre==='string'?m.genre.split(','):[]).map(g=>String(g).trim()).filter(Boolean))].sort((a,b)=>a.localeCompare(b));
  const fill=(select,values,label)=>{select.replaceChildren(new Option(label,''));for(const value of values)select.add(new Option(value,value));};
  fill(yearFilter,years,'All years');fill(genreFilter,genres,'All genres');
- yearFilter.value=years.includes(oldYear)?oldYear:'';genreFilter.value=genres.includes(oldGenre)?oldGenre:'';
+ updatingFilters=true;yearFilter.value=years.includes(oldYear)?oldYear:'';genreFilter.value=genres.includes(oldGenre)?oldGenre:'';
  yearFilter.dispatchEvent(new Event('change'));genreFilter.dispatchEvent(new Event('change'));
+ updatingFilters=false;
 }
 function renderPagination(total){
  pagination.replaceChildren();
@@ -251,12 +252,11 @@ const setQuality=q=>{if(!qualities.includes(q))return;const targetUrl=streamUrl(
  const maybeSwitch=()=>{canPlay=stage.readyState>=2;if(canPlay&&!stage.seeking)switchToStaged(stage,q,wasPlaying);};
  stage.addEventListener('loadedmetadata',()=>{if(stage!==stagedVideo)return;if(position>0&&position<stage.duration){stage.currentTime=position;stage.addEventListener('seeked',maybeSwitch,{once:true});}maybeSwitch();},{once:true});stage.addEventListener('canplay',maybeSwitch);stage.addEventListener('seeked',maybeSwitch);stage.addEventListener('error',()=>{if(stage!==stagedVideo)return;cancelStaging();selected=activeQuality;updateQualityButtons();setLoading('',false);setStatus('Could not switch quality. Playback continues at '+activeQuality+'.');},{once:true});stage.load();
 };
-fetch('/api/stream-availability/'+slug,{cache:'no-store'}).then(r=>r.ok?r.json():null).then(async data=>{
+fetch('/api/stream-availability/'+slug,{cache:'no-store'}).then(r=>r.ok?r.json():null).then(data=>{
  if(!isActive())return;
  if(!data?.available){setStatus('Streaming is currently unavailable.');actions.classList.add('hidden');qualityRow.classList.add('hidden');return;}
  if(!selected){setStatus('No quality available.');return;}
- const auth=await fetch('/api/me',{cache:'no-store'});
- if(!auth.ok){accessNotice.hidden=false;accessNotice.replaceChildren(el('span','','Sign in to stream or download. Free accounts receive 50 tokens per UTC day; reset is 00:00:00 UTC. '));const signIn=el('a','','Sign in');signIn.href='/profile?return='+encodeURIComponent(location.pathname);accessNotice.append(signIn);return;}
+ if(!data.signed_in){accessNotice.hidden=false;accessNotice.replaceChildren(el('span','','Sign in to stream or download. Free accounts receive 50 tokens per UTC day; reset is 00:00:00 UTC. '));const signIn=el('a','','Sign in');signIn.href='/profile?return='+encodeURIComponent(location.pathname);accessNotice.append(signIn);return;}
  accessNotice.hidden=true;
  setQuality(selected);
 }).catch(()=>{if(isActive()&&selected){setQuality(selected);setStatus('Availability check failed. You can still try streaming or downloading.');}});
@@ -276,28 +276,28 @@ search.addEventListener('focus',()=>{if(location.pathname!=='/search'&&!location
 search.addEventListener('input',()=>{page=1;if(location.pathname==='/search')history.replaceState({},'','/search?q='+encodeURIComponent(search.value));render();});
 $('catalog-search-close').addEventListener('click',()=>{search.blur();searchSuggestions=[];suggestionsInitialized=false;history.replaceState({},'','/');route();});
 window.addEventListener('keydown',event=>{if(event.key==='Escape'&&location.pathname==='/search'){$('catalog-search-close').click();}});
-for(const select of [yearFilter,genreFilter,sortFilter])select.addEventListener('change',()=>{page=1;render();});window.addEventListener('popstate',route);const desktopPagination=window.matchMedia('(min-width: 768px)');desktopPagination.addEventListener?.('change',()=>{page=1;render();});$('catalog-back')?.addEventListener('click',e=>{if(location.pathname.startsWith('/title/')){e.preventDefault();history.pushState({},'','/');route();}});skeleton();
-let catalogFingerprint='',catalogLoading=false;
+for(const select of [yearFilter,genreFilter,sortFilter])select.addEventListener('change',()=>{if(updatingFilters)return;page=1;render();});window.addEventListener('popstate',route);const desktopPagination=window.matchMedia('(min-width: 768px)');desktopPagination.addEventListener?.('change',()=>{page=1;render();});$('catalog-back')?.addEventListener('click',e=>{if(location.pathname.startsWith('/title/')){e.preventDefault();history.pushState({},'','/');route();}});skeleton();
+let catalogEtag='',catalogLoading=false;
 async function refreshCatalog(){
  if(catalogLoading||document.hidden)return;
  catalogLoading=true;
  try{
-  const response=await fetch('/movies.json?_='+Date.now(),{cache:'no-store'});
+  const response=await fetch('/movies.json',{cache:'no-cache'});
+  if(response.status===304)return;
   if(!response.ok)throw Error('Catalog unavailable');
+  const etag=response.headers.get('ETag')||'';
+  if(catalogLoaded&&etag&&etag===catalogEtag)return;
   const data=await response.json();
   if(!Array.isArray(data.movies))throw Error('Invalid catalog');
-  const fingerprint=JSON.stringify(data.movies.map(m=>[m.slug_id,m.title,m.poster,m.file_size,m.metadata_status,JSON.stringify(m.qualities)]));
-  if(fingerprint!==catalogFingerprint||!catalogLoaded){
-   catalogFingerprint=fingerprint;movies=data.movies;catalogLoaded=true;if(location.pathname==='/search'&&!search.value.trim())suggestionsInitialized=false;updateFilters();
-   if(!location.pathname.startsWith('/title/'))render();
-   else if(location.pathname.startsWith('/title/')){const requested=decodeURIComponent(location.pathname.slice(7).replace(/\/$/,''));const movie=movies.find(item=>item.slug_id===requested||item.id===requested);if(movie)showDetail(movie);else route();}
-  }
+  catalogEtag=etag;movies=data.movies;catalogLoaded=true;if(location.pathname==='/search'&&!search.value.trim())suggestionsInitialized=false;updateFilters();
+  if(!location.pathname.startsWith('/title/'))render();
+  else{const requested=decodeURIComponent(location.pathname.slice(7).replace(/\/$/,''));const movie=movies.find(item=>item.slug_id===requested||item.id===requested);if(movie)showDetail(movie);else route();}
  }catch(err){
   if(!catalogLoaded){$('movie-count').textContent='Unable to load movies. Retrying…';}
  }finally{catalogLoading=false;}
 }
 route();void refreshCatalog();
-setInterval(()=>{void refreshCatalog();},15000);
+setInterval(()=>{void refreshCatalog();},60000);
 document.addEventListener('visibilitychange',()=>{if(!document.hidden)void refreshCatalog();});
 // Resolve the existing server session before showing the account control.
 // No localStorage login hint is trusted as authentication.

@@ -244,11 +244,12 @@ const server=http.createServer(async(req,res)=>{
   if(req.method==='GET'&&url.pathname==='/health'){return send(res,200,{ok:true});}
   if(req.method==='GET'&&url.pathname.startsWith('/api/stream-availability/')){
    const id=url.pathname.slice('/api/stream-availability/'.length);
-   const movie=((await getPublicCatalog()).movies||[]).find(m=>m.slug_id===id);
+   const [catalog,session]=await Promise.all([getPublicCatalog(),authenticated(req)]);
+   const movie=(catalog.movies||[]).find(m=>m.slug_id===id);
    const variant=movie?selectMovieVariant(movie,url.searchParams.get('quality')):null;
    const ext=String(variant?.file_name||'').toLowerCase();
    const format=ext.endsWith('.mkv')?'mkv':ext.endsWith('.webm')?'webm':ext.endsWith('.mp4')?'mp4':'unknown';
-   return send(res,200,{available:telegramReady&&!!variant,format,qualities:movie?Object.keys(movie.qualities||{[movie.quality]:movie}):[]});
+   return send(res,200,{available:telegramReady&&!!variant,signed_in:!!session,format,qualities:movie?Object.keys(movie.qualities||{[movie.quality]:movie}):[]});
   }
   if((req.method==='GET'||req.method==='HEAD')&&url.pathname.startsWith('/api/download/')){
    const slug=url.pathname.slice('/api/download/'.length);
