@@ -205,7 +205,7 @@ async function saveMovieMetadata(id,d){
  }
  throw Error('Catalog update conflict');
 }
-async function publishDraft(d){const lock=prefix+'publishing:'+ADMIN_ID;if(await redis('SET',lock,'1','NX','EX',90)!=='OK')return say(ADMIN_ID,'Publishing is already running.');try{const caption=['Movie: '+d.title,'Year: '+d.year,'Quality: '+d.quality,...(d.slug_id?['Slug ID: '+d.slug_id]:[])].join('\n');const sent=await tg('copyMessage',{chat_id:CHANNEL_ID,from_chat_id:ADMIN_ID,message_id:d.message_id,caption},30000);await saveMovieMetadata(sent.message_id,d);await redis('DEL',DRAFT_KEY+ADMIN_ID);void logFilmGo('movies','🎬 Published: '+d.title+' ('+d.year+') · '+d.quality+' · channel #'+sent.message_id);await dispatch('filmgo-catalog-sync',{message_id:sent.message_id});}finally{await redis('DEL',lock);}}
+async function publishDraft(d){const lock=prefix+'publishing:'+ADMIN_ID;if(await redis('SET',lock,'1','NX','EX',90)!=='OK')return say(ADMIN_ID,'Publishing is already running.');try{const caption=['Movie: '+d.title,'Year: '+d.year,'Quality: '+d.quality,...(d.slug_id?['Slug ID: '+d.slug_id]:[])].join('\n');const sent=await tg('copyMessage',{chat_id:CHANNEL_ID,from_chat_id:ADMIN_ID,message_id:d.message_id,caption},30000);await saveMovieMetadata(sent.message_id,d);await redis('DEL',DRAFT_KEY+ADMIN_ID);void logFilmGo('movies','🎬 Published: '+d.title+' ('+d.year+') · '+d.quality+' · channel #'+sent.message_id);await dispatch('filmgo-catalog-sync',{message_id:sent.message_id});await say(ADMIN_ID,'✅ Movie published successfully\n\n🎬 '+d.title+' ('+d.year+')\n📺 Quality: '+d.quality);}finally{await redis('DEL',lock);}}
 
 let running=false;
 async function redis(...args){
@@ -218,6 +218,7 @@ async function tg(method,data={},timeout=20000){
  const j=await r.json();if(!j.ok)throw Error('Telegram '+method+': '+String(j.description).slice(0,160));return j.result;
 }
 async function say(chat_id,text,extra={}){return tg('sendMessage',{chat_id,text,disable_web_page_preview:true,...extra});}
+async function deleteConfirmation(q){const chatId=q.message?.chat?.id,messageId=q.message?.message_id;if(chatId==null||!Number.isInteger(messageId))return;try{await tg('deleteMessage',{chat_id:chatId,message_id:messageId});}catch{}}
 async function dispatch(type,payload){
  if(!/^[\w.-]+\/[\w.-]+$/.test(REPO))throw Error('GitHub repository missing');
  const [owner,name]=REPO.split('/');
@@ -368,22 +369,23 @@ async function onCallback(q){
  const action=String(q.data||'');
  if(action==='fg:omdb:yes'||action==='fg:omdb:no'){
   await tg('answerCallbackQuery',{callback_query_id:q.id});const d=await draftGet();
-  if(!d||d.stage!=='await-omdb-confirm')return say(ADMIN_ID,'This OMDb confirmation has expired. Send the file again to start a new draft.');
-  if(action==='fg:omdb:yes')return acceptOmdbResult(d);
-  delete d.omdb_candidate;await say(ADMIN_ID,'Okay, I will not use that OMDb result.');return askOptional(d);
+  if(!d||d.stage!=='await-omdb-confirm'){await deleteConfirmation(q);return say(ADMIN_ID,'This OMDb confirmation has expired. Send the file again to start a new draft.');}
+  await deleteConfirmation(q);
+  if(action==='fg:omdb:yes'){await acceptOmdbResult(d);return;}
+  delete d.omdb_candidate;await say(ADMIN_ID,'✅ OMDb result declined. I will collect the movie details manually.');return askOptional(d);
  }
- if(action==='fg:publish'||action==='fg:cancel'){await tg('answerCallbackQuery',{callback_query_id:q.id});const d=await draftGet();if(!d)return say(ADMIN_ID,'Draft expired.');if(action==='fg:cancel'){await redis('DEL',DRAFT_KEY+ADMIN_ID);return say(ADMIN_ID,'Draft cancelled.');}if(d.stage&&d.stage!=='await-publish')return say(ADMIN_ID,'This draft is not ready to publish yet. Use /draft to continue the current step.');return publishDraft(d);}
+ if(action==='fg:publish'||action==='fg:cancel'){await tg('answerCallbackQuery',{callback_query_id:q.id});const d=await draftGet();if(!d){await deleteConfirmation(q);return say(ADMIN_ID,'Draft expired.');}if(action==='fg:cancel'){await redis('DEL',DRAFT_KEY+ADMIN_ID);await deleteConfirmation(q);return say(ADMIN_ID,'Draft cancelled.');}if(d.stage&&d.stage!=='await-publish')return say(ADMIN_ID,'This draft is not ready to publish yet. Use /draft to continue the current step.');try{await publishDraft(d);}finally{await deleteConfirmation(q);}return;}
  const m=action.match(/^fg:(yes|no):([a-f0-9]{24})$/);if(!m)return;
  await tg('answerCallbackQuery',{callback_query_id:q.id});
  const key=prefix+'pending:'+m[2],raw=await redis('GET',key);
- if(!raw){await say(ADMIN_ID,'Import confirmation expired or already used.');return;}
+ if(!raw){await deleteConfirmation(q);await say(ADMIN_ID,'Import confirmation expired or already used.');return;}
  const data=JSON.parse(raw);if(data.admin!==ADMIN_ID)return;
  // Atomic claim prevents repeated button taps from dispatching multiple jobs.
- if(await redis('SET',prefix+'claimed:'+m[2],'1','EX',3600,'NX')!=='OK')return;
+ if(await redis('SET',prefix+'claimed:'+m[2],'1','EX',3600,'NX')!=='OK'){await deleteConfirmation(q);await say(ADMIN_ID,'This import was already handled.');return;}
  await redis('DEL',key);
- if(m[1]==='no'){await say(ADMIN_ID,'Import cancelled.');return;}
- try{await dispatch('filmgo-admin-import',{import_id:m[2],source_url:data.url,admin_id:ADMIN_ID});void logFilmGo('movies','📥 Remote movie import queued · job '+m[2]);}
- catch(err){await say(ADMIN_ID,'Unable to queue import: '+err.message);}
+ if(m[1]==='no'){await deleteConfirmation(q);await say(ADMIN_ID,'Import cancelled.');return;}
+ try{await dispatch('filmgo-admin-import',{import_id:m[2],source_url:data.url,admin_id:ADMIN_ID});void logFilmGo('movies','📥 Remote movie import queued · job '+m[2]);await deleteConfirmation(q);await say(ADMIN_ID,'✅ Remote movie import queued successfully.');}
+ catch(err){await deleteConfirmation(q);await say(ADMIN_ID,'Unable to queue import: '+err.message);}
 }
 async function onChannel(message,refresh){
  if(String(message.chat?.id)!==CHANNEL_ID)return;
