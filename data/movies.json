@@ -1,7 +1,41 @@
 {
   "schema_version": 2,
-  "updated_at": "2026-10-30T12:12:31.792666+00:00",
+  "updated_at": "2026-10-30T13:33:27.068451+00:00",
   "movies": [
+    {
+      "id": "telegram-69",
+      "slug_id": "RljvpUVxVqq4xYrd",
+      "title": "Bairavaa",
+      "year": 2017,
+      "qualities": {
+        "720p": {
+          "telegram_message_id": 69,
+          "file_size": 1552690448,
+          "file_name": "Bairavaa [2017] Tamil 720p HDRip x264 Vijaysm_Kerala.mkv",
+          "mime_type": "video/x-matroska"
+        }
+      },
+      "imdb_id": "tt6201292",
+      "poster": "https://m.media-amazon.com/images/M/MV5BZjlhOWM2YzMtY2UzMC00ZWQ4LWIyNDgtNWU2NDBlMzVjM2VkXkEyXkFqcGc@._V1_.jpg",
+      "genre": [
+        "Action"
+      ],
+      "runtime": "169 min",
+      "director": "Bharathan",
+      "cast": [
+        "Joseph Vijay",
+        "Keerthy Suresh",
+        "Jagapathi Babu"
+      ],
+      "plot": "Bairavaa, a gallant debt collector, takes on a violent criminal masquerading as a philanthropist in the education field.",
+      "imdb_rating": "5.8",
+      "metadata_status": "matched",
+      "telegram_message_id": 69,
+      "file_size": 1552690448,
+      "file_name": "Bairavaa [2017] Tamil 720p HDRip x264 Vijaysm_Kerala.mkv",
+      "mime_type": "video/x-matroska",
+      "quality": "720p"
+    },
     {
       "id": "telegram-68",
       "slug_id": "LUCfdt7n14OitMSj",
@@ -1921,32 +1955,6 @@
       "file_name": "Modha Rathri (2026) Tamil HQ HDRip - 720p - x264 - (DD+5.mkv",
       "mime_type": "video/x-matroska",
       "quality": "720p"
-    },
-    {
-      "id": "telegram-69",
-      "slug_id": "RljvpUVxVqq4xYrd",
-      "title": "Bairavaa",
-      "year": 2017,
-      "qualities": {
-        "720p": {
-          "telegram_message_id": 69,
-          "file_name": "Bairavaa [2017] Tamil 720p HDRip x264 Vijaysm_Kerala.mkv",
-          "file_size": 0,
-          "mime_type": ""
-        }
-      },
-      "telegram_message_id": 69,
-      "quality": "720p",
-      "file_name": "Bairavaa [2017] Tamil 720p HDRip x264 Vijaysm_Kerala.mkv",
-      "file_size": 0,
-      "mime_type": "",
-      "imdb_id": "tt6201292",
-      "poster": "https://m.media-amazon.com/images/M/MV5BMzhmOGM5YzUtMzBhZS00NTRkLTg0MjMtZThlNjkyMTljN2FiXkEyXkFqcGc@._V1_SX300.jpg",
-      "genre": "Action",
-      "runtime": "169 min",
-      "director": "Bharathan",
-      "cast": "Joseph Vijay, Keerthy Suresh, Jagapathi Babu",
-      "plot": "Bairavaa, a gallant debt collector, takes on a violent criminal masquerading as a philanthropist in the education field."
     }
   ]
 }
