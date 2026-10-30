@@ -1,7 +1,42 @@
 {
   "schema_version": 2,
-  "updated_at": "2026-10-30T17:55:29.500956+00:00",
+  "updated_at": "2026-10-30T17:56:14.270278+00:00",
   "movies": [
+    {
+      "id": "telegram-83",
+      "slug_id": "FCS4wq2xwN7mUMJO",
+      "title": "Oru Kal Oru Kannadi",
+      "year": 2012,
+      "qualities": {
+        "720p": {
+          "telegram_message_id": 83,
+          "file_size": 1462703583,
+          "file_name": "Oru Kal Oru Kannadi (2012) Tamil HQ HDRip - 720p - x264 .mkv",
+          "mime_type": "video/x-matroska"
+        }
+      },
+      "imdb_id": "tt2359201",
+      "poster": "https://m.media-amazon.com/images/M/MV5BMzQwZjJmMTEtNmU3Zi00NTk4LTkxZGYtYTIyZGI3ODg3ZmYwXkEyXkFqcGc@._V1_.jpg",
+      "genre": [
+        "Comedy",
+        "Romance"
+      ],
+      "runtime": "166 min",
+      "director": "M. Rajesh",
+      "cast": [
+        "Udhayanidhi Stalin",
+        "Hansika Motwani",
+        "Santhanam Neelamegam"
+      ],
+      "plot": "A young boy tries to impress a young girl hardly and he too succeeds in it. But there lies the twist, because of a single phone call.",
+      "imdb_rating": "6.3",
+      "metadata_status": "matched",
+      "telegram_message_id": 83,
+      "file_size": 1462703583,
+      "file_name": "Oru Kal Oru Kannadi (2012) Tamil HQ HDRip - 720p - x264 .mkv",
+      "mime_type": "video/x-matroska",
+      "quality": "720p"
+    },
     {
       "id": "telegram-82",
       "slug_id": "O-oa6wxPxdFU3RRk",
@@ -2416,32 +2451,6 @@
       "file_name": "Modha Rathri (2026) Tamil HQ HDRip - 720p - x264 - (DD+5.mkv",
       "mime_type": "video/x-matroska",
       "quality": "720p"
-    },
-    {
-      "id": "telegram-83",
-      "slug_id": "FCS4wq2xwN7mUMJO",
-      "title": "Oru Kal Oru Kannadi",
-      "year": 2012,
-      "qualities": {
-        "720p": {
-          "telegram_message_id": 83,
-          "file_name": "Oru Kal Oru Kannadi (2012) Tamil HQ HDRip - 720p - x264 .mkv",
-          "file_size": 0,
-          "mime_type": ""
-        }
-      },
-      "telegram_message_id": 83,
-      "quality": "720p",
-      "file_name": "Oru Kal Oru Kannadi (2012) Tamil HQ HDRip - 720p - x264 .mkv",
-      "file_size": 0,
-      "mime_type": "",
-      "imdb_id": "tt2359201",
-      "poster": "https://m.media-amazon.com/images/M/MV5BOGJhYmFmMjYtMzVmNy00OGM0LWEwZmQtNzc1NTAwY2EyYjc2XkEyXkFqcGdeQXVyMTEzNzg0Mjkx._V1_SX300.jpg",
-      "genre": "Comedy, Romance",
-      "runtime": "166 min",
-      "director": "M. Rajesh",
-      "cast": "Udhayanidhi Stalin, Hansika Motwani, Santhanam Neelamegam",
-      "plot": "A young boy tries to impress a young girl hardly and he too succeeds in it. But there lies the twist, because of a single phone call."
     }
   ]
 }
