@@ -210,12 +210,12 @@ const setMovieAccessState=state=>{
  const copy=el('div','filmgo-signin-copy');
  if(state==='checking')copy.append(el('strong','','Checking sign-in status'),el('span','','Sign in is required to use this movie’s player and actions.'));
  else if(state==='unavailable')copy.append(el('strong','','Unable to verify sign-in'),el('span','','Check your connection, then try again.'));
- else copy.append(el('strong','','Sign in required'),el('span','','Sign in before streaming, downloading, or requesting this movie through WhatsApp or Telegram.'));
+ else copy.append(el('strong','','Sign in required'),el('span','','Sign in using Phone before streaming, downloading, or requesting this movie.'));
  accessNotice.append(copy);
  if(state==='unavailable'){
   const retry=el('button','filmgo-signin-cta','Try again');retry.type='button';retry.addEventListener('click',checkMovieAccess);accessNotice.append(retry);
  }else if(state==='signed-out'){
-  const signIn=el('a','filmgo-signin-cta','Sign in with WhatsApp');signIn.href='/profile?return='+encodeURIComponent(location.pathname);accessNotice.append(signIn);
+  const signIn=el('a','filmgo-signin-cta','Sign in using Phone');signIn.href='/profile?return='+encodeURIComponent(location.pathname);accessNotice.append(signIn);
  }
 };
 async function checkMovieAccess(){

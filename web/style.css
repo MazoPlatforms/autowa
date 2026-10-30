@@ -416,7 +416,7 @@ main{padding-inline:clamp(16px,4vw,40px)!important}
 @media(min-width:1024px){#plans .plans-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important;grid-auto-rows:1fr;gap:16px!important}#plans .plan-card{height:100%;padding:24px 22px!important}#plans .plan-card:last-child{grid-column:auto}#plans .plan-card>ul{flex:1}#plans .plan-card>.primary-button{margin-top:auto!important}}
 @media(min-width:1400px){#plans .plan-card{padding:28px 30px!important}}
 
-/* Searchable country code picker for WhatsApp sign-in. */
+/* Searchable country code picker for phone sign-in. */
 #start .country-picker{position:relative;margin-top:8px}
 #start #country.country-native{position:absolute!important;left:0;top:0;width:1px!important;height:1px!important;min-height:1px!important;padding:0!important;border:0!important;opacity:0!important;pointer-events:none!important}
 #start .country-trigger{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;height:50px;padding:0 14px;border:1px solid #3f3f46;border-radius:12px;background:#242428;color:#f4f4f5;text-align:left;font-size:14px;font-weight:600}
@@ -431,3 +431,21 @@ main{padding-inline:clamp(16px,4vw,40px)!important}
 #start .country-option:hover,#start .country-option:focus-visible,#start .country-option[aria-selected=true]{background:#ffffff12;outline:none}
 #start .country-option-dial{flex:none;color:#a1a1aa;font-size:12px;font-variant-numeric:tabular-nums}
 #start .country-no-results{margin:12px 8px;color:#a1a1aa;font-size:12px;text-align:center}
+
+/* Six-cell OTP entry that stays usable on narrow phones and desktop. */
+#verify .otp-fields{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:clamp(5px,1.8vw,10px);width:100%;margin-top:12px}
+#verify .otp-digit{display:block;width:100%!important;min-width:0;height:clamp(44px,12vw,58px)!important;padding:0!important;border:1px solid #3f3f46;border-radius:13px;background:#242428;color:#fafafa;text-align:center;font-size:clamp(19px,5.4vw,25px);font-weight:750;font-variant-numeric:tabular-nums;caret-color:#fafafa}
+#verify .otp-digit:focus{border-color:#d4d4d8;background:#2b2b30;box-shadow:0 0 0 3px #ffffff12;outline:none}
+#verify .otp-digit::selection{background:#52525b}
+#verify #code{display:none!important}
+@media(max-width:360px){#verify .otp-fields{gap:5px}#verify .otp-digit{border-radius:10px;font-size:20px}}
+.otp-timer{margin:12px 0 0;color:#a1a1aa;font-size:12px;line-height:1.5;text-align:center;font-variant-numeric:tabular-nums}
+.otp-timer[hidden]{display:none!important}
+.otp-actions{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:8px 14px;margin-top:14px}
+.otp-actions .otp-timer{grid-column:1/-1;margin:0}
+.otp-resend-button,.otp-change-phone{min-height:40px;padding:8px 12px;border:1px solid #3f3f46;border-radius:11px;background:#242428;color:#e4e4e7;font-size:12px;font-weight:650}
+.otp-resend-button:disabled{opacity:.55;cursor:wait}
+.otp-change-phone{background:transparent;color:#a1a1aa;border-color:transparent;text-decoration:underline;text-underline-offset:3px}
+.otp-change-phone:hover{color:#f4f4f5}
+#verify .otp-actions+.primary-button{margin-top:16px}
+@media(max-width:380px){.otp-actions{grid-template-columns:1fr;gap:8px}.otp-actions .otp-resend-button,.otp-actions .otp-change-phone{width:100%}}
