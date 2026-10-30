@@ -23,15 +23,16 @@ document.addEventListener('click',event=>{if(!event.target.closest('#country-pic
 $('phone').addEventListener('focus',()=>{void loadCountries();});
 $('start').addEventListener('submit',async e=>{e.preventDefault();const btn=e.target.querySelector('button');btn.disabled=true;try{number=phoneNumber();const version=authVersion;await api('otp/start',{number});if(version!==authVersion)return;$('start').classList.add('hidden');$('verify').classList.remove('hidden');msg('Verification code sent to '+number);}catch(err){msg(err.message)}finally{btn.disabled=false;}});
 $('verify').addEventListener('submit',async e=>{e.preventDefault();const btn=e.target.querySelector('button');btn.disabled=true;try{const back=new URLSearchParams(location.search).get('return');const safeBack=back&&(/^\/title\/[A-Za-z0-9_-]+\/?$/.test(back)||/^\/download\/[A-Za-z0-9_-]{1,80}(?:\?quality=[A-Za-z0-9._+-]{1,40})?$/.test(back));const d=await api('otp/verify',{number,code:$('code').value});authVersion++;await showAccount();saveLoginHint(true);if(safeBack){location.assign(back);return;}msg('Signed in successfully.');}catch(err){msg(err.message)}finally{btn.disabled=false;}});
+const AVATAR_PLACEHOLDER='https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original';
 const avatarCacheKey=n=>'filmgo-avatar:'+n;
 function paintAvatar(url){
+ const source=typeof url==='string'&&url.startsWith('https://')?url:AVATAR_PLACEHOLDER;
  for(const id of ['profile-avatar','profile-monogram']){
   const root=$(id);if(!root)continue;
   root.querySelector('.wa-avatar-image')?.remove();
-  if(!url)continue;
   const img=document.createElement('img');img.className='wa-avatar-image';img.alt='WhatsApp profile picture';img.referrerPolicy='no-referrer';
-  img.onerror=()=>{img.remove();};
-  img.src=url;root.append(img);
+  img.onerror=()=>{if(img.dataset.fallbackApplied!=='true'&&img.src!==AVATAR_PLACEHOLDER){img.dataset.fallbackApplied='true';img.src=AVATAR_PLACEHOLDER;return;}img.remove();};
+  img.src=source;root.append(img);
  }
 }
 async function refreshAvatar(number){
@@ -40,13 +41,14 @@ async function refreshAvatar(number){
  if(cached){paintAvatar(cached);return;}
  try{
   const response=await fetch('/api/avatar',{cache:'no-store'});
-  if(!response.ok)return;
+  if(!response.ok){paintAvatar(AVATAR_PLACEHOLDER);return;}
   const data=await response.json();
   if(typeof data.url==='string'&&data.url.startsWith('https://')){
    try{sessionStorage.setItem(avatarCacheKey(number),data.url);}catch{}
-   paintAvatar(data.url);
+   paintAvatar(data.url);return;
   }
- }catch{/* Letter avatar is the privacy-safe fallback. */}
+  paintAvatar(AVATAR_PLACEHOLDER);
+ }catch{paintAvatar(AVATAR_PLACEHOLDER);}
 }
 async function refreshAccount(){
  const response=await fetch('/api/me',{cache:'no-store'});
@@ -58,7 +60,7 @@ async function refreshAccount(){
  $('profile-display-name').textContent=user.name||'FilmGo member';
  $('usage-stats').replaceChildren();
  for(const [label,value] of [['Tokens used',user.unlimited?'—':user.tokens_used],['Tokens remaining',user.unlimited?'∞':user.tokens_remaining],['Daily tokens',user.unlimited?'∞':user.token_limit]]){const tile=document.createElement('div');tile.className='usage-tile';const n=document.createElement('strong');n.textContent=String(value);const t=document.createElement('span');t.textContent=label;tile.append(n,t);$('usage-stats').append(tile);}
- $('avatar-initials').textContent=(user.name||user.number||'?').trim().split(/\s+/).slice(0,2).map(v=>v[0]||'').join('').toUpperCase();
+ $('avatar-initials').textContent=(user.name||'FG').trim().split(/\s+/).slice(0,2).map(v=>v[0]||'').join('').toUpperCase();
  $('profile-monogram').textContent=$('avatar-initials').textContent;
  void refreshAvatar(user.number);
  $('account-limits').textContent=user.unlimited?'Tokens: Unlimited · No daily quota':'Tokens: '+user.tokens_used+' / '+user.token_limit+' used · '+user.tokens_remaining+' remaining · Resets 00:00:00 UTC';
