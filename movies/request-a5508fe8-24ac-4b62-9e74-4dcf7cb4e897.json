@@ -1,0 +1,17 @@
+{
+  "id": "request-a5508fe8-24ac-4b62-9e74-4dcf7cb4e897",
+  "title": "Theri",
+  "year": "2016",
+  "quality": "720p",
+  "license_confirmed": true,
+  "enabled": false,
+  "status": "submitted",
+  "started_at": "2026-10-30T13:31:09.122Z",
+  "file_type": "mkv",
+  "filename": "mzn.is-a.dev - Theri (2016) - 720p.mkv",
+  "caption": "🎬 FilmGo\n\n🎞️ Theri (2016)\n\nEnjoy the movie!\n\n> Powered by Itz Maazin • https://mzn.is-a.dev/",
+  "finished_at": "2026-10-30T13:39:21.516Z",
+  "request_origin": "koyeb_verified",
+  "workflow_run_id": "41063822387",
+  "workflow_run_url": "https://github.com/MazoPlatforms/autowa/actions/runs/41063822387"
+}
