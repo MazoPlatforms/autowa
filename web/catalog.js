@@ -37,7 +37,7 @@ function confirmMovieRequest(movie,channel){
  });
  buttons.append(cancel,confirm);sheet.append(buttons);overlay.append(sheet);document.body.append(overlay);document.addEventListener('keydown',esc);cancel.focus();
 }
-const $=id=>document.getElementById(id);const grid=$('catalog-grid'),search=$('catalog-search'),empty=$('catalog-empty'),home=$('catalog-home'),detail=$('catalog-detail');let movies=[];const el=(tag,cls,text)=>{const e=document.createElement(tag);if(cls)e.className=cls;if(text!==undefined)e.textContent=text;return e;};const FALLBACK_POSTER='https://i.ibb.co/TMJ6YCC4/IMG-33a2f581-8ff4-4a5e-9e64-e43c900000c2.png';const poster=m=>m.poster&&(/^https:\/\//.test(m.poster)||/^\/posters\/[a-f0-9]{24}\.jpg$/.test(m.poster))?m.poster:FALLBACK_POSTER;function image(m,cls,eager=false,priority=false){const img=el('img',cls);img.alt=m.title+' poster';img.loading=eager?'eager':'lazy';img.decoding='async';if(priority)img.fetchPriority='high';img.src=poster(m);img.onerror=()=>{if(img.src!==FALLBACK_POSTER){img.src=FALLBACK_POSTER;}else{img.onerror=null;img.removeAttribute('src');}};return img;}function skeleton(){grid.replaceChildren();for(let i=0;i<8;i++){const box=el('div');box.append(el('div','shimmer aspect-[2/3] rounded-2xl'),el('div','shimmer mt-3 h-4 w-3/4 rounded-md'),el('div','shimmer mt-2 h-3 w-1/2 rounded-md'));grid.append(box);}}const PAGE_SIZE=()=>window.matchMedia('(min-width: 768px)').matches?24:20;let page=1,catalogLoaded=false,searchSuggestions=[],suggestionsInitialized=false;
+const $=id=>document.getElementById(id);const grid=$('catalog-grid'),search=$('catalog-search'),empty=$('catalog-empty'),home=$('catalog-home'),detail=$('catalog-detail');let movies=[];const el=(tag,cls,text)=>{const e=document.createElement(tag);if(cls)e.className=cls;if(text!==undefined)e.textContent=text;return e;};const FALLBACK_POSTER='https://i.ibb.co/TMJ6YCC4/IMG-33a2f581-8ff4-4a5e-9e64-e43c900000c2.png';const poster=m=>m.poster&&(/^https:\/\//.test(m.poster)||/^\/posters\/[a-f0-9]{24}\.jpg$/.test(m.poster))?m.poster:FALLBACK_POSTER;function startPoster(img){const source=img.dataset.posterSrc;if(!source)return;delete img.dataset.posterSrc;img.loading='eager';img.src=source;}const posterObserver='IntersectionObserver'in window?new IntersectionObserver(entries=>{for(const entry of entries){if(!entry.isIntersecting)continue;posterObserver.unobserve(entry.target);startPoster(entry.target);}},{rootMargin:'1600px 0px'}):null;function image(m,cls,eager=false,priority=false){const img=el('img',cls);img.alt='';img.loading=eager?'eager':'lazy';img.decoding='async';img.classList.add('poster-loading');if(priority)img.fetchPriority='high';img.addEventListener('load',()=>{img.classList.remove('poster-loading');img.classList.add('poster-loaded');},{once:true});img.onerror=()=>{if(img.src!==FALLBACK_POSTER){img.src=FALLBACK_POSTER;}else{img.onerror=null;img.removeAttribute('src');img.classList.remove('poster-loading');img.classList.add('poster-failed');}};img.dataset.posterSrc=poster(m);if(eager||!posterObserver)startPoster(img);else posterObserver.observe(img);return img;}function skeleton(){grid.replaceChildren();for(let i=0;i<8;i++){const box=el('div');box.append(el('div','shimmer aspect-[2/3] rounded-2xl'),el('div','shimmer mt-3 h-4 w-3/4 rounded-md'),el('div','shimmer mt-2 h-3 w-1/2 rounded-md'));grid.append(box);}}const PAGE_SIZE=()=>window.matchMedia('(min-width: 768px)').matches?24:20;let page=1,catalogLoaded=false,searchSuggestions=[],suggestionsInitialized=false;
 const yearFilter=$('filter-year'),genreFilter=$('filter-genre'),sortFilter=$('filter-sort'),pagination=$('catalog-pagination');let updatingFilters=false;
 // Accessible custom popovers; native selects remain as the state source.
 function initCustomFilters(){
@@ -124,15 +124,16 @@ function render(){
  });
  const pageSize=PAGE_SIZE();
  page=Math.max(1,Math.min(page,Math.ceil(rows.length/pageSize)||1));
- grid.replaceChildren();
+ posterObserver?.disconnect();grid.replaceChildren();
  $('movie-count').textContent=searching&&!query?'':rows.length+' '+(rows.length===1?'title':'titles');
  $('catalog-results-title').textContent=searching?(query?'Search results':'Suggestions'):'All movies';
  empty.classList.toggle('hidden',rows.length>0);
  empty.textContent=searching?'No movies match your search.':movies.length?'No movies match your filters.':'No movies available yet.';
  const visibleRows=rows.slice((page-1)*pageSize,page*pageSize);
+ const eagerCount=window.matchMedia('(min-width: 1280px)').matches?6:window.matchMedia('(min-width: 768px)').matches?4:2;
  for(const [visibleIndex,m] of visibleRows.entries()){
   const a=el('a','movie-card group block min-w-0'+(searching?' search-result-card':''));a.href='/title/'+encodeURIComponent(m.slug_id||m.id);
-  const wrap=el('div','poster-wrap');wrap.append(image(m,'poster',visibleIndex<4,visibleIndex===0));
+  const wrap=el('div','poster-wrap');wrap.append(image(m,'poster',visibleIndex<eagerCount,visibleIndex===0));
   const badge=!searching&&m.imdb_rating&&m.imdb_rating!=='N/A'?el('span','absolute bottom-2 left-2 rounded-md bg-zinc-950/85 px-2 py-1 text-[11px] font-bold text-white backdrop-blur','★ '+m.imdb_rating):null;
   if(badge)wrap.append(badge);
   const info=el('div','search-result-info');info.append(el('h3','truncate text-sm font-semibold text-zinc-100',m.title));
