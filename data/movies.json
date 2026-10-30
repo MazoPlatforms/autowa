@@ -2276,6 +2276,32 @@
       "file_name": "Modha Rathri (2026) Tamil HQ HDRip - 720p - x264 - (DD+5.mkv",
       "mime_type": "video/x-matroska",
       "quality": "720p"
+    },
+    {
+      "id": "telegram-79",
+      "slug_id": "SziHx9OZ_g_XtnZr",
+      "title": "Maattrraan",
+      "year": 2012,
+      "qualities": {
+        "720p": {
+          "telegram_message_id": 79,
+          "file_name": "Maattrraan (2012) [Hindi Tamil] 720p Blu-Ray x264 ESub.mkv",
+          "file_size": 0,
+          "mime_type": ""
+        }
+      },
+      "telegram_message_id": 79,
+      "quality": "720p",
+      "file_name": "Maattrraan (2012) [Hindi Tamil] 720p Blu-Ray x264 ESub.mkv",
+      "file_size": 0,
+      "mime_type": "",
+      "imdb_id": "tt2246837",
+      "poster": "https://m.media-amazon.com/images/M/MV5BYjM3YWU3YmEtZmVkYy00ZTZhLWEyNDAtNTZlMTUxOGRmNTM1XkEyXkFqcGc@._V1_QL75_UX380_CR0,4,380,562_.jpg",
+      "genre": "Action, Sci-Fi, Thriller",
+      "runtime": "165 min",
+      "director": "K.V. Anand",
+      "cast": "Suriya, Kajal Aggarwal, Sachin Khedekar",
+      "plot": "Conjoined twins Vimalan and Akhilan involve themselves in a series of deaths involving their father's company. However, the truths that they initially uncover lead to a bigger conspiracy, one that spans across the globe."
     }
   ]
 }
