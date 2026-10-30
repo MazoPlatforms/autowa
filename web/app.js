@@ -74,13 +74,13 @@ function planQuote(tier){
  return {region,price:region[tier],formatted:new Intl.NumberFormat('en',{style:'currency',currency:region.currency,maximumFractionDigits:region.currency==='USD'?2:0}).format(region[tier])};
 }
 function updatePlanPrices(){
- $('price-free').textContent='Free';
+ $('price-free').textContent='Basic';
  for(const tier of ['plus','premium'])$('price-'+tier).textContent=planQuote(tier).formatted+' / month';
 }
 updatePlanPrices();
 $('continue-free').addEventListener('click',async()=>{
  const button=$('continue-free');button.disabled=true;
- try{await api('plans/continue',{});navigate('/profile');msg('You are continuing with the Free plan.');}
+ try{await api('plans/continue',{});navigate('/profile');msg('You are continuing with the Basic plan.');}
  catch(err){msg(err.message);}
  finally{button.disabled=false;}
 });
