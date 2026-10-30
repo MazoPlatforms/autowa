@@ -1,7 +1,42 @@
 {
   "schema_version": 2,
-  "updated_at": "2026-10-30T11:55:04.610853+00:00",
+  "updated_at": "2026-10-30T12:05:33.158498+00:00",
   "movies": [
+    {
+      "id": "telegram-60",
+      "slug_id": "BXlEDxODAsibH6Ki",
+      "title": "Mapla Singam",
+      "year": 2016,
+      "qualities": {
+        "720p": {
+          "telegram_message_id": 60,
+          "file_size": 1547702329,
+          "file_name": "Mapla Singam (2016) Tamil HQ HDRip - 720p - x264 - (DD5..mkv",
+          "mime_type": "video/x-matroska"
+        }
+      },
+      "imdb_id": "tt5542460",
+      "poster": "https://m.media-amazon.com/images/M/MV5BODFjYzMyMjUtMTM0Ny00MWNmLThlODgtNjE1NWQyMTFjOWExXkEyXkFqcGc@._V1_.jpg",
+      "genre": [
+        "Comedy",
+        "Romance"
+      ],
+      "runtime": "131 min",
+      "director": "Rajasekhar",
+      "cast": [
+        "Anjali",
+        "Yogi Babu",
+        "Rajesh Gopalan"
+      ],
+      "plot": "Mapla Singam is a rural comedy about two families in a village that are in constant conflict with each other.",
+      "imdb_rating": "4.6",
+      "metadata_status": "matched",
+      "telegram_message_id": 60,
+      "file_size": 1547702329,
+      "file_name": "Mapla Singam (2016) Tamil HQ HDRip - 720p - x264 - (DD5..mkv",
+      "mime_type": "video/x-matroska",
+      "quality": "720p"
+    },
     {
       "id": "telegram-59",
       "slug_id": "h1eYp5q-LWdUHDh_",
@@ -1602,32 +1637,6 @@
       "file_name": "Modha Rathri (2026) Tamil HQ HDRip - 720p - x264 - (DD+5.mkv",
       "mime_type": "video/x-matroska",
       "quality": "720p"
-    },
-    {
-      "id": "telegram-60",
-      "slug_id": "BXlEDxODAsibH6Ki",
-      "title": "Mapla Singam",
-      "year": 2016,
-      "qualities": {
-        "720p": {
-          "telegram_message_id": 60,
-          "file_name": "Mapla Singam (2016) Tamil HQ HDRip - 720p - x264 - (DD5..mkv",
-          "file_size": 0,
-          "mime_type": ""
-        }
-      },
-      "telegram_message_id": 60,
-      "quality": "720p",
-      "file_name": "Mapla Singam (2016) Tamil HQ HDRip - 720p - x264 - (DD5..mkv",
-      "file_size": 0,
-      "mime_type": "",
-      "imdb_id": "tt5542460",
-      "poster": "https://m.media-amazon.com/images/M/MV5BMGUyOWVmODgtZDY3Ni00M2E4LWE0N2EtMjQ2MzAxZjUwYmU5XkEyXkFqcGdeQXVyOTk3NTc2MzE@._V1_SX300.jpg",
-      "genre": "Comedy, Romance",
-      "runtime": "131 min",
-      "director": "Rajasekhar",
-      "cast": "Anjali, Yogi Babu, Rajesh Gopalan",
-      "plot": "Mapla Singam is a rural comedy about two families in a village that are in constant conflict with each other."
     }
   ]
 }
