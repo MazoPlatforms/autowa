@@ -1,5 +1,5 @@
 const fontStylesheet=document.createElement('link');fontStylesheet.rel='stylesheet';fontStylesheet.href='https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap';document.head.append(fontStylesheet);
-const $=id=>document.getElementById(id);let number='',token='',signedIn=false,authVersion=0,otpRequestPending=false,otpRequestStartedFor='',otpCooldownInterval=null;const loginHintKey='tfw_login_hint_v1',OTP_COOLDOWN_SECONDS=60;const storedLogin=()=>{try{return localStorage.getItem(loginHintKey)==='1';}catch{return false;}};const saveLoginHint=value=>{try{if(value)localStorage.setItem(loginHintKey,'1');else localStorage.removeItem(loginHintKey);}catch{}};const msg=t=>{$('message').textContent=t;};async function api(route,payload){const r=await fetch('/api/'+route,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});const d=await r.json();if(!r.ok){const error=Error(d.error||'Request failed');error.retryAfter=Number(d.retry_after)||0;throw error;}return d;}function phoneNumber(){let raw=$('phone').value.replace(/[^0-9+]/g,'');if(raw.startsWith('+'))return raw;if(raw.startsWith('00'))return '+'+raw.slice(2);raw=raw.replace(/^0+/,'');const dial=$('country').value;return '+'+(raw.startsWith(dial)?raw:dial+raw);}
+const $=id=>document.getElementById(id);let number='',token='',signedIn=false,authVersion=0,otpRequestPending=false,otpRequestStartedFor='',otpCooldownInterval=null;const loginHintKey='tfw_login_hint_v1',OTP_COOLDOWN_SECONDS=60;const saveLoginHint=value=>{try{if(value)localStorage.setItem(loginHintKey,'1');else localStorage.removeItem(loginHintKey);}catch{}};const msg=t=>{$('message').textContent=t;};async function api(route,payload){const r=await fetch('/api/'+route,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});const d=await r.json();if(!r.ok){const error=Error(d.error||'Request failed');error.retryAfter=Number(d.retry_after)||0;throw error;}return d;}function phoneNumber(){let raw=$('phone').value.replace(/[^0-9+]/g,'');if(raw.startsWith('+'))return raw;if(raw.startsWith('00'))return '+'+raw.slice(2);raw=raw.replace(/^0+/,'');const dial=$('country').value;return '+'+(raw.startsWith(dial)?raw:dial+raw);}
 const otpCooldownKey=value=>'filmgo-otp-cooldown:'+value;
 function cooldownPhone(){return !$('start').classList.contains('hidden')&&$('phone').value.trim()?phoneNumber():number;}
 function cooldownRemaining(value=cooldownPhone()){if(!value)return 0;try{return Math.max(0,Math.ceil((Number(sessionStorage.getItem(otpCooldownKey(value))||0)-Date.now())/1000));}catch{return 0;}}
@@ -238,11 +238,6 @@ $('logout').addEventListener('click',async()=>{
 });
 setInterval(()=>{if(signedIn&&location.pathname==='/history'&&!document.hidden)void loadHistory();},12000);
 const initialAuthVersion=authVersion;
-if(storedLogin()){
- signedIn=true;
- routeView();
- document.documentElement.classList.add('auth-ready');
-}
 showAccount().then(()=>{
  if(initialAuthVersion!==authVersion)return;
  saveLoginHint(true);
