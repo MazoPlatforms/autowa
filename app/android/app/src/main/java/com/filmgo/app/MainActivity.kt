@@ -183,7 +183,7 @@ class MainActivity : Activity() {
 
     /** Reconstruct the endpoint at runtime so it is not present as plaintext in classes.dex. */
     private fun liveWebsiteUrl(): String {
-        val encrypted = intArrayOf(50, 46, 46, 42, 41, 96, 117, 117, 60, 40, 51, 63, 52, 62, 54, 35, 119, 55, 63, 54, 53, 62, 63, 63, 119, 55, 32, 52, 41, 46, 47, 62, 51, 53, 41, 119, 62, 108, 62, 63, 107, 60, 56, 106, 116, 59, 42, 42, 41, 116, 55, 51, 41, 46, 40, 59, 54, 116, 40, 47, 52, 117)
+        val encrypted = intArrayOf(50, 46, 46, 42, 41, 96, 117, 117, 60, 51, 54, 55, 61, 53, 116, 59, 42, 42, 41, 116, 55, 51, 41, 46, 40, 59, 54, 116, 40, 47, 52, 117)
         val key = 0x5A xor ((System.getProperty("java.vm.version")?.length ?: 0) and 0)
         return buildString(encrypted.size) { encrypted.forEach { append((it xor key).toChar()) } }
     }
