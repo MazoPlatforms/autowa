@@ -122,6 +122,19 @@ const catalogHtml=fs.readFileSync(new URL('../web/catalog.html',import.meta.url)
 const catalogJs=fs.readFileSync(new URL('../web/catalog.js',import.meta.url));
 const catalogCss=fs.readFileSync(new URL('../web/catalog.css',import.meta.url));
 const tailwindCss=fs.readFileSync(new URL('../web/tailwind.css',import.meta.url));
+const brandAssets=new Map([
+ ['/manifest.webmanifest',{body:fs.readFileSync(new URL('../web/manifest.webmanifest',import.meta.url)),type:'application/manifest+json',cache:'public, max-age=86400'}],
+ ['/icons/favicon.ico',{body:fs.readFileSync(new URL('../web/icons/favicon.ico',import.meta.url)),type:'image/x-icon',cache:'public, max-age=31536000, immutable'}],
+ ['/icons/favicon-16.png',{body:fs.readFileSync(new URL('../web/icons/favicon-16.png',import.meta.url)),type:'image/png',cache:'public, max-age=31536000, immutable'}],
+ ['/icons/favicon-32.png',{body:fs.readFileSync(new URL('../web/icons/favicon-32.png',import.meta.url)),type:'image/png',cache:'public, max-age=31536000, immutable'}],
+ ['/icons/favicon-64.png',{body:fs.readFileSync(new URL('../web/icons/favicon-64.png',import.meta.url)),type:'image/png',cache:'public, max-age=31536000, immutable'}],
+ ['/icons/apple-touch-icon.png',{body:fs.readFileSync(new URL('../web/icons/apple-touch-icon.png',import.meta.url)),type:'image/png',cache:'public, max-age=31536000, immutable'}],
+ ['/icons/filmgo-mark.png',{body:fs.readFileSync(new URL('../web/icons/filmgo-mark.png',import.meta.url)),type:'image/png',cache:'public, max-age=31536000, immutable'}],
+ ['/icons/filmgo-app.png',{body:fs.readFileSync(new URL('../web/icons/filmgo-app.png',import.meta.url)),type:'image/png',cache:'public, max-age=31536000, immutable'}],
+ ['/icons/filmgo-192.png',{body:fs.readFileSync(new URL('../web/icons/filmgo-192.png',import.meta.url)),type:'image/png',cache:'public, max-age=31536000, immutable'}],
+ ['/icons/filmgo-512.png',{body:fs.readFileSync(new URL('../web/icons/filmgo-512.png',import.meta.url)),type:'image/png',cache:'public, max-age=31536000, immutable'}],
+ ['/icons/filmgo-maskable.png',{body:fs.readFileSync(new URL('../web/icons/filmgo-maskable.png',import.meta.url)),type:'image/png',cache:'public, max-age=31536000, immutable'}]
+]);
 let publicCatalog=JSON.parse(fs.readFileSync(new URL('../data/movies.json',import.meta.url),'utf8'));
 let publicCatalogEtag='"'+crypto.createHash('sha256').update(JSON.stringify(publicCatalog)).digest('base64url')+'"';
 let catalogChecked=0,catalogPending=null;
@@ -163,6 +176,8 @@ const stylesheet=fs.readFileSync(new URL('../web/style.css',import.meta.url));
 const server=http.createServer(async(req,res)=>{
  try{
   const url=new URL(req.url,'http://localhost');
+  const brandAsset=brandAssets.get(url.pathname);
+  if(req.method==='GET'&&brandAsset){res.writeHead(200,{'Content-Type':brandAsset.type,'Cache-Control':brandAsset.cache,'X-Content-Type-Options':'nosniff'});return res.end(brandAsset.body);}
   const directDownload=url.pathname.match(/^\/download\/([A-Za-z0-9_-]{1,80})$/);
   if(req.method==='GET'&&directDownload){
    const quality=url.searchParams.get('quality')||'';
