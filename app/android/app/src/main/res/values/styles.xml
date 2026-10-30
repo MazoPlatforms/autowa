@@ -1,0 +1,11 @@
+<resources>
+    <style name="Theme.FilmGo" parent="android:style/Theme.Material.NoActionBar">
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:colorAccent">#f4f4f5</item>
+        <item name="android:navigationBarColor">#09090b</item>
+        <item name="android:statusBarColor">#09090b</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowActionModeOverlay">true</item>
+        <item name="android:windowBackground">@drawable/splash_background</item>
+    </style>
+</resources>

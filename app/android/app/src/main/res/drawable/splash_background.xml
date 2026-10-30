@@ -1,0 +1,4 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@color/filmgo_black" />
+    <item android:gravity="center" android:width="128dp" android:height="128dp" android:drawable="@drawable/filmgo_app" />
+</layer-list>
