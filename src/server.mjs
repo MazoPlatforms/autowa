@@ -197,7 +197,7 @@ const server=http.createServer(async(req,res)=>{
   if(req.method==='POST'&&url.pathname==='/api/telegram-link'){
    if(!configured)return send(res,503,{error:'Service setup incomplete'});
    const session=await authenticated(req);
-   if(!session)return send(res,401,{error:'Sign in with WhatsApp first'});
+   if(!session)return send(res,401,{error:'Please sign in using your phone number.'});
    let publicBase;
    try{const origin=new URL(req.headers.origin||'');if(origin.protocol!=='https:'||origin.host!==req.headers.host||origin.username||origin.password)return send(res,403,{error:'Origin rejected'});publicBase=origin.origin;}catch{return send(res,403,{error:'Origin rejected'});}
    if(req.headers['content-type']?.split(';')[0]!=='application/json')return send(res,415,{error:'JSON required'});
@@ -258,7 +258,7 @@ const server=http.createServer(async(req,res)=>{
    const movie=selectMovieVariant(record,url.searchParams.get('quality'));
    if(!movie||!Number.isSafeInteger(movie.telegram_message_id)||!Number.isSafeInteger(movie.file_size)||movie.file_size<=0)return send(res,404,{error:'Movie unavailable'});
    const session=await authenticated(req);
-   if(!session)return send(res,401,{error:'Sign in with WhatsApp to download movies'});
+   if(!session)return send(res,401,{error:'Please sign in using your phone number.'});
    if(!telegramReady)return send(res,503,{error:'Telegram unavailable'});
    if(streamWorkerState().state!=='ready')return send(res,503,{error:'Download gateway warming up; retry shortly'});
    if(req.method==='HEAD')return send(res,405,{error:'HEAD is not available'});
@@ -286,7 +286,7 @@ const server=http.createServer(async(req,res)=>{
    const movie=selectMovieVariant(record,url.searchParams.get('quality'));
    if(!movie||!Number.isSafeInteger(movie.telegram_message_id)||!Number.isSafeInteger(movie.file_size)||movie.file_size<=0)return send(res,404,{error:'Video unavailable'});
    const session=await authenticated(req);
-   if(!session)return send(res,401,{error:'Sign in with WhatsApp to stream movies'});
+   if(!session)return send(res,401,{error:'Please sign in using your phone number.'});
    if(!telegramReady)return send(res,503,{error:'Telegram not configured'});
    const total=movie.file_size;
    const range=req.headers.range;
@@ -372,12 +372,17 @@ const server=http.createServer(async(req,res)=>{
    const number=phone(data.number);
    if(!number)return send(res,400,{error:'Use an international number starting with +'});
    if(!await limit('otp:'+number,5,3600)||!await limit('otp-ip:'+ip,20,3600))return send(res,429,{error:'OTP limit reached'});
-   const cooldown=await redis('SET','cool:'+hmac(number),'1','EX',60,'NX');
-   if(cooldown!=='OK')return send(res,429,{error:'Wait 60 seconds before requesting another OTP'});
+   const cooldownKey='cool:'+hmac(number);
+   const cooldown=await redis('SET',cooldownKey,'1','EX',60,'NX');
+   if(cooldown!=='OK'){
+    const ttl=Number(await redis('TTL',cooldownKey));
+    const retryAfter=ttl>0?ttl:60;
+    return send(res,429,{error:`Wait ${retryAfter} seconds before requesting another verification code`,retry_after:retryAfter});
+   }
    const code=String(crypto.randomInt(0,1000000)).padStart(6,'0');
-   const otpKey='otp:'+hmac(number),cooldownKey='cool:'+hmac(number);
+   const otpKey='otp:'+hmac(number);
    try{await redis('SET',otpKey,hmac(number+':'+code),'EX',300);await sendOtp(number,code);}
-   catch{await Promise.allSettled([redis('DEL',otpKey),redis('DEL',cooldownKey)]);return send(res,503,{error:'Could not send the WhatsApp verification code. Please try again.'});}
+   catch{await Promise.allSettled([redis('DEL',otpKey),redis('DEL',cooldownKey)]);return send(res,503,{error:'Could not send the verification code. Please try again.'});}
    return send(res,200,{ok:true,message:'OTP sent'});
   }
   if(url.pathname==='/api/otp/verify'){
@@ -395,7 +400,7 @@ const server=http.createServer(async(req,res)=>{
    return send(res,200,{ok:true,first_registration:!existing,expires_in:age},{'Set-Cookie':sessionCookie(tokenFor(number,nonce,exp),age)});
   }
   const session=await authenticated(req);
-  if(!session)return send(res,401,{error:'Sign in with WhatsApp first'});
+  if(!session)return send(res,401,{error:'Please sign in using your phone number.'});
   if(url.pathname==='/api/logout'){
    await redis('DEL','session:'+hmac(session.nonce));
    return send(res,200,{ok:true},{'Set-Cookie':sessionCookie('',0)});
