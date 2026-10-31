@@ -207,6 +207,7 @@ const setMovieAccessState=state=>{
  const copy=el('div','filmgo-signin-copy');
  if(state==='checking')copy.append(el('strong','','Checking sign-in status'),el('span','','Sign in is required to use this movie’s player and actions.'));
  else if(state==='unavailable')copy.append(el('strong','','Unable to verify sign-in'),el('span','','Check your connection, then try again.'));
+ else if(state==='no-tokens')copy.append(el('strong','','Daily streaming tokens exhausted'),el('span','','Your streaming allowance is used for today. Try again after the daily reset.'));
  else copy.append(el('strong','','Sign in required'),el('span','','Sign in using Phone before streaming, downloading, or requesting this movie.'));
  accessNotice.append(copy);
  if(state==='unavailable'){
@@ -220,7 +221,11 @@ async function checkMovieAccess(){
  try{
   const response=await fetch('/api/me',{cache:'no-store',credentials:'same-origin'});
   if(!isActive())return;
-  setMovieAccessState(response.status===401?'signed-out':response.ok?'signed-in':'unavailable');
+  if(response.status===401){setMovieAccessState('signed-out');startPlaybackWhenReady();return;}
+  if(!response.ok){setMovieAccessState('unavailable');startPlaybackWhenReady();return;}
+  const user=await response.json();
+  const hasTokens=user?.unlimited===true||Number(user?.tokens_remaining)>0;
+  setMovieAccessState(hasTokens?'signed-in':'no-tokens');
   startPlaybackWhenReady();
  }catch{if(isActive())setMovieAccessState('unavailable');}
 }
