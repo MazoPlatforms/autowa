@@ -1,6 +1,8 @@
 name: Demo extract Telegram media tracks
 
 on:
+  push:
+    branches: [experiment/telegram-track-extraction-mlefhqyyzhyaosi3]
   workflow_dispatch:
     inputs:
       slug:
