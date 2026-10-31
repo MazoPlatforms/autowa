@@ -163,13 +163,19 @@ class Gateway:
             length = min(length, size - start)
             aligned = start - start % REQUEST_SIZE
             skip = start - aligned
+            header_sent = False
             for attempt in (0, 1):
                 try:
-                    writer.write(b"OK\n")
-                    await writer.drain()
                     remaining = length
                     skipped = skip
                     async for chunk in streamer.stream(file_id, aligned, skip + length):
+                        # Do not acknowledge the HTTP response until Telegram
+                        # has returned the first raw chunk.  This keeps a
+                        # pre-fetch failure recoverable by the Node fallback.
+                        if not header_sent:
+                            writer.write(b"OK\n")
+                            await writer.drain()
+                            header_sent = True
                         if skipped:
                             drop = min(skipped, len(chunk)); chunk = chunk[drop:]; skipped -= drop
                         if chunk:
@@ -179,10 +185,22 @@ class Gateway:
                     if remaining: raise IOError("incomplete Telegram range")
                     return
                 except FileReferenceExpired:
+                    # Once the protocol header/media is visible to Node, a
+                    # retry from the old offset would duplicate bytes or
+                    # inject a second protocol header.  Let the connection
+                    # end cleanly instead.
+                    if header_sent:
+                        return
                     streamer.cached_file_ids.pop(message_id, None)
                     file_id = await streamer.get_file_properties(message_id, force=True)
                     if attempt:
                         raise
+                except Exception:
+                    # Never append an ERR line after a successful response
+                    # header; that would become corrupt media on the client.
+                    if header_sent:
+                        return
+                    raise
         finally:
             self.loads[index] -= 1
             self.slots.release()
