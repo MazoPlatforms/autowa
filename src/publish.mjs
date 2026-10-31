@@ -112,18 +112,14 @@ function requesterProgress(j){
  const year=String(j.year||movie.year||'—'),quality=String(j.quality||movie.quality||'—');
  const size=Number(j.file_size||movie.file_size||0);
  const details=['*FilmGo*','', '*'+title+'*','Year: '+year,'Quality: '+quality,...(movie.genre?.length?['Genre: '+(Array.isArray(movie.genre)?movie.genre.join(', '):movie.genre)]:[]),''];
- let key=null,posterSent=false,last='',lastAt=0,chain=Promise.resolve(),started=Date.now(),lastBytes=0,lastSample=started,rate=0;
- const render=(message,stats)=>{
-  if(!stats)return details.join('\n')+message+(size?'\nFile size: '+miB(size)+' MiB':'')+'\n\n'+STATUS_FOOTER;
-  const now=Date.now(),elapsed=Math.max(.001,(now-lastSample)/1000);
-  if(stats.done>=lastBytes&&elapsed>=1){const instant=(stats.done-lastBytes)/elapsed;rate=rate?rate*.65+instant*.35:instant;lastBytes=stats.done;lastSample=now;}
-  const total=stats.total||size,remaining=Math.max(0,total-stats.done);
-  return details.join('\n')+'*Downloading movie*\n'+asciiBar(stats.done,total)+'\n\nSize: '+miB(stats.done)+' / '+(total?miB(total):'?')+' MiB\nSpeed: '+(rate>0?miB(rate)+' MiB/s':'Calculating…')+'\nETA: '+(rate>0?formatDuration(remaining/rate):'Calculating…')+'\nElapsed: '+formatDuration((now-started)/1000)+'\n\n'+STATUS_FOOTER;
- };
+ let key=null,posterSent=false,last='',lastAt=0,chain=Promise.resolve();
+ // Keep exactly one editable status message. It is intentionally state-only:
+ // processing, downloading, and uploading. Never expose byte-level progress.
+ const render=message=>details.join('\n')+message+(size?'\nFile size: '+miB(size)+' MiB':'')+'\n\n'+STATUS_FOOTER;
  const update=(message,force=false,stats=null)=>{
   if(!jid)return Promise.resolve();
   chain=chain.then(async()=>{
-   const caption=render(message,stats);
+   const caption=render(message);
    if(!force&&(caption===last||Date.now()-lastAt<12000))return;
    try{
     if(!key){
@@ -151,7 +147,15 @@ function requesterProgress(j){
   });
   return chain;
  };
- return {update,flush:()=>chain};
+ const remove=()=>chain.then(async()=>{
+  if(!jid||!key)return false;
+  try{
+   await sock.sendMessage(jid,{delete:key});
+   key=null;
+   return true;
+  }catch(err){console.warn('Requester status cleanup unavailable:',err.message);return false;}
+ });
+ return {update,flush:()=>chain,remove};
 }
 async function downloadWithProgress(args,onProgress){
  await new Promise((resolve,reject)=>{
@@ -185,17 +189,13 @@ try{
   let movieFailures=0;
   const progress=requesterProgress(j);
   try {
-  await progress.update('⏳ Preparing your request…',true);
+  await progress.update('⏳ Processing your request…',true);
   const dest=path.join('downloads',j.id+'.download');
   fs.mkdirSync('downloads',{recursive:true});
   console.log('Downloading',j.id);
   await progress.update('📥 Downloading your movie…',true);
   if(!Number.isSafeInteger(j.telegram_message_id)||j.telegram_message_id<=0)throw Error('Telegram media ID required');
-  await downloadWithProgress(['telegram',String(j.telegram_message_id),dest],(bytes,total)=>{
-   const pct=total?Math.min(100,Math.floor(bytes/total*100)):null;
-   void progress.update('📥 Downloading your movie…',false,{done:bytes,total});
-  });
-  await progress.update('✅ Download complete. Preparing upload…',true);
+  await downloadWithProgress(['telegram',String(j.telegram_message_id),dest],()=>{});
   const mediaBytes=fs.statSync(dest).size;
   console.log('Media ready:',mediaBytes,'bytes /',(mediaBytes/1048576).toFixed(2),'MiB (thumbnail excluded)');
   const probe=JSON.parse(execFileSync('ffprobe',['-v','error','-show_entries','format=format_name:stream=codec_type,codec_name','-of','json',dest],{encoding:'utf8',timeout:120000}));
@@ -226,8 +226,8 @@ try{
   if(thumbnail && !(thumbnail[0]===255&&thumbnail[1]===216&&thumbnail[2]===255)) thumbnail=undefined;
   const targets=targetsForJob(j);
   let sentCount=0;
+  await progress.update('📤 Uploading your movie…',true);
   for(const groupId of targets){
-   await progress.update('📤 Uploading to WhatsApp: '+sentCount+'/'+targets.length+' destinations…',true);
    if(groupId.endsWith('@g.us')&&!groups[groupId]){console.error('Not a member of group',groupId);failures++;movieFailures++;continue;}
    let ok=false;
    for(let attempt=1;attempt<=5;attempt++){
@@ -241,7 +241,7 @@ try{
       fileName:filename,caption,...(thumbnail?{jpegThumbnail:thumbnail}:{})
      });
      if(!result?.key?.id)throw Error('No message ID');
-     console.log('Submitted',j.id,groupId,result.key.id);ok=true;sentCount++;await progress.update('📤 Submitted to '+sentCount+'/'+targets.length+' destinations…',true);break;
+     console.log('Submitted',j.id,groupId,result.key.id);ok=true;sentCount++;break;
     }catch(e){console.error('Send failed',j.id,groupId,attempt,e.message);if(/connection closed|socket.*closed|connection lost|not connected/i.test(String(e.message)))connectionClosed=true;if(attempt<5){if(connectionClosed){console.warn('Reconnecting before retry');}else await sleep(Math.min(30000,5000*attempt));}}
    }
    if(!ok){failures++;movieFailures++;}
@@ -250,8 +250,8 @@ try{
   fs.rmSync(dest,{force:true});
   j.status=movieFailures?'failed':'submitted';
   } catch(err) { j.status='failed'; j.error=String(err.message).slice(0,250); failures++; console.error('Job failed',j.id,err.message); }
-  await progress.update(j.status==='submitted'?'✅ Movie submitted to WhatsApp. Delivery to each recipient is not guaranteed.':'❌ Processing failed. Please contact support with your request ID.',true);
-  await progress.flush();
+  if(j.status==='submitted') await progress.remove();
+  else { await progress.update('❌ Processing failed. Please contact support with your request ID.',true); await progress.flush(); }
   j.finished_at=new Date().toISOString();
   fs.writeFileSync(file,JSON.stringify(j,null,2)+'\n');
  }
