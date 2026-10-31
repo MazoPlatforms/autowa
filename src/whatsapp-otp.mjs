@@ -24,6 +24,22 @@ async function redis(...args){
  if(!r.ok)throw Error('WhatsApp auth store unavailable');
  const j=await r.json();if(j.error)throw Error('WhatsApp auth store error');return j.result;
 }
+function verificationRedisKey(value){return 'wa-verify:'+crypto.createHmac('sha256',process.env.APP_SECRET||'').update(value).digest('hex');}
+function verificationClaimKey(value){return 'wa-verify-claim:'+crypto.createHmac('sha256',process.env.APP_SECRET||'').update(value).digest('hex');}
+async function handleWhatsAppVerification(message,client){
+ if(message?.key?.fromMe)return;
+ const remoteJid=String(message?.key?.remoteJid||'');
+ if(!/^\d+(?::\d+)?@s\.whatsapp\.net$/.test(remoteJid))return;
+ const sender='+'+remoteJid.split('@')[0].split(':')[0];
+ const text=String(message?.message?.conversation||message?.message?.extendedTextMessage?.text||'').trim();
+ if(!/^[A-Za-z0-9_-]{32}$/.test(text))return;
+ const recordKey=verificationRedisKey(text),raw=await redis('GET',recordKey);let record;
+ try{record=raw?JSON.parse(raw):null;}catch{return;}
+ if(!record||record.status!=='pending'||record.number!==sender)return;
+ if(await redis('SET',verificationClaimKey(text),'1','NX','EX',30)!=='OK')return;
+ await redis('SET',recordKey,JSON.stringify({...record,status:'verified',verified_at:Date.now()}),'EX',300);
+ await client.sendMessage(remoteJid,{text:'✅ FilmGo WhatsApp verification successful. Return to the website to continue.'});
+}
 function encrypt(obj){
  const iv=crypto.randomBytes(12),cipher=crypto.createCipheriv('aes-256-gcm',key,iv);
  const raw=Buffer.from(JSON.stringify(obj,BufferJSON.replacer));
@@ -89,6 +105,7 @@ export async function startWhatsApp(){
   const {state,saveCreds}=await authState();
   const sock=makeWASocket({auth:state,logger:pino({level:'silent'}),markOnlineOnConnect:false,syncFullHistory:false,connectTimeoutMs:30000});
   socket=sock;
+  sock.ev.on('messages.upsert',({messages})=>{for(const message of messages||[])void handleWhatsAppVerification(message,sock).catch(error=>console.warn('WhatsApp verification handler failed:',error.message));});
   sock.ev.on('creds.update',()=>saveCreds().catch(e=>console.error('Credential persistence failed',e.message)));
   sock.ev.on('connection.update',({connection,qr,lastDisconnect})=>{
    if(qr){console.warn('OTP WhatsApp device pairing required. Scan QR from private Koyeb logs.');qrcode.generate(qr,{small:true});}

@@ -1,3 +1,4 @@
+const whatsappSheet=document.createElement('div');whatsappSheet.id='whatsapp-sheet';whatsappSheet.className='auth-sheet hidden';whatsappSheet.setAttribute('role','dialog');whatsappSheet.setAttribute('aria-modal','true');whatsappSheet.setAttribute('aria-labelledby','whatsapp-sheet-title');whatsappSheet.innerHTML='<div class="auth-sheet-backdrop" data-close-whatsapp-sheet></div><section class="auth-sheet-panel"><button id="close-whatsapp-sheet" class="auth-sheet-close" type="button" aria-label="Close">×</button><p class="sheet-kicker">QUICK VERIFICATION</p><h2 id="whatsapp-sheet-title">Verify with WhatsApp</h2><p id="whatsapp-sheet-copy">Your verification code was sent. You can also verify instantly by sending a secure one-time key to FilmGo on WhatsApp.</p><button id="verify-via-whatsapp" class="primary-button" type="button">Verify via WhatsApp</button><button id="continue-with-code" class="secondary-button" type="button">Continue with verification code</button><a id="whatsapp-verify-link" class="hidden" href="#" target="_blank" rel="noopener">Open WhatsApp</a><p id="whatsapp-sheet-status" class="small" role="status" aria-live="polite"></p><button id="reset-verification" class="auth-reset-button" type="button">Forgot password? Reset</button></section>';document.body.append(whatsappSheet);
 const fontStylesheet=document.createElement('link');fontStylesheet.rel='stylesheet';fontStylesheet.href='https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap';document.head.append(fontStylesheet);
 const $=id=>document.getElementById(id);let number='',token='',signedIn=false,authVersion=0,otpRequestPending=false,otpRequestStartedFor='',otpCooldownInterval=null;const loginHintKey='tfw_login_hint_v1',OTP_COOLDOWN_SECONDS=60;const saveLoginHint=value=>{try{if(value)localStorage.setItem(loginHintKey,'1');else localStorage.removeItem(loginHintKey);}catch{}};const msg=t=>{$('message').textContent=t;};async function api(route,payload){const r=await fetch('/api/'+route,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});const d=await r.json();if(!r.ok){const error=Error(d.error||'Request failed');error.retryAfter=Number(d.retry_after)||0;throw error;}return d;}function phoneNumber(){let raw=$('phone').value.replace(/[^0-9+]/g,'');if(raw.startsWith('+'))return raw;if(raw.startsWith('00'))return '+'+raw.slice(2);raw=raw.replace(/^0+/,'');const dial=$('country').value;return '+'+(raw.startsWith(dial)?raw:dial+raw);}
 const otpCooldownKey=value=>'filmgo-otp-cooldown:'+value;
@@ -24,6 +25,38 @@ function applyRetryCooldown(error,value){
  const seconds=Number(error?.retryAfter)||Number(match?.[1])||0;
  if(seconds>0)startOtpCooldown(value,seconds);
 }
+let waVerifyId='',waPollTimer=null;
+function closeWhatsAppSheet(){whatsappSheet.classList.add('hidden');if(waPollTimer){clearInterval(waPollTimer);waPollTimer=null;}}
+function resetVerification(){closeWhatsAppSheet();waVerifyId='';otpFields.forEach(field=>field.value='');syncOtpCode();$('verify').classList.add('hidden');$('start').classList.remove('hidden');msg('Verification reset. Enter your phone number to start again.');refreshOtpTimers();$('phone').focus();}
+function beginWhatsAppPolling(){
+ if(waPollTimer)clearInterval(waPollTimer);
+ const poll=async()=>{
+  if(!waVerifyId||!number)return;
+  try{
+   const result=await api('otp/whatsapp/status',{number,request_id:waVerifyId});
+   if(!result.verified)return;
+   if(waPollTimer){clearInterval(waPollTimer);waPollTimer=null;}
+   $('whatsapp-sheet-copy').textContent='Your WhatsApp number was verified successfully.';
+   $('verify-via-whatsapp').classList.add('hidden');$('continue-with-code').classList.add('hidden');$('whatsapp-verify-link').classList.add('hidden');$('reset-verification').classList.add('hidden');
+   $('whatsapp-sheet-status').textContent='Verification complete. Tap below to return to FilmGo.';
+   const done=document.createElement('button');done.type='button';done.className='primary-button';done.textContent='Continue to FilmGo';done.addEventListener('click',()=>location.assign('/'));document.querySelector('.auth-sheet-panel').append(done);
+   authVersion++;signedIn=true;saveLoginHint(true);
+  }catch(err){if(/expired/i.test(err.message)){closeWhatsAppSheet();msg('WhatsApp verification expired. Please send a new code.');}}
+ };
+ void poll();waPollTimer=setInterval(()=>void poll(),2000);
+}
+async function startWhatsAppVerification(){
+ const button=$('verify-via-whatsapp');button.disabled=true;button.textContent='Preparing WhatsApp verification…';
+ try{
+  const result=await api('otp/whatsapp/start',{number});waVerifyId=result.request_id;
+  const link=$('whatsapp-verify-link');link.href=result.url;link.classList.remove('hidden');link.textContent='Open WhatsApp manually';
+  $('whatsapp-sheet-status').textContent='Opening WhatsApp… Send the pre-filled message, then return here.';
+  const popup=window.open('about:blank','_blank','noopener,noreferrer');if(popup)popup.location.href=result.url;else location.href=result.url;
+  beginWhatsAppPolling();
+ }catch(err){$('whatsapp-sheet-status').textContent=err.message;button.disabled=false;button.textContent='Verify via WhatsApp';}
+}
+function openWhatsAppSheet(){whatsappSheet.classList.remove('hidden');$('whatsapp-sheet-status').textContent='';$('verify-via-whatsapp').classList.remove('hidden');$('verify-via-whatsapp').disabled=false;$('verify-via-whatsapp').textContent='Verify via WhatsApp';$('continue-with-code').classList.remove('hidden');$('reset-verification').classList.remove('hidden');}
+$('close-whatsapp-sheet').addEventListener('click',closeWhatsAppSheet);document.querySelector('[data-close-whatsapp-sheet]').addEventListener('click',closeWhatsAppSheet);$('continue-with-code').addEventListener('click',()=>{closeWhatsAppSheet();otpFields[0].focus();});$('reset-verification').addEventListener('click',resetVerification);$('verify-via-whatsapp').addEventListener('click',startWhatsAppVerification);
 let countriesLoaded=false,countriesFailed=false,countriesPromise=null,countryList=[];
 function flagFor(iso){return String.fromCodePoint(...String(iso||'').toUpperCase().split('').map(ch=>127397+ch.charCodeAt(0)));}
 function closeCountryPicker(){const panel=$('country-panel');panel.hidden=true;$('country-trigger').setAttribute('aria-expanded','false');}
@@ -80,7 +113,7 @@ otpFields.forEach((field,index)=>{
   else if(event.key==='ArrowRight'&&index<otpFields.length-1){event.preventDefault();otpFields[index+1].focus();}
  });
 });
-$('start').addEventListener('submit',async e=>{e.preventDefault();number=phoneNumber();if(cooldownRemaining(number)){refreshOtpTimers();return;}const version=authVersion;otpRequestPending=true;refreshOtpTimers();try{await api('otp/start',{number});if(version!==authVersion)return;startOtpCooldown(number);otpFields.forEach(field=>field.value='');syncOtpCode();$('start').classList.add('hidden');$('verify').classList.remove('hidden');msg('Verification code sent to '+number);otpFields[0].focus();}catch(err){applyRetryCooldown(err,number);msg(err.message)}finally{otpRequestPending=false;refreshOtpTimers();}});
+$('start').addEventListener('submit',async e=>{e.preventDefault();number=phoneNumber();if(cooldownRemaining(number)){refreshOtpTimers();return;}const version=authVersion;otpRequestPending=true;refreshOtpTimers();try{await api('otp/start',{number});if(version!==authVersion)return;startOtpCooldown(number);otpFields.forEach(field=>field.value='');syncOtpCode();$('start').classList.add('hidden');$('verify').classList.remove('hidden');msg('Verification code sent to '+number);otpFields[0].focus();openWhatsAppSheet();}catch(err){applyRetryCooldown(err,number);msg(err.message)}finally{otpRequestPending=false;refreshOtpTimers();}});
 $('resend-otp').addEventListener('click',async()=>{if(!number||cooldownRemaining(number)||otpRequestPending)return;otpRequestPending=true;refreshOtpTimers();try{await api('otp/start',{number});startOtpCooldown(number);otpFields.forEach(field=>field.value='');syncOtpCode();otpFields[0].focus();msg('A new verification code was sent.');}catch(err){applyRetryCooldown(err,number);msg(err.message)}finally{otpRequestPending=false;refreshOtpTimers();}});
 $('change-phone').addEventListener('click',()=>{otpFields.forEach(field=>field.value='');syncOtpCode();$('verify').classList.add('hidden');$('start').classList.remove('hidden');refreshOtpTimers();$('phone').focus();});
 $('verify').addEventListener('submit',async e=>{e.preventDefault();const code=syncOtpCode();if(!/^\d{6}$/.test(code)){otpFields.find(field=>!field.value)?.focus();return;}const btn=e.target.querySelector('button[type="submit"]');btn.disabled=true;try{const back=new URLSearchParams(location.search).get('return');const safeBack=back&&(/^\/title\/[A-Za-z0-9_-]+\/?$/.test(back)||/^\/download\/[A-Za-z0-9_-]{1,80}(?:\?quality=[A-Za-z0-9._+-]{1,40})?$/.test(back));await api('otp/verify',{number,code});authVersion++;await showAccount();saveLoginHint(true);if(safeBack){location.assign(back);return;}msg('Signed in successfully.');}catch(err){msg(err.message)}finally{btn.disabled=false;}});
