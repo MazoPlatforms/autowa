@@ -450,3 +450,110 @@ main{padding-inline:clamp(16px,4vw,40px)!important}
 #verify .otp-actions+.primary-button{margin-top:16px}
 @media(max-width:380px){.otp-actions{grid-template-columns:1fr;gap:8px}.otp-actions .otp-resend-button,.otp-actions .otp-change-phone{width:100%}}
 .auth-sheet{position:fixed;inset:0;z-index:100;display:flex;align-items:flex-end}.auth-sheet.hidden{display:none!important}.auth-sheet-backdrop{position:absolute;inset:0;background:#0009;backdrop-filter:blur(4px)}.auth-sheet-panel{position:relative;width:min(100%,560px);margin:0 auto;padding:26px 22px max(24px,env(safe-area-inset-bottom));border:1px solid #3f3f46;border-bottom:0;border-radius:24px 24px 0 0;background:#18181b;box-shadow:0 -18px 60px #0008;animation:auth-sheet-up .2s ease-out}.auth-sheet-panel h2{margin:0 0 8px;font-size:24px;letter-spacing:-.5px}.auth-sheet-panel p{line-height:1.55}.sheet-kicker{margin:0 0 8px;color:#a1a1aa;font-size:10px;font-weight:800;letter-spacing:.16em}.auth-sheet-close{position:absolute;top:16px;right:18px;width:34px;height:34px;border:1px solid #3f3f46;border-radius:50%;background:#242428;color:#e4e4e7;font-size:22px;line-height:1}.auth-sheet-panel .primary-button,.auth-sheet-panel .secondary-button{width:100%;margin-top:12px}.auth-sheet-panel .secondary-button{justify-content:center}.auth-sheet-panel .small{min-height:20px;margin:12px 0 0;text-align:center}.auth-reset-button{display:block;margin:14px auto 0;border:0;background:transparent;color:#a1a1aa;font-size:11px;text-decoration:underline;text-underline-offset:3px}.auth-reset-button:hover{color:#f4f4f5}.auth-sheet-panel>a{display:block;margin-top:10px;text-align:center;color:#d4d4d8;font-size:12px}@keyframes auth-sheet-up{from{transform:translateY(100%)}to{transform:translateY(0)}}
+
+/* =====================================================================
+   FilmGo — TV-style redesign for account, plans, history & sign-in
+   ===================================================================== */
+body.tv{--bg:#0a0a0b;--surface:#141416;--surface-2:#1c1c1f;--line:rgba(255,255,255,.09);--text:#f5f5f7;--muted:#9a9aa2;--dim:#6c6c74;
+ font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Inter","Segoe UI",Roboto,system-ui,sans-serif;background:var(--bg)!important;color:var(--text);-webkit-font-smoothing:antialiased}
+html{background:#0a0a0b!important;color-scheme:dark}
+body.tv main{max-width:none;padding:0 0 72px}
+body.tv .app-header{position:sticky;top:0;z-index:30;margin:0 0 40px!important;padding:12px clamp(16px,4vw,48px);min-height:64px;background:rgba(10,10,11,.72);backdrop-filter:saturate(180%) blur(24px);-webkit-backdrop-filter:saturate(180%) blur(24px);border-bottom:1px solid var(--line)}
+body.tv .header-leading{display:flex;align-items:center;gap:12px}
+body.tv .app-nav{display:flex;align-items:center;gap:10px}
+body.tv .tv-home-link{padding:8px 16px;border-radius:999px;background:rgba(255,255,255,.08);color:var(--text);font-size:13px;font-weight:600}
+body.tv .tv-home-link:hover{background:rgba(255,255,255,.16)}
+body.tv #profile-back.back-button,body.tv #profile-avatar.avatar-button{border:1px solid var(--line);background:var(--surface);color:var(--text)}
+body.tv #profile-avatar.avatar-button{border-radius:50%}
+
+body.tv h1,body.tv h2{color:var(--text);letter-spacing:-.03em}
+body.tv p{color:var(--muted)}
+body.tv label{color:#c9c9d0;font-size:12px;font-weight:600;letter-spacing:.04em;text-transform:uppercase}
+body.tv #auth-intro{margin:0 0 6px;font-size:15px;font-weight:400;line-height:1.5;color:var(--muted)}
+body.tv input:not([type=checkbox]):not([type=range]),body.tv select{height:52px;border:1px solid var(--line)!important;border-radius:999px!important;background:var(--surface-2)!important;color:var(--text);padding:0 20px;font-size:15px}
+body.tv input:focus{border-color:rgba(255,255,255,.3)!important;box-shadow:none!important;outline:none}
+body.tv .primary-button{display:inline-flex;align-items:center;justify-content:center;gap:8px;width:100%;min-height:52px;margin-top:20px;border:0!important;border-radius:999px!important;background:var(--text)!important;color:#0a0a0b!important;font-size:15px;font-weight:700;transition:transform .2s cubic-bezier(.2,.7,.2,1),opacity .2s}
+body.tv .primary-button:hover:not(:disabled){transform:scale(1.02);background:#fff!important}
+body.tv .primary-button:disabled{opacity:.45}
+body.tv .secondary-button{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;min-height:52px;padding:0 20px;border:0!important;border-radius:999px!important;background:rgba(255,255,255,.08)!important;color:var(--text)!important;font-size:14px;font-weight:600}
+body.tv .secondary-button:hover{background:rgba(255,255,255,.15)!important}
+body.tv .secondary-button span{flex:1;text-align:left}
+body.tv #start .country-trigger{height:52px;border:1px solid var(--line);border-radius:999px;background:var(--surface-2);padding:0 20px}
+body.tv #start .country-panel{border:1px solid var(--line);border-radius:22px;background:rgba(28,28,31,.97)}
+body.tv #start #country-search{border-radius:999px!important;background:var(--bg)!important}
+body.tv #start .country-option{border-radius:12px}
+body.tv #verify .otp-digit{border:1px solid var(--line);border-radius:16px;background:var(--surface-2)}
+body.tv #verify .otp-digit:focus{border-color:rgba(255,255,255,.4);background:#232327}
+body.tv .otp-resend-button{border:0;border-radius:999px;background:rgba(255,255,255,.08);padding:8px 16px}
+body.tv #message{width:min(100% - 32px,640px);margin:16px auto 0;text-align:center;color:var(--muted);font-size:13px}
+body.tv footer{margin-top:40px;text-align:center;color:var(--dim);font-size:12px;border:0}
+body.tv footer a{color:var(--muted)}
+
+/* Account */
+body.tv .page-kicker,body.tv .plans-eyebrow,body.tv .plan-kicker{color:var(--dim);font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase}
+body.tv .profile-hero{display:flex;align-items:center;gap:20px;margin:12px 0 28px;padding:0;border:0;background:none}
+body.tv .profile-monogram{display:grid;place-items:center;flex:none;width:84px;height:84px;border-radius:50%;background:linear-gradient(135deg,#3a3a42,#1c1c1f);border:1px solid var(--line);color:var(--text);font-size:28px;font-weight:700;letter-spacing:-.02em}
+body.tv .profile-hero h2{margin:0;font-size:26px}
+body.tv .member-pill{display:inline-block;margin-top:10px;padding:5px 12px;border-radius:999px;background:rgba(255,255,255,.1);color:var(--text);font-size:11px;font-weight:700;letter-spacing:.06em}
+body.tv #edit-display-name{border:0;background:rgba(255,255,255,.08);color:var(--text);border-radius:50%}
+body.tv .profile-panel{margin-top:16px;padding:22px;border:1px solid var(--line);border-radius:24px;background:var(--bg)}
+body.tv .panel-heading{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:16px}
+body.tv .panel-heading h3{margin:0;font-size:17px;font-weight:700;letter-spacing:-.02em}
+body.tv .panel-heading>span{color:var(--dim);font-size:10px;font-weight:700;letter-spacing:.16em}
+body.tv .usage-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+body.tv .usage-tile{padding:16px 12px;border:0;border-radius:18px;background:var(--surface);text-align:left}
+body.tv .usage-tile strong{display:block;font-size:26px;font-weight:800;letter-spacing:-.03em;color:var(--text);font-variant-numeric:tabular-nums}
+body.tv .usage-tile span{display:block;margin-top:4px;font-size:11px;color:var(--muted)}
+body.tv #account-limits{margin:14px 0;font-size:12px;color:var(--dim)}
+body.tv .profile-logout{justify-content:center;margin-top:20px;background:transparent!important;color:var(--muted)!important;border:1px solid var(--line)!important}
+body.tv .ui-icon{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
+
+/* Plans: full-width row of three, like a streaming service picker */
+body.tv #plans{width:min(100% - 32px,1100px);margin:0 auto}
+body.tv #plans .plans-intro{text-align:center;margin-bottom:32px}
+body.tv #plans .plans-intro h2{font-size:clamp(30px,5vw,48px);font-weight:800;margin:8px 0 12px}
+body.tv #plans .plans-intro p{max-width:520px;margin:0 auto}
+body.tv #plans .plan-card{border:1px solid var(--line)!important;border-radius:28px!important;background:var(--surface)!important;box-shadow:none!important}
+body.tv #plans .plan-card.plan-featured{background:linear-gradient(180deg,#25252a,#171719)!important;border-color:rgba(255,255,255,.28)!important;box-shadow:0 30px 70px rgba(0,0,0,.5)!important}
+body.tv .plan-price{font-size:30px!important;font-weight:800;letter-spacing:-.03em;color:var(--text)!important}
+body.tv .plan-card ul{color:var(--muted);font-size:14px;line-height:1.7}
+body.tv #plans>.small{margin:24px auto 0;max-width:620px;text-align:center;font-size:12px;color:var(--dim)}
+
+/* History */
+body.tv #history{width:min(100% - 32px,720px);margin:0 auto}
+body.tv .history-heading h2{font-size:clamp(28px,4vw,38px);font-weight:800}
+body.tv .history-subtitle{margin:6px 0 0;color:var(--muted)}
+body.tv .history-card{margin-top:12px;padding:20px 22px;border:1px solid var(--line);border-radius:22px;background:var(--surface)}
+body.tv .history-card-top strong{font-size:16px;color:var(--text)}
+body.tv .history-status{padding:5px 12px;border-radius:999px;font-size:11px;font-weight:700;background:rgba(255,255,255,.1);color:var(--text)}
+body.tv .history-status-submitted{background:rgba(52,199,89,.16);color:#6ee08f}
+body.tv .history-status-failed{background:rgba(255,69,58,.16);color:#ff8a82}
+body.tv .history-status-processing{background:rgba(255,214,10,.14);color:#ffd60a}
+body.tv .history-id{font-size:11px;color:var(--dim)}
+body.tv .history-empty{padding:48px 20px;border:1px dashed var(--line);border-radius:24px;text-align:center}
+body.tv .history-page-button{border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--text)}
+body.tv .history-page-button.active{background:var(--text);color:#0a0a0b}
+body.tv .history-shimmer{border-radius:22px}
+body.tv .auth-sheet-panel{border:1px solid var(--line);background:rgba(28,28,31,.97);border-radius:28px 28px 0 0}
+@media(max-width:560px){body.tv .usage-stats{grid-template-columns:1fr 1fr 1fr;gap:8px}body.tv .usage-tile strong{font-size:22px}body.tv .profile-monogram{width:68px;height:68px;font-size:22px}body.tv .tv-home-link{display:none}}
+
+/* Layout: page column + full-bleed frosted header; cards are the form/section blocks themselves */
+body.tv main{max-width:1280px!important;width:100%;padding:0 clamp(16px,4vw,48px) 72px!important;margin:0 auto}
+body.tv .app-header{margin-inline:calc(50% - 50vw)!important;padding-inline:max(16px,calc(50vw - 592px))!important}
+body.tv .card{max-width:100%!important;width:100%;padding:0!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important}
+body.tv #start,body.tv #verify,body.tv #account{max-width:600px!important;margin:0 auto!important;padding:clamp(24px,4vw,40px)!important;border:1px solid var(--line)!important;border-radius:28px!important;background:var(--surface)!important;box-shadow:0 30px 80px rgba(0,0,0,.4)!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+body.tv #plans{max-width:1100px!important;margin:0 auto}
+body.tv #history{max-width:720px!important;margin:0 auto}
+body.tv #auth-intro{max-width:600px;margin:8px auto 24px!important;text-align:center}
+body.tv #auth-intro::before{color:var(--text)!important;font-weight:800!important;letter-spacing:-.04em!important}
+body.tv #start::before,body.tv #verify::before{color:var(--dim)!important}
+body.tv .profile-name-row,body.tv .profile-hero>div{background:none!important;border:0!important;box-shadow:none!important}
+body.tv .profile-monogram{background:linear-gradient(135deg,#3a3a42,#1c1c1f)!important}
+body.tv .history-card:before{display:none!important}
+body.tv .history-card{position:relative}
+body.tv .plan-price{font-size:26px!important;white-space:nowrap}
+body.tv #start>*:first-child:not(label),body.tv #verify>*:first-child:not(label){margin-top:0}
+body.tv .profile-hero{background:none!important;border:0!important;box-shadow:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;padding:0!important;border-radius:0!important}
+body.tv .profile-panel{background:var(--bg)!important;border-color:var(--line)!important;backdrop-filter:none!important}
+body.tv .usage-tile{background:var(--surface)!important;border:0!important}
+body.tv #account-limits{background:none!important;border:0!important;padding:0!important}
