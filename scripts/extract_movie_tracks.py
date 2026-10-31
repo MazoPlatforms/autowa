@@ -72,7 +72,7 @@ def build_browser_movie(source, audio_streams, video_streams, output):
         tags = stream.get("tags") or {}
         language = str(tags.get("language") or "und")[:15]
         title = str(tags.get("title") or tags.get("language") or f"Audio {index + 1}")[:80]
-        command.extend([f"-metadata:s:a:{index}:language", language, f"-metadata:s:a:{index}:title", title])
+        command.extend([f"-metadata:s:a:{index}", f"language={language}", f"-metadata:s:a:{index}", f"title={title}"])
     command.extend(["-map_metadata", "0", "-movflags", "+faststart", str(output)])
     run(command, timeout=1800)
 
