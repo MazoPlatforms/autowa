@@ -4,1237 +4,1484 @@
     {
       "iso": "AF",
       "name": "Afghanistan",
-      "dial": "93"
+      "dial": "93",
+      "format": "## ### ###"
     },
     {
       "iso": "AX",
       "name": "Åland Islands",
-      "dial": "358"
+      "dial": "358",
+      "format": "### ### ### ### ###"
     },
     {
       "iso": "AL",
       "name": "Albania",
-      "dial": "355"
+      "dial": "355",
+      "format": "### ### ###"
     },
     {
       "iso": "DZ",
       "name": "Algeria",
-      "dial": "213"
+      "dial": "213",
+      "format": "### ### ####"
     },
     {
       "iso": "AS",
       "name": "American Samoa",
-      "dial": "1684"
+      "dial": "1684",
+      "format": "### ####"
     },
     {
       "iso": "AD",
       "name": "Andorra",
-      "dial": "376"
+      "dial": "376",
+      "format": "### ###"
     },
     {
       "iso": "AO",
       "name": "Angola",
-      "dial": "244"
+      "dial": "244",
+      "format": "### ### ###"
     },
     {
       "iso": "AI",
       "name": "Anguilla",
-      "dial": "1264"
+      "dial": "1264",
+      "format": "### ### ### ### ###"
     },
     {
       "iso": "AQ",
       "name": "Antarctica",
-      "dial": "672"
+      "dial": "672",
+      "format": "### ### ### ### ###"
     },
     {
       "iso": "AG",
       "name": "Antigua & Barbuda",
-      "dial": "1268"
+      "dial": "1268",
+      "format": "### ### ### ### ###"
     },
     {
       "iso": "AR",
       "name": "Argentina",
-      "dial": "54"
+      "dial": "54",
+      "format": "## #### ####"
     },
     {
       "iso": "AM",
       "name": "Armenia",
-      "dial": "374"
+      "dial": "374",
+      "format": "## ### ###"
     },
     {
       "iso": "AW",
       "name": "Aruba",
-      "dial": "297"
+      "dial": "297",
+      "format": "### ### ### ### ###"
     },
     {
       "iso": "AU",
       "name": "Australia",
-      "dial": "61"
+      "dial": "61",
+      "format": "#### ### ###"
     },
     {
       "iso": "AT",
       "name": "Austria",
-      "dial": "43"
+      "dial": "43",
+      "format": "### #######"
     },
     {
       "iso": "AZ",
       "name": "Azerbaijan",
-      "dial": "994"
+      "dial": "994",
+      "format": "## ### ####"
     },
     {
       "iso": "BS",
       "name": "Bahamas",
-      "dial": "1242"
+      "dial": "1242",
+      "format": "### ####"
     },
     {
       "iso": "BH",
       "name": "Bahrain",
-      "dial": "973"
+      "dial": "973",
+      "format": "#### ####"
     },
     {
       "iso": "BD",
       "name": "Bangladesh",
-      "dial": "880"
+      "dial": "880",
+      "format": "#### ######"
     },
     {
       "iso": "BB",
       "name": "Barbados",
-      "dial": "1246"
+      "dial": "1246",
+      "format": "### ####"
     },
     {
       "iso": "BY",
       "name": "Belarus",
-      "dial": "375"
+      "dial": "375",
+      "format": "## ### ####"
     },
     {
       "iso": "BE",
       "name": "Belgium",
-      "dial": "32"
+      "dial": "32",
+      "format": "### ## ## ##"
     },
     {
       "iso": "BZ",
       "name": "Belize",
-      "dial": "501"
+      "dial": "501",
+      "format": "### ### ### ### ###"
     },
     {
       "iso": "BJ",
       "name": "Benin",
-      "dial": "229"
+      "dial": "229",
+      "format": "## ## ## ##"
     },
     {
       "iso": "BM",
       "name": "Bermuda",
-      "dial": "1441"
+      "dial": "1441",
+      "format": "### ####"
     },
     {
       "iso": "BT",
       "name": "Bhutan",
-      "dial": "975"
+      "dial": "975",
+      "format": "## ### ###"
     },
     {
       "iso": "BO",
       "name": "Bolivia",
-      "dial": "591"
+      "dial": "591",
+      "format": "# ### ####"
     },
     {
       "iso": "BA",
       "name": "Bosnia",
-      "dial": "387"
+      "dial": "387",
+      "format": "## ### ####"
     },
     {
       "iso": "BW",
       "name": "Botswana",
-      "dial": "267"
+      "dial": "267",
+      "format": "### ### ### ### ###"
     },
     {
       "iso": "BV",
       "name": "Bouvet Island",
-      "dial": "47"
+      "dial": "47",
+      "format": "### ### ### ### ###"
     },
     {
       "iso": "BR",
       "name": "Brazil",
-      "dial": "55"
+      "dial": "55",
+      "format": "## ##### ####"
     },
     {
       "iso": "IO",
       "name": "British Indian Ocean Territory",
-      "dial": "246"
+      "dial": "246",
+      "format": "### ### ### ### ###"
     },
     {
       "iso": "VG",
       "name": "British Virgin Islands",
-      "dial": "1284"
+      "dial": "1284",
+      "format": "### ### ### ### ###"
     },
     {
       "iso": "BN",
       "name": "Brunei",
-      "dial": "673"
+      "dial": "673",
+      "format": "### ### ### ### ###"
     },
     {
       "iso": "BG",
       "name": "Bulgaria",
-      "dial": "359"
+      "dial": "359",
+      "format": "### ### ###"
     },
     {
       "iso": "BF",
       "name": "Burkina Faso",
-      "dial": "226"
+      "dial": "226",
+      "format": "## ## ## ##"
     },
     {
       "iso": "BI",
       "name": "Burundi",
-      "dial": "257"
+      "dial": "257",
+      "format": "## ## ## ##"
     },
     {
       "iso": "KH",
       "name": "Cambodia",
-      "dial": "855"
+      "dial": "855",
+      "format": "## ### ###"
     },
     {
       "iso": "CM",
       "name": "Cameroon",
-      "dial": "237"
+      "dial": "237",
+      "format": "#### ####"
     },
     {
       "iso": "CA",
       "name": "Canada",
-      "dial": "1"
+      "dial": "1",
+      "format": "### ### ####"
     },
     {
       "iso": "CV",
       "name": "Cape Verde",
-      "dial": "238"
+      "dial": "238",
+      "format": "### ####"
     },
     {
       "iso": "BQ",
       "name": "Caribbean Netherlands",
-      "dial": "599"
+      "dial": "599",
+      "format": "### ### ### ### ###"
     },
     {
       "iso": "KY",
       "name": "Cayman Islands",
-      "dial": "1345"
+      "dial": "1345",
+      "format": "### ####"
     },
     {
       "iso": "CF",
       "name": "Central African Republic",
-      "dial": "236"
+      "dial": "236",
+      "format": "## ## ## ##"
     },
     {
       "iso": "TD",
       "name": "Chad",
-      "dial": "235"
+      "dial": "235",
+      "format": "## ## ## ##"
     },
     {
       "iso": "CL",
       "name": "Chile",
-      "dial": "56"
+      "dial": "56",
+      "format": "# #### ####"
     },
     {
       "iso": "CN",
       "name": "China",
-      "dial": "86"
+      "dial": "86",
+      "format": "### #### ####"
     },
     {
       "iso": "CX",
       "name": "Christmas Island",
-      "dial": "61"
+      "dial": "61",
+      "format": "### ### ### ### ###"
     },
     {
       "iso": "CC",
       "name": "Cocos Islands",
-      "dial": "61"
+      "dial": "61",
+      "format": "### ### ### ### ###"
     },
     {
       "iso": "CO",
       "name": "Colombia",
-      "dial": "57"
+      "dial": "57",
+      "format": "### ### ####"
     },
     {
       "iso": "KM",
       "name": "Comoros",
-      "dial": "269"
+      "dial": "269",
+      "format": "### ### ### ### ###"
     },
     {
       "iso": "CG",
       "name": "Congo - Brazzaville",
-      "dial": "242"
+      "dial": "242",
+      "format": "## ### ####"
     },
     {
       "iso": "CD",
       "name": "Congo - Kinshasa",
-      "dial": "243"
+      "dial": "243",
+      "format": "### ### ###"
     },
     {
       "iso": "CK",
       "name": "Cook Islands",
-      "dial": "682"
+      "dial": "682",
+      "format": "## ###"
     },
     {
       "iso": "CR",
       "name": "Costa Rica",
-      "dial": "506"
+      "dial": "506",
+      "format": "#### ####"
     },
     {
       "iso": "CI",
       "name": "Côte d’Ivoire",
-      "dial": "225"
+      "dial": "225",
+      "format": "### ### ### ### ###"
     },
     {
       "iso": "HR",
       "name": "Croatia",
-      "dial": "385"
+      "dial": "385",
+      "format": "## ### ####"
     },
     {
       "iso": "CU",
       "name": "Cuba",
-      "dial": "53"
+      "dial": "53",
+      "format": "# ### ####"
     },
     {
       "iso": "CW",
       "name": "Curaçao",
-      "dial": "599"
+      "dial": "599",
+      "format": "### ### ### ### ###"
     },
     {
       "iso": "CY",
       "name": "Cyprus",
-      "dial": "357"
+      "dial": "357",
+      "format": "## ######"
     },
     {
       "iso": "CZ",
       "name": "Czechia",
-      "dial": "420"
+      "dial": "420",
+      "format": "### ### ###"
     },
     {
       "iso": "DK",
       "name": "Denmark",
-      "dial": "45"
+      "dial": "45",
+      "format": "## ## ## ##"
     },
     {
       "iso": "DJ",
       "name": "Djibouti",
-      "dial": "253"
+      "dial": "253",
+      "format": "## ## ## ##"
     },
     {
       "iso": "DM",
       "name": "Dominica",
-      "dial": "1767"
+      "dial": "1767",
+      "format": "### ### ### ### ###"
     },
     {
       "iso": "EC",
       "name": "Ecuador",
-      "dial": "593"
+      "dial": "593",
+      "format": "## ### ####"
     },
     {
       "iso": "EG",
       "name": "Egypt",
-      "dial": "20"
+      "dial": "20",
+      "format": "### ### ####"
     },
     {
       "iso": "SV",
       "name": "El Salvador",
-      "dial": "503"
+      "dial": "503",
+      "format": "#### ####"
     },
     {
       "iso": "GQ",
       "name": "Equatorial Guinea",
-      "dial": "240"
+      "dial": "240",
+      "format": "### ### ###"
     },
     {
       "iso": "ER",
       "name": "Eritrea",
-      "dial": "291"
+      "dial": "291",
+      "format": "# ### ###"
     },
     {
       "iso": "EE",
       "name": "Estonia",
-      "dial": "372"
+      "dial": "372",
+      "format": "### #####"
     },
     {
       "iso": "SZ",
       "name": "Eswatini",
-      "dial": "268"
+      "dial": "268",
+      "format": "## ## ####"
     },
     {
       "iso": "ET",
       "name": "Ethiopia",
-      "dial": "251"
+      "dial": "251",
+      "format": "### ### ####"
     },
     {
       "iso": "FK",
       "name": "Falkland Islands",
-      "dial": "500"
+      "dial": "500",
+      "format": "### ### ### ### ###"
     },
     {
       "iso": "FO",
       "name": "Faroe Islands",
-      "dial": "298"
+      "dial": "298",
+      "format": "### ### ### ### ###"
     },
     {
       "iso": "FJ",
       "name": "Fiji",
-      "dial": "679"
+      "dial": "679",
+      "format": "### ####"
     },
     {
       "iso": "FI",
       "name": "Finland",
-      "dial": "358"
+      "dial": "358",
+      "format": "## ### ####"
     },
     {
       "iso": "FR",
       "name": "France",
-      "dial": "33"
+      "dial": "33",
+      "format": "# ## ## ## ##"
     },
     {
       "iso": "GF",
       "name": "French Guiana",
-      "dial": "594"
+      "dial": "594",
+      "format": "### ### ### ### ###"
     },
     {
       "iso": "PF",
       "name": "French Polynesia",
-      "dial": "689"
+      "dial": "689",
+      "format": "## ## ##"
     },
     {
       "iso": "TF",
       "name": "French Southern Territories",
-      "dial": "262"
+      "dial": "262",
+      "format": "### ### ### ### ###"
     },
     {
       "iso": "GA",
       "name": "Gabon",
-      "dial": "241"
+      "dial": "241",
+      "format": "## ## ## ##"
     },
     {
       "iso": "GM",
       "name": "Gambia",
-      "dial": "220"
+      "dial": "220",
+      "format": "### ####"
     },
     {
       "iso": "GE",
       "name": "Georgia",
-      "dial": "995"
+      "dial": "995",
+      "format": "### ### ###"
     },
     {
       "iso": "DE",
       "name": "Germany",
-      "dial": "49"
+      "dial": "49",
+      "format": "#### #######"
     },
     {
       "iso": "GH",
       "name": "Ghana",
-      "dial": "233"
+      "dial": "233",
+      "format": "### ### ####"
     },
     {
       "iso": "GI",
       "name": "Gibraltar",
-      "dial": "350"
+      "dial": "350",
+      "format": "### ### ### ### ###"
     },
     {
       "iso": "GR",
       "name": "Greece",
-      "dial": "30"
+      "dial": "30",
+      "format": "### ### ####"
     },
     {
       "iso": "GL",
       "name": "Greenland",
-      "dial": "299"
+      "dial": "299",
+      "format": "### ### ### ### ###"
     },
     {
       "iso": "GD",
       "name": "Grenada",
-      "dial": "1473"
+      "dial": "1473",
+      "format": "### ### ### ### ###"
     },
     {
       "iso": "GP",
       "name": "Guadeloupe",
-      "dial": "590"
+      "dial": "590",
+      "format": "### ### ### ### ###"
     },
     {
       "iso": "GU",
       "name": "Guam",
-      "dial": "1671"
+      "dial": "1671",
+      "format": "### ####"
     },
     {
       "iso": "GT",
       "name": "Guatemala",
-      "dial": "502"
+      "dial": "502",
+      "format": "#### ####"
     },
     {
       "iso": "GG",
       "name": "Guernsey",
-      "dial": "44"
+      "dial": "44",
+      "format": "### ### ### ### ###"
     },
     {
       "iso": "GN",
       "name": "Guinea",
-      "dial": "224"
+      "dial": "224",
+      "format": "### ### ###"
     },
     {
       "iso": "GW",
       "name": "Guinea-Bissau",
-      "dial": "245"
+      "dial": "245",
+      "format": "### ###"
     },
     {
       "iso": "GY",
       "name": "Guyana",
-      "dial": "592"
+      "dial": "592",
+      "format": "### ####"
     },
     {
       "iso": "HT",
       "name": "Haiti",
-      "dial": "509"
+      "dial": "509",
+      "format": "#### ####"
     },
     {
       "iso": "HM",
       "name": "Heard & McDonald Islands",
-      "dial": "672"
+      "dial": "672",
+      "format": "### ### ### ### ###"
     },
     {
       "iso": "HN",
       "name": "Honduras",
-      "dial": "504"
+      "dial": "504",
+      "format": "#### ####"
     },
     {
       "iso": "HK",
       "name": "Hong Kong",
-      "dial": "852"
+      "dial": "852",
+      "format": "#### ####"
     },
     {
       "iso": "HU",
       "name": "Hungary",
-      "dial": "36"
+      "dial": "36",
+      "format": "## ### ####"
     },
     {
       "iso": "IS",
       "name": "Iceland",
-      "dial": "354"
+      "dial": "354",
+      "format": "### ####"
     },
     {
       "iso": "IN",
       "name": "India",
-      "dial": "91"
+      "dial": "91",
+      "format": "##### #####"
     },
     {
       "iso": "ID",
       "name": "Indonesia",
-      "dial": "62"
+      "dial": "62",
+      "format": "### #### ####"
     },
     {
       "iso": "IR",
       "name": "Iran",
-      "dial": "98"
+      "dial": "98",
+      "format": "### ### ####"
     },
     {
       "iso": "IQ",
       "name": "Iraq",
-      "dial": "964"
+      "dial": "964",
+      "format": "### ### ####"
     },
     {
       "iso": "IE",
       "name": "Ireland",
-      "dial": "353"
+      "dial": "353",
+      "format": "## ### ####"
     },
     {
       "iso": "IM",
       "name": "Isle of Man",
-      "dial": "44"
+      "dial": "44",
+      "format": "### ### ### ### ###"
     },
     {
       "iso": "IL",
       "name": "Israel",
-      "dial": "972"
+      "dial": "972",
+      "format": "## ### ####"
     },
     {
       "iso": "IT",
       "name": "Italy",
-      "dial": "39"
+      "dial": "39",
+      "format": "### ### ####"
     },
     {
       "iso": "JM",
       "name": "Jamaica",
-      "dial": "1876"
+      "dial": "1876",
+      "format": "### ####"
     },
     {
       "iso": "JP",
       "name": "Japan",
-      "dial": "81"
+      "dial": "81",
+      "format": "## #### ####"
     },
     {
       "iso": "JE",
       "name": "Jersey",
-      "dial": "44"
+      "dial": "44",
+      "format": "### ### ### ### ###"
     },
     {
       "iso": "JO",
       "name": "Jordan",
-      "dial": "962"
+      "dial": "962",
+      "format": "# #### ####"
     },
     {
       "iso": "KZ",
       "name": "Kazakhstan",
-      "dial": "7"
+      "dial": "7",
+      "format": "### ### ####"
     },
     {
       "iso": "KE",
       "name": "Kenya",
-      "dial": "254"
+      "dial": "254",
+      "format": "### ### ####"
     },
     {
       "iso": "KI",
       "name": "Kiribati",
-      "dial": "686"
+      "dial": "686",
+      "format": "### ### ### ### ###"
     },
     {
       "iso": "KW",
       "name": "Kuwait",
-      "dial": "965"
+      "dial": "965",
+      "format": "#### ####"
     },
     {
       "iso": "KG",
       "name": "Kyrgyzstan",
-      "dial": "996"
+      "dial": "996",
+      "format": "### ### ### ### ###"
     },
     {
       "iso": "LA",
       "name": "Laos",
-      "dial": "856"
+      "dial": "856",
+      "format": "## ### ###"
     },
     {
       "iso": "LV",
       "name": "Latvia",
-      "dial": "371"
+      "dial": "371",
+      "format": "### #####"
     },
     {
       "iso": "LB",
       "name": "Lebanon",
-      "dial": "961"
+      "dial": "961",
+      "format": "## ### ###"
     },
     {
       "iso": "LS",
       "name": "Lesotho",
-      "dial": "266"
+      "dial": "266",
+      "format": "## ## ####"
     },
     {
       "iso": "LR",
       "name": "Liberia",
-      "dial": "231"
+      "dial": "231",
+      "format": "### ### ###"
     },
     {
       "iso": "LY",
       "name": "Libya",
-      "dial": "218"
+      "dial": "218",
+      "format": "## ### ####"
     },
     {
       "iso": "LI",
       "name": "Liechtenstein",
-      "dial": "423"
+      "dial": "423",
+      "format": "### ### ### ### ###"
     },
     {
       "iso": "LT",
       "name": "Lithuania",
-      "dial": "370"
+      "dial": "370",
+      "format": "### #####"
     },
     {
       "iso": "LU",
       "name": "Luxembourg",
-      "dial": "352"
+      "dial": "352",
+      "format": "### ###"
     },
     {
       "iso": "MO",
       "name": "Macao",
-      "dial": "853"
+      "dial": "853",
+      "format": "### ### ### ### ###"
     },
     {
       "iso": "MG",
       "name": "Madagascar",
-      "dial": "261"
+      "dial": "261",
+      "format": "## ## ####"
     },
     {
       "iso": "MW",
       "name": "Malawi",
-      "dial": "265"
+      "dial": "265",
+      "format": "### ### ###"
     },
     {
       "iso": "MY",
       "name": "Malaysia",
-      "dial": "60"
+      "dial": "60",
+      "format": "## #### ####"
     },
     {
       "iso": "MV",
       "name": "Maldives",
-      "dial": "960"
+      "dial": "960",
+      "format": "### ####"
     },
     {
       "iso": "ML",
       "name": "Mali",
-      "dial": "223"
+      "dial": "223",
+      "format": "## ## ## ##"
     },
     {
       "iso": "MT",
       "name": "Malta",
-      "dial": "356"
+      "dial": "356",
+      "format": "#### ####"
     },
     {
       "iso": "MH",
       "name": "Marshall Islands",
-      "dial": "692"
+      "dial": "692",
+      "format": "### ####"
     },
     {
       "iso": "MQ",
       "name": "Martinique",
-      "dial": "596"
+      "dial": "596",
+      "format": "### ### ### ### ###"
     },
     {
       "iso": "MR",
       "name": "Mauritania",
-      "dial": "222"
+      "dial": "222",
+      "format": "## ## ## ##"
     },
     {
       "iso": "MU",
       "name": "Mauritius",
-      "dial": "230"
+      "dial": "230",
+      "format": "#### ####"
     },
     {
       "iso": "YT",
       "name": "Mayotte",
-      "dial": "262"
+      "dial": "262",
+      "format": "### ### ### ### ###"
     },
     {
       "iso": "MX",
       "name": "Mexico",
-      "dial": "52"
+      "dial": "52",
+      "format": "### ### ### ### ###"
     },
     {
       "iso": "FM",
       "name": "Micronesia",
-      "dial": "691"
+      "dial": "691",
+      "format": "### ####"
     },
     {
       "iso": "MD",
       "name": "Moldova",
-      "dial": "373"
+      "dial": "373",
+      "format": "### ### ##"
     },
     {
       "iso": "MC",
       "name": "Monaco",
-      "dial": "377"
+      "dial": "377",
+      "format": "## ## ## ##"
     },
     {
       "iso": "MN",
       "name": "Mongolia",
-      "dial": "976"
+      "dial": "976",
+      "format": "## ## ####"
     },
     {
       "iso": "ME",
       "name": "Montenegro",
-      "dial": "382"
+      "dial": "382",
+      "format": "### ### ### ### ###"
     },
     {
       "iso": "MS",
       "name": "Montserrat",
-      "dial": "1664"
+      "dial": "1664",
+      "format": "### ### ### ### ###"
     },
     {
       "iso": "MA",
       "name": "Morocco",
-      "dial": "212"
+      "dial": "212",
+      "format": "### ### ####"
     },
     {
       "iso": "MZ",
       "name": "Mozambique",
-      "dial": "258"
+      "dial": "258",
+      "format": "## ### ####"
     },
     {
       "iso": "MM",
       "name": "Myanmar",
-      "dial": "95"
+      "dial": "95",
+      "format": "## ### ###"
     },
     {
       "iso": "NA",
       "name": "Namibia",
-      "dial": "264"
+      "dial": "264",
+      "format": "## ### ####"
     },
     {
       "iso": "NR",
       "name": "Nauru",
-      "dial": "674"
+      "dial": "674",
+      "format": "### ### ### ### ###"
     },
     {
       "iso": "NP",
       "name": "Nepal",
-      "dial": "977"
+      "dial": "977",
+      "format": "### #######"
     },
     {
       "iso": "NL",
       "name": "Netherlands",
-      "dial": "31"
+      "dial": "31",
+      "format": "# ## ## ## ##"
     },
     {
       "iso": "NC",
       "name": "New Caledonia",
-      "dial": "687"
+      "dial": "687",
+      "format": "## ## ##"
     },
     {
       "iso": "NZ",
       "name": "New Zealand",
-      "dial": "64"
+      "dial": "64",
+      "format": "## ### ####"
     },
     {
       "iso": "NI",
       "name": "Nicaragua",
-      "dial": "505"
+      "dial": "505",
+      "format": "#### ####"
     },
     {
       "iso": "NE",
       "name": "Niger",
-      "dial": "227"
+      "dial": "227",
+      "format": "## ## ## ##"
     },
     {
       "iso": "NG",
       "name": "Nigeria",
-      "dial": "234"
+      "dial": "234",
+      "format": "### ### ####"
     },
     {
       "iso": "NU",
       "name": "Niue",
-      "dial": "683"
+      "dial": "683",
+      "format": "### ####"
     },
     {
       "iso": "NF",
       "name": "Norfolk Island",
-      "dial": "672"
+      "dial": "672",
+      "format": "### ### ### ### ###"
     },
     {
       "iso": "KP",
       "name": "North Korea",
-      "dial": "850"
+      "dial": "850",
+      "format": "### ### ### ### ###"
     },
     {
       "iso": "MK",
       "name": "North Macedonia",
-      "dial": "389"
+      "dial": "389",
+      "format": "### ### ### ### ###"
     },
     {
       "iso": "MP",
       "name": "Northern Mariana Islands",
-      "dial": "1670"
+      "dial": "1670",
+      "format": "### ####"
     },
     {
       "iso": "NO",
       "name": "Norway",
-      "dial": "47"
+      "dial": "47",
+      "format": "### ## ###"
     },
     {
       "iso": "OM",
       "name": "Oman",
-      "dial": "968"
+      "dial": "968",
+      "format": "#### ####"
     },
     {
       "iso": "PK",
       "name": "Pakistan",
-      "dial": "92"
+      "dial": "92",
+      "format": "### #######"
     },
     {
       "iso": "PW",
       "name": "Palau",
-      "dial": "680"
+      "dial": "680",
+      "format": "### ####"
     },
     {
       "iso": "PS",
       "name": "Palestine",
-      "dial": "970"
+      "dial": "970",
+      "format": "### ### ### ### ###"
     },
     {
       "iso": "PA",
       "name": "Panama",
-      "dial": "507"
+      "dial": "507",
+      "format": "#### ####"
     },
     {
       "iso": "PG",
       "name": "Papua New Guinea",
-      "dial": "675"
+      "dial": "675",
+      "format": "### ####"
     },
     {
       "iso": "PY",
       "name": "Paraguay",
-      "dial": "595"
+      "dial": "595",
+      "format": "### ### ###"
     },
     {
       "iso": "PE",
       "name": "Peru",
-      "dial": "51"
+      "dial": "51",
+      "format": "### ### ###"
     },
     {
       "iso": "PH",
       "name": "Philippines",
-      "dial": "63"
+      "dial": "63",
+      "format": "### ### ####"
     },
     {
       "iso": "PN",
       "name": "Pitcairn",
-      "dial": "870"
+      "dial": "870",
+      "format": "### ### ### ### ###"
     },
     {
       "iso": "PL",
       "name": "Poland",
-      "dial": "48"
+      "dial": "48",
+      "format": "### ### ###"
     },
     {
       "iso": "PT",
       "name": "Portugal",
-      "dial": "351"
+      "dial": "351",
+      "format": "### ### ###"
     },
     {
       "iso": "PR",
       "name": "Puerto Rico",
-      "dial": "1"
+      "dial": "1",
+      "format": "### ### ####"
     },
     {
       "iso": "QA",
       "name": "Qatar",
-      "dial": "974"
+      "dial": "974",
+      "format": "#### ####"
     },
     {
       "iso": "RE",
       "name": "Réunion",
-      "dial": "262"
+      "dial": "262",
+      "format": "### ### ### ### ###"
     },
     {
       "iso": "RO",
       "name": "Romania",
-      "dial": "40"
+      "dial": "40",
+      "format": "### ### ###"
     },
     {
       "iso": "RU",
       "name": "Russia",
-      "dial": "7"
+      "dial": "7",
+      "format": "### ### ####"
     },
     {
       "iso": "RW",
       "name": "Rwanda",
-      "dial": "250"
+      "dial": "250",
+      "format": "### ### ###"
     },
     {
       "iso": "WS",
       "name": "Samoa",
-      "dial": "685"
+      "dial": "685",
+      "format": "## ####"
     },
     {
       "iso": "SM",
       "name": "San Marino",
-      "dial": "378"
+      "dial": "378",
+      "format": "#### ####"
     },
     {
       "iso": "ST",
       "name": "São Tomé & Príncipe",
-      "dial": "239"
+      "dial": "239",
+      "format": "### ####"
     },
     {
       "iso": "SA",
       "name": "Saudi Arabia",
-      "dial": "966"
+      "dial": "966",
+      "format": "## ### ####"
     },
     {
       "iso": "SN",
       "name": "Senegal",
-      "dial": "221"
+      "dial": "221",
+      "format": "### ### ### ### ###"
     },
     {
       "iso": "RS",
       "name": "Serbia",
-      "dial": "381"
+      "dial": "381",
+      "format": "## ### ####"
     },
     {
       "iso": "SC",
       "name": "Seychelles",
-      "dial": "248"
+      "dial": "248",
+      "format": "# ### ###"
     },
     {
       "iso": "SL",
       "name": "Sierra Leone",
-      "dial": "232"
+      "dial": "232",
+      "format": "### ### ###"
     },
     {
       "iso": "SG",
       "name": "Singapore",
-      "dial": "65"
+      "dial": "65",
+      "format": "#### ####"
     },
     {
       "iso": "SX",
       "name": "Sint Maarten",
-      "dial": "1721"
+      "dial": "1721",
+      "format": "### ### ### ### ###"
     },
     {
       "iso": "SK",
       "name": "Slovakia",
-      "dial": "421"
+      "dial": "421",
+      "format": "### ### ###"
     },
     {
       "iso": "SI",
       "name": "Slovenia",
-      "dial": "386"
+      "dial": "386",
+      "format": "### ### ###"
     },
     {
       "iso": "SB",
       "name": "Solomon Islands",
-      "dial": "677"
+      "dial": "677",
+      "format": "### ### ### ### ###"
     },
     {
       "iso": "SO",
       "name": "Somalia",
-      "dial": "252"
+      "dial": "252",
+      "format": "## ### ###"
     },
     {
       "iso": "ZA",
       "name": "South Africa",
-      "dial": "27"
+      "dial": "27",
+      "format": "## ### ####"
     },
     {
       "iso": "GS",
       "name": "South Georgia & South Sandwich Islands",
-      "dial": "500"
+      "dial": "500",
+      "format": "### ### ### ### ###"
     },
     {
       "iso": "KR",
       "name": "South Korea",
-      "dial": "82"
+      "dial": "82",
+      "format": "## #### ####"
     },
     {
       "iso": "SS",
       "name": "South Sudan",
-      "dial": "211"
+      "dial": "211",
+      "format": "### ### ###"
     },
     {
       "iso": "ES",
       "name": "Spain",
-      "dial": "34"
+      "dial": "34",
+      "format": "### ### ###"
     },
     {
       "iso": "LK",
       "name": "Sri Lanka",
-      "dial": "94"
+      "dial": "94",
+      "format": "## ### ####"
     },
     {
       "iso": "BL",
       "name": "St. Barthélemy",
-      "dial": "590"
+      "dial": "590",
+      "format": "### ### ### ### ###"
     },
     {
       "iso": "SH",
       "name": "St. Helena",
-      "dial": "290"
+      "dial": "290",
+      "format": "### ### ### ### ###"
     },
     {
       "iso": "KN",
       "name": "St. Kitts & Nevis",
-      "dial": "1869"
+      "dial": "1869",
+      "format": "### ### ### ### ###"
     },
     {
       "iso": "LC",
       "name": "St. Lucia",
-      "dial": "1758"
+      "dial": "1758",
+      "format": "### ### ### ### ###"
     },
     {
       "iso": "MF",
       "name": "St. Martin",
-      "dial": "590"
+      "dial": "590",
+      "format": "### ### ### ### ###"
     },
     {
       "iso": "PM",
       "name": "St. Pierre & Miquelon",
-      "dial": "508"
+      "dial": "508",
+      "format": "### ### ### ### ###"
     },
     {
       "iso": "VC",
       "name": "St. Vincent & Grenadines",
-      "dial": "1784"
+      "dial": "1784",
+      "format": "### ### ### ### ###"
     },
     {
       "iso": "SD",
       "name": "Sudan",
-      "dial": "249"
+      "dial": "249",
+      "format": "### ### ###"
     },
     {
       "iso": "SR",
       "name": "Suriname",
-      "dial": "597"
+      "dial": "597",
+      "format": "### ####"
     },
     {
       "iso": "SJ",
       "name": "Svalbard & Jan Mayen",
-      "dial": "47"
+      "dial": "47",
+      "format": "### ### ### ### ###"
     },
     {
       "iso": "SE",
       "name": "Sweden",
-      "dial": "46"
+      "dial": "46",
+      "format": "## ### ## ##"
     },
     {
       "iso": "CH",
       "name": "Switzerland",
-      "dial": "41"
+      "dial": "41",
+      "format": "## ### ####"
     },
     {
       "iso": "SY",
       "name": "Syria",
-      "dial": "963"
+      "dial": "963",
+      "format": "### ### ### ### ###"
     },
     {
       "iso": "TW",
       "name": "Taiwan",
-      "dial": "886"
+      "dial": "886",
+      "format": "#### ####"
     },
     {
       "iso": "TJ",
       "name": "Tajikistan",
-      "dial": "992"
+      "dial": "992",
+      "format": "### ### ### ### ###"
     },
     {
       "iso": "TZ",
       "name": "Tanzania",
-      "dial": "255"
+      "dial": "255",
+      "format": "### ### ####"
     },
     {
       "iso": "TH",
       "name": "Thailand",
-      "dial": "66"
+      "dial": "66",
+      "format": "## ### ####"
     },
     {
       "iso": "TL",
       "name": "Timor-Leste",
-      "dial": "670"
+      "dial": "670",
+      "format": "### ### ### ### ###"
     },
     {
       "iso": "TG",
       "name": "Togo",
-      "dial": "228"
+      "dial": "228",
+      "format": "## ### ###"
     },
     {
       "iso": "TK",
       "name": "Tokelau",
-      "dial": "690"
+      "dial": "690",
+      "format": "### ####"
     },
     {
       "iso": "TO",
       "name": "Tonga",
-      "dial": "676"
+      "dial": "676",
+      "format": "### ####"
     },
     {
       "iso": "TT",
       "name": "Trinidad & Tobago",
-      "dial": "1868"
+      "dial": "1868",
+      "format": "### ####"
     },
     {
       "iso": "TN",
       "name": "Tunisia",
-      "dial": "216"
+      "dial": "216",
+      "format": "## ### ###"
     },
     {
       "iso": "TR",
       "name": "Türkiye",
-      "dial": "90"
+      "dial": "90",
+      "format": "### ### ####"
     },
     {
       "iso": "TM",
       "name": "Turkmenistan",
-      "dial": "993"
+      "dial": "993",
+      "format": "### ### ### ### ###"
     },
     {
       "iso": "TC",
       "name": "Turks & Caicos Islands",
-      "dial": "1649"
+      "dial": "1649",
+      "format": "### ### ### ### ###"
     },
     {
       "iso": "TV",
       "name": "Tuvalu",
-      "dial": "688"
+      "dial": "688",
+      "format": "### ### ### ### ###"
     },
     {
       "iso": "VI",
       "name": "U.S. Virgin Islands",
-      "dial": "1340"
+      "dial": "1340",
+      "format": "### ####"
     },
     {
       "iso": "UG",
       "name": "Uganda",
-      "dial": "256"
+      "dial": "256",
+      "format": "### ### ####"
     },
     {
       "iso": "GB",
       "name": "UK",
-      "dial": "44"
+      "dial": "44",
+      "format": "#### ### ####"
     },
     {
       "iso": "UA",
       "name": "Ukraine",
-      "dial": "380"
+      "dial": "380",
+      "format": "## ### ####"
     },
     {
       "iso": "AE",
       "name": "United Arab Emirates",
-      "dial": "971"
+      "dial": "971",
+      "format": "## ### ####"
     },
     {
       "iso": "UY",
       "name": "Uruguay",
-      "dial": "598"
+      "dial": "598",
+      "format": "### ### ###"
     },
     {
       "iso": "US",
       "name": "US",
-      "dial": "1"
+      "dial": "1",
+      "format": "### ### ####"
     },
     {
       "iso": "UZ",
       "name": "Uzbekistan",
-      "dial": "998"
+      "dial": "998",
+      "format": "## ### ####"
     },
     {
       "iso": "VU",
       "name": "Vanuatu",
-      "dial": "678"
+      "dial": "678",
+      "format": "#####"
     },
     {
       "iso": "VA",
       "name": "Vatican City",
-      "dial": "3906"
+      "dial": "3906",
+      "format": "#### ####"
     },
     {
       "iso": "VE",
       "name": "Venezuela",
-      "dial": "58"
+      "dial": "58",
+      "format": "### #######"
     },
     {
       "iso": "VN",
       "name": "Vietnam",
-      "dial": "84"
+      "dial": "84",
+      "format": "### ### ####"
     },
     {
       "iso": "WF",
       "name": "Wallis & Futuna",
-      "dial": "681"
+      "dial": "681",
+      "format": "### ### ### ### ###"
     },
     {
       "iso": "EH",
       "name": "Western Sahara",
-      "dial": "212"
+      "dial": "212",
+      "format": "### ### ### ### ###"
     },
     {
       "iso": "YE",
       "name": "Yemen",
-      "dial": "967"
+      "dial": "967",
+      "format": "### ### ### ### ###"
     },
     {
       "iso": "ZM",
       "name": "Zambia",
-      "dial": "260"
+      "dial": "260",
+      "format": "## ### ####"
     },
     {
       "iso": "ZW",
       "name": "Zimbabwe",
-      "dial": "263"
+      "dial": "263",
+      "format": "## ### ####"
     }
   ]
 }

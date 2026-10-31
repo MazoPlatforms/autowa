@@ -164,7 +164,7 @@ async function requestHistory(number){
 }
 async function profile(number){const raw=await redis('GET','profile:'+hmac(number));return raw?JSON.parse(raw):{name:'',created_at:new Date().toISOString()};}
 async function sendOtp(number,code){return sendWhatsAppOtp(number,code);}
-const index=fs.readFileSync(new URL('../web/index.html',import.meta.url));
+const index=fs.readFileSync(new URL('../web/index.html',import.meta.url)).toString('utf8').replace('<script src="/poster-wall.js','<script src="/phone-format.js?v=20261101-1" defer></script><script src="/poster-wall.js');
 const catalogHtml=fs.readFileSync(new URL('../web/catalog.html',import.meta.url));
 const catalogJs=fs.readFileSync(new URL('../web/catalog.js',import.meta.url));
 const catalogCss=fs.readFileSync(new URL('../web/catalog.css',import.meta.url));
@@ -223,6 +223,7 @@ const countries=fs.readFileSync(new URL('../site/countries.json',import.meta.url
 const appJs=fs.readFileSync(new URL('../web/app.js',import.meta.url));
 const stylesheet=fs.readFileSync(new URL('../web/style.css',import.meta.url));
 const posterWallJs=fs.readFileSync(new URL('../web/poster-wall.js',import.meta.url));
+const phoneFormatJs=fs.readFileSync(new URL('../web/phone-format.js',import.meta.url));
 const posterBackgrounds=new Map(['bg-04.webp','bg-05.webp','bg-06.webp','bg-28.webp','bg-30.webp'].map(name=>[
  '/posters/background/'+name,
  fs.readFileSync(new URL('../web/posters/background/'+name,import.meta.url))
@@ -430,6 +431,7 @@ const server=http.createServer(async(req,res)=>{
   }
   if(req.method==='GET'&&url.pathname==='/style.css'){res.writeHead(200,{'Content-Type':'text/css; charset=utf-8','Cache-Control':'no-store','X-Content-Type-Options':'nosniff'});return res.end(stylesheet);}
   if(req.method==='GET'&&url.pathname==='/poster-wall.js'){res.writeHead(200,{'Content-Type':'text/javascript; charset=utf-8','Cache-Control':'public, max-age=300','X-Content-Type-Options':'nosniff'});return res.end(posterWallJs);}
+  if(req.method==='GET'&&url.pathname==='/phone-format.js'){res.writeHead(200,{'Content-Type':'text/javascript; charset=utf-8','Cache-Control':'public, max-age=300','X-Content-Type-Options':'nosniff'});return res.end(phoneFormatJs);}
   if(req.method==='GET'&&posterBackgrounds.has(url.pathname)){res.writeHead(200,{'Content-Type':'image/webp','Cache-Control':'public, max-age=31536000, immutable','X-Content-Type-Options':'nosniff'});return res.end(posterBackgrounds.get(url.pathname));}
   if(req.method==='GET'&&url.pathname==='/app.js'){res.writeHead(200,{'Content-Type':'text/javascript; charset=utf-8','Cache-Control':'no-store','X-Content-Type-Options':'nosniff'});return res.end(appJs);}
   if(req.method==='GET'&&url.pathname==='/countries.json'){res.writeHead(200,{'Content-Type':'application/json','Cache-Control':'public, max-age=86400'});return res.end(countries);}
