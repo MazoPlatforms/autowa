@@ -200,6 +200,7 @@ const setMovieAccessState=state=>{
  movieAccessState=state;
  const locked=state!=='signed-in';
  player.toggleAttribute('inert',locked);actions.toggleAttribute('inert',locked);
+ if(state==='checking'){accessNotice.hidden=true;return;}
  accessNotice.hidden=!locked;
  if(!locked)return;
  accessNotice.replaceChildren();
