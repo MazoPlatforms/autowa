@@ -45,25 +45,32 @@ def stream_label(stream, index):
 
 def extract_audio(source, stream_index, stream, output_dir, stem):
     label = stream_label(stream, stream_index)
-    original = output_dir / f"{stem}.audio-{stream_index + 1:02d}-{label}.mka"
     compatible = output_dir / f"{stem}.audio-{stream_index + 1:02d}-{label}.aac.m4a"
     files = []
-    try:
-        # Stream copy does not decode the audio, so even a damaged or browser-
-        # unsupported track is preserved for later use.
-        run(["ffmpeg", "-y", "-v", "error", "-i", str(source), "-map", f"0:a:{stream_index}", "-map_metadata", "0", "-c:a", "copy", str(original)], timeout=300)
-        files.append(original)
-    except (subprocess.CalledProcessError, subprocess.TimeoutExpired) as error:
-        print(f"Audio track {stream_index + 1} original extraction failed: {type(error).__name__}", flush=True)
     # AAC stereo is broadly playable in Android WebView and desktop browsers.
     try:
-        run(["ffmpeg", "-y", "-v", "error", "-err_detect", "ignore_err", "-i", str(source), "-map", f"0:a:{stream_index}", "-vn", "-map_metadata", "0", "-c:a", "aac", "-b:a", "192k", "-ac", "2", str(compatible)], timeout=300)
+        run(["ffmpeg", "-y", "-v", "error", "-err_detect", "ignore_err", "-i", str(source), "-map", f"0:a:{stream_index}", "-vn", "-map_metadata", "0", "-c:a", "aac", "-b:a", "192k", "-ac", "2", str(compatible)], timeout=900)
         files.append(compatible)
     except (subprocess.CalledProcessError, subprocess.TimeoutExpired) as error:
         # A malformed E-AC3/DTS track must not block other audio, subtitle,
         # chapter, and attachment extraction.
         print(f"Audio track {stream_index + 1} AAC conversion skipped: {type(error).__name__}", flush=True)
     return files
+
+
+def build_browser_movie(source, audio_streams, output):
+    """Copy video and convert every audio track to browser-friendly AAC."""
+    if not audio_streams:
+        raise RuntimeError("Movie has no audio tracks to make browser-compatible")
+    command = ["ffmpeg", "-y", "-v", "error", "-err_detect", "ignore_err", "-i", str(source), "-map", "0:v:0", "-c:v", "copy"]
+    for index, stream in enumerate(audio_streams):
+        command.extend(["-map", f"0:a:{index}", f"-c:a:{index}", "aac", f"-b:a:{index}", "192k", f"-ac:a:{index}", "2"])
+        tags = stream.get("tags") or {}
+        language = str(tags.get("language") or "und")[:15]
+        title = str(tags.get("title") or tags.get("language") or f"Audio {index + 1}")[:80]
+        command.extend([f"-metadata:s:a:{index}:language", language, f"-metadata:s:a:{index}:title", title])
+    command.extend(["-map_metadata", "0", "-movflags", "+faststart", str(output)])
+    run(command, timeout=1800)
 
 
 def extract_subtitle(source, stream_index, stream, output_dir, stem):
@@ -121,8 +128,9 @@ async def main():
         raise RuntimeError(f"Movie slug not found: {args.slug}")
     variant = movie.get("qualities", {}).get(movie.get("quality"), movie)
     message_id = int(variant["telegram_message_id"])
-    stem = safe(f"{movie.get('title', 'movie')}-{movie.get('year', '')}", "movie")
+    stem = safe(f"{args.slug}-{movie.get('title', 'movie')}-{movie.get('year', '')}-source-{message_id}", "movie")
     target = int(args.target_channel)
+    marker = f"FilmGo track bundle · slug={args.slug} · source_file_id={message_id}"
 
     with tempfile.TemporaryDirectory(prefix="filmgo-track-extract-") as temp:
         root = Path(temp)
@@ -136,11 +144,13 @@ async def main():
             print(f"Downloading source message {message_id}: {stem}", flush=True)
             await client.download_media(source, file=str(source_path))
             metadata = probe(source_path)
-            (output_dir / f"{stem}.manifest.json").write_text(json.dumps(metadata, indent=2) + "\n")
-            files = [output_dir / f"{stem}.manifest.json"]
             audio = [s for s in metadata.get("streams", []) if s.get("codec_type") == "audio"]
             subtitles = [s for s in metadata.get("streams", []) if s.get("codec_type") == "subtitle"]
             attachments = [s for s in metadata.get("streams", []) if s.get("codec_type") == "attachment"]
+            browser_movie = output_dir / f"{stem}.browser.mp4"
+            print(f"Creating browser-compatible movie with {len(audio)} AAC audio track(s)", flush=True)
+            build_browser_movie(source_path, audio, browser_movie)
+            files = [browser_movie]
             for index, stream in enumerate(audio):
                 files.extend(extract_audio(source_path, index, stream, output_dir, stem))
             for index, stream in enumerate(subtitles):
@@ -152,14 +162,33 @@ async def main():
                 files.append(chapters)
             except subprocess.CalledProcessError:
                 pass
-            print(f"Extracted {len(files)} sidecar files; uploading to {target}", flush=True)
-            notice = await client.send_message(target, f"🎬 Track extraction demo\n{movie.get('title')} ({movie.get('year')})\nSource message: {message_id}\nFiles: {len(files)}")
+            manifest = {
+                "slug_id": args.slug,
+                "title": movie.get("title"),
+                "year": movie.get("year"),
+                "source_channel_id": int(DEFAULT_SOURCE),
+                "source_file_id": message_id,
+                "browser_movie": browser_movie.name,
+                "audio_tracks": [{"index": i + 1, "language": (s.get("tags") or {}).get("language"), "title": (s.get("tags") or {}).get("title"), "codec": "aac"} for i, s in enumerate(audio)],
+                "subtitle_tracks": [{"index": i + 1, "language": (s.get("tags") or {}).get("language"), "title": (s.get("tags") or {}).get("title"), "format": "webvtt"} for i, s in enumerate(subtitles)],
+                "files": [p.name for p in files],
+            }
+            manifest_path = output_dir / f"{stem}.manifest.json"
+            manifest_path.write_text(json.dumps(manifest, indent=2, ensure_ascii=False) + "\n")
+            files.append(manifest_path)
+            # Keep this temporary channel tidy: remove only prior bundles for
+            # this exact slug and source file ID, never unrelated messages.
+            async for old in client.iter_messages(target, search=marker, limit=100):
+                if marker in str(old.message or ""):
+                    await client.delete_messages(target, old.id, revoke=True)
+            print(f"Prepared {len(files)} browser-compatible files; uploading to {target}", flush=True)
+            notice = await client.send_message(target, f"🎬 {marker}\nmovie={movie.get('title')} ({movie.get('year')})\nfiles={len(files)}")
             for path in files:
                 if not path.exists() or path.stat().st_size == 0:
                     continue
-                caption = f"FilmGo extraction demo · {movie.get('title')} ({movie.get('year')}) · source #{message_id} · {path.name}"
+                caption = f"{marker}\nmovie={movie.get('title')} ({movie.get('year')})\nartifact={path.name}"
                 await client.send_file(target, str(path), caption=caption, force_document=True)
-            await notice.edit(f"✅ Track extraction complete\n{movie.get('title')} ({movie.get('year')})\nSource message: {message_id}\nUploaded files: {len(files)}")
+            await notice.edit(f"✅ {marker}\nmovie={movie.get('title')} ({movie.get('year')})\nuploaded_files={len(files)}")
 
 
 if __name__ == "__main__":
