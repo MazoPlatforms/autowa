@@ -154,12 +154,14 @@ export async function sendWhatsAppOtp(number,code){
 }
 
 export async function deleteWhatsAppOtp(messageKey){
- if(!socket||!messageKey?.id||!messageKey?.remoteJid)return false;
+ if(!messageKey?.id||!messageKey?.remoteJid){console.warn('OTP WhatsApp message cleanup skipped: invalid message key');return false;}
+ if(!socket||!ready){console.warn('OTP WhatsApp message cleanup deferred: WhatsApp socket is not ready');return false;}
  try{
   await socket.sendMessage(messageKey.remoteJid,{delete:messageKey});
   return true;
  }catch(error){
-  console.warn('OTP WhatsApp message cleanup deferred:',error?.message||'unknown');
+  const detail=error?.message||error?.data?.message||error?.output?.payload?.message||(typeof error==='string'?error:'unknown error');
+  console.warn('OTP WhatsApp message cleanup deferred:',detail);
   return false;
  }
 }
