@@ -114,6 +114,16 @@ def catalog_message_ids():
 class ByteStreamer:
     def __init__(self, client):
         self.client = client
+        # Pyrogram 2.0.106 does not expose media_sessions on every Client
+        # instance. Keep this cache on the streamer so prewarm and live
+        # requests use the same compatibility path.
+        self.media_sessions = getattr(client, "media_sessions", None)
+        if self.media_sessions is None:
+            self.media_sessions = {}
+            try:
+                client.media_sessions = self.media_sessions
+            except AttributeError:
+                pass
         self.cached_file_ids = {}
         # One lock per DC: two first-time viewers must not both create an auth key.
         self.session_locks = collections.defaultdict(asyncio.Lock)
@@ -164,11 +174,11 @@ class ByteStreamer:
         return found
 
     async def media_session(self, file_id):
-        session = self.client.media_sessions.get(file_id.dc_id)
+        session = self.media_sessions.get(file_id.dc_id)
         if session:
             return session
         async with self.session_locks[file_id.dc_id]:
-            session = self.client.media_sessions.get(file_id.dc_id)
+            session = self.media_sessions.get(file_id.dc_id)
             if session:
                 return session
             return await self._create_media_session(file_id)
@@ -190,7 +200,7 @@ class ByteStreamer:
         else:
             session = Session(self.client, file_id.dc_id, await self.client.storage.auth_key(), await self.client.storage.test_mode(), is_media=True)
             await session.start()
-        self.client.media_sessions[file_id.dc_id] = session
+        self.media_sessions[file_id.dc_id] = session
         return session
 
     @staticmethod
