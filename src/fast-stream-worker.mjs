@@ -6,12 +6,16 @@ let worker=null,state='stopped',lastError=null,retryTimer=null,stopping=false,re
 
 export function fastStreamWorkerState(){return {state,restarts:restartCount,error:lastError};}
 export function startFastStreamWorker(){
- if(worker||stopping||!['TELEGRAM_API_ID','TELEGRAM_API_HASH','TELEGRAM_CHANNEL_ID'].every(k=>process.env[k])||!(process.env.STREAM_BOT_TOKEN||process.env.BOT_TOKEN||Object.keys(process.env).some(k=>k.startsWith('STREAM_MULTI_TOKEN'))))return;
+ if(worker||stopping)return;
+ const missing=['TELEGRAM_API_ID','TELEGRAM_API_HASH','TELEGRAM_CHANNEL_ID'].filter(k=>!process.env[k]);
+ const tokenCount=(process.env.STREAM_BOT_TOKEN||process.env.BOT_TOKEN?1:0)+Object.keys(process.env).filter(k=>k.startsWith('STREAM_MULTI_TOKEN')&&process.env[k]).length;
+ if(missing.length||tokenCount===0){console.warn('Fast stream worker not started:',missing.length?'missing '+missing.join(', '):'no streaming bot token');return;}
+ console.log('Fast stream worker: starting Pyrogram gateway with '+tokenCount+' bot client(s)');
  state='starting';worker=spawn('python3',['-u','src/telegram_stream_fast_server.py'],{env:{...process.env,FAST_STREAM_WORKER_PORT:String(PORT)},stdio:['ignore','pipe','pipe']});
- worker.stdout.on('data',chunk=>{if(chunk.toString().includes('READY')){state='ready';lastError=null;restartCount=0;}});
+ worker.stdout.on('data',chunk=>{const output=chunk.toString().trim();if(output)console.log('Fast stream worker:',output.slice(0,400));if(output.includes('READY')){state='ready';lastError=null;restartCount=0;}});
  worker.stderr.on('data',chunk=>{const line=chunk.toString().trim();if(line)console.warn('Fast stream worker:',line.slice(0,400));});
- worker.on('error',err=>{lastError=err.message;state='error';});
- worker.on('close',(code,signal)=>{worker=null;if(stopping)return;state='stopped';lastError='Worker exited: '+code+' '+(signal||'');if(restartCount++<8){retryTimer=setTimeout(startFastStreamWorker,Math.min(30000,2000*restartCount));retryTimer.unref();}else state='failed';});
+ worker.on('error',err=>{lastError=err.message;state='error';console.error('Fast stream worker spawn failed:',err.message);});
+ worker.on('close',(code,signal)=>{worker=null;if(stopping)return;state='stopped';lastError='Worker exited: '+code+' '+(signal||'');console.warn('Fast stream worker exited:',lastError);if(restartCount++<8){retryTimer=setTimeout(startFastStreamWorker,Math.min(30000,2000*restartCount));retryTimer.unref();}else state='failed';});
 }
 process.once('SIGTERM',()=>{stopping=true;if(retryTimer)clearTimeout(retryTimer);worker?.kill('SIGTERM');});
 process.once('SIGINT',()=>{stopping=true;if(retryTimer)clearTimeout(retryTimer);worker?.kill('SIGINT');});

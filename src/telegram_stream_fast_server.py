@@ -166,11 +166,14 @@ class Gateway:
         tokens.extend(value for key, value in sorted(os.environ.items()) if key.startswith("STREAM_MULTI_TOKEN") and value)
         if not tokens:
             raise RuntimeError("STREAM_BOT_TOKEN, BOT_TOKEN, or STREAM_MULTI_TOKEN* is required")
+        print(f"STARTING fast-pyrogram clients={len(tokens)} source_channel={SOURCE_CHANNEL}", flush=True)
         for index, token in enumerate(tokens):
+            print(f"AUTHENTICATING fast-pyrogram client={index + 1}/{len(tokens)}", flush=True)
             client = Client(name=f"filmgo-fast-{index}", api_id=api_id, api_hash=api_hash, bot_token=token, no_updates=True, in_memory=True, sleep_threshold=60)
             await client.start()
             # Verify every configured client can actually read FilmGo's
             # source channel before including it in the load balancer.
+            print(f"VERIFYING fast-pyrogram client={index + 1}/{len(tokens)} channel_access", flush=True)
             await client.get_chat(SOURCE_CHANNEL)
             self.clients[index] = client
             self.streamers[index] = ByteStreamer(client)
