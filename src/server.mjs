@@ -402,7 +402,7 @@ const server=http.createServer(async(req,res)=>{
   if(req.method==='GET'&&(url.pathname==='/profile'||url.pathname==='/history'||url.pathname==='/plans')){
    let serverAuthenticated=false;
    try{serverAuthenticated=Boolean(await authenticated(req));}catch{}
-   const page=index.replace('<html','<html data-server-authenticated="'+String(serverAuthenticated)+'"');
+   const page=index.toString('utf8').replace('<html','<html data-server-authenticated="'+String(serverAuthenticated)+'"');
    res.writeHead(200,{'Content-Type':'text/html; charset=utf-8','Cache-Control':'no-store','X-Content-Type-Options':'nosniff','Content-Security-Policy':"default-src 'self'; img-src 'self' https: data:; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src 'self'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'"});
    return res.end(page);
   }
