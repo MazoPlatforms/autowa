@@ -118,8 +118,12 @@ export async function startWhatsApp(){
   sock.ev.on('creds.update',()=>saveCreds().catch(e=>console.error('Credential persistence failed',e.message)));
   sock.ev.on('connection.update',({connection,qr,lastDisconnect})=>{
    if(qr){console.warn('OTP WhatsApp device pairing required. Scan QR from private Koyeb logs.');qrcode.generate(qr,{small:true});}
-   if(connection==='open'){ready=true;tries=0;console.log('OTP WhatsApp session connected');}
+   if(connection==='open'){if(socket!==sock)return;ready=true;tries=0;console.log('OTP WhatsApp session connected');}
    if(connection==='close'){
+    // A stale socket may close after a replacement socket has connected.
+    // Never let that old event clear the active socket or schedule a second
+    // auth session; concurrent sessions can corrupt Signal message keys.
+    if(socket!==sock)return;
     ready=false;socket=null;
     const code=lastDisconnect?.error?.output?.statusCode;
     if(code===DisconnectReason.loggedOut){console.error('OTP WhatsApp logged out. Clear Redis auth keys and pair again; do not reuse stale creds.json.');return;}
