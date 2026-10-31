@@ -64,7 +64,7 @@ async function startWhatsAppVerification(){
 }
 async function sendOtpFallback(){
  const button=$('send-otp-fallback');button.disabled=true;button.textContent='Sending OTP…';otpRequestPending=true;refreshOtpTimers();
- try{clearWhatsAppPending();await api('otp/start',{number});startOtpCooldown(number);otpFields.forEach(field=>field.value='');syncOtpCode();closeWhatsAppSheet();$('start').classList.add('hidden');$('verify').classList.remove('hidden');msg('Verification code sent to '+number);otpFields[0].focus();}
+ try{clearWhatsAppPending();await api('otp/start',{number});startOtpCooldown(number);otpFields.forEach(field=>field.value='');syncOtpCode();closeWhatsAppSheet();$('auth-intro').textContent='We sent a verification code to '+number+'.';$('start').classList.add('hidden');$('verify').classList.remove('hidden');msg('Verification code sent to '+number);otpFields[0].focus();}
  catch(err){applyRetryCooldown(err,number);$('whatsapp-sheet-status').textContent=err.message;button.disabled=false;button.textContent='Can’t access WhatsApp? Send OTP';}
  finally{otpRequestPending=false;refreshOtpTimers();}
 }
@@ -136,7 +136,7 @@ otpFields.forEach((field,index)=>{
 });
 $('start').addEventListener('submit',async e=>{e.preventDefault();number=phoneNumber();if(!number)return;openWhatsAppSheet();});
 $('resend-otp').addEventListener('click',async()=>{if(!number||cooldownRemaining(number)||otpRequestPending)return;otpRequestPending=true;refreshOtpTimers();try{await api('otp/start',{number});startOtpCooldown(number);otpFields.forEach(field=>field.value='');syncOtpCode();otpFields[0].focus();msg('A new verification code was sent.');}catch(err){applyRetryCooldown(err,number);msg(err.message)}finally{otpRequestPending=false;refreshOtpTimers();}});
-$('change-phone').addEventListener('click',()=>{otpFields.forEach(field=>field.value='');syncOtpCode();$('verify').classList.add('hidden');$('start').classList.remove('hidden');refreshOtpTimers();$('phone').focus();});
+$('change-phone').addEventListener('click',()=>{otpFields.forEach(field=>field.value='');syncOtpCode();$('auth-intro').textContent='Sign in using Phone to manage your FilmGo account.';$('verify').classList.add('hidden');$('start').classList.remove('hidden');refreshOtpTimers();$('phone').focus();});
 $('verify').addEventListener('submit',async e=>{e.preventDefault();const code=syncOtpCode();if(!/^\d{6}$/.test(code)){otpFields.find(field=>!field.value)?.focus();return;}const btn=e.target.querySelector('button[type="submit"]');btn.disabled=true;try{const back=new URLSearchParams(location.search).get('return');const safeBack=back&&(/^\/title\/[A-Za-z0-9_-]+\/?$/.test(back)||/^\/download\/[A-Za-z0-9_-]{1,80}(?:\?quality=[A-Za-z0-9._+-]{1,40})?$/.test(back));await api('otp/verify',{number,code});authVersion++;await showAccount();saveLoginHint(true);if(safeBack){location.assign(back);return;}msg('Signed in successfully.');}catch(err){msg(err.message)}finally{btn.disabled=false;}});
 const AVATAR_PLACEHOLDER='https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original';
 const avatarCacheKey=n=>'filmgo-avatar:'+n;
