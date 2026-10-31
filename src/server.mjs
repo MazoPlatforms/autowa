@@ -210,6 +210,17 @@ function selectMovieVariant(movie, quality){
 const countries=fs.readFileSync(new URL('../site/countries.json',import.meta.url));
 const appJs=fs.readFileSync(new URL('../web/app.js',import.meta.url));
 const stylesheet=fs.readFileSync(new URL('../web/style.css',import.meta.url));
+async function renderCatalogPage(req){
+ let session=null,user=null;
+ try{session=await authenticated(req);if(session)user=await profile(session.number);}catch{}
+ const authenticatedState=Boolean(session);
+ const name=String(user?.name||'').trim();
+ const label=authenticatedState?(name?name.split(/\s+/).slice(0,2).map(value=>value[0]||'').join('').toUpperCase():'Account'):'Sign in';
+ return catalogHtml.toString('utf8').replace(
+  '<a href="/profile" class="rounded-xl border border-zinc-700 px-3 py-2 text-xs font-semibold text-zinc-200 transition hover:bg-zinc-800 sm:text-sm" id="catalog-account-link" aria-live="polite" aria-busy="true">Account</a>',
+  '<a href="/profile" class="rounded-xl border border-zinc-700 px-3 py-2 text-xs font-semibold text-zinc-200 transition hover:bg-zinc-800 sm:text-sm" id="catalog-account-link" aria-live="polite" aria-busy="false" data-server-authenticated="'+String(authenticatedState)+'">'+label+'</a>'
+ );
+}
 const server=http.createServer(async(req,res)=>{
  try{
   const url=new URL(req.url,'http://localhost');
@@ -390,7 +401,7 @@ const server=http.createServer(async(req,res)=>{
   if(req.method==='GET'&&url.pathname==='/tailwind.css'){res.writeHead(200,{'Content-Type':'text/css; charset=utf-8','Cache-Control':'public, max-age=86400','X-Content-Type-Options':'nosniff'});return res.end(tailwindCss);}
   if(req.method==='GET'&&url.pathname==='/catalog.css'){res.writeHead(200,{'Content-Type':'text/css; charset=utf-8','Cache-Control':'public, max-age=300','X-Content-Type-Options':'nosniff'});return res.end(catalogCss);}
   if(req.method==='GET'&&url.pathname==='/catalog.js'){res.writeHead(200,{'Content-Type':'text/javascript; charset=utf-8','Cache-Control':'public, max-age=300','X-Content-Type-Options':'nosniff'});return res.end(catalogJs);}
-  if(req.method==='GET'&&(url.pathname==='/'||url.pathname==='/search'||(url.pathname.startsWith('/title/')&&/^[-a-zA-Z0-9_]+$/.test(url.pathname.slice(7).replace(/\/$/,''))))){res.writeHead(200,{'Content-Type':'text/html; charset=utf-8','Cache-Control':'no-store','Content-Security-Policy':"default-src 'self'; img-src 'self' https: data:; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src 'self'; base-uri 'none'; frame-ancestors 'none'"});return res.end(catalogHtml);}
+  if(req.method==='GET'&&(url.pathname==='/'||url.pathname==='/search'||(url.pathname.startsWith('/title/')&&/^[-a-zA-Z0-9_]+$/.test(url.pathname.slice(7).replace(/\/$/,''))))){res.writeHead(200,{'Content-Type':'text/html; charset=utf-8','Cache-Control':'no-store','Content-Security-Policy':"default-src 'self'; img-src 'self' https: data:; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src 'self'; base-uri 'none'; frame-ancestors 'none'"});return res.end(await renderCatalogPage(req));}
   if(req.method==='GET'&&(url.pathname==='/profile'||url.pathname==='/history'||url.pathname==='/plans')){
    let serverAuthenticated=false;
    try{serverAuthenticated=Boolean(await authenticated(req));}catch{}
