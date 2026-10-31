@@ -43,7 +43,8 @@ async function removeOtpMessage(recordKey,raw){
   if(removed)await redis('DEL',recordKey);
   return removed;
  }catch(error){
-  console.warn('OTP message cleanup deferred:',error?.message||'unknown');
+  const detail=error?.message||error?.data?.message||error?.output?.payload?.message||(typeof error==='string'?error:'unknown error');
+  console.warn('OTP message cleanup deferred:',detail);
   return false;
  }
 }
