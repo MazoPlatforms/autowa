@@ -222,6 +222,11 @@ function selectMovieVariant(movie, quality){
 const countries=fs.readFileSync(new URL('../site/countries.json',import.meta.url));
 const appJs=fs.readFileSync(new URL('../web/app.js',import.meta.url));
 const stylesheet=fs.readFileSync(new URL('../web/style.css',import.meta.url));
+const posterWallJs=fs.readFileSync(new URL('../web/poster-wall.js',import.meta.url));
+const posterBackgrounds=new Map(['bg-04.webp','bg-05.webp','bg-06.webp','bg-28.webp','bg-30.webp'].map(name=>[
+ '/posters/background/'+name,
+ fs.readFileSync(new URL('../web/posters/background/'+name,import.meta.url))
+]));
 async function renderCatalogPage(req){
  let session=null,user=null;
  try{session=await authenticated(req);if(session)user=await profile(session.number);}catch{}
@@ -424,6 +429,8 @@ const server=http.createServer(async(req,res)=>{
    return res.end(page);
   }
   if(req.method==='GET'&&url.pathname==='/style.css'){res.writeHead(200,{'Content-Type':'text/css; charset=utf-8','Cache-Control':'no-store','X-Content-Type-Options':'nosniff'});return res.end(stylesheet);}
+  if(req.method==='GET'&&url.pathname==='/poster-wall.js'){res.writeHead(200,{'Content-Type':'text/javascript; charset=utf-8','Cache-Control':'public, max-age=300','X-Content-Type-Options':'nosniff'});return res.end(posterWallJs);}
+  if(req.method==='GET'&&posterBackgrounds.has(url.pathname)){res.writeHead(200,{'Content-Type':'image/webp','Cache-Control':'public, max-age=31536000, immutable','X-Content-Type-Options':'nosniff'});return res.end(posterBackgrounds.get(url.pathname));}
   if(req.method==='GET'&&url.pathname==='/app.js'){res.writeHead(200,{'Content-Type':'text/javascript; charset=utf-8','Cache-Control':'no-store','X-Content-Type-Options':'nosniff'});return res.end(appJs);}
   if(req.method==='GET'&&url.pathname==='/countries.json'){res.writeHead(200,{'Content-Type':'application/json','Cache-Control':'public, max-age=86400'});return res.end(countries);}
   if(req.method!=='POST'||!['/api/otp/start','/api/otp/verify','/api/otp/whatsapp/start','/api/otp/whatsapp/status','/api/request','/api/profile','/api/plans/continue','/api/logout'].includes(url.pathname))return send(res,404,{error:'Not found'});
