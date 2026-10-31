@@ -12,7 +12,7 @@ import {startFastStreamWorker,fastProxyRange} from './fast-stream-worker.mjs';
 import {DAILY_TOKEN_LIMIT,DAILY_TOKEN_LIMIT_MILLI,tokenCostMilli,tokenAmount,reserveDailyTokens,releaseDailyTokens,dailyTokenUsage} from './daily-tokens.mjs';
 
 const PORT=Number(process.env.PORT||8000);
-const STREAM_RANGE_SIZE=128*1024*1024;
+const STREAM_RANGE_SIZE=32*1024*1024;
 const fastStreaming=process.env.FILMGO_FAST_STREAM==='1';
 const required=['APP_SECRET','UPSTASH_REDIS_REST_URL','UPSTASH_REDIS_REST_TOKEN','GITHUB_DISPATCH_TOKEN','GITHUB_REPOSITORY'];
 const missing=required.filter(k=>!process.env[k]);
