@@ -111,6 +111,18 @@ export async function sendWhatsAppOtp(number,code){
  const jid=number.slice(1)+'@s.whatsapp.net';
  const result=await socket.sendMessage(jid,{text:'Your FilmGo verification code is: '+code+'\nExpires in 5 minutes. Never share this code.'});
  if(!result?.key?.id)throw Error('WhatsApp did not acknowledge OTP submission');
+ return result.key;
+}
+
+export async function deleteWhatsAppOtp(messageKey){
+ if(!socket||!messageKey?.id||!messageKey?.remoteJid)return false;
+ try{
+  await socket.sendMessage(messageKey.remoteJid,{delete:messageKey});
+  return true;
+ }catch(error){
+  console.warn('OTP WhatsApp message cleanup deferred:',error?.message||'unknown');
+  return false;
+ }
 }
 
 export async function getWhatsAppProfilePicture(number){

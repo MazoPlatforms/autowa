@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import {execFile,spawn} from 'node:child_process';
 import {promisify} from 'node:util';
 const execFileAsync=promisify(execFile);
-import {startWhatsApp,sendWhatsAppOtp,getWhatsAppProfilePicture} from './whatsapp-otp.mjs';
+import {startWhatsApp,sendWhatsAppOtp,deleteWhatsAppOtp,getWhatsAppProfilePicture} from './whatsapp-otp.mjs';
 import {startFilmGoBot} from './filmgo-bot.mjs';
 import {logFilmGo} from './filmgo-logs.mjs';
 import {startStreamWorker,proxyRange,downloadFile,streamWorkerState} from './stream-worker.mjs';
@@ -24,6 +24,41 @@ async function redis(...args){
  const r=await fetch(redisBase,{method:'POST',headers:{Authorization:'Bearer '+redisToken,'Content-Type':'application/json'},body:JSON.stringify(args),signal:AbortSignal.timeout(10000)});
  if(!r.ok)throw Error('Persistent store unavailable');
  const data=await r.json();if(data.error)throw Error('Persistent store error');return data.result;
+}
+const OTP_TTL=300;
+const OTP_MESSAGE_PREFIX='otp-message:';
+const otpMessageKey=number=>OTP_MESSAGE_PREFIX+hmac(number);
+async function removeOtpMessage(recordKey,raw){
+ if(!raw)return true;
+ try{
+  const record=JSON.parse(raw);
+  if(!record?.message_key?.id||!record.message_key.remoteJid){await redis('DEL',recordKey);return true;}
+  const removed=await deleteWhatsAppOtp(record.message_key);
+  if(removed)await redis('DEL',recordKey);
+  return removed;
+ }catch(error){
+  console.warn('OTP message cleanup deferred:',error?.message||'unknown');
+  return false;
+ }
+}
+async function cleanupExpiredOtpMessages(){
+ let cursor='0';
+ do{
+  const result=await redis('SCAN',cursor,'MATCH',OTP_MESSAGE_PREFIX+'*','COUNT','100');
+  cursor=String(result?.[0]??'0');
+  for(const recordKey of result?.[1]||[]){
+   const raw=await redis('GET',recordKey);
+   if(!raw){continue;}
+   let record;
+   try{record=JSON.parse(raw);}catch{await redis('DEL',recordKey);continue;}
+   if(Number(record.expires_at)>Date.now())continue;
+   await removeOtpMessage(recordKey,raw);
+  }
+ }while(cursor!=='0');
+}
+function startOtpMessageCleanup(){
+ const timer=setInterval(()=>{void cleanupExpiredOtpMessages().catch(error=>console.warn('OTP cleanup scan failed:',error.message));},30000);
+ timer.unref();
 }
 const UNLIMITED_REQUEST_NUMBER="+94779290433";
 const unlimitedRequests=number=>number===UNLIMITED_REQUEST_NUMBER;
@@ -381,8 +416,16 @@ const server=http.createServer(async(req,res)=>{
    }
    const code=String(crypto.randomInt(0,1000000)).padStart(6,'0');
    const otpKey='otp:'+hmac(number);
-   try{await redis('SET',otpKey,hmac(number+':'+code),'EX',300);await sendOtp(number,code);}
-   catch{await Promise.allSettled([redis('DEL',otpKey),redis('DEL',cooldownKey)]);return send(res,503,{error:'Could not send the verification code. Please try again.'});}
+   let messageKey=null;
+   try{
+    await redis('SET',otpKey,hmac(number+':'+code),'EX',OTP_TTL);
+    messageKey=await sendOtp(number,code);
+    await redis('SET',otpMessageKey(number),JSON.stringify({message_key:messageKey,expires_at:Date.now()+OTP_TTL*1000}),'EX',OTP_TTL+300);
+   }catch{
+    if(messageKey)await deleteWhatsAppOtp(messageKey).catch(()=>{});
+    await Promise.allSettled([redis('DEL',otpKey),redis('DEL',cooldownKey),redis('DEL',otpMessageKey(number))]);
+    return send(res,503,{error:'Could not send the verification code. Please try again.'});
+   }
    return send(res,200,{ok:true,message:'OTP sent'});
   }
   if(url.pathname==='/api/otp/verify'){
@@ -391,7 +434,9 @@ const server=http.createServer(async(req,res)=>{
    if(!await limit('verify:'+number,5,600))return send(res,429,{error:'Too many attempts'});
    const stored=await redis('GET','otp:'+hmac(number));
    if(!stored||!safeEq(stored,hmac(number+':'+code)))return send(res,401,{error:'Invalid or expired OTP'});
+   const messageRecordKey=otpMessageKey(number),messageRecord=await redis('GET',messageRecordKey);
    await redis('DEL','otp:'+hmac(number));
+   if(messageRecord)void removeOtpMessage(messageRecordKey,messageRecord);
    const nonce=crypto.randomBytes(16).toString('hex'),age=30*86400,exp=Date.now()+age*1000;
    await redis('SET','session:'+hmac(nonce),number,'EX',age);
    const key='profile:'+hmac(number);
@@ -457,6 +502,7 @@ const server=http.createServer(async(req,res)=>{
 });
 server.listen(PORT,'0.0.0.0',()=>console.log('FilmGo API listening on',PORT));
 if(configured){
+ startOtpMessageCleanup();
  startWhatsApp().catch(e=>console.error('WhatsApp initialization failed',e.message));
  startFilmGoBot(refreshCatalog);
 }
