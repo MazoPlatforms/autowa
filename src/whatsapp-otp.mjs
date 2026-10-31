@@ -3,6 +3,18 @@ import makeWASocket,{initAuthCreds,BufferJSON,proto,DisconnectReason} from '@whi
 import pino from 'pino';
 import qrcode from 'qrcode-terminal';
 
+// libsignal writes recoverable stale-session decrypt noise directly with
+// console.error, bypassing Baileys' silent logger. Keep application errors
+// visible while suppressing only that known Bad MAC message and its repeated
+// companion line.
+const nativeConsoleError=console.error.bind(console);
+console.error=(...args)=>{
+ const first=String(args[0]??'');
+ if(first==='Failed to decrypt message with any known session...')return;
+ if(first.startsWith('Session error:')&&/Bad MAC/i.test(first))return;
+ nativeConsoleError(...args);
+};
+
 const base=(process.env.UPSTASH_REDIS_REST_URL||'').replace(/\/$/,'');
 const token=process.env.UPSTASH_REDIS_REST_TOKEN;
 const key=crypto.createHash('sha256').update(process.env.APP_SECRET||'').digest();
