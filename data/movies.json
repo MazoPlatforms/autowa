@@ -2803,6 +2803,32 @@
       "file_name": "Modha Rathri (2026) Tamil HQ HDRip - 720p - x264 - (DD+5.mkv",
       "mime_type": "video/x-matroska",
       "quality": "720p"
+    },
+    {
+      "id": "telegram-94",
+      "slug_id": "sP1B38nMhEQG_JJH",
+      "title": "Demonte Colony 2",
+      "year": 2024,
+      "qualities": {
+        "720p": {
+          "telegram_message_id": 94,
+          "file_name": "Demonte.Colony.2.Tamil.2024.720p.ZEE5.WEB-DL.DD 5.1.Atmo.mkv",
+          "file_size": 0,
+          "mime_type": ""
+        }
+      },
+      "telegram_message_id": 94,
+      "quality": "720p",
+      "file_name": "Demonte.Colony.2.Tamil.2024.720p.ZEE5.WEB-DL.DD 5.1.Atmo.mkv",
+      "file_size": 0,
+      "mime_type": "",
+      "imdb_id": "tt25151410",
+      "poster": "https://m.media-amazon.com/images/M/MV5BYmQ3ZGEwZjEtZDRjYS00YzJmLWFjMzUtMjNhMTliY2RiMTk3XkEyXkFqcGc@._V1_QL75_UX380_CR0,57,380,562_.jpg",
+      "genre": "Horror, Thriller",
+      "runtime": "144 min",
+      "director": "R. Ajay Gnanamuthu",
+      "cast": "VJ Archana, Arulnithi, C. Arunpandian",
+      "plot": "A group of friends who return to a cursed location, driven by curiosity and the quest to uncover the truth behind the malevolent spirits that reside there."
     }
   ]
 }
