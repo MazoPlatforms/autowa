@@ -11,7 +11,7 @@
     if (digits.startsWith('00' + dial)) digits = digits.slice(2 + dial.length);
     else if (digits.startsWith(dial) && digits.length > dial.length + 6) digits = digits.slice(dial.length);
     const prefix = country?.national_prefix || '';
-    if (prefix && digits.startsWith(prefix) && digits.length > 7) digits = digits.slice(prefix.length);
+    if (prefix && digits.startsWith(prefix) && digits.length > prefix.length) digits = digits.slice(prefix.length);
     return digits;
   };
   const formatWithTemplate = (template, pattern, digits) => {
@@ -38,6 +38,8 @@
     }) || formats[0] || null;
   };
   const formatLocal = (value, country = selectedCountry()) => {
+    const raw = digitsOnly(value);
+    if (country?.national_prefix && raw === country.national_prefix) return raw;
     const digits = significantDigits(value, country);
     if (!digits) return '';
     const format = chooseFormat(country, digits);
