@@ -195,6 +195,7 @@ if(qualities.length>1)settingsPanel.prepend(qualityLabel,qualityRow);
 for(const q of qualities){const button=el('button','filmgo-quality-button',q);button.type='button';button.addEventListener('click',()=>setQuality(q));qualityRow.append(button);}
 const isActive=()=>root.isConnected&&location.pathname==='/title/'+slug;
 let movieAccessState='checking';
+let streamAvailability=null;
 const setMovieAccessState=state=>{
  movieAccessState=state;
  const locked=state!=='signed-in';
@@ -219,7 +220,16 @@ async function checkMovieAccess(){
   const response=await fetch('/api/me',{cache:'no-store',credentials:'same-origin'});
   if(!isActive())return;
   setMovieAccessState(response.status===401?'signed-out':response.ok?'signed-in':'unavailable');
+  startPlaybackWhenReady();
  }catch{if(isActive())setMovieAccessState('unavailable');}
+}
+function startPlaybackWhenReady(){
+ if(!isActive()||movieAccessState!=='signed-in'||!streamAvailability)return;
+ if(!streamAvailability.available){setStatus('Streaming is currently unavailable.');actions.classList.add('hidden');qualityRow.classList.add('hidden');return;}
+ if(streamAvailability.signed_in===false){setMovieAccessState('signed-out');return;}
+ if(!selected){setStatus('No quality available.');return;}
+ accessNotice.hidden=true;
+ setQuality(selected);
 }
 setMovieAccessState('checking');void checkMovieAccess();
 download.addEventListener('click',async event=>{
@@ -291,12 +301,8 @@ const setQuality=q=>{if(movieAccessState!=='signed-in'||!qualities.includes(q))r
 };
 fetch('/api/stream-availability/'+slug,{cache:'no-store'}).then(r=>r.ok?r.json():null).then(data=>{
  if(!isActive())return;
-if(!data?.available){setStatus('Streaming is currently unavailable.');actions.classList.add('hidden');qualityRow.classList.add('hidden');if(data?.signed_in===false)setMovieAccessState('signed-out');return;}
- if(!selected){setStatus('No quality available.');return;}
- if(data.signed_in===false){setMovieAccessState('signed-out');return;}
- if(movieAccessState!=='signed-in')return;
- accessNotice.hidden=true;
- setQuality(selected);
+ streamAvailability=data;
+ startPlaybackWhenReady();
 }).catch(()=>{if(isActive()&&selected&&movieAccessState==='signed-in'){setQuality(selected);setStatus('Availability check failed. You can still try streaming or downloading.');}});
 document.title=m.title+' — FilmGo';}function route(){
  const match=location.pathname.match(/^\/title\/([^/]+)\/?$/),searching=location.pathname==='/search';
