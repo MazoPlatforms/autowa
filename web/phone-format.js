@@ -48,7 +48,12 @@
     const local = significantDigits(value, country);
     return local && country?.dial ? '+' + country.dial + local : '';
   };
-  const placeholder = country => (country?.format || '### ### ### ### ###').replace(/#/g, '0');
+  const placeholder = country => {
+    const format = chooseFormat(country, '');
+    if (!format) return 'Phone number';
+    const digits = [...String(format.pattern || '').matchAll(/\\d\{(\d+)(?:,\d+)?\}/g)].map(match => '0'.repeat(Number(match[1]))).join('');
+    return formatWithTemplate(format.local, format.pattern, digits);
+  };
   const localFromInternational = value => {
     const raw = String(value || '').replace(/^\+/, '');
     const country = [...(window.filmgoCountries || [])].sort((a, b) => b.dial.length - a.dial.length).find(item => raw.startsWith(item.dial));
