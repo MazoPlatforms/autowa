@@ -1,0 +1,15 @@
+{
+  "id": "request-6d5970e5-3742-49bf-9af2-e5507ab6a2f0",
+  "title": "Pathu Thala",
+  "year": "2023",
+  "quality": "720p",
+  "license_confirmed": true,
+  "enabled": false,
+  "status": "failed",
+  "started_at": "2026-10-31T13:43:41.250Z",
+  "finished_at": "2026-10-31T13:56:08.700Z",
+  "failure_stage": "media_publishing",
+  "request_origin": "koyeb_verified",
+  "workflow_run_id": "41206830535",
+  "workflow_run_url": "https://github.com/MazoPlatforms/autowa/actions/runs/41206830535"
+}
