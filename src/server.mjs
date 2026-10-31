@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import {execFile,spawn} from 'node:child_process';
 import {promisify} from 'node:util';
 const execFileAsync=promisify(execFile);
-import {startWhatsApp,sendWhatsAppOtp,deleteWhatsAppOtp,getWhatsAppProfilePicture} from './whatsapp-otp.mjs';
+import {startWhatsApp,sendWhatsAppOtp,deleteWhatsAppOtp,getWhatsAppProfilePicture,getWhatsAppBotNumber} from './whatsapp-otp.mjs';
 import {startFilmGoBot} from './filmgo-bot.mjs';
 import {logFilmGo} from './filmgo-logs.mjs';
 import {startStreamWorker,proxyRange,downloadFile,streamWorkerState} from './stream-worker.mjs';
@@ -33,7 +33,6 @@ const OTP_MESSAGE_PREFIX='otp-message:';
 const otpMessageKey=number=>OTP_MESSAGE_PREFIX+hmac(number);
 const WA_VERIFY_TTL=300;
 const WA_VERIFY_PREFIX='wa-verify:';
-const WHATSAPP_VERIFY_NUMBER='94789481495';
 const waVerifyKey=value=>WA_VERIFY_PREFIX+hmac(value);
 async function removeOtpMessage(recordKey,raw){
  if(!raw)return true;
@@ -483,9 +482,11 @@ const server=http.createServer(async(req,res)=>{
    const number=phone(data.number);
    if(!number)return send(res,400,{error:'Invalid phone number'});
    if(!await limit('wa-verify-start:'+number,5,3600))return send(res,429,{error:'WhatsApp verification limit reached'});
+   const botNumber=getWhatsAppBotNumber();
+   if(!botNumber)return send(res,503,{error:'WhatsApp verification is temporarily unavailable'});
    const requestId=crypto.randomBytes(24).toString('base64url');
    await redis('SET',waVerifyKey(requestId),JSON.stringify({number,status:'pending',created_at:Date.now()}),'EX',WA_VERIFY_TTL);
-   const verifyUrl='https://wa.me/+'+WHATSAPP_VERIFY_NUMBER+'?text='+encodeURIComponent(requestId);
+   const verifyUrl='https://wa.me/+'+botNumber+'?text='+encodeURIComponent(requestId);
    return send(res,200,{ok:true,request_id:requestId,url:verifyUrl,expires_in:WA_VERIFY_TTL});
   }
   if(url.pathname==='/api/otp/whatsapp/status'){

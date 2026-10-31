@@ -51,7 +51,7 @@ async function startWhatsAppVerification(){
   const result=await api('otp/whatsapp/start',{number});waVerifyId=result.request_id;
   const link=$('whatsapp-verify-link');link.href=result.url;link.classList.remove('hidden');link.textContent='Open WhatsApp manually';
   $('whatsapp-sheet-status').textContent='Opening WhatsApp… Send the pre-filled message, then return here.';
-  const popup=window.open('about:blank','_blank','noopener,noreferrer');if(popup)popup.location.href=result.url;else location.href=result.url;
+  button.textContent='WhatsApp opened — send the message';const popup=window.open('about:blank','_blank','noopener,noreferrer');if(popup)popup.location.href=result.url;else location.href=result.url;
   beginWhatsAppPolling();
  }catch(err){$('whatsapp-sheet-status').textContent=err.message;button.disabled=false;button.textContent='Verify via WhatsApp';}
 }
