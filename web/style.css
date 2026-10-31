@@ -557,3 +557,8 @@ body.tv .profile-hero{background:none!important;border:0!important;box-shadow:no
 body.tv .profile-panel{background:var(--bg)!important;border-color:var(--line)!important;backdrop-filter:none!important}
 body.tv .usage-tile{background:var(--surface)!important;border:0!important}
 body.tv #account-limits{background:none!important;border:0!important;padding:0!important}
+
+/* Account page: use the available canvas instead of a narrow profile card. */
+body.tv #account{max-width:1100px!important;width:100%!important;padding:clamp(24px,5vw,56px) clamp(0px,3vw,32px)!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important}
+body.tv #account .profile-panel{width:100%;margin-inline:0}
+@media(max-width:650px){body.tv #account{padding:20px 0 28px!important}}
