@@ -1,7 +1,43 @@
 {
   "schema_version": 2,
-  "updated_at": "2026-10-31T18:35:15.434200+00:00",
+  "updated_at": "2026-10-31T18:35:52.418857+00:00",
   "movies": [
+    {
+      "id": "telegram-112",
+      "slug_id": "QLPecXMst8XAhl_1",
+      "title": "Madrasapattinam",
+      "year": 2010,
+      "qualities": {
+        "720p": {
+          "telegram_message_id": 112,
+          "file_size": 1301027335,
+          "file_name": "Madrasapattinam_2010_720p_BluRay.mp4",
+          "mime_type": "video/mp4"
+        }
+      },
+      "imdb_id": "tt1365030",
+      "poster": "https://m.media-amazon.com/images/M/MV5BN2RiZmE2YTktMTQ1Mi00MTAwLThlNjItMjM4YjNhNjMxMWQwXkEyXkFqcGc@._V1_.jpg",
+      "genre": [
+        "Drama",
+        "History",
+        "Romance"
+      ],
+      "runtime": "165 min",
+      "director": "A.L. Vijay",
+      "cast": [
+        "Arya",
+        "Carole Trangmar-Palmer",
+        "Amy Jackson"
+      ],
+      "plot": "A film set in 1940s India, during the country's struggle for independence. The young daughter of an English governor falls in love with a local Indian boy.",
+      "imdb_rating": "7.9",
+      "metadata_status": "matched",
+      "telegram_message_id": 112,
+      "file_size": 1301027335,
+      "file_name": "Madrasapattinam_2010_720p_BluRay.mp4",
+      "mime_type": "video/mp4",
+      "quality": "720p"
+    },
     {
       "id": "telegram-111",
       "slug_id": "UkXZSZ5PRRFB5Hm8",
@@ -3368,32 +3404,6 @@
       "file_name": "Modha Rathri (2026) Tamil HQ HDRip - 720p - x264 - (DD+5.mkv",
       "mime_type": "video/x-matroska",
       "quality": "720p"
-    },
-    {
-      "id": "telegram-112",
-      "slug_id": "QLPecXMst8XAhl_1",
-      "title": "Madrasapattinam",
-      "year": 2010,
-      "qualities": {
-        "720p": {
-          "telegram_message_id": 112,
-          "file_name": "Madrasapattinam_2010_720p_BluRay.mp4",
-          "file_size": 0,
-          "mime_type": ""
-        }
-      },
-      "telegram_message_id": 112,
-      "quality": "720p",
-      "file_name": "Madrasapattinam_2010_720p_BluRay.mp4",
-      "file_size": 0,
-      "mime_type": "",
-      "imdb_id": "tt1365030",
-      "poster": "https://m.media-amazon.com/images/M/MV5BN2RiZmE2YTktMTQ1Mi00MTAwLThlNjItMjM4YjNhNjMxMWQwXkEyXkFqcGc@._V1_SX300.jpg",
-      "genre": "Drama, History, Romance",
-      "runtime": "165 min",
-      "director": "A.L. Vijay",
-      "cast": "Arya, Carole Trangmar-Palmer, Amy Jackson",
-      "plot": "A film set in 1940s India, during the country's struggle for independence. The young daughter of an English governor falls in love with a local Indian boy."
     }
   ]
 }
