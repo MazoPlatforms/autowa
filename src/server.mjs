@@ -31,6 +31,10 @@ async function redis(...args){
 const OTP_TTL=300;
 const OTP_MESSAGE_PREFIX='otp-message:';
 const otpMessageKey=number=>OTP_MESSAGE_PREFIX+hmac(number);
+const WA_VERIFY_TTL=300;
+const WA_VERIFY_PREFIX='wa-verify:';
+const WHATSAPP_VERIFY_NUMBER='94789481495';
+const waVerifyKey=value=>WA_VERIFY_PREFIX+hmac(value);
 async function removeOtpMessage(recordKey,raw){
  if(!raw)return true;
  try{
@@ -126,6 +130,13 @@ async function body(req){
 }
 function phone(v){return typeof v==='string'&&/^\+[1-9]\d{7,14}$/.test(v)?v:null;}
 function tokenFor(number,nonce,exp){const data=Buffer.from(JSON.stringify({number,nonce,exp})).toString('base64url');return data+'.'+hmac(data);}
+async function issueSession(number){
+ const nonce=crypto.randomBytes(18).toString('base64url'),age=30*24*60*60,exp=Date.now()+age*1000;
+ await redis('SET','session:'+hmac(nonce),number,'EX',age);
+ const key='profile:'+hmac(number),existing=await redis('GET',key);
+ if(!existing)await redis('SET',key,JSON.stringify({name:'',created_at:new Date().toISOString(),plan_onboarded:false}));
+ return {first_registration:!existing,expires_in:age,cookie:sessionCookie(tokenFor(number,nonce,exp),age)};
+}
 function verifyToken(token){
  if(typeof token!=='string'||token.length>700)return null;
  const [data,mac,...extra]=token.split('.');if(!data||!mac||extra.length||!safeEq(hmac(data),mac))return null;
@@ -423,7 +434,7 @@ const server=http.createServer(async(req,res)=>{
   if(req.method==='GET'&&url.pathname==='/style.css'){res.writeHead(200,{'Content-Type':'text/css; charset=utf-8','Cache-Control':'no-store','X-Content-Type-Options':'nosniff'});return res.end(stylesheet);}
   if(req.method==='GET'&&url.pathname==='/app.js'){res.writeHead(200,{'Content-Type':'text/javascript; charset=utf-8','Cache-Control':'no-store','X-Content-Type-Options':'nosniff'});return res.end(appJs);}
   if(req.method==='GET'&&url.pathname==='/countries.json'){res.writeHead(200,{'Content-Type':'application/json','Cache-Control':'public, max-age=86400'});return res.end(countries);}
-  if(req.method!=='POST'||!['/api/otp/start','/api/otp/verify','/api/request','/api/profile','/api/plans/continue','/api/logout'].includes(url.pathname))return send(res,404,{error:'Not found'});
+  if(req.method!=='POST'||!['/api/otp/start','/api/otp/verify','/api/otp/whatsapp/start','/api/otp/whatsapp/status','/api/request','/api/profile','/api/plans/continue','/api/logout'].includes(url.pathname))return send(res,404,{error:'Not found'});
   if(!configured)return send(res,503,{error:'Service setup incomplete; contact operator'});
   if(req.headers['content-type']?.split(';')[0]!=='application/json')return send(res,415,{error:'JSON required'});
   const origin=req.headers.origin,host=req.headers.host;
@@ -465,12 +476,32 @@ const server=http.createServer(async(req,res)=>{
    const messageRecordKey=otpMessageKey(number),messageRecord=await redis('GET',messageRecordKey);
    await redis('DEL','otp:'+hmac(number));
    if(messageRecord)void removeOtpMessage(messageRecordKey,messageRecord);
-   const nonce=crypto.randomBytes(16).toString('hex'),age=30*86400,exp=Date.now()+age*1000;
-   await redis('SET','session:'+hmac(nonce),number,'EX',age);
-   const key='profile:'+hmac(number);
-   const existing=await redis('GET',key);
-   if(!existing)await redis('SET',key,JSON.stringify({name:'',plan:'free',plan_onboarded:false,created_at:new Date().toISOString()}));
-   return send(res,200,{ok:true,first_registration:!existing,expires_in:age},{'Set-Cookie':sessionCookie(tokenFor(number,nonce,exp),age)});
+   const session=await issueSession(number);
+   return send(res,200,{ok:true,first_registration:session.first_registration,expires_in:session.expires_in},{'Set-Cookie':session.cookie});
+  }
+  if(url.pathname==='/api/otp/whatsapp/start'){
+   const number=phone(data.number);
+   if(!number)return send(res,400,{error:'Invalid phone number'});
+   if(!await limit('wa-verify-start:'+number,5,3600))return send(res,429,{error:'WhatsApp verification limit reached'});
+   if(!await redis('GET','otp:'+hmac(number)))return send(res,409,{error:'Send a verification code first'});
+   const requestId=crypto.randomBytes(24).toString('base64url');
+   await redis('SET',waVerifyKey(requestId),JSON.stringify({number,status:'pending',created_at:Date.now()}),'EX',WA_VERIFY_TTL);
+   const verifyUrl='https://wa.me/+'+WHATSAPP_VERIFY_NUMBER+'?text='+encodeURIComponent(requestId);
+   return send(res,200,{ok:true,request_id:requestId,url:verifyUrl,expires_in:WA_VERIFY_TTL});
+  }
+  if(url.pathname==='/api/otp/whatsapp/status'){
+   const number=phone(data.number),requestId=typeof data.request_id==='string'&&/^[A-Za-z0-9_-]{20,80}$/.test(data.request_id)?data.request_id:null;
+   if(!number||!requestId)return send(res,400,{error:'Invalid WhatsApp verification request'});
+   if(!await limit('wa-verify-status:'+requestId,90,300))return send(res,429,{error:'Verification polling limit reached'});
+   const raw=await redis('GET',waVerifyKey(requestId));let record=null;
+   try{record=raw?JSON.parse(raw):null;}catch{}
+   if(!record||record.number!==number)return send(res,404,{error:'WhatsApp verification expired'});
+   if(record.status!=='verified')return send(res,200,{ok:true,verified:false});
+   await redis('DEL','otp:'+hmac(number));
+   const messageRecordKey=otpMessageKey(number),messageRecord=await redis('GET',messageRecordKey);
+   if(messageRecord)void removeOtpMessage(messageRecordKey,messageRecord);
+   const session=await issueSession(number);
+   return send(res,200,{ok:true,verified:true,first_registration:session.first_registration,expires_in:session.expires_in},{'Set-Cookie':session.cookie});
   }
   const session=await authenticated(req);
   if(!session)return send(res,401,{error:'Please sign in using your phone number.'});
