@@ -27,7 +27,7 @@ button{cursor:pointer}
 #account-limits{padding:14px;background:#f5f6f8;border-radius:10px;color:#49515d}
 #message{min-height:20px;font-size:13px;color:#374151;margin:16px 0}
 footer{font-size:12px;line-height:1.7;color:#8790a0;margin-top:26px;text-align:center}
-html:not(.auth-ready) #verify,html:not(.auth-ready) #account{display:none!important}
+html:not(.auth-ready) #start,html:not(.auth-ready) #verify,html:not(.auth-ready) #account,html:not(.auth-ready) #auth-intro{display:none!important}
 @media(max-width:480px){main{padding:22px 16px 40px}.card{padding:21px 18px;border-radius:17px}.app-header{margin-bottom:24px}}
 
 /* Quiet premium refinements */
