@@ -23,6 +23,7 @@ jobs:
   extract:
     runs-on: ubuntu-latest
     timeout-minutes: 180
+    environment: production
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -38,6 +39,6 @@ jobs:
           TELEGRAM_API_HASH: ${{ secrets.TELEGRAM_API_HASH }}
           TELEGRAM_SESSION: ${{ secrets.TELEGRAM_SESSION }}
           TELEGRAM_SOURCE_CHANNEL_ID: ${{ secrets.TELEGRAM_CHANNEL_ID }}
-          SLUG: ${{ inputs.slug }}
-          TARGET_CHANNEL: ${{ inputs.target_channel }}
+          SLUG: ${{ inputs.slug || 'mlefhQyyZHyAosi3' }}
+          TARGET_CHANNEL: ${{ inputs.target_channel || '-1003821706724' }}
         run: python3 scripts/extract_movie_tracks.py --slug "$SLUG" --target-channel "$TARGET_CHANNEL"
