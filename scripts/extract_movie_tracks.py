@@ -58,11 +58,15 @@ def extract_audio(source, stream_index, stream, output_dir, stem):
     return files
 
 
-def build_browser_movie(source, audio_streams, output):
-    """Copy video and convert every audio track to browser-friendly AAC."""
+def build_browser_movie(source, audio_streams, video_streams, output):
+    """Copy video when present, otherwise create a browser-friendly audio file."""
     if not audio_streams:
         raise RuntimeError("Movie has no audio tracks to make browser-compatible")
-    command = ["ffmpeg", "-y", "-v", "error", "-err_detect", "ignore_err", "-i", str(source), "-map", "0:v:0", "-c:v", "copy"]
+    command = ["ffmpeg", "-y", "-v", "error", "-err_detect", "ignore_err", "-i", str(source)]
+    if video_streams:
+        command.extend(["-map", "0:v:0", "-c:v", "copy"])
+    else:
+        command.extend(["-vn"])
     for index, stream in enumerate(audio_streams):
         command.extend(["-map", f"0:a:{index}", f"-c:a:{index}", "aac", f"-b:a:{index}", "192k", f"-ac:a:{index}", "2"])
         tags = stream.get("tags") or {}
@@ -145,11 +149,13 @@ async def main():
             await client.download_media(source, file=str(source_path))
             metadata = probe(source_path)
             audio = [s for s in metadata.get("streams", []) if s.get("codec_type") == "audio"]
+            video = [s for s in metadata.get("streams", []) if s.get("codec_type") == "video"]
             subtitles = [s for s in metadata.get("streams", []) if s.get("codec_type") == "subtitle"]
             attachments = [s for s in metadata.get("streams", []) if s.get("codec_type") == "attachment"]
-            browser_movie = output_dir / f"{stem}.browser.mp4"
-            print(f"Creating browser-compatible movie with {len(audio)} AAC audio track(s)", flush=True)
-            build_browser_movie(source_path, audio, browser_movie)
+            browser_extension = "mp4" if video else "m4a"
+            browser_movie = output_dir / f"{stem}.browser.{browser_extension}"
+            print(f"Creating browser-compatible {'video' if video else 'audio-only'} file with {len(audio)} AAC audio track(s)", flush=True)
+            build_browser_movie(source_path, audio, video, browser_movie)
             files = [browser_movie]
             for index, stream in enumerate(audio):
                 files.extend(extract_audio(source_path, index, stream, output_dir, stem))
@@ -169,6 +175,7 @@ async def main():
                 "source_channel_id": int(DEFAULT_SOURCE),
                 "source_file_id": message_id,
                 "browser_movie": browser_movie.name,
+                "has_video": bool(video),
                 "audio_tracks": [{"index": i + 1, "language": (s.get("tags") or {}).get("language"), "title": (s.get("tags") or {}).get("title"), "codec": "aac"} for i, s in enumerate(audio)],
                 "subtitle_tracks": [{"index": i + 1, "language": (s.get("tags") or {}).get("language"), "title": (s.get("tags") or {}).get("title"), "format": "webvtt"} for i, s in enumerate(subtitles)],
                 "files": [p.name for p in files],
