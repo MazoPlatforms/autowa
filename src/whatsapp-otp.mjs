@@ -107,6 +107,13 @@ export function getWhatsAppBotNumber(){
  const raw=String(socket?.user?.id||'').split('@')[0].split(':')[0];
  return /^\d{8,15}$/.test(raw)?raw:null;
 }
+export async function isWhatsAppNumber(number){
+ if(!socket)throw Object.assign(Error('WhatsApp verification is temporarily unavailable'),{code:'WHATSAPP_CHECK_UNAVAILABLE'});
+ const jid=number.slice(1)+'@s.whatsapp.net';
+ let result;
+ try{result=await socket.onWhatsApp(jid);}catch(error){throw Object.assign(Error('WhatsApp number check failed'),{code:'WHATSAPP_CHECK_UNAVAILABLE',cause:error});}
+ return Boolean(Array.isArray(result)&&result.some(item=>item?.exists===true));
+}
 export async function startWhatsApp(){
  if(connecting||socket)return;
  connecting=true;
@@ -139,6 +146,8 @@ export async function sendWhatsAppOtp(number,code){
  // transient connection updates and must not reject a send pre-emptively.
  if(!socket)throw Error('OTP WhatsApp socket is unavailable');
  const jid=number.slice(1)+'@s.whatsapp.net';
+ const available=await isWhatsAppNumber(number);
+ if(!available)throw Object.assign(Error('WhatsApp is not available for this number'),{code:'WHATSAPP_NOT_AVAILABLE'});
  const result=await socket.sendMessage(jid,{text:'Your FilmGo verification code is: '+code+'\nExpires in 5 minutes. Never share this code.'});
  if(!result?.key?.id)throw Error('WhatsApp did not acknowledge OTP submission');
  return result.key;
