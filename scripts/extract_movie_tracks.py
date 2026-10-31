@@ -19,6 +19,7 @@ from telethon.sessions import StringSession
 DEFAULT_SOURCE = os.environ.get("TELEGRAM_SOURCE_CHANNEL_ID") or os.environ.get("TELEGRAM_CHANNEL_ID")
 DEFAULT_TARGET = os.environ.get("TELEGRAM_EXTRACTION_CHANNEL_ID", "-1003821706724")
 CATALOG = Path("data/movies.json")
+FFMPEG_PROBE_ARGS = ["-probesize", "200M", "-analyzeduration", "200M"]
 
 
 def run(command, *, capture=False, timeout=600):
@@ -32,7 +33,7 @@ def safe(value, fallback):
 
 def probe(path):
     result = run([
-        "ffprobe", "-v", "error", "-show_streams", "-show_format", "-show_chapters",
+        "ffprobe", "-v", "error", *FFMPEG_PROBE_ARGS, "-show_streams", "-show_format", "-show_chapters",
         "-of", "json", str(path),
     ], capture=True)
     return json.loads(result.stdout)
@@ -62,7 +63,7 @@ def build_browser_movie(source, audio_streams, video_streams, output):
     """Copy video when present, otherwise create a browser-friendly audio file."""
     if not audio_streams:
         raise RuntimeError("Movie has no audio tracks to make browser-compatible")
-    command = ["ffmpeg", "-y", "-v", "error", "-err_detect", "ignore_err", "-i", str(source)]
+    command = ["ffmpeg", "-y", "-v", "error", "-err_detect", "ignore_err", *FFMPEG_PROBE_ARGS, "-i", str(source)]
     if video_streams:
         command.extend(["-map", "0:v:0", "-c:v", "copy"])
     else:
