@@ -2899,6 +2899,32 @@
       "director": "Anilkatz",
       "cast": "Varalaxmi Sarathkumar, Ganesh Venkatraman, Shashank Siddamsetty",
       "plot": "A single mother battles her past demons to safeguard her child's future, facing daunting challenges to shield her daughter from imminent danger."
+    },
+    {
+      "id": "telegram-97",
+      "slug_id": "-iFsX30ClWrG5y_Z",
+      "title": "Lubber Pandhu",
+      "year": 2024,
+      "qualities": {
+        "720p": {
+          "telegram_message_id": 97,
+          "file_name": "Lubber.Pandhu.Tamil.2024.720p.HS.WEB-DL.DD 5.1.H.264-TR.mkv",
+          "file_size": 0,
+          "mime_type": ""
+        }
+      },
+      "telegram_message_id": 97,
+      "quality": "720p",
+      "file_name": "Lubber.Pandhu.Tamil.2024.720p.HS.WEB-DL.DD 5.1.H.264-TR.mkv",
+      "file_size": 0,
+      "mime_type": "",
+      "imdb_id": "tt27007466",
+      "poster": "https://m.media-amazon.com/images/M/MV5BOTczNTZiNWItZTZmNy00YjEzLWI5ZDItYjIxODcxNGQxY2U0XkEyXkFqcGc@._V1_QL75_UX380_CR0,4,380,562_.jpg",
+      "genre": "Comedy, Drama, Sport",
+      "runtime": "146 min",
+      "director": "Tamizharasan Pachamuthu",
+      "cast": "Harish Kalyan, Dinesh, Sanjana",
+      "plot": "Set against the rural backdrop, explores gully cricket stars Gethu and Anbu's intense rivalry. Anbu's romantic involvement with Gethu's daughter escalates the clash. Their skills and emotions are put to the ultimate test."
     }
   ]
 }
