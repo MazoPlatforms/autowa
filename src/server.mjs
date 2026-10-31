@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import {execFile,spawn} from 'node:child_process';
 import {promisify} from 'node:util';
 const execFileAsync=promisify(execFile);
-import {startWhatsApp,sendWhatsAppOtp,deleteWhatsAppOtp,getWhatsAppProfilePicture,getWhatsAppBotNumber} from './whatsapp-otp.mjs';
+import {startWhatsApp,sendWhatsAppOtp,deleteWhatsAppOtp,getWhatsAppProfilePicture,getWhatsAppBotNumber,isWhatsAppNumber} from './whatsapp-otp.mjs';
 import {startFilmGoBot} from './filmgo-bot.mjs';
 import {logFilmGo} from './filmgo-logs.mjs';
 import {startStreamWorker,proxyRange,downloadFile,streamWorkerState} from './stream-worker.mjs';
@@ -451,9 +451,11 @@ const server=http.createServer(async(req,res)=>{
     await redis('SET',otpKey,hmac(number+':'+code),'EX',OTP_TTL);
     messageKey=await sendOtp(number,code);
     await redis('SET',otpMessageKey(number),JSON.stringify({message_key:messageKey,expires_at:Date.now()+OTP_TTL*1000}),'EX',OTP_TTL+300);
-   }catch{
+   }catch(error){
     if(messageKey)await deleteWhatsAppOtp(messageKey).catch(()=>{});
     await Promise.allSettled([redis('DEL',otpKey),redis('DEL',cooldownKey),redis('DEL',otpMessageKey(number))]);
+    if(error?.code==='WHATSAPP_NOT_AVAILABLE')return send(res,422,{error:'WhatsApp is not available for this number, so FilmGo cannot deliver the OTP.'});
+    if(error?.code==='WHATSAPP_CHECK_UNAVAILABLE')return send(res,503,{error:'WhatsApp number verification is temporarily unavailable. Please try again.'});
     return send(res,503,{error:'Could not send the verification code. Please try again.'});
    }
    return send(res,200,{ok:true,message:'OTP sent'});
@@ -476,6 +478,9 @@ const server=http.createServer(async(req,res)=>{
    if(!await limit('wa-verify-start:'+number,5,3600))return send(res,429,{error:'WhatsApp verification limit reached'});
    const botNumber=getWhatsAppBotNumber();
    if(!botNumber)return send(res,503,{error:'WhatsApp verification is temporarily unavailable'});
+   let available;
+   try{available=await isWhatsAppNumber(number);}catch(error){if(error.code==='WHATSAPP_CHECK_UNAVAILABLE')return send(res,503,{error:'WhatsApp number verification is temporarily unavailable'});throw error;}
+   if(!available)return send(res,422,{error:'WhatsApp is not available for this number, so FilmGo cannot deliver verification messages.'});
    const requestId=crypto.randomBytes(24).toString('base64url');
    await redis('SET',waVerifyKey(requestId),JSON.stringify({number,status:'pending',created_at:Date.now()}),'EX',WA_VERIFY_TTL);
    const verifyUrl='https://wa.me/+'+botNumber+'?text='+encodeURIComponent(requestId);
