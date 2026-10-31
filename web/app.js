@@ -137,6 +137,12 @@ function routeView(){
  $('profile-back').classList.toggle('hidden',!signedIn||!['/profile','/history','/plans'].includes(location.pathname));
  $('auth-intro').classList.toggle('hidden',signedIn);
 }
+// The server has already checked the session for direct profile navigation.
+// Paint the correct shell immediately, then showAccount() revalidates /api/me.
+const serverAuthenticated=document.documentElement.dataset.serverAuthenticated==='true';
+signedIn=serverAuthenticated;
+routeView();
+document.documentElement.classList.add('auth-ready');
 let pricingCountry='OTHER';
 const planPrices={
  LK:{currency:'LKR',plus:890,premium:1790,label:'Sri Lanka'},
