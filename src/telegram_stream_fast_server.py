@@ -9,6 +9,16 @@ import asyncio
 import collections
 import os
 import time
+
+# Pyrogram 2.0.x initialises its sync helpers at import time and expects a
+# current event loop. Python 3.14 no longer creates one implicitly. Create the
+# compatibility loop before importing Pyrogram; asyncio.run() owns the actual
+# gateway loop later, so the streaming implementation remains unchanged.
+try:
+    asyncio.get_event_loop()
+except RuntimeError:
+    asyncio.set_event_loop(asyncio.new_event_loop())
+
 from pyrogram import Client, utils, raw, errors
 from pyrogram.file_id import FileId, FileType, ThumbnailSource
 from pyrogram.session import Session, Auth
