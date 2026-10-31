@@ -26,16 +26,21 @@ async function redis(...args){
 }
 function verificationRedisKey(value){return 'wa-verify:'+crypto.createHmac('sha256',process.env.APP_SECRET||'').update(value).digest('hex');}
 function verificationClaimKey(value){return 'wa-verify-claim:'+crypto.createHmac('sha256',process.env.APP_SECRET||'').update(value).digest('hex');}
+function verificationText(message){
+ const content=message?.message||{};
+ const nested=content.ephemeralMessage?.message||content.viewOnceMessage?.message||content.viewOnceMessageV2?.message||content;
+ return String(nested.conversation||nested.extendedTextMessage?.text||'').trim();
+}
 async function handleWhatsAppVerification(message,client){
  if(message?.key?.fromMe)return;
  const remoteJid=String(message?.key?.remoteJid||'');
  if(!/^\d+(?::\d+)?@s\.whatsapp\.net$/.test(remoteJid))return;
  const sender='+'+remoteJid.split('@')[0].split(':')[0];
- const text=String(message?.message?.conversation||message?.message?.extendedTextMessage?.text||'').trim();
+ const text=verificationText(message);
  if(!/^[A-Za-z0-9_-]{32}$/.test(text))return;
  const recordKey=verificationRedisKey(text),raw=await redis('GET',recordKey);let record;
  try{record=raw?JSON.parse(raw):null;}catch{return;}
- if(!record||record.status!=='pending'||record.number!==sender)return;
+ if(!record||record.status!=='pending'||record.number!==sender){console.warn('WhatsApp verification key rejected: expired, already used, or sender mismatch');return;}
  if(await redis('SET',verificationClaimKey(text),'1','NX','EX',30)!=='OK')return;
  await redis('SET',recordKey,JSON.stringify({...record,status:'verified',verified_at:Date.now()}),'EX',300);
  await client.sendMessage(remoteJid,{text:'✅ FilmGo WhatsApp verification successful. Return to the website to continue.'});
@@ -98,6 +103,10 @@ async function authState(){
 }
 let socket=null,ready=false,connecting=false,tries=0,retryTimer=null;
 export const isWhatsAppReady=()=>ready;
+export function getWhatsAppBotNumber(){
+ const raw=String(socket?.user?.id||'').split('@')[0].split(':')[0];
+ return /^\d{8,15}$/.test(raw)?raw:null;
+}
 export async function startWhatsApp(){
  if(connecting||socket)return;
  connecting=true;
