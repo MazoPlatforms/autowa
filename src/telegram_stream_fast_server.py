@@ -24,6 +24,21 @@ from pyrogram.file_id import FileId, FileType, ThumbnailSource
 from pyrogram.session import Session, Auth
 from pyrogram.errors import AuthBytesInvalid
 
+# Pyrogram 2.0.106 predates Telegram's larger channel-id range and rejects
+# valid modern -100... IDs before it can resolve the channel. Keep Pyrogram's
+# normal handling for every other peer and only widen that classification;
+# get_channel_id() already converts the modern ID to the raw API value.
+_pyrogram_get_peer_type = utils.get_peer_type
+
+
+def _filmgo_get_peer_type(peer_id):
+    if isinstance(peer_id, int) and peer_id <= -1000000000001:
+        return "channel"
+    return _pyrogram_get_peer_type(peer_id)
+
+
+utils.get_peer_type = _filmgo_get_peer_type
+
 HOST = "127.0.0.1"
 PORT = int(os.getenv("FAST_STREAM_WORKER_PORT", "8766"))
 REQUEST_SIZE = 1024 * 1024
