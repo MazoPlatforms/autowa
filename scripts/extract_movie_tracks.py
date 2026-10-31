@@ -21,8 +21,8 @@ DEFAULT_TARGET = os.environ.get("TELEGRAM_EXTRACTION_CHANNEL_ID", "-100382170672
 CATALOG = Path("data/movies.json")
 
 
-def run(command, *, capture=False):
-    return subprocess.run(command, check=True, text=True, capture_output=capture)
+def run(command, *, capture=False, timeout=600):
+    return subprocess.run(command, check=True, text=True, capture_output=capture, timeout=timeout)
 
 
 def safe(value, fallback):
@@ -47,10 +47,23 @@ def extract_audio(source, stream_index, stream, output_dir, stem):
     label = stream_label(stream, stream_index)
     original = output_dir / f"{stem}.audio-{stream_index + 1:02d}-{label}.mka"
     compatible = output_dir / f"{stem}.audio-{stream_index + 1:02d}-{label}.aac.m4a"
-    run(["ffmpeg", "-y", "-v", "error", "-i", str(source), "-map", f"0:a:{stream_index}", "-map_metadata", "0", "-c:a", "copy", str(original)])
+    files = []
+    try:
+        # Stream copy does not decode the audio, so even a damaged or browser-
+        # unsupported track is preserved for later use.
+        run(["ffmpeg", "-y", "-v", "error", "-i", str(source), "-map", f"0:a:{stream_index}", "-map_metadata", "0", "-c:a", "copy", str(original)], timeout=300)
+        files.append(original)
+    except (subprocess.CalledProcessError, subprocess.TimeoutExpired) as error:
+        print(f"Audio track {stream_index + 1} original extraction failed: {type(error).__name__}", flush=True)
     # AAC stereo is broadly playable in Android WebView and desktop browsers.
-    run(["ffmpeg", "-y", "-v", "error", "-i", str(source), "-map", f"0:a:{stream_index}", "-vn", "-map_metadata", "0", "-c:a", "aac", "-b:a", "192k", "-ac", "2", str(compatible)])
-    return [original, compatible]
+    try:
+        run(["ffmpeg", "-y", "-v", "error", "-err_detect", "ignore_err", "-i", str(source), "-map", f"0:a:{stream_index}", "-vn", "-map_metadata", "0", "-c:a", "aac", "-b:a", "192k", "-ac", "2", str(compatible)], timeout=300)
+        files.append(compatible)
+    except (subprocess.CalledProcessError, subprocess.TimeoutExpired) as error:
+        # A malformed E-AC3/DTS track must not block other audio, subtitle,
+        # chapter, and attachment extraction.
+        print(f"Audio track {stream_index + 1} AAC conversion skipped: {type(error).__name__}", flush=True)
+    return files
 
 
 def extract_subtitle(source, stream_index, stream, output_dir, stem):
