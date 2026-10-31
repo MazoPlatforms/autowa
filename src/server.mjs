@@ -250,10 +250,10 @@ async function renderCatalogPage(req){
  const label=authenticatedState?(name?name.split(/\s+/).slice(0,2).map(value=>value[0]||'').join('').toUpperCase():'Account'):'Sign in';
  const fallbackAvatar='https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original';
  const accountContent=authenticatedState?'<img class="catalog-avatar-image" src="'+fallbackAvatar+'" alt="Profile" referrerpolicy="no-referrer" decoding="async">':label;
- return catalogHtml.toString('utf8').replace(
-  '<a href="/profile" class="rounded-xl border border-zinc-700 px-3 py-2 text-xs font-semibold text-zinc-200 transition hover:bg-zinc-800 sm:text-sm" id="catalog-account-link" aria-live="polite" aria-busy="true">Account</a>',
-  '<a href="/profile" class="rounded-xl border border-zinc-700 px-3 py-2 text-xs font-semibold text-zinc-200 transition hover:bg-zinc-800 sm:text-sm'+(authenticatedState?' catalog-account-avatar':'')+'" id="catalog-account-link" aria-live="polite" aria-busy="false" aria-label="'+(authenticatedState?'Open profile':'Sign in')+'" data-server-authenticated="'+String(authenticatedState)+'">'+accountContent+'</a>'
- );
+ const accountLink='<a href="/profile" class="tv-account'+(authenticatedState?' catalog-account-avatar':'')+'" id="catalog-account-link" aria-live="polite" aria-busy="false" aria-label="'+(authenticatedState?'Open profile':'Sign in')+'" data-server-authenticated="'+String(authenticatedState)+'">'+accountContent+'</a>';
+ // Keep authentication server-rendered so the redesign cannot briefly show
+ // the guest label for an already authenticated user.
+ return catalogHtml.toString('utf8').replace(/<a\b[^>]*\bid="catalog-account-link"[^>]*>[\s\S]*?<\/a>/,accountLink);
 }
 const server=http.createServer(async(req,res)=>{
  try{
