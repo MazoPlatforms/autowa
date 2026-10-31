@@ -77,6 +77,24 @@ def build_browser_movie(source, audio_streams, video_streams, output):
     run(command, timeout=1800)
 
 
+async def download_verified(client, message, destination, expected_size):
+    """Download the Telegram document and reject truncated runner files."""
+    last_size = 0
+    for attempt in range(1, 4):
+        if destination.exists():
+            destination.unlink()
+        print(f"Downloading source attempt {attempt}/3", flush=True)
+        result = await client.download_media(message, file=str(destination))
+        if not result or not destination.exists():
+            raise RuntimeError("Telegram download returned no local file")
+        last_size = destination.stat().st_size
+        print(f"Downloaded bytes: {last_size} / expected {expected_size or 'unknown'}", flush=True)
+        if not expected_size or last_size == expected_size:
+            return
+        print("Downloaded size mismatch; retrying Telegram download", flush=True)
+    raise RuntimeError(f"Telegram download remained incomplete after 3 attempts: {last_size} / {expected_size} bytes")
+
+
 def extract_subtitle(source, stream_index, stream, output_dir, stem):
     label = stream_label(stream, stream_index)
     original = output_dir / f"{stem}.subtitle-{stream_index + 1:02d}-{label}.mks"
@@ -145,11 +163,16 @@ async def main():
             source = await client.get_messages(int(DEFAULT_SOURCE), ids=message_id)
             if not source or not source.file:
                 raise RuntimeError(f"Telegram message {message_id} has no downloadable media")
+            expected_size = int(getattr(source.file, "size", 0) or variant.get("file_size") or 0)
             print(f"Downloading source message {message_id}: {stem}", flush=True)
-            await client.download_media(source, file=str(source_path))
+            await download_verified(client, source, source_path, expected_size)
             metadata = probe(source_path)
             audio = [s for s in metadata.get("streams", []) if s.get("codec_type") == "audio"]
             video = [s for s in metadata.get("streams", []) if s.get("codec_type") == "video"]
+            summary = [{"index": s.get("index"), "type": s.get("codec_type"), "codec": s.get("codec_name"), "width": s.get("width"), "height": s.get("height"), "duration": s.get("duration")} for s in metadata.get("streams", [])]
+            print(f"Detected streams: {json.dumps(summary, ensure_ascii=False)}", flush=True)
+            if not video:
+                raise RuntimeError("Downloaded Telegram bytes contain no video stream; refusing to publish an audio-only movie bundle")
             subtitles = [s for s in metadata.get("streams", []) if s.get("codec_type") == "subtitle"]
             attachments = [s for s in metadata.get("streams", []) if s.get("codec_type") == "attachment"]
             browser_extension = "mp4" if video else "m4a"
