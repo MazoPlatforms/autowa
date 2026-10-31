@@ -1,0 +1,41 @@
+name: Demo extract Telegram media tracks
+
+on:
+  workflow_dispatch:
+    inputs:
+      slug:
+        description: "Movie slug to process"
+        required: true
+        default: "mlefhQyyZHyAosi3"
+        type: string
+      target_channel:
+        description: "Telegram channel ID for extracted sidecars"
+        required: true
+        default: "-1003821706724"
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install media tools
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg
+      - name: Install Telegram client
+        run: python3 -m pip install --no-cache-dir telethon==1.42.0
+      - name: Extract and upload sidecars
+        env:
+          TELEGRAM_API_ID: ${{ secrets.TELEGRAM_API_ID }}
+          TELEGRAM_API_HASH: ${{ secrets.TELEGRAM_API_HASH }}
+          TELEGRAM_SESSION: ${{ secrets.TELEGRAM_SESSION }}
+          TELEGRAM_SOURCE_CHANNEL_ID: ${{ secrets.TELEGRAM_CHANNEL_ID }}
+          SLUG: ${{ inputs.slug }}
+          TARGET_CHANNEL: ${{ inputs.target_channel }}
+        run: python3 scripts/extract_movie_tracks.py --slug "$SLUG" --target-channel "$TARGET_CHANNEL"
