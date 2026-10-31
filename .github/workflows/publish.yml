@@ -11,8 +11,6 @@ on:
         type: string
 permissions:
   contents: write
-  pages: write
-  id-token: write
 concurrency:
   group: whatsapp-publisher
   cancel-in-progress: false
