@@ -93,12 +93,7 @@ function renderPagination(total){
   pagination.append(button);
  };
  add('‹',page-1,page===1);
- const shown=new Set([1,pages,page-1,page,page+1].filter(n=>n>=1&&n<=pages));
- let last=0;
- for(const n of [...shown].sort((a,b)=>a-b)){
-  if(n-last>1)pagination.append(el('span','page-ellipsis','…'));
-  add(String(n),n,false,n===page);last=n;
- }
+ for(let n=1;n<=pages;n++)add(String(n),n,false,n===page);
  add('›',page+1,page===pages);
 }
 function render(){
