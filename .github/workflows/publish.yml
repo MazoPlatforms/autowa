@@ -32,6 +32,9 @@ jobs:
       - name: Publish
         env:
           WA_AUTH_CREDS: ${{ secrets.WA_AUTH_CREDS }}
+          APP_SECRET: ${{ secrets.APP_SECRET }}
+          UPSTASH_REDIS_REST_URL: ${{ secrets.UPSTASH_REDIS_REST_URL }}
+          UPSTASH_REDIS_REST_TOKEN: ${{ secrets.UPSTASH_REDIS_REST_TOKEN }}
           JOB_ID: ${{ inputs.job_id }}
         run: node src/publish.mjs
       - name: Save assigned job IDs and results

@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { execFileSync, spawn } from 'node:child_process';
 import crypto from 'node:crypto';
-import makeWASocket, { useMultiFileAuthState, DisconnectReason } from '@whiskeysockets/baileys';
+import makeWASocket, { BufferJSON, DisconnectReason, proto } from '@whiskeysockets/baileys';
 import pino from 'pino';
 import { setTimeout as sleep } from 'node:timers/promises';
 const ALWAYS_SEND_GROUP_IDS=Object.freeze(['120363024245545077@g.us','120363328126166173@g.us']);
@@ -27,15 +27,60 @@ if(process.env.DRY_RUN==='1'){
 }
 const raw=process.env.WA_AUTH_CREDS;
 if(!raw) throw Error('WA_AUTH_CREDS missing from production environment');
-let creds;
-try { creds=JSON.parse(raw); } catch { throw Error('WA_AUTH_CREDS is not valid JSON'); }
-if(!creds || typeof creds!=='object' || Array.isArray(creds) || creds.registered!==true || !creds.noiseKey) {
+const redisBase=(process.env.UPSTASH_REDIS_REST_URL||'').replace(/\/$/,'');
+const redisToken=process.env.UPSTASH_REDIS_REST_TOKEN||'';
+const authSecret=process.env.APP_SECRET||'';
+const movieAuthPrefix='autowa:movie-wa:';
+if(!redisBase||!redisToken||authSecret.length<32) throw Error('Movie WhatsApp auth store requires APP_SECRET, UPSTASH_REDIS_REST_URL and UPSTASH_REDIS_REST_TOKEN');
+async function redis(...args){
+ const response=await fetch(redisBase,{method:'POST',headers:{Authorization:'Bearer '+redisToken,'Content-Type':'application/json'},body:JSON.stringify(args),signal:AbortSignal.timeout(15000)});
+ if(!response.ok)throw Error('Movie WhatsApp auth store unavailable');
+ const data=await response.json();if(data.error)throw Error('Movie WhatsApp auth store error');return data.result;
+}
+const authKey=crypto.createHash('sha256').update(authSecret).digest();
+function encryptAuth(value){
+ const iv=crypto.randomBytes(12),cipher=crypto.createCipheriv('aes-256-gcm',authKey,iv);
+ const data=Buffer.concat([cipher.update(Buffer.from(JSON.stringify(value,BufferJSON.replacer))),cipher.final()]);
+ return Buffer.concat([iv,cipher.getAuthTag(),data]).toString('base64');
+}
+function decryptAuth(value){
+ const bytes=Buffer.from(value,'base64'),decipher=crypto.createDecipheriv('aes-256-gcm',authKey,bytes.subarray(0,12));
+ decipher.setAuthTag(bytes.subarray(12,28));
+ return JSON.parse(Buffer.concat([decipher.update(bytes.subarray(28)),decipher.final()]).toString(),BufferJSON.reviver);
+}
+let providedCreds;
+try { providedCreds=JSON.parse(raw,BufferJSON.reviver); } catch { throw Error('WA_AUTH_CREDS is not valid JSON'); }
+if(!providedCreds || typeof providedCreds!=='object' || Array.isArray(providedCreds) || providedCreds.registered!==true || !providedCreds.noiseKey) {
   throw Error('WA_AUTH_CREDS must be the plain-text contents of a registered Baileys creds.json');
 }
-fs.mkdirSync('.auth',{recursive:true,mode:0o700});
-fs.writeFileSync(path.join('.auth','creds.json'),JSON.stringify(creds),{mode:0o600});
-console.warn('Using creds.json-only auth: missing Signal key files or rotated session keys may cause authentication failures.');
-const {state,saveCreds}=await useMultiFileAuthState('.auth');
+async function movieAuthState(){
+ let creds;
+ const stored=await redis('GET',movieAuthPrefix+'creds');
+ if(stored){
+  try{creds=decryptAuth(stored);}catch(err){throw Error('Movie WhatsApp auth state could not be decrypted: '+err.message);}
+ }else{
+  creds=providedCreds;
+  await redis('SET',movieAuthPrefix+'creds',encryptAuth(creds));
+ }
+ const keys={
+  get:async(type,ids)=>{
+   const result={};
+   await Promise.all(ids.map(async id=>{
+    const value=await redis('GET',movieAuthPrefix+'key:'+type+':'+id);
+    if(value){let decoded=decryptAuth(value);if(type==='app-state-sync-key')decoded=proto.Message.AppStateSyncKeyData.fromObject(decoded);result[id]=decoded;}
+   }));
+   return result;
+  },
+  set:async(data)=>{
+   for(const [type,entries] of Object.entries(data))for(const [id,value] of Object.entries(entries)){
+    const name=movieAuthPrefix+'key:'+type+':'+id;
+    if(value)await redis('SET',name,encryptAuth(value));else await redis('DEL',name);
+   }
+  }
+ };
+ return {state:{creds,keys},saveCreds:async()=>redis('SET',movieAuthPrefix+'creds',encryptAuth(creds))};
+}
+const {state,saveCreds}=await movieAuthState();
 let sock,connectionClosed=true;
 const logger=pino({level:'silent'});
 async function connectWhatsApp(){
