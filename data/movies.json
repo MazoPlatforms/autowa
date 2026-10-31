@@ -1,7 +1,79 @@
 {
   "schema_version": 2,
-  "updated_at": "2026-10-31T18:17:55.009144+00:00",
+  "updated_at": "2026-10-31T18:18:37.309035+00:00",
   "movies": [
+    {
+      "id": "telegram-97",
+      "slug_id": "wFLnmHG2JYid24rj",
+      "title": "Lubber Pandhu",
+      "year": 2024,
+      "qualities": {
+        "720p": {
+          "telegram_message_id": 97,
+          "file_size": 1597940705,
+          "file_name": "Lubber.Pandhu.Tamil.2024.720p.HS.WEB-DL.DD 5.1.H.264-TR.mkv",
+          "mime_type": "video/x-matroska"
+        }
+      },
+      "imdb_id": "tt27007466",
+      "poster": "https://m.media-amazon.com/images/M/MV5BNDk0NzM3ZGQtNjk5Mi00Y2I4LWIwYzUtYjA2NzJiNmQyNDdlXkEyXkFqcGc@._V1_.jpg",
+      "genre": [
+        "Comedy",
+        "Drama",
+        "Sport"
+      ],
+      "runtime": "146 min",
+      "director": "Tamizharasan Pachamuthu",
+      "cast": [
+        "Harish Kalyan",
+        "Dinesh",
+        "Sanjana"
+      ],
+      "plot": "Set against the rural backdrop, explores gully cricket stars Gethu and Anbu's intense rivalry. Anbu's romantic involvement with Gethu's daughter escalates the clash. Their skills and emotions are put to the ultimate test.",
+      "imdb_rating": "8.1",
+      "metadata_status": "matched",
+      "telegram_message_id": 97,
+      "file_size": 1597940705,
+      "file_name": "Lubber.Pandhu.Tamil.2024.720p.HS.WEB-DL.DD 5.1.H.264-TR.mkv",
+      "mime_type": "video/x-matroska",
+      "quality": "720p"
+    },
+    {
+      "id": "telegram-96",
+      "slug_id": "M-rbOruM1d9nf4iu",
+      "title": "Sabari",
+      "year": 2024,
+      "qualities": {
+        "720p": {
+          "telegram_message_id": 96,
+          "file_size": 1787542103,
+          "file_name": "Sabari.Tamil.2024.720p.SNXT.WEB-DL.DD 5.1.H.264-TR.mkv",
+          "mime_type": "video/x-matroska"
+        }
+      },
+      "imdb_id": "tt24225846",
+      "poster": "https://m.media-amazon.com/images/M/MV5BNzgzYmYzMTEtNDc2ZS00NzU3LThjNDMtODM2NzZmMDY0ZmEyXkEyXkFqcGc@._V1_.jpg",
+      "genre": [
+        "Action",
+        "Drama",
+        "Family"
+      ],
+      "runtime": "129 min",
+      "director": "Anilkatz",
+      "cast": [
+        "Varalaxmi Sarathkumar",
+        "Ganesh Venkatraman",
+        "Shashank Siddamsetty"
+      ],
+      "plot": "A single mother battles her past demons to safeguard her child's future, facing daunting challenges to shield her daughter from imminent danger.",
+      "imdb_rating": "8.7",
+      "metadata_status": "matched",
+      "telegram_message_id": 96,
+      "file_size": 1787542103,
+      "file_name": "Sabari.Tamil.2024.720p.SNXT.WEB-DL.DD 5.1.H.264-TR.mkv",
+      "mime_type": "video/x-matroska",
+      "quality": "720p"
+    },
     {
       "id": "telegram-95",
       "slug_id": "xWtQeZG7O5mYG529",
@@ -2873,58 +2945,6 @@
       "file_name": "Modha Rathri (2026) Tamil HQ HDRip - 720p - x264 - (DD+5.mkv",
       "mime_type": "video/x-matroska",
       "quality": "720p"
-    },
-    {
-      "id": "telegram-96",
-      "slug_id": "M-rbOruM1d9nf4iu",
-      "title": "Sabari",
-      "year": 2024,
-      "qualities": {
-        "720p": {
-          "telegram_message_id": 96,
-          "file_name": "Sabari.Tamil.2024.720p.SNXT.WEB-DL.DD 5.1.H.264-TR.mkv",
-          "file_size": 0,
-          "mime_type": ""
-        }
-      },
-      "telegram_message_id": 96,
-      "quality": "720p",
-      "file_name": "Sabari.Tamil.2024.720p.SNXT.WEB-DL.DD 5.1.H.264-TR.mkv",
-      "file_size": 0,
-      "mime_type": "",
-      "imdb_id": "tt24225846",
-      "poster": "https://m.media-amazon.com/images/M/MV5BNzgzYmYzMTEtNDc2ZS00NzU3LThjNDMtODM2NzZmMDY0ZmEyXkEyXkFqcGc@._V1_SX300.jpg",
-      "genre": "Action, Drama, Family",
-      "runtime": "129 min",
-      "director": "Anilkatz",
-      "cast": "Varalaxmi Sarathkumar, Ganesh Venkatraman, Shashank Siddamsetty",
-      "plot": "A single mother battles her past demons to safeguard her child's future, facing daunting challenges to shield her daughter from imminent danger."
-    },
-    {
-      "id": "telegram-97",
-      "slug_id": "-iFsX30ClWrG5y_Z",
-      "title": "Lubber Pandhu",
-      "year": 2024,
-      "qualities": {
-        "720p": {
-          "telegram_message_id": 97,
-          "file_name": "Lubber.Pandhu.Tamil.2024.720p.HS.WEB-DL.DD 5.1.H.264-TR.mkv",
-          "file_size": 0,
-          "mime_type": ""
-        }
-      },
-      "telegram_message_id": 97,
-      "quality": "720p",
-      "file_name": "Lubber.Pandhu.Tamil.2024.720p.HS.WEB-DL.DD 5.1.H.264-TR.mkv",
-      "file_size": 0,
-      "mime_type": "",
-      "imdb_id": "tt27007466",
-      "poster": "https://m.media-amazon.com/images/M/MV5BOTczNTZiNWItZTZmNy00YjEzLWI5ZDItYjIxODcxNGQxY2U0XkEyXkFqcGc@._V1_QL75_UX380_CR0,4,380,562_.jpg",
-      "genre": "Comedy, Drama, Sport",
-      "runtime": "146 min",
-      "director": "Tamizharasan Pachamuthu",
-      "cast": "Harish Kalyan, Dinesh, Sanjana",
-      "plot": "Set against the rural backdrop, explores gully cricket stars Gethu and Anbu's intense rivalry. Anbu's romantic involvement with Gethu's daughter escalates the clash. Their skills and emotions are put to the ultimate test."
     }
   ]
 }
