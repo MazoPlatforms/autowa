@@ -83,7 +83,7 @@ function flagFor(iso){return String.fromCodePoint(...String(iso||'').toUpperCase
 function closeCountryPicker(){const panel=$('country-panel');panel.hidden=true;$('country-trigger').setAttribute('aria-expanded','false');}
 function renderCountryOptions(query=''){
  const term=query.trim().toLowerCase(),root=$('country-options');root.replaceChildren();
- const matches=countryList.filter(c=>c.name.toLowerCase().includes(term)||c.iso.toLowerCase().includes(term)||('+'+c.dial).includes(term)).slice(0,80);
+ const matches=countryList.filter(c=>c.name.toLowerCase().includes(term)||c.iso.toLowerCase().includes(term)||('+'+c.dial).includes(term)).sort((a,b)=>Number(a.name.toLowerCase()!==term)-Number(b.name.toLowerCase()!==term)).slice(0,80);
  if(!matches.length){root.append(Object.assign(document.createElement('p'),{className:'country-no-results',textContent:countryList.length?'No matching countries':countriesFailed?'Country list unavailable':'Loading countries…'}));return;}
  for(const country of matches){
   const option=document.createElement('button');option.type='button';option.className='country-option';option.setAttribute('role','option');option.setAttribute('aria-selected',String($('country').value===country.iso));
