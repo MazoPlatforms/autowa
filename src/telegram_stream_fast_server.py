@@ -7,6 +7,8 @@ FilmGo keeps authentication, token accounting and HTTP headers in Node.
 """
 import asyncio
 import collections
+import contextlib
+import json
 import os
 import time
 
@@ -41,13 +43,22 @@ utils.get_peer_type = _filmgo_get_peer_type
 
 HOST = "127.0.0.1"
 PORT = int(os.getenv("FAST_STREAM_WORKER_PORT", "8766"))
-REQUEST_SIZE = 1024 * 1024
+PAGE = 4096
+MIB = 1024 * 1024
+REQUEST_SIZE = MIB                   # largest part Telegram allows
+# First part of every range is small so the first byte reaches the player
+# quickly (seek / first load); parts then double up to 1 MiB. Power of two.
+FIRST_PART = max(PAGE, min(MIB, 1 << (int(os.getenv("STREAM_FIRST_PART_KIB", "128")) * 1024).bit_length() - 1))
+PIPELINE = max(1, int(os.getenv("STREAM_PIPELINE", "3")))   # parts requested in parallel per stream
 MAX_LENGTH = 32 * 1024 * 1024
 MAX_STREAMS = int(os.getenv("STREAM_MAX_CONCURRENT", "6"))
-QUEUE_DEPTH = 4
 CHUNK_TIMEOUT = 30
-REF_TTL = 600
+REF_TTL = int(os.getenv("STREAM_REF_TTL", "1800"))          # seconds a looked-up file is reused
+REFRESH_INTERVAL = int(os.getenv("STREAM_REFRESH_SECONDS", "1200"))
 CACHE_MAX = 256
+PREWARM_MESSAGES = int(os.getenv("STREAM_PREWARM_MESSAGES", "40"))
+PREWARM_TIMEOUT = int(os.getenv("STREAM_PREWARM_TIMEOUT", "25"))
+CATALOG_PATH = os.getenv("FILMGO_CATALOG_PATH", "data/movies.json")
 SOURCE_CHANNEL = int(os.environ["TELEGRAM_CHANNEL_ID"])
 
 FileReferenceExpired = getattr(errors, "FileReferenceExpired", type("FileReferenceExpired", (Exception,), {}))
@@ -61,36 +72,108 @@ def media_from_message(message):
     return None
 
 
+def part_plan(start, length):
+    """Yield (offset, limit) Telegram parts covering [start, start + length).
+
+    Every part satisfies Telegram's rules under any reading of them: offset and
+    limit are multiples of 4 KiB, limit is a power of two <= 1 MiB, offset is a
+    multiple of limit (so a part never crosses a 1 MiB boundary). The first
+    part is small (FIRST_PART) for a fast first byte, then sizes double.
+    """
+    end = start + length
+    offset = start - start % FIRST_PART
+    cap = FIRST_PART
+    while offset < end:
+        align = (offset & -offset) if offset else MIB      # largest power of two dividing offset
+        limit = min(cap, align, MIB)
+        while limit > PAGE and offset + limit // 2 >= end:   # do not over-fetch the tail
+            limit //= 2
+        yield offset, limit
+        offset += limit
+        cap = min(MIB, cap * 2)
+
+
+def catalog_message_ids():
+    """Message ids from the bundled catalog (newest first), used for pre-warming."""
+    try:
+        with open(CATALOG_PATH, encoding="utf-8") as handle:
+            movies = json.load(handle).get("movies", [])
+    except Exception as error:
+        print(f"PREWARM catalog unavailable: {type(error).__name__}", flush=True)
+        return []
+    ids = []
+    for movie in movies:
+        entries = [movie] + list((movie.get("qualities") or {}).values())
+        for entry in entries:
+            value = entry.get("telegram_message_id") if isinstance(entry, dict) else None
+            if isinstance(value, int) and value > 0 and value not in ids:
+                ids.append(value)
+    return ids
+
+
 class ByteStreamer:
     def __init__(self, client):
         self.client = client
         self.cached_file_ids = {}
-        self.clean_task = asyncio.create_task(self.clean_cache())
+        # One lock per DC: two first-time viewers must not both create an auth key.
+        self.session_locks = collections.defaultdict(asyncio.Lock)
+
+    @staticmethod
+    def file_id_from_message(message):
+        if not message or getattr(message, "empty", False) or not message.file:
+            return None
+        media = media_from_message(message)
+        if not media:
+            return None
+        file_id = FileId.decode(media.file_id)
+        file_id.file_size = int(getattr(media, "file_size", 0) or 0)
+        file_id.mime_type = getattr(media, "mime_type", "") or "application/octet-stream"
+        file_id.file_name = getattr(media, "file_name", "") or ""
+        file_id.unique_id = getattr(media, "file_unique_id", "") or ""
+        return file_id
+
+    def remember(self, message_id, file_id):
+        self.cached_file_ids[message_id] = (file_id, time.time())
+        while len(self.cached_file_ids) > CACHE_MAX:
+            self.cached_file_ids.pop(next(iter(self.cached_file_ids)))
 
     async def get_file_properties(self, message_id, force=False):
         item = self.cached_file_ids.get(message_id)
         if item and not force and time.time() - item[1] < REF_TTL:
             return item[0]
         message = await self.client.get_messages(SOURCE_CHANNEL, message_id)
-        if not message or not message.file:
-            raise FileNotFoundError(f"Telegram message {message_id} has no media")
-        media = media_from_message(message)
-        if not media:
+        file_id = self.file_id_from_message(message)
+        if file_id is None:
             raise FileNotFoundError(f"Telegram message {message_id} has no supported media")
-        file_id = FileId.decode(media.file_id)
-        file_id.file_size = int(getattr(media, "file_size", 0) or 0)
-        file_id.mime_type = getattr(media, "mime_type", "") or "application/octet-stream"
-        file_id.file_name = getattr(media, "file_name", "") or ""
-        file_id.unique_id = getattr(media, "file_unique_id", "") or ""
-        self.cached_file_ids[message_id] = (file_id, time.time())
-        while len(self.cached_file_ids) > CACHE_MAX:
-            self.cached_file_ids.pop(next(iter(self.cached_file_ids)))
+        self.remember(message_id, file_id)
         return file_id
+
+    async def fetch_many(self, message_ids):
+        """Look up many messages in as few Telegram calls as possible."""
+        found = {}
+        for index in range(0, len(message_ids), 100):
+            batch = message_ids[index:index + 100]
+            messages = await self.client.get_messages(SOURCE_CHANNEL, batch)
+            if not isinstance(messages, (list, tuple)):
+                messages = [messages]
+            for message_id, message in zip(batch, messages):
+                file_id = self.file_id_from_message(message)
+                if file_id is not None:
+                    self.remember(message_id, file_id)
+                    found[message_id] = file_id
+        return found
 
     async def media_session(self, file_id):
         session = self.client.media_sessions.get(file_id.dc_id)
         if session:
             return session
+        async with self.session_locks[file_id.dc_id]:
+            session = self.client.media_sessions.get(file_id.dc_id)
+            if session:
+                return session
+            return await self._create_media_session(file_id)
+
+    async def _create_media_session(self, file_id):
         if file_id.dc_id != await self.client.storage.dc_id():
             session = Session(self.client, file_id.dc_id, await Auth(self.client, file_id.dc_id, await self.client.storage.test_mode()).create(), await self.client.storage.test_mode(), is_media=True)
             await session.start()
@@ -131,22 +214,62 @@ class ByteStreamer:
             raise IOError("Telegram returned no bytes")
         return session, result.bytes
 
-    async def stream(self, file_id, offset, length):
+    async def parts(self, file_id, start, length):
+        """Yield (offset, bytes) for consecutive Telegram parts covering the range.
+
+        Up to PIPELINE GetFile requests are in flight at once (the session
+        multiplexes them), and parts are delivered strictly in order. Closing
+        the generator cancels whatever is still in flight.
+        """
         session = await self.media_session(file_id)
         location = await self.location(file_id)
-        while length > 0:
-            result = await asyncio.wait_for(session.send(raw.functions.upload.GetFile(location=location, offset=offset, limit=REQUEST_SIZE)), CHUNK_TIMEOUT)
-            if not isinstance(result, raw.types.upload.File) or not result.bytes:
-                break
-            data = result.bytes[:length]
-            yield data
-            offset += len(result.bytes)
-            length -= len(data)
+        plan = part_plan(start, length)
+        inflight = collections.deque()
 
-    async def clean_cache(self):
+        async def fetch(offset, limit):
+            result = await asyncio.wait_for(
+                session.send(raw.functions.upload.GetFile(location=location, offset=offset, limit=limit)),
+                CHUNK_TIMEOUT)
+            if not isinstance(result, raw.types.upload.File):
+                raise IOError("Telegram returned an unexpected response")
+            return result.bytes
+
+        def fill():
+            while len(inflight) < PIPELINE:
+                part = next(plan, None)
+                if part is None:
+                    return
+                inflight.append((part[0], asyncio.ensure_future(fetch(*part))))
+
+        try:
+            fill()
+            while inflight:
+                offset, task = inflight.popleft()
+                data = await task
+                fill()
+                yield offset, data
+        finally:
+            pending = [task for _, task in inflight]
+            for task in pending:
+                task.cancel()
+            if pending:
+                await asyncio.gather(*pending, return_exceptions=True)
+
+    async def warm(self, message_id):
+        file_id = await self.get_file_properties(message_id)
+        await self.media_session(file_id)
+
+    async def refresh_loop(self):
+        """Keep file references fresh and the cache warm (no periodic cold start)."""
         while True:
-            await asyncio.sleep(30 * 60)
-            self.cached_file_ids.clear()
+            await asyncio.sleep(REFRESH_INTERVAL)
+            ids = list(self.cached_file_ids)
+            if not ids:
+                continue
+            try:
+                await self.fetch_many(ids)
+            except Exception as error:
+                print(f"REFRESH failed {type(error).__name__}", flush=True)
 
 
 class Gateway:
@@ -157,6 +280,7 @@ class Gateway:
         self.slots = asyncio.Semaphore(MAX_STREAMS)
         self.load_lock = asyncio.Lock()
         self.entity_ready = False
+        self.background = []
 
     async def start(self):
         api_id = int(os.environ["TELEGRAM_API_ID"])
@@ -180,6 +304,39 @@ class Gateway:
             self.loads[index] = 0
         self.entity_ready = True
 
+    async def prewarm(self):
+        """Resolve the newest catalog files and open a media session for every
+        DC they live in, so the first viewer does not pay for a Telegram
+        lookup or a new auth key (DH exchange, ~1-3 s)."""
+        ids = catalog_message_ids()[:PREWARM_MESSAGES]
+        if not ids:
+            return
+        started = time.time()
+
+        async def warm_client(streamer):
+            files = await streamer.fetch_many(ids)
+            by_dc = {}
+            for file_id in files.values():
+                by_dc.setdefault(file_id.dc_id, file_id)
+            results = await asyncio.gather(*(streamer.media_session(f) for f in by_dc.values()), return_exceptions=True)
+            failed = sum(isinstance(r, Exception) for r in results)
+            return len(files), sorted(by_dc), failed
+
+        outcomes = await asyncio.gather(*(warm_client(s) for s in self.streamers.values()), return_exceptions=True)
+        for index, outcome in enumerate(outcomes):
+            if isinstance(outcome, Exception):
+                print(f"PREWARM client={index + 1} failed {type(outcome).__name__}", flush=True)
+            else:
+                files, dcs, failed = outcome
+                print(f"PREWARM client={index + 1} files={files} dcs={dcs} failed_sessions={failed} in {time.time() - started:.1f}s", flush=True)
+
+    def start_background(self):
+        for streamer in self.streamers.values():
+            self.background.append(asyncio.create_task(streamer.refresh_loop()))
+
+    async def warm(self, message_id):
+        await asyncio.gather(*(s.warm(message_id) for s in self.streamers.values()), return_exceptions=True)
+
     async def serve(self, message_id, start, length, writer):
         if not self.entity_ready:
             raise RuntimeError("gateway is not ready")
@@ -197,37 +354,40 @@ class Gateway:
             size = int(file_id.file_size)
             if start < 0 or start >= size or length <= 0:
                 raise ValueError("invalid range")
-            length = min(length, size - start)
-            aligned = start - start % REQUEST_SIZE
-            skip = start - aligned
+            end = start + min(length, size - start)
+            pos = start                       # next byte the viewer needs
             header_sent = False
-            telegram_offset = aligned
             file_reference_retries = 0
-            remaining = length
-            skipped = skip
-            while remaining > 0:
+            while pos < end:
                 try:
-                    async for chunk in streamer.stream(file_id, telegram_offset, skipped + remaining):
-                        # Do not acknowledge the HTTP response until Telegram
-                        # has returned the first raw chunk.  This keeps a
-                        # pre-fetch failure recoverable by the Node fallback.
-                        if not header_sent:
-                            writer.write(b"OK\n")
-                            await writer.drain()
-                            header_sent = True
-                        telegram_offset += len(chunk)
-                        if skipped:
-                            drop = min(skipped, len(chunk)); chunk = chunk[drop:]; skipped -= drop
-                        if chunk:
-                            chunk = chunk[:remaining]
-                            writer.write(chunk); await writer.drain(); remaining -= len(chunk)
-                        if remaining <= 0: break
-                    if remaining: raise IOError("incomplete Telegram range")
+                    async with contextlib.aclosing(streamer.parts(file_id, pos, end - pos)) as parts:
+                        async for offset, data in parts:
+                            # Do not acknowledge the HTTP response until Telegram
+                            # has returned the first part. A pre-fetch failure
+                            # then stays recoverable by the Node fallback.
+                            if offset > pos:
+                                raise IOError("gap in Telegram parts")
+                            low = pos - offset
+                            high = min(end, offset + len(data)) - offset
+                            if high <= low:
+                                raise IOError("short Telegram part")
+                            chunk = data[low:high]
+                            if not header_sent:
+                                writer.write(b"OK\n")
+                                await writer.drain()
+                                header_sent = True
+                            writer.write(chunk)
+                            await writer.drain()      # back-pressure: slow viewer = slow Telegram
+                            pos += len(chunk)
+                            if pos >= end:
+                                break
+                    if pos < end:
+                        raise IOError("incomplete Telegram range")
                     return
                 except FileReferenceExpired:
                     # Refresh the file reference and continue from the next
-                    # unread Telegram offset.  No second protocol header is
-                    # written, so already delivered bytes are not duplicated.
+                    # byte the viewer still needs. No second protocol header is
+                    # written, so delivered bytes are never duplicated.
                     if file_reference_retries >= 1:
                         return
                     file_reference_retries += 1
@@ -240,15 +400,21 @@ class Gateway:
                         return
                     raise
         finally:
-            self.loads[index] -= 1
+            if index is not None:
+                self.loads[index] -= 1
             self.slots.release()
 
 
 async def main():
     gateway = Gateway()
     await gateway.start()
+    try:
+        await asyncio.wait_for(gateway.prewarm(), PREWARM_TIMEOUT)
+    except Exception as error:
+        print(f"PREWARM skipped {type(error).__name__}", flush=True)
+    gateway.start_background()
     server = await asyncio.start_server(lambda r, w: handle(gateway, r, w), HOST, PORT)
-    print(f"READY fast-pyrogram clients={len(gateway.clients)} port={PORT}", flush=True)
+    print(f"READY fast-pyrogram clients={len(gateway.clients)} port={PORT} first_part={FIRST_PART // 1024}KiB pipeline={PIPELINE}", flush=True)
     async with server:
         await server.serve_forever()
 
@@ -258,7 +424,14 @@ async def handle(gateway, reader, writer):
         line = await asyncio.wait_for(reader.readline(), 5)
         if not line:
             return
-        message_id, start, length = map(int, line.decode().split())
+        words = line.decode().split()
+        if words and words[0] == "WARM":
+            # Optional hint from Node: prepare this file while auth/token checks run.
+            await asyncio.wait_for(gateway.warm(int(words[1])), 10)
+            writer.write(b"WARMED\n")
+            await writer.drain()
+            return
+        message_id, start, length = map(int, words)
         if length > MAX_LENGTH:
             raise ValueError("range too large")
         await gateway.serve(message_id, start, length, writer)
@@ -269,7 +442,10 @@ async def handle(gateway, reader, writer):
             pass
     finally:
         writer.close()
-        await writer.wait_closed()
+        try:
+            await writer.wait_closed()
+        except Exception:
+            pass
 
 
 if __name__ == "__main__":

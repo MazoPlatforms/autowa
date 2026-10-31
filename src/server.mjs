@@ -8,7 +8,7 @@ import {startWhatsApp,sendWhatsAppOtp,deleteWhatsAppOtp,getWhatsAppProfilePictur
 import {startFilmGoBot} from './filmgo-bot.mjs';
 import {logFilmGo} from './filmgo-logs.mjs';
 import {startStreamWorker,proxyRange,downloadFile,streamWorkerState} from './stream-worker.mjs';
-import {startFastStreamWorker,fastProxyRange} from './fast-stream-worker.mjs';
+import {startFastStreamWorker,fastProxyRange,fastWarm} from './fast-stream-worker.mjs';
 import {DAILY_TOKEN_LIMIT,DAILY_TOKEN_LIMIT_MILLI,tokenCostMilli,tokenAmount,reserveDailyTokens,releaseDailyTokens,dailyTokenUsage} from './daily-tokens.mjs';
 
 const PORT=Number(process.env.PORT||8000);
@@ -143,6 +143,23 @@ function verifyToken(token){
 }
 function cookieToken(req){return (req.headers.cookie||'').split(';').map(v=>v.trim()).find(v=>v.startsWith('tfw_session='))?.slice(12)||'';}
 async function authenticated(req){const session=verifyToken(cookieToken(req));return session&&await redis('GET','session:'+hmac(session.nonce))===session.number?session:null;}
+// Every seek is a new Range request; without this each one waited for an Upstash
+// round trip just to re-check the session. The signed token is still verified on
+// every request; only the "not revoked" lookup is cached (default 30 s, 0 = off).
+// Logout clears the entry immediately.
+const AUTH_STREAM_CACHE_MS=Number(process.env.AUTH_STREAM_CACHE_MS??30000);
+const authStreamCache=new Map();
+async function authenticatedStream(req){
+ const session=verifyToken(cookieToken(req));if(!session)return null;
+ const key=hmac(session.nonce),hit=authStreamCache.get(key);
+ if(hit&&hit.number===session.number&&hit.until>Date.now())return session;
+ if(await redis('GET','session:'+key)!==session.number){authStreamCache.delete(key);return null;}
+ if(AUTH_STREAM_CACHE_MS>0){
+  authStreamCache.set(key,{number:session.number,until:Date.now()+AUTH_STREAM_CACHE_MS});
+  if(authStreamCache.size>2000){const now=Date.now();for(const [k,v] of authStreamCache)if(v.until<=now)authStreamCache.delete(k);if(authStreamCache.size>2000)authStreamCache.clear();}
+ }
+ return session;
+}
 function sessionCookie(token,age){return 'tfw_session='+token+'; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age='+age;}
 // Private per-account request history. Never expose a public phone-indexed endpoint.
 const historyKey=number=>'request-history:'+hmac(number);
@@ -343,11 +360,14 @@ const server=http.createServer(async(req,res)=>{
   }
   if((req.method==='GET'||req.method==='HEAD')&&url.pathname.startsWith('/api/stream/')){
    const publicId=url.pathname.slice('/api/stream/'.length);
+   const tReq=Date.now();
    const catalog=await getPublicCatalog();
    const record=(catalog.movies||[]).find(m=>m.slug_id===publicId);
    const movie=selectMovieVariant(record,url.searchParams.get('quality'));
    if(!movie||!Number.isSafeInteger(movie.telegram_message_id)||!Number.isSafeInteger(movie.file_size)||movie.file_size<=0)return send(res,404,{error:'Video unavailable'});
-   const session=await authenticated(req);
+   if(fastStreaming)fastWarm(movie.telegram_message_id); // prepare Telegram side while auth/token checks run
+   const session=await authenticatedStream(req);
+   const tAuth=Date.now();
    if(!session)return send(res,401,{error:'Please sign in using your phone number.'});
    if(!telegramReady)return send(res,503,{error:'Telegram not configured'});
    const total=movie.file_size;
@@ -365,8 +385,11 @@ const server=http.createServer(async(req,res)=>{
    const length=end-start+1;
    if(req.method==='HEAD')return send(res,405,{error:'HEAD is not available'});
    const exempt=unlimitedRequests(session.number),reservation=await reserveDailyTokens(redis,hmac(session.number),tokenCostMilli(length,'stream'),{unlimited:exempt});
+   const tReserve=Date.now();
    if(!reservation.allowed)return send(res,429,{error:'Daily tokens exhausted; reset is 00:00:00 UTC'});
-   let delivered=0,settled=false;
+   let delivered=0,settled=false,firstAt=0;
+   // One line per range request: where the time before the first byte goes.
+   const onChunk=n=>{if(!firstAt){firstAt=Date.now();console.info('FilmGo stream timing',JSON.stringify({id:publicId,start,len:length,auth_ms:tAuth-tReq,reserve_ms:tReserve-tAuth,gateway_ms:firstAt-tReserve,first_byte_ms:firstAt-tReq,path:fastStreaming?'fast':'telethon'}));}delivered+=n;};
    const settle=async()=>{if(settled)return;settled=true;const actual=delivered?tokenCostMilli(delivered,'stream'):0;if(!exempt&&reservation.costMilli>actual)await releaseDailyTokens(redis,reservation,reservation.costMilli-actual).catch(()=>{});};
    res.once('finish',()=>{void settle();});res.once('close',()=>{void settle();});
    const originalName=String(movie.file_name||'').trim();
@@ -383,11 +406,11 @@ const server=http.createServer(async(req,res)=>{
    if(start===0)void logFilmGo('streams','▶️ Stream started · '+record.title+' ('+record.year+') · '+(movie.quality||url.searchParams.get('quality')||'default'));
    // Prefer one persistent Telethon connection; legacy subprocess remains a fallback.
    const rangeProxy=fastStreaming?fastProxyRange:proxyRange;
-   if(await rangeProxy(res,headers,{messageId:movie.telegram_message_id,start,length,onChunk:n=>{delivered+=n;}},send)){await settle();return;}
+   if(await rangeProxy(res,headers,{messageId:movie.telegram_message_id,start,length,onChunk},send)){await settle();return;}
    // If the experimental Pyrogram path is unavailable before response
    // headers are sent, reuse FilmGo's persistent Telethon gateway before
    // falling back to the legacy per-range subprocess.
-   if(fastStreaming&&await proxyRange(res,headers,{messageId:movie.telegram_message_id,start,length,onChunk:n=>{delivered+=n;}},send)){await settle();return;}
+   if(fastStreaming&&await proxyRange(res,headers,{messageId:movie.telegram_message_id,start,length,onChunk},send)){await settle();return;}
    const child=spawn('python3',['src/telegram_stream.py',String(movie.telegram_message_id),String(start),String(length)],{env:process.env,stdio:['ignore','pipe','pipe']});
    let started=false,bytes=0,closed=false;
    const startedAt=Date.now();
@@ -506,6 +529,7 @@ const server=http.createServer(async(req,res)=>{
   const session=await authenticated(req);
   if(!session)return send(res,401,{error:'Please sign in using your phone number.'});
   if(url.pathname==='/api/logout'){
+   authStreamCache.delete(hmac(session.nonce));
    await redis('DEL','session:'+hmac(session.nonce));
    return send(res,200,{ok:true},{'Set-Cookie':sessionCookie('',0)});
   }

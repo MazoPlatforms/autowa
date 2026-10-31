@@ -25,3 +25,16 @@ export async function fastProxyRange(res,headers,{messageId,start,length,onChunk
  try{socket=await new Promise((resolve,reject)=>{const conn=net.createConnection({host:'127.0.0.1',port:PORT});const timer=setTimeout(()=>conn.destroy(new Error('Fast worker connection timeout')),3000);conn.once('connect',()=>{clearTimeout(timer);resolve(conn);});conn.once('error',e=>{clearTimeout(timer);reject(e);});});}catch(error){lastError=error.message;return false;}
  return new Promise(resolve=>{let settled=false,header=false,buffer=Buffer.alloc(0),bytes=0,timer;const done=ok=>{if(settled)return;settled=true;clearTimeout(timer);socket.destroy();resolve(ok);};timer=setTimeout(()=>{if(!header)done(false);else{res.destroy(new Error('Fast worker timeout'));done(true);}},40000);socket.on('data',chunk=>{if(settled)return;if(!header){buffer=Buffer.concat([buffer,chunk]);const end=buffer.indexOf(10);if(end<0){if(buffer.length>512)done(false);return;}const reply=buffer.subarray(0,end).toString().trim();chunk=buffer.subarray(end+1);buffer=Buffer.alloc(0);if(reply!=='OK'){lastError=reply;done(false);return;}header=true;res.writeHead(206,headers);}if(chunk.length){bytes+=chunk.length;if(bytes>length){res.destroy();done(true);return;}onChunk?.(chunk.length);if(!res.write(chunk))socket.pause();}clearTimeout(timer);timer=setTimeout(()=>{res.destroy();done(true);},40000);if(bytes===length){res.end();done(true);}});res.on('drain',()=>socket.resume());res.once('close',()=>{if(!settled)done(true);});socket.on('error',error=>{lastError=error.message;if(header){res.destroy();done(true);}else done(false);});socket.on('end',()=>{if(!settled){if(header){res.destroy();done(true);}else done(false);}});socket.write(`${messageId} ${start} ${length}\n`);});
 }
+
+// Hint the gateway to prepare a file (message lookup + media session) while
+// Node is still doing auth/token checks. Fire-and-forget; never throws.
+export function fastWarm(messageId){
+ if(state!=='ready')return;
+ const conn=net.createConnection({host:'127.0.0.1',port:PORT});
+ const timer=setTimeout(()=>conn.destroy(),10000);
+ timer.unref?.();
+ conn.on('connect',()=>conn.write('WARM '+messageId+'\n'));
+ conn.on('data',()=>conn.destroy());
+ conn.on('error',()=>{});
+ conn.on('close',()=>clearTimeout(timer));
+}
