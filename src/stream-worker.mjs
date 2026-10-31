@@ -23,7 +23,7 @@ export function startStreamWorker(){
   if(stdout.includes('READY')){state='ready';lastError=null;restartCount=0;}
   if(stdout.includes('AUTH_FAILED')){state='auth_failed';stopping=true;}
  });
- child.stderr.on('data',chunk=>{const line=chunk.toString().trim();if(line)console.warn('Stream worker:',line.slice(0,400));});
+ child.stderr.on('data',chunk=>{const line=chunk.toString().trim();if(line){console.warn('Stream worker:',line.slice(0,400));if(/stream worker listening on/i.test(line)){state='ready';lastError=null;restartCount=0;}}});
  child.on('error',err=>{lastError=err.message;state='error';});
  child.on('close',(code,signal)=>{
   if(worker!==child)return;
@@ -137,6 +137,7 @@ export async function downloadFile(res,{messageId,total,onChunk}){
   res.end();return true;
  }catch(err){
   lastError=err.message;
+  console.warn('Telegram download worker failed:',err.message);
   if(res.headersSent)res.destroy(err);
   else{res.writeHead(502,{'Content-Type':'application/json','Cache-Control':'no-store'});res.end(JSON.stringify({error:'Download unavailable'}));}
   return true;
