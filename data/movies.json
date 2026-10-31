@@ -3475,6 +3475,32 @@
       "file_name": "Modha Rathri (2026) Tamil HQ HDRip - 720p - x264 - (DD+5.mkv",
       "mime_type": "video/x-matroska",
       "quality": "720p"
+    },
+    {
+      "id": "telegram-115",
+      "slug_id": "oogvlgzDff1O1bmr",
+      "title": "Boss Engira Baskaran",
+      "year": 2010,
+      "qualities": {
+        "720p": {
+          "telegram_message_id": 115,
+          "file_name": "Boss Engira Bhaskaran (2010) Tamil HQ BluRay - 720p - x2.mkv",
+          "file_size": 0,
+          "mime_type": ""
+        }
+      },
+      "telegram_message_id": 115,
+      "quality": "720p",
+      "file_name": "Boss Engira Bhaskaran (2010) Tamil HQ BluRay - 720p - x2.mkv",
+      "file_size": 0,
+      "mime_type": "",
+      "imdb_id": "tt1606183",
+      "poster": "https://m.media-amazon.com/images/M/MV5BY2E2YWY4MTAtNGRkMi00ZjRjLThmOTQtZTdjNjAyNjVhZjFmXkEyXkFqcGdeQXVyODk4ODEyMjk@._V1_SX300.jpg",
+      "genre": "Comedy",
+      "runtime": "161 min",
+      "director": "M. Rajesh",
+      "cast": "Arya, Nayanthara, Santhanam",
+      "plot": "Bhaskaran, a college dropout, along with his friend Nallathambi starts a coaching class for students in order to win the love of a young professor, Chandrika."
     }
   ]
 }
