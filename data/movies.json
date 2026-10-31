@@ -3077,6 +3077,32 @@
       "director": "A.R. Murugadoss",
       "cast": "Joseph Vijay, Yogi Babu, Keerthy Suresh",
       "plot": "An NRI businessman learns his vote has been cast by someone else and decides to investigate the matter, eventually finding himself pitted against two corrupt politicians."
+    },
+    {
+      "id": "telegram-102",
+      "slug_id": "YVNA90-8DSTjeSJ3",
+      "title": "Kaala",
+      "year": 2018,
+      "qualities": {
+        "720p": {
+          "telegram_message_id": 102,
+          "file_name": "Kaala.Tamil.2018.720p.AMZN.WEB-DL.Tamil.DDP5.1.AV1-JeRi.mkv",
+          "file_size": 0,
+          "mime_type": ""
+        }
+      },
+      "telegram_message_id": 102,
+      "quality": "720p",
+      "file_name": "Kaala.Tamil.2018.720p.AMZN.WEB-DL.Tamil.DDP5.1.AV1-JeRi.mkv",
+      "file_size": 0,
+      "mime_type": "",
+      "imdb_id": "tt6929642",
+      "poster": "https://m.media-amazon.com/images/M/MV5BY2JlN2E2NjQtYTFkYi00NGM4LThlM2YtZTgwYjMwYzE3MTQ3XkEyXkFqcGc@._V1_QL75_UX380_CR0,16,380,562_.jpg",
+      "genre": "Action, Crime, Drama",
+      "runtime": "162 min",
+      "director": "Pa. Ranjith",
+      "cast": "Rajinikanth, Nana Patekar, Samuthirakani",
+      "plot": "Kaala is about the life of Nellai / Tirunelveli based Tamils who live in large number in Mumbai."
     }
   ]
 }
