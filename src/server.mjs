@@ -11,6 +11,7 @@ import {startStreamWorker,proxyRange,downloadFile,streamWorkerState} from './str
 import {DAILY_TOKEN_LIMIT,DAILY_TOKEN_LIMIT_MILLI,tokenCostMilli,tokenAmount,reserveDailyTokens,releaseDailyTokens,dailyTokenUsage} from './daily-tokens.mjs';
 
 const PORT=Number(process.env.PORT||8000);
+const STREAM_RANGE_SIZE=128*1024*1024;
 const required=['APP_SECRET','UPSTASH_REDIS_REST_URL','UPSTASH_REDIS_REST_TOKEN','GITHUB_DISPATCH_TOKEN','GITHUB_REPOSITORY'];
 const missing=required.filter(k=>!process.env[k]);
 const secret=process.env.APP_SECRET||'';
@@ -338,7 +339,7 @@ const server=http.createServer(async(req,res)=>{
    if(!telegramReady)return send(res,503,{error:'Telegram not configured'});
    const total=movie.file_size;
    const range=req.headers.range;
-   let start=0,end=Math.min(total-1,32*1024*1024-1);
+   let start=0,end=Math.min(total-1,STREAM_RANGE_SIZE-1);
    if(range){
     const match=/^bytes=(\d+)-(\d*)$/.exec(range);
     if(!match)return send(res,416,{error:'Invalid byte range'},{'Content-Range':'bytes */'+total});
@@ -346,7 +347,7 @@ const server=http.createServer(async(req,res)=>{
     if(!Number.isSafeInteger(start)||start>=total)return send(res,416,{error:'Range unavailable'},{'Content-Range':'bytes */'+total});
     const requested=match[2]?Number(match[2]):total-1;
     if(!Number.isSafeInteger(requested)||requested<start)return send(res,416,{error:'Invalid byte range'},{'Content-Range':'bytes */'+total});
-    end=Math.min(requested,total-1,start+32*1024*1024-1);
+    end=Math.min(requested,total-1,start+STREAM_RANGE_SIZE-1);
    }
    const length=end-start+1;
    if(req.method==='HEAD')return send(res,405,{error:'HEAD is not available'});
