@@ -25,30 +25,37 @@ function applyRetryCooldown(error,value){
  const seconds=Number(error?.retryAfter)||Number(match?.[1])||0;
  if(seconds>0)startOtpCooldown(value,seconds);
 }
-let waVerifyId='',waPollTimer=null;
+let waVerifyId='',waPollTimer=null,waPollInFlight=false,waVerificationCompleted=false;
+const waPendingKey='filmgo-wa-verify-v1';
+function saveWhatsAppPending(data){try{localStorage.setItem(waPendingKey,JSON.stringify(data));}catch{}}
+function clearWhatsAppPending(){try{localStorage.removeItem(waPendingKey);}catch{}}
 function closeWhatsAppSheet(){whatsappSheet.classList.add('hidden');if(waPollTimer){clearInterval(waPollTimer);waPollTimer=null;}}
-function resetVerification(){closeWhatsAppSheet();waVerifyId='';otpFields.forEach(field=>field.value='');syncOtpCode();$('verify').classList.add('hidden');$('start').classList.remove('hidden');msg('Verification reset. Enter your phone number to start again.');refreshOtpTimers();$('phone').focus();}
+function resetVerification(){closeWhatsAppSheet();clearWhatsAppPending();waVerifyId='';waVerificationCompleted=false;otpFields.forEach(field=>field.value='');syncOtpCode();$('verify').classList.add('hidden');$('start').classList.remove('hidden');msg('Verification reset. Enter your phone number to start again.');refreshOtpTimers();$('phone').focus();}
 function beginWhatsAppPolling(){
  if(waPollTimer)clearInterval(waPollTimer);
+ waPollInFlight=false;waVerificationCompleted=false;
  const poll=async()=>{
-  if(!waVerifyId||!number)return;
+  if(!waVerifyId||!number||waPollInFlight||waVerificationCompleted)return;
+  waPollInFlight=true;
   try{
    const result=await api('otp/whatsapp/status',{number,request_id:waVerifyId});
    if(!result.verified)return;
+   waVerificationCompleted=true;clearWhatsAppPending();
    if(waPollTimer){clearInterval(waPollTimer);waPollTimer=null;}
    $('whatsapp-sheet-copy').textContent='Your WhatsApp number was verified successfully.';
    $('verify-via-whatsapp').classList.add('hidden');$('send-otp-fallback').classList.add('hidden');$('whatsapp-verify-link').classList.add('hidden');
    $('whatsapp-sheet-status').textContent='Verification complete. Tap below to return to FilmGo.';
-   const done=document.createElement('button');done.type='button';done.className='primary-button';done.textContent='Continue to FilmGo';done.addEventListener('click',()=>location.assign('/'));document.querySelector('.auth-sheet-panel').append(done);
+   let done=document.getElementById('wa-verify-done');if(!done){done=document.createElement('button');done.id='wa-verify-done';done.type='button';done.className='primary-button';done.addEventListener('click',()=>location.assign('/'));document.querySelector('.auth-sheet-panel').append(done);}done.textContent='Continue to FilmGo';
    authVersion++;signedIn=true;saveLoginHint(true);
-  }catch(err){if(/expired/i.test(err.message)){closeWhatsAppSheet();msg('WhatsApp verification expired. Please send a new code.');}}
+  }catch(err){if(/expired/i.test(err.message)){clearWhatsAppPending();closeWhatsAppSheet();msg('WhatsApp verification expired. Please send a new code.');}}
+  finally{waPollInFlight=false;}
  };
  void poll();waPollTimer=setInterval(()=>void poll(),2000);
 }
 async function startWhatsAppVerification(){
  const button=$('verify-via-whatsapp');button.disabled=true;button.textContent='Preparing WhatsApp verification…';
  try{
-  const result=await api('otp/whatsapp/start',{number});waVerifyId=result.request_id;
+  const result=await api('otp/whatsapp/start',{number});waVerifyId=result.request_id;saveWhatsAppPending({request_id:waVerifyId,number,url:result.url,expires_at:Date.now()+Number(result.expires_in||300)*1000});
   const link=$('whatsapp-verify-link');link.href=result.url;link.classList.remove('hidden');link.textContent='Open WhatsApp manually';
   $('whatsapp-sheet-status').textContent='Opening WhatsApp… Send the pre-filled message, then return here.';
   button.textContent='WhatsApp opened — send the message';const popup=window.open('about:blank','_blank','noopener,noreferrer');if(popup)popup.location.href=result.url;else location.href=result.url;
@@ -57,11 +64,19 @@ async function startWhatsAppVerification(){
 }
 async function sendOtpFallback(){
  const button=$('send-otp-fallback');button.disabled=true;button.textContent='Sending OTP…';otpRequestPending=true;refreshOtpTimers();
- try{await api('otp/start',{number});startOtpCooldown(number);otpFields.forEach(field=>field.value='');syncOtpCode();closeWhatsAppSheet();$('start').classList.add('hidden');$('verify').classList.remove('hidden');msg('Verification code sent to '+number);otpFields[0].focus();}
+ try{clearWhatsAppPending();await api('otp/start',{number});startOtpCooldown(number);otpFields.forEach(field=>field.value='');syncOtpCode();closeWhatsAppSheet();$('start').classList.add('hidden');$('verify').classList.remove('hidden');msg('Verification code sent to '+number);otpFields[0].focus();}
  catch(err){applyRetryCooldown(err,number);$('whatsapp-sheet-status').textContent=err.message;button.disabled=false;button.textContent='Can’t access WhatsApp? Send OTP';}
  finally{otpRequestPending=false;refreshOtpTimers();}
 }
-function openWhatsAppSheet(){whatsappSheet.classList.remove('hidden');$('whatsapp-sheet-status').textContent='';$('whatsapp-sheet-copy').textContent='Choose a secure way to verify your phone number.';$('verify-via-whatsapp').classList.remove('hidden');$('verify-via-whatsapp').disabled=false;$('verify-via-whatsapp').textContent='Verify via WhatsApp';$('send-otp-fallback').classList.remove('hidden');$('send-otp-fallback').disabled=false;$('send-otp-fallback').textContent='Can’t access WhatsApp? Send OTP';$('whatsapp-verify-link').classList.add('hidden');$('whatsapp-verify-link').removeAttribute('href');}
+function openWhatsAppSheet(){whatsappSheet.classList.remove('hidden');waVerificationCompleted=false;document.getElementById('wa-verify-done')?.remove();$('whatsapp-sheet-status').textContent='';$('whatsapp-sheet-copy').textContent='Choose a secure way to verify your phone number.';$('verify-via-whatsapp').classList.remove('hidden');$('verify-via-whatsapp').disabled=false;$('verify-via-whatsapp').textContent='Verify via WhatsApp';$('send-otp-fallback').classList.remove('hidden');$('send-otp-fallback').disabled=false;$('send-otp-fallback').textContent='Can’t access WhatsApp? Send OTP';$('whatsapp-verify-link').classList.add('hidden');$('whatsapp-verify-link').removeAttribute('href');}
+function restorePendingWhatsAppVerification(){
+ let pending=null;try{pending=JSON.parse(localStorage.getItem(waPendingKey)||'null');}catch{}
+ if(!pending||typeof pending.request_id!=='string'||typeof pending.number!=='string'||!pending.url||Number(pending.expires_at)<=Date.now()){clearWhatsAppPending();return;}
+ number=pending.number;waVerifyId=pending.request_id;$('phone').value=number;openWhatsAppSheet();
+ const link=$('whatsapp-verify-link');link.href=pending.url;link.textContent='Open WhatsApp manually';link.classList.remove('hidden');
+ $('verify-via-whatsapp').disabled=true;$('verify-via-whatsapp').textContent='Waiting for WhatsApp verification…';$('whatsapp-sheet-status').textContent='Previous verification request restored. Send the message or return here after sending it.';
+ beginWhatsAppPolling();
+}
 $('close-whatsapp-sheet').addEventListener('click',closeWhatsAppSheet);document.querySelector('[data-close-whatsapp-sheet]').addEventListener('click',closeWhatsAppSheet);$('send-otp-fallback').addEventListener('click',sendOtpFallback);$('verify-via-whatsapp').addEventListener('click',startWhatsAppVerification);
 let countriesLoaded=false,countriesFailed=false,countriesPromise=null,countryList=[];
 function flagFor(iso){return String.fromCodePoint(...String(iso||'').toUpperCase().split('').map(ch=>127397+ch.charCodeAt(0)));}
@@ -285,6 +300,7 @@ setInterval(()=>{if(signedIn&&location.pathname==='/history'&&!document.hidden)v
 const initialAuthVersion=authVersion;
 showAccount().then(()=>{
  if(initialAuthVersion!==authVersion)return;
+ clearWhatsAppPending();
  saveLoginHint(true);
 }).catch(()=>{
  if(initialAuthVersion!==authVersion)return;
@@ -292,4 +308,5 @@ showAccount().then(()=>{
  saveLoginHint(false);
  routeView();
  msg('Please sign in to continue.');
+ restorePendingWhatsAppVerification();
 }).finally(()=>document.documentElement.classList.add('auth-ready'));
