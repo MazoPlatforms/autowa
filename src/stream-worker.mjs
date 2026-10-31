@@ -103,7 +103,7 @@ export async function downloadFile(res,{messageId,total,onChunk}){
    await new Promise((resolve,reject)=>{
     const socket=net.createConnection({host:'127.0.0.1',port:PORT});
     let header=Buffer.alloc(0),accepted=false,count=0,finished=false;
-    const timeout=setTimeout(()=>fail(Error('Download segment timeout')),45000);
+    const timeout=setTimeout(()=>fail(Error('Download segment timeout')),130000);
     const cleanup=()=>{clearTimeout(timeout);socket.destroy();res.off('close',abort);res.off('drain',resume);};
     const fail=err=>{if(finished)return;finished=true;cleanup();reject(err);};
     const abort=()=>fail(Error('Download cancelled'));
