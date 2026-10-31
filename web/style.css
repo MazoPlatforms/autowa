@@ -632,6 +632,13 @@ body.tv:has(#verify:not(.hidden)) #verify .primary-button{margin-bottom:20px!imp
 body.tv:has(#start:not(.hidden)) footer,body.tv:has(#verify:not(.hidden)) footer{display:none}
 body.tv:has(#start:not(.hidden)) #message,body.tv:has(#verify:not(.hidden)) #message{display:none!important}
 
+/* Use the official FilmGo lockup in authentication headers. */
+body.tv:has(#start:not(.hidden)) .brand-link,body.tv:has(#verify:not(.hidden)) .brand-link{top:64px;width:112px;height:28px;transform:translateX(-50%)}
+body.tv:has(#start:not(.hidden)) .brand-link img,body.tv:has(#verify:not(.hidden)) .brand-link img{display:block;width:112px;height:28px;object-fit:contain}
+body.tv:has(#start:not(.hidden)) .brand-link::after,body.tv:has(#verify:not(.hidden)) .brand-link::after{display:none}
+body.tv .auth-sheet-panel::before{content:'';width:112px;height:28px;background:url('/icons/filmgo-lockup.png?v=20261030-2') center/contain no-repeat;font-size:0;}
+@media(max-width:600px){body.tv:has(#start:not(.hidden)) .brand-link,body.tv:has(#verify:not(.hidden)) .brand-link{top:64px;width:112px;height:28px}body.tv:has(#start:not(.hidden)) .brand-link img,body.tv:has(#verify:not(.hidden)) .brand-link img{width:112px;height:28px}body.tv .auth-sheet-panel::before{width:112px;height:28px}}
+
 /* The verification-method screen becomes a deliberate full-page step on phones. */
 body.tv .auth-sheet{align-items:stretch;background:#1c1c1e}
 body.tv .auth-sheet-backdrop{display:none}
