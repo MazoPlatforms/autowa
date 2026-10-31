@@ -483,7 +483,6 @@ const server=http.createServer(async(req,res)=>{
    const number=phone(data.number);
    if(!number)return send(res,400,{error:'Invalid phone number'});
    if(!await limit('wa-verify-start:'+number,5,3600))return send(res,429,{error:'WhatsApp verification limit reached'});
-   if(!await redis('GET','otp:'+hmac(number)))return send(res,409,{error:'Send a verification code first'});
    const requestId=crypto.randomBytes(24).toString('base64url');
    await redis('SET',waVerifyKey(requestId),JSON.stringify({number,status:'pending',created_at:Date.now()}),'EX',WA_VERIFY_TTL);
    const verifyUrl='https://wa.me/+'+WHATSAPP_VERIFY_NUMBER+'?text='+encodeURIComponent(requestId);
