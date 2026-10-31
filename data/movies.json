@@ -1,7 +1,42 @@
 {
   "schema_version": 2,
-  "updated_at": "2026-10-31T18:20:17.051450+00:00",
+  "updated_at": "2026-10-31T18:22:05.022680+00:00",
   "movies": [
+    {
+      "id": "telegram-100",
+      "slug_id": "NRQjyt1FW9sUHWJ6",
+      "title": "96",
+      "year": 2018,
+      "qualities": {
+        "720p": {
+          "telegram_message_id": 100,
+          "file_size": 1461758869,
+          "file_name": "96.2018.720p.WEBRip.x264.AAC-[YTS.GG - YTS.BZ].mp4",
+          "mime_type": "video/mp4"
+        }
+      },
+      "imdb_id": "tt7019842",
+      "poster": "https://m.media-amazon.com/images/M/MV5BZjVkNWRjOGQtNzMyNy00N2VlLTg5OTctMzNiMjU4NjA1NzBhXkEyXkFqcGc@._V1_.jpg",
+      "genre": [
+        "Drama",
+        "Romance"
+      ],
+      "runtime": "158 min",
+      "director": "C. Prem Kumar",
+      "cast": [
+        "Vijay Sethupathi",
+        "Trisha Krishnan",
+        "Adithya Bhaskar"
+      ],
+      "plot": "Two high school sweethearts meet at a reunion after 22 years and reminisce about their past.",
+      "imdb_rating": "8.4",
+      "metadata_status": "matched",
+      "telegram_message_id": 100,
+      "file_size": 1461758869,
+      "file_name": "96.2018.720p.WEBRip.x264.AAC-[YTS.GG - YTS.BZ].mp4",
+      "mime_type": "video/mp4",
+      "quality": "720p"
+    },
     {
       "id": "telegram-99",
       "slug_id": "R2ZDBoTmPKFSP14s",
@@ -3016,32 +3051,6 @@
       "file_name": "Modha Rathri (2026) Tamil HQ HDRip - 720p - x264 - (DD+5.mkv",
       "mime_type": "video/x-matroska",
       "quality": "720p"
-    },
-    {
-      "id": "telegram-100",
-      "slug_id": "NRQjyt1FW9sUHWJ6",
-      "title": "96",
-      "year": 2018,
-      "qualities": {
-        "720p": {
-          "telegram_message_id": 100,
-          "file_name": "96.2018.720p.WEBRip.x264.AAC-[YTS.GG - YTS.BZ].mp4",
-          "file_size": 0,
-          "mime_type": ""
-        }
-      },
-      "telegram_message_id": 100,
-      "quality": "720p",
-      "file_name": "96.2018.720p.WEBRip.x264.AAC-[YTS.GG - YTS.BZ].mp4",
-      "file_size": 0,
-      "mime_type": "",
-      "imdb_id": "tt7019842",
-      "poster": "https://m.media-amazon.com/images/M/MV5BODFiZDk5MDgtMWMzNy00MTZmLTk2YTQtYjg1NzNmYzJlODJkXkEyXkFqcGc@._V1_QL75_UY562_CR14,0,380,562_.jpg",
-      "genre": "Drama, Romance",
-      "runtime": "158 min",
-      "director": "C. Prem Kumar",
-      "cast": "Vijay Sethupathi, Trisha Krishnan, Adithya Bhaskar",
-      "plot": "Two high school sweethearts meet at a reunion after 22 years and reminisce about their past."
     }
   ]
 }
