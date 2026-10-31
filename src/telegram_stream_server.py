@@ -26,7 +26,7 @@ REQUEST_SIZE = 512 * 1024            # Telegram max-friendly aligned part size
 MAX_LENGTH = 32 * 1024 * 1024        # same cap as the HTTP layer
 MAX_STREAMS = int(os.getenv("STREAM_MAX_CONCURRENT", "6"))
 QUEUE_DEPTH = 4                      # chunks buffered per stream (~2 MiB)
-CHUNK_TIMEOUT = 30                   # seconds to wait for one Telegram part
+CHUNK_TIMEOUT = 90                   # seconds to wait for one Telegram part
 ACQUIRE_TIMEOUT = 5                  # seconds to wait for a free stream slot
 REF_TTL = 600                        # seconds a looked-up message is reused
 CACHE_MAX = 256
@@ -127,7 +127,7 @@ class Gateway:
     async def first_chunk(self, message_id, start, remaining):
         aligned = start - start % REQUEST_SIZE
         chunks = -(-(start - aligned + remaining) // REQUEST_SIZE)
-        for attempt in (0, 1):
+        for attempt in range(3):
             media, size = await self.media_for(message_id, force=bool(attempt))
             if start >= size:
                 raise GatewayError(416, "Range exceeds media")
@@ -139,8 +139,13 @@ class Gateway:
                 raise GatewayError(502, "Telegram returned no data")
             except FileRefExpired:
                 self.cache.pop(message_id, None)   # refresh the file reference once
-                if attempt:
+                if attempt >= 2:
                     raise
+            except asyncio.TimeoutError:
+                self.cache.pop(message_id, None)
+                if attempt >= 2:
+                    raise
+                await asyncio.sleep(0.25)
         raise GatewayError(502, "Telegram media could not be retrieved")
 
     async def serve(self, message_id, start, length, writer):
