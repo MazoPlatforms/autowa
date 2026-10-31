@@ -130,6 +130,7 @@ class Gateway:
         self.streamers = {}
         self.loads = {}
         self.slots = asyncio.Semaphore(MAX_STREAMS)
+        self.load_lock = asyncio.Lock()
         self.entity_ready = False
 
     async def start(self):
@@ -143,6 +144,9 @@ class Gateway:
         for index, token in enumerate(tokens):
             client = Client(name=f"filmgo-fast-{index}", api_id=api_id, api_hash=api_hash, bot_token=token, no_updates=True, in_memory=True, sleep_threshold=60)
             await client.start()
+            # Verify every configured client can actually read FilmGo's
+            # source channel before including it in the load balancer.
+            await client.get_chat(SOURCE_CHANNEL)
             self.clients[index] = client
             self.streamers[index] = ByteStreamer(client)
             self.loads[index] = 0
@@ -151,11 +155,16 @@ class Gateway:
     async def serve(self, message_id, start, length, writer):
         if not self.entity_ready:
             raise RuntimeError("gateway is not ready")
-        index = min(self.loads, key=self.loads.get)
-        streamer = self.streamers[index]
         await asyncio.wait_for(self.slots.acquire(), 5)
-        self.loads[index] += 1
+        index = None
         try:
+            # Reserve a stream slot first, then choose and account the client
+            # without an await between selection and increment.  This keeps
+            # queued requests from selecting the same stale minimum load.
+            async with self.load_lock:
+                index = min(self.loads, key=self.loads.get)
+                self.loads[index] += 1
+            streamer = self.streamers[index]
             file_id = await streamer.get_file_properties(message_id)
             size = int(file_id.file_size)
             if start < 0 or start >= size or length <= 0:
@@ -164,11 +173,13 @@ class Gateway:
             aligned = start - start % REQUEST_SIZE
             skip = start - aligned
             header_sent = False
-            for attempt in (0, 1):
+            telegram_offset = aligned
+            file_reference_retries = 0
+            remaining = length
+            skipped = skip
+            while remaining > 0:
                 try:
-                    remaining = length
-                    skipped = skip
-                    async for chunk in streamer.stream(file_id, aligned, skip + length):
+                    async for chunk in streamer.stream(file_id, telegram_offset, skipped + remaining):
                         # Do not acknowledge the HTTP response until Telegram
                         # has returned the first raw chunk.  This keeps a
                         # pre-fetch failure recoverable by the Node fallback.
@@ -176,6 +187,7 @@ class Gateway:
                             writer.write(b"OK\n")
                             await writer.drain()
                             header_sent = True
+                        telegram_offset += len(chunk)
                         if skipped:
                             drop = min(skipped, len(chunk)); chunk = chunk[drop:]; skipped -= drop
                         if chunk:
@@ -185,16 +197,14 @@ class Gateway:
                     if remaining: raise IOError("incomplete Telegram range")
                     return
                 except FileReferenceExpired:
-                    # Once the protocol header/media is visible to Node, a
-                    # retry from the old offset would duplicate bytes or
-                    # inject a second protocol header.  Let the connection
-                    # end cleanly instead.
-                    if header_sent:
+                    # Refresh the file reference and continue from the next
+                    # unread Telegram offset.  No second protocol header is
+                    # written, so already delivered bytes are not duplicated.
+                    if file_reference_retries >= 1:
                         return
+                    file_reference_retries += 1
                     streamer.cached_file_ids.pop(message_id, None)
                     file_id = await streamer.get_file_properties(message_id, force=True)
-                    if attempt:
-                        raise
                 except Exception:
                     # Never append an ERR line after a successful response
                     # header; that would become corrupt media on the client.

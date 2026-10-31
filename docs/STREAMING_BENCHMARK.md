@@ -31,6 +31,12 @@ pip install -r requirements-fast-stream.txt
 Required runtime settings for the experimental path are the existing Telegram
 API/session settings plus `BOT_TOKEN` or `STREAM_BOT_TOKEN`. Optional
 `STREAM_MULTI_TOKEN1`, `STREAM_MULTI_TOKEN2`, ... add clients.
+Each configured client verifies access to `TELEGRAM_CHANNEL_ID` during startup;
+the fast gateway does not advertise itself as ready when a configured token
+cannot read the source channel. Stream slots are reserved before client
+selection, and file-reference refresh continues from the next unread Telegram
+offset. If the fast gateway is unavailable before response headers, FilmGo
+tries its persistent Telethon gateway before the legacy subprocess fallback.
 
 ## Benchmark
 

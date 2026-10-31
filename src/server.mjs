@@ -325,6 +325,10 @@ const server=http.createServer(async(req,res)=>{
    // Prefer one persistent Telethon connection; legacy subprocess remains a fallback.
    const rangeProxy=fastStreaming?fastProxyRange:proxyRange;
    if(await rangeProxy(res,headers,{messageId:movie.telegram_message_id,start,length,onChunk:n=>{delivered+=n;}},send)){await settle();return;}
+   // If the experimental Pyrogram path is unavailable before response
+   // headers are sent, reuse FilmGo's persistent Telethon gateway before
+   // falling back to the legacy per-range subprocess.
+   if(fastStreaming&&await proxyRange(res,headers,{messageId:movie.telegram_message_id,start,length,onChunk:n=>{delivered+=n;}},send)){await settle();return;}
    const child=spawn('python3',['src/telegram_stream.py',String(movie.telegram_message_id),String(start),String(length)],{env:process.env,stdio:['ignore','pipe','pipe']});
    let started=false,bytes=0,closed=false;
    const startedAt=Date.now();
