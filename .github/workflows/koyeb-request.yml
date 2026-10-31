@@ -37,6 +37,9 @@ jobs:
         id: publish
         env:
           WA_AUTH_CREDS: ${{ secrets.WA_AUTH_CREDS }}
+          APP_SECRET: ${{ secrets.APP_SECRET }}
+          UPSTASH_REDIS_REST_URL: ${{ secrets.UPSTASH_REDIS_REST_URL }}
+          UPSTASH_REDIS_REST_TOKEN: ${{ secrets.UPSTASH_REDIS_REST_TOKEN }}
           TELEGRAM_API_ID: ${{ secrets.TELEGRAM_API_ID }}
           TELEGRAM_API_HASH: ${{ secrets.TELEGRAM_API_HASH }}
           TELEGRAM_SESSION: ${{ secrets.TELEGRAM_SESSION }}
