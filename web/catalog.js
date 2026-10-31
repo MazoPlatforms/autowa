@@ -158,9 +158,9 @@ const player=el('div','filmgo-player-shell');player.tabIndex=0;player.setAttribu
 player.setAttribute('inert','');
 const viewport=el('div','filmgo-player-viewport');
 let video=el('video','filmgo-player');
-video.preload='none';video.playsInline=true;video.setAttribute('playsinline','');video.setAttribute('controlsList','nodownload');
+video.preload='auto';video.playsInline=true;video.setAttribute('playsinline','');video.setAttribute('controlsList','nodownload');
 video.poster='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 9%22%3E%3Crect width=%2216%22 height=%229%22 fill=%22%2309090b%22/%3E%3C/svg%3E';video.setAttribute('aria-label','FilmGo built-in movie player');
-const loadingOverlay=el('div','filmgo-loading-overlay');loadingOverlay.hidden=true;loadingOverlay.setAttribute('role','status');loadingOverlay.setAttribute('aria-live','polite');loadingOverlay.append(el('span','filmgo-loading-spinner'),el('span','filmgo-loading-label','Loading video…'));
+const loadingOverlay=el('div','filmgo-loading-overlay');loadingOverlay.hidden=true;loadingOverlay.setAttribute('role','status');loadingOverlay.setAttribute('aria-label','Loading');loadingOverlay.append(el('span','filmgo-loading-spinner'));
 const seekFeedback=el('div','filmgo-seek-feedback','');seekFeedback.setAttribute('aria-live','polite');seekFeedback.setAttribute('aria-atomic','true');
 viewport.append(video,loadingOverlay,seekFeedback);
 const controls=el('div','filmgo-controls');
@@ -235,7 +235,7 @@ download.addEventListener('click',async event=>{
 whatsapp.addEventListener('click',()=>{if(movieAccessState==='signed-in')confirmMovieRequest(m,'whatsapp');});
 telegram.addEventListener('click',()=>{if(movieAccessState==='signed-in')confirmMovieRequest(m,'telegram');});
 const setStatus=value=>{if(isActive())status.textContent=value;};
-const setLoading=(value,show=true)=>{if(!isActive())return;loadingOverlay.hidden=!show;loadingOverlay.querySelector('.filmgo-loading-label').textContent=value||'';};
+const setLoading=(value,show=true)=>{if(!isActive())return;loadingOverlay.hidden=!show;};
 const formatTime=value=>{if(!Number.isFinite(value)||value<0)return '--:--:--';const total=Math.floor(value),hours=Math.floor(total/3600),minutes=Math.floor(total%3600/60),seconds=total%60;return String(hours).padStart(2,'0')+':'+String(minutes).padStart(2,'0')+':'+String(seconds).padStart(2,'0');};
 const updateControls=()=>{const duration=video.duration||0;time.textContent=formatTime(video.currentTime)+' / '+formatTime(duration);progress.value=String(duration?Math.round(video.currentTime/duration*1000):0);progress.style.setProperty('--progress',duration?((video.currentTime/duration)*100)+'%':'0%');play.replaceChildren(playerIcon(video.paused?'play':'pause'));play.setAttribute('aria-label',video.paused?'Play':'Pause');player.classList.toggle('is-playing',!video.paused);};
 let tapTimer=0,lastTap=0,feedbackTimer=0,controlsTimer=0;

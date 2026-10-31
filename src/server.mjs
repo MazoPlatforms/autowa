@@ -364,7 +364,7 @@ const server=http.createServer(async(req,res)=>{
    const safeName=baseName.replace(/[^a-zA-Z0-9 ._()-]/g,'_').slice(0,180);
    const asciiName=safeName.replace(/[^\\x20-\\x7e]/g,'_');
    const disposition='inline; filename="'+asciiName+'"; filename*=UTF-8\'\''+encodeURIComponent(safeName);
-   const headers={'Content-Type':mediaType,'Content-Length':String(length),'Content-Range':'bytes '+start+'-'+end+'/'+total,'Accept-Ranges':'bytes','Cache-Control':'no-store','X-Content-Type-Options':'nosniff','Content-Disposition':disposition};
+   const headers={'Content-Type':mediaType,'Content-Length':String(length),'Content-Range':'bytes '+start+'-'+end+'/'+total,'Accept-Ranges':'bytes','Cache-Control':'no-store','X-Accel-Buffering':'no','X-Content-Type-Options':'nosniff','Content-Disposition':disposition};
    if(req.method==='HEAD'){res.writeHead(206,headers);return res.end();}
    if(start===0)void logFilmGo('streams','▶️ Stream started · '+record.title+' ('+record.year+') · '+(movie.quality||url.searchParams.get('quality')||'default'));
    // Prefer one persistent Telethon connection; legacy subprocess remains a fallback.
