@@ -28,19 +28,26 @@ function verificationRedisKey(value){return 'wa-verify:'+crypto.createHmac('sha2
 function verificationClaimKey(value){return 'wa-verify-claim:'+crypto.createHmac('sha256',process.env.APP_SECRET||'').update(value).digest('hex');}
 function verificationText(message){
  const content=message?.message||{};
- const nested=content.ephemeralMessage?.message||content.viewOnceMessage?.message||content.viewOnceMessageV2?.message||content;
- return String(nested.conversation||nested.extendedTextMessage?.text||'').trim();
+ const nested=content.ephemeralMessage?.message||content.viewOnceMessage?.message||content.viewOnceMessageV2?.message||content.documentWithCaptionMessage?.message||content;
+ return String(nested.conversation||nested.extendedTextMessage?.text||nested.documentMessage?.caption||'').trim();
+}
+function phoneFromJid(value){
+ const raw=String(value||'').split('@')[0].split(':')[0];
+ return /^\d{8,15}$/.test(raw)?'+'+raw:null;
 }
 async function handleWhatsAppVerification(message,client){
  if(message?.key?.fromMe)return;
- const remoteJid=String(message?.key?.remoteJid||'');
- if(!/^\d+(?::\d+)?@s\.whatsapp\.net$/.test(remoteJid))return;
- const sender='+'+remoteJid.split('@')[0].split(':')[0];
+ const key=message?.key||{};
+ const remoteJid=String(key.remoteJid||'');
+ if(!/^\d+(?::\d+)?@(s\.whatsapp\.net|lid)$/.test(remoteJid))return;
+ const senderCandidates=[key.remoteJid,key.remoteJidAlt,key.participant,key.participantAlt,key.senderPn].map(phoneFromJid).filter(Boolean);
+ const senderNumbers=[...new Set(senderCandidates)];
  const text=verificationText(message);
+ console.log('WhatsApp verification message received',JSON.stringify({jid_type:remoteJid.split('@')[1]||'unknown',text_length:text.length}));
  if(!/^[A-Za-z0-9_-]{32}$/.test(text))return;
  const recordKey=verificationRedisKey(text),raw=await redis('GET',recordKey);let record;
  try{record=raw?JSON.parse(raw):null;}catch{return;}
- if(!record||record.status!=='pending'||record.number!==sender){console.warn('WhatsApp verification key rejected: expired, already used, or sender mismatch');return;}
+ if(!record||record.status!=='pending'||!senderNumbers.includes(record.number)){console.warn('WhatsApp verification key rejected: expired, already used, or sender mismatch');return;}
  if(await redis('SET',verificationClaimKey(text),'1','NX','EX',30)!=='OK')return;
  await redis('SET',recordKey,JSON.stringify({...record,status:'verified',verified_at:Date.now()}),'EX',300);
  await client.sendMessage(remoteJid,{text:'✅ FilmGo WhatsApp verification successful. Return to the website to continue.'});
