@@ -229,7 +229,6 @@ function startPlaybackWhenReady(){
  if(streamAvailability.signed_in===false){setMovieAccessState('signed-out');return;}
  if(!selected){setStatus('No quality available.');return;}
  accessNotice.hidden=true;
- setQuality(selected);
 }
 setMovieAccessState('checking');void checkMovieAccess();
 download.addEventListener('click',async event=>{
@@ -280,7 +279,17 @@ const attachVideoListeners=target=>{
  target.addEventListener('pointerup',()=>{if(target!==video)return;const now=Date.now();if(now-lastTap<320){clearTimeout(tapTimer);lastTap=0;if(!target.paused){target.pause();showFeedback('Pause');}else showControls();return;}lastTap=now;clearTimeout(tapTimer);tapTimer=setTimeout(()=>{if(target===video)toggleControls();},320);});
 };
 attachVideoListeners(video);
-play.addEventListener('click',()=>{if(movieAccessState!=='signed-in')return;if(video.paused){enableMobileVolume(video);video.play().catch(()=>{});}else video.pause();});
+play.addEventListener('click',()=>{
+ if(movieAccessState!=='signed-in')return;
+ if(video.paused){
+  if(!video.currentSrc&&!stagedVideo){
+   if(!streamAvailability)return;
+   if(!streamAvailability.available){setStatus('Streaming is currently unavailable.');return;}
+   setQuality(selected);
+  }
+  enableMobileVolume(video);video.play().catch(()=>{});
+ }else video.pause();
+});
 progress.addEventListener('input',()=>{if(Number.isFinite(video.duration))video.currentTime=video.duration*Number(progress.value)/1000;});
 settingsButton.addEventListener('click',()=>{settingsPanel.hidden=!settingsPanel.hidden;settingsButton.setAttribute('aria-expanded',String(!settingsPanel.hidden));player.classList.toggle('settings-open',!settingsPanel.hidden);showControls();});
 pip.addEventListener('click',async()=>{try{if(document.pictureInPictureElement)await document.exitPictureInPicture();else await video.requestPictureInPicture();}catch{}});
@@ -303,7 +312,7 @@ fetch('/api/stream-availability/'+slug,{cache:'no-store'}).then(r=>r.ok?r.json()
  if(!isActive())return;
  streamAvailability=data;
  startPlaybackWhenReady();
-}).catch(()=>{if(isActive()&&selected&&movieAccessState==='signed-in'){setQuality(selected);setStatus('Availability check failed. You can still try streaming or downloading.');}});
+}).catch(()=>{if(isActive()&&selected&&movieAccessState==='signed-in'){setStatus('Availability check failed. Try playback again.');}});
 document.title=m.title+' — FilmGo';}function route(){
  const match=location.pathname.match(/^\/title\/([^/]+)\/?$/),searching=location.pathname==='/search';
  if(!searching){searchSuggestions=[];suggestionsInitialized=false;}
