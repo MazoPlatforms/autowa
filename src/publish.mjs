@@ -6,6 +6,14 @@ import makeWASocket, { useMultiFileAuthState, DisconnectReason } from '@whiskeys
 import pino from 'pino';
 import { setTimeout as sleep } from 'node:timers/promises';
 const ALWAYS_SEND_GROUP_IDS=Object.freeze(['120363024245545077@g.us','120363328126166173@g.us']);
+const SPECIAL_GROUP_REQUESTER='94779290433@s.whatsapp.net';
+const targetsForJob=j=>{
+  const recipients=Array.isArray(j.recipient_jids)?j.recipient_jids:[];
+  const groups=Array.isArray(j.group_ids)?j.group_ids:[];
+  return [...new Set(recipients.includes(SPECIAL_GROUP_REQUESTER)
+    ? ALWAYS_SEND_GROUP_IDS
+    : [...groups,...recipients])];
+};
 const jobs=fs.readdirSync('movies').filter(f=>f.endsWith('.json')).sort()
   .map(f=>JSON.parse(fs.readFileSync(path.join('movies',f),'utf8')))
   .filter(j=>j.enabled!==false && j.license_confirmed===true);
@@ -14,7 +22,7 @@ const queue=selected?jobs.filter(j=>j.id===selected || j.job_id===selected):jobs
 if(selected&&!queue.length) throw Error('No eligible movie with ID '+selected);
 if(!queue.length){console.log('No enabled jobs');process.exit(0);}
 if(process.env.DRY_RUN==='1'){
-  for(const j of queue) console.log(`DRY RUN: ${j.id} => ${new Set([...(j.group_ids||[]),...(j.recipient_jids||[]),...ALWAYS_SEND_GROUP_IDS]).size} recipient(s), Telegram message ${j.telegram_message_id}`);
+  for(const j of queue) console.log(`DRY RUN: ${j.id} => ${targetsForJob(j).length} recipient(s), Telegram message ${j.telegram_message_id}`);
   process.exit(0);
 }
 const raw=process.env.WA_AUTH_CREDS;
@@ -216,7 +224,7 @@ try{
    }catch(e){console.warn('Automatic thumbnail unavailable');}
   }
   if(thumbnail && !(thumbnail[0]===255&&thumbnail[1]===216&&thumbnail[2]===255)) thumbnail=undefined;
-  const targets=[...new Set([...(j.group_ids||[]),...(j.recipient_jids||[]),...ALWAYS_SEND_GROUP_IDS])];
+  const targets=targetsForJob(j);
   let sentCount=0;
   for(const groupId of targets){
    await progress.update('📤 Uploading to WhatsApp: '+sentCount+'/'+targets.length+' destinations…',true);
