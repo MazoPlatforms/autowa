@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-01T12:10:48.120Z",
+  "updated_at": 1793535063,
   "anime": [
     {
       "slug_id": "naruto-shippuden",
@@ -2432,7 +2432,7 @@
           "episode": 222,
           "season": 10,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 101519848,
           "file_name": "Naruto Shippuden [S10] {EP:222} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -2443,7 +2443,7 @@
           "episode": 223,
           "season": 10,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 111519318,
           "file_name": "Naruto Shippuden [S10] {EP:223} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -2454,7 +2454,7 @@
           "episode": 224,
           "season": 11,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 75941265,
           "file_name": "Naruto Shippuden [S11] {EP:224} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -2465,7 +2465,7 @@
           "episode": 225,
           "season": 11,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 121579423,
           "file_name": "Naruto Shippuden [S11] {EP:225} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -2476,7 +2476,7 @@
           "episode": 226,
           "season": 11,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 173643131,
           "file_name": "Naruto Shippuden [S11] {EP:226} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -2487,7 +2487,7 @@
           "episode": 227,
           "season": 11,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 104171934,
           "file_name": "Naruto Shippuden [S11] {EP:227) (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -2498,7 +2498,7 @@
           "episode": 228,
           "season": 11,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 126280056,
           "file_name": "Naruto Shippuden [S11] {EP:228) (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -2509,7 +2509,7 @@
           "episode": 229,
           "season": 11,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 199018812,
           "file_name": "Naruto Shippuden [S11] {EP:229) (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -2520,7 +2520,7 @@
           "episode": 230,
           "season": 11,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 84120281,
           "file_name": "Naruto Shippuden [S11] {EP:230) (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -2531,7 +2531,7 @@
           "episode": 231,
           "season": 11,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 154038063,
           "file_name": "Naruto Shippuden [S11] {EP:231} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -2542,7 +2542,7 @@
           "episode": 232,
           "season": 11,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 70255720,
           "file_name": "Naruto Shippuden [S11] {EP:232} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -2553,7 +2553,7 @@
           "episode": 233,
           "season": 11,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 115871048,
           "file_name": "Naruto Shippuden [S11] {EP:233} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -2564,7 +2564,7 @@
           "episode": 234,
           "season": 11,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 115322484,
           "file_name": "Naruto Shippuden [S11] {EP:234} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -2575,7 +2575,7 @@
           "episode": 235,
           "season": 11,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 86973901,
           "file_name": "Naruto Shippuden [S11] {EP:235} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -2586,7 +2586,7 @@
           "episode": 236,
           "season": 11,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 200159770,
           "file_name": "Naruto Shippuden [S11] {EP:236} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -2597,7 +2597,7 @@
           "episode": 237,
           "season": 11,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 121075946,
           "file_name": "Naruto Shippuden [S11] {EP:237} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -2608,7 +2608,7 @@
           "episode": 238,
           "season": 11,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 196327254,
           "file_name": "Naruto Shippuden [S11] {EP:238} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -2619,7 +2619,7 @@
           "episode": 239,
           "season": 11,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 90273015,
           "file_name": "Naruto Shippuden [S11] {EP:239} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -2630,7 +2630,7 @@
           "episode": 240,
           "season": 11,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 202878378,
           "file_name": "Naruto Shippuden [S11] {EP:240} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -2641,7 +2641,7 @@
           "episode": 241,
           "season": 11,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 78025354,
           "file_name": "Naruto Shippuden [S11] {EP:241} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -2652,7 +2652,7 @@
           "episode": 242,
           "season": 11,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 96681352,
           "file_name": "Naruto Shippuden [S11] {EP:242} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -2673,7 +2673,7 @@
       "status": "Finished",
       "episodes_total": 500,
       "studio": "Studio Pierrot",
-      "updated_at": "2026-11-01T12:10:48.120Z"
+      "updated_at": "2026-11-01T12:11:03Z"
     }
   ]
 }
