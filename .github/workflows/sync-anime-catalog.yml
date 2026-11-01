@@ -25,6 +25,7 @@ jobs:
           TELEGRAM_API_HASH: ${{ secrets.TELEGRAM_API_HASH }}
           TELEGRAM_SESSION: ${{ secrets.TELEGRAM_SESSION }}
           TELEGRAM_ANIME_CHANNEL_ID: ${{ secrets.TELEGRAM_ANIME_CHANNEL_ID }}
+          TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
         run: |
           python - <<'PY'
           import os, sys
@@ -45,6 +46,7 @@ jobs:
           TELEGRAM_API_HASH: ${{ secrets.TELEGRAM_API_HASH }}
           TELEGRAM_SESSION: ${{ secrets.TELEGRAM_SESSION }}
           TELEGRAM_ANIME_CHANNEL_ID: ${{ secrets.TELEGRAM_ANIME_CHANNEL_ID }}
+          TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
         run: python src/telegram_media.py index-anime > /tmp/anime-catalog.json
       - name: Publish anime catalog safely against latest main
         run: |

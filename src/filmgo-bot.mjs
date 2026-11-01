@@ -206,11 +206,18 @@ async function detectAnimeType(file){
  return {anime:confidence>=.7,confidence,parts,metadata};
 }
 function animeSlug(title){return String(title||'').normalize('NFKD').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'').slice(0,70)||'anime';}
-function inferredAnimeSeason(title,episode,explicit){
- if(explicit)return explicit;
- const key=normalize(title);const number=Number(episode)||0;
- if(key==='narutoshippuden'&&number>=33&&number<=53)return 2;
- return 1;
+async function tmdbAnimeSeason(title,episode){
+ const key=process.env.TMDB_API_KEY;if(!key||!episode)return null;
+ try{
+  const search=await fetch('https://api.themoviedb.org/3/search/tv?'+new URLSearchParams({api_key:key,query:title,language:'en-US'}),{signal:AbortSignal.timeout(8000)});
+  if(!search.ok)return null;const result=(await search.json()).results?.[0];if(!result?.id)return null;
+  const detail=await fetch('https://api.themoviedb.org/3/tv/'+result.id+'?'+new URLSearchParams({api_key:key,language:'en-US'}),{signal:AbortSignal.timeout(8000)});if(!detail.ok)return null;
+  const seasons=(await detail.json()).seasons||[];let offset=0;
+  for(const season of seasons.filter(item=>Number(item.season_number)>0).sort((a,b)=>a.season_number-b.season_number)){
+   const count=Number(season.episode_count)||0;if(Number(episode)<=offset+count)return Number(season.season_number);offset+=count;
+  }
+ }catch{}
+ return null;
 }
 function animeDraftPrompt(d){
  const lines=['FilmGo anime draft',d.title,'Season: '+d.season+' · Episode: '+d.episode+(d.part?' · Part: '+d.part:''),'Quality: '+d.quality,'File: '+d.file_name,d.poster?'Poster: ready':'Poster: '+(d.poster_error||'AniList / fallback'),'Use /edit to change metadata or /cancel to discard.'];
@@ -301,7 +308,7 @@ async function probe(input){
 async function startAnimeDraft(file,messageId,detected=null){
  const parts=animeFilenameParts(file.file_name||'');
  if(!parts.episode)return say(ADMIN_ID,'I could not identify the anime episode. Use a filename such as Naruto Shippuden - 001 [720p].mkv.');
- parts.season=inferredAnimeSeason(parts.title,parts.episode,parts.season);
+ parts.season=parts.season||await tmdbAnimeSeason(parts.title,parts.episode)||1;
  const d={kind:'anime',message_id:messageId,file_name:file.file_name||'',file_size:Number(file.file_size||0),mime_type:file.mime_type||'',title:parts.title,titleCandidates:parts.titleCandidates,season:parts.season,episode:parts.episode,part:parts.part,quality:parts.quality,slug_id:animeSlug(parts.title),episode_slug_id:crypto.randomBytes(12).toString('base64url')};
  const metadata=detected?.metadata||await anilistSearch(parts.title).catch(()=>null);if(metadata){Object.assign(d,metadata);d.slug_id=animeSlug(metadata.title);}d.stage='await-publish';await draftSave(d);
  if(detected?.confidence>=.7){await say(ADMIN_ID,'Recognized '+d.title+' as anime ('+Math.round(detected.confidence*100)+'% confidence). Publishing automatically.');return publishAnimeDraft(d);}

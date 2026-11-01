@@ -8,6 +8,7 @@ The existing Koyeb Node.js API also runs a Telegram Bot API long poller. It is *
 - `FILMGO_BOT_ADMIN_ID=7744742903` — exact Telegram numeric user ID, not a username.
 - `TELEGRAM_CHANNEL_ID` — the existing channel ID (typically `-100...`).
 - `TELEGRAM_ANIME_CHANNEL_ID` — the separate anime channel ID; currently `-1004325690397`.
+- `TMDB_API_KEY` — recommended for mapping overall anime episode numbers to the correct season when the filename does not include one.
 - `GITHUB_DISPATCH_TOKEN`, `GITHUB_REPOSITORY`, `UPSTASH_REDIS_REST_URL`, `UPSTASH_REDIS_REST_TOKEN` — existing app configuration.
 - Existing `TELEGRAM_API_ID`, `TELEGRAM_API_HASH`, `TELEGRAM_SESSION` for channel indexing.
 

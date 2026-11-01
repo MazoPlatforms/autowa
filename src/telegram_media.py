@@ -82,11 +82,31 @@ def anime_filename_parts(raw):
     value = re.sub(r'\s+', ' ', value).strip(' -[]()')
     return (value[:140] or 'Untitled anime', season, episode, part)
 
-def inferred_anime_season(title, episode, explicit):
+def tmdb_season_boundaries(title):
+    key = os.getenv('TMDB_API_KEY')
+    if not key:
+        return []
+    try:
+        params = urllib.parse.urlencode({'api_key': key, 'query': title, 'language': 'en-US'})
+        with urllib.request.urlopen(urllib.request.Request('https://api.themoviedb.org/3/search/tv?' + params, headers={'User-Agent': 'FilmGo/1.0'}), timeout=6) as response:
+            result = json.load(response).get('results', [])
+        if not result or not result[0].get('id'):
+            return []
+        params = urllib.parse.urlencode({'api_key': key, 'language': 'en-US'})
+        with urllib.request.urlopen(urllib.request.Request('https://api.themoviedb.org/3/tv/%s?%s' % (result[0]['id'], params), headers={'User-Agent': 'FilmGo/1.0'}), timeout=6) as response:
+            seasons = json.load(response).get('seasons', [])
+        return [(int(item.get('season_number')), int(item.get('episode_count') or 0)) for item in sorted(seasons, key=lambda item: int(item.get('season_number') or 0)) if int(item.get('season_number') or 0) > 0]
+    except Exception:
+        return []
+
+def inferred_anime_season(episode, explicit, boundaries):
     if explicit:
         return explicit
-    if re.sub(r'[^a-z0-9]+', '', str(title).casefold()) == 'narutoshippuden' and 33 <= int(episode or 0) <= 53:
-        return 2
+    offset = 0
+    for season, count in boundaries:
+        if int(episode or 0) <= offset + count:
+            return season
+        offset += count
     return 1
 
 def anime_metadata(raw_title):
@@ -109,13 +129,12 @@ def anime_media_item(message):
     if not filename or not getattr(message, 'file', None):
         return None
     title, season, episode, part = anime_filename_parts(filename)
-    season = inferred_anime_season(title, episode, season)
     quality_match = re.search(r'(?i)\b(2160p|1080p|720p|480p|4k)\b', filename)
     quality = quality_match.group(1).upper() if quality_match else 'AUTO'
     size = int(getattr(message.file, 'size', 0) or 0)
     if not episode or not quality or not 0 < size <= 2000000000:
         return None
-    return {'slug_id': secrets.token_urlsafe(12), 'telegram_message_id': int(message.id), 'episode': episode, 'season': season or 1, 'part': part, 'quality': quality, 'file_size': size, 'file_name': filename[:240], 'mime_type': str(getattr(message.file, 'mime_type', '') or '')}
+    return {'slug_id': secrets.token_urlsafe(12), 'telegram_message_id': int(message.id), 'episode': episode, 'season': season, 'season_explicit': bool(season), 'part': part, 'quality': quality, 'file_size': size, 'file_name': filename[:240], 'mime_type': str(getattr(message.file, 'mime_type', '') or '')}
 
 def build_anime_catalog(messages):
     shows = {}
@@ -131,6 +150,9 @@ def build_anime_catalog(messages):
     for show in shows.values():
         meta = anime_metadata(show['title'])
         show.update({k: v for k, v in meta.items() if v not in (None, '', [])})
+        boundaries = tmdb_season_boundaries(show['title'])
+        for episode in show['episodes']:
+            episode['season'] = inferred_anime_season(episode['episode'], episode.pop('season_explicit', None) and episode['season'], boundaries)
         show['episodes'].sort(key=lambda e: (e.get('season') or 1, e.get('episode') or 0, e.get('part') or 0, e.get('quality') or ''))
         show['updated_at'] = time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime())
         result.append(show)

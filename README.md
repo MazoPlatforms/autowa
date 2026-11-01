@@ -21,6 +21,7 @@ This repository includes a separate **Koyeb API + public web form**. Visitors do
 | `TELEGRAM_SESSION` | Authorized Telethon session string with access to both media channels |
 | `TELEGRAM_CHANNEL_ID` | Existing Movies channel ID, including the `-100...` prefix |
 | `TELEGRAM_ANIME_CHANNEL_ID` | Anime channel ID: `-1004325690397` |
+| `TMDB_API_KEY` | TMDB API key used to map overall anime episode numbers to season numbers when filenames omit the season |
 | `WA_OTP_AUTH_CREDS` | **Optional bootstrap only**: an unregistered Baileys creds JSON; a registered `creds.json` alone is incomplete without Signal keys and is ignored for a fresh QR pairing |
 | `PORT` | Optional, defaults to 8000 |
 
