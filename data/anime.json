@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-01T16:30:31.463Z",
+  "updated_at": "2026-11-01T16:30:37.058Z",
   "anime": [
     {
       "slug_id": "naruto",
@@ -715,6 +715,17 @@
           "file_size": 204324589,
           "file_name": "Naruto S3 E55 Tamil Dub 720p.mp4",
           "mime_type": "video/mp4"
+        },
+        {
+          "slug_id": "USGe_OtmyCPRrbhP",
+          "telegram_message_id": 453,
+          "episode": 56,
+          "season": 3,
+          "part": null,
+          "quality": "720p",
+          "file_size": 218814486,
+          "file_name": "Naruto S3 E56 Tamil Dub 720p.mp4",
+          "mime_type": "video/mp4"
         }
       ],
       "year": 2002,
@@ -732,7 +743,7 @@
       "status": "Finished",
       "episodes_total": 220,
       "studio": "Studio Pierrot",
-      "updated_at": "2026-11-01T16:30:31.463Z"
+      "updated_at": "2026-11-01T16:30:37.058Z"
     },
     {
       "slug_id": "naruto-shippuden",
