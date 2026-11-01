@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-01T09:48:51.554Z",
+  "updated_at": "2026-11-01T09:49:04.221Z",
   "anime": [
     {
       "slug_id": "naruto-shippuden",
@@ -720,6 +720,17 @@
           "file_size": 59363486,
           "file_name": "Naruto Shippuden - 066 [720p] [Dual] @Anime_Gallery.mkv",
           "mime_type": "video/x-matroska"
+        },
+        {
+          "slug_id": "Sba0D5IOMtu__yCj",
+          "telegram_message_id": 73,
+          "episode": 67,
+          "season": 1,
+          "part": null,
+          "quality": "720p",
+          "file_size": 60490368,
+          "file_name": "Naruto Shippuden - 067 [720p] [Dual] @Anime_Gallery.mkv",
+          "mime_type": "video/x-matroska"
         }
       ],
       "poster": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx1735-kGfVm0YqCPcu.png",
@@ -737,7 +748,7 @@
       "episodes_total": 500,
       "year": 2007,
       "studio": "Studio Pierrot",
-      "updated_at": "2026-11-01T09:48:51.554Z"
+      "updated_at": "2026-11-01T09:49:04.221Z"
     }
   ]
 }
