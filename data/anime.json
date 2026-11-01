@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-01T12:48:39.013Z",
+  "updated_at": "2026-11-01T12:48:43.226Z",
   "anime": [
     {
       "slug_id": "naruto-shippuden",
@@ -4009,6 +4009,17 @@
           "file_size": 189156320,
           "file_name": "Naruto Shippuden - S17 E365 Multi 360pTamil.mkv",
           "mime_type": "video/x-matroska"
+        },
+        {
+          "slug_id": "uktQRAWTKbxsVbo7",
+          "telegram_message_id": 388,
+          "episode": 366,
+          "season": 17,
+          "part": null,
+          "quality": "360p",
+          "file_size": 101565428,
+          "file_name": "Naruto Shippuden - S17 E366 Multi 360pTamil.mkv",
+          "mime_type": "video/x-matroska"
         }
       ],
       "year": 2007,
@@ -4026,7 +4037,7 @@
       "status": "Finished",
       "episodes_total": 500,
       "studio": "Studio Pierrot",
-      "updated_at": "2026-11-01T12:48:39.013Z"
+      "updated_at": "2026-11-01T12:48:43.226Z"
     }
   ]
 }
