@@ -58,6 +58,8 @@ def anime_filename_parts(raw):
     """Parse common anime release names without requiring a fixed naming format."""
     value = re.sub(r'(?i)\.(mkv|mp4|avi|mov|webm)(\.\w+)?$', '', raw or '')
     value = re.sub(r'[._]+', ' ', value)
+    # Language/release labels are not part of the anime title.
+    value = re.sub(r'(?i)(?:tamil|telugu|malayalam|kannada|hindi|english|தமிழ்)', ' ', value)
     episode = None
     season = None
     part = None
@@ -80,6 +82,7 @@ def anime_filename_parts(raw):
     if match:
         part = int(match.group(1)); value = value[:match.start()] + ' ' + value[match.end():]
     value = re.sub(r'(?i)\s+(?:தமிழ்|tamil|telugu|malayalam|kannada|hindi|english|2160p|1080p|720p|480p|4k|web[- ]?dl|webrip|bluray|brrip|hdrip|dvdrip|x264|x265|h264|h265|hevc|aac|ddp5?\.?(?:1|2)?|esub|multi|proper|repack|uncut|dual audio)\b.*$', '', value)
+    value = re.sub(r'(?:\s*(?:\[[^]]*\]|\([^)]*\)))+\s*(?:@.*)?$', '', value)
     value = re.sub(r'\s+@.*$', '', value)
     value = re.sub(r'\s+', ' ', value).strip(' -[]()')
     return (value[:140] or 'Untitled anime', season, episode, part)
@@ -108,7 +111,7 @@ def tmdb_season_boundaries(title):
         if not results or not results[0].get('id'):
             return []
         params = urllib.parse.urlencode({'api_key': key, 'language': 'en-US'})
-        with urllib.request.urlopen(urllib.request.Request('https://api.themoviedb.org/3/tv/%s?%s' % (result[0]['id'], params), headers={'User-Agent': 'FilmGo/1.0'}), timeout=6) as response:
+        with urllib.request.urlopen(urllib.request.Request('https://api.themoviedb.org/3/tv/%s?%s' % (results[0]['id'], params), headers={'User-Agent': 'FilmGo/1.0'}), timeout=6) as response:
             seasons = json.load(response).get('seasons', [])
         return [(int(item.get('season_number')), int(item.get('episode_count') or 0)) for item in sorted(seasons, key=lambda item: int(item.get('season_number') or 0)) if int(item.get('season_number') or 0) > 0]
     except Exception:
@@ -168,6 +171,30 @@ def manual_anime_season(title, episode):
 
 _TMDB_SHOW_CACHE = {}
 _TMDB_SEASON_CACHE = {}
+
+def catalog_title_key(title):
+    """Stable comparison key for titles and release-name variants."""
+    return re.sub(r'[^a-z0-9]+', '', str(title or '').casefold())
+
+def load_existing_anime_catalog():
+    """Load local metadata so known shows do not hit APIs on every refresh."""
+    try:
+        with open(os.path.join(os.path.dirname(__file__), '..', 'data', 'anime.json'), encoding='utf-8') as handle:
+            return (json.load(handle).get('anime') or [])
+    except (OSError, ValueError, TypeError):
+        return []
+
+def existing_show_for(title, existing):
+    key = catalog_title_key(title)
+    exact = next((item for item in existing if catalog_title_key(item.get('title')) == key), None)
+    if exact:
+        return exact
+    # Also absorb a stale release-tagged title from an older catalog.
+    for item in existing:
+        candidate = catalog_title_key(item.get('title'))
+        if candidate and (candidate.startswith(key) or key.startswith(candidate)) and min(len(candidate), len(key)) >= 6:
+            return item
+    return None
 def tmdb_show_id(title):
     key = os.getenv('TMDB_API_KEY')
     cache_key = str(title).casefold()
@@ -262,25 +289,46 @@ def anime_media_item(message):
     return {'slug_id': secrets.token_urlsafe(12), 'telegram_message_id': int(message.id), 'episode': episode, 'season': season, 'season_explicit': bool(season), 'part': part, 'quality': quality, 'file_size': size, 'file_name': filename[:240], 'mime_type': str(getattr(message.file, 'mime_type', '') or '')}
 
 def build_anime_catalog(messages):
+    existing = load_existing_anime_catalog()
     shows = {}
     for message in messages:
         item = anime_media_item(message)
         if not item:
             continue
         title, _, _, _ = anime_filename_parts(str(getattr(message.file, 'name', '') or ''))
-        key = re.sub(r'[^a-z0-9]+', ' ', title.casefold()).strip()
-        show = shows.setdefault(key, {'slug_id': re.sub(r'[^a-z0-9]+', '-', key).strip('-')[:80] or 'anime', 'title': title, 'episodes': []})
+        known = existing_show_for(title, existing)
+        key = catalog_title_key((known or {}).get('title') or title)
+        show = shows.setdefault(key, {
+            'slug_id': (known or {}).get('slug_id') or re.sub(r'[^a-z0-9]+', '-', title.casefold()).strip('-')[:80] or 'anime',
+            'title': (known or {}).get('title') or title,
+            'episodes': [],
+        })
         show['episodes'].append(item)
     result = []
     for show in shows.values():
-        meta = anime_metadata(show['title'])
-        show.update({k: v for k, v in meta.items() if v not in (None, '', [])})
-        boundaries = tmdb_season_boundaries(show['title'])
+        known = existing_show_for(show['title'], existing)
+        if known:
+            show.update({k: v for k, v in known.items() if k not in ('episodes', 'updated_at') and v not in (None, '', [])})
+        else:
+            meta = anime_metadata(show['title'])
+            show.update({k: v for k, v in meta.items() if v not in (None, '', [])})
+        known_episodes = {
+            str(ep.get('telegram_message_id')): ep
+            for ep in (known or {}).get('episodes', [])
+            if ep.get('telegram_message_id') is not None
+        }
+        boundaries = [] if known else tmdb_season_boundaries(show['title'])
+        unique = {}
         for episode in show['episodes']:
-            episode['season'] = episode.pop('season_explicit', None) and episode['season'] or manual_anime_season(show['title'], episode['episode']) or inferred_anime_season(episode['episode'], None, boundaries)
-            guide = tmdb_season_episodes(show['title'], episode['season']).get(int(episode['episode']))
-            if guide:
-                episode.update({key: value for key, value in guide.items() if value})
+            previous = known_episodes.get(str(episode.get('telegram_message_id')))
+            explicit_season = episode.pop('season_explicit', None)
+            episode['season'] = explicit_season and episode['season'] or (previous or {}).get('season') or manual_anime_season(show['title'], episode['episode']) or inferred_anime_season(episode['episode'], None, boundaries)
+            if previous:
+                for field, value in previous.items():
+                    if field not in ('slug_id', 'telegram_message_id', 'file_name', 'file_size', 'mime_type') and value not in (None, '', []):
+                        episode.setdefault(field, value)
+            unique[str(episode.get('telegram_message_id'))] = episode
+        show['episodes'] = list(unique.values())
         show['episodes'].sort(key=lambda e: (e.get('season') or 1, e.get('episode') or 0, e.get('part') or 0, e.get('quality') or ''))
         show['updated_at'] = time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime())
         result.append(show)

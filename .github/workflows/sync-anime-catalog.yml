@@ -9,7 +9,7 @@ permissions:
   contents: write
 concurrency:
   group: anime-catalog-sync
-  cancel-in-progress: false
+  cancel-in-progress: true
 jobs:
   sync:
     runs-on: ubuntu-latest
