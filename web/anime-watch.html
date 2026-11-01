@@ -2,28 +2,19 @@
 <html lang="en" class="dark">
 <head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#09090b"><meta name="color-scheme" content="dark">
-  <title>Watch anime · FilmGo</title>
-  <link rel="stylesheet" href="/tailwind.css?v=20261030-1">
-  <link rel="stylesheet" href="/anime-watch.css?v=20261101-3">
+  <meta name="theme-color" content="#09090b"><meta name="color-scheme" content="dark"><meta name="application-name" content="FilmGo">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <title>Watch anime · FilmGo</title><link rel="stylesheet" href="/tailwind.css?v=20261030-1"><link rel="stylesheet" href="/catalog.css?v=20261101-2"><link rel="stylesheet" href="/anime-watch.css?v=20261101-4">
 </head>
-<body>
-  <main class="anime-watch-page">
-    <header class="anime-watch-header"><a id="watch-back" class="anime-watch-back" href="/anime" aria-label="Back to anime"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg></a><a class="anime-watch-brand" href="/anime"><img src="/icons/filmgo-wordmark.png" alt="FilmGo"></a><a class="anime-watch-account" href="/profile">Account</a></header>
-    <section id="watch-loading" class="anime-watch-state">Loading episode…</section>
-    <section id="watch-error" class="anime-watch-state" hidden></section>
+<body class="tv antialiased"><div class="min-h-screen">
+  <header class="tv-nav"><div class="tv-nav-inner"><div class="catalog-header-leading"><a id="watch-back" class="catalog-back-button" href="/anime" aria-label="Back to anime" title="Back to anime"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg></a><a href="/anime" class="catalog-brand" aria-label="FilmGo home"><img src="/icons/filmgo-lockup.png?v=20261030-2" alt="FilmGo logo and wordmark" width="112" height="28"></a></div><nav class="tv-nav-links" aria-label="Primary"><a href="/">Movies</a><a href="/anime" class="is-active" aria-current="page">Anime</a><a href="/search" hidden aria-hidden="true" tabindex="-1">Search</a></nav><a href="/profile" class="tv-account" id="catalog-account-link" aria-live="polite" aria-busy="true">Account</a></div></header>
+  <main class="tv-main"><div class="anime-watch-page">
+    <section id="watch-loading" class="anime-watch-state">Loading episode…</section><section id="watch-error" class="anime-watch-state" hidden></section>
     <article id="watch-content" hidden>
       <div class="anime-watch-heading"><p class="anime-watch-kicker">Now watching</p><h1 id="watch-title"></h1><p id="watch-meta"></p></div>
-      <section class="anime-player-shell" aria-label="FilmGo anime player">
-        <div class="anime-player-viewport"><video id="watch-video" class="anime-player-video" playsinline preload="metadata" controlslist="nodownload"></video><div id="player-loading" class="anime-player-loading" hidden><span></span></div><div id="seek-feedback" class="anime-seek-feedback" aria-live="polite"></div></div>
-        <div class="anime-player-controls"><input id="player-progress" type="range" min="0" max="1000" value="0" aria-label="Seek"><div class="anime-control-row"><div class="anime-control-left"><button id="player-play" class="anime-control-button" type="button" aria-label="Play"></button><span id="player-time" class="anime-player-time">00:00 / 00:00</span></div><div class="anime-control-right"><button id="player-volume-button" class="anime-control-button" type="button" aria-label="Mute"></button><input id="player-volume" class="anime-volume" type="range" min="0" max="1" step="0.01" value="1" aria-label="Volume"><button id="player-speed" class="anime-control-button anime-control-text" type="button" aria-label="Playback speed">1×</button><button id="player-pip" class="anime-control-button" type="button" aria-label="Picture in picture">PiP</button><button id="player-fullscreen" class="anime-control-button" type="button" aria-label="Full screen"></button></div></div></div>
-      </section>
-      <p id="watch-status" class="anime-watch-status" role="status"></p>
-      <div class="anime-watch-actions"><a id="anime-download" class="anime-action anime-action-primary" href="#">Download</a><a id="anime-whatsapp" class="anime-action" target="_blank" rel="noopener">WhatsApp</a><a id="anime-telegram" class="anime-action" target="_blank" rel="noopener">Telegram</a></div>
-      <nav class="anime-episode-nav" aria-label="Episode navigation"><a id="episode-previous" class="anime-nav-button" href="#" hidden>Previous</a><a id="episode-next" class="anime-nav-button anime-nav-next" href="#" hidden>Next</a></nav>
-      <section id="anime-suggestions" class="anime-suggestions" hidden><h2>You may also like</h2><div id="anime-suggestion-grid"></div></section>
+      <section class="anime-player-shell" aria-label="FilmGo anime player"><div class="anime-player-viewport"><video id="watch-video" class="anime-player-video" playsinline preload="metadata" controlslist="nodownload"></video><div id="player-loading" class="anime-player-loading" hidden><span></span></div><div id="seek-feedback" class="anime-seek-feedback" aria-live="polite"></div></div><div class="anime-player-controls"><input id="player-progress" type="range" min="0" max="1000" value="0" aria-label="Seek"><div class="anime-control-row"><div class="anime-control-left"><button id="player-play" class="anime-control-button" type="button" aria-label="Play"></button><span id="player-time" class="anime-player-time">00:00 / 00:00</span></div><div class="anime-control-right"><button id="player-volume-button" class="anime-control-button" type="button" aria-label="Mute"></button><input id="player-volume" class="anime-volume" type="range" min="0" max="1" step="0.01" value="1" aria-label="Volume"><button id="player-speed" class="anime-control-button anime-control-text" type="button" aria-label="Playback speed">1×</button><button id="player-pip" class="anime-control-button" type="button" aria-label="Picture in picture">PiP</button><button id="player-fullscreen" class="anime-control-button" type="button" aria-label="Full screen"></button></div></div></div></section>
+      <p id="watch-status" class="anime-watch-status" role="status"></p><div class="anime-watch-actions"><a id="anime-download" class="anime-action anime-action-primary" href="#">Download</a><a id="anime-whatsapp" class="anime-action" target="_blank" rel="noopener">WhatsApp</a><a id="anime-telegram" class="anime-action" target="_blank" rel="noopener">Telegram</a></div><nav class="anime-episode-nav" aria-label="Episode navigation"><a id="episode-previous" class="anime-nav-button" href="#" hidden>Previous</a><a id="episode-next" class="anime-nav-button anime-nav-next" href="#" hidden>Next</a></nav><section id="anime-suggestions" class="anime-suggestions" hidden><h2>You may also like</h2><div id="anime-suggestion-grid"></div></section>
     </article>
-  </main>
-  <script src="/anime-watch.js?v=20261101-3" defer></script>
-</body>
+  </div></main><footer class="tv-footer">FilmGo · Powered by Itz Maazin · <a href="https://mzn.is-a.dev/">mzn.is-a.dev</a></footer>
+</div><script src="/anime-watch.js?v=20261101-4" defer></script><script src="/account-chip.js?v=20261101-1" defer></script></body>
 </html>
