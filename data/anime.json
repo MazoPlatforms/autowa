@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-01T16:34:16.781Z",
+  "updated_at": 1793550880,
   "anime": [
     {
       "slug_id": "naruto",
@@ -502,10 +502,13 @@
           "episode": 36,
           "season": 2,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 113569977,
           "file_name": "Naruto S2 E36 Tamil Dub 720p.mp4",
-          "mime_type": "video/mp4"
+          "mime_type": "video/mp4",
+          "title": "Clone vs. Clone: Mine are Better than Yours!",
+          "released": "2003-06-03",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/476/1191216.jpg"
         },
         {
           "slug_id": "S1mwtZZfWePLq6Yi",
@@ -513,10 +516,13 @@
           "episode": 37,
           "season": 2,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 102760448,
           "file_name": "Naruto S2 E37 Tamil Dub 720p.mp4",
-          "mime_type": "video/mp4"
+          "mime_type": "video/mp4",
+          "title": "Surviving the Cut! The Rookie Nine Together Again!",
+          "released": "2003-06-10",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/476/1192238.jpg"
         },
         {
           "slug_id": "C83dLPN5hA6wkTG6",
@@ -524,10 +530,13 @@
           "episode": 38,
           "season": 2,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 106639097,
           "file_name": "Naruto S2 E38 Tamil Dub 720p.mp4",
-          "mime_type": "video/mp4"
+          "mime_type": "video/mp4",
+          "title": "Narrowing the Field: Sudden Death Elimination!",
+          "released": "2003-06-17",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/477/1193071.jpg"
         },
         {
           "slug_id": "BGAapoF_pJPV8BZz",
@@ -535,10 +544,13 @@
           "episode": 39,
           "season": 2,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 121677994,
           "file_name": "Naruto S2 E39 Tamil Dub 720p.mp4",
-          "mime_type": "video/mp4"
+          "mime_type": "video/mp4",
+          "title": "Bushy Brow's Jealousy: Lions Barrage Unleashed!",
+          "released": "2003-07-01",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/477/1193181.jpg"
         },
         {
           "slug_id": "D00v_PjauBiJbyuI",
@@ -546,10 +558,13 @@
           "episode": 40,
           "season": 2,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 119565231,
           "file_name": "Naruto S2 E40 Tamil Dub 720p.mp4",
-          "mime_type": "video/mp4"
+          "mime_type": "video/mp4",
+          "title": "Kakashi and Orochimaru: Face-to-Face!",
+          "released": "2003-07-08",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/477/1193187.jpg"
         },
         {
           "slug_id": "7OeK6CCXsAwzUDzJ",
@@ -557,10 +572,13 @@
           "episode": 41,
           "season": 2,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 107931922,
           "file_name": "Naruto S2 E41 Tamil Dub 720p.mp4",
-          "mime_type": "video/mp4"
+          "mime_type": "video/mp4",
+          "title": "Kunoichi Rumble: The Rivals Get Serious!",
+          "released": "2003-07-15",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/477/1193196.jpg"
         },
         {
           "slug_id": "xAS2H3SsrVApTnWa",
@@ -568,10 +586,13 @@
           "episode": 42,
           "season": 2,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 121457069,
           "file_name": "Naruto S2 E42 Tamil Dub 720p.mp4",
-          "mime_type": "video/mp4"
+          "mime_type": "video/mp4",
+          "title": "The Ultimate Battle: Cha!",
+          "released": "2003-07-22",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/477/1193217.jpg"
         },
         {
           "slug_id": "hOoAdPvB7oupX0Nd",
@@ -579,10 +600,13 @@
           "episode": 43,
           "season": 2,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 115800317,
           "file_name": "Naruto S2 E43 Tamil Dub 720p.mp4",
-          "mime_type": "video/mp4"
+          "mime_type": "video/mp4",
+          "title": "Killer Kunoichi and a Shaky Shikamaru",
+          "released": "2003-07-29",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/477/1193229.jpg"
         },
         {
           "slug_id": "ntCPl_rkl2URblf-",
@@ -590,10 +614,13 @@
           "episode": 44,
           "season": 2,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 120809452,
           "file_name": "Naruto S2 E44 Tamil Dub 720p.mp4",
-          "mime_type": "video/mp4"
+          "mime_type": "video/mp4",
+          "title": "Akamaru Unleashed! Who's Top Dog Now?",
+          "released": "2003-08-05",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/477/1193239.jpg"
         },
         {
           "slug_id": "O18zY-3ePRAtEM-c",
@@ -601,10 +628,13 @@
           "episode": 45,
           "season": 2,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 202211069,
           "file_name": "Naruto S2 E45 Tamil Dub 720p.mp4",
-          "mime_type": "video/mp4"
+          "mime_type": "video/mp4",
+          "title": "Surprise Attack! Naruto's Secret Weapon!",
+          "released": "2003-08-12",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/477/1193244.jpg"
         },
         {
           "slug_id": "Mm8Sfw9L8AQ48D7Y",
@@ -612,10 +642,13 @@
           "episode": 46,
           "season": 2,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 202522113,
           "file_name": "Naruto S2 E46 Tamil Dub 720p.mp4",
-          "mime_type": "video/mp4"
+          "mime_type": "video/mp4",
+          "title": "Byakugan Battle: Hinata Grows Bold!",
+          "released": "2003-08-19",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/477/1193257.jpg"
         },
         {
           "slug_id": "Ox6zIRJQVcSojmtH",
@@ -623,10 +656,13 @@
           "episode": 47,
           "season": 2,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 122599696,
           "file_name": "Naruto S2 E47 Tamil Dub 720p.mp4",
-          "mime_type": "video/mp4"
+          "mime_type": "video/mp4",
+          "title": "A Failure Stands Tall!",
+          "released": "2003-08-26",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/477/1193671.jpg"
         },
         {
           "slug_id": "nXYNagTCgvBe4P_T",
@@ -634,10 +670,13 @@
           "episode": 48,
           "season": 2,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 127153255,
           "file_name": "Naruto S2 E48 Tamil Dub 720p.mp4",
-          "mime_type": "video/mp4"
+          "mime_type": "video/mp4",
+          "title": "Gaara vs. Rock Lee: The Power of Youth Explodes!",
+          "released": "2003-09-03",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/477/1193675.jpg"
         },
         {
           "slug_id": "Dwpemxe-vByvTLtX",
@@ -645,10 +684,13 @@
           "episode": 49,
           "season": 2,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 127330413,
           "file_name": "Naruto S2 E49 Tamil Dub 720p.mp4",
-          "mime_type": "video/mp4"
+          "mime_type": "video/mp4",
+          "title": "Lee's Hidden Strength: Forbidden Secret Jutsu!",
+          "released": "2003-09-10",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/477/1193684.jpg"
         },
         {
           "slug_id": "QHu07PXz_7joNo_D",
@@ -656,10 +698,13 @@
           "episode": 50,
           "season": 2,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 138709116,
           "file_name": "Naruto S2 E50 Tamil Dub 720p.mp4",
-          "mime_type": "video/mp4"
+          "mime_type": "video/mp4",
+          "title": "The Fifth Gate: A Splendid Ninja is Born",
+          "released": "2003-09-17",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/477/1193692.jpg"
         },
         {
           "slug_id": "V0tRXhHrf9bHV1Xb",
@@ -667,10 +712,13 @@
           "episode": 51,
           "season": 2,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 173581256,
           "file_name": "Naruto S2 E51 Tamil Dub 720p.mp4",
-          "mime_type": "video/mp4"
+          "mime_type": "video/mp4",
+          "title": "A Shadow in Darkness: Danger Approaches Sasuke",
+          "released": "2003-09-24",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/477/1194379.jpg"
         },
         {
           "slug_id": "MxuN0Iy1qv77Obw6",
@@ -678,10 +726,13 @@
           "episode": 52,
           "season": 2,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 205922002,
           "file_name": "Naruto S2 E52 Tamil Dub 720p.mp4",
-          "mime_type": "video/mp4"
+          "mime_type": "video/mp4",
+          "title": "Ebisu Returns: Naruto's Toughest Training Yet!",
+          "released": "2003-10-01",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/477/1194383.jpg"
         },
         {
           "slug_id": "M13MxaNFsptAZa1H",
@@ -689,10 +740,13 @@
           "episode": 53,
           "season": 3,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 110390322,
           "file_name": "Naruto S3 E53 Tamil Dub 720p.mp4",
-          "mime_type": "video/mp4"
+          "mime_type": "video/mp4",
+          "title": "Long Time No See: Jiraiya Returns!",
+          "released": "2003-10-08",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/477/1194391.jpg"
         },
         {
           "slug_id": "MGQHedC6yBYo55SL",
@@ -700,10 +754,13 @@
           "episode": 54,
           "season": 3,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 112473120,
           "file_name": "Naruto S3 E54 Tamil Dub 720p.mp4",
-          "mime_type": "video/mp4"
+          "mime_type": "video/mp4",
+          "title": "The Summoning Jutsu: Wisdom of the Toad Sage!",
+          "released": "2003-10-15",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/478/1196452.jpg"
         },
         {
           "slug_id": "KkmOt7mmBzmB_3o8",
@@ -711,10 +768,13 @@
           "episode": 55,
           "season": 3,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 204324589,
           "file_name": "Naruto S3 E55 Tamil Dub 720p.mp4",
-          "mime_type": "video/mp4"
+          "mime_type": "video/mp4",
+          "title": "A Feeling of Yearning, A Flower Full of Hope",
+          "released": "2003-10-22",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/478/1196456.jpg"
         },
         {
           "slug_id": "USGe_OtmyCPRrbhP",
@@ -722,10 +782,13 @@
           "episode": 56,
           "season": 3,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 218814486,
           "file_name": "Naruto S3 E56 Tamil Dub 720p.mp4",
-          "mime_type": "video/mp4"
+          "mime_type": "video/mp4",
+          "title": "Live or Die: Risk it All to Win it All!",
+          "released": "2003-10-29",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/478/1196458.jpg"
         },
         {
           "slug_id": "d3vMi4Y9-1-bY9S5",
@@ -733,10 +796,13 @@
           "episode": 57,
           "season": 3,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 117858717,
           "file_name": "Naruto S3 E57 Tamil Dub 720p.mp4",
-          "mime_type": "video/mp4"
+          "mime_type": "video/mp4",
+          "title": "He Flies! He Jumps! He Lurks! Chief Toad Appears!",
+          "released": "2003-11-05",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/478/1196467.jpg"
         },
         {
           "slug_id": "cL6K0rPzJNMI6d_e",
@@ -744,10 +810,13 @@
           "episode": 58,
           "season": 3,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 110978929,
           "file_name": "Naruto S3 E58 Tamil Dub 720p.mp4",
-          "mime_type": "video/mp4"
+          "mime_type": "video/mp4",
+          "title": "Hospital Besieged: The Evil Hand Revealed!",
+          "released": "2003-11-12",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/478/1196510.jpg"
         },
         {
           "slug_id": "_tO1FHkMBzG4oGLr",
@@ -755,10 +824,13 @@
           "episode": 59,
           "season": 3,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 129578782,
           "file_name": "Naruto S3 E59 Tamil Dub 720p.mp4",
-          "mime_type": "video/mp4"
+          "mime_type": "video/mp4",
+          "title": "The Final Rounds: Rush to the Battle Arena!",
+          "released": "2003-11-19",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/478/1196533.jpg"
         },
         {
           "slug_id": "EZG8WbRPqJ-eNPGC",
@@ -766,10 +838,13 @@
           "episode": 60,
           "season": 3,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 128307010,
           "file_name": "Naruto S3 E60 Tamil Dub 720p.mp4",
-          "mime_type": "video/mp4"
+          "mime_type": "video/mp4",
+          "title": "Byakugan vs. Shadow Clone",
+          "released": "2003-11-26",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/478/1196544.jpg"
         },
         {
           "slug_id": "KUB1ubqyOfB-vEAi",
@@ -777,10 +852,13 @@
           "episode": 61,
           "season": 3,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 112179025,
           "file_name": "Naruto S3 E61 Tamil Dub 720p.mp4",
-          "mime_type": "video/mp4"
+          "mime_type": "video/mp4",
+          "title": "Ultimate Defense: Zero Blind Spot!",
+          "released": "2003-12-03",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/478/1196552.jpg"
         },
         {
           "slug_id": "5bHE5OuuoD7yxXA-",
@@ -788,10 +866,13 @@
           "episode": 62,
           "season": 3,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 142044998,
           "file_name": "Naruto S3 E62 Tamil Dub 720p.mp4",
-          "mime_type": "video/mp4"
+          "mime_type": "video/mp4",
+          "title": "A Failure's True Power",
+          "released": "2003-12-10",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/478/1196560.jpg"
         },
         {
           "slug_id": "GuBGVr-Laxu5d7ch",
@@ -799,10 +880,13 @@
           "episode": 63,
           "season": 3,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 98558626,
           "file_name": "Naruto S3 E63 Tamil Dub 720p.mp4",
-          "mime_type": "video/mp4"
+          "mime_type": "video/mp4",
+          "title": "Hit it or Quit it: The Final Rounds Get Complicated!",
+          "released": "2003-12-17",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/478/1196591.jpg"
         },
         {
           "slug_id": "-FDZBzhkUGKPNI0D",
@@ -810,10 +894,13 @@
           "episode": 64,
           "season": 3,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 123436701,
           "file_name": "Naruto S3 E64 Tamil Dub 720p.mp4",
-          "mime_type": "video/mp4"
+          "mime_type": "video/mp4",
+          "title": "Zero Motivation: The Guy with Cloud Envy!",
+          "released": "2003-12-24",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/478/1196597.jpg"
         },
         {
           "slug_id": "Wqi5m_o55L2ZB-gk",
@@ -821,10 +908,13 @@
           "episode": 65,
           "season": 3,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 101459281,
           "file_name": "Naruto S3 E65 Tamil Dub 720p.mp4",
-          "mime_type": "video/mp4"
+          "mime_type": "video/mp4",
+          "title": "Dancing Leaf, Squirming Sand",
+          "released": "2004-01-07",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/478/1196600.jpg"
         },
         {
           "slug_id": "7qOnAs3dveCAiPzw",
@@ -832,10 +922,13 @@
           "episode": 66,
           "season": 3,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 119035308,
           "file_name": "Naruto S3 E66 Tamil Dub 720p.mp4",
-          "mime_type": "video/mp4"
+          "mime_type": "video/mp4",
+          "title": "Bushy Brow's Jutsu: Sasuke Style!",
+          "released": "2004-01-14",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/478/1196613.jpg"
         },
         {
           "slug_id": "6rtmDfHqtJwqY18y",
@@ -843,10 +936,13 @@
           "episode": 67,
           "season": 3,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 139963950,
           "file_name": "Naruto S3 E67 Tamil Dub 720p.mp4",
-          "mime_type": "video/mp4"
+          "mime_type": "video/mp4",
+          "title": "Late for the Show, But Ready to Go! The Ultimate Secret Technique Is Born!",
+          "released": "2004-01-14",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/478/1196618.jpg"
         },
         {
           "slug_id": "1ADOvOh9ni3vOsE6",
@@ -854,10 +950,13 @@
           "episode": 68,
           "season": 3,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 105682479,
           "file_name": "Naruto S3 E68 Tamil Dub 720p.mp4",
-          "mime_type": "video/mp4"
+          "mime_type": "video/mp4",
+          "title": "Zero Hour! The Destruction of the Hidden Leaf Village Begins!",
+          "released": "2004-01-28",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/478/1196709.jpg"
         },
         {
           "slug_id": "ndzlAVenGciViwky",
@@ -865,10 +964,13 @@
           "episode": 69,
           "season": 3,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 122720746,
           "file_name": "Naruto S3 E69 Tamil Dub 720p.mp4",
-          "mime_type": "video/mp4"
+          "mime_type": "video/mp4",
+          "title": "Village in Distress: A New A-Ranked Mission!",
+          "released": "2004-02-04",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/478/1197322.jpg"
         },
         {
           "slug_id": "NswQjtuRDzIwnhJU",
@@ -876,10 +978,13 @@
           "episode": 70,
           "season": 3,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 162519989,
           "file_name": "Naruto S3 E70 Tamil Dub 720p.mp4",
-          "mime_type": "video/mp4"
+          "mime_type": "video/mp4",
+          "title": "A Shirker's Call to Action: A Layabout No More!",
+          "released": "2004-02-11",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/479/1197679.jpg"
         },
         {
           "slug_id": "d8n7uL5Qt6qoQzZ8",
@@ -887,10 +992,13 @@
           "episode": 72,
           "season": 3,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 117580000,
           "file_name": "Naruto S3 E72 Tamil Dub 720p.mp4",
-          "mime_type": "video/mp4"
+          "mime_type": "video/mp4",
+          "title": "A Mistake from the Past: A Face Revealed!",
+          "released": "2004-02-25",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/479/1198559.jpg"
         },
         {
           "slug_id": "xfFxS45F6REJ4Ijl",
@@ -898,10 +1006,13 @@
           "episode": 74,
           "season": 3,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 139538399,
           "file_name": "Naruto S3 E74 Tamil Dub 720p.mp4",
-          "mime_type": "video/mp4"
+          "mime_type": "video/mp4",
+          "title": "Astonishing Truth! Gaara's Identity Emerges!",
+          "released": "2004-03-10",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/479/1198782.jpg"
         },
         {
           "slug_id": "wqK0pnt_Karxkthm",
@@ -909,10 +1020,13 @@
           "episode": 77,
           "season": 3,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 124286651,
           "file_name": "Naruto S3 E77 Tamil Dub 720p.mp4",
-          "mime_type": "video/mp4"
+          "mime_type": "video/mp4",
+          "title": "Light vs. Dark: The Two Faces of Gaara",
+          "released": "2004-03-31",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/479/1199692.jpg"
         },
         {
           "slug_id": "oQF0bORr8diPHmM5",
@@ -920,10 +1034,13 @@
           "episode": 78,
           "season": 3,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 139457358,
           "file_name": "Naruto S3 E78 Tamil Dub 720p.mp4",
-          "mime_type": "video/mp4"
+          "mime_type": "video/mp4",
+          "title": "Naruto's Ninja Handbook",
+          "released": "2004-04-07",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/479/1199694.jpg"
         },
         {
           "slug_id": "-2oo8cOitEBnbpuw",
@@ -931,10 +1048,13 @@
           "episode": 79,
           "season": 3,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 125253045,
           "file_name": "Naruto S3 E79 Tamil Dub 720p.mp4",
-          "mime_type": "video/mp4"
+          "mime_type": "video/mp4",
+          "title": "Beyond the Limit of Darkness and Light",
+          "released": "2004-04-14",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/479/1199711.jpg"
         },
         {
           "slug_id": "KRQel7hk25X-jFJd",
@@ -942,10 +1062,13 @@
           "episode": 80,
           "season": 3,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 106570465,
           "file_name": "Naruto S3 E80 Tamil Dub 720p.mp4",
-          "mime_type": "video/mp4"
+          "mime_type": "video/mp4",
+          "title": "The Third Hokage, Forever...",
+          "released": "2004-04-21",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/480/1200024.jpg"
         },
         {
           "slug_id": "DWqz4M6_tadIaz27",
@@ -953,10 +1076,13 @@
           "episode": 81,
           "season": 4,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 190588393,
           "file_name": "Naruto S4 E81 Tamil Dub 720p.mp4",
-          "mime_type": "video/mp4"
+          "mime_type": "video/mp4",
+          "title": "Return of the Morning Mist",
+          "released": "2004-04-28",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/480/1200046.jpg"
         },
         {
           "slug_id": "tH4uoR00o_b6eqJ8",
@@ -964,10 +1090,13 @@
           "episode": 82,
           "season": 4,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 191543400,
           "file_name": "Naruto S4 E82 Tamil Dub 720p.mp4",
-          "mime_type": "video/mp4"
+          "mime_type": "video/mp4",
+          "title": "Eye to Eye: Sharingan vs. Sharingan!",
+          "released": "2004-05-05",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/480/1201582.jpg"
         },
         {
           "slug_id": "zPo45atY-OFjcFid",
@@ -975,10 +1104,13 @@
           "episode": 83,
           "season": 4,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 194384911,
           "file_name": "Naruto S4 E83 Tamil Dub 720p.mp4",
-          "mime_type": "video/mp4"
+          "mime_type": "video/mp4",
+          "title": "Jiraiya: Naruto's Potential Disaster!",
+          "released": "2004-05-12",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/480/1201628.jpg"
         },
         {
           "slug_id": "NZX2A6tGhIdRW4y_",
@@ -986,10 +1118,13 @@
           "episode": 84,
           "season": 4,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 175388376,
           "file_name": "Naruto S4 E84 Tamil Dub 720p.mp4",
-          "mime_type": "video/mp4"
+          "mime_type": "video/mp4",
+          "title": "Roar, Chidori! Brother vs. Brother!",
+          "released": "2004-05-19",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/481/1202627.jpg"
         },
         {
           "slug_id": "JcSwyTg4v1ms_Cxk",
@@ -997,10 +1132,13 @@
           "episode": 85,
           "season": 4,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 196515077,
           "file_name": "Naruto S4 E85 Tamil Dub 720p.mp4",
-          "mime_type": "video/mp4"
+          "mime_type": "video/mp4",
+          "title": "Hate Among the Uchihas: The Last of the Clan!",
+          "released": "2004-05-26",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/481/1203467.jpg"
         },
         {
           "slug_id": "R4xSmNULnv7SjagA",
@@ -1008,10 +1146,13 @@
           "episode": 86,
           "season": 4,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 130653735,
           "file_name": "Naruto S4 E86 Tamil Dub 720p.mp4",
-          "mime_type": "video/mp4"
+          "mime_type": "video/mp4",
+          "title": "A New Training Begins: I Will Be Strong!",
+          "released": "2004-06-02",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/481/1203775.jpg"
         },
         {
           "slug_id": "dM8F88OKDlkqFO43",
@@ -1019,10 +1160,13 @@
           "episode": 87,
           "season": 4,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 187422687,
           "file_name": "Naruto S4 E87 Tamil Dub 720p.mp4",
-          "mime_type": "video/mp4"
+          "mime_type": "video/mp4",
+          "title": "Keep on Training: Pop Goes the Water Balloon!",
+          "released": "2004-06-09",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/481/1203804.jpg"
         },
         {
           "slug_id": "Tku2HYuZ98p02f2O",
@@ -1030,10 +1174,13 @@
           "episode": 88,
           "season": 4,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 165762778,
           "file_name": "Naruto S4 E88 Tamil Dub 720p.mp4",
-          "mime_type": "video/mp4"
+          "mime_type": "video/mp4",
+          "title": "Focal Point: The Mark of the Leaf",
+          "released": "2004-06-16",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/481/1204622.jpg"
         },
         {
           "slug_id": "XO6oYpwxmGuyo0TE",
@@ -1041,10 +1188,13 @@
           "episode": 89,
           "season": 4,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 82042830,
           "file_name": "Naruto S4 E89 Tamil Dub 720p.mp4",
-          "mime_type": "video/mp4"
+          "mime_type": "video/mp4",
+          "title": "An Impossible Choice: The Pain Within Tsunade's Heart",
+          "released": "2004-06-23",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/481/1204632.jpg"
         },
         {
           "slug_id": "_ThBPSZDHI28oCGN",
@@ -1052,10 +1202,13 @@
           "episode": 90,
           "season": 4,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 74777329,
           "file_name": "Naruto S4 E90 Tamil Dub 720p.mp4",
-          "mime_type": "video/mp4"
+          "mime_type": "video/mp4",
+          "title": "Unforgivable! A Total Lack of Respect!",
+          "released": "2004-07-01",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/481/1204760.jpg"
         },
         {
           "slug_id": "NJDjoWzVyMI5F-HP",
@@ -1063,10 +1216,13 @@
           "episode": 91,
           "season": 4,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 93914405,
           "file_name": "Naruto S4 E91 Tamil Dub 720p.mp4",
-          "mime_type": "video/mp4"
+          "mime_type": "video/mp4",
+          "title": "Inheritence! The Necklace of Death!",
+          "released": "2004-07-08",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/481/1204903.jpg"
         },
         {
           "slug_id": "KHFLzwdaOQLw6Zwd",
@@ -1074,10 +1230,13 @@
           "episode": 92,
           "season": 4,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 104622946,
           "file_name": "Naruto S4 E92 Tamil Dub 720p.mp4",
-          "mime_type": "video/mp4"
+          "mime_type": "video/mp4",
+          "title": "A Dubious Offer! Tsunade's Choice!",
+          "released": "2004-07-22",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/481/1204921.jpg"
         },
         {
           "slug_id": "QmVsMTMd-uPWo8fF",
@@ -1085,10 +1244,13 @@
           "episode": 93,
           "season": 4,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 132139817,
           "file_name": "Naruto S4 E93 Tamil Dub 720p.mp4",
-          "mime_type": "video/mp4"
+          "mime_type": "video/mp4",
+          "title": "Breakdown! The Deal is Off!",
+          "released": "2004-07-29",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/481/1204930.jpg"
         },
         {
           "slug_id": "-Vzw0Q_usVh4HcmX",
@@ -1096,10 +1258,13 @@
           "episode": 94,
           "season": 4,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 116266132,
           "file_name": "Naruto S4 E94 Tamil Dub 720p.mp4",
-          "mime_type": "video/mp4"
+          "mime_type": "video/mp4",
+          "title": "Attack! Fury of the Rasengan!",
+          "released": "2004-08-05",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/481/1204970.jpg"
         },
         {
           "slug_id": "jKoqEcPbp61geZdk",
@@ -1107,10 +1272,13 @@
           "episode": 95,
           "season": 4,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 114332655,
           "file_name": "Naruto S4 E95 Tamil Dub 720p.mp4",
-          "mime_type": "video/mp4"
+          "mime_type": "video/mp4",
+          "title": "The Fifth Hokage! A Life on the Line!",
+          "released": "2004-08-12",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/481/1204978.jpg"
         },
         {
           "slug_id": "GNRuWb5acor1LF0L",
@@ -1118,10 +1286,13 @@
           "episode": 96,
           "season": 4,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 134052816,
           "file_name": "Naruto S4 E96 Tamil Dub 720p.mp4",
-          "mime_type": "video/mp4"
+          "mime_type": "video/mp4",
+          "title": "Deadlock! Sannin Showdown!",
+          "released": "2004-08-12",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/482/1205210.jpg"
         },
         {
           "slug_id": "q64MFC_5If4ih6rt",
@@ -1129,10 +1300,13 @@
           "episode": 97,
           "season": 4,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 122926075,
           "file_name": "Naruto S4 E97 Tamil Dub 720p.mp4",
-          "mime_type": "video/mp4"
+          "mime_type": "video/mp4",
+          "title": "Kidnapped! Naruto's Hot Spring Adventure!",
+          "released": "2004-08-19",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/482/1206931.jpg"
         },
         {
           "slug_id": "rM8fLeEgdtYOze9B",
@@ -1140,10 +1314,13 @@
           "episode": 98,
           "season": 4,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 110854585,
           "file_name": "Naruto S4 E98 Tamil Dub 720p.mp4",
-          "mime_type": "video/mp4"
+          "mime_type": "video/mp4",
+          "title": "Tsunade's Warning: Ninja No More!",
+          "released": "2004-08-25",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/482/1206937.jpg"
         },
         {
           "slug_id": "FXP0mKqSw3hYIhx4",
@@ -1151,10 +1328,13 @@
           "episode": 99,
           "season": 4,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 97961342,
           "file_name": "Naruto S4 E99 Tamil Dub 720p.mp4",
-          "mime_type": "video/mp4"
+          "mime_type": "video/mp4",
+          "title": "The Will of Fire Still Burns!",
+          "released": "2004-09-01",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/482/1206967.jpg"
         },
         {
           "slug_id": "R60bWO3e1yKP9aPI",
@@ -1162,10 +1342,13 @@
           "episode": 100,
           "season": 4,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 93549497,
           "file_name": "Naruto S4 E100 Tamil Dub 720p.mp4",
-          "mime_type": "video/mp4"
+          "mime_type": "video/mp4",
+          "title": "Sensei and Student: The Bond of the Shinobi",
+          "released": "2004-09-08",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/482/1207034.jpg"
         },
         {
           "slug_id": "wVgYNEydIkF4mclN",
@@ -1173,10 +1356,13 @@
           "episode": 101,
           "season": 4,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 109419027,
           "file_name": "Naruto S4 E101 Tamil Dub 720p.mp4",
-          "mime_type": "video/mp4"
+          "mime_type": "video/mp4",
+          "title": "Gotta See! Gotta Know! Kakashi-Sensei's True Face!",
+          "released": "2004-09-15",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/482/1207047.jpg"
         },
         {
           "slug_id": "cHF4GKS5qafJCrNe",
@@ -1184,10 +1370,13 @@
           "episode": 102,
           "season": 4,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 114694405,
           "file_name": "Naruto S4 E102 Tamil Dub 720p.mp4",
-          "mime_type": "video/mp4"
+          "mime_type": "video/mp4",
+          "title": "Mission: Help an Old Friend in the Land of Tea",
+          "released": "2004-09-22",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/482/1207331.jpg"
         },
         {
           "slug_id": "TTOx79MNQperjmr6",
@@ -1195,10 +1384,13 @@
           "episode": 103,
           "season": 4,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 133428256,
           "file_name": "Naruto S4 E103 Tamil Dub 720p.mp4",
-          "mime_type": "video/mp4"
+          "mime_type": "video/mp4",
+          "title": "The Race is on! Trouble on the High Seas!",
+          "released": "2004-09-29",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/482/1207433.jpg"
         },
         {
           "slug_id": "JFLuH2SAWexvyRru",
@@ -1206,10 +1398,13 @@
           "episode": 104,
           "season": 4,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 138531553,
           "file_name": "Naruto S4 E104 Tamil Dub 720p.mp4",
-          "mime_type": "video/mp4"
+          "mime_type": "video/mp4",
+          "title": "Run Idate Run! Nagi Island Awaits!",
+          "released": "2004-10-13",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/483/1207670.jpg"
         }
       ],
       "year": 2002,
@@ -1227,7 +1422,7 @@
       "status": "Finished",
       "episodes_total": 220,
       "studio": "Studio Pierrot",
-      "updated_at": "2026-11-01T16:34:16.781Z"
+      "updated_at": "2026-11-01T16:34:39Z"
     },
     {
       "slug_id": "naruto-shippuden",
@@ -6485,7 +6680,7 @@
       "status": "Finished",
       "episodes_total": 500,
       "studio": "Studio Pierrot",
-      "updated_at": "2026-11-01T16:20:45Z"
+      "updated_at": "2026-11-01T16:34:40Z"
     }
   ]
 }
