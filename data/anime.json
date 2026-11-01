@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-01T16:48:01.955Z",
+  "updated_at": "2026-11-01T16:48:06.884Z",
   "anime": [
     {
       "slug_id": "naruto",
@@ -1889,6 +1889,17 @@
           "file_size": 114513479,
           "file_name": "Naruto S06 E160 Blu-Ray - 480p - x264 - [Tamil + Telugu + H.mkv",
           "mime_type": "video/x-matroska"
+        },
+        {
+          "slug_id": "q2RRzY5RzzlTULtS",
+          "telegram_message_id": 542,
+          "episode": 161,
+          "season": 1,
+          "part": null,
+          "quality": "720p",
+          "file_size": 184993309,
+          "file_name": "[Toonworld4all] Naruto - 161 [720p BD x264 Multi Audio] ESub.mkv",
+          "mime_type": "video/x-matroska"
         }
       ],
       "year": 2002,
@@ -1906,7 +1917,7 @@
       "status": "Finished",
       "episodes_total": 220,
       "studio": "Studio Pierrot",
-      "updated_at": "2026-11-01T16:48:01.955Z"
+      "updated_at": "2026-11-01T16:48:06.884Z"
     },
     {
       "slug_id": "naruto-shippuden",
