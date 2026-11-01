@@ -63,7 +63,7 @@ export const animeFilenameParts=name=>{
  if(!episode){match=raw.match(/(?<!\d)[- ]0*(\d{1,4})(?=\s*(?:\[[^\]]*\]|\([^)]*\)|(?:360|480|720|1080|2160|4k)p?|tamil|telugu|malayalam|kannada|hindi|english|தமிழ்|hdrip|webrip|bluray|web-dl|$))/iu);if(match&&!(Number(match[1])>=1900&&Number(match[1])<=2099)){episode=Number(match[1]);raw=raw.slice(0,match.index)+' '+raw.slice(match.index+match[0].length);}}
  match=raw.match(/\bpart\s*[- ]?(\d{1,2})\b/i);if(match){part=Number(match[1]);raw=raw.slice(0,match.index)+' '+raw.slice(match.index+match[0].length);}
  const qualityMatch=raw.match(ANIME_QUALITY),quality=qualityMatch?.[0]?.toLowerCase()==='4k'?'2160p':qualityMatch?.[0]?.toLowerCase()||'720p';
- const cut=qualityMatch?.index??Infinity;const title=(Number.isFinite(cut)?raw.slice(0,cut):raw).replace(/\s+(?:தமிழ்|tamil|telugu|malayalam|kannada|hindi|english|hdrip|webrip|bluray|web-dl|proper|repack|dual(?:\s+audio)?).*$/iu,'').replace(/\s+@.*$/,'').replace(/\s*(?:\[[^\]]*\]|\{[^}]*\}|\([^)]*\))+/g,' ').replace(/\s*\+\s*/g,' ').replace(/^[\s\[({]+|[\s\-\[\]({})]+$/g,'').replace(/\s+/g,' ').trim();
+ const cut=qualityMatch?.index??Infinity;const title=(Number.isFinite(cut)?raw.slice(0,cut):raw).replace(/\s+(?:தமிழ்|tamil|telugu|malayalam|kannada|hindi|english|hdrip|webrip|bluray|web-dl|proper|repack|dual(?:\s+audio)?).*$/iu,'').replace(/\s+@.*$/,'').replace(/\s*(?:\[[^\]]*\]|\{[^}]*\}|\([^)]*\))+/g,' ').replace(/\b(?:multi(?:\s+audio)?|audio|esub|esubs)\b/giu,' ').replace(/\s*\+\s*/g,' ').replace(/^[\s\[({]+|[\s\-\[\]({})]+$/g,'').replace(/\s+/g,' ').trim();
  return {title:title||'Untitled anime',titleCandidates:titleCandidates(title),season,episode,part,quality};
 };
 function seasonFromCaption(caption){
