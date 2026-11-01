@@ -9,6 +9,7 @@ function startPoster(img){const source=img.dataset.posterSrc;if(!source)return;d
 const posterObserver='IntersectionObserver'in window?new IntersectionObserver(entries=>{for(const entry of entries){if(!entry.isIntersecting)continue;posterObserver.unobserve(entry.target);startPoster(entry.target);}},{rootMargin:'1600px 0px'}):null;
 function image(a,cls,eager=false,priority=false){const img=el('img',cls);img.alt='';img.loading=eager?'eager':'lazy';img.decoding='async';img.classList.add('poster-loading');if(priority)img.fetchPriority='high';img.addEventListener('load',()=>{img.classList.remove('poster-loading');img.classList.add('poster-loaded');},{once:true});img.onerror=()=>{if(img.src!==FALLBACK_POSTER){img.src=FALLBACK_POSTER;}else{img.onerror=null;img.removeAttribute('src');img.classList.remove('poster-loading');img.classList.add('poster-failed');}};img.dataset.posterSrc=poster(a);if(eager||!posterObserver)startPoster(img);else posterObserver.observe(img);return img;}
 function playIcon(){const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');svg.setAttribute('viewBox','0 0 24 24');svg.setAttribute('width','17');svg.setAttribute('height','17');svg.setAttribute('fill','currentColor');svg.setAttribute('aria-hidden','true');const p=document.createElementNS('http://www.w3.org/2000/svg','path');p.setAttribute('d','M8 5v14l11-7L8 5Z');svg.append(p);return svg;}
+function chevronIcon(){const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');svg.setAttribute('viewBox','0 0 24 24');svg.setAttribute('width','20');svg.setAttribute('height','20');svg.setAttribute('fill','none');svg.setAttribute('stroke','currentColor');svg.setAttribute('stroke-width','2');svg.setAttribute('stroke-linecap','round');svg.setAttribute('stroke-linejoin','round');svg.setAttribute('aria-hidden','true');const path=document.createElementNS('http://www.w3.org/2000/svg','path');path.setAttribute('d','m6 9 6 6 6-6');svg.append(path);return svg;}
 
 const grid=$('anime-grid'),searchInput=$('anime-search'),empty=$('anime-empty'),home=$('anime-home'),detail=$('anime-detail'),pagination=$('anime-pagination');
 const yearFilter=$('filter-year'),genreFilter=$('filter-genre'),sortFilter=$('filter-sort');
@@ -158,14 +159,15 @@ function showDetail(a){
  if(!list.length)eps.append(el('div','anime-empty-eps','Episodes will appear here once they are added.'));
  const seasons=new Map();for(const episode of list){const season=Number(episode.season)||1;if(!seasons.has(season))seasons.set(season,[]);seasons.get(season).push(episode);}
  for(const [season,seasonEpisodes] of seasons){
-  const banner=SEASON_BANNERS[a.slug_id]?.[season],frame=banner||seasonEpisodes.map(e=>e.frame).find(Boolean)||a.poster||'';const divider=el('section','anime-season-divider');divider.setAttribute('aria-label',`Season ${season}`);if(frame)divider.style.backgroundImage='url("'+frame.replaceAll('"','%22')+'")';eps.append(divider);
+  const banner=SEASON_BANNERS[a.slug_id]?.[season],frame=banner||seasonEpisodes.map(e=>e.frame).find(Boolean)||a.poster||'';const group=el('section','anime-season-group');const divider=el('section','anime-season-divider');divider.setAttribute('aria-label',`Season ${season}`);if(frame)divider.style.backgroundImage='url("'+frame.replaceAll('"','%22')+'")';const episodesId='anime-season-episodes-'+season;const toggle=el('button','anime-season-toggle');toggle.type='button';toggle.setAttribute('aria-label',`Toggle Season ${season}`);toggle.setAttribute('aria-expanded',String(season===1));toggle.setAttribute('aria-controls',episodesId);toggle.append(chevronIcon());divider.append(toggle);const episodeGroup=el('div','anime-season-episodes');episodeGroup.id=episodesId;episodeGroup.hidden=season!==1;toggle.addEventListener('click',()=>{const open=!episodeGroup.hidden;episodeGroup.hidden=open;toggle.setAttribute('aria-expanded',String(!open));});group.append(divider,episodeGroup);
   for(const e of seasonEpisodes){
    const number=episodeNumber(e),row=el('div','anime-ep');if(e.frame){const thumb=el('img','anime-ep-frame');thumb.src=e.frame;thumb.alt='';thumb.loading='lazy';row.append(thumb);}else row.append(el('div','anime-ep-num',String(number).padStart(2,'0')));
    const text=el('div');text.append(el('p','anime-ep-title',e.title||'Episode '+number),el('p','anime-ep-sub',[e.released,e.quality,e.duration,e.part&&'Part '+e.part].filter(Boolean).join(' · ')||'Episode '+number));
    const episodeSlug=typeof e.slug_id==='string'&&/^[A-Za-z0-9_-]{8,80}$/.test(e.slug_id)?e.slug_id:'';
    const play=el('a','anime-ep-play');play.href=episodeSlug?'/anime/watch/'+encodeURIComponent(episodeSlug):'#';play.title=episodeSlug?'Watch episode':'Episode link unavailable';if(!episodeSlug)play.setAttribute('aria-disabled','true');play.append(playIcon(),document.createTextNode('Play'));
-   row.append(text,play);eps.append(row);
+   row.append(text,play);episodeGroup.append(row);
   }
+  eps.append(group);
  }
  root.append(eps);document.title=a.title+' — FilmGo';
 }
