@@ -183,6 +183,16 @@ def manual_anime_season(title, episode):
         return boundaries[-1][0]
     return None
 
+def manual_anime_episode(title, season, episode):
+    """Convert a global episode number to a season-local guide number."""
+    normalized = re.sub(r'[^a-z0-9]+', '', str(title or '').casefold())
+    if normalized in ('narutoshippuden', 'narutoshippuuden'):
+        boundaries = (32, 53, 71, 88, 112, 143, 151, 175, 196, 221, 242, 275, 295, 320, 348, 361, 379, 405, 431, 458, 479, 500)
+        index = max(1, int(season or 1)) - 1
+        previous = boundaries[index - 1] if index > 0 and index <= len(boundaries) else 0
+        return max(1, int(episode or 0) - previous)
+    return int(episode or 0)
+
 _TMDB_SHOW_CACHE = {}
 _TMDB_SEASON_CACHE = {}
 
@@ -340,6 +350,12 @@ def build_anime_catalog(messages):
             caption_season = episode.pop('caption_season', None)
             editorial_season = manual_anime_season(show['title'], episode['episode'])
             episode['season'] = explicit_season and episode['season'] or editorial_season or caption_season or (previous or {}).get('season') or inferred_anime_season(episode['episode'], None, boundaries)
+            guide_episode = manual_anime_episode(show['title'], episode['season'], episode['episode'])
+            guide = tmdb_season_episodes(show['title'], episode['season']).get(guide_episode) or tmdb_season_episodes(show['title'], episode['season']).get(episode['episode'])
+            if guide:
+                for field in ('title', 'released', 'frame'):
+                    if guide.get(field):
+                        episode[field] = guide[field]
             if previous:
                 for field, value in previous.items():
                     if field not in ('slug_id', 'telegram_message_id', 'file_name', 'file_size', 'mime_type') and value not in (None, '', []):
