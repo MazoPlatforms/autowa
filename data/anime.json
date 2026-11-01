@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": 1793537437,
+  "updated_at": 1793539066,
   "anime": [
     {
       "slug_id": "naruto-shippuden",
@@ -3956,6 +3956,17 @@
           "mime_type": "video/x-matroska"
         },
         {
+          "slug_id": "LK0T45u_MlfFDcr5",
+          "telegram_message_id": 383,
+          "episode": 361,
+          "season": 16,
+          "part": null,
+          "quality": "720P",
+          "file_size": 205717992,
+          "file_name": "Naruto Shippuden - S16 E361 Multi 360pTamil.mkv",
+          "mime_type": "video/x-matroska"
+        },
+        {
           "slug_id": "VExA94LMMppRzesp",
           "telegram_message_id": 384,
           "episode": 362,
@@ -3964,6 +3975,72 @@
           "quality": "720P",
           "file_size": 119556000,
           "file_name": "Naruto shippuden S16 Ep 362 [ Tamil + Multi ].mkv",
+          "mime_type": "video/x-matroska"
+        },
+        {
+          "slug_id": "qDKF36dg75WnHmI8",
+          "telegram_message_id": 385,
+          "episode": 363,
+          "season": 17,
+          "part": null,
+          "quality": "720P",
+          "file_size": 179427662,
+          "file_name": "Naruto Shippuden - S17 E363 Multi 360pTamil.mkv",
+          "mime_type": "video/x-matroska"
+        },
+        {
+          "slug_id": "QuW5S0XGmJylAOb0",
+          "telegram_message_id": 386,
+          "episode": 364,
+          "season": 17,
+          "part": null,
+          "quality": "720P",
+          "file_size": 119671737,
+          "file_name": "Naruto Shippuden - S17 E364 Multi 360pTamil.mkv",
+          "mime_type": "video/x-matroska"
+        },
+        {
+          "slug_id": "OSlytD2CfdudFdR-",
+          "telegram_message_id": 387,
+          "episode": 365,
+          "season": 17,
+          "part": null,
+          "quality": "720P",
+          "file_size": 189156320,
+          "file_name": "Naruto Shippuden - S17 E365 Multi 360pTamil.mkv",
+          "mime_type": "video/x-matroska"
+        },
+        {
+          "slug_id": "uktQRAWTKbxsVbo7",
+          "telegram_message_id": 388,
+          "episode": 366,
+          "season": 17,
+          "part": null,
+          "quality": "720P",
+          "file_size": 101565428,
+          "file_name": "Naruto Shippuden - S17 E366 Multi 360pTamil.mkv",
+          "mime_type": "video/x-matroska"
+        },
+        {
+          "slug_id": "F0qWZ7n7CwgAlqAq",
+          "telegram_message_id": 389,
+          "episode": 367,
+          "season": 17,
+          "part": null,
+          "quality": "720P",
+          "file_size": 149270149,
+          "file_name": "Naruto Shippuden - S17 E367 Multi 360pTamil.mkv",
+          "mime_type": "video/x-matroska"
+        },
+        {
+          "slug_id": "huK3juH7VzbjZMvV",
+          "telegram_message_id": 390,
+          "episode": 368,
+          "season": 17,
+          "part": null,
+          "quality": "720P",
+          "file_size": 81412830,
+          "file_name": "Naruto Shippuden - S17 E368 Multi 360pTamil.mkv",
           "mime_type": "video/x-matroska"
         },
         {
@@ -3976,6 +4053,17 @@
           "file_size": 160379943,
           "file_name": "Naruto Shippuden S17 E369 720p Tamil.Mp4",
           "mime_type": "video/mp4"
+        },
+        {
+          "slug_id": "tZmVkaJgZaVFyfTj",
+          "telegram_message_id": 392,
+          "episode": 370,
+          "season": 17,
+          "part": null,
+          "quality": "720P",
+          "file_size": 61565918,
+          "file_name": "Naruto Shippud… - S17E370 [Tamil] 720p @Animes_Tamil.mkv",
+          "mime_type": "video/x-matroska"
         },
         {
           "slug_id": "f-MEQnPOxOic882X",
@@ -3997,6 +4085,28 @@
           "quality": "720P",
           "file_size": 80645010,
           "file_name": "Naruto Shippuden S17E372 Tamil.mkv",
+          "mime_type": "video/x-matroska"
+        },
+        {
+          "slug_id": "atyuGAtvh0Yf6cXd",
+          "telegram_message_id": 395,
+          "episode": 373,
+          "season": 18,
+          "part": null,
+          "quality": "720P",
+          "file_size": 82840473,
+          "file_name": "Naruto Shippud… - S18E373 [Tamil] 720p @Animes_Tamil_Hub.mkv",
+          "mime_type": "video/x-matroska"
+        },
+        {
+          "slug_id": "-2oOl8Vem9ng-quV",
+          "telegram_message_id": 396,
+          "episode": 374,
+          "season": 18,
+          "part": null,
+          "quality": "480P",
+          "file_size": 40038963,
+          "file_name": "Naruto Shippud… - S18E374 [Tamil] 480p @Animes_Tamil_Hub.mkv",
           "mime_type": "video/x-matroska"
         },
         {
@@ -4026,124 +4136,7 @@
       "status": "Finished",
       "episodes_total": 500,
       "studio": "Studio Pierrot",
-      "updated_at": "2026-11-01T12:50:37Z"
-    },
-    {
-      "slug_id": "naruto-shippud",
-      "title": "Naruto Shippud…",
-      "episodes": [
-        {
-          "slug_id": "LK0T45u_MlfFDcr5",
-          "telegram_message_id": 383,
-          "episode": 361,
-          "season": 16,
-          "part": null,
-          "quality": "360P",
-          "file_size": 205717992,
-          "file_name": "Naruto Shippuden - S16 E361 Multi 360pTamil.mkv",
-          "mime_type": "video/x-matroska"
-        },
-        {
-          "slug_id": "qDKF36dg75WnHmI8",
-          "telegram_message_id": 385,
-          "episode": 363,
-          "season": 17,
-          "part": null,
-          "quality": "360P",
-          "file_size": 179427662,
-          "file_name": "Naruto Shippuden - S17 E363 Multi 360pTamil.mkv",
-          "mime_type": "video/x-matroska"
-        },
-        {
-          "slug_id": "QuW5S0XGmJylAOb0",
-          "telegram_message_id": 386,
-          "episode": 364,
-          "season": 17,
-          "part": null,
-          "quality": "360P",
-          "file_size": 119671737,
-          "file_name": "Naruto Shippuden - S17 E364 Multi 360pTamil.mkv",
-          "mime_type": "video/x-matroska"
-        },
-        {
-          "slug_id": "OSlytD2CfdudFdR-",
-          "telegram_message_id": 387,
-          "episode": 365,
-          "season": 17,
-          "part": null,
-          "quality": "360P",
-          "file_size": 189156320,
-          "file_name": "Naruto Shippuden - S17 E365 Multi 360pTamil.mkv",
-          "mime_type": "video/x-matroska"
-        },
-        {
-          "slug_id": "uktQRAWTKbxsVbo7",
-          "telegram_message_id": 388,
-          "episode": 366,
-          "season": 17,
-          "part": null,
-          "quality": "360P",
-          "file_size": 101565428,
-          "file_name": "Naruto Shippuden - S17 E366 Multi 360pTamil.mkv",
-          "mime_type": "video/x-matroska"
-        },
-        {
-          "slug_id": "F0qWZ7n7CwgAlqAq",
-          "telegram_message_id": 389,
-          "episode": 367,
-          "season": 17,
-          "part": null,
-          "quality": "360P",
-          "file_size": 149270149,
-          "file_name": "Naruto Shippuden - S17 E367 Multi 360pTamil.mkv",
-          "mime_type": "video/x-matroska"
-        },
-        {
-          "slug_id": "huK3juH7VzbjZMvV",
-          "telegram_message_id": 390,
-          "episode": 368,
-          "season": 17,
-          "part": null,
-          "quality": "360P",
-          "file_size": 81412830,
-          "file_name": "Naruto Shippuden - S17 E368 Multi 360pTamil.mkv",
-          "mime_type": "video/x-matroska"
-        },
-        {
-          "slug_id": "tZmVkaJgZaVFyfTj",
-          "telegram_message_id": 392,
-          "episode": 370,
-          "season": 17,
-          "part": null,
-          "quality": "720P",
-          "file_size": 61565918,
-          "file_name": "Naruto Shippud… - S17E370 [Tamil] 720p @Animes_Tamil.mkv",
-          "mime_type": "video/x-matroska"
-        },
-        {
-          "slug_id": "atyuGAtvh0Yf6cXd",
-          "telegram_message_id": 395,
-          "episode": 373,
-          "season": 18,
-          "part": null,
-          "quality": "720P",
-          "file_size": 82840473,
-          "file_name": "Naruto Shippud… - S18E373 [Tamil] 720p @Animes_Tamil_Hub.mkv",
-          "mime_type": "video/x-matroska"
-        },
-        {
-          "slug_id": "-2oOl8Vem9ng-quV",
-          "telegram_message_id": 396,
-          "episode": 374,
-          "season": 18,
-          "part": null,
-          "quality": "480P",
-          "file_size": 40038963,
-          "file_name": "Naruto Shippud… - S18E374 [Tamil] 480p @Animes_Tamil_Hub.mkv",
-          "mime_type": "video/x-matroska"
-        }
-      ],
-      "updated_at": "2026-11-01T12:50:37Z"
+      "updated_at": "2026-11-01T13:17:46Z"
     }
   ]
 }
