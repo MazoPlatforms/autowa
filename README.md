@@ -16,12 +16,18 @@ This repository includes a separate **Koyeb API + public web form**. Visitors do
 | `UPSTASH_REDIS_REST_TOKEN` | Upstash Redis REST token |
 | `GITHUB_DISPATCH_TOKEN` | GitHub fine-grained PAT with Contents write access to dispatch repository events |
 | `GITHUB_REPOSITORY` | `MazoPlatforms/autowa` |
+| `TELEGRAM_API_ID` | Telegram API application ID used by catalog and streaming workers |
+| `TELEGRAM_API_HASH` | Telegram API application hash |
+| `TELEGRAM_SESSION` | Authorized Telethon session string with access to both media channels |
+| `TELEGRAM_CHANNEL_ID` | Existing Movies channel ID, including the `-100...` prefix |
+| `TELEGRAM_ANIME_CHANNEL_ID` | Anime channel ID: `-1004325690397` |
 | `WA_OTP_AUTH_CREDS` | **Optional bootstrap only**: an unregistered Baileys creds JSON; a registered `creds.json` alone is incomplete without Signal keys and is ignored for a fresh QR pairing |
 | `PORT` | Optional, defaults to 8000 |
 
 4. **Pair OTP bot**: On first startup, look for a QR in **private Koyeb service logs** and scan it with WhatsApp → Linked devices → Link a device. Once connected, the bot saves encrypted auth data in Redis and reconnects automatically. Do **not** expose logs containing QR codes or secrets. If QR output is unreadable in the hosting logs, pairing requires a separate secure setup route; it has not been implemented.
 5. Create a GitHub **production environment** with required reviewer approval (if your repository plan/settings support it) and the `WA_AUTH_CREDS` environment secret for the **separate movie publisher bot**. The publisher's creds-only authentication is still unreliable without its matching Signal keys.
-6. Test OTP to your own WhatsApp number, then a small authorized media file through a reviewed GitHub Actions dispatch. Do not open public registration until real tests pass.
+6. Add `TELEGRAM_ANIME_CHANNEL_ID=-1004325690397` in the same Koyeb service environment secrets. The Telethon account in `TELEGRAM_SESSION` must be a member of that channel. The Koyeb service refreshes anime metadata every two minutes and stores the result in Redis; no GitHub Actions secret is needed for the live website catalog.
+7. Test OTP to your own WhatsApp number, then a small authorized media file through a reviewed GitHub Actions dispatch. Do not open public registration until real tests pass.
 
 **No Meta WhatsApp Cloud API credentials are required.** OTP sending now uses Baileys on Koyeb. Unofficial WhatsApp automation may be rate-limited or lead to account restrictions.
 

@@ -7,8 +7,15 @@ The existing Koyeb Node.js API also runs a Telegram Bot API long poller. It is *
 - `BOT_TOKEN` — existing Telegram bot token.
 - `FILMGO_BOT_ADMIN_ID=7744742903` — exact Telegram numeric user ID, not a username.
 - `TELEGRAM_CHANNEL_ID` — the existing channel ID (typically `-100...`).
+- `TELEGRAM_ANIME_CHANNEL_ID` — the separate anime channel ID; currently `-1004325690397`.
 - `GITHUB_DISPATCH_TOKEN`, `GITHUB_REPOSITORY`, `UPSTASH_REDIS_REST_URL`, `UPSTASH_REDIS_REST_TOKEN` — existing app configuration.
 - Existing `TELEGRAM_API_ID`, `TELEGRAM_API_HASH`, `TELEGRAM_SESSION` for channel indexing.
+
+The live anime catalog uses `TELEGRAM_ANIME_CHANNEL_ID` independently from
+`TELEGRAM_CHANNEL_ID`. Add the Telethon account to both channels. Anime files
+are grouped by normalized title and parsed season/episode/part values; AniList
+metadata and posters are best-effort enrichment and do not block indexing when
+the metadata service is unavailable.
 
 The bot **must be added as an administrator to the media channel**, with permission to see channel posts. A bot added after an upload cannot reliably receive old channel posts; the existing scheduled sync remains as a backstop. Configure the Koyeb service as always-on, not scale-to-zero. Only one service should own this bot token's updates. The polling offset and duplicate channel-message IDs are stored in Redis.
 

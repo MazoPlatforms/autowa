@@ -1,4 +1,4 @@
-// FilmGo anime page. Served only while ANIME_ENABLED=1 on the server; otherwise /anime shows the coming-soon page.
+// FilmGo anime catalog. The server indexes the separate Telegram anime channel.
 const fontStylesheet=document.createElement('link');fontStylesheet.rel='stylesheet';fontStylesheet.href='https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap';document.head.append(fontStylesheet);
 const $=id=>document.getElementById(id);
 const el=(tag,cls,text)=>{const e=document.createElement(tag);if(cls)e.className=cls;if(text!==undefined)e.textContent=text;return e;};
@@ -16,9 +16,10 @@ let items=[],loaded=false,page=1,updatingFilters=false;
 const PAGE_SIZE=()=>window.matchMedia('(min-width: 768px)').matches?24:20;
 const genresOf=a=>(Array.isArray(a.genre)?a.genre:typeof a.genre==='string'?a.genre.split(','):[]).map(g=>String(g).trim()).filter(Boolean);
 const ratingOf=a=>{const r=parseFloat(a.rating);return Number.isFinite(r)?r:0;};
-const updatedOf=a=>Date.parse(a.updated_at)||0;
+const updatedOf=a=>Number(a.updated_at)||Date.parse(a.updated_at)||0;
 const slugOf=a=>'/anime/title/'+encodeURIComponent(a.slug_id||a.id);
-const latestEp=a=>Array.isArray(a.episodes)&&a.episodes.length?Math.max(...a.episodes.map(e=>Number(e.number)||0)):Number(a.episodes_released)||0;
+const episodeNumber=e=>Number(e.number??e.episode)||0;
+const latestEp=a=>Array.isArray(a.episodes)&&a.episodes.length?Math.max(...a.episodes.map(episodeNumber)):Number(a.episodes_released)||0;
 const goTo=(link)=>link.addEventListener('click',e=>{if(e.ctrlKey||e.metaKey||e.shiftKey||e.altKey)return;e.preventDefault();history.pushState({},'',link.href);route();});
 function skeleton(){grid.replaceChildren();for(let i=0;i<8;i++){const box=el('div');box.append(el('div','shimmer aspect-[2/3] rounded-2xl'),el('div','shimmer mt-3 h-4 w-3/4 rounded-md'),el('div','shimmer mt-2 h-3 w-1/2 rounded-md'));grid.append(box);}}
 
@@ -151,12 +152,12 @@ function showDetail(a){
  if(a.studio)info.append(el('p','anime-detail-line','Studio: '+a.studio));
  layout.append(info);root.append(layout);
  const overview=el('div','anime-overview');overview.append(el('h2','','Overview'),el('p','',a.plot||'No synopsis available yet.'));root.append(overview);
- const eps=el('div','anime-eps');const head=el('div','anime-eps-head');const list=Array.isArray(a.episodes)?[...a.episodes].sort((x,y)=>(Number(x.number)||0)-(Number(y.number)||0)):[];
+ const eps=el('div','anime-eps');const head=el('div','anime-eps-head');const list=Array.isArray(a.episodes)?[...a.episodes].sort((x,y)=>episodeNumber(x)-episodeNumber(y)):[];
  head.append(el('h2','','Episodes'),el('span','',list.length?list.length+' available':''));eps.append(head);
  if(!list.length)eps.append(el('div','anime-empty-eps','Episodes will appear here once they are added.'));
  for(const e of list){
-  const row=el('div','anime-ep');row.append(el('div','anime-ep-num',String(e.number)));
-  const text=el('div');text.append(el('p','anime-ep-title',e.title||'Episode '+e.number),el('p','anime-ep-sub',[e.duration,e.released].filter(Boolean).join(' · ')||'Episode '+e.number));
+  const number=episodeNumber(e),row=el('div','anime-ep');row.append(el('div','anime-ep-num',String(number).padStart(2,'0')));
+  const text=el('div');text.append(el('p','anime-ep-title',e.title||'Episode '+number),el('p','anime-ep-sub',[e.season&&'Season '+e.season,e.part&&'Part '+e.part,e.quality,e.duration,e.released].filter(Boolean).join(' · ')||'Episode '+number));
   const play=el('button','anime-ep-play');play.type='button';play.disabled=true;play.title='Playback is not connected yet';play.append(playIcon(),document.createTextNode('Play'));
   row.append(text,play);eps.append(row);
  }

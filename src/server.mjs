@@ -77,9 +77,12 @@ function startOtpMessageCleanup(){
 const UNLIMITED_REQUEST_NUMBER="+94779290433";
 const unlimitedRequests=number=>number===UNLIMITED_REQUEST_NUMBER;
 const telegramReady=['TELEGRAM_API_ID','TELEGRAM_API_HASH','TELEGRAM_SESSION','TELEGRAM_CHANNEL_ID'].every(k=>!!process.env[k]);
+const telegramAnimeReady=['TELEGRAM_API_ID','TELEGRAM_API_HASH','TELEGRAM_SESSION','TELEGRAM_ANIME_CHANNEL_ID'].every(k=>!!process.env[k]);
 let syncPromise=null;
+let animeSyncPromise=null;
 let telegramAuthBlocked=false;
 let telegramCatalogStatus={state:'starting',updated_at:null,error:null};
+let telegramAnimeStatus={state:telegramAnimeReady?'starting':'disabled',updated_at:null,error:null};
 function telegramError(err){
  const stderr=String(err.stderr||'').trim();
  const lines=stderr.split('\n').filter(Boolean);
@@ -112,15 +115,42 @@ async function refreshCatalog(){
  })();
  try{await syncPromise;}finally{syncPromise=null;}
 }
+async function refreshAnimeCatalog(){
+ if(!configured||!telegramAnimeReady||telegramAuthBlocked)return;
+ if(animeSyncPromise)return animeSyncPromise;
+ animeSyncPromise=(async()=>{
+  telegramAnimeStatus={...telegramAnimeStatus,state:'syncing'};
+  try{
+   const {stdout}=await execFileAsync('python3',['src/telegram_media.py','index-anime'],{timeout:180000,maxBuffer:10*1024*1024,env:process.env});
+   const data=JSON.parse(stdout);
+   if(!Array.isArray(data.anime))throw Error('Invalid anime catalog response');
+   await redis('SET','telegram:anime:v1',JSON.stringify(data));
+   telegramAnimeStatus={state:'ready',updated_at:Date.now(),error:null};
+   console.log('Telegram anime catalog refreshed:',data.anime.length,'series');
+  }catch(err){
+   const error=telegramError(err);telegramAnimeStatus={state:'error',updated_at:Date.now(),error};
+   console.error('Telegram anime catalog refresh failed:',error);
+  }
+ })();
+ try{await animeSyncPromise;}finally{animeSyncPromise=null;}
+}
 if(configured&&telegramReady){
  void refreshCatalog();
  setInterval(()=>{void refreshCatalog();},120000).unref();
  startStreamWorker();
  if(fastStreaming)startFastStreamWorker();
 }
+if(configured&&telegramAnimeReady){
+ void refreshAnimeCatalog();
+ setInterval(()=>{void refreshAnimeCatalog();},120000).unref();
+}
 async function getCatalog(){
  const raw=await redis('GET','telegram:catalog:v2');
  return raw?JSON.parse(raw):null;
+}
+async function getAnimeCatalog(){
+ const raw=await redis('GET','telegram:anime:v1');
+ return raw?JSON.parse(raw):{anime:[],indexed_at:null};
 }
 async function limit(key,max,seconds){
  const name='rate:'+hmac(key),n=Number(await redis('INCR',name));
@@ -340,7 +370,13 @@ const server=http.createServer(async(req,res)=>{
    return send(res,200,{requests});
   }
   if(req.method==='GET'&&url.pathname==='/api/version')return send(res,200,{version:'20261028-3',catalog_sync:'single-flight'});
-  if(req.method==='GET'&&url.pathname==='/api/catalog-status')return send(res,200,{state:telegramCatalogStatus.state,updated_at:telegramCatalogStatus.updated_at,error:telegramCatalogStatus.error,telegram_configured:telegramReady});
+  if(req.method==='GET'&&url.pathname==='/api/catalog-status')return send(res,200,{state:telegramCatalogStatus.state,updated_at:telegramCatalogStatus.updated_at,error:telegramCatalogStatus.error,telegram_configured:telegramReady,anime:{...telegramAnimeStatus,telegram_configured:telegramAnimeReady}});
+  if(req.method==='GET'&&url.pathname==='/api/anime'){
+   const catalog=await getAnimeCatalog();
+   const query=(url.searchParams.get('q')||'').trim().toLowerCase().slice(0,100);
+   const anime=(catalog.anime||[]).filter(item=>!query||[item.title,item.title_alt,...(item.genre||[])].filter(Boolean).join(' ').toLowerCase().includes(query));
+   return send(res,200,{anime,indexed_at:catalog.indexed_at||null,source:'telegram'});
+  }
   if(req.method==='GET'&&url.pathname==='/health'){return send(res,200,{ok:true});}
   if(req.method==='GET'&&url.pathname.startsWith('/api/stream-availability/')){
    const id=url.pathname.slice('/api/stream-availability/'.length);
@@ -465,11 +501,11 @@ const server=http.createServer(async(req,res)=>{
    }
   if(req.method==='GET'&&url.pathname==='/anime-soon.css'){res.writeHead(200,{'Content-Type':'text/css; charset=utf-8','Cache-Control':'public, max-age=300'});return res.end(animeSoonCss);}
   if(req.method==='GET'&&url.pathname==='/account-chip.js'){res.writeHead(200,{'Content-Type':'text/javascript; charset=utf-8','Cache-Control':'public, max-age=300'});return res.end(accountChipJs);}
-  if(req.method==='GET'&&url.pathname==='/anime.css')return send(res,404,{error:'Anime is coming soon'});
-  if(req.method==='GET'&&url.pathname==='/anime.js')return send(res,404,{error:'Anime is coming soon'});
+  if(req.method==='GET'&&url.pathname==='/anime.css'){res.writeHead(200,{'Content-Type':'text/css; charset=utf-8','Cache-Control':'public, max-age=300'});return res.end(animeCss);}
+  if(req.method==='GET'&&url.pathname==='/anime.js'){res.writeHead(200,{'Content-Type':'text/javascript; charset=utf-8','Cache-Control':'public, max-age=300'});return res.end(animeJs);}
   if(req.method==='GET'&&(url.pathname==='/anime'||url.pathname==='/anime/'||(url.pathname.startsWith('/anime/title/')&&/^[-a-zA-Z0-9_]+$/.test(url.pathname.slice(13).replace(/\/$/,''))))){
    const headers={'Content-Type':'text/html; charset=utf-8','Cache-Control':'no-store','X-Robots-Tag':'noindex','Content-Security-Policy':"default-src 'self'; img-src 'self' https: data:; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; base-uri 'none'; frame-ancestors 'none'"};
-   res.writeHead(200,headers);return res.end(await renderCatalogPage(req,animeSoonHtml));
+   res.writeHead(200,headers);return res.end(await renderCatalogPage(req,animeHtml));
   }
   if(req.method==='GET'&&url.pathname==='/tailwind.css'){res.writeHead(200,{'Content-Type':'text/css; charset=utf-8','Cache-Control':'public, max-age=86400','X-Content-Type-Options':'nosniff'});return res.end(tailwindCss);}
   if(req.method==='GET'&&url.pathname==='/catalog.css'){res.writeHead(200,{'Content-Type':'text/css; charset=utf-8','Cache-Control':'public, max-age=300','X-Content-Type-Options':'nosniff'});return res.end(catalogCss);}

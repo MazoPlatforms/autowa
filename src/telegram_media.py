@@ -12,8 +12,8 @@ import urllib.request
 from telethon import TelegramClient
 from telethon.sessions import StringSession
 
-def config():
-    keys = ('TELEGRAM_API_ID', 'TELEGRAM_API_HASH', 'TELEGRAM_SESSION', 'TELEGRAM_CHANNEL_ID')
+def config(channel_key='TELEGRAM_CHANNEL_ID'):
+    keys = ('TELEGRAM_API_ID', 'TELEGRAM_API_HASH', 'TELEGRAM_SESSION', channel_key)
     missing = [key for key in keys if not os.getenv(key)]
     if missing:
         raise RuntimeError('Missing Telegram settings: ' + ', '.join(missing))
@@ -52,6 +52,81 @@ def enrich_title(raw):
         pass
     return candidate, None
 
+def anime_filename_parts(raw):
+    """Parse common anime release names without requiring a fixed naming format."""
+    value = re.sub(r'(?i)\.(mkv|mp4|avi|mov|webm)(\.\w+)?$', '', raw or '')
+    value = re.sub(r'[._]+', ' ', value)
+    episode = None
+    season = None
+    part = None
+    match = re.search(r'(?i)\bS(\d{1,2})\s*(?:-|x)?\s*E(\d{1,4})\b', value)
+    if match:
+        season, episode = int(match.group(1)), int(match.group(2))
+        value = value[:match.start()] + ' ' + value[match.end():]
+    else:
+        match = re.search(r'(?i)\b(?:season|s)\s*[- ]?(\d{1,2})\b', value)
+        if match:
+            season = int(match.group(1)); value = value[:match.start()] + ' ' + value[match.end():]
+        match = re.search(r'(?i)\b(?:episode|ep|e)\s*[- ]?(\d{1,4})\b', value)
+        if match:
+            episode = int(match.group(1)); value = value[:match.start()] + ' ' + value[match.end():]
+    if episode is None:
+        match = re.search(r'(?<!\d)[- ]0*(\d{1,4})(?=\s*(?:\[[^]]*\]|\([^)]*\)|\b(?:720|1080|2160|4k)p?\b|$))', value, re.I)
+        if match:
+            episode = int(match.group(1)); value = value[:match.start()] + ' ' + value[match.end():]
+    match = re.search(r'(?i)\bpart\s*[- ]?(\d{1,2})\b', value)
+    if match:
+        part = int(match.group(1)); value = value[:match.start()] + ' ' + value[match.end():]
+    value = re.sub(r'(?i)\b(2160p|1080p|720p|480p|4k|web[- ]?dl|webrip|bluray|brrip|hdrip|dvdrip|x264|x265|h264|h265|hevc|aac|ddp5?\.?(?:1|2)?|esub|multi|proper|repack|uncut|dual audio)\b.*$', '', value)
+    value = re.sub(r'\s+', ' ', value).strip(' -[]()')
+    return (value[:140] or 'Untitled anime', season, episode, part)
+
+def anime_metadata(raw_title):
+    """Best-effort AniList enrichment; Telegram indexing still works offline."""
+    title, _, _, _ = anime_filename_parts(raw_title)
+    query = '''query ($search: String) { Media(search: $search, type: ANIME) { id title { romaji english native } coverImage { large } description(asHtml: false) genres averageScore status episodes startDate { year } studios { nodes { name } } } }'''
+    try:
+        payload = json.dumps({'query': query, 'variables': {'search': title}}).encode()
+        request = urllib.request.Request('https://graphql.anilist.co', data=payload, headers={'Content-Type': 'application/json', 'User-Agent': 'FilmGo/1.0'})
+        with urllib.request.urlopen(request, timeout=5) as response:
+            media = json.load(response).get('data', {}).get('Media') or {}
+        names = [media.get('title', {}).get(k) for k in ('english', 'romaji', 'native')]
+        canonical = next((str(name).strip() for name in names if name), title)
+        return {'title': canonical[:140], 'poster': media.get('coverImage', {}).get('large'), 'plot': re.sub(r'<[^>]+>', '', str(media.get('description') or '')).strip()[:900], 'genre': media.get('genres') or [], 'rating': round((float(media.get('averageScore') or 0) / 10), 1) or None, 'status': media.get('status', '').title() or None, 'episodes_total': media.get('episodes'), 'year': (media.get('startDate') or {}).get('year'), 'studio': (((media.get('studios') or {}).get('nodes') or [{}])[0]).get('name')}
+    except Exception:
+        return {'title': title}
+
+def anime_media_item(message):
+    filename = str(getattr(message.file, 'name', '') or '')
+    if not filename or not getattr(message, 'file', None):
+        return None
+    title, season, episode, part = anime_filename_parts(filename)
+    quality_match = re.search(r'(?i)\b(2160p|1080p|720p|480p|4k)\b', filename)
+    quality = quality_match.group(1).upper() if quality_match else 'AUTO'
+    size = int(getattr(message.file, 'size', 0) or 0)
+    if not episode or not quality or not 0 < size <= 2000000000:
+        return None
+    return {'telegram_message_id': int(message.id), 'episode': episode, 'season': season or 1, 'part': part, 'quality': quality, 'file_size': size, 'file_name': filename[:240], 'mime_type': str(getattr(message.file, 'mime_type', '') or '')}
+
+def build_anime_catalog(messages):
+    shows = {}
+    for message in messages:
+        item = anime_media_item(message)
+        if not item:
+            continue
+        title, _, _, _ = anime_filename_parts(str(getattr(message.file, 'name', '') or ''))
+        key = re.sub(r'[^a-z0-9]+', ' ', title.casefold()).strip()
+        show = shows.setdefault(key, {'slug_id': re.sub(r'[^a-z0-9]+', '-', key).strip('-')[:80] or 'anime', 'title': title, 'episodes': []})
+        show['episodes'].append(item)
+    result = []
+    for show in shows.values():
+        meta = anime_metadata(show['title'])
+        show.update({k: v for k, v in meta.items() if v not in (None, '', [])})
+        show['episodes'].sort(key=lambda e: (e.get('season') or 1, e.get('episode') or 0, e.get('part') or 0, e.get('quality') or ''))
+        show['updated_at'] = time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime())
+        result.append(show)
+    return result
+
 def media_item(message, enrich=False):
     caption = message.message or ''
     fields = {}
@@ -87,7 +162,8 @@ def trace(stage, **details):
 
 async def main():
     mode = sys.argv[1]
-    api_id, api_hash, session, channel = config()
+    anime_mode = mode in ('index-anime', 'recent-anime', 'check-anime', 'download-anime')
+    api_id, api_hash, session, channel = config('TELEGRAM_ANIME_CHANNEL_ID' if anime_mode else 'TELEGRAM_CHANNEL_ID')
     started = time.monotonic()
     trace('start', mode=mode, elapsed='0s')
     print('Telegram: connecting', file=sys.stderr, flush=True)
@@ -112,7 +188,13 @@ async def main():
             raise RuntimeError('Channel not accessible; check TELEGRAM_CHANNEL_ID and account membership')
         print('Telegram: channel resolved', file=sys.stderr, flush=True)
         trace('channel resolved', elapsed_seconds=round(time.monotonic()-started, 2))
-        if mode == 'index':
+        if mode == 'index-anime':
+            messages = []
+            async for message in client.iter_messages(entity, limit=2000):
+                if message.file and (message.video or message.document):
+                    messages.append(message)
+            print(json.dumps({'anime': build_anime_catalog(messages), 'indexed_at': int(time.time())}), flush=True)
+        elif mode == 'index':
             items = []
             async for message in client.iter_messages(entity, limit=500):
                 if not message.file or not (message.video or message.document):
