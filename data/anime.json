@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": 1793535750,
+  "updated_at": "2026-11-01T12:23:48.014Z",
   "anime": [
     {
       "slug_id": "naruto-shippuden",
@@ -700,14 +700,14 @@
           "mime_type": "video/mp4"
         },
         {
-          "slug_id": "1MrqEJI4YsowA2-q",
-          "telegram_message_id": 39,
+          "slug_id": "QtjX4NXtNJ6KOhht",
+          "telegram_message_id": 303,
           "episode": 33,
           "season": 2,
           "part": null,
-          "quality": "720P",
-          "file_size": 74323513,
-          "file_name": "Naruto Shippuden - 033 [720p] [Dual] @Anime_Gallery.mkv",
+          "quality": "720p",
+          "file_size": 201419329,
+          "file_name": "Naruto Shippuden \n33 தமிழ் HDRip.mp4",
           "mime_type": "video/x-matroska"
         },
         {
@@ -3267,7 +3267,7 @@
       "status": "Finished",
       "episodes_total": 500,
       "studio": "Studio Pierrot",
-      "updated_at": "2026-11-01T12:22:30Z"
+      "updated_at": "2026-11-01T12:23:48.014Z"
     }
   ]
 }
