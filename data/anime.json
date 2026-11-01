@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-01T12:25:45.343Z",
+  "updated_at": 1793535961,
   "anime": [
     {
       "slug_id": "naruto-shippuden",
@@ -3268,7 +3268,7 @@
           "episode": 298,
           "season": 14,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 120251379,
           "file_name": "Naruto Shippuden [S14] {EP:298} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -3289,7 +3289,7 @@
       "status": "Finished",
       "episodes_total": 500,
       "studio": "Studio Pierrot",
-      "updated_at": "2026-11-01T12:25:45.343Z"
+      "updated_at": "2026-11-01T12:26:01Z"
     }
   ]
 }
