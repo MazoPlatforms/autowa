@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-01T22:06:22.855Z",
+  "updated_at": "2026-11-01T22:06:37.449Z",
   "anime": [
     {
       "slug_id": "naruto",
@@ -18878,6 +18878,18 @@
               "title": "Distress",
               "released": "2014-08-08",
               "frame": "https://raw.githubusercontent.com/MazoPlatforms/autowa/main/web/frames/anime/attack-on-titan-oad-003.jpg"
+            },
+            "480P": {
+              "slug_id": "_UoawYl-H7i_Oquh",
+              "telegram_message_id": 885,
+              "episode": 3,
+              "season": 1,
+              "special_type": "OAD",
+              "part": null,
+              "quality": "480p",
+              "file_size": 47098863,
+              "file_name": "Attack On Titan - OAD EP03 [Tamil] 480p.mkv",
+              "mime_type": "video/x-matroska"
             }
           }
         },
@@ -24395,7 +24407,7 @@
         "4": "/banners/attack-on-titan-season-4.webp",
         "OAD": "/banners/attack-on-titan-oad.webp"
       },
-      "updated_at": "2026-11-01T22:06:22.855Z"
+      "updated_at": "2026-11-01T22:06:37.449Z"
     }
   ]
 }
