@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": 1793539066,
+  "updated_at": 1793540195,
   "anime": [
     {
       "slug_id": "naruto-shippuden",
@@ -4136,7 +4136,7 @@
       "status": "Finished",
       "episodes_total": 500,
       "studio": "Studio Pierrot",
-      "updated_at": "2026-11-01T13:17:46Z"
+      "updated_at": "2026-11-01T13:36:35Z"
     }
   ]
 }
