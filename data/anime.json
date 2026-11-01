@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-01T12:24:29.546Z",
+  "updated_at": 1793535891,
   "anime": [
     {
       "slug_id": "naruto-shippuden",
@@ -312,6 +312,17 @@
           "quality": "720P",
           "file_size": 98256724,
           "file_name": "Naruto Shippuden - 028 [720p] [Dual] @Anime_Gallery.mkv",
+          "mime_type": "video/x-matroska"
+        },
+        {
+          "slug_id": "5A1TgraaT1CJmSkl",
+          "telegram_message_id": 304,
+          "episode": 29,
+          "season": 1,
+          "part": null,
+          "quality": "720P",
+          "file_size": 201334205,
+          "file_name": "Naruto Shippuden \n29 தமிழ் HDRip.mp4",
           "mime_type": "video/x-matroska"
         },
         {
@@ -698,17 +709,6 @@
           "file_size": 98370782,
           "file_name": "Naruto Shippuden \n175 தமிழ் HDRip.mp4",
           "mime_type": "video/mp4"
-        },
-        {
-          "slug_id": "QtjX4NXtNJ6KOhht",
-          "telegram_message_id": 303,
-          "episode": 33,
-          "season": 2,
-          "part": null,
-          "quality": "720P",
-          "file_size": 201419329,
-          "file_name": "Naruto Shippuden \n33 தமிழ் HDRip.mp4",
-          "mime_type": "video/x-matroska"
         },
         {
           "slug_id": "PpiNPV1-LS2dW_8H",
@@ -3261,17 +3261,6 @@
           "file_size": 76756547,
           "file_name": "Naruto Shippuden [S14] {EP:296} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
-        },
-        {
-          "slug_id": "5A1TgraaT1CJmSkl",
-          "telegram_message_id": 304,
-          "episode": 29,
-          "season": 1,
-          "part": null,
-          "quality": "720p",
-          "file_size": 201334205,
-          "file_name": "Naruto Shippuden \n29 தமிழ் HDRip.mp4",
-          "mime_type": "video/x-matroska"
         }
       ],
       "year": 2007,
@@ -3289,7 +3278,7 @@
       "status": "Finished",
       "episodes_total": 500,
       "studio": "Studio Pierrot",
-      "updated_at": "2026-11-01T12:24:29.546Z"
+      "updated_at": "2026-11-01T12:24:51Z"
     }
   ]
 }
