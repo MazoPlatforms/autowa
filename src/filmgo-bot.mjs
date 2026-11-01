@@ -409,9 +409,14 @@ async function onMessage(message,refresh){
  if(animeDeep&&message.chat?.type==='private'){
   const key='filmgo:anime-deeplink:'+animeDeep[1],raw=await redis('GET',key);let grant;try{grant=raw?JSON.parse(raw):null;}catch{}
   if(!grant||!/^[-a-f0-9]{64}$/.test(grant.account_hash||''))return say(chat,'This anime link has expired. Please sign in on FilmGo and request a new link.');
-  let animeList;try{animeList=await animeCatalog();}catch{return say(chat,'Anime delivery is temporarily unavailable. Please try again later.');}
-  let anime=null,episode=null;for(const item of animeList){const found=(item.episodes||[]).find(ep=>ep.slug_id===grant.episode_slug_id);if(found){anime=item;episode=found;break;}}
-  if(!anime||!episode)return say(chat,'This anime episode is no longer available.');
+  let anime=null,episode=null;
+  if(Number.isSafeInteger(Number(grant.telegram_message_id))&&Number(grant.telegram_message_id)>0&&grant.anime_title){
+   anime={title:String(grant.anime_title),year:grant.anime_year||null};episode={slug_id:String(grant.episode_slug_id||''),telegram_message_id:Number(grant.telegram_message_id),title:String(grant.episode_title||''),season:Number(grant.season)||1,episode:Number(grant.episode)||0,quality:String(grant.quality||'720p'),file_size:Number(grant.file_size||0)};
+  }else{
+   let animeList;try{animeList=await animeCatalog();}catch{return say(chat,'Anime delivery is temporarily unavailable. Please try again later.');}
+   for(const item of animeList){const found=(item.episodes||[]).find(ep=>ep.slug_id===grant.episode_slug_id);if(found){anime=item;episode=found;break;}}
+  }
+  if(!anime||!episode)return say(chat,'This anime episode link has expired. Please request it again from FilmGo.');
   const messageId=Number(episode.telegram_message_id),size=Number(episode.file_size||0);if(!Number.isSafeInteger(messageId)||!Number.isSafeInteger(size)||size<=0)return say(chat,'Anime episode is unavailable.');
   const claimKey='filmgo:anime-deeplink-claim:'+animeDeep[1];if(await redis('SET',claimKey,'1','NX','EX',600)!=='OK')return say(chat,'This anime link is already being processed.');
   const now=new Date(),day=now.toISOString().slice(0,10),resetAt=Date.UTC(now.getUTCFullYear(),now.getUTCMonth(),now.getUTCDate()+1),expireAt=Math.ceil(resetAt/1000),usageKey='filmgo:daily-tokens:v1:'+grant.account_hash+':'+day,cost=Math.max(1,Math.ceil((size/(512*1024*1024)*0.75+1)*1000));

@@ -373,7 +373,7 @@ const server=http.createServer(async(req,res)=>{
    const input=await body(req),slug=String(input.episode_slug_id||'');if(!/^[A-Za-z0-9_-]{8,80}$/.test(slug))return send(res,400,{error:'Invalid anime episode'});
    const catalog=await getAnimeCatalog();let episode=null,anime=null;for(const item of catalog.anime||[]){const found=(item.episodes||[]).find(ep=>ep.slug_id===slug);if(found){anime=item;episode=found;break;}}
    if(!episode||!anime)return send(res,404,{error:'Anime episode unavailable'});
-   const token=crypto.randomBytes(12).toString('base64url');await redis('SET','filmgo:anime-deeplink:'+token,JSON.stringify({episode_slug_id:slug,account_hash:hmac(session.number),unlimited:unlimitedRequests(session.number),base_url:publicBase}),'EX',600);
+   const token=crypto.randomBytes(12).toString('base64url');await redis('SET','filmgo:anime-deeplink:'+token,JSON.stringify({episode_slug_id:slug,telegram_message_id:Number(episode.telegram_message_id),anime_title:anime.title,anime_year:anime.year||null,episode_title:episode.title||'',season:Number(episode.season)||1,episode:Number(episode.episode??episode.number)||0,quality:episode.quality||'720p',file_size:Number(episode.file_size||0),account_hash:hmac(session.number),unlimited:unlimitedRequests(session.number),base_url:publicBase}),'EX',600);
    return send(res,200,{url:'https://t.me/mzn_filmgobot?start=a_'+token});
   }
   if(req.method==='GET'&&url.pathname==='/api/movies'){
