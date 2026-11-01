@@ -157,7 +157,10 @@ async function getCatalog(){
 }
 async function getAnimeCatalog(){
  const raw=await redis('GET','telegram:anime:v1');
- return raw?JSON.parse(raw):{anime:[],indexed_at:null};
+ const data=raw?JSON.parse(raw):{anime:[],indexed_at:null};let changed=false;
+ for(const anime of data.anime||[])for(const episode of anime.episodes||[]){if(!episode.slug_id){episode.slug_id=crypto.randomBytes(12).toString('base64url');changed=true;}}
+ if(changed)await redis('SET','telegram:anime:v1',JSON.stringify(data));
+ return data;
 }
 async function limit(key,max,seconds){
  const name='rate:'+hmac(key),n=Number(await redis('INCR',name));
@@ -234,9 +237,12 @@ const catalogJs=fs.readFileSync(new URL('../web/catalog.js',import.meta.url));
 const catalogCss=fs.readFileSync(new URL('../web/catalog.css',import.meta.url));
 // The anime UI and data ship with the app for future use; the public route is always coming soon.
 const animeHtml=fs.readFileSync(new URL('../web/anime.html',import.meta.url));
+const animeWatchHtml=fs.readFileSync(new URL('../web/anime-watch.html',import.meta.url));
 const animeSoonHtml=fs.readFileSync(new URL('../web/anime-soon.html',import.meta.url));
 const animeJs=fs.readFileSync(new URL('../web/anime.js',import.meta.url));
 const animeCss=fs.readFileSync(new URL('../web/anime.css',import.meta.url));
+const animeWatchCss=fs.readFileSync(new URL('../web/anime-watch.css',import.meta.url));
+const animeWatchJs=fs.readFileSync(new URL('../web/anime-watch.js',import.meta.url));
 const animeSoonCss=fs.readFileSync(new URL('../web/anime-soon.css',import.meta.url));
 const accountChipJs=fs.readFileSync(new URL('../web/account-chip.js',import.meta.url));
 const tailwindCss=fs.readFileSync(new URL('../web/tailwind.css',import.meta.url));
@@ -384,6 +390,12 @@ const server=http.createServer(async(req,res)=>{
    const anime=(catalog.anime||[]).filter(item=>!query||[item.title,item.title_alt,...(item.genre||[])].filter(Boolean).join(' ').toLowerCase().includes(query));
    return send(res,200,{anime,indexed_at:catalog.indexed_at||null,source:'telegram'});
   }
+  const animeEpisodeApi=url.pathname.match(/^\/api\/anime\/episode\/([A-Za-z0-9_-]{8,80})$/);
+  if(req.method==='GET'&&animeEpisodeApi){
+   const catalog=await getAnimeCatalog(),episodeSlug=animeEpisodeApi[1];
+   for(const anime of catalog.anime||[]){const episode=(anime.episodes||[]).find(item=>item.slug_id===episodeSlug);if(episode)return send(res,200,{anime:{slug_id:anime.slug_id,title:anime.title,poster:anime.poster||null},episode});}
+   return send(res,404,{error:'Anime episode unavailable'});
+  }
   const animeStream=url.pathname.match(/^\/api\/anime\/stream\/([A-Za-z0-9_-]{8,80})$/);
   if((req.method==='GET'||req.method==='HEAD')&&animeStream){
    const requestedId=animeStream[1],catalog=await getAnimeCatalog();
@@ -529,6 +541,13 @@ const server=http.createServer(async(req,res)=>{
   if(req.method==='GET'&&url.pathname==='/account-chip.js'){res.writeHead(200,{'Content-Type':'text/javascript; charset=utf-8','Cache-Control':'public, max-age=300'});return res.end(accountChipJs);}
   if(req.method==='GET'&&url.pathname==='/anime.css'){res.writeHead(200,{'Content-Type':'text/css; charset=utf-8','Cache-Control':'public, max-age=300'});return res.end(animeCss);}
   if(req.method==='GET'&&url.pathname==='/anime.js'){res.writeHead(200,{'Content-Type':'text/javascript; charset=utf-8','Cache-Control':'public, max-age=300'});return res.end(animeJs);}
+  if(req.method==='GET'&&url.pathname==='/anime-watch.css'){res.writeHead(200,{'Content-Type':'text/css; charset=utf-8','Cache-Control':'public, max-age=300'});return res.end(animeWatchCss);}
+  if(req.method==='GET'&&url.pathname==='/anime-watch.js'){res.writeHead(200,{'Content-Type':'text/javascript; charset=utf-8','Cache-Control':'public, max-age=300'});return res.end(animeWatchJs);}
+  const animeWatchPage=url.pathname.match(/^\/anime\/watch\/([A-Za-z0-9_-]{8,80})\/?$/);
+  if(req.method==='GET'&&animeWatchPage){
+   const headers={'Content-Type':'text/html; charset=utf-8','Cache-Control':'no-store','X-Robots-Tag':'noindex','Content-Security-Policy':"default-src 'self'; img-src 'self' https: data:; media-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; base-uri 'none'; frame-ancestors 'none'"};
+   res.writeHead(200,headers);return res.end(animeWatchHtml);
+  }
   if(req.method==='GET'&&(url.pathname==='/anime'||url.pathname==='/anime/'||(url.pathname.startsWith('/anime/title/')&&/^[-a-zA-Z0-9_]+$/.test(url.pathname.slice(13).replace(/\/$/,''))))){
    const headers={'Content-Type':'text/html; charset=utf-8','Cache-Control':'no-store','X-Robots-Tag':'noindex','Content-Security-Policy':"default-src 'self'; img-src 'self' https: data:; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; base-uri 'none'; frame-ancestors 'none'"};
    res.writeHead(200,headers);return res.end(await renderCatalogPage(req,animeHtml));
