@@ -72,13 +72,13 @@ def anime_filename_parts(raw):
         if match:
             episode = int(match.group(1)); value = value[:match.start()] + ' ' + value[match.end():]
     if episode is None:
-        match = re.search(r'(?<!\d)[- ]0*(\d{1,4})(?=\s*(?:\[[^]]*\]|\([^)]*\)|\b(?:720|1080|2160|4k)p?\b|$))', value, re.I)
+        match = re.search(r'(?<!\d)[- ]0*(\d{1,4})(?=\s*(?:\[[^]]*\]|\([^)]*\)|(?:360|480|720|1080|2160|4k)p?|tamil|telugu|malayalam|kannada|hindi|english|தமிழ்|hdrip|webrip|bluray|web-dl|$))', value, re.I)
         if match:
             episode = int(match.group(1)); value = value[:match.start()] + ' ' + value[match.end():]
     match = re.search(r'(?i)\bpart\s*[- ]?(\d{1,2})\b', value)
     if match:
         part = int(match.group(1)); value = value[:match.start()] + ' ' + value[match.end():]
-    value = re.sub(r'(?i)\b(2160p|1080p|720p|480p|4k|web[- ]?dl|webrip|bluray|brrip|hdrip|dvdrip|x264|x265|h264|h265|hevc|aac|ddp5?\.?(?:1|2)?|esub|multi|proper|repack|uncut|dual audio)\b.*$', '', value)
+    value = re.sub(r'(?i)\s+(?:தமிழ்|tamil|telugu|malayalam|kannada|hindi|english|2160p|1080p|720p|480p|4k|web[- ]?dl|webrip|bluray|brrip|hdrip|dvdrip|x264|x265|h264|h265|hevc|aac|ddp5?\.?(?:1|2)?|esub|multi|proper|repack|uncut|dual audio)\b.*$', '', value)
     value = re.sub(r'\s+', ' ', value).strip(' -[]()')
     return (value[:140] or 'Untitled anime', season, episode, part)
 
