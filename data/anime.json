@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-01T11:39:03.701Z",
+  "updated_at": "2026-11-01T11:39:07.527Z",
   "anime": [
     {
       "slug_id": "naruto-shippuden",
@@ -2161,6 +2161,17 @@
           "file_size": 168963871,
           "file_name": "Naruto Shippuden S10 E197 (720p) Tamil+Multi Audio ESub.mkv",
           "mime_type": "video/x-matroska"
+        },
+        {
+          "slug_id": "IOwb3md5UCHUB_G0",
+          "telegram_message_id": 204,
+          "episode": 198,
+          "season": 10,
+          "part": null,
+          "quality": "720p",
+          "file_size": 160456283,
+          "file_name": "Naruto Shippuden S10 E198 (720p) Tamil+Multi Audio ESub.mkv",
+          "mime_type": "video/x-matroska"
         }
       ],
       "year": 2007,
@@ -2178,7 +2189,7 @@
       "status": "Finished",
       "episodes_total": 500,
       "studio": "Studio Pierrot",
-      "updated_at": "2026-11-01T11:39:03.701Z"
+      "updated_at": "2026-11-01T11:39:07.527Z"
     }
   ]
 }
