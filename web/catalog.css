@@ -219,6 +219,7 @@
 @media(max-width:520px){.filmgo-settings-panel{top:0;left:auto;right:0;bottom:0;width:82%;padding:52px 14px 18px;grid-template-columns:repeat(3,minmax(58px,1fr));gap:12px 6px}.filmgo-settings-close{top:10px;left:10px}.filmgo-settings-panel .filmgo-setting{padding:7px 2px;font-size:10px}.filmgo-settings-panel .filmgo-setting>svg,.filmgo-settings-panel .filmgo-settings-action svg{width:28px;height:28px}.filmgo-settings-panel .filmgo-settings-action{min-height:78px;font-size:10px}.filmgo-player-shell:fullscreen .filmgo-settings-panel,.filmgo-player-shell:-webkit-full-screen .filmgo-settings-panel{width:82%;padding:54px 14px 20px}}
 
 .detail-loading{display:flex;align-items:center;justify-content:center;min-height:50vh;color:#a1a1aa;font-size:14px;font-weight:650}
+.detail-skeleton{display:grid;grid-template-columns:minmax(180px,280px) minmax(0,1fr);gap:28px;align-items:start;padding:clamp(24px,5vw,64px) 0}.detail-skeleton-poster,.detail-skeleton-banner{width:100%;aspect-ratio:2/3;border-radius:24px}.detail-skeleton-banner{aspect-ratio:16/9;grid-column:1/-1}.detail-skeleton-copy{display:grid;gap:14px;padding-top:12px}.detail-skeleton-kicker{height:24px;width:132px;border-radius:999px}.detail-skeleton-title{height:62px;width:min(100%,420px);border-radius:12px}.detail-skeleton-meta{height:20px;width:220px;border-radius:8px}.detail-skeleton-line{height:16px;width:100%;max-width:560px;border-radius:8px}.detail-skeleton-line.short{width:72%}@media(max-width:640px){.detail-skeleton{grid-template-columns:1fr;gap:20px}.detail-skeleton-poster{max-width:220px}.detail-skeleton-copy{padding-top:0}}
 
 /* Final responsive settings layout: every control stays inside the side sheet. */
 .filmgo-settings-panel{box-sizing:border-box;grid-template-columns:repeat(3,minmax(0,1fr));align-items:start;overflow-x:hidden}
@@ -585,6 +586,7 @@ body.catalog-search-active>div>header,body.catalog-search-active>div>footer{disp
 .poster-loading,.detail-poster.poster-loading{background-color:#18181b!important;background-image:linear-gradient(105deg,#18181b 10%,#303035 25%,#18181b 40%)!important;background-size:220% 100%!important;animation:shimmer 1.35s linear infinite}
 .poster-failed{background:#18181b!important;background-image:none!important;animation:none!important}
 @media(prefers-reduced-motion:reduce){.poster-loading,.detail-poster.poster-loading{background-image:none!important;animation:none}}
+.movie-skeleton-card,.anime-skeleton-card{min-width:0}.movie-skeleton-poster,.anime-skeleton-poster{aspect-ratio:2/3;border-radius:18px}.movie-skeleton-title,.anime-skeleton-title{height:16px;width:76%;margin-top:12px;border-radius:6px}.movie-skeleton-meta,.anime-skeleton-meta{height:12px;width:48%;margin-top:8px;border-radius:5px}.anime-catalog-loading .anime-skeleton-poster{border-radius:22px}.movie-catalog-loading .movie-skeleton-poster{border-radius:16px}
 
 /* =====================================================================
    FilmGo — TV-style redesign (Apple TV / Netflix / Google TV inspired)
