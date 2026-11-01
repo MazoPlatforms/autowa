@@ -1,0 +1,37 @@
+name: Update Naruto anime captions
+
+on:
+  workflow_dispatch:
+    inputs:
+      max_episode:
+        description: "Highest episode to update"
+        required: true
+        default: "88"
+      dry_run:
+        description: "Preview changes without editing Telegram messages"
+        required: true
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install telethon==1.42.0
+      - name: Update Telegram captions
+        env:
+          TELEGRAM_API_ID: ${{ secrets.TELEGRAM_API_ID }}
+          TELEGRAM_API_HASH: ${{ secrets.TELEGRAM_API_HASH }}
+          TELEGRAM_SESSION: ${{ secrets.TELEGRAM_SESSION }}
+          TELEGRAM_ANIME_CHANNEL_ID: ${{ secrets.TELEGRAM_ANIME_CHANNEL_ID }}
+          MAX_EPISODE: ${{ inputs.max_episode }}
+          DRY_RUN: ${{ inputs.dry_run }}
+        run: python scripts/update_anime_captions.py

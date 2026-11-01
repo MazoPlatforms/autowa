@@ -154,6 +154,16 @@ def inferred_anime_season(episode, explicit, boundaries):
         offset += count
     return 1
 
+def manual_anime_season(title, episode):
+    """Known editorial season boundaries used when a release omits Sxx."""
+    normalized = re.sub(r'[^a-z0-9]+', '', str(title or '').casefold())
+    if normalized in ('narutoshippuden', 'narutoshippuuden'):
+        for season, last_episode in ((1, 32), (2, 53), (3, 71), (4, 88)):
+            if int(episode or 0) <= last_episode:
+                return season
+        return 5
+    return None
+
 _TMDB_SHOW_CACHE = {}
 _TMDB_SEASON_CACHE = {}
 def tmdb_show_id(title):
@@ -265,7 +275,7 @@ def build_anime_catalog(messages):
         show.update({k: v for k, v in meta.items() if v not in (None, '', [])})
         boundaries = tmdb_season_boundaries(show['title'])
         for episode in show['episodes']:
-            episode['season'] = inferred_anime_season(episode['episode'], episode.pop('season_explicit', None) and episode['season'], boundaries)
+            episode['season'] = episode.pop('season_explicit', None) and episode['season'] or manual_anime_season(show['title'], episode['episode']) or inferred_anime_season(episode['episode'], None, boundaries)
             guide = tmdb_season_episodes(show['title'], episode['season']).get(int(episode['episode']))
             if guide:
                 episode.update({key: value for key, value in guide.items() if value})

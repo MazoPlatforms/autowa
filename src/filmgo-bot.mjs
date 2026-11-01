@@ -243,6 +243,11 @@ async function detectAnimeType(file,caption=''){
  return {anime:confidence>=.7,confidence,parts,metadata};
 }
 function animeSlug(title){return String(title||'').normalize('NFKD').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'').slice(0,70)||'anime';}
+function manualAnimeSeason(title,episode){
+ const normalized=String(title||'').toLowerCase().replace(/[^a-z0-9]+/g,'');
+ if(normalized==='narutoshippuden'||normalized==='narutoshippuuden')for(const [season,last] of [[1,32],[2,53],[3,71],[4,88]])if(Number(episode)<=last)return season;
+ return normalized==='narutoshippuden'||normalized==='narutoshippuuden'?5:null;
+}
 async function tmdbAnimeSeason(title,episode){
  const key=process.env.TMDB_API_KEY;if(!key||!episode){if(!key)console.warn('Anime season mapping skipped: TMDB_API_KEY is missing');return null;}
  try{
@@ -345,7 +350,7 @@ async function probe(input){
 async function startAnimeDraft(file,messageId,detected=null,caption=''){
  const parts=animePartsFromMessage(file,caption);
  if(!parts.episode)return say(ADMIN_ID,'I could not identify the anime episode. Use a filename such as Naruto Shippuden - 001 [720p].mkv.');
- parts.season=parts.season||await tmdbAnimeSeason(parts.title,parts.episode)||1;
+ parts.season=parts.season||manualAnimeSeason(parts.title,parts.episode)||await tmdbAnimeSeason(parts.title,parts.episode)||1;
  const d={kind:'anime',message_id:messageId,file_name:file.file_name||'',file_size:Number(file.file_size||0),mime_type:file.mime_type||'',title:parts.title,titleCandidates:parts.titleCandidates,season:parts.season,episode:parts.episode,part:parts.part,quality:parts.quality,slug_id:animeSlug(parts.title),episode_slug_id:crypto.randomBytes(12).toString('base64url')};
  const metadata=detected?.metadata||await animeMetadata(parts.title).catch(()=>null);if(metadata){Object.assign(d,metadata);d.slug_id=animeSlug(metadata.title);}d.stage='await-publish';await draftSave(d);
  if(detected?.confidence>=.7){await say(ADMIN_ID,'Recognized '+d.title+' as anime ('+Math.round(detected.confidence*100)+'% confidence). Publishing automatically.');return publishAnimeDraft(d);}
