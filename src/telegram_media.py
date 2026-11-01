@@ -141,6 +141,50 @@ def inferred_anime_season(episode, explicit, boundaries):
         offset += count
     return 1
 
+_TMDB_SHOW_CACHE = {}
+_TMDB_SEASON_CACHE = {}
+def tmdb_show_id(title):
+    key = os.getenv('TMDB_API_KEY')
+    cache_key = str(title).casefold()
+    if cache_key in _TMDB_SHOW_CACHE:
+        return _TMDB_SHOW_CACHE[cache_key]
+    if not key:
+        return None
+    try:
+        params = urllib.parse.urlencode({'api_key': key, 'query': title, 'language': 'en-US', 'include_adult': 'false'})
+        with urllib.request.urlopen(urllib.request.Request('https://api.themoviedb.org/3/search/tv?' + params, headers={'User-Agent': 'FilmGo/1.0'}), timeout=6) as response:
+            result = next(iter(json.load(response).get('results', [])), None)
+        value = result.get('id') if result else None
+        _TMDB_SHOW_CACHE[cache_key] = value
+        return value
+    except Exception:
+        _TMDB_SHOW_CACHE[cache_key] = None
+        return None
+
+def tmdb_season_episodes(title, season):
+    """Fetch one TMDB season once and return its episode guide by number."""
+    key = os.getenv('TMDB_API_KEY')
+    cache_key = (str(title).casefold(), int(season or 1))
+    if cache_key in _TMDB_SEASON_CACHE:
+        return _TMDB_SEASON_CACHE[cache_key]
+    if not key:
+        return {}
+    try:
+        show_id = tmdb_show_id(title)
+        if not show_id:
+            _TMDB_SEASON_CACHE[cache_key] = {}
+            return {}
+        params = urllib.parse.urlencode({'api_key': key, 'language': 'en-US'})
+        endpoint = 'https://api.themoviedb.org/3/tv/%s/season/%s?%s' % (show_id, int(season or 1), params)
+        with urllib.request.urlopen(urllib.request.Request(endpoint, headers={'User-Agent': 'FilmGo/1.0'}), timeout=6) as response:
+            episodes = json.load(response).get('episodes', [])
+        mapped = {int(item.get('episode_number')): {'title': str(item.get('name') or '').strip() or None, 'released': str(item.get('air_date') or '').strip() or None, 'frame': ('https://image.tmdb.org/t/p/w780' + str(item.get('still_path'))) if item.get('still_path') else None} for item in episodes if item.get('episode_number') is not None}
+        _TMDB_SEASON_CACHE[cache_key] = mapped
+        return mapped
+    except Exception:
+        _TMDB_SEASON_CACHE[cache_key] = {}
+        return {}
+
 def jikan_metadata(title):
     try:
         query = urllib.parse.urlencode({'q': title, 'limit': 5, 'sfw': 'true'})
@@ -204,6 +248,9 @@ def build_anime_catalog(messages):
         boundaries = tmdb_season_boundaries(show['title'])
         for episode in show['episodes']:
             episode['season'] = inferred_anime_season(episode['episode'], episode.pop('season_explicit', None) and episode['season'], boundaries)
+            guide = tmdb_season_episodes(show['title'], episode['season']).get(int(episode['episode']))
+            if guide:
+                episode.update({key: value for key, value in guide.items() if value})
         show['episodes'].sort(key=lambda e: (e.get('season') or 1, e.get('episode') or 0, e.get('part') or 0, e.get('quality') or ''))
         show['updated_at'] = time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime())
         result.append(show)

@@ -152,15 +152,20 @@ function showDetail(a){
  if(a.studio)info.append(el('p','anime-detail-line','Studio: '+a.studio));
  layout.append(info);root.append(layout);
  const overview=el('div','anime-overview');overview.append(el('h2','','Overview'),el('p','',a.plot||'No synopsis available yet.'));root.append(overview);
- const eps=el('div','anime-eps');const head=el('div','anime-eps-head');const list=Array.isArray(a.episodes)?[...a.episodes].sort((x,y)=>episodeNumber(x)-episodeNumber(y)):[];
+ const eps=el('div','anime-eps');const head=el('div','anime-eps-head');const list=Array.isArray(a.episodes)?[...a.episodes].sort((x,y)=>(Number(x.season)||1)-(Number(y.season)||1)||episodeNumber(x)-episodeNumber(y)):[];
  head.append(el('h2','','Episodes'),el('span','',list.length?list.length+' available':''));eps.append(head);
  if(!list.length)eps.append(el('div','anime-empty-eps','Episodes will appear here once they are added.'));
- for(const e of list){
-  const number=episodeNumber(e),row=el('div','anime-ep');row.append(el('div','anime-ep-num',String(number).padStart(2,'0')));
-  const text=el('div');text.append(el('p','anime-ep-title',e.title||'Episode '+number),el('p','anime-ep-sub',[e.season&&'Season '+e.season,e.part&&'Part '+e.part,e.quality,e.duration,e.released].filter(Boolean).join(' · ')||'Episode '+number));
-  const episodeSlug=typeof e.slug_id==='string'&&/^[A-Za-z0-9_-]{8,80}$/.test(e.slug_id)?e.slug_id:'';
-  const play=el('a','anime-ep-play');play.href=episodeSlug?'/anime/watch/'+encodeURIComponent(episodeSlug):'#';play.title=episodeSlug?'Watch episode':'Episode link unavailable';if(!episodeSlug)play.setAttribute('aria-disabled','true');play.append(playIcon(),document.createTextNode('Play'));
-  row.append(text,play);eps.append(row);
+ const seasons=new Map();for(const episode of list){const season=Number(episode.season)||1;if(!seasons.has(season))seasons.set(season,[]);seasons.get(season).push(episode);}
+ for(const [season,seasonEpisodes] of seasons){
+  const frame=seasonEpisodes.map(e=>e.frame).find(Boolean)||a.poster||'';const divider=el('section','anime-season-divider');if(frame)divider.style.backgroundImage='linear-gradient(90deg,rgba(9,9,11,.96) 0%,rgba(9,9,11,.7) 58%,rgba(9,9,11,.2)),url("'+frame.replaceAll('"','%22')+'")';
+  const dividerBody=el('div','anime-season-divider-body');dividerBody.append(el('span','anime-season-kicker','Episode guide'),el('h3','',`Season ${season}`));const dates=seasonEpisodes.map(e=>e.released).filter(Boolean).sort();if(dates.length)dividerBody.append(el('p','',dates.length>1?dates[0]+' – '+dates.at(-1):dates[0]));divider.append(dividerBody);eps.append(divider);
+  for(const e of seasonEpisodes){
+   const number=episodeNumber(e),row=el('div','anime-ep');if(e.frame){const thumb=el('img','anime-ep-frame');thumb.src=e.frame;thumb.alt='';thumb.loading='lazy';row.append(thumb);}else row.append(el('div','anime-ep-num',String(number).padStart(2,'0')));
+   const text=el('div');text.append(el('p','anime-ep-title',e.title||'Episode '+number),el('p','anime-ep-sub',[e.released,e.quality,e.duration,e.part&&'Part '+e.part].filter(Boolean).join(' · ')||'Episode '+number));
+   const episodeSlug=typeof e.slug_id==='string'&&/^[A-Za-z0-9_-]{8,80}$/.test(e.slug_id)?e.slug_id:'';
+   const play=el('a','anime-ep-play');play.href=episodeSlug?'/anime/watch/'+encodeURIComponent(episodeSlug):'#';play.title=episodeSlug?'Watch episode':'Episode link unavailable';if(!episodeSlug)play.setAttribute('aria-disabled','true');play.append(playIcon(),document.createTextNode('Play'));
+   row.append(text,play);eps.append(row);
+  }
  }
  root.append(eps);document.title=a.title+' — FilmGo';
 }

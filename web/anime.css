@@ -14,7 +14,13 @@
 .anime-eps{max-width:760px;margin-top:36px}
 .anime-eps-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:14px}
 .anime-eps-head span{font-size:12px;color:#71717a}
-.anime-ep{display:grid;grid-template-columns:44px minmax(0,1fr) auto;gap:14px;align-items:center;margin-bottom:8px;padding:12px 14px;border:1px solid #27272a;border-radius:14px;background:rgba(255,255,255,.035)}
+.anime-season-divider{position:relative;min-height:132px;margin:24px 0 10px;overflow:hidden;border:1px solid #3f3f46;border-radius:16px;background-color:#18181b;background-position:center;background-size:cover}
+.anime-season-divider-body{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;padding:22px 24px}
+.anime-season-kicker{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#a1a1aa}
+.anime-season-divider h3{margin:5px 0 0;font-size:24px;font-weight:700;color:#fafafa}
+.anime-season-divider p{margin:5px 0 0;font-size:12px;color:#d4d4d8}
+.anime-ep{display:grid;grid-template-columns:92px minmax(0,1fr) auto;gap:14px;align-items:center;margin-bottom:8px;padding:10px 14px;border:1px solid #27272a;border-radius:14px;background:rgba(255,255,255,.035)}
+.anime-ep-frame{width:92px;height:52px;object-fit:cover;border-radius:9px;background:#27272a}
 .anime-ep-num{display:grid;place-items:center;width:44px;height:44px;border-radius:12px;background:#27272a;font-size:14px;font-weight:700;color:#f4f4f5}
 .anime-ep-title{margin:0;font-size:14px;font-weight:600;color:#f4f4f5;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .anime-ep-sub{margin:3px 0 0;font-size:12px;color:#71717a}
@@ -23,3 +29,4 @@
 
 /* Phones: show the Movies / Anime pill under the header (catalog.css hides it below 560px; movies page is left as-is). */
 @media(max-width:560px){.tv-nav-inner{row-gap:10px}.tv-nav-links{display:flex;grid-column:1/-1;grid-row:2}.tv-nav-links a{flex:1;text-align:center;padding:8px 0}}
+@media(max-width:560px){.anime-season-divider{min-height:112px}.anime-season-divider-body{padding:18px}.anime-ep{grid-template-columns:68px minmax(0,1fr) auto;gap:10px;padding:9px}.anime-ep-frame{width:68px;height:48px}.anime-ep-play{padding:0 10px;font-size:0}.anime-ep-play svg{width:17px;height:17px}}
