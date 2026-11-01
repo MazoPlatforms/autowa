@@ -42,6 +42,16 @@ def build_caption(message, max_episode):
     return caption
 
 
+def caption_is_canonical(caption):
+    """Reject stale release tags from the title and slug fields."""
+    lines = [line.strip() for line in str(caption or '').splitlines()]
+    anime = next((line.split(':', 1)[1].strip() for line in lines if line.lower().startswith('anime:')), '')
+    slug = next((line.split(':', 1)[1].strip() for line in lines if line.lower().startswith('anime slug id:')), '')
+    if not anime or slug != slugify(anime):
+        return False
+    return not re.search(r'(?i)(?:720p|1080p|2160p|4k|multi(?:\s+audio)?|audio|esub|tamil|telugu|malayalam|kannada|hindi|english|tam\+|mal\+|hin\+|eng\+|jap\+)', anime)
+
+
 async def main():
     required = ("TELEGRAM_API_ID", "TELEGRAM_API_HASH", "TELEGRAM_SESSION", "TELEGRAM_ANIME_CHANNEL_ID")
     missing = [key for key in required if not os.getenv(key)]
@@ -51,19 +61,29 @@ async def main():
     dry_run = os.getenv("DRY_RUN", "false").casefold() == "true"
     client = TelegramClient(StringSession(os.environ["TELEGRAM_SESSION"]), int(os.environ["TELEGRAM_API_ID"]), os.environ["TELEGRAM_API_HASH"])
     updated = 0
+    verified = 0
     async with client:
-        async for message in client.iter_messages(int(os.environ["TELEGRAM_ANIME_CHANNEL_ID"]), limit=None):
+        channel = int(os.environ["TELEGRAM_ANIME_CHANNEL_ID"])
+        async for message in client.iter_messages(channel, limit=None):
             if not (message.document or message.video):
                 continue
             caption = build_caption(message, max_episode)
-            if not caption or caption == (message.raw_text or "").strip():
+            if not caption:
                 continue
-            print(f"{'DRY RUN ' if dry_run else ''}update message {message.id}: {caption.splitlines()[0]} · S{caption.splitlines()[2].split(':', 1)[1].strip()}E{caption.splitlines()[3].split(':', 1)[1].split('·')[0].strip()}", flush=True)
-            if not dry_run:
+            if caption != (message.raw_text or "").strip():
+                print(f"{'DRY RUN ' if dry_run else ''}update message {message.id}: {caption.splitlines()[0]} · S{caption.splitlines()[2].split(':', 1)[1].strip()}E{caption.splitlines()[3].split(':', 1)[1].split('·')[0].strip()}", flush=True)
+            if not dry_run and caption != (message.raw_text or "").strip():
                 await message.edit(caption)
                 await asyncio.sleep(0.4)
-            updated += 1
-    print(f"Updated captions: {updated}", flush=True)
+                updated += 1
+            if not dry_run:
+                current = await client.get_messages(channel, ids=message.id)
+                actual = (getattr(current, 'raw_text', '') or '').strip()
+                if actual != caption or not caption_is_canonical(actual):
+                    raise RuntimeError(f"Caption verification failed for Telegram message {message.id}")
+                verified += 1
+                print(f"verified message {message.id}: {actual.splitlines()[0]}", flush=True)
+    print(f"Updated captions: {updated}; Verified captions: {verified}", flush=True)
 
 
 if __name__ == "__main__":
