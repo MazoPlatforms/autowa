@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": 1793550880,
+  "updated_at": "2026-11-01T16:44:25.458Z",
   "anime": [
     {
       "slug_id": "naruto",
@@ -1405,6 +1405,17 @@
           "title": "Run Idate Run! Nagi Island Awaits!",
           "released": "2004-10-13",
           "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/483/1207670.jpg"
+        },
+        {
+          "slug_id": "Y3PbqxCxCbwrfk8p",
+          "telegram_message_id": 498,
+          "episode": 105,
+          "season": 4,
+          "part": null,
+          "quality": "720p",
+          "file_size": 125410424,
+          "file_name": "Naruto S4 E105 Tamil Dub 720p.mp4",
+          "mime_type": "video/mp4"
         }
       ],
       "year": 2002,
@@ -1422,7 +1433,7 @@
       "status": "Finished",
       "episodes_total": 220,
       "studio": "Studio Pierrot",
-      "updated_at": "2026-11-01T16:34:39Z"
+      "updated_at": "2026-11-01T16:44:25.458Z"
     },
     {
       "slug_id": "naruto-shippuden",
