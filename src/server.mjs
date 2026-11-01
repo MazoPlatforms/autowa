@@ -411,7 +411,15 @@ const server=http.createServer(async(req,res)=>{
    const catalog=await getAnimeCatalog();
    const query=(url.searchParams.get('q')||'').trim().toLowerCase().slice(0,100);
    const anime=(catalog.anime||[]).filter(item=>!query||[item.title,item.title_alt,...(item.genre||[])].filter(Boolean).join(' ').toLowerCase().includes(query));
-   return send(res,200,{anime,indexed_at:catalog.indexed_at||null,source:'telegram'});
+   const summaries=anime.map(item=>({...item,episodes:undefined,episodes_released:Math.max(0,...(item.episodes||[]).map(ep=>Number(ep.episode??ep.number)||0))}));
+   return send(res,200,{anime:summaries,indexed_at:catalog.indexed_at||null,source:'telegram'});
+  }
+  const animeTitleApi=url.pathname.match(/^\/api\/anime\/title\/([-a-zA-Z0-9_]+)$/);
+  if(req.method==='GET'&&animeTitleApi){
+   const catalog=await getAnimeCatalog(),anime=(catalog.anime||[]).find(item=>item.slug_id===animeTitleApi[1]);
+   if(!anime)return send(res,404,{error:'Anime not found'});
+   const suggestions=(catalog.anime||[]).filter(item=>item.slug_id!==anime.slug_id).slice(0,8).map(item=>({...item,episodes:undefined,episodes_released:Math.max(0,...(item.episodes||[]).map(ep=>Number(ep.episode??ep.number)||0))}));
+   return send(res,200,{anime,suggestions,indexed_at:catalog.indexed_at||null,source:'telegram'});
   }
   const animeEpisodeApi=url.pathname.match(/^\/api\/anime\/episode\/([A-Za-z0-9_-]{8,80})$/);
   if(req.method==='GET'&&animeEpisodeApi){

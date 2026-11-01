@@ -14,7 +14,7 @@ function chevronIcon(){const svg=document.createElementNS('http://www.w3.org/200
 const grid=$('anime-grid'),searchInput=$('anime-search'),empty=$('anime-empty'),home=$('anime-home'),detail=$('anime-detail'),pagination=$('anime-pagination');
 const yearFilter=$('filter-year'),genreFilter=$('filter-genre'),sortFilter=$('filter-sort');
 const heroEl=$('anime-hero'),shelvesEl=$('anime-shelves'),introEl=$('anime-intro');
-let items=[],loaded=false,page=1,updatingFilters=false;
+let items=[],loaded=false,page=1,updatingFilters=false,detailLoad=0;
 const PAGE_SIZE=()=>window.matchMedia('(min-width: 768px)').matches?24:20;
 const genresOf=a=>(Array.isArray(a.genre)?a.genre:typeof a.genre==='string'?a.genre.split(','):[]).map(g=>String(g).trim()).filter(Boolean);
 const ratingOf=a=>{const r=parseFloat(a.rating);return Number.isFinite(r)?r:0;};
@@ -173,13 +173,20 @@ function showDetail(a){
  root.append(eps);document.title=a.title+' — FilmGo';
 }
 function detailSkeleton(){const wrap=el('div','detail-skeleton');wrap.append(el('div','shimmer detail-skeleton-banner'),el('div','detail-skeleton-copy'));wrap.querySelector('.detail-skeleton-copy').append(el('div','shimmer detail-skeleton-kicker'),el('div','shimmer detail-skeleton-title'),el('div','shimmer detail-skeleton-meta'),el('div','shimmer detail-skeleton-line'),el('div','shimmer detail-skeleton-line short'));detail.querySelector('#detail-content').replaceChildren(wrap);}
+async function loadAnimeDetail(key){
+ const token=++detailLoad;
+ try{const response=await fetch('/api/anime/title/'+encodeURIComponent(key),{cache:'no-store',credentials:'same-origin'});if(!response.ok)throw Error('Anime unavailable');const data=await response.json();if(token===detailLoad)showDetail(data.anime);}
+ catch{if(token===detailLoad)$('detail-content').replaceChildren(el('p','text-zinc-400','Anime unavailable.'));}
+}
 function route(){
  const match=location.pathname.match(/^\/anime\/title\/([^/]+)\/?$/);
  $('anime-back')?.classList.toggle('visible',!!match);
  if(match){
   const key=decodeURIComponent(match[1]),a=items.find(x=>x.slug_id===key||x.id===key);
   home.classList.add('hidden');detail.classList.remove('hidden');
-  if(a)showDetail(a);else if(!loaded){detailSkeleton();document.title='Loading anime — FilmGo';}
+  if(a&&Array.isArray(a.episodes))showDetail(a);else if(!loaded){detailSkeleton();document.title='Loading anime — FilmGo';}
+  else if(a){detailSkeleton();document.title='Loading '+a.title+' — FilmGo';void loadAnimeDetail(key);}
+  else if(!loaded){detailSkeleton();document.title='Loading anime — FilmGo';}
   else{$('detail-content').replaceChildren(el('p','text-zinc-400','Anime not found.'));document.title='Anime not found — FilmGo';}
  }else{home.classList.remove('hidden');detail.classList.add('hidden');document.title='FilmGo — Anime';if(loaded)render();}
  window.scrollTo(0,0);
@@ -189,7 +196,7 @@ for(const select of [yearFilter,genreFilter,sortFilter])select.addEventListener(
 window.addEventListener('popstate',route);
 (async()=>{
  if(location.pathname.startsWith('/anime/title/'))route();else skeleton();
- try{const response=await fetch('/api/anime',{cache:'no-store',credentials:'same-origin'});if(!response.ok)throw Error('Anime unavailable');const data=await response.json();items=Array.isArray(data.anime)?data.anime:[];}
+ try{const response=await fetch('/api/anime?summary=1',{cache:'no-store',credentials:'same-origin'});if(!response.ok)throw Error('Anime unavailable');const data=await response.json();items=Array.isArray(data.anime)?data.anime:[];}
  catch{items=[];}
  loaded=true;updateFilters();buildHome();route();
 })();
