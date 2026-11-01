@@ -63,14 +63,30 @@ jobs:
               for episode in item.get('episodes', []):
                   episode['slug_id']=old.get(str(episode.get('telegram_message_id')), episode.get('slug_id') or secrets.token_urlsafe(12))
           output={'schema_version':1,'updated_at':source.get('indexed_at'),'anime':source.get('anime',[])}
+          priority={'naruto': 0, 'naruto-shippuden': 1}
+          output['anime'].sort(key=lambda item: (priority.get(item.get('slug_id'), 99), str(item.get('title', '')).casefold()))
+          for item in output['anime']:
+              if item.get('slug_id') == 'naruto':
+                  item['season_banners']={str(number): f'/banners/naruto-season-{number}.webp' for number in range(1, 12)}
           json.dump(output, open('/tmp/updated-anime.json','w',encoding='utf-8'), ensure_ascii=False, indent=2)
           open('/tmp/updated-anime.json','a').write('\n')
+          import os
+          os.makedirs('data/anime', exist_ok=True)
+          index={'schema_version':1,'updated_at':output.get('updated_at'),'anime':[]}
+          for item in output['anime']:
+              with open(f"data/anime/{item['slug_id']}.json", 'w', encoding='utf-8') as handle:
+                  json.dump({'schema_version':1,'updated_at':output.get('updated_at'),'anime':item}, handle, ensure_ascii=False, indent=2)
+                  handle.write('\n')
+              index['anime'].append({key:value for key,value in item.items() if key != 'episodes'})
+          with open('data/anime/index.json', 'w', encoding='utf-8') as handle:
+              json.dump(index, handle, ensure_ascii=False, indent=2)
+              handle.write('\n')
           PY
           cp /tmp/updated-anime.json data/anime.json
-          if git diff --quiet -- data/anime.json; then echo "No anime catalog changes to publish"; exit 0; fi
+          if git diff --quiet -- data/anime.json data/anime; then echo "No anime catalog changes to publish"; exit 0; fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/anime.json
+          git add data/anime.json data/anime
           git commit -m "chore: refresh anime catalog"
           git pull --rebase origin main
           git push origin HEAD:main

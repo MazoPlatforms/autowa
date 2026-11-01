@@ -249,7 +249,7 @@ async function animeMetadata(title){
 }
 let KNOWN_ANIME_TITLES=new Set();
 try{
- const catalog=JSON.parse(fs.readFileSync(new URL('../data/anime.json',import.meta.url),'utf8'));
+ const catalog=JSON.parse(fs.readFileSync(new URL('../data/anime/index.json',import.meta.url),'utf8'));
  KNOWN_ANIME_TITLES=new Set((catalog.anime||[]).flatMap(item=>[item.title,item.title_alt]).filter(Boolean).map(normalize));
 }catch(error){console.warn('Anime catalog fast-path unavailable:',error.message);}
 const isKnownAnimeTitle=title=>KNOWN_ANIME_TITLES.has(normalize(title));

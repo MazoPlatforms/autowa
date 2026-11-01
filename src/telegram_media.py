@@ -204,6 +204,20 @@ def catalog_title_key(title):
 def load_existing_anime_catalog():
     """Load local metadata so known shows do not hit APIs on every refresh."""
     try:
+        split_dir = os.path.join(os.path.dirname(__file__), '..', 'data', 'anime')
+        split_items = []
+        for name in sorted(os.listdir(split_dir)):
+            if name == 'index.json' or not name.endswith('.json'):
+                continue
+            with open(os.path.join(split_dir, name), encoding='utf-8') as handle:
+                item = json.load(handle).get('anime')
+                if isinstance(item, dict):
+                    split_items.append(item)
+        if split_items:
+            return split_items
+    except (OSError, ValueError, TypeError):
+        pass
+    try:
         with open(os.path.join(os.path.dirname(__file__), '..', 'data', 'anime.json'), encoding='utf-8') as handle:
             return (json.load(handle).get('anime') or [])
     except (OSError, ValueError, TypeError):
