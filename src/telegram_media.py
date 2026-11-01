@@ -163,10 +163,11 @@ def manual_anime_season(title, episode):
     """Known editorial season boundaries used when a release omits Sxx."""
     normalized = re.sub(r'[^a-z0-9]+', '', str(title or '').casefold())
     if normalized in ('narutoshippuden', 'narutoshippuuden'):
-        for season, last_episode in ((1, 32), (2, 53), (3, 71), (4, 88)):
+        boundaries = ((1, 32), (2, 53), (3, 71), (4, 88), (5, 112), (6, 143), (7, 151), (8, 175), (9, 196), (10, 221), (11, 242), (12, 275), (13, 295), (14, 320), (15, 348), (16, 361), (17, 379), (18, 405), (19, 431), (20, 458), (21, 479), (22, 500))
+        for season, last_episode in boundaries:
             if int(episode or 0) <= last_episode:
                 return season
-        return 5
+        return boundaries[-1][0]
     return None
 
 _TMDB_SHOW_CACHE = {}

@@ -6,7 +6,7 @@ on:
       max_episode:
         description: "Highest episode to update"
         required: true
-        default: "88"
+        default: "500"
       dry_run:
         description: "Preview changes without editing Telegram messages"
         required: true

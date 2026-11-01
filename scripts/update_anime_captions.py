@@ -47,7 +47,7 @@ async def main():
     missing = [key for key in required if not os.getenv(key)]
     if missing:
         raise SystemExit("Missing secrets: " + ", ".join(missing))
-    max_episode = int(os.getenv("MAX_EPISODE", "88"))
+    max_episode = int(os.getenv("MAX_EPISODE", "500"))
     dry_run = os.getenv("DRY_RUN", "false").casefold() == "true"
     client = TelegramClient(StringSession(os.environ["TELEGRAM_SESSION"]), int(os.environ["TELEGRAM_API_ID"]), os.environ["TELEGRAM_API_HASH"])
     updated = 0

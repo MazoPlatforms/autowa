@@ -265,6 +265,12 @@ async function tmdbAnimeSeason(title,episode){
  }catch(error){console.warn('Anime season mapping failed:',error?.message||'unknown error');}
  return null;
 }
+function manualAnimeSeason(title,episode){
+ const normalized=normalize(title);
+ if(!['narutoshippuden','narutoshippuuden'].includes(normalized))return null;
+ const boundaries=[[1,32],[2,53],[3,71],[4,88],[5,112],[6,143],[7,151],[8,175],[9,196],[10,221],[11,242],[12,275],[13,295],[14,320],[15,348],[16,361],[17,379],[18,405],[19,431],[20,458],[21,479],[22,500]];
+ return boundaries.find(([,last])=>Number(episode)<=last)?.[0]||22;
+}
 function animeDraftPrompt(d){
  const lines=['FilmGo anime draft',d.title,'Season: '+d.season+' · Episode: '+d.episode+(d.part?' · Part: '+d.part:''),'Quality: '+d.quality,'File: '+d.file_name,d.poster?'Poster: ready':'Poster: '+(d.poster_error||'AniList / fallback'),'Use /edit to change metadata or /cancel to discard.'];
  return say(ADMIN_ID,lines.join('\n'),{reply_markup:{inline_keyboard:[[{text:'Publish anime',callback_data:'fg:publish'},{text:'Cancel',callback_data:'fg:cancel'}]]}});
@@ -355,7 +361,7 @@ async function startAnimeDraft(file,messageId,detected=null,caption=''){
  const parts=animePartsFromMessage(file,caption);
  if(!parts.episode)return say(ADMIN_ID,'I could not identify the anime episode. Use a filename such as Naruto Shippuden - 001 [720p].mkv.');
  const known=isKnownAnimeTitle(parts.title);
- parts.season=parts.season||(known?1:await tmdbAnimeSeason(parts.title,parts.episode)||1);
+ parts.season=parts.season||(known?manualAnimeSeason(parts.title,parts.episode)||1:await tmdbAnimeSeason(parts.title,parts.episode)||1);
  const d={kind:'anime',message_id:messageId,file_name:file.file_name||'',file_size:Number(file.file_size||0),mime_type:file.mime_type||'',title:parts.title,titleCandidates:parts.titleCandidates,season:parts.season,episode:parts.episode,part:parts.part,quality:parts.quality,slug_id:animeSlug(parts.title),episode_slug_id:crypto.randomBytes(12).toString('base64url')};
  const metadata=known?null:(detected?.metadata||await animeMetadata(parts.title).catch(()=>null));if(metadata){Object.assign(d,metadata);d.slug_id=animeSlug(metadata.title);}d.stage='await-publish';await draftSave(d);
  if(detected?.confidence>=.7){await say(ADMIN_ID,'Recognized '+d.title+' as anime ('+Math.round(detected.confidence*100)+'% confidence). Publishing automatically.');return publishAnimeDraft(d);}

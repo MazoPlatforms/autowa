@@ -261,7 +261,7 @@ const brandAssets=new Map([
  ['/icons/filmgo-512.png',{body:fs.readFileSync(new URL('../web/icons/filmgo-512.png',import.meta.url)),type:'image/png',cache:'public, max-age=31536000, immutable'}],
  ['/icons/filmgo-maskable.png',{body:fs.readFileSync(new URL('../web/icons/filmgo-maskable.png',import.meta.url)),type:'image/png',cache:'public, max-age=31536000, immutable'}]
 ]);
-const animeBanners=new Map(['naruto-shippuden-season-1.webp','naruto-shippuden-season-2.webp','naruto-shippuden-season-3.webp','naruto-shippuden-season-4.webp'].map(name=>[
+const animeBanners=new Map(['naruto-shippuden-season-1.webp','naruto-shippuden-season-2.webp','naruto-shippuden-season-3.webp','naruto-shippuden-season-4.webp','naruto-shippuden-season-5.webp','naruto-shippuden-season-6.webp','naruto-shippuden-season-7.webp','naruto-shippuden-season-8.webp','naruto-shippuden-season-9.webp','naruto-shippuden-season-10.webp'].map(name=>[
  '/banners/'+name,
  fs.readFileSync(new URL('../web/banners/'+name,import.meta.url))
 ]));
