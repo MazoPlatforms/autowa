@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-01T16:48:11.380Z",
+  "updated_at": "2026-11-01T16:48:15.858Z",
   "anime": [
     {
       "slug_id": "naruto",
@@ -1911,6 +1911,17 @@
           "file_size": 165699649,
           "file_name": "[Toonworld4all] Naruto - 162 [720p BD x264 Multi Audio] ESub.mkv",
           "mime_type": "video/x-matroska"
+        },
+        {
+          "slug_id": "If9lr-wmdW6df8uQ",
+          "telegram_message_id": 544,
+          "episode": 167,
+          "season": 7,
+          "part": null,
+          "quality": "480p",
+          "file_size": 109309425,
+          "file_name": "_Naruto_S07_E167_Blu_Ray_480p_x264_Tamil_+_Telugu_+_Hindi_+_Malayalam.mkv",
+          "mime_type": "video/x-matroska"
         }
       ],
       "year": 2002,
@@ -1928,7 +1939,7 @@
       "status": "Finished",
       "episodes_total": 220,
       "studio": "Studio Pierrot",
-      "updated_at": "2026-11-01T16:48:11.380Z"
+      "updated_at": "2026-11-01T16:48:15.858Z"
     },
     {
       "slug_id": "naruto-shippuden",
