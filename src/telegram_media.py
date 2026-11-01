@@ -287,6 +287,7 @@ def anime_media_item(message):
     title, season, episode, part = anime_filename_parts(filename)
     caption = anime_caption_parts(getattr(message, 'raw_text', ''))
     title = caption['title'] or title
+    filename_season = season
     season = season or caption['season']
     episode = episode or caption['episode']
     part = part or caption['part']
@@ -295,7 +296,7 @@ def anime_media_item(message):
     size = int(getattr(message.file, 'size', 0) or 0)
     if not episode or not quality or not 0 < size <= 2000000000:
         return None
-    return {'slug_id': secrets.token_urlsafe(12), 'telegram_message_id': int(message.id), 'episode': episode, 'season': season, 'season_explicit': bool(season), 'part': part, 'quality': quality, 'file_size': size, 'file_name': filename[:240], 'mime_type': str(getattr(message.file, 'mime_type', '') or '')}
+    return {'slug_id': secrets.token_urlsafe(12), 'telegram_message_id': int(message.id), 'episode': episode, 'season': season, 'season_explicit': bool(filename_season), 'caption_season': caption['season'], 'part': part, 'quality': quality, 'file_size': size, 'file_name': filename[:240], 'mime_type': str(getattr(message.file, 'mime_type', '') or '')}
 
 def build_anime_catalog(messages):
     existing = load_existing_anime_catalog()
@@ -331,8 +332,9 @@ def build_anime_catalog(messages):
         for episode in show['episodes']:
             previous = known_episodes.get(str(episode.get('telegram_message_id')))
             explicit_season = episode.pop('season_explicit', None)
+            caption_season = episode.pop('caption_season', None)
             editorial_season = manual_anime_season(show['title'], episode['episode'])
-            episode['season'] = explicit_season and episode['season'] or editorial_season or (previous or {}).get('season') or inferred_anime_season(episode['episode'], None, boundaries)
+            episode['season'] = explicit_season and episode['season'] or editorial_season or caption_season or (previous or {}).get('season') or inferred_anime_season(episode['episode'], None, boundaries)
             if previous:
                 for field, value in previous.items():
                     if field not in ('slug_id', 'telegram_message_id', 'file_name', 'file_size', 'mime_type') and value not in (None, '', []):
