@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-01T12:27:37.113Z",
+  "updated_at": 1793536075,
   "anime": [
     {
       "slug_id": "naruto-shippuden",
@@ -3279,7 +3279,7 @@
           "episode": 299,
           "season": 14,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 132877913,
           "file_name": "Naruto Shippuden [S14] {EP:299} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -3290,7 +3290,7 @@
           "episode": 300,
           "season": 14,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 123057761,
           "file_name": "Naruto Shippuden [S14] {EP:300} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -3301,7 +3301,7 @@
           "episode": 301,
           "season": 14,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 100530262,
           "file_name": "Naruto Shippuden [S14] {EP:301} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -3312,7 +3312,7 @@
           "episode": 302,
           "season": 14,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 101336640,
           "file_name": "Naruto Shippuden [S14] {EP:302} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -3323,7 +3323,7 @@
           "episode": 303,
           "season": 14,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 99797868,
           "file_name": "Naruto shippuden episode 303 (720p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -3334,7 +3334,7 @@
           "episode": 304,
           "season": 14,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 111781045,
           "file_name": "Naruto Shippuden [S14] {EP:304} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -3345,7 +3345,7 @@
           "episode": 305,
           "season": 14,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 94731224,
           "file_name": "Naruto Shippuden [S14] {EP:305} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -3356,7 +3356,7 @@
           "episode": 306,
           "season": 14,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 172825454,
           "file_name": "Naruto Shippuden [S14] {EP:306} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -3367,7 +3367,7 @@
           "episode": 307,
           "season": 14,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 74532232,
           "file_name": "Naruto Shippuden [S14] {EP:307} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -3378,7 +3378,7 @@
           "episode": 308,
           "season": 14,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 94892570,
           "file_name": "Naruto Shippuden [S14] {EP:308} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -3389,7 +3389,7 @@
           "episode": 309,
           "season": 14,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 97459313,
           "file_name": "Naruto Shippuden [S14] {EP:309} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -3400,7 +3400,7 @@
           "episode": 310,
           "season": 14,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 86516090,
           "file_name": "Naruto Shippuden [S14] {EP:310} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -3411,7 +3411,7 @@
           "episode": 311,
           "season": 14,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 67268121,
           "file_name": "Naruto Shippuden [S14] {EP:311} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -3422,7 +3422,7 @@
           "episode": 312,
           "season": 14,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 108764345,
           "file_name": "Naruto Shippuden [S14] {EP:312} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -3433,7 +3433,7 @@
           "episode": 313,
           "season": 14,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 138625539,
           "file_name": "Naruto Shippuden [S14] {EP:313} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -3444,7 +3444,7 @@
           "episode": 314,
           "season": 14,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 106692190,
           "file_name": "Naruto Shippuden [S14] {EP:314} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -3455,7 +3455,7 @@
           "episode": 315,
           "season": 14,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 92397605,
           "file_name": "Naruto Shippuden [S14] {EP:315} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -3466,7 +3466,7 @@
           "episode": 316,
           "season": 14,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 107715000,
           "file_name": "Naruto Shippuden [S14] {EP:316} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -3477,7 +3477,7 @@
           "episode": 317,
           "season": 14,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 89920794,
           "file_name": "Naruto Shippuden [S14] {EP:317} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -3488,7 +3488,7 @@
           "episode": 318,
           "season": 14,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 121786417,
           "file_name": "Naruto Shippuden [S14] {EP:318} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -3499,7 +3499,7 @@
           "episode": 319,
           "season": 14,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 123731968,
           "file_name": "Naruto Shippuden [S14] {EP:319} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -3510,7 +3510,7 @@
           "episode": 320,
           "season": 14,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 125665716,
           "file_name": "Naruto Shippuden [S14] {EP:320} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -3531,7 +3531,7 @@
       "status": "Finished",
       "episodes_total": 500,
       "studio": "Studio Pierrot",
-      "updated_at": "2026-11-01T12:27:37.113Z"
+      "updated_at": "2026-11-01T12:27:55Z"
     }
   ]
 }
