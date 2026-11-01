@@ -337,6 +337,12 @@ const server=http.createServer(async(req,res)=>{
    if(!await authenticated(req)){res.writeHead(302,{'Location':'/profile?return='+encodeURIComponent(returnPath),'Cache-Control':'no-store'});return res.end();}
    res.writeHead(302,{'Location':'/api/download/'+directDownload[1]+(quality?'?quality='+encodeURIComponent(quality):''),'Cache-Control':'no-store'});return res.end();
   }
+  const directAnimeDownload=url.pathname.match(/^\/anime\/download\/([A-Za-z0-9_-]{8,80})$/);
+  if(req.method==='GET'&&directAnimeDownload){
+   const returnPath='/anime/download/'+directAnimeDownload[1];
+   if(!await authenticated(req)){res.writeHead(302,{'Location':'/profile?return='+encodeURIComponent(returnPath),'Cache-Control':'no-store'});return res.end();}
+   res.writeHead(302,{'Location':'/api/anime/download/'+directAnimeDownload[1],'Cache-Control':'no-store'});return res.end();
+  }
   if(req.method==='GET'&&/^\/posters\/[a-f0-9]{24}\.jpg$/.test(url.pathname)){
    const upstream=await fetch('https://raw.githubusercontent.com/MazoPlatforms/autowa/main/web'+url.pathname,{signal:AbortSignal.timeout(8000)});
    if(!upstream.ok)return send(res,404,{error:'Poster unavailable'});
@@ -358,6 +364,17 @@ const server=http.createServer(async(req,res)=>{
    const token=crypto.randomBytes(12).toString('base64url');
    await redis('SET','filmgo:deeplink:'+token,JSON.stringify({slug_id:slug,account_hash:hmac(session.number),unlimited:unlimitedRequests(session.number),base_url:publicBase}),'EX',600);
    return send(res,200,{url:'https://t.me/mzn_filmgobot?start=m_'+token});
+  }
+  if(req.method==='POST'&&url.pathname==='/api/anime-telegram-link'){
+   if(!configured||!telegramAnimeReady)return send(res,503,{error:'Anime delivery is temporarily unavailable'});
+   const session=await authenticated(req);if(!session)return send(res,401,{error:'Please sign in using your phone number.'});
+   let publicBase;try{const origin=new URL(req.headers.origin||'');if(origin.protocol!=='https:'||origin.host!==req.headers.host||origin.username||origin.password)return send(res,403,{error:'Origin rejected'});publicBase=origin.origin;}catch{return send(res,403,{error:'Origin rejected'});}
+   if(req.headers['content-type']?.split(';')[0]!=='application/json')return send(res,415,{error:'JSON required'});
+   const input=await body(req),slug=String(input.episode_slug_id||'');if(!/^[A-Za-z0-9_-]{8,80}$/.test(slug))return send(res,400,{error:'Invalid anime episode'});
+   const catalog=await getAnimeCatalog();let episode=null,anime=null;for(const item of catalog.anime||[]){const found=(item.episodes||[]).find(ep=>ep.slug_id===slug);if(found){anime=item;episode=found;break;}}
+   if(!episode||!anime)return send(res,404,{error:'Anime episode unavailable'});
+   const token=crypto.randomBytes(12).toString('base64url');await redis('SET','filmgo:anime-deeplink:'+token,JSON.stringify({episode_slug_id:slug,account_hash:hmac(session.number),unlimited:unlimitedRequests(session.number),base_url:publicBase}),'EX',600);
+   return send(res,200,{url:'https://t.me/mzn_filmgobot?start=a_'+token});
   }
   if(req.method==='GET'&&url.pathname==='/api/movies'){
     const query=(url.searchParams.get('q')||'').trim().toLowerCase().slice(0,100);
@@ -594,7 +611,7 @@ const server=http.createServer(async(req,res)=>{
   if(req.method==='GET'&&posterBackgrounds.has(url.pathname)){res.writeHead(200,{'Content-Type':'image/webp','Cache-Control':'public, max-age=31536000, immutable','X-Content-Type-Options':'nosniff'});return res.end(posterBackgrounds.get(url.pathname));}
   if(req.method==='GET'&&url.pathname==='/app.js'){res.writeHead(200,{'Content-Type':'text/javascript; charset=utf-8','Cache-Control':'no-store','X-Content-Type-Options':'nosniff'});return res.end(appJs);}
   if(req.method==='GET'&&url.pathname==='/countries.json'){res.writeHead(200,{'Content-Type':'application/json','Cache-Control':'public, max-age=86400'});return res.end(countries);}
-  if(req.method!=='POST'||!['/api/otp/start','/api/otp/verify','/api/otp/whatsapp/start','/api/otp/whatsapp/status','/api/request','/api/profile','/api/plans/continue','/api/logout'].includes(url.pathname))return send(res,404,{error:'Not found'});
+  if(req.method!=='POST'||!['/api/otp/start','/api/otp/verify','/api/otp/whatsapp/start','/api/otp/whatsapp/status','/api/request','/api/anime-request','/api/profile','/api/plans/continue','/api/logout'].includes(url.pathname))return send(res,404,{error:'Not found'});
   if(!configured)return send(res,503,{error:'Service setup incomplete; contact operator'});
   if(req.headers['content-type']?.split(';')[0]!=='application/json')return send(res,415,{error:'JSON required'});
   const origin=req.headers.origin,host=req.headers.host;
@@ -686,6 +703,19 @@ const server=http.createServer(async(req,res)=>{
    const name=data.name.trim().replace(/[\x00-\x1f]/g,'');
    await redis('SET','profile:'+hmac(session.number),JSON.stringify({...await profile(session.number),name,updated_at:new Date().toISOString()}));
    return send(res,200,{ok:true,name});
+  }
+  if(url.pathname==='/api/anime-request'){
+   if(data.rights_confirmed!==true||typeof data.episode_slug_id!=='string'||!/^[A-Za-z0-9_-]{8,80}$/.test(data.episode_slug_id))return send(res,400,{error:'Select an anime episode and confirm distribution rights'});
+   const catalog=await getAnimeCatalog();let episode=null,anime=null;for(const item of catalog.anime||[]){const found=(item.episodes||[]).find(ep=>ep.slug_id===data.episode_slug_id);if(found){anime=item;episode=found;break;}}
+   if(!episode||!anime)return send(res,404,{error:'Anime episode unavailable'});
+   const messageId=Number(episode.telegram_message_id),size=Number(episode.file_size||0);if(!Number.isSafeInteger(messageId)||!Number.isSafeInteger(size)||size<=0)return send(res,503,{error:'Anime episode size unavailable; try again later'});
+   if(!telegramAnimeReady)return send(res,503,{error:'Anime delivery is temporarily unavailable'});
+   const exempt=unlimitedRequests(session.number),reservation=await reserveDailyTokens(redis,hmac(session.number),tokenCostMilli(size,'whatsapp'),{unlimited:exempt});if(!reservation.allowed)return send(res,429,{error:'Daily streaming tokens exhausted; reset is 00:00:00 UTC'});
+   const requestId=crypto.randomUUID(),[owner,repo]=String(process.env.GITHUB_REPOSITORY||'').split('/');if(!owner||!repo){await releaseDailyTokens(redis,reservation).catch(()=>{});return send(res,503,{error:'Request queue unavailable'});}
+   const payload={request_id:requestId,media_type:'anime',title:anime.title,episode_slug_id:episode.slug_id,telegram_message_id:messageId,season:Number(episode.season)||1,episode:Number(episode.episode??episode.number)||0,quality:String(episode.quality||'720p'),file_name:String(episode.file_name||''),file_size:size,recipient_jid:session.number.slice(1)+'@s.whatsapp.net',rights_confirmed:true};
+   let result;try{result=await fetch('https://api.github.com/repos/'+encodeURIComponent(owner)+'/'+encodeURIComponent(repo)+'/dispatches',{method:'POST',headers:{Authorization:'Bearer '+process.env.GITHUB_DISPATCH_TOKEN,Accept:'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28','Content-Type':'application/json'},body:JSON.stringify({event_type:'autowa-verified-anime-request',client_payload:payload}),signal:AbortSignal.timeout(15000)});}catch(error){await releaseDailyTokens(redis,reservation).catch(()=>{});return send(res,503,{error:'Queue unavailable; try again later'});}
+   if(!result.ok){await releaseDailyTokens(redis,reservation).catch(()=>{});return send(res,503,{error:'Queue unavailable; try again later'});}
+   void logFilmGo('requests','📨 WhatsApp anime request queued · '+anime.title+' S'+payload.season+'E'+payload.episode+' · request '+requestId);return send(res,202,{ok:true,request_id:requestId});
   }
   if(data.rights_confirmed!==true||!Number.isSafeInteger(data.movie_id)||data.movie_id<=0)return send(res,400,{error:'Select a movie and confirm distribution rights'});
   const catalog=await getCatalog();

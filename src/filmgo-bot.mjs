@@ -92,6 +92,7 @@ function animePartsFromMessage(file,caption){
  return parts;
 }
 async function catalog(){const r=await fetch('https://raw.githubusercontent.com/'+REPO+'/main/data/movies.json?ts='+Date.now(),{signal:AbortSignal.timeout(10000),cache:'no-store'});if(!r.ok)throw Error('Catalog unavailable');return (await r.json()).movies||[];}
+async function animeCatalog(){const r=await fetch('https://raw.githubusercontent.com/'+REPO+'/main/data/anime.json?ts='+Date.now(),{signal:AbortSignal.timeout(10000),cache:'no-store'});if(!r.ok)throw Error('Anime catalog unavailable');return (await r.json()).anime||[];}
 async function draftGet(){const raw=await redis('GET',DRAFT_KEY+ADMIN_ID);return raw?JSON.parse(raw):null;}
 async function draftSave(d){await redis('SET',DRAFT_KEY+ADMIN_ID,JSON.stringify(d),'EX',86400*7);}
 async function askForTitle(d){d.stage='await-title';await draftSave(d);return say(ADMIN_ID,'I could not identify the movie title from the filename. Please send the movie title.');}
@@ -186,6 +187,14 @@ export function telegramMovieButtons(baseUrl,slug,quality){
  if(base.protocol!=='https:'||!/^[-A-Za-z0-9_]{1,80}$/.test(String(slug||'')))throw Error('Invalid FilmGo action link');
  const id=encodeURIComponent(slug),q=encodeURIComponent(String(quality||''));
  return {inline_keyboard:[[{text:'▶️ Stream on FilmGo',url:new URL('/title/'+id,base).href},{text:'⬇️ Download',url:new URL('/download/'+id+'?quality='+q,base).href}]]};
+}
+export function telegramAnimeDeliveryCaption(anime,episode){
+ const title=captionValue(anime.title,150),number=Number(episode.episode??episode.number)||0,season=Number(episode.season)||1;
+ return ['🍥 FilmGo Anime','',title,'Season '+season+' · Episode '+number,episode.title?'Episode: '+captionValue(episode.title,150):'',episode.quality?'Quality: '+captionValue(episode.quality,30):'','', '> Powered by Itz Maazin • https://mzn.is-a.dev/'].filter(Boolean).join('\n');
+}
+export function telegramAnimeButtons(baseUrl,slug){
+ const base=new URL(baseUrl);if(base.protocol!=='https:'||!/^[A-Za-z0-9_-]{8,80}$/.test(String(slug||'')))throw Error('Invalid FilmGo anime action link');
+ const id=encodeURIComponent(slug);return {inline_keyboard:[[{text:'▶️ Stream on FilmGo',url:new URL('/anime/watch/'+id,base).href},{text:'⬇️ Download',url:new URL('/anime/download/'+id,base).href}]]};
 }
 async function omdbSearch(title,year){const key=process.env.OMDB_API_KEY;if(!key)return null;const url='https://www.omdbapi.com/?'+new URLSearchParams({apikey:key,t:title,...(year?{y:String(year)}:{})});const r=await fetch(url,{signal:AbortSignal.timeout(10000)});const j=await r.json();return j.Response==='True'?j:null;}
 async function omdbById(imdbId){const key=process.env.OMDB_API_KEY;if(!key||!/^tt\d+$/.test(String(imdbId||'')))return null;const url='https://www.omdbapi.com/?'+new URLSearchParams({apikey:key,i:imdbId});const r=await fetch(url,{signal:AbortSignal.timeout(10000)});const j=await r.json();return j.Response==='True'?j:null;}
@@ -396,6 +405,22 @@ async function startMovieDraft(file,messageId,chat){
 }
 async function onMessage(message,refresh){
  const from=String(message.from?.id||''),chat=message.chat?.id;
+ const animeDeep=String(message.text||'').trim().match(/^\/start(?:@\w+)?\s+a_([A-Za-z0-9_-]{16})$/);
+ if(animeDeep&&message.chat?.type==='private'){
+  const key='filmgo:anime-deeplink:'+animeDeep[1],raw=await redis('GET',key);let grant;try{grant=raw?JSON.parse(raw):null;}catch{}
+  if(!grant||!/^[-a-f0-9]{64}$/.test(grant.account_hash||''))return say(chat,'This anime link has expired. Please sign in on FilmGo and request a new link.');
+  let animeList;try{animeList=await animeCatalog();}catch{return say(chat,'Anime delivery is temporarily unavailable. Please try again later.');}
+  let anime=null,episode=null;for(const item of animeList){const found=(item.episodes||[]).find(ep=>ep.slug_id===grant.episode_slug_id);if(found){anime=item;episode=found;break;}}
+  if(!anime||!episode)return say(chat,'This anime episode is no longer available.');
+  const messageId=Number(episode.telegram_message_id),size=Number(episode.file_size||0);if(!Number.isSafeInteger(messageId)||!Number.isSafeInteger(size)||size<=0)return say(chat,'Anime episode is unavailable.');
+  const claimKey='filmgo:anime-deeplink-claim:'+animeDeep[1];if(await redis('SET',claimKey,'1','NX','EX',600)!=='OK')return say(chat,'This anime link is already being processed.');
+  const now=new Date(),day=now.toISOString().slice(0,10),resetAt=Date.UTC(now.getUTCFullYear(),now.getUTCMonth(),now.getUTCDate()+1),expireAt=Math.ceil(resetAt/1000),usageKey='filmgo:daily-tokens:v1:'+grant.account_hash+':'+day,cost=Math.max(1,Math.ceil((size/(512*1024*1024)*0.75+1)*1000));
+  const refund=async()=>{if(!grant.unlimited)await redis('EVAL',REFUND_TOKEN_SCRIPT,1,usageKey,cost).catch(()=>{});};const script="local used=tonumber(redis.call('GET',KEYS[1]) or '0'); local cost=tonumber(ARGV[1]); if used+cost>50000 then return -1 end; local next=redis.call('INCRBY',KEYS[1],cost); if next==cost then redis.call('EXPIREAT',KEYS[1],ARGV[2]) end; return next";const used=grant.unlimited?0:Number(await redis('EVAL',script,1,usageKey,cost,expireAt));
+  if(!grant.unlimited&&used<0){await redis('DEL',claimKey);return say(chat,'Daily token limit reached. Your tokens reset at 00:00:00 UTC.');}
+  const baseUrl=grant.base_url||process.env.FILMGO_PUBLIC_URL;let replyMarkup;try{replyMarkup=telegramAnimeButtons(baseUrl,episode.slug_id);}catch{await refund();await redis('DEL',claimKey);return say(chat,'FilmGo links are temporarily unavailable.');}
+  try{await tg('copyMessage',{chat_id:chat,from_chat_id:ANIME_CHANNEL_ID,message_id:messageId,caption:telegramAnimeDeliveryCaption(anime,episode),reply_markup:replyMarkup});}catch(error){await refund();await redis('DEL',claimKey);await say(chat,'Could not deliver this anime episode right now. Please retry.');return;}
+  await redis('DEL',key);void logFilmGo('downloads','Telegram anime requested: '+anime.title+' S'+(episode.season||1)+'E'+(episode.episode||episode.number||0));return;
+ }
  const deep=String(message.text||'').trim().match(/^\/start(?:@\w+)?\s+m_([A-Za-z0-9_-]{16})$/);
  if(deep&&message.chat?.type==='private'){
   const key='filmgo:deeplink:'+deep[1];

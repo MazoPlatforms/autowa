@@ -512,7 +512,7 @@ async def main():
             message = await client.get_messages(entity, ids=message_id)
             item = media_item(message) if message and message.file else None
             print(json.dumps({'movie': item}), flush=True)
-        elif mode == 'download':
+        elif mode in ('download', 'download-anime'):
             message_id = int(sys.argv[2])
             destination = sys.argv[3]
             if message_id <= 0:

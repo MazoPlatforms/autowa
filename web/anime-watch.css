@@ -3,6 +3,7 @@
 .anime-watch-state{display:flex;align-items:center;justify-content:center;gap:12px;margin:72px 0;padding:28px;border:1px solid #27272a;border-radius:20px;background:#111113;color:#a1a1aa;font-size:14px;text-align:center}
 .anime-watch-state a{color:#f4f4f5;font-weight:600;text-decoration:underline;text-underline-offset:3px}
 .anime-watch-state .filmgo-loading-spinner{position:static;flex:none}
+.anime-watch-loading-skeleton{display:grid;gap:14px;width:100%;text-align:left}.anime-watch-skeleton-kicker{width:120px;height:14px;border-radius:5px}.anime-watch-skeleton-title{width:min(76%,520px);height:42px;border-radius:10px}.anime-watch-skeleton-meta{width:220px;height:18px;border-radius:6px}.anime-watch-skeleton-player{width:100%;aspect-ratio:16/9;border-radius:20px;margin-top:8px}.anime-watch-skeleton-action{width:100%;height:52px;border-radius:14px;margin-top:4px}
 .anime-watch-hero{position:relative;isolation:isolate;margin:0 0 8px;padding:22px;border:1px solid #27272a;border-radius:26px;background:#101012;overflow:hidden}
 .anime-watch-hero::before{content:"";position:absolute;inset:-30px;z-index:-2;background:var(--hero-art) center/cover;filter:blur(38px) saturate(1.25);opacity:.38;transform:scale(1.1)}
 .anime-watch-hero::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(110deg,rgba(9,9,11,.9),rgba(9,9,11,.66) 55%,rgba(9,9,11,.82))}

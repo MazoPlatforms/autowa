@@ -1,0 +1,58 @@
+name: Process verified FilmGo anime request
+on:
+  repository_dispatch:
+    types: [autowa-verified-anime-request]
+permissions:
+  contents: write
+concurrency:
+  group: whatsapp-publisher
+  cancel-in-progress: false
+jobs:
+  deliver:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    environment: production
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+      - name: Install media tools and Telegram client
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+          python3 -m pip install telethon==1.42.0
+      - name: Validate anime request and stage private job
+        env:
+          REQUEST_PAYLOAD_JSON: ${{ toJSON(github.event.client_payload) }}
+        run: node src/stage-anime-request.mjs
+      - name: Send authorized anime episode
+        env:
+          WA_AUTH_CREDS: ${{ secrets.WA_AUTH_CREDS }}
+          APP_SECRET: ${{ secrets.APP_SECRET }}
+          UPSTASH_REDIS_REST_URL: ${{ secrets.UPSTASH_REDIS_REST_URL }}
+          UPSTASH_REDIS_REST_TOKEN: ${{ secrets.UPSTASH_REDIS_REST_TOKEN }}
+          TELEGRAM_API_ID: ${{ secrets.TELEGRAM_API_ID }}
+          TELEGRAM_API_HASH: ${{ secrets.TELEGRAM_API_HASH }}
+          TELEGRAM_SESSION: ${{ secrets.TELEGRAM_SESSION }}
+          TELEGRAM_ANIME_CHANNEL_ID: ${{ secrets.TELEGRAM_ANIME_CHANNEL_ID }}
+          JOB_ID: request-${{ github.event.client_payload.request_id }}
+        run: node src/publish.mjs
+      - name: Remove private anime request record
+        if: always()
+        run: |
+          if [ -n "$(git status --porcelain -- movies)" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add movies/
+            git commit -m "chore: archive anime delivery request [skip ci]"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi

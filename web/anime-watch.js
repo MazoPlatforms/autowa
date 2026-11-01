@@ -127,10 +127,26 @@ function suggestions(items){
  sec.append(row);return sec;
 }
 
+function confirmAnimeRequest(anime,episode,channel){
+ const overlay=el('div','filmgo-sheet-overlay'),sheet=el('div','filmgo-sheet');sheet.setAttribute('role','dialog');sheet.setAttribute('aria-modal','true');
+ const number=Number(episode.episode??episode.number)||0,season=Number(episode.season)||1,platform=channel==='telegram'?'Telegram':'WhatsApp';
+ sheet.append(el('h2','','Confirm anime request'),el('p','filmgo-sheet-description',(anime.title||'Anime')+' · Season '+season+' · Episode '+number+' via '+platform+'? Your daily tokens are charged by file size and delivery method.'));
+ const buttons=el('div','filmgo-sheet-buttons'),cancel=el('button','filmgo-open-button','Cancel'),confirm=el('button','filmgo-download-button','Confirm');
+ const close=()=>{document.removeEventListener('keydown',esc);overlay.remove();};const esc=e=>{if(e.key==='Escape')close();};cancel.addEventListener('click',close);overlay.addEventListener('click',e=>{if(e.target===overlay)close();});
+ confirm.addEventListener('click',async()=>{confirm.disabled=true;confirm.textContent='Preparing…';try{
+  const endpoint=channel==='telegram'?'/api/anime-telegram-link':'/api/anime-request',payload=channel==='telegram'?{episode_slug_id:episode.slug_id}:{episode_slug_id:episode.slug_id,rights_confirmed:true};
+  const response=await fetch(endpoint,{method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)}),data=await response.json();
+  if(response.status===401){close();location.href='/profile?return='+encodeURIComponent(location.pathname);return;}if(!response.ok)throw Error(data.error||'Request failed');
+  if(channel==='telegram'){close();location.href=data.url;return;}
+  sheet.replaceChildren(el('h2','','Request received'),el('p','filmgo-sheet-description','Your WhatsApp anime episode request has been queued.'));const done=el('button','filmgo-download-button','Done');done.addEventListener('click',close);sheet.append(done);
+ }catch(error){confirm.disabled=false;confirm.textContent='Try again';sheet.querySelector('.filmgo-sheet-error')?.remove();sheet.append(el('p','filmgo-sheet-error',error.message));}});
+ buttons.append(cancel,confirm);sheet.append(buttons);overlay.append(sheet);document.body.append(overlay);document.addEventListener('keydown',esc);cancel.focus();
+}
+
 async function main(){
  if(!/^[A-Za-z0-9_-]{8,80}$/.test(slug))return fail('Episode unavailable.');
- let data;
- try{const r=await fetch('/api/anime/episode/'+encodeURIComponent(slug),{cache:'no-store',credentials:'same-origin'});if(!r.ok)throw Error();data=await r.json();}catch{return fail('Episode unavailable.');}
+ let data,accessResponse=null;
+ try{const [episodeResult,authResult]=await Promise.allSettled([fetch('/api/anime/episode/'+encodeURIComponent(slug),{cache:'no-store',credentials:'same-origin'}),fetch('/api/me',{cache:'no-store',credentials:'same-origin'})]);if(episodeResult.status!=='fulfilled'||!episodeResult.value.ok)throw Error();data=await episodeResult.value.json();if(authResult.status==='fulfilled')accessResponse=authResult.value;}catch{return fail('Episode unavailable.');}
  const episode=data.episode,anime=data.anime||{};if(!episode||!episode.slug_id)return fail('Episode unavailable.');
  const episodes=sortEps(anime.episodes),index=episodes.findIndex(e=>e.slug_id===episode.slug_id);
  const prevEp=index>0?episodes[index-1]:null,nextEp=index>=0&&index<episodes.length-1?episodes[index+1]:null;
@@ -166,10 +182,11 @@ async function main(){
  const actions=el('div','filmgo-player-actions');actions.setAttribute('inert','');
  const dl=el('a','filmgo-download-button','Download');dl.href='/api/anime/download/'+encodeURIComponent(episode.slug_id);dl.setAttribute('download','');dl.setAttribute('aria-label','Download '+(anime.title||'episode')+' '+epLabel);
  const shareTitle=(anime.title?anime.title+' · ':'')+epLabel;
- const wa=el('a','filmgo-open-button','WhatsApp');wa.target='_blank';wa.rel='noopener';wa.href='https://wa.me/?text='+encodeURIComponent(shareTitle+'\n'+location.href);wa.setAttribute('aria-label','Share on WhatsApp');
- const tg=el('a','filmgo-open-button','Telegram');tg.target='_blank';tg.rel='noopener';tg.href='https://t.me/share/url?url='+encodeURIComponent(location.href)+'&text='+encodeURIComponent(shareTitle);tg.setAttribute('aria-label','Share on Telegram');
+ const wa=el('button','filmgo-open-button','WhatsApp');wa.type='button';wa.setAttribute('aria-label','Request this episode on WhatsApp');
+ const tg=el('button','filmgo-open-button','Telegram');tg.type='button';tg.setAttribute('aria-label','Request this episode on Telegram');
  for(const [b,k] of [[dl,'download'],[wa,'whatsapp'],[tg,'telegram']]){b.prepend(actionIcon(k));b.style.gap='8px';}
  actions.append(dl,wa,tg);section.append(actions,status);
+ wa.addEventListener('click',()=>confirmAnimeRequest(anime,episode,'whatsapp'));tg.addEventListener('click',()=>confirmAnimeRequest(anime,episode,'telegram'));
 
  const nav=el('nav','anime-episode-nav');nav.setAttribute('aria-label','Episode navigation');
  if(prevEp){const a=el('a','anime-nav-button');a.href=watchUrl(prevEp);a.setAttribute('aria-label','Previous episode');a.append(g('prev',18),document.createTextNode('Ep '+numOf(prevEp)));nav.append(a);}
@@ -183,10 +200,10 @@ async function main(){
 
  const lock=(on)=>{ui.player.toggleAttribute('inert',on);actions.toggleAttribute('inert',on);};
  const showNotice=(title,text,cta)=>{notice.hidden=false;notice.replaceChildren();const c=el('div','filmgo-signin-copy');c.append(el('strong','',title),el('span','',text));notice.append(c);if(cta)notice.append(cta);};
- const checkAccess=async()=>{
+ const checkAccess=async(initialResponse=null)=>{
   notice.hidden=true;
   try{
-   const r=await fetch('/api/me',{cache:'no-store',credentials:'same-origin'});
+   const r=initialResponse||await fetch('/api/me',{cache:'no-store',credentials:'same-origin'});
    if(r.status===401){lock(true);const a=el('a','filmgo-signin-cta','Sign in using Phone');a.href='/profile?return='+encodeURIComponent(location.pathname);showNotice('Sign in required','Sign in using Phone before streaming or downloading this episode.',a);return;}
    if(!r.ok)throw Error();
    const u=await r.json();
@@ -194,6 +211,7 @@ async function main(){
    lock(false);ui.start();
   }catch{lock(true);const b=el('button','filmgo-signin-cta','Try again');b.type='button';b.addEventListener('click',checkAccess);showNotice('Unable to verify sign-in','Check your connection, then try again.',b);}
  };
- void checkAccess();
+  dl.addEventListener('click',async event=>{event.preventDefault();try{const r=await fetch('/api/me',{cache:'no-store',credentials:'same-origin'});if(!r.ok){lock(true);location.href='/profile?return='+encodeURIComponent(location.pathname);return;}location.href=dl.href;}catch{status.textContent='Unable to verify sign-in. Try again.';}});
+  void checkAccess(accessResponse);
 }
 main();

@@ -156,7 +156,7 @@ function requesterProgress(j){
  const title=String(j.title||movie.title||'Movie').slice(0,130);
  const year=String(j.year||movie.year||'—'),quality=String(j.quality||movie.quality||'—');
  const size=Number(j.file_size||movie.file_size||0);
- const details=['*FilmGo*','', '*'+title+'*','Year: '+year,'Quality: '+quality,...(movie.genre?.length?['Genre: '+(Array.isArray(movie.genre)?movie.genre.join(', '):movie.genre)]:[]),''];
+ const details=j.media_type==='anime'?['*FilmGo Anime*','', '*'+title+'*','Season: '+(Number(j.season)||1)+' · Episode: '+(Number(j.episode)||0),'Quality: '+quality,'']:['*FilmGo*','', '*'+title+'*','Year: '+year,'Quality: '+quality,...(movie.genre?.length?['Genre: '+(Array.isArray(movie.genre)?movie.genre.join(', '):movie.genre)]:[]),''];
  let key=null,posterSent=false,last='',lastAt=0,chain=Promise.resolve();
  // Keep exactly one editable status message. It is intentionally state-only:
  // processing, downloading, and uploading. Never expose byte-level progress.
@@ -232,6 +232,7 @@ try{
   j.started_at=new Date().toISOString();
   fs.writeFileSync(file,JSON.stringify(j,null,2)+'\n');
   let movieFailures=0;
+  const isAnime=j.media_type==='anime';
   const progress=requesterProgress(j);
   try {
   await progress.update('⏳ Processing your request…',true);
@@ -240,7 +241,7 @@ try{
   console.log('Downloading',j.id);
   await progress.update('📥 Downloading your movie…',true);
   if(!Number.isSafeInteger(j.telegram_message_id)||j.telegram_message_id<=0)throw Error('Telegram media ID required');
-  await downloadWithProgress(['telegram',String(j.telegram_message_id),dest],()=>{});
+  await downloadWithProgress([isAnime?'telegram-anime':'telegram',String(j.telegram_message_id),dest],()=>{});
   const mediaBytes=fs.statSync(dest).size;
   console.log('Media ready:',mediaBytes,'bytes /',(mediaBytes/1048576).toFixed(2),'MiB (thumbnail excluded)');
   const probe=JSON.parse(execFileSync('ffprobe',['-v','error','-show_entries','format=format_name:stream=codec_type,codec_name','-of','json',dest],{encoding:'utf8',timeout:120000}));
@@ -252,8 +253,9 @@ try{
   const movieName=String(j.title||'Untitled').trim();
   const year=/^(19|20)\d{2}$/.test(String(j.year||''))?String(j.year):'';
   const quality=String(j.quality||'Unknown Quality');
-  const filename=('mzn.is-a.dev - '+movieName+(year?' ('+year+')':'')+' - '+quality+'.'+type).split('').filter(ch=>ch!=='/'&&ch!=='\\'&&ch.charCodeAt(0)>=32).join('').slice(0,180);
-  const caption=['🎬 FilmGo','','🎞️ '+movieName+(year?' ('+year+')':''),'','Enjoy the movie!','','> Powered by Itz Maazin • https://mzn.is-a.dev/'].join('\n');
+  const episodeLabel=isAnime?' · Season '+(Number(j.season)||1)+' · Episode '+(Number(j.episode)||0):'';
+  const filename=('mzn.is-a.dev - '+movieName+episodeLabel+(year?' ('+year+')':'')+' - '+quality+'.'+type).split('').filter(ch=>ch!=='/'&&ch!=='\\'&&ch.charCodeAt(0)>=32).join('').slice(0,180);
+  const caption=isAnime?['🍥 FilmGo Anime','','📺 '+movieName,'🎞️ Season '+(Number(j.season)||1)+' · Episode '+(Number(j.episode)||0),'📺 Quality: '+quality,'','> Powered by Itz Maazin • https://mzn.is-a.dev/'].join('\n'):['🎬 FilmGo','','🎞️ '+movieName+(year?' ('+year+')':''),'','Enjoy the movie!','','> Powered by Itz Maazin • https://mzn.is-a.dev/'].join('\n');
   j.file_type=type;j.filename=filename;j.caption=caption;
   const thumbUrl='https://i.ibb.co/8L3RB6Qh/Itz-Maazin-20261027-155011.jpg';
   let thumbnail;
