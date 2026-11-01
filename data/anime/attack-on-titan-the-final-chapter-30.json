@@ -1,22 +1,46 @@
 {
   "schema_version": 1,
-  "updated_at": 1793569365,
+  "updated_at": 1793569474,
   "anime": {
     "slug_id": "attack-on-titan-the-final-chapter-30",
     "title": "Attack on Titan Final Season THE FINAL CHAPTERS Special 2",
     "episodes": [
       {
-        "slug_id": "yfPP5CHcBfisbEFD",
-        "telegram_message_id": 878,
+        "slug_id": "IWQ2ujQ1THh0Ql95",
+        "telegram_message_id": 879,
         "episode": 1,
         "season": 4,
         "special_type": null,
         "part": null,
-        "quality": "480P",
-        "file_size": 141237376,
-        "file_name": "_Attack_on_Titan_The_Final_Chapter_S04_E01_30_Tamil_480p_@official.mkv",
+        "quality": "720P",
+        "file_size": 271033138,
+        "file_name": "_Attack_on_Titan_The_Final_Chapter_S04_E01_30_Tamil_720p_@official.mkv",
         "mime_type": "video/x-matroska",
         "qualities": {
+          "1080P": {
+            "slug_id": "t4Qjo_XFJxyu7ozf",
+            "telegram_message_id": 880,
+            "episode": 1,
+            "season": 4,
+            "special_type": null,
+            "part": null,
+            "quality": "1080P",
+            "file_size": 570070010,
+            "file_name": "_Attack_on_Titan_The_Final_Chapter_S04_E01_30_Tamil_1080p_@official.mkv",
+            "mime_type": "video/x-matroska"
+          },
+          "720P": {
+            "slug_id": "IWQ2ujQ1THh0Ql95",
+            "telegram_message_id": 879,
+            "episode": 1,
+            "season": 4,
+            "special_type": null,
+            "part": null,
+            "quality": "720P",
+            "file_size": 271033138,
+            "file_name": "_Attack_on_Titan_The_Final_Chapter_S04_E01_30_Tamil_720p_@official.mkv",
+            "mime_type": "video/x-matroska"
+          },
           "480P": {
             "slug_id": "yfPP5CHcBfisbEFD",
             "telegram_message_id": 878,
@@ -47,6 +71,6 @@
     "year": 2023,
     "studio": "MAPPA",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Attack_on_Titan_season_4",
-    "updated_at": "2026-11-01T21:42:33Z"
+    "updated_at": "2026-11-01T21:44:21Z"
   }
 }
