@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-01T12:48:51.629Z",
+  "updated_at": "2026-11-01T12:48:57.660Z",
   "anime": [
     {
       "slug_id": "naruto-shippuden",
@@ -4042,6 +4042,17 @@
           "file_size": 81412830,
           "file_name": "Naruto Shippuden - S17 E368 Multi 360pTamil.mkv",
           "mime_type": "video/x-matroska"
+        },
+        {
+          "slug_id": "aLlDFpojTX1unLgw",
+          "telegram_message_id": 391,
+          "episode": 369,
+          "season": 17,
+          "part": null,
+          "quality": "720p",
+          "file_size": 160379943,
+          "file_name": "Naruto Shippuden S17 E369 720p Tamil.Mp4",
+          "mime_type": "video/mp4"
         }
       ],
       "year": 2007,
@@ -4059,7 +4070,7 @@
       "status": "Finished",
       "episodes_total": 500,
       "studio": "Studio Pierrot",
-      "updated_at": "2026-11-01T12:48:51.629Z"
+      "updated_at": "2026-11-01T12:48:57.660Z"
     }
   ]
 }
