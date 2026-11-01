@@ -399,8 +399,23 @@ const server=http.createServer(async(req,res)=>{
   const animeEpisodeApi=url.pathname.match(/^\/api\/anime\/episode\/([A-Za-z0-9_-]{8,80})$/);
   if(req.method==='GET'&&animeEpisodeApi){
    const catalog=await getAnimeCatalog(),episodeSlug=animeEpisodeApi[1];
-   for(const anime of catalog.anime||[]){const episode=(anime.episodes||[]).find(item=>item.slug_id===episodeSlug);if(episode)return send(res,200,{anime:{slug_id:anime.slug_id,title:anime.title,poster:anime.poster||null},episode});}
+   for(const anime of catalog.anime||[]){const episode=(anime.episodes||[]).find(item=>item.slug_id===episodeSlug);if(episode)return send(res,200,{anime:{slug_id:anime.slug_id,title:anime.title,poster:anime.poster||null,year:anime.year||null,plot:anime.plot||'',episodes:anime.episodes||[]},suggestions:(catalog.anime||[]).filter(item=>item.slug_id!==anime.slug_id).slice(0,8),episode});}
    return send(res,404,{error:'Anime episode unavailable'});
+  }
+  const animeDownload=url.pathname.match(/^\/api\/anime\/download\/([A-Za-z0-9_-]{8,80})$/);
+  if((req.method==='GET'||req.method==='HEAD')&&animeDownload){
+   const requestedId=animeDownload[1],catalog=await getAnimeCatalog();
+   const episode=(catalog.anime||[]).flatMap(item=>item.episodes||[]).find(item=>item.slug_id===requestedId||String(item.telegram_message_id)===requestedId);
+   const messageId=Number(episode?.telegram_message_id),total=Number(episode?.file_size||0);
+   if(!episode||!Number.isSafeInteger(messageId)||!Number.isSafeInteger(total)||total<=0)return send(res,404,{error:'Anime episode unavailable'});
+   const session=await authenticatedStream(req);if(!session)return send(res,401,{error:'Please sign in using your phone number.'});
+   if(!telegramAnimeReady)return send(res,503,{error:'Anime channel unavailable'});
+   if(req.method==='HEAD')return send(res,405,{error:'HEAD is not available'});
+   const exempt=unlimitedRequests(session.number),reservation=await reserveDailyTokens(redis,hmac(session.number),tokenCostMilli(total,'download'),{unlimited:exempt});
+   if(!reservation.allowed)return send(res,429,{error:'Daily tokens exhausted; reset is 00:00:00 UTC'});
+   let delivered=0,settled=false;const settle=async()=>{if(settled)return;settled=true;const actual=delivered?tokenCostMilli(delivered,'download'):0;if(!exempt&&reservation.costMilli>actual)await releaseDailyTokens(redis,reservation,reservation.costMilli-actual).catch(()=>{});};res.once('finish',()=>{void settle()});res.once('close',()=>{void settle()});
+   const original=String(episode.file_name||'').trim(),ext=original.toLowerCase().match(/\.(mkv|mp4|webm|mov|avi|m4v)$/)?.[1]||'mp4',safe=(original||'anime-episode.'+ext).replace(/[\r\n"\\/]/g,'_').slice(0,180);res.writeHead(200,{'Content-Type':'application/octet-stream','Content-Length':String(total),'Content-Disposition':'attachment; filename="'+safe.replace(/[^\x20-\x7e]/g,'_')+'"','Cache-Control':'private, no-store','X-Content-Type-Options':'nosniff'});
+   const child=spawn('python3',['src/telegram_stream.py',String(messageId),'0',String(total),String(process.env.TELEGRAM_ANIME_CHANNEL_ID)],{env:process.env,stdio:['ignore','pipe','pipe']});let closed=false;res.once('close',()=>{if(!child.killed)child.kill('SIGTERM')});child.stdout.on('data',chunk=>{if(closed)return;delivered+=chunk.length;if(!res.write(chunk))child.stdout.pause()});res.on('drain',()=>child.stdout.resume());child.on('close',code=>{if(closed)return;closed=true;if(code!==0||delivered!==total)return res.destroy();res.end()});return;
   }
   const animeStream=url.pathname.match(/^\/api\/anime\/stream\/([A-Za-z0-9_-]{8,80})$/);
   if((req.method==='GET'||req.method==='HEAD')&&animeStream){
