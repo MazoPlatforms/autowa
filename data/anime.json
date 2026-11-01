@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-01T19:40:37.170Z",
+  "updated_at": "2026-11-01T19:40:53.074Z",
   "anime": [
     {
       "slug_id": "naruto",
@@ -19586,6 +19586,18 @@
               "file_size": 267179536,
               "file_name": "Attack_On_Titan_S01_Ep13_தமிழ்_720p_@Anime_Tamil_Dubbed_Series_1.mkv",
               "mime_type": "video/x-matroska"
+            },
+            "1080P": {
+              "slug_id": "wr6EE-NHpj0DpHLk",
+              "telegram_message_id": 652,
+              "episode": 13,
+              "season": 1,
+              "special_type": null,
+              "part": null,
+              "quality": "1080p",
+              "file_size": 513100875,
+              "file_name": "Attack_On_Titan_S01_Ep13_தமிழ்_1080p_@Anime_Tamil_Dubbed_Series.mkv",
+              "mime_type": "video/x-matroska"
             }
           }
         }
@@ -19604,7 +19616,7 @@
       "episodes_total": 25,
       "year": 2013,
       "studio": "WIT STUDIO",
-      "updated_at": "2026-11-01T19:40:37.170Z"
+      "updated_at": "2026-11-01T19:40:53.074Z"
     }
   ]
 }
