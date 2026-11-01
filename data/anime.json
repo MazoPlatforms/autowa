@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-01T17:01:00.884Z",
+  "updated_at": 1793552488,
   "anime": [
     {
       "slug_id": "naruto",
@@ -2812,10 +2812,13 @@
           "episode": 213,
           "season": 9,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 141296254,
           "file_name": "Naruto S9 E213 HDRip - 720p [Tamil].mp4",
-          "mime_type": "video/mp4"
+          "mime_type": "video/mp4",
+          "title": "Vanished Memories",
+          "released": "2006-12-14",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/487/1217977.jpg"
         },
         {
           "slug_id": "o3uLce6pR9XAPZ-U",
@@ -2823,10 +2826,13 @@
           "episode": 214,
           "season": 9,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 113250498,
           "file_name": "Naruto S9 E214 HDRip - 720p [Tamil].mp4",
-          "mime_type": "video/mp4"
+          "mime_type": "video/mp4",
+          "title": "Bringing Back Reality",
+          "released": "2006-12-21",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/487/1217982.jpg"
         },
         {
           "slug_id": "qoYgKa4596tqWfpW",
@@ -2834,10 +2840,13 @@
           "episode": 215,
           "season": 9,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 108006972,
           "file_name": "Naruto S9 E215 HDRip - 720p [Tamil].mp4",
-          "mime_type": "video/mp4"
+          "mime_type": "video/mp4",
+          "title": "A Past to Be Erased",
+          "released": "2006-12-21",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/487/1217986.jpg"
         },
         {
           "slug_id": "YoVUwavC2MCdq19k",
@@ -2845,10 +2854,13 @@
           "episode": 216,
           "season": 9,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 93877256,
           "file_name": "Naruto S9 E216 HDRip - 720p [Tamil].mp4",
-          "mime_type": "video/mp4"
+          "mime_type": "video/mp4",
+          "title": "The Targeted Shukaku",
+          "released": "2007-01-11",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/487/1217992.jpg"
         },
         {
           "slug_id": "JUXu4j1qqETOIp9h",
@@ -2856,10 +2868,13 @@
           "episode": 217,
           "season": 9,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 146391354,
           "file_name": "Naruto S9 E217 HDRip - 720p [Tamil].mp4",
-          "mime_type": "video/mp4"
+          "mime_type": "video/mp4",
+          "title": "Sand Alliance With The Leaf Shinobi",
+          "released": "2007-01-18",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/487/1218004.jpg"
         },
         {
           "slug_id": "xEmmbB2x_of_elCO",
@@ -2867,10 +2882,13 @@
           "episode": 218,
           "season": 9,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 120261509,
           "file_name": "Naruto S9 E218 HDRip - 720p [Tamil].mp4",
-          "mime_type": "video/mp4"
+          "mime_type": "video/mp4",
+          "title": "The Counterattack!",
+          "released": "2007-01-25",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/487/1218033.jpg"
         },
         {
           "slug_id": "eKEFrTl-vJdnqipr",
@@ -2878,10 +2896,13 @@
           "episode": 219,
           "season": 9,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 121801257,
           "file_name": "Naruto S9 E219 HDRip - 720p [Tamil].mp4",
-          "mime_type": "video/mp4"
+          "mime_type": "video/mp4",
+          "title": "The Ultimate Weapon Reborn",
+          "released": "2007-02-01",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/487/1218068.jpg"
         },
         {
           "slug_id": "d6XLbgwXzOQGRj0p",
@@ -2889,10 +2910,13 @@
           "episode": 220,
           "season": 9,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 101615640,
           "file_name": "Naruto S9 E220 HDRip - 720p [Tamil].mp4",
-          "mime_type": "video/mp4"
+          "mime_type": "video/mp4",
+          "title": "Departure",
+          "released": "2007-02-08",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/487/1218119.jpg"
         }
       ],
       "year": 2002,
@@ -2910,7 +2934,7 @@
       "status": "Finished",
       "episodes_total": 220,
       "studio": "Studio Pierrot",
-      "updated_at": "2026-11-01T17:01:00.884Z"
+      "updated_at": "2026-11-01T17:01:26Z"
     },
     {
       "slug_id": "naruto-shippuden",
@@ -8168,7 +8192,7 @@
       "status": "Finished",
       "episodes_total": 500,
       "studio": "Studio Pierrot",
-      "updated_at": "2026-11-01T16:53:10Z"
+      "updated_at": "2026-11-01T17:01:28Z"
     }
   ]
 }
