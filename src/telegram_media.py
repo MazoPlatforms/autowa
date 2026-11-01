@@ -25,7 +25,7 @@ def clean_title(raw):
     value = re.sub(r'[._]+', ' ', value)
     value = re.sub(r'(?i)(?:tamil|telugu|malayalam|kannada|hindi|english|தமிழ்)', ' ', value)
     value = re.sub(r'(?i)\b(2160p|1080p|720p|480p|4k|web[- ]?dl|webrip|bluray|brrip|hdrip|dvdrip|x264|x265|h264|h265|hevc|aac|ddp5?\.?1|esub|multi|proper|repack)\b.*$', '', value)
-    value = re.sub(r'\s+', ' ', value).strip(' -[]()')
+    value = re.sub(r'\s+', ' ', value).strip(' -[](){}')
     return value[:140] or 'Untitled movie'
 
 def enrich_title(raw):
