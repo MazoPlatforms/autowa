@@ -1,4 +1,5 @@
 import crypto from 'node:crypto';
+import fs from 'node:fs';
 import {logFilmGo} from './filmgo-logs.mjs';
 
 const TOKEN=process.env.BOT_TOKEN||'';
@@ -235,7 +236,11 @@ async function wikipediaSearch(title){
 async function animeMetadata(title){
  const [ani,jikan,tmdb,wikipedia]=await Promise.all([anilistSearch(title).catch(()=>null),jikanSearch(title).catch(()=>null),tmdbAnimeSearch(title).catch(()=>null),wikipediaSearch(title).catch(()=>null)]);const primary=ani||jikan||tmdb||wikipedia;if(!primary)return null;const fallbacks=[jikan,tmdb,wikipedia].filter(Boolean);return Object.fromEntries(Object.entries(primary).map(([key,value])=>[key,value===null||value===''||(Array.isArray(value)&&!value.length)?(fallbacks.find(item=>item[key]!==null&&item[key]!==''&&(!Array.isArray(item[key])||item[key].length))?.[key]??value):value]));
 }
-const KNOWN_ANIME_TITLES=new Set(['narutoshippuden','narutoshippuuden']);
+let KNOWN_ANIME_TITLES=new Set();
+try{
+ const catalog=JSON.parse(fs.readFileSync(new URL('../data/anime.json',import.meta.url),'utf8'));
+ KNOWN_ANIME_TITLES=new Set((catalog.anime||[]).flatMap(item=>[item.title,item.title_alt]).filter(Boolean).map(normalize));
+}catch(error){console.warn('Anime catalog fast-path unavailable:',error.message);}
 const isKnownAnimeTitle=title=>KNOWN_ANIME_TITLES.has(normalize(title));
 async function detectAnimeType(file,caption=''){
  const parts=animePartsFromMessage(file,caption);const name=String(file.file_name||'')+'\n'+caption;
@@ -246,11 +251,6 @@ async function detectAnimeType(file,caption=''){
  return {anime:confidence>=.7,confidence,parts,metadata};
 }
 function animeSlug(title){return String(title||'').normalize('NFKD').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'').slice(0,70)||'anime';}
-function manualAnimeSeason(title,episode){
- const normalized=String(title||'').toLowerCase().replace(/[^a-z0-9]+/g,'');
- if(normalized==='narutoshippuden'||normalized==='narutoshippuuden')for(const [season,last] of [[1,32],[2,53],[3,71],[4,88]])if(Number(episode)<=last)return season;
- return normalized==='narutoshippuden'||normalized==='narutoshippuuden'?5:null;
-}
 async function tmdbAnimeSeason(title,episode){
  const key=process.env.TMDB_API_KEY;if(!key||!episode){if(!key)console.warn('Anime season mapping skipped: TMDB_API_KEY is missing');return null;}
  try{
@@ -354,7 +354,7 @@ async function startAnimeDraft(file,messageId,detected=null,caption=''){
  const parts=animePartsFromMessage(file,caption);
  if(!parts.episode)return say(ADMIN_ID,'I could not identify the anime episode. Use a filename such as Naruto Shippuden - 001 [720p].mkv.');
  const known=isKnownAnimeTitle(parts.title);
- parts.season=parts.season||(known?1:manualAnimeSeason(parts.title,parts.episode)||await tmdbAnimeSeason(parts.title,parts.episode)||1);
+ parts.season=parts.season||(known?1:await tmdbAnimeSeason(parts.title,parts.episode)||1);
  const d={kind:'anime',message_id:messageId,file_name:file.file_name||'',file_size:Number(file.file_size||0),mime_type:file.mime_type||'',title:parts.title,titleCandidates:parts.titleCandidates,season:parts.season,episode:parts.episode,part:parts.part,quality:parts.quality,slug_id:animeSlug(parts.title),episode_slug_id:crypto.randomBytes(12).toString('base64url')};
  const metadata=known?null:(detected?.metadata||await animeMetadata(parts.title).catch(()=>null));if(metadata){Object.assign(d,metadata);d.slug_id=animeSlug(metadata.title);}d.stage='await-publish';await draftSave(d);
  if(detected?.confidence>=.7){await say(ADMIN_ID,'Recognized '+d.title+' as anime ('+Math.round(detected.confidence*100)+'% confidence). Publishing automatically.');return publishAnimeDraft(d);}
