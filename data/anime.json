@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-01T22:08:26.055Z",
+  "updated_at": "2026-11-01T22:08:41.153Z",
   "anime": [
     {
       "slug_id": "naruto",
@@ -19350,6 +19350,18 @@
               "title": "Lost Girls: Wall Sina, Goodbye - Part 2",
               "released": "2018-04-09",
               "frame": "https://raw.githubusercontent.com/MazoPlatforms/autowa/main/web/frames/anime/attack-on-titan-oad-007.jpg"
+            },
+            "480P": {
+              "slug_id": "yfYwqtEDGFqVo72E",
+              "telegram_message_id": 893,
+              "episode": 7,
+              "season": 1,
+              "special_type": "OAD",
+              "part": null,
+              "quality": "480p",
+              "file_size": 33068702,
+              "file_name": "Attack On Titan - OAD EP07 [Tamil] 480p.mkv",
+              "mime_type": "video/x-matroska"
             }
           }
         },
@@ -24491,7 +24503,7 @@
         "4": "/banners/attack-on-titan-season-4.webp",
         "OAD": "/banners/attack-on-titan-oad.webp"
       },
-      "updated_at": "2026-11-01T22:08:26.055Z"
+      "updated_at": "2026-11-01T22:08:41.153Z"
     }
   ]
 }
