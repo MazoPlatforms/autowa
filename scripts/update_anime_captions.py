@@ -1,55 +1,56 @@
-"""One-time cleanup of Naruto Shippuden captions in the anime channel."""
+"""Normalize every anime Telegram caption and assign one stable slug per message."""
 import asyncio
 import os
 import re
-import secrets
 import sys
 
 from telethon import TelegramClient
 from telethon.sessions import StringSession
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
-from src.telegram_media import anime_filename_parts, manual_anime_season
+from src.telegram_media import (
+    anime_caption_parts,
+    anime_filename_parts,
+    anime_special_type,
+    fixed_anime_episode_slug,
+    manual_anime_season,
+)
 
 
 def slugify(value):
     return re.sub(r"^-+|-+$", "", re.sub(r"[^a-z0-9]+", "-", value.casefold()))[:70] or "anime"
 
 
-def existing_episode_slug(caption):
-    match = re.search(r"(?im)^Episode Slug ID:\s*([A-Za-z0-9_-]{8,80})\s*$", caption or "")
-    return match.group(1) if match else ""
-
-
-def build_caption(message, max_episode):
+def build_caption(message):
     filename = str(getattr(message.file, "name", "") or "")
-    title, explicit_season, episode, part = anime_filename_parts(filename)
-    if not episode or episode > max_episode:
+    title, filename_season, episode, part = anime_filename_parts(filename)
+    previous = anime_caption_parts(getattr(message, "raw_text", "") or "")
+    title = previous["title"] or title
+    season = filename_season or previous["season"] or manual_anime_season(title, episode)
+    episode = episode or previous["episode"]
+    if not episode:
         return None
-    season = explicit_season or manual_anime_season(title, episode)
-    if not season:
-        return None
-    quality = re.search(r"(?i)\b(2160p|1080p|720p|480p|360p|4k)\b", filename)
-    quality = quality.group(1).lower().replace("4k", "2160p") if quality else "auto"
-    caption = "\n".join([
+    special = anime_special_type(filename)
+    quality_match = re.search(r"(?i)\b(2160l?p|1080l?p|720l?p|480l?p|360l?p|4k)\b", filename)
+    quality = quality_match.group(1).lower().replace("lp", "p").replace("4k", "2160p") if quality_match else (previous["quality"] or "720p")
+    season_line = f"Collection: {special}" if special else f"Season: {season or 1}"
+    lines = [
         f"Anime: {title}",
         f"Anime Slug ID: {slugify(title)}",
-        f"Season: {season}",
+        season_line,
         f"Episode: {episode}" + (f" · Part: {part}" if part else ""),
         f"Quality: {quality}",
-        f"Episode Slug ID: {existing_episode_slug(getattr(message, 'raw_text', '') or '') or secrets.token_urlsafe(12)}",
-    ])
-    return caption
+        f"Episode Slug ID: {fixed_anime_episode_slug(message.id)}",
+    ]
+    return "\n".join(lines)
 
 
-def caption_is_canonical(caption):
-    """Reject stale release tags from the title and slug fields."""
-    lines = [line.strip() for line in str(caption or '').splitlines()]
-    anime = next((line.split(':', 1)[1].strip() for line in lines if line.lower().startswith('anime:')), '')
-    slug = next((line.split(':', 1)[1].strip() for line in lines if line.lower().startswith('anime slug id:')), '')
-    if not anime or slug != slugify(anime):
-        return False
-    return not re.search(r'(?i)(?:720p|1080p|2160p|4k|multi(?:\s+audio)?|audio|esub|tamil|telugu|malayalam|kannada|hindi|english|tam\+|mal\+|hin\+|eng\+|jap\+)', anime)
+def caption_is_canonical(caption, message_id):
+    lines = [line.strip() for line in str(caption or "").splitlines()]
+    anime = next((line.split(":", 1)[1].strip() for line in lines if line.lower().startswith("anime:")), "")
+    slug = next((line.split(":", 1)[1].strip() for line in lines if line.lower().startswith("anime slug id:")), "")
+    episode_slug = next((line.split(":", 1)[1].strip() for line in lines if line.lower().startswith("episode slug id:")), "")
+    return bool(anime and slug == slugify(anime) and episode_slug == fixed_anime_episode_slug(message_id))
 
 
 async def main():
@@ -57,23 +58,27 @@ async def main():
     missing = [key for key in required if not os.getenv(key)]
     if missing:
         raise SystemExit("Missing secrets: " + ", ".join(missing))
-    max_episode = int(os.getenv("MAX_EPISODE", "500"))
     dry_run = os.getenv("DRY_RUN", "false").casefold() == "true"
-    client = TelegramClient(StringSession(os.environ["TELEGRAM_SESSION"]), int(os.environ["TELEGRAM_API_ID"]), os.environ["TELEGRAM_API_HASH"])
-    updated = 0
-    verified = 0
+    client = TelegramClient(
+        StringSession(os.environ["TELEGRAM_SESSION"]),
+        int(os.environ["TELEGRAM_API_ID"]),
+        os.environ["TELEGRAM_API_HASH"],
+    )
+    updated = verified = 0
     timed_out = []
     async with client:
         channel = int(os.environ["TELEGRAM_ANIME_CHANNEL_ID"])
         async for message in client.iter_messages(channel, limit=None):
             if not (message.document or message.video):
                 continue
-            caption = build_caption(message, max_episode)
+            caption = build_caption(message)
             if not caption:
+                print(f"skip message {message.id}: episode number not found", flush=True)
                 continue
-            if caption != (message.raw_text or "").strip():
-                print(f"{'DRY RUN ' if dry_run else ''}update message {message.id}: {caption.splitlines()[0]} · S{caption.splitlines()[2].split(':', 1)[1].strip()}E{caption.splitlines()[3].split(':', 1)[1].split('·')[0].strip()}", flush=True)
-            if not dry_run and caption != (message.raw_text or "").strip():
+            current = (message.raw_text or "").strip()
+            if caption != current:
+                print(f"{'DRY RUN ' if dry_run else ''}update message {message.id}: {caption.splitlines()[0]} · {caption.splitlines()[2]}", flush=True)
+            if not dry_run and caption != current:
                 try:
                     await asyncio.wait_for(message.edit(caption), timeout=25)
                 except asyncio.TimeoutError:
@@ -84,16 +89,15 @@ async def main():
                 updated += 1
             if not dry_run:
                 try:
-                    current = await asyncio.wait_for(client.get_messages(channel, ids=message.id), timeout=25)
+                    current_message = await asyncio.wait_for(client.get_messages(channel, ids=message.id), timeout=25)
                 except asyncio.TimeoutError:
                     timed_out.append(message.id)
                     print(f"timeout verifying message {message.id}; continuing", flush=True)
                     continue
-                actual = (getattr(current, 'raw_text', '') or '').strip()
-                if actual != caption or not caption_is_canonical(actual):
+                actual = (getattr(current_message, "raw_text", "") or "").strip()
+                if actual != caption or not caption_is_canonical(actual, message.id):
                     raise RuntimeError(f"Caption verification failed for Telegram message {message.id}")
                 verified += 1
-                print(f"verified message {message.id}: {actual.splitlines()[0]}", flush=True)
     print(f"Updated captions: {updated}; Verified captions: {verified}; Timed out: {len(timed_out)}", flush=True)
     if timed_out:
         raise RuntimeError("Telegram caption cleanup timed out for message(s): " + ", ".join(map(str, timed_out)))

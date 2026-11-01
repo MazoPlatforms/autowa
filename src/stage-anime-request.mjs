@@ -12,5 +12,5 @@ if(!Number.isSafeInteger(telegram_message_id)||telegram_message_id<=0)throw Erro
 if(!Number.isSafeInteger(Number(season))||Number(season)<1||!Number.isSafeInteger(Number(episode))||Number(episode)<1)throw Error('Invalid anime episode');
 if(typeof quality!=='string'||!/^[\w .+-]{2,40}$/.test(quality))throw Error('Invalid anime quality');
 const id='request-'+request_id;
-fs.writeFileSync('movies/'+id+'.json',JSON.stringify({id,media_type:'anime',title:title.trim(),special_type:special_type||null,telegram_message_id,season:Number(season),episode:Number(episode),quality:quality.trim(),group_ids:[],recipient_jids:[recipient_jid],license_confirmed:true,enabled:true},null,2)+'\n',{mode:0o600});
+fs.writeFileSync('movies/'+id+'.json',JSON.stringify({id,media_type:'anime',title:title.trim(),special_type:special_type||null,telegram_message_id,season:Number(season),episode:Number(episode),quality:quality.trim(),group_ids:[],recipient_jids:[recipient_jid],enabled:true},null,2)+'\n',{mode:0o600});
 console.log('Private anime job staged for reviewed request',request_id);

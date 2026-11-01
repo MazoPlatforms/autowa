@@ -1,10 +1,11 @@
 """Private Telegram channel catalog, search, and authorized media download."""
 import asyncio
+import base64
 import difflib
+import hashlib
 import json
 import os
 import re
-import secrets
 import sys
 import time
 import traceback
@@ -106,13 +107,19 @@ def season_from_caption(caption):
     match = re.search(r'(?i)\b(?:season|s)\s*[:#-]?\s*(\d{1,2})\b', str(caption or ''))
     return int(match.group(1)) if match else None
 
+def fixed_anime_episode_slug(message_id):
+    digest = hashlib.sha256(f'filmgo-anime-episode:{int(message_id)}'.encode()).digest()[:12]
+    return base64.urlsafe_b64encode(digest).decode().rstrip('=')
+
 def anime_caption_parts(caption):
     value = str(caption or '')
     title_match = re.search(r'(?im)^\s*(?:anime|series|title)\s*:\s*(.+)$', value)
     episode_match = re.search(r'(?i)\b(?:episode|ep)\s*[:#-]?\s*(\d{1,4})\b', value)
     quality_match = re.search(r'(?i)\b(?:quality\s*:\s*)?(2160l?p|1080l?p|720l?p|480l?p|360l?p|4k)\b', value)
+    anime_slug_match = re.search(r'(?im)^\s*anime slug id\s*:\s*([a-z0-9-]{2,80})\s*$', value)
+    episode_slug_match = re.search(r'(?im)^\s*episode slug id\s*:\s*([A-Za-z0-9_-]{8,80})\s*$', value)
     raw_quality = re.sub(r'l(?=p$)', '', quality_match.group(1).lower()) if quality_match else None
-    return {'title': title_match.group(1).strip() if title_match else None, 'season': season_from_caption(value), 'episode': int(episode_match.group(1)) if episode_match else None, 'quality': '2160p' if raw_quality == '4k' else raw_quality, 'part': None}
+    return {'title': title_match.group(1).strip() if title_match else None, 'season': season_from_caption(value), 'episode': int(episode_match.group(1)) if episode_match else None, 'quality': '2160p' if raw_quality == '4k' else raw_quality, 'part': None, 'anime_slug_id': anime_slug_match.group(1) if anime_slug_match else None, 'episode_slug_id': episode_slug_match.group(1) if episode_slug_match else None}
 
 def anime_special_type(filename):
     match = re.search(r'(?i)\b(OAD|OVA|specials?)\b', str(filename or ''))
@@ -400,7 +407,7 @@ def anime_media_item(message):
     size = int(getattr(message.file, 'size', 0) or 0)
     if not episode or not quality or not 0 < size <= 2000000000:
         return None
-    return {'slug_id': secrets.token_urlsafe(12), 'telegram_message_id': int(message.id), 'episode': episode, 'season': season, 'season_explicit': bool(filename_season), 'caption_season': caption['season'], 'special_type': anime_special_type(filename), 'part': part, 'quality': quality, 'file_size': size, 'file_name': filename[:240], 'mime_type': str(getattr(message.file, 'mime_type', '') or '')}
+    return {'slug_id': caption['episode_slug_id'] or fixed_anime_episode_slug(message.id), 'telegram_message_id': int(message.id), 'episode': episode, 'season': season, 'season_explicit': bool(filename_season), 'caption_season': caption['season'], 'special_type': anime_special_type(filename), 'part': part, 'quality': quality, 'file_size': size, 'file_name': filename[:240], 'mime_type': str(getattr(message.file, 'mime_type', '') or '')}
 
 def build_anime_catalog(messages):
     existing = load_existing_anime_catalog()

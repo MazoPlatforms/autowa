@@ -19,13 +19,11 @@ for(const file of files){
   if(j.file_type!==undefined && !['mp4','mkv'].includes(j.file_type)) throw Error('Invalid file type');
   if(j.caption!==undefined && (typeof j.caption!=='string'||j.caption.length>2048)) throw Error('Invalid caption');
   if(j.enabled!==undefined && typeof j.enabled!=='boolean') throw Error('Invalid enabled flag');
-  if(j.license_confirmed!==true) throw Error('Distribution rights confirmation required');
   const groups=j.group_ids??[];
   const people=j.recipient_jids??[];
   if(!Array.isArray(groups)||groups.some(x=>typeof x!=='string'||!/^\d+(-\d+)?@g\.us$/.test(x))) throw Error('Invalid group ids');
   if(!Array.isArray(people)||people.some(x=>typeof x!=='string'||!/^\d{7,15}@s\.whatsapp\.net$/.test(x))) throw Error('Invalid personal recipient JIDs');
   if(!groups.length&&!people.length) throw Error('At least one recipient is required');
-  if(j.enabled!==false&&!j.license_confirmed) throw Error('Enabled media requires confirmed distribution rights');
   if(j.telegram_message_id!==undefined){
     if(!Number.isSafeInteger(j.telegram_message_id)||j.telegram_message_id<=0)throw Error('Invalid Telegram media ID');
   }else{

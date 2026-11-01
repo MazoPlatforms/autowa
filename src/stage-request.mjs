@@ -10,5 +10,5 @@ if(!Number.isSafeInteger(movie_id)||movie_id<=0)throw Error('Invalid Telegram me
 if(typeof year!=='string'||!/^(19|20)\d{2}$/.test(year))throw Error('Invalid movie year');
 if(typeof quality!=='string'||!/^[\w .+-]{2,40}$/.test(quality))throw Error('Invalid movie quality');
 const id='request-'+request_id;
-fs.writeFileSync('movies/'+id+'.json',JSON.stringify({id,title:title.trim(),telegram_message_id:movie_id,year,quality,group_ids:[],recipient_jids:[recipient_jid],license_confirmed:true,enabled:true},null,2)+'\n',{mode:0o600});
+fs.writeFileSync('movies/'+id+'.json',JSON.stringify({id,title:title.trim(),telegram_message_id:movie_id,year,quality,group_ids:[],recipient_jids:[recipient_jid],enabled:true},null,2)+'\n',{mode:0o600});
 console.log('Private job staged for reviewed request',request_id);

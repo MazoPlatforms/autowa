@@ -52,16 +52,23 @@ jobs:
         run: |
           set -euo pipefail
           python - <<'PY'
-          import json, secrets
+          import base64, hashlib, json
           source=json.load(open('/tmp/anime-catalog.json', encoding='utf-8'))
+          def fixed_slug(message_id):
+              digest=hashlib.sha256(f'filmgo-anime-episode:{int(message_id)}'.encode()).digest()[:12]
+              return base64.urlsafe_b64encode(digest).decode().rstrip('=')
           try:
               previous=json.load(open('data/anime.json', encoding='utf-8'))
           except (FileNotFoundError, json.JSONDecodeError):
               previous={}
-          old={str(ep.get('telegram_message_id')): ep.get('slug_id') for item in previous.get('anime', []) for ep in item.get('episodes', []) if ep.get('telegram_message_id') and ep.get('slug_id')}
           for item in source.get('anime', []):
               for episode in item.get('episodes', []):
-                  episode['slug_id']=old.get(str(episode.get('telegram_message_id')), episode.get('slug_id') or secrets.token_urlsafe(12))
+                  variants=episode.get('qualities') or {str(episode.get('quality') or '720P').upper(): episode}
+                  for variant in variants.values():
+                      variant['slug_id']=variant.get('slug_id') or fixed_slug(variant.get('telegram_message_id'))
+                      variant.pop('slug_aliases', None)
+                  episode['slug_id']=episode.get('slug_id') or next(iter(variants.values())).get('slug_id')
+                  episode.pop('slug_aliases', None)
               grouped={}
               for episode in item.get('episodes', []):
                   identity=(episode.get('special_type') or '', int(episode.get('season') or 1), int(episode.get('episode') or episode.get('number') or 0), int(episode.get('part') or 0))

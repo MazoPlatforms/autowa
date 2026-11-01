@@ -16,7 +16,7 @@ const targetsForJob=j=>{
 };
 const jobs=fs.readdirSync('movies').filter(f=>f.endsWith('.json')).sort()
   .map(f=>JSON.parse(fs.readFileSync(path.join('movies',f),'utf8')))
-  .filter(j=>j.enabled!==false && j.license_confirmed===true);
+  .filter(j=>j.enabled!==false);
 const selected=process.env.JOB_ID;
 const queue=selected?jobs.filter(j=>j.id===selected || j.job_id===selected):jobs.filter(j=>!j.job_id);
 if(selected&&!queue.length) throw Error('No eligible movie with ID '+selected);

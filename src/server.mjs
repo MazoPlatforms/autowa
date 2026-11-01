@@ -165,8 +165,9 @@ async function getAnimeCatalog(){
 function findAnimeEpisode(catalog, requestedId){
  const id=String(requestedId);
  for(const anime of catalog.anime||[])for(const episode of anime.episodes||[]){
-  if(String(episode.slug_id)===id||String(episode.telegram_message_id)===id)return {anime,episode};
-  for(const variant of Object.values(episode.qualities||{}))if(String(variant?.slug_id)===id||String(variant?.telegram_message_id)===id)return {anime,episode:{...episode,...variant,qualities:episode.qualities}};
+  const matches=item=>String(item?.slug_id)===id||String(item?.telegram_message_id)===id;
+  if(matches(episode))return {anime,episode};
+  for(const variant of Object.values(episode.qualities||{}))if(matches(variant))return {anime,episode:{...episode,...variant,qualities:episode.qualities}};
  }
  return null;
 }
