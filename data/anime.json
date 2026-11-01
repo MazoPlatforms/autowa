@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-01T11:34:13.441Z",
+  "updated_at": 1793532871,
   "anime": [
     {
       "slug_id": "naruto-shippuden",
@@ -433,6 +433,270 @@
           "quality": "720P",
           "file_size": 107938448,
           "file_name": "Naruto Shippuden \n151 தமிழ் HDRip.mp4",
+          "mime_type": "video/mp4"
+        },
+        {
+          "slug_id": "QyMBsJV_BLSJYB9h",
+          "telegram_message_id": 158,
+          "episode": 152,
+          "season": 1,
+          "part": null,
+          "quality": "720P",
+          "file_size": 98234604,
+          "file_name": "Naruto Shippuden \n152 தமிழ் HDRip.mp4",
+          "mime_type": "video/mp4"
+        },
+        {
+          "slug_id": "MstsZFyfy1GlX7XJ",
+          "telegram_message_id": 159,
+          "episode": 153,
+          "season": 1,
+          "part": null,
+          "quality": "720P",
+          "file_size": 82666127,
+          "file_name": "Naruto Shippuden \n153 தமிழ் HDRip.mp4",
+          "mime_type": "video/mp4"
+        },
+        {
+          "slug_id": "yXFfztUZ_Pa3mua9",
+          "telegram_message_id": 160,
+          "episode": 154,
+          "season": 1,
+          "part": null,
+          "quality": "720P",
+          "file_size": 110193194,
+          "file_name": "Naruto Shippuden \n154 தமிழ் HDRip.mp4",
+          "mime_type": "video/mp4"
+        },
+        {
+          "slug_id": "9LBr3qBaDUer-5Uv",
+          "telegram_message_id": 161,
+          "episode": 155,
+          "season": 1,
+          "part": null,
+          "quality": "720P",
+          "file_size": 136776675,
+          "file_name": "Naruto Shippuden \n155 தமிழ் HDRip.mp4",
+          "mime_type": "video/mp4"
+        },
+        {
+          "slug_id": "EFmMTlg8SvftSyAG",
+          "telegram_message_id": 162,
+          "episode": 156,
+          "season": 1,
+          "part": null,
+          "quality": "720P",
+          "file_size": 128552077,
+          "file_name": "Naruto Shippuden \n156 தமிழ் HDRip.mp4",
+          "mime_type": "video/mp4"
+        },
+        {
+          "slug_id": "-jMZj03EimB9GVOG",
+          "telegram_message_id": 163,
+          "episode": 157,
+          "season": 1,
+          "part": null,
+          "quality": "720P",
+          "file_size": 130694669,
+          "file_name": "Naruto Shippuden \n157 தமிழ் HDRip.mp4",
+          "mime_type": "video/mp4"
+        },
+        {
+          "slug_id": "GQ9sxx3ufALpISiT",
+          "telegram_message_id": 164,
+          "episode": 158,
+          "season": 1,
+          "part": null,
+          "quality": "720P",
+          "file_size": 124185085,
+          "file_name": "Naruto Shippuden \n158 தமிழ் HDRip.mp4",
+          "mime_type": "video/mp4"
+        },
+        {
+          "slug_id": "CtVnbPa-kDVAPOrN",
+          "telegram_message_id": 165,
+          "episode": 159,
+          "season": 1,
+          "part": null,
+          "quality": "720P",
+          "file_size": 103314311,
+          "file_name": "Naruto Shippuden \n159 தமிழ் HDRip.mp4",
+          "mime_type": "video/mp4"
+        },
+        {
+          "slug_id": "YleBGtib1eSjRmQz",
+          "telegram_message_id": 166,
+          "episode": 160,
+          "season": 1,
+          "part": null,
+          "quality": "720P",
+          "file_size": 149771656,
+          "file_name": "Naruto Shippuden \n160 தமிழ் HDRip.mp4",
+          "mime_type": "video/mp4"
+        },
+        {
+          "slug_id": "Lyax3NCmQcXJGMiQ",
+          "telegram_message_id": 167,
+          "episode": 161,
+          "season": 1,
+          "part": null,
+          "quality": "720P",
+          "file_size": 101688521,
+          "file_name": "Naruto Shippuden \n161 தமிழ் HDRip.mp4",
+          "mime_type": "video/mp4"
+        },
+        {
+          "slug_id": "pjniZ7cRZbqtEEF7",
+          "telegram_message_id": 168,
+          "episode": 162,
+          "season": 1,
+          "part": null,
+          "quality": "720P",
+          "file_size": 137320373,
+          "file_name": "Naruto Shippuden \n162 தமிழ் HDRip.mp4",
+          "mime_type": "video/mp4"
+        },
+        {
+          "slug_id": "spF-FDLXQxHxJhZt",
+          "telegram_message_id": 169,
+          "episode": 163,
+          "season": 1,
+          "part": null,
+          "quality": "720P",
+          "file_size": 107695287,
+          "file_name": "Naruto Shippuden \n163 தமிழ் HDRip.mp4",
+          "mime_type": "video/mp4"
+        },
+        {
+          "slug_id": "td7E9AAzxbcH-NsZ",
+          "telegram_message_id": 170,
+          "episode": 164,
+          "season": 1,
+          "part": null,
+          "quality": "720P",
+          "file_size": 173510901,
+          "file_name": "Naruto Shippuden \n164 தமிழ் HDRip.mp4",
+          "mime_type": "video/mp4"
+        },
+        {
+          "slug_id": "q9yj8rNas66kpoxA",
+          "telegram_message_id": 171,
+          "episode": 165,
+          "season": 1,
+          "part": null,
+          "quality": "720P",
+          "file_size": 135000446,
+          "file_name": "Naruto Shippuden \n165 தமிழ் HDRip.mp4",
+          "mime_type": "video/mp4"
+        },
+        {
+          "slug_id": "pzueHsdTElb1eRm1",
+          "telegram_message_id": 172,
+          "episode": 166,
+          "season": 1,
+          "part": null,
+          "quality": "720P",
+          "file_size": 108989746,
+          "file_name": "Naruto Shippuden \n166 Tamil HDRip.mp4",
+          "mime_type": "video/mp4"
+        },
+        {
+          "slug_id": "VS_nJBAl2MzFAmIj",
+          "telegram_message_id": 173,
+          "episode": 167,
+          "season": 1,
+          "part": null,
+          "quality": "720P",
+          "file_size": 155215996,
+          "file_name": "Naruto Shippuden \n167 தமிழ் HDRip.mp4",
+          "mime_type": "video/mp4"
+        },
+        {
+          "slug_id": "r8Xo850ZIKBM-oC7",
+          "telegram_message_id": 174,
+          "episode": 168,
+          "season": 1,
+          "part": null,
+          "quality": "720P",
+          "file_size": 112689558,
+          "file_name": "Naruto Shippuden \n168 தமிழ் HDRip.mp4",
+          "mime_type": "video/mp4"
+        },
+        {
+          "slug_id": "062Wu6VpIeDjPsbs",
+          "telegram_message_id": 175,
+          "episode": 169,
+          "season": 1,
+          "part": null,
+          "quality": "720P",
+          "file_size": 121693963,
+          "file_name": "Naruto Shippuden \n169 தமிழ் HDRip.mp4",
+          "mime_type": "video/mp4"
+        },
+        {
+          "slug_id": "k2b2_Px8Qc3uj2gW",
+          "telegram_message_id": 176,
+          "episode": 170,
+          "season": 1,
+          "part": null,
+          "quality": "720P",
+          "file_size": 119072261,
+          "file_name": "Naruto Shippuden \n170 தமிழ் HDRip.mp4",
+          "mime_type": "video/mp4"
+        },
+        {
+          "slug_id": "ts2SqSzF1D8J3pIe",
+          "telegram_message_id": 177,
+          "episode": 171,
+          "season": 1,
+          "part": null,
+          "quality": "720P",
+          "file_size": 87895293,
+          "file_name": "Naruto Shippuden \n171 தமிழ் HDRip.mp4",
+          "mime_type": "video/mp4"
+        },
+        {
+          "slug_id": "zYlmErArR9tLWGI1",
+          "telegram_message_id": 178,
+          "episode": 172,
+          "season": 1,
+          "part": null,
+          "quality": "720P",
+          "file_size": 147591236,
+          "file_name": "Naruto Shippuden \n172 தமிழ் HDRip.mp4",
+          "mime_type": "video/mp4"
+        },
+        {
+          "slug_id": "BFFtpjzz8Dl2u8eZ",
+          "telegram_message_id": 179,
+          "episode": 173,
+          "season": 1,
+          "part": null,
+          "quality": "720P",
+          "file_size": 164374986,
+          "file_name": "Naruto Shippuden \n173 தமிழ் HDRip.mp4",
+          "mime_type": "video/mp4"
+        },
+        {
+          "slug_id": "1AcxZtcF04wc5jdp",
+          "telegram_message_id": 180,
+          "episode": 174,
+          "season": 1,
+          "part": null,
+          "quality": "720P",
+          "file_size": 129606523,
+          "file_name": "Naruto Shippuden \n174 தமிழ் HDRip.mp4",
+          "mime_type": "video/mp4"
+        },
+        {
+          "slug_id": "0AbGzdj9wpNp_o1x",
+          "telegram_message_id": 181,
+          "episode": 175,
+          "season": 1,
+          "part": null,
+          "quality": "720P",
+          "file_size": 98370782,
+          "file_name": "Naruto Shippuden \n175 தமிழ் HDRip.mp4",
           "mime_type": "video/mp4"
         },
         {
@@ -1655,270 +1919,6 @@
           "file_size": 182178554,
           "file_name": "Naruto Shippuden \n143 தமிழ் HDRip.mp4",
           "mime_type": "video/mp4"
-        },
-        {
-          "slug_id": "QyMBsJV_BLSJYB9h",
-          "telegram_message_id": 158,
-          "episode": 152,
-          "season": 1,
-          "part": null,
-          "quality": "720p",
-          "file_size": 98234604,
-          "file_name": "Naruto Shippuden \n152 தமிழ் HDRip.mp4",
-          "mime_type": "video/mp4"
-        },
-        {
-          "slug_id": "MstsZFyfy1GlX7XJ",
-          "telegram_message_id": 159,
-          "episode": 153,
-          "season": 1,
-          "part": null,
-          "quality": "720p",
-          "file_size": 82666127,
-          "file_name": "Naruto Shippuden \n153 தமிழ் HDRip.mp4",
-          "mime_type": "video/mp4"
-        },
-        {
-          "slug_id": "yXFfztUZ_Pa3mua9",
-          "telegram_message_id": 160,
-          "episode": 154,
-          "season": 1,
-          "part": null,
-          "quality": "720p",
-          "file_size": 110193194,
-          "file_name": "Naruto Shippuden \n154 தமிழ் HDRip.mp4",
-          "mime_type": "video/mp4"
-        },
-        {
-          "slug_id": "9LBr3qBaDUer-5Uv",
-          "telegram_message_id": 161,
-          "episode": 155,
-          "season": 1,
-          "part": null,
-          "quality": "720p",
-          "file_size": 136776675,
-          "file_name": "Naruto Shippuden \n155 தமிழ் HDRip.mp4",
-          "mime_type": "video/mp4"
-        },
-        {
-          "slug_id": "EFmMTlg8SvftSyAG",
-          "telegram_message_id": 162,
-          "episode": 156,
-          "season": 1,
-          "part": null,
-          "quality": "720p",
-          "file_size": 128552077,
-          "file_name": "Naruto Shippuden \n156 தமிழ் HDRip.mp4",
-          "mime_type": "video/mp4"
-        },
-        {
-          "slug_id": "-jMZj03EimB9GVOG",
-          "telegram_message_id": 163,
-          "episode": 157,
-          "season": 1,
-          "part": null,
-          "quality": "720p",
-          "file_size": 130694669,
-          "file_name": "Naruto Shippuden \n157 தமிழ் HDRip.mp4",
-          "mime_type": "video/mp4"
-        },
-        {
-          "slug_id": "GQ9sxx3ufALpISiT",
-          "telegram_message_id": 164,
-          "episode": 158,
-          "season": 1,
-          "part": null,
-          "quality": "720p",
-          "file_size": 124185085,
-          "file_name": "Naruto Shippuden \n158 தமிழ் HDRip.mp4",
-          "mime_type": "video/mp4"
-        },
-        {
-          "slug_id": "CtVnbPa-kDVAPOrN",
-          "telegram_message_id": 165,
-          "episode": 159,
-          "season": 1,
-          "part": null,
-          "quality": "720p",
-          "file_size": 103314311,
-          "file_name": "Naruto Shippuden \n159 தமிழ் HDRip.mp4",
-          "mime_type": "video/mp4"
-        },
-        {
-          "slug_id": "YleBGtib1eSjRmQz",
-          "telegram_message_id": 166,
-          "episode": 160,
-          "season": 1,
-          "part": null,
-          "quality": "720p",
-          "file_size": 149771656,
-          "file_name": "Naruto Shippuden \n160 தமிழ் HDRip.mp4",
-          "mime_type": "video/mp4"
-        },
-        {
-          "slug_id": "Lyax3NCmQcXJGMiQ",
-          "telegram_message_id": 167,
-          "episode": 161,
-          "season": 1,
-          "part": null,
-          "quality": "720p",
-          "file_size": 101688521,
-          "file_name": "Naruto Shippuden \n161 தமிழ் HDRip.mp4",
-          "mime_type": "video/mp4"
-        },
-        {
-          "slug_id": "pjniZ7cRZbqtEEF7",
-          "telegram_message_id": 168,
-          "episode": 162,
-          "season": 1,
-          "part": null,
-          "quality": "720p",
-          "file_size": 137320373,
-          "file_name": "Naruto Shippuden \n162 தமிழ் HDRip.mp4",
-          "mime_type": "video/mp4"
-        },
-        {
-          "slug_id": "spF-FDLXQxHxJhZt",
-          "telegram_message_id": 169,
-          "episode": 163,
-          "season": 1,
-          "part": null,
-          "quality": "720p",
-          "file_size": 107695287,
-          "file_name": "Naruto Shippuden \n163 தமிழ் HDRip.mp4",
-          "mime_type": "video/mp4"
-        },
-        {
-          "slug_id": "td7E9AAzxbcH-NsZ",
-          "telegram_message_id": 170,
-          "episode": 164,
-          "season": 1,
-          "part": null,
-          "quality": "720p",
-          "file_size": 173510901,
-          "file_name": "Naruto Shippuden \n164 தமிழ் HDRip.mp4",
-          "mime_type": "video/mp4"
-        },
-        {
-          "slug_id": "q9yj8rNas66kpoxA",
-          "telegram_message_id": 171,
-          "episode": 165,
-          "season": 1,
-          "part": null,
-          "quality": "720p",
-          "file_size": 135000446,
-          "file_name": "Naruto Shippuden \n165 தமிழ் HDRip.mp4",
-          "mime_type": "video/mp4"
-        },
-        {
-          "slug_id": "pzueHsdTElb1eRm1",
-          "telegram_message_id": 172,
-          "episode": 166,
-          "season": 1,
-          "part": null,
-          "quality": "720p",
-          "file_size": 108989746,
-          "file_name": "Naruto Shippuden \n166 Tamil HDRip.mp4",
-          "mime_type": "video/mp4"
-        },
-        {
-          "slug_id": "VS_nJBAl2MzFAmIj",
-          "telegram_message_id": 173,
-          "episode": 167,
-          "season": 1,
-          "part": null,
-          "quality": "720p",
-          "file_size": 155215996,
-          "file_name": "Naruto Shippuden \n167 தமிழ் HDRip.mp4",
-          "mime_type": "video/mp4"
-        },
-        {
-          "slug_id": "r8Xo850ZIKBM-oC7",
-          "telegram_message_id": 174,
-          "episode": 168,
-          "season": 1,
-          "part": null,
-          "quality": "720p",
-          "file_size": 112689558,
-          "file_name": "Naruto Shippuden \n168 தமிழ் HDRip.mp4",
-          "mime_type": "video/mp4"
-        },
-        {
-          "slug_id": "062Wu6VpIeDjPsbs",
-          "telegram_message_id": 175,
-          "episode": 169,
-          "season": 1,
-          "part": null,
-          "quality": "720p",
-          "file_size": 121693963,
-          "file_name": "Naruto Shippuden \n169 தமிழ் HDRip.mp4",
-          "mime_type": "video/mp4"
-        },
-        {
-          "slug_id": "k2b2_Px8Qc3uj2gW",
-          "telegram_message_id": 176,
-          "episode": 170,
-          "season": 1,
-          "part": null,
-          "quality": "720p",
-          "file_size": 119072261,
-          "file_name": "Naruto Shippuden \n170 தமிழ் HDRip.mp4",
-          "mime_type": "video/mp4"
-        },
-        {
-          "slug_id": "ts2SqSzF1D8J3pIe",
-          "telegram_message_id": 177,
-          "episode": 171,
-          "season": 1,
-          "part": null,
-          "quality": "720p",
-          "file_size": 87895293,
-          "file_name": "Naruto Shippuden \n171 தமிழ் HDRip.mp4",
-          "mime_type": "video/mp4"
-        },
-        {
-          "slug_id": "zYlmErArR9tLWGI1",
-          "telegram_message_id": 178,
-          "episode": 172,
-          "season": 1,
-          "part": null,
-          "quality": "720p",
-          "file_size": 147591236,
-          "file_name": "Naruto Shippuden \n172 தமிழ் HDRip.mp4",
-          "mime_type": "video/mp4"
-        },
-        {
-          "slug_id": "BFFtpjzz8Dl2u8eZ",
-          "telegram_message_id": 179,
-          "episode": 173,
-          "season": 1,
-          "part": null,
-          "quality": "720p",
-          "file_size": 164374986,
-          "file_name": "Naruto Shippuden \n173 தமிழ் HDRip.mp4",
-          "mime_type": "video/mp4"
-        },
-        {
-          "slug_id": "1AcxZtcF04wc5jdp",
-          "telegram_message_id": 180,
-          "episode": 174,
-          "season": 1,
-          "part": null,
-          "quality": "720p",
-          "file_size": 129606523,
-          "file_name": "Naruto Shippuden \n174 தமிழ் HDRip.mp4",
-          "mime_type": "video/mp4"
-        },
-        {
-          "slug_id": "0AbGzdj9wpNp_o1x",
-          "telegram_message_id": 181,
-          "episode": 175,
-          "season": 1,
-          "part": null,
-          "quality": "720p",
-          "file_size": 98370782,
-          "file_name": "Naruto Shippuden \n175 தமிழ் HDRip.mp4",
-          "mime_type": "video/mp4"
         }
       ],
       "year": 2007,
@@ -1936,7 +1936,7 @@
       "status": "Finished",
       "episodes_total": 500,
       "studio": "Studio Pierrot",
-      "updated_at": "2026-11-01T11:34:13.441Z"
+      "updated_at": "2026-11-01T11:34:31Z"
     }
   ]
 }
