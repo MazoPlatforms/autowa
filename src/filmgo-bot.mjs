@@ -352,7 +352,7 @@ async function onMessage(message,refresh){
   if(file.file_size>MAX_BYTES)return say(chat,'File exceeds the current 2 GB limit.');
   if(!ANIME_CHANNEL_ID)return startMovieDraft(file,message.message_id,chat);
   const choice=crypto.randomBytes(12).toString('hex');
-  await redis(MEDIA_CHOICE_KEY+choice,JSON.stringify({message_id:message.message_id,file,admin:ADMIN_ID}),'EX',900);
+  await redis('SET',MEDIA_CHOICE_KEY+choice,JSON.stringify({message_id:message.message_id,file,admin:ADMIN_ID}),'EX',900);
   return say(chat,'Choose the media type for this file:',{reply_markup:{inline_keyboard:[[{text:'🎬 Movie',callback_data:'fg:type:movie:'+choice},{text:'🍥 Anime',callback_data:'fg:type:anime:'+choice}]]}});
  }
  const d=await draftGet();
@@ -413,7 +413,7 @@ async function onCallback(q){
  const typeChoice=action.match(/^fg:type:(movie|anime):([a-f0-9]{24})$/);
  if(typeChoice){
   await tg('answerCallbackQuery',{callback_query_id:q.id});const key=MEDIA_CHOICE_KEY+typeChoice[2],raw=await redis('GET',key);if(!raw){await deleteConfirmation(q);return say(ADMIN_ID,'Media selection expired. Send the file again.');}
-  if(await redis(MEDIA_CHOICE_KEY+'claimed:'+typeChoice[2],'1','EX',900,'NX')!=='OK'){await deleteConfirmation(q);return say(ADMIN_ID,'This file was already selected.');}
+  if(await redis('SET',MEDIA_CHOICE_KEY+'claimed:'+typeChoice[2],'1','EX',900,'NX')!=='OK'){await deleteConfirmation(q);return say(ADMIN_ID,'This file was already selected.');}
   const choice=JSON.parse(raw);await redis('DEL',key);await deleteConfirmation(q);
   if(typeChoice[1]==='anime')return startAnimeDraft(choice.file,choice.message_id);
   return startMovieDraft(choice.file,choice.message_id,ADMIN_ID);
