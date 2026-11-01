@@ -1,7 +1,36 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-01T12:49:49.686Z",
+  "updated_at": 1793537405,
   "anime": [
+    {
+      "slug_id": "naruto-shippud",
+      "title": "Naruto Shippud…",
+      "episodes": [
+        {
+          "slug_id": "tZmVkaJgZaVFyfTj",
+          "telegram_message_id": 392,
+          "episode": 370,
+          "season": 17,
+          "part": null,
+          "quality": "720P",
+          "file_size": 61565918,
+          "file_name": "Naruto Shippud… - S17E370 [Tamil] 720p @Animes_Tamil.mkv",
+          "mime_type": "video/x-matroska"
+        },
+        {
+          "slug_id": "atyuGAtvh0Yf6cXd",
+          "telegram_message_id": 395,
+          "episode": 373,
+          "season": 18,
+          "part": null,
+          "quality": "720P",
+          "file_size": 82840473,
+          "file_name": "Naruto Shippud… - S18E373 [Tamil] 720p @Animes_Tamil_Hub.mkv",
+          "mime_type": "video/x-matroska"
+        }
+      ],
+      "updated_at": "2026-11-01T12:50:05Z"
+    },
     {
       "slug_id": "naruto-shippuden",
       "title": "Naruto Shippuden",
@@ -4092,43 +4121,7 @@
       "status": "Finished",
       "episodes_total": 500,
       "studio": "Studio Pierrot",
-      "updated_at": "2026-11-01T12:49:46Z"
-    },
-    {
-      "slug_id": "naruto-shippud",
-      "title": "Naruto Shippud…",
-      "episodes": [
-        {
-          "slug_id": "tZmVkaJgZaVFyfTj",
-          "telegram_message_id": 392,
-          "episode": 370,
-          "season": 17,
-          "part": null,
-          "quality": "720P",
-          "file_size": 61565918,
-          "file_name": "Naruto Shippud… - S17E370 [Tamil] 720p @Animes_Tamil.mkv",
-          "mime_type": "video/x-matroska"
-        },
-        {
-          "slug_id": "atyuGAtvh0Yf6cXd",
-          "telegram_message_id": 395,
-          "episode": 373,
-          "season": 18,
-          "part": null,
-          "quality": "720p",
-          "file_size": 82840473,
-          "file_name": "Naruto Shippud… - S18E373 [Tamil] 720p @Animes_Tamil_Hub.mkv",
-          "mime_type": "video/x-matroska"
-        }
-      ],
-      "updated_at": "2026-11-01T12:49:49.685Z",
-      "poster": null,
-      "plot": "",
-      "genre": [],
-      "rating": null,
-      "status": null,
-      "episodes_total": null,
-      "studio": null
+      "updated_at": "2026-11-01T12:50:05Z"
     }
   ]
 }
