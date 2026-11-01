@@ -1,12 +1,57 @@
 {
   "schema_version": 1,
-  "updated_at": 1793558402,
+  "updated_at": 1793560486,
   "anime": {
     "slug_id": "attack-on-titan",
     "title": "Attack on Titan",
     "episodes": [
       {
-        "slug_id": "OK5zYn_8BoFyTeZJ",
+        "slug_id": "ohVj--P-mSngKyOq",
+        "telegram_message_id": 616,
+        "episode": 1,
+        "season": 1,
+        "special_type": null,
+        "part": null,
+        "quality": "1080P",
+        "file_size": 326527819,
+        "file_name": "Attack_On_Titan_S01_Ep01_தமிழ்_1080p_@Anime_Tamil_Dubbed_Series.mkv",
+        "mime_type": "video/x-matroska",
+        "title": "To You, in 2000 Years - The Fall of Shiganshina (1)",
+        "released": "2013-04-07",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242650.jpg"
+      },
+      {
+        "slug_id": "fkT46vwBAWKciNwp",
+        "telegram_message_id": 614,
+        "episode": 1,
+        "season": 1,
+        "special_type": null,
+        "part": null,
+        "quality": "480P",
+        "file_size": 74190572,
+        "file_name": "Attack_On_Titan_S01_Ep01_தமிழ்_480p_@Anime_Tamil_Dubbed_Series_1.mkv",
+        "mime_type": "video/x-matroska",
+        "title": "To You, in 2000 Years - The Fall of Shiganshina (1)",
+        "released": "2013-04-07",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242650.jpg"
+      },
+      {
+        "slug_id": "sCGOH84Jd6xNkpfy",
+        "telegram_message_id": 615,
+        "episode": 1,
+        "season": 1,
+        "special_type": null,
+        "part": null,
+        "quality": "720P",
+        "file_size": 145463116,
+        "file_name": "Attack_On_Titan_S01_Ep01_தமிழ்_720p_@Anime_Tamil_Dubbed_Series_1.mkv",
+        "mime_type": "video/x-matroska",
+        "title": "To You, in 2000 Years - The Fall of Shiganshina (1)",
+        "released": "2013-04-07",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242650.jpg"
+      },
+      {
+        "slug_id": "g-OiDVW4OHN2lpOz",
         "telegram_message_id": 606,
         "episode": 1,
         "season": 1,
@@ -140,6 +185,6 @@
     "episodes_total": 25,
     "year": 2013,
     "studio": "WIT STUDIO",
-    "updated_at": "2026-11-01T18:40:00Z"
+    "updated_at": "2026-11-01T19:14:43Z"
   }
 }

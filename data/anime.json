@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-01T19:14:18.347Z",
+  "updated_at": 1793560486,
   "anime": [
     {
       "slug_id": "naruto",
@@ -3155,7 +3155,7 @@
         "10": "/banners/naruto-season-10.webp",
         "11": "/banners/naruto-season-11.webp"
       },
-      "updated_at": "2026-11-01T18:40:01Z"
+      "updated_at": "2026-11-01T19:14:44Z"
     },
     {
       "slug_id": "naruto-shippuden",
@@ -8787,12 +8787,42 @@
       "status": "Finished",
       "episodes_total": 500,
       "studio": "Studio Pierrot",
-      "updated_at": "2026-11-01T18:40:02Z"
+      "updated_at": "2026-11-01T19:14:46Z"
     },
     {
       "slug_id": "attack-on-titan",
       "title": "Attack on Titan",
       "episodes": [
+        {
+          "slug_id": "ohVj--P-mSngKyOq",
+          "telegram_message_id": 616,
+          "episode": 1,
+          "season": 1,
+          "special_type": null,
+          "part": null,
+          "quality": "1080P",
+          "file_size": 326527819,
+          "file_name": "Attack_On_Titan_S01_Ep01_தமிழ்_1080p_@Anime_Tamil_Dubbed_Series.mkv",
+          "mime_type": "video/x-matroska",
+          "title": "To You, in 2000 Years - The Fall of Shiganshina (1)",
+          "released": "2013-04-07",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242650.jpg"
+        },
+        {
+          "slug_id": "fkT46vwBAWKciNwp",
+          "telegram_message_id": 614,
+          "episode": 1,
+          "season": 1,
+          "special_type": null,
+          "part": null,
+          "quality": "480P",
+          "file_size": 74190572,
+          "file_name": "Attack_On_Titan_S01_Ep01_தமிழ்_480p_@Anime_Tamil_Dubbed_Series_1.mkv",
+          "mime_type": "video/x-matroska",
+          "title": "To You, in 2000 Years - The Fall of Shiganshina (1)",
+          "released": "2013-04-07",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242650.jpg"
+        },
         {
           "slug_id": "sCGOH84Jd6xNkpfy",
           "telegram_message_id": 615,
@@ -8800,10 +8830,28 @@
           "season": 1,
           "special_type": null,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 145463116,
           "file_name": "Attack_On_Titan_S01_Ep01_தமிழ்_720p_@Anime_Tamil_Dubbed_Series_1.mkv",
-          "mime_type": "video/x-matroska"
+          "mime_type": "video/x-matroska",
+          "title": "To You, in 2000 Years - The Fall of Shiganshina (1)",
+          "released": "2013-04-07",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242650.jpg"
+        },
+        {
+          "slug_id": "g-OiDVW4OHN2lpOz",
+          "telegram_message_id": 606,
+          "episode": 1,
+          "season": 1,
+          "special_type": "OAD",
+          "part": null,
+          "quality": "720P",
+          "file_size": 118158912,
+          "file_name": "Attack On Titan - OAD EP01 [Tamil] 720p.mkv",
+          "mime_type": "video/x-matroska",
+          "title": "Ilse's Notebook: Notes from a Scout Regiment Member",
+          "released": "2013-12-09",
+          "frame": "https://raw.githubusercontent.com/MazoPlatforms/autowa/main/web/frames/anime/attack-on-titan-oad-001.jpg"
         },
         {
           "slug_id": "RyvfZDpOeBQyhB-I",
@@ -8909,30 +8957,6 @@
           "title": "Lost Girls: Lost in the Cruel World",
           "released": "2018-08-09",
           "frame": "https://raw.githubusercontent.com/MazoPlatforms/autowa/main/web/frames/anime/attack-on-titan-oad-008.jpg"
-        },
-        {
-          "slug_id": "fkT46vwBAWKciNwp",
-          "telegram_message_id": 614,
-          "episode": 1,
-          "season": 1,
-          "special_type": null,
-          "part": null,
-          "quality": "480p",
-          "file_size": 74190572,
-          "file_name": "Attack_On_Titan_S01_Ep01_தமிழ்_480p_@Anime_Tamil_Dubbed_Series_1.mkv",
-          "mime_type": "video/x-matroska"
-        },
-        {
-          "slug_id": "ohVj--P-mSngKyOq",
-          "telegram_message_id": 616,
-          "episode": 1,
-          "season": 1,
-          "special_type": null,
-          "part": null,
-          "quality": "1080p",
-          "file_size": 326527819,
-          "file_name": "Attack_On_Titan_S01_Ep01_தமிழ்_1080p_@Anime_Tamil_Dubbed_Series.mkv",
-          "mime_type": "video/x-matroska"
         }
       ],
       "wikipedia_url": "https://en.wikipedia.org/wiki/Attack_on_Titan_(TV_series)",
@@ -8949,7 +8973,7 @@
       "episodes_total": 25,
       "year": 2013,
       "studio": "WIT STUDIO",
-      "updated_at": "2026-11-01T19:14:18.347Z"
+      "updated_at": "2026-11-01T19:14:43Z"
     }
   ]
 }
