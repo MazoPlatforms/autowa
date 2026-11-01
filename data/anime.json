@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": 1793550045,
+  "updated_at": "2026-11-01T16:28:56.561Z",
   "anime": [
     {
       "slug_id": "naruto",
@@ -495,6 +495,17 @@
           "title": "The Scroll's Secret: No Peeking Allowed",
           "released": "2003-05-27",
           "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/476/1190998.jpg"
+        },
+        {
+          "slug_id": "zGfVlOUQqXFtNtZQ",
+          "telegram_message_id": 433,
+          "episode": 36,
+          "season": 2,
+          "part": null,
+          "quality": "720p",
+          "file_size": 113569977,
+          "file_name": "Naruto S2 E36 Tamil Dub 720p.mp4",
+          "mime_type": "video/mp4"
         }
       ],
       "year": 2002,
@@ -512,7 +523,7 @@
       "status": "Finished",
       "episodes_total": 220,
       "studio": "Studio Pierrot",
-      "updated_at": "2026-11-01T16:20:43Z"
+      "updated_at": "2026-11-01T16:28:56.561Z"
     },
     {
       "slug_id": "naruto-shippuden",
