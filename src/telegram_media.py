@@ -23,6 +23,7 @@ def config(channel_key='TELEGRAM_CHANNEL_ID'):
 def clean_title(raw):
     value = re.sub(r'(?i)\.(mkv|mp4|avi|mov|webm)(\.\w+)?$', '', raw or '')
     value = re.sub(r'[._]+', ' ', value)
+    value = re.sub(r'(?i)(?:tamil|telugu|malayalam|kannada|hindi|english|தமிழ்)', ' ', value)
     value = re.sub(r'(?i)\b(2160p|1080p|720p|480p|4k|web[- ]?dl|webrip|bluray|brrip|hdrip|dvdrip|x264|x265|h264|h265|hevc|aac|ddp5?\.?1|esub|multi|proper|repack)\b.*$', '', value)
     value = re.sub(r'\s+', ' ', value).strip(' -[]()')
     return value[:140] or 'Untitled movie'
@@ -79,6 +80,7 @@ def anime_filename_parts(raw):
     if match:
         part = int(match.group(1)); value = value[:match.start()] + ' ' + value[match.end():]
     value = re.sub(r'(?i)\s+(?:தமிழ்|tamil|telugu|malayalam|kannada|hindi|english|2160p|1080p|720p|480p|4k|web[- ]?dl|webrip|bluray|brrip|hdrip|dvdrip|x264|x265|h264|h265|hevc|aac|ddp5?\.?(?:1|2)?|esub|multi|proper|repack|uncut|dual audio)\b.*$', '', value)
+    value = re.sub(r'\s+@.*$', '', value)
     value = re.sub(r'\s+', ' ', value).strip(' -[]()')
     return (value[:140] or 'Untitled anime', season, episode, part)
 
