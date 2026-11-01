@@ -262,7 +262,14 @@ async function detectAnimeType(file,caption=''){
  const metadata=await animeMetadata(parts.title).catch(()=>null);const titleScore=metadata?.title?similarity(parts.title,metadata.title):0;
  let confidence=0;if(explicitEpisode)confidence=.95;else if(parts.episode)confidence=.82;if(titleScore>=.7)confidence=Math.max(confidence,Math.min(.92,titleScore));
  const ambiguous=Boolean(parts.episode&&!explicitEpisode);
- return {anime:confidence>=.7&&!ambiguous,confidence,parts,metadata,ambiguous};
+ if(ambiguous){
+  const movieParts=filenameParts(file.file_name||'');
+  const movie=await resolveOmdbMovie(movieParts.title||parts.title,movieParts.year,movieParts.titleCandidates||parts.titleCandidates).catch(()=>null);
+  if(movie?.movie&&Number(movie.confidence||0)>=.65)return {anime:false,confidence:Number(movie.confidence),parts,metadata,movie:movie.movie,ambiguous:false};
+  if(metadata?.title&&titleScore>=.8)return {anime:true,confidence:Math.min(.95,titleScore),parts,metadata,ambiguous:false};
+  return {anime:false,confidence,parts,metadata,ambiguous:true};
+ }
+ return {anime:confidence>=.7,confidence,parts,metadata,ambiguous:false};
 }
 function animeSlug(title){return String(title||'').normalize('NFKD').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'').slice(0,70)||'anime';}
 async function tmdbAnimeSeason(title,episode){
