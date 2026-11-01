@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-01T17:00:22.572Z",
+  "updated_at": "2026-11-01T17:00:30.063Z",
   "anime": [
     {
       "slug_id": "naruto",
@@ -2816,6 +2816,17 @@
           "file_size": 141296254,
           "file_name": "Naruto S9 E213 HDRip - 720p [Tamil].mp4",
           "mime_type": "video/mp4"
+        },
+        {
+          "slug_id": "o3uLce6pR9XAPZ-U",
+          "telegram_message_id": 599,
+          "episode": 214,
+          "season": 9,
+          "part": null,
+          "quality": "720p",
+          "file_size": 113250498,
+          "file_name": "Naruto S9 E214 HDRip - 720p [Tamil].mp4",
+          "mime_type": "video/mp4"
         }
       ],
       "year": 2002,
@@ -2833,7 +2844,7 @@
       "status": "Finished",
       "episodes_total": 220,
       "studio": "Studio Pierrot",
-      "updated_at": "2026-11-01T17:00:22.572Z"
+      "updated_at": "2026-11-01T17:00:30.063Z"
     },
     {
       "slug_id": "naruto-shippuden",
