@@ -206,6 +206,25 @@ _TMDB_SHOW_CACHE = {}
 _TMDB_SEASON_CACHE = {}
 _TVMAZE_EPISODE_CACHE = {}
 
+ATTACK_ON_TITAN_OAD_GUIDE = {
+    1: ('Ilse\'s Notebook: Notes from a Scout Regiment Member', '2013-12-09'),
+    2: ('The Sudden Visitor: The Torturous Curse of Youth', '2014-04-09'),
+    3: ('Distress', '2014-08-08'),
+    4: ('No Regrets - Part 1', '2014-12-09'),
+    5: ('No Regrets - Part 2', '2015-04-09'),
+    6: ('Lost Girls: Wall Sina, Goodbye - Part 1', '2017-12-08'),
+    7: ('Lost Girls: Wall Sina, Goodbye - Part 2', '2018-04-09'),
+    8: ('Lost Girls: Lost in the Cruel World', '2018-08-09'),
+}
+
+def manual_anime_special_guide(title, special_type, episode):
+    normalized = catalog_title_key(title)
+    if normalized == 'attackontitan' and special_type == 'OAD':
+        item = ATTACK_ON_TITAN_OAD_GUIDE.get(int(episode or 0))
+        if item:
+            return {'title': item[0], 'released': item[1]}
+    return {}
+
 def catalog_title_key(title):
     """Stable comparison key for titles and release-name variants."""
     return re.sub(r'[^a-z0-9]+', '', str(title or '').casefold())
@@ -435,9 +454,11 @@ def build_anime_catalog(messages):
             episode['special_type'] = special_type
             if special_type:
                 episode['season'] = 1
-                guide = tmdb_season_episodes(show['title'], 0).get(int(episode['episode'] or 0))
-                if not guide:
-                    guide = tvmaze_episode_guide(show['title'], specials=True).get(int(episode['episode'] or 0))
+                guide = manual_anime_special_guide(show['title'], special_type, episode['episode'])
+                remote_guide = tmdb_season_episodes(show['title'], 0).get(int(episode['episode'] or 0))
+                if not remote_guide:
+                    remote_guide = tvmaze_episode_guide(show['title'], specials=True).get(int(episode['episode'] or 0))
+                guide = {**guide, **{key: value for key, value in (remote_guide or {}).items() if value}}
             else:
                 editorial_season = manual_anime_season(show['title'], episode['episode'])
                 episode['season'] = explicit_season and episode['season'] or editorial_season or caption_season or (previous or {}).get('season') or inferred_anime_season(episode['episode'], None, boundaries)

@@ -156,7 +156,7 @@ function requesterProgress(j){
  const title=String(j.title||movie.title||'Movie').slice(0,130);
  const year=String(j.year||movie.year||'—'),quality=String(j.quality||movie.quality||'—');
  const size=Number(j.file_size||movie.file_size||0);
- const details=j.media_type==='anime'?['*FilmGo Anime*','', '*'+title+'*','Season: '+(Number(j.season)||1)+' · Episode: '+(Number(j.episode)||0),'Quality: '+quality,'']:['*FilmGo*','', '*'+title+'*','Year: '+year,'Quality: '+quality,...(movie.genre?.length?['Genre: '+(Array.isArray(movie.genre)?movie.genre.join(', '):movie.genre)]:[]),''];
+ const details=j.media_type==='anime'?['*FilmGo Anime*','', '*'+title+'*',j.special_type?'Collection: '+j.special_type:'Season: '+(Number(j.season)||1)+' · Episode: '+(Number(j.episode)||0),'Quality: '+quality,'']:['*FilmGo*','', '*'+title+'*','Year: '+year,'Quality: '+quality,...(movie.genre?.length?['Genre: '+(Array.isArray(movie.genre)?movie.genre.join(', '):movie.genre)]:[]),''];
  let key=null,posterSent=false,last='',lastAt=0,chain=Promise.resolve();
  // Keep exactly one editable status message. It is intentionally state-only:
  // processing, downloading, and uploading. Never expose byte-level progress.
