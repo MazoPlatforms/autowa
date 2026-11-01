@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-01T12:17:02.863Z",
+  "updated_at": 1793535445,
   "anime": [
     {
       "slug_id": "naruto-shippuden",
@@ -2663,7 +2663,7 @@
           "episode": 243,
           "season": 12,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 36156718,
           "file_name": "Naruto Shippuden [S12] {EP:243} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -2674,7 +2674,7 @@
           "episode": 244,
           "season": 12,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 103122709,
           "file_name": "Naruto Shippuden [S12] {EP:244} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -2685,7 +2685,7 @@
           "episode": 245,
           "season": 12,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 199314909,
           "file_name": "Naruto Shippuden [S12] {EP:245} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -2696,7 +2696,7 @@
           "episode": 246,
           "season": 12,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 183961817,
           "file_name": "Naruto Shippuden [S12] {EP:246} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -2707,7 +2707,7 @@
           "episode": 247,
           "season": 12,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 179405519,
           "file_name": "Naruto Shippuden [S12] {EP:247} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -2718,7 +2718,7 @@
           "episode": 248,
           "season": 12,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 106030153,
           "file_name": "Naruto Shippuden [S12] {EP:248} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -2729,7 +2729,7 @@
           "episode": 249,
           "season": 12,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 97688303,
           "file_name": "Naruto Shippuden [S12] {EP:249} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -2740,7 +2740,7 @@
           "episode": 250,
           "season": 12,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 134483093,
           "file_name": "Naruto Shippuden [S12] {EP:250} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -2751,7 +2751,7 @@
           "episode": 251,
           "season": 12,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 91799989,
           "file_name": "Naruto Shippuden [S12] {EP:251} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -2762,7 +2762,7 @@
           "episode": 252,
           "season": 12,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 94177929,
           "file_name": "Naruto Shippuden [S12] {EP:252} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -2773,7 +2773,7 @@
           "episode": 253,
           "season": 12,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 98005403,
           "file_name": "Naruto Shippuden [S12] {EP:253} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -2784,7 +2784,7 @@
           "episode": 254,
           "season": 12,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 85626842,
           "file_name": "Naruto Shippuden [S12] {EP:254} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -2795,7 +2795,7 @@
           "episode": 255,
           "season": 12,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 91460368,
           "file_name": "Naruto Shippuden [S12] {EP:255} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -2806,7 +2806,7 @@
           "episode": 256,
           "season": 12,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 86571305,
           "file_name": "Naruto Shippuden [S12] {EP:256} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -2817,7 +2817,7 @@
           "episode": 257,
           "season": 12,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 116882517,
           "file_name": "Naruto Shippuden [S12] {EP:257} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -2828,7 +2828,7 @@
           "episode": 258,
           "season": 12,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 84043021,
           "file_name": "Naruto Shippuden [S12] {EP:258} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -2839,7 +2839,7 @@
           "episode": 259,
           "season": 12,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 163661081,
           "file_name": "Naruto Shippuden [S12] {EP:259} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -2850,7 +2850,7 @@
           "episode": 260,
           "season": 12,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 120182276,
           "file_name": "Naruto Shippuden [S12] {EP:260} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -2861,7 +2861,7 @@
           "episode": 261,
           "season": 12,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 71193445,
           "file_name": "Naruto Shippuden [S12] {EP:261} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -2872,7 +2872,7 @@
           "episode": 262,
           "season": 12,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 121209304,
           "file_name": "Naruto Shippuden [S12] {EP:262} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -2883,7 +2883,7 @@
           "episode": 263,
           "season": 12,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 77514559,
           "file_name": "Naruto Shippuden [S12] {EP:263} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -2894,7 +2894,7 @@
           "episode": 264,
           "season": 12,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 84583904,
           "file_name": "Naruto Shippuden [S12] {EP:264} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -2905,7 +2905,7 @@
           "episode": 265,
           "season": 12,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 91461007,
           "file_name": "Naruto Shippuden [S12] {EP:265} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -2916,7 +2916,7 @@
           "episode": 266,
           "season": 12,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 74863875,
           "file_name": "Naruto Shippuden [S12] {EP:266} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -2927,7 +2927,7 @@
           "episode": 267,
           "season": 12,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 72565567,
           "file_name": "Naruto Shippuden [S12] {EP:267} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -2938,7 +2938,7 @@
           "episode": 268,
           "season": 12,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 91122902,
           "file_name": "Naruto Shippuden [S12] {EP:268} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -2949,7 +2949,7 @@
           "episode": 269,
           "season": 12,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 120279083,
           "file_name": "Naruto Shippuden [S12] {EP:269} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -2960,7 +2960,7 @@
           "episode": 270,
           "season": 12,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 129849400,
           "file_name": "Naruto Shippuden [S12] {EP:270} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -2971,7 +2971,7 @@
           "episode": 271,
           "season": 12,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 183862591,
           "file_name": "Naruto Shippuden [S12] {EP:271} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -2982,7 +2982,7 @@
           "episode": 272,
           "season": 12,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 59084320,
           "file_name": "Naruto Shippuden [S12] {EP:272} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -2993,7 +2993,7 @@
           "episode": 273,
           "season": 12,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 64543771,
           "file_name": "Naruto Shippuden [S12] {EP:273} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -3004,7 +3004,7 @@
           "episode": 274,
           "season": 12,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 92438498,
           "file_name": "Naruto Shippuden [S12] {EP:274} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -3015,7 +3015,7 @@
           "episode": 275,
           "season": 12,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 79549206,
           "file_name": "Naruto Shippuden [S12] {EP:275} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -3026,7 +3026,7 @@
           "episode": 276,
           "season": 12,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 103340589,
           "file_name": "Naruto Shippuden [S12] {EP:276} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -3037,7 +3037,7 @@
           "episode": 277,
           "season": 13,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 73339511,
           "file_name": "Naruto Shippuden [S13] {EP:277} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -3048,7 +3048,7 @@
           "episode": 278,
           "season": 13,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 102956577,
           "file_name": "Naruto Shippuden [S13] {EP:278} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -3059,7 +3059,7 @@
           "episode": 279,
           "season": 13,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 67176871,
           "file_name": "Naruto Shippuden [S13] {EP:279} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -3070,7 +3070,7 @@
           "episode": 280,
           "season": 13,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 116214244,
           "file_name": "Naruto Shippuden [S13] {EP:280} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -3081,7 +3081,7 @@
           "episode": 281,
           "season": 13,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 107490314,
           "file_name": "Naruto Shippuden [S13] {EP:281} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -3092,7 +3092,7 @@
           "episode": 282,
           "season": 13,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 128907376,
           "file_name": "Naruto Shippuden [S13] {EP:282} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -3103,7 +3103,7 @@
           "episode": 283,
           "season": 13,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 43066230,
           "file_name": "Naruto Shippuden [S13] {EP:283} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -3114,7 +3114,7 @@
           "episode": 284,
           "season": 13,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 84246063,
           "file_name": "Naruto Shippuden [S13] {EP:284} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -3125,7 +3125,7 @@
           "episode": 285,
           "season": 13,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 81010782,
           "file_name": "Naruto Shippuden [S13] {EP:285} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -3136,7 +3136,7 @@
           "episode": 286,
           "season": 13,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 186840714,
           "file_name": "Naruto Shippuden [S13] {EP:286} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -3147,7 +3147,7 @@
           "episode": 287,
           "season": 13,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 171519518,
           "file_name": "Naruto Shippuden [S13] {EP:287} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -3158,7 +3158,7 @@
           "episode": 288,
           "season": 13,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 130940590,
           "file_name": "Naruto Shippuden [S13] {EP:288} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -3169,7 +3169,7 @@
           "episode": 289,
           "season": 13,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 130955214,
           "file_name": "Naruto Shippuden [S13] {EP:289} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -3180,7 +3180,7 @@
           "episode": 290,
           "season": 13,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 158319129,
           "file_name": "Naruto Shippuden [S13] {EP:290} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -3191,7 +3191,7 @@
           "episode": 291,
           "season": 13,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 105234358,
           "file_name": "Naruto Shippuden [S13] {EP:291} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -3212,7 +3212,7 @@
       "status": "Finished",
       "episodes_total": 500,
       "studio": "Studio Pierrot",
-      "updated_at": "2026-11-01T12:17:02.863Z"
+      "updated_at": "2026-11-01T12:17:25Z"
     }
   ]
 }
