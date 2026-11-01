@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-01T09:45:11.762Z",
+  "updated_at": 1793526342,
   "anime": [
     {
       "slug_id": "naruto-shippuden",
@@ -348,6 +348,17 @@
           "mime_type": "video/x-matroska"
         },
         {
+          "slug_id": "1MrqEJI4YsowA2-q",
+          "telegram_message_id": 39,
+          "episode": 33,
+          "season": 1,
+          "part": null,
+          "quality": "720P",
+          "file_size": 74323513,
+          "file_name": "Naruto Shippuden - 033 [720p] [Dual] @Anime_Gallery.mkv",
+          "mime_type": "video/x-matroska"
+        },
+        {
           "slug_id": "36paROoD-bhaLQxO",
           "telegram_message_id": 40,
           "episode": 34,
@@ -425,23 +436,12 @@
           "mime_type": "video/x-matroska"
         },
         {
-          "slug_id": "1MrqEJI4YsowA2-q",
-          "telegram_message_id": 39,
-          "episode": 33,
-          "season": 2,
-          "part": null,
-          "quality": "720P",
-          "file_size": 74323513,
-          "file_name": "Naruto Shippuden - 033 [720p] [Dual] @Anime_Gallery.mkv",
-          "mime_type": "video/x-matroska"
-        },
-        {
           "slug_id": "PG5q-vflIaIOQR2Z",
           "telegram_message_id": 47,
           "episode": 41,
           "season": 1,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 102824304,
           "file_name": "Naruto Shippuden - 041 [720p] [Dual] @Anime_Gallery.mkv",
           "mime_type": "video/x-matroska"
@@ -452,7 +452,7 @@
           "episode": 42,
           "season": 1,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 162626754,
           "file_name": "Naruto Shippuden - 042 [720p] [Dual] @Anime_Gallery.mkv",
           "mime_type": "video/x-matroska"
@@ -463,7 +463,7 @@
           "episode": 43,
           "season": 1,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 140230441,
           "file_name": "Naruto Shippuden - 043 [720p] [Dual] @Anime_Gallery.mkv",
           "mime_type": "video/x-matroska"
@@ -474,7 +474,7 @@
           "episode": 44,
           "season": 1,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 76131521,
           "file_name": "Naruto Shippuden - 044 [720p] [Dual] @Anime_Gallery.mkv",
           "mime_type": "video/x-matroska"
@@ -485,7 +485,7 @@
           "episode": 45,
           "season": 1,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 96915843,
           "file_name": "Naruto Shippuden - 045 [720p] [Dual] @Anime_Gallery.mkv",
           "mime_type": "video/x-matroska"
@@ -496,7 +496,7 @@
           "episode": 46,
           "season": 1,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 71494166,
           "file_name": "Naruto Shippuden - 046 [720p] [Dual] @Anime_Gallery.mkv",
           "mime_type": "video/x-matroska"
@@ -507,7 +507,7 @@
           "episode": 47,
           "season": 1,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 71239601,
           "file_name": "Naruto Shippuden - 047 [720p] [Dual] @Anime_Gallery.mkv",
           "mime_type": "video/x-matroska"
@@ -518,7 +518,7 @@
           "episode": 48,
           "season": 1,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 56146561,
           "file_name": "Naruto Shippuden - 048 [720p] [Dual] @Anime_Gallery.mkv",
           "mime_type": "video/x-matroska"
@@ -529,7 +529,7 @@
           "episode": 49,
           "season": 1,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 91568159,
           "file_name": "Naruto Shippuden - 049 [720p] [Dual] @Anime_Gallery.mkv",
           "mime_type": "video/x-matroska"
@@ -540,7 +540,7 @@
           "episode": 50,
           "season": 1,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 79136097,
           "file_name": "Naruto Shippuden - 050 [720p] [Dual] @Anime_Gallery.mkv",
           "mime_type": "video/x-matroska"
@@ -551,7 +551,7 @@
           "episode": 51,
           "season": 1,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 72174741,
           "file_name": "Naruto Shippuden - 051 [720p] [Dual] @Anime_Gallery.mkv",
           "mime_type": "video/x-matroska"
@@ -562,7 +562,7 @@
           "episode": 52,
           "season": 1,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 86899068,
           "file_name": "Naruto Shippuden - 052 [720p] [Dual] @Anime_Gallery.mkv",
           "mime_type": "video/x-matroska"
@@ -573,7 +573,7 @@
           "episode": 53,
           "season": 1,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 74436431,
           "file_name": "Naruto Shippuden - 053 [720p] [Dual] @Anime_Gallery.mkv",
           "mime_type": "video/x-matroska"
@@ -594,8 +594,7 @@
       "episodes_total": 500,
       "year": 2007,
       "studio": "Studio Pierrot",
-      "wikipedia_url": "https://en.wikipedia.org/wiki/Naruto_(TV_series)",
-      "updated_at": "2026-11-01T09:45:11.762Z"
+      "updated_at": "2026-11-01T09:45:42Z"
     }
   ]
 }
