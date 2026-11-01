@@ -82,6 +82,13 @@ def anime_filename_parts(raw):
     value = re.sub(r'\s+', ' ', value).strip(' -[]()')
     return (value[:140] or 'Untitled anime', season, episode, part)
 
+def inferred_anime_season(title, episode, explicit):
+    if explicit:
+        return explicit
+    if re.sub(r'[^a-z0-9]+', '', str(title).casefold()) == 'narutoshippuden' and 33 <= int(episode or 0) <= 53:
+        return 2
+    return 1
+
 def anime_metadata(raw_title):
     """Best-effort AniList enrichment; Telegram indexing still works offline."""
     title, _, _, _ = anime_filename_parts(raw_title)
@@ -102,6 +109,7 @@ def anime_media_item(message):
     if not filename or not getattr(message, 'file', None):
         return None
     title, season, episode, part = anime_filename_parts(filename)
+    season = inferred_anime_season(title, episode, season)
     quality_match = re.search(r'(?i)\b(2160p|1080p|720p|480p|4k)\b', filename)
     quality = quality_match.group(1).upper() if quality_match else 'AUTO'
     size = int(getattr(message.file, 'size', 0) or 0)
