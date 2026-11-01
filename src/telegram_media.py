@@ -93,6 +93,11 @@ def anime_filename_parts(raw):
     value = re.sub(r'\s+@.*$', '', value)
     value = re.sub(r'\s*\+\s*', ' ', value)
     value = re.sub(r'\s+', ' ', value).strip(' -[]()')
+    # Some Telegram uploads contain a literal ellipsis in the show name
+    # (for example, ``Naruto Shippud…``). Keep those files in the canonical
+    # show record instead of creating a second truncated anime.
+    if re.sub(r'[^a-z0-9]+', '', value.casefold()).startswith('narutoshippud'):
+        value = 'Naruto Shippuden'
     return (value[:140] or 'Untitled anime', season, episode, part)
 
 def season_from_caption(caption):
