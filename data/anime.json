@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": 1793537357,
+  "updated_at": "2026-11-01T12:49:19.956Z",
   "anime": [
     {
       "slug_id": "naruto-shippuden",
@@ -4071,6 +4071,31 @@
       "episodes_total": 500,
       "studio": "Studio Pierrot",
       "updated_at": "2026-11-01T12:49:17Z"
+    },
+    {
+      "slug_id": "naruto-shippud",
+      "title": "Naruto Shippud…",
+      "episodes": [
+        {
+          "slug_id": "tZmVkaJgZaVFyfTj",
+          "telegram_message_id": 392,
+          "episode": 370,
+          "season": 17,
+          "part": null,
+          "quality": "720p",
+          "file_size": 61565918,
+          "file_name": "Naruto Shippud… - S17E370 [Tamil] 720p @Animes_Tamil.mkv",
+          "mime_type": "video/x-matroska"
+        }
+      ],
+      "poster": null,
+      "plot": "",
+      "genre": [],
+      "rating": null,
+      "status": null,
+      "episodes_total": null,
+      "studio": null,
+      "updated_at": "2026-11-01T12:49:19.956Z"
     }
   ]
 }
