@@ -82,6 +82,10 @@ def anime_filename_parts(raw):
     value = re.sub(r'\s+', ' ', value).strip(' -[]()')
     return (value[:140] or 'Untitled anime', season, episode, part)
 
+def season_from_caption(caption):
+    match = re.search(r'(?i)\b(?:season|s)\s*[:#-]?\s*(\d{1,2})\b', str(caption or ''))
+    return int(match.group(1)) if match else None
+
 def tmdb_season_boundaries(title):
     key = os.getenv('TMDB_API_KEY')
     if not key:
@@ -89,8 +93,9 @@ def tmdb_season_boundaries(title):
     try:
         params = urllib.parse.urlencode({'api_key': key, 'query': title, 'language': 'en-US'})
         with urllib.request.urlopen(urllib.request.Request('https://api.themoviedb.org/3/search/tv?' + params, headers={'User-Agent': 'FilmGo/1.0'}), timeout=6) as response:
-            result = json.load(response).get('results', [])
-        if not result or not result[0].get('id'):
+            results = json.load(response).get('results', [])
+        results.sort(key=lambda item: max(difflib.SequenceMatcher(None, str(title).casefold(), str(item.get('name') or '').casefold()).ratio(), difflib.SequenceMatcher(None, str(title).casefold(), str(item.get('original_name') or '').casefold()).ratio()), reverse=True)
+        if not results or not results[0].get('id'):
             return []
         params = urllib.parse.urlencode({'api_key': key, 'language': 'en-US'})
         with urllib.request.urlopen(urllib.request.Request('https://api.themoviedb.org/3/tv/%s?%s' % (result[0]['id'], params), headers={'User-Agent': 'FilmGo/1.0'}), timeout=6) as response:
@@ -224,6 +229,7 @@ def anime_media_item(message):
     if not filename or not getattr(message, 'file', None):
         return None
     title, season, episode, part = anime_filename_parts(filename)
+    season = season or season_from_caption(getattr(message, 'raw_text', ''))
     quality_match = re.search(r'(?i)\b(2160p|1080p|720p|480p|4k)\b', filename)
     quality = quality_match.group(1).upper() if quality_match else 'AUTO'
     size = int(getattr(message.file, 'size', 0) or 0)

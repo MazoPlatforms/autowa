@@ -64,6 +64,10 @@ export const animeFilenameParts=name=>{
  const cut=qualityMatch?.index??Infinity;const title=(Number.isFinite(cut)?raw.slice(0,cut):raw).replace(/^[\s\[({]+|[\s\-\[\]({})]+$/g,'').replace(/\s+/g,' ').trim();
  return {title:title||'Untitled anime',titleCandidates:titleCandidates(title),season,episode,part,quality};
 };
+function seasonFromCaption(caption){
+ const match=String(caption||'').match(/\b(?:season|s)\s*[:#-]?\s*(\d{1,2})\b/i);
+ return match?Number(match[1]):null;
+}
 async function catalog(){const r=await fetch('https://raw.githubusercontent.com/'+REPO+'/main/data/movies.json?ts='+Date.now(),{signal:AbortSignal.timeout(10000),cache:'no-store'});if(!r.ok)throw Error('Catalog unavailable');return (await r.json()).movies||[];}
 async function draftGet(){const raw=await redis('GET',DRAFT_KEY+ADMIN_ID);return raw?JSON.parse(raw):null;}
 async function draftSave(d){await redis('SET',DRAFT_KEY+ADMIN_ID,JSON.stringify(d),'EX',86400*7);}
@@ -211,8 +215,9 @@ async function wikipediaSearch(title){
 async function animeMetadata(title){
  const [ani,jikan,tmdb,wikipedia]=await Promise.all([anilistSearch(title).catch(()=>null),jikanSearch(title).catch(()=>null),tmdbAnimeSearch(title).catch(()=>null),wikipediaSearch(title).catch(()=>null)]);const primary=ani||jikan||tmdb||wikipedia;if(!primary)return null;const fallbacks=[jikan,tmdb,wikipedia].filter(Boolean);return Object.fromEntries(Object.entries(primary).map(([key,value])=>[key,value===null||value===''||(Array.isArray(value)&&!value.length)?(fallbacks.find(item=>item[key]!==null&&item[key]!==''&&(!Array.isArray(item[key])||item[key].length))?.[key]??value):value]));
 }
-async function detectAnimeType(file){
+async function detectAnimeType(file,caption=''){
  const parts=animeFilenameParts(file.file_name||'');const name=String(file.file_name||'');
+ if(!parts.season)parts.season=seasonFromCaption(caption);
  const explicitEpisode=/\b(?:S\d{1,2}\s*(?:-|x)?\s*E\d{1,4}|season\s*\d+\s*(?:episode|ep)\s*\d+|episode|ep)\b/i.test(name);
  const metadata=await animeMetadata(parts.title).catch(()=>null);const titleScore=metadata?.title?similarity(parts.title,metadata.title):0;
  let confidence=0;if(explicitEpisode)confidence=.95;else if(parts.episode)confidence=.82;if(titleScore>=.7)confidence=Math.max(confidence,Math.min(.92,titleScore));
@@ -220,16 +225,16 @@ async function detectAnimeType(file){
 }
 function animeSlug(title){return String(title||'').normalize('NFKD').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'').slice(0,70)||'anime';}
 async function tmdbAnimeSeason(title,episode){
- const key=process.env.TMDB_API_KEY;if(!key||!episode)return null;
+ const key=process.env.TMDB_API_KEY;if(!key||!episode){if(!key)console.warn('Anime season mapping skipped: TMDB_API_KEY is missing');return null;}
  try{
   const search=await fetch('https://api.themoviedb.org/3/search/tv?'+new URLSearchParams({api_key:key,query:title,language:'en-US'}),{signal:AbortSignal.timeout(8000)});
-  if(!search.ok)return null;const result=(await search.json()).results?.[0];if(!result?.id)return null;
+  if(!search.ok)return null;const results=(await search.json()).results||[];const result=[...results].sort((a,b)=>Math.max(similarity(title,a.name),similarity(title,a.original_name))-Math.max(similarity(title,b.name),similarity(title,b.original_name)))[0];if(!result?.id)return null;
   const detail=await fetch('https://api.themoviedb.org/3/tv/'+result.id+'?'+new URLSearchParams({api_key:key,language:'en-US'}),{signal:AbortSignal.timeout(8000)});if(!detail.ok)return null;
   const seasons=(await detail.json()).seasons||[];let offset=0;
   for(const season of seasons.filter(item=>Number(item.season_number)>0).sort((a,b)=>a.season_number-b.season_number)){
    const count=Number(season.episode_count)||0;if(Number(episode)<=offset+count)return Number(season.season_number);offset+=count;
   }
- }catch{}
+ }catch(error){console.warn('Anime season mapping failed:',error?.message||'unknown error');}
  return null;
 }
 function animeDraftPrompt(d){
@@ -318,8 +323,9 @@ async function probe(input){
  // Never fetch arbitrary URLs from the Koyeb service. GitHub runner performs the download.
  return {size:null,drive:false,url:u.url};
 }
-async function startAnimeDraft(file,messageId,detected=null){
+async function startAnimeDraft(file,messageId,detected=null,caption=''){
  const parts=animeFilenameParts(file.file_name||'');
+ if(!parts.season)parts.season=seasonFromCaption(caption);
  if(!parts.episode)return say(ADMIN_ID,'I could not identify the anime episode. Use a filename such as Naruto Shippuden - 001 [720p].mkv.');
  parts.season=parts.season||await tmdbAnimeSeason(parts.title,parts.episode)||1;
  const d={kind:'anime',message_id:messageId,file_name:file.file_name||'',file_size:Number(file.file_size||0),mime_type:file.mime_type||'',title:parts.title,titleCandidates:parts.titleCandidates,season:parts.season,episode:parts.episode,part:parts.part,quality:parts.quality,slug_id:animeSlug(parts.title),episode_slug_id:crypto.randomBytes(12).toString('base64url')};
@@ -388,8 +394,8 @@ async function onMessage(message,refresh){
  if(file){
   const active=await draftGet();if(active)return say(chat,'There is already an active draft. Finish it or use /cancel before sending another file.');
   if(file.file_size>MAX_BYTES)return say(chat,'File exceeds the current 2 GB limit.');
-  const detected=await detectAnimeType(file);
-  if(detected.anime){if(!ANIME_CHANNEL_ID)return say(chat,'Anime channel is not configured yet. Add TELEGRAM_ANIME_CHANNEL_ID and resend the file.');return startAnimeDraft(file,message.message_id,detected);}
+  const detected=await detectAnimeType(file,message.caption||'');
+  if(detected.anime){if(!ANIME_CHANNEL_ID)return say(chat,'Anime channel is not configured yet. Add TELEGRAM_ANIME_CHANNEL_ID and resend the file.');return startAnimeDraft(file,message.message_id,detected,message.caption||'');}
   return startMovieDraft(file,message.message_id,chat);
  }
  const d=await draftGet();
