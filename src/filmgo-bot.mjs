@@ -272,8 +272,17 @@ function manualAnimeSeason(title,episode){
  return boundaries.find(([,last])=>Number(episode)<=last)?.[0]||22;
 }
 function animeDraftPrompt(d){
- const lines=['FilmGo anime draft',d.title,'Season: '+d.season+' · Episode: '+d.episode+(d.part?' · Part: '+d.part:''),'Quality: '+d.quality,'File: '+d.file_name,d.poster?'Poster: ready':'Poster: '+(d.poster_error||'AniList / fallback'),'Use /edit to change metadata or /cancel to discard.'];
- return say(ADMIN_ID,lines.join('\n'),{reply_markup:{inline_keyboard:[[{text:'Publish anime',callback_data:'fg:publish'},{text:'Cancel',callback_data:'fg:cancel'}]]}});
+ const lines=['FilmGo anime draft',d.title,'Season: '+d.season+' · Episode: '+d.episode+(d.part?' · Part: '+d.part:''),'Quality: '+d.quality,'File: '+d.file_name,d.replace?'Existing episode and quality found — replacement requires confirmation':d.poster?'Poster: ready':'Poster: '+(d.poster_error||'AniList / fallback'),'Use /edit to change metadata or /cancel to discard.'];
+ return say(ADMIN_ID,lines.join('\n'),{reply_markup:{inline_keyboard:[[{text:d.replace?'Replace existing':'Publish anime',callback_data:'fg:publish'},{text:'Cancel',callback_data:'fg:cancel'}]]}});
+}
+async function findAnimeDuplicate(d){
+ const [owner,name]=REPO.split('/');if(!owner||!name||!GH_TOKEN)return null;
+ const response=await fetch('https://api.github.com/repos/'+owner+'/'+name+'/contents/data/anime.json',{headers:{Authorization:'Bearer '+GH_TOKEN,Accept:'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28'},signal:AbortSignal.timeout(15000)});
+ if(!response.ok)return null;
+ const file=await response.json();const content=JSON.parse(Buffer.from(file.content.replace(/\s/g,''),'base64').toString('utf8'));
+ const show=(content.anime||[]).find(item=>item.slug_id===d.slug_id||normalize(item.title)===normalize(d.title));
+ if(!show)return null;
+ return (show.episodes||[]).find(item=>Number(item.episode)===Number(d.episode)&&Number(item.season||1)===Number(d.season||1)&&String(item.quality||'').toLowerCase()===String(d.quality||'').toLowerCase())||null;
 }
 async function saveAnimeMetadata(id,d){
  const [owner,name]=REPO.split('/');const url='https://api.github.com/repos/'+owner+'/'+name+'/contents/data/anime.json';const headers={Authorization:'Bearer '+GH_TOKEN,Accept:'application/vnd.github+json','Content-Type':'application/json','X-GitHub-Api-Version':'2022-11-28'};
@@ -325,7 +334,7 @@ async function saveMovieMetadata(id,d){
 }
 async function publishDraft(d){if(d.kind==='anime')return publishAnimeDraft(d);const lock=prefix+'publishing:'+ADMIN_ID;if(await redis('SET',lock,'1','NX','EX',90)!=='OK')return say(ADMIN_ID,'Publishing is already running.');try{const caption=['Movie: '+d.title,'Year: '+d.year,'Quality: '+d.quality,...(d.slug_id?['Slug ID: '+d.slug_id]:[])].join('\n');const sent=await tg('copyMessage',{chat_id:CHANNEL_ID,from_chat_id:ADMIN_ID,message_id:d.message_id,caption},30000);await saveMovieMetadata(sent.message_id,d);await redis('DEL',DRAFT_KEY+ADMIN_ID);void logFilmGo('movies','🎬 Published: '+d.title+' ('+d.year+') · '+d.quality+' · channel #'+sent.message_id);await dispatch('filmgo-catalog-sync',{message_id:sent.message_id});await say(ADMIN_ID,'✅ Movie published successfully\n\n🎬 '+d.title+' ('+d.year+')\n📺 Quality: '+d.quality);}finally{await redis('DEL',lock);}}
 
-async function publishAnimeDraft(d){const lock=prefix+'publishing:'+ADMIN_ID;if(await redis('SET',lock,'1','NX','EX',90)!=='OK')return say(ADMIN_ID,'Publishing is already running.');try{const sent=await tg('copyMessage',{chat_id:ANIME_CHANNEL_ID,from_chat_id:ADMIN_ID,message_id:d.message_id,caption:telegramAnimeCaption(d)},30000);const posted=sent.document||sent.video||{};await saveAnimeMetadata(sent.message_id,{...d,file_size:posted.file_size||d.file_size,mime_type:posted.mime_type||d.mime_type});await redis('DEL',DRAFT_KEY+ADMIN_ID);void logFilmGo('anime','🍥 Published: '+d.title+' S'+d.season+'E'+d.episode+' · '+d.quality+' · channel #'+sent.message_id);await dispatch('filmgo-anime-catalog-sync',{message_id:sent.message_id});await say(ADMIN_ID,'✅ Anime published successfully\n\n🍥 '+d.title+'\n🎞️ Season '+d.season+' · Episode '+d.episode+'\n📺 '+d.quality);}finally{await redis('DEL',lock);}}
+async function publishAnimeDraft(d){const lock=prefix+'publishing:'+ADMIN_ID;if(await redis('SET',lock,'1','NX','EX',90)!=='OK')return say(ADMIN_ID,'Publishing is already running.');try{const sent=await tg('copyMessage',{chat_id:ANIME_CHANNEL_ID,from_chat_id:ADMIN_ID,message_id:d.message_id,caption:telegramAnimeCaption(d)},30000);const posted=sent.document||sent.video||{};await saveAnimeMetadata(sent.message_id,{...d,file_size:posted.file_size||d.file_size,mime_type:posted.mime_type||d.mime_type});if(d.replace&&d.existing_episode_message_id&&Number(d.existing_episode_message_id)!==Number(sent.message_id)){try{await tg('deleteMessage',{chat_id:ANIME_CHANNEL_ID,message_id:Number(d.existing_episode_message_id)});}catch(error){console.warn('Anime replacement cleanup failed:',error?.message||'unknown error');}}await redis('DEL',DRAFT_KEY+ADMIN_ID);void logFilmGo('anime','🍥 Published: '+d.title+' S'+d.season+'E'+d.episode+' · '+d.quality+' · channel #'+sent.message_id+(d.replace?' · replaced #'+d.existing_episode_message_id:''));await dispatch('filmgo-anime-catalog-sync',{message_id:sent.message_id});await say(ADMIN_ID,(d.replace?'✅ Anime replacement published successfully':'✅ Anime published successfully')+'\n\n🍥 '+d.title+'\n🎞️ Season '+d.season+' · Episode '+d.episode+'\n📺 '+d.quality);}finally{await redis('DEL',lock);}}
 let running=false;
 async function redis(...args){
  const r=await fetch(REDIS_URL,{method:'POST',headers:{Authorization:'Bearer '+REDIS_TOKEN,'Content-Type':'application/json'},body:JSON.stringify(args),signal:AbortSignal.timeout(12000)});
@@ -363,8 +372,10 @@ async function startAnimeDraft(file,messageId,detected=null,caption=''){
  const known=isKnownAnimeTitle(parts.title);
  parts.season=parts.season||(known?manualAnimeSeason(parts.title,parts.episode)||1:await tmdbAnimeSeason(parts.title,parts.episode)||1);
  const d={kind:'anime',message_id:messageId,file_name:file.file_name||'',file_size:Number(file.file_size||0),mime_type:file.mime_type||'',title:parts.title,titleCandidates:parts.titleCandidates,season:parts.season,episode:parts.episode,part:parts.part,quality:parts.quality,slug_id:animeSlug(parts.title),episode_slug_id:crypto.randomBytes(12).toString('base64url')};
+ const duplicate=await findAnimeDuplicate(d).catch(error=>{console.warn('Anime duplicate check failed:',error?.message||'unknown error');return null;});
+ if(duplicate){d.existing=true;d.replace=true;d.existing_episode_message_id=Number(duplicate.telegram_message_id)||null;}
  const metadata=known?null:(detected?.metadata||await animeMetadata(parts.title).catch(()=>null));if(metadata){Object.assign(d,metadata);d.slug_id=animeSlug(metadata.title);}d.stage='await-publish';await draftSave(d);
- if(detected?.confidence>=.7){await say(ADMIN_ID,'Recognized '+d.title+' as anime ('+Math.round(detected.confidence*100)+'% confidence). Publishing automatically.');return publishAnimeDraft(d);}
+ if(detected?.confidence>=.7&&!d.replace){await say(ADMIN_ID,'Recognized '+d.title+' as anime ('+Math.round(detected.confidence*100)+'% confidence). Publishing automatically.');return publishAnimeDraft(d);}
  return animeDraftPrompt(d);
 }
 async function startMovieDraft(file,messageId,chat){
