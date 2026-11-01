@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-01T12:50:10.264Z",
+  "updated_at": "2026-11-01T12:50:15.654Z",
   "anime": [
     {
       "slug_id": "naruto-shippud",
@@ -4122,6 +4122,17 @@
           "file_size": 80645010,
           "file_name": "Naruto Shippuden S17E372 Tamil.mkv",
           "mime_type": "video/x-matroska"
+        },
+        {
+          "slug_id": "U1u79FCjpfLCSls5",
+          "telegram_message_id": 397,
+          "episode": 375,
+          "season": 18,
+          "part": null,
+          "quality": "720p",
+          "file_size": 126793930,
+          "file_name": "Naruto Shippuden S18E375 Tamil.mkv",
+          "mime_type": "video/x-matroska"
         }
       ],
       "year": 2007,
@@ -4139,7 +4150,7 @@
       "status": "Finished",
       "episodes_total": 500,
       "studio": "Studio Pierrot",
-      "updated_at": "2026-11-01T12:50:05Z"
+      "updated_at": "2026-11-01T12:50:15.654Z"
     }
   ]
 }
