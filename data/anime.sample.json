@@ -1,0 +1,1227 @@
+{
+  "schema_version": 1,
+  "updated_at": "2026-10-31T00:00:00Z",
+  "note": "Sample data for UI previews only. Not served by the app.",
+  "anime": [
+    {
+      "id": "sample-01",
+      "slug_id": "sample-anime-01",
+      "title": "Moonlit Blade Chronicle",
+      "year": 2026,
+      "type": "Movie",
+      "status": "Completed",
+      "episodes_total": 1,
+      "poster": "https://sample.invalid/poster/01.svg",
+      "genre": [
+        "Adventure",
+        "Action"
+      ],
+      "rating": "7.3",
+      "studio": "Studio Aurora",
+      "plot": "Sample synopsis for preview only. A short description of the series appears here, clamped to a few lines in the featured hero and shown in full on the details page.",
+      "updated_at": "2026-10-30T12:00:00Z",
+      "episodes": [
+        {
+          "number": 1,
+          "title": "Moonlit Blade Chronicle",
+          "duration": "112 min"
+        }
+      ]
+    },
+    {
+      "id": "sample-02",
+      "slug_id": "sample-anime-02",
+      "title": "Skyward Academy",
+      "year": 2025,
+      "type": "TV",
+      "status": "Airing",
+      "episodes_total": 24,
+      "poster": "https://sample.invalid/poster/02.svg",
+      "genre": [
+        "Action",
+        "Drama"
+      ],
+      "rating": "7.3",
+      "studio": "Lantern Pictures",
+      "plot": "Sample synopsis for preview only. A short description of the series appears here, clamped to a few lines in the featured hero and shown in full on the details page.",
+      "updated_at": "2026-10-29T12:00:00Z",
+      "episodes": [
+        {
+          "number": 1,
+          "title": "Episode 1",
+          "duration": "24 min"
+        },
+        {
+          "number": 2,
+          "title": "Episode 2",
+          "duration": "24 min"
+        },
+        {
+          "number": 3,
+          "title": "Episode 3",
+          "duration": "24 min"
+        },
+        {
+          "number": 4,
+          "title": "Episode 4",
+          "duration": "24 min"
+        },
+        {
+          "number": 5,
+          "title": "Episode 5",
+          "duration": "24 min"
+        },
+        {
+          "number": 6,
+          "title": "Episode 6",
+          "duration": "24 min"
+        },
+        {
+          "number": 7,
+          "title": "Episode 7",
+          "duration": "24 min"
+        },
+        {
+          "number": 8,
+          "title": "Episode 8",
+          "duration": "24 min"
+        },
+        {
+          "number": 9,
+          "title": "Episode 9",
+          "duration": "24 min"
+        },
+        {
+          "number": 10,
+          "title": "Episode 10",
+          "duration": "24 min"
+        },
+        {
+          "number": 11,
+          "title": "Episode 11",
+          "duration": "24 min"
+        },
+        {
+          "number": 12,
+          "title": "Episode 12",
+          "duration": "24 min"
+        },
+        {
+          "number": 13,
+          "title": "Episode 13",
+          "duration": "24 min"
+        },
+        {
+          "number": 14,
+          "title": "Episode 14",
+          "duration": "24 min"
+        },
+        {
+          "number": 15,
+          "title": "Episode 15",
+          "duration": "24 min"
+        },
+        {
+          "number": 16,
+          "title": "Episode 16",
+          "duration": "24 min"
+        },
+        {
+          "number": 17,
+          "title": "Episode 17",
+          "duration": "24 min"
+        },
+        {
+          "number": 18,
+          "title": "Episode 18",
+          "duration": "24 min"
+        },
+        {
+          "number": 19,
+          "title": "Episode 19",
+          "duration": "24 min"
+        },
+        {
+          "number": 20,
+          "title": "Episode 20",
+          "duration": "24 min"
+        },
+        {
+          "number": 21,
+          "title": "Episode 21",
+          "duration": "24 min"
+        },
+        {
+          "number": 22,
+          "title": "Episode 22",
+          "duration": "24 min"
+        }
+      ]
+    },
+    {
+      "id": "sample-03",
+      "slug_id": "sample-anime-03",
+      "title": "Neon District Zero",
+      "year": 2024,
+      "type": "TV",
+      "status": "Completed",
+      "episodes_total": 25,
+      "poster": "https://sample.invalid/poster/03.svg",
+      "genre": [
+        "Fantasy",
+        "Drama"
+      ],
+      "rating": "7.4",
+      "studio": "Lantern Pictures",
+      "plot": "Sample synopsis for preview only. A short description of the series appears here, clamped to a few lines in the featured hero and shown in full on the details page.",
+      "updated_at": "2026-10-28T12:00:00Z",
+      "episodes": [
+        {
+          "number": 1,
+          "title": "Episode 1",
+          "duration": "24 min"
+        },
+        {
+          "number": 2,
+          "title": "Episode 2",
+          "duration": "24 min"
+        },
+        {
+          "number": 3,
+          "title": "Episode 3",
+          "duration": "24 min"
+        },
+        {
+          "number": 4,
+          "title": "Episode 4",
+          "duration": "24 min"
+        },
+        {
+          "number": 5,
+          "title": "Episode 5",
+          "duration": "24 min"
+        },
+        {
+          "number": 6,
+          "title": "Episode 6",
+          "duration": "24 min"
+        },
+        {
+          "number": 7,
+          "title": "Episode 7",
+          "duration": "24 min"
+        },
+        {
+          "number": 8,
+          "title": "Episode 8",
+          "duration": "24 min"
+        },
+        {
+          "number": 9,
+          "title": "Episode 9",
+          "duration": "24 min"
+        },
+        {
+          "number": 10,
+          "title": "Episode 10",
+          "duration": "24 min"
+        },
+        {
+          "number": 11,
+          "title": "Episode 11",
+          "duration": "24 min"
+        },
+        {
+          "number": 12,
+          "title": "Episode 12",
+          "duration": "24 min"
+        },
+        {
+          "number": 13,
+          "title": "Episode 13",
+          "duration": "24 min"
+        },
+        {
+          "number": 14,
+          "title": "Episode 14",
+          "duration": "24 min"
+        },
+        {
+          "number": 15,
+          "title": "Episode 15",
+          "duration": "24 min"
+        },
+        {
+          "number": 16,
+          "title": "Episode 16",
+          "duration": "24 min"
+        },
+        {
+          "number": 17,
+          "title": "Episode 17",
+          "duration": "24 min"
+        },
+        {
+          "number": 18,
+          "title": "Episode 18",
+          "duration": "24 min"
+        },
+        {
+          "number": 19,
+          "title": "Episode 19",
+          "duration": "24 min"
+        },
+        {
+          "number": 20,
+          "title": "Episode 20",
+          "duration": "24 min"
+        },
+        {
+          "number": 21,
+          "title": "Episode 21",
+          "duration": "24 min"
+        },
+        {
+          "number": 22,
+          "title": "Episode 22",
+          "duration": "24 min"
+        },
+        {
+          "number": 23,
+          "title": "Episode 23",
+          "duration": "24 min"
+        },
+        {
+          "number": 24,
+          "title": "Episode 24",
+          "duration": "24 min"
+        },
+        {
+          "number": 25,
+          "title": "Episode 25",
+          "duration": "24 min"
+        }
+      ]
+    },
+    {
+      "id": "sample-04",
+      "slug_id": "sample-anime-04",
+      "title": "The Last Lantern",
+      "year": 2023,
+      "type": "TV",
+      "status": "Airing",
+      "episodes_total": 12,
+      "poster": "https://sample.invalid/poster/04.svg",
+      "genre": [
+        "Drama",
+        "Action"
+      ],
+      "rating": "8.3",
+      "studio": "Lantern Pictures",
+      "plot": "Sample synopsis for preview only. A short description of the series appears here, clamped to a few lines in the featured hero and shown in full on the details page.",
+      "updated_at": "2026-10-27T12:00:00Z",
+      "episodes": [
+        {
+          "number": 1,
+          "title": "Episode 1",
+          "duration": "24 min"
+        },
+        {
+          "number": 2,
+          "title": "Episode 2",
+          "duration": "24 min"
+        },
+        {
+          "number": 3,
+          "title": "Episode 3",
+          "duration": "24 min"
+        },
+        {
+          "number": 4,
+          "title": "Episode 4",
+          "duration": "24 min"
+        },
+        {
+          "number": 5,
+          "title": "Episode 5",
+          "duration": "24 min"
+        }
+      ]
+    },
+    {
+      "id": "sample-05",
+      "slug_id": "sample-anime-05",
+      "title": "Ember and Ash",
+      "year": 2022,
+      "type": "TV",
+      "status": "Airing",
+      "episodes_total": 12,
+      "poster": "https://sample.invalid/poster/05.svg",
+      "genre": [
+        "Action",
+        "Sci-Fi"
+      ],
+      "rating": "7.8",
+      "studio": "Kite Works",
+      "plot": "Sample synopsis for preview only. A short description of the series appears here, clamped to a few lines in the featured hero and shown in full on the details page.",
+      "updated_at": "2026-10-26T12:00:00Z",
+      "episodes": [
+        {
+          "number": 1,
+          "title": "Episode 1",
+          "duration": "24 min"
+        },
+        {
+          "number": 2,
+          "title": "Episode 2",
+          "duration": "24 min"
+        },
+        {
+          "number": 3,
+          "title": "Episode 3",
+          "duration": "24 min"
+        },
+        {
+          "number": 4,
+          "title": "Episode 4",
+          "duration": "24 min"
+        },
+        {
+          "number": 5,
+          "title": "Episode 5",
+          "duration": "24 min"
+        },
+        {
+          "number": 6,
+          "title": "Episode 6",
+          "duration": "24 min"
+        },
+        {
+          "number": 7,
+          "title": "Episode 7",
+          "duration": "24 min"
+        }
+      ]
+    },
+    {
+      "id": "sample-06",
+      "slug_id": "sample-anime-06",
+      "title": "Tidebreaker",
+      "year": 2026,
+      "type": "Movie",
+      "status": "Completed",
+      "episodes_total": 1,
+      "poster": "https://sample.invalid/poster/06.svg",
+      "genre": [
+        "Comedy",
+        "Sci-Fi"
+      ],
+      "rating": "7.4",
+      "studio": "Kite Works",
+      "plot": "Sample synopsis for preview only. A short description of the series appears here, clamped to a few lines in the featured hero and shown in full on the details page.",
+      "updated_at": "2026-10-25T12:00:00Z",
+      "episodes": [
+        {
+          "number": 1,
+          "title": "Tidebreaker",
+          "duration": "112 min"
+        }
+      ]
+    },
+    {
+      "id": "sample-07",
+      "slug_id": "sample-anime-07",
+      "title": "Clockwork Garden",
+      "year": 2025,
+      "type": "TV",
+      "status": "Airing",
+      "episodes_total": 24,
+      "poster": "https://sample.invalid/poster/07.svg",
+      "genre": [
+        "Mystery",
+        "Fantasy"
+      ],
+      "rating": "8.3",
+      "studio": "Kite Works",
+      "plot": "Sample synopsis for preview only. A short description of the series appears here, clamped to a few lines in the featured hero and shown in full on the details page.",
+      "updated_at": "2026-10-24T12:00:00Z",
+      "episodes": [
+        {
+          "number": 1,
+          "title": "Episode 1",
+          "duration": "24 min"
+        },
+        {
+          "number": 2,
+          "title": "Episode 2",
+          "duration": "24 min"
+        },
+        {
+          "number": 3,
+          "title": "Episode 3",
+          "duration": "24 min"
+        },
+        {
+          "number": 4,
+          "title": "Episode 4",
+          "duration": "24 min"
+        },
+        {
+          "number": 5,
+          "title": "Episode 5",
+          "duration": "24 min"
+        },
+        {
+          "number": 6,
+          "title": "Episode 6",
+          "duration": "24 min"
+        },
+        {
+          "number": 7,
+          "title": "Episode 7",
+          "duration": "24 min"
+        }
+      ]
+    },
+    {
+      "id": "sample-08",
+      "slug_id": "sample-anime-08",
+      "title": "Starlit Ramen Shop",
+      "year": 2024,
+      "type": "TV",
+      "status": "Airing",
+      "episodes_total": 25,
+      "poster": "https://sample.invalid/poster/08.svg",
+      "genre": [
+        "Mystery",
+        "Adventure"
+      ],
+      "rating": "8.7",
+      "studio": "Lantern Pictures",
+      "plot": "Sample synopsis for preview only. A short description of the series appears here, clamped to a few lines in the featured hero and shown in full on the details page.",
+      "updated_at": "2026-10-23T12:00:00Z",
+      "episodes": [
+        {
+          "number": 1,
+          "title": "Episode 1",
+          "duration": "24 min"
+        },
+        {
+          "number": 2,
+          "title": "Episode 2",
+          "duration": "24 min"
+        },
+        {
+          "number": 3,
+          "title": "Episode 3",
+          "duration": "24 min"
+        },
+        {
+          "number": 4,
+          "title": "Episode 4",
+          "duration": "24 min"
+        },
+        {
+          "number": 5,
+          "title": "Episode 5",
+          "duration": "24 min"
+        },
+        {
+          "number": 6,
+          "title": "Episode 6",
+          "duration": "24 min"
+        },
+        {
+          "number": 7,
+          "title": "Episode 7",
+          "duration": "24 min"
+        },
+        {
+          "number": 8,
+          "title": "Episode 8",
+          "duration": "24 min"
+        },
+        {
+          "number": 9,
+          "title": "Episode 9",
+          "duration": "24 min"
+        },
+        {
+          "number": 10,
+          "title": "Episode 10",
+          "duration": "24 min"
+        },
+        {
+          "number": 11,
+          "title": "Episode 11",
+          "duration": "24 min"
+        },
+        {
+          "number": 12,
+          "title": "Episode 12",
+          "duration": "24 min"
+        },
+        {
+          "number": 13,
+          "title": "Episode 13",
+          "duration": "24 min"
+        },
+        {
+          "number": 14,
+          "title": "Episode 14",
+          "duration": "24 min"
+        },
+        {
+          "number": 15,
+          "title": "Episode 15",
+          "duration": "24 min"
+        },
+        {
+          "number": 16,
+          "title": "Episode 16",
+          "duration": "24 min"
+        },
+        {
+          "number": 17,
+          "title": "Episode 17",
+          "duration": "24 min"
+        },
+        {
+          "number": 18,
+          "title": "Episode 18",
+          "duration": "24 min"
+        },
+        {
+          "number": 19,
+          "title": "Episode 19",
+          "duration": "24 min"
+        },
+        {
+          "number": 20,
+          "title": "Episode 20",
+          "duration": "24 min"
+        },
+        {
+          "number": 21,
+          "title": "Episode 21",
+          "duration": "24 min"
+        },
+        {
+          "number": 22,
+          "title": "Episode 22",
+          "duration": "24 min"
+        },
+        {
+          "number": 23,
+          "title": "Episode 23",
+          "duration": "24 min"
+        },
+        {
+          "number": 24,
+          "title": "Episode 24",
+          "duration": "24 min"
+        },
+        {
+          "number": 25,
+          "title": "Episode 25",
+          "duration": "24 min"
+        }
+      ]
+    },
+    {
+      "id": "sample-09",
+      "slug_id": "sample-anime-09",
+      "title": "Iron Meridian",
+      "year": 2023,
+      "type": "TV",
+      "status": "Completed",
+      "episodes_total": 25,
+      "poster": "https://sample.invalid/poster/09.svg",
+      "genre": [
+        "Romance",
+        "Comedy"
+      ],
+      "rating": "7.7",
+      "studio": "Kite Works",
+      "plot": "Sample synopsis for preview only. A short description of the series appears here, clamped to a few lines in the featured hero and shown in full on the details page.",
+      "updated_at": "2026-10-22T12:00:00Z",
+      "episodes": [
+        {
+          "number": 1,
+          "title": "Episode 1",
+          "duration": "24 min"
+        },
+        {
+          "number": 2,
+          "title": "Episode 2",
+          "duration": "24 min"
+        },
+        {
+          "number": 3,
+          "title": "Episode 3",
+          "duration": "24 min"
+        },
+        {
+          "number": 4,
+          "title": "Episode 4",
+          "duration": "24 min"
+        },
+        {
+          "number": 5,
+          "title": "Episode 5",
+          "duration": "24 min"
+        },
+        {
+          "number": 6,
+          "title": "Episode 6",
+          "duration": "24 min"
+        },
+        {
+          "number": 7,
+          "title": "Episode 7",
+          "duration": "24 min"
+        },
+        {
+          "number": 8,
+          "title": "Episode 8",
+          "duration": "24 min"
+        },
+        {
+          "number": 9,
+          "title": "Episode 9",
+          "duration": "24 min"
+        },
+        {
+          "number": 10,
+          "title": "Episode 10",
+          "duration": "24 min"
+        },
+        {
+          "number": 11,
+          "title": "Episode 11",
+          "duration": "24 min"
+        },
+        {
+          "number": 12,
+          "title": "Episode 12",
+          "duration": "24 min"
+        },
+        {
+          "number": 13,
+          "title": "Episode 13",
+          "duration": "24 min"
+        },
+        {
+          "number": 14,
+          "title": "Episode 14",
+          "duration": "24 min"
+        },
+        {
+          "number": 15,
+          "title": "Episode 15",
+          "duration": "24 min"
+        },
+        {
+          "number": 16,
+          "title": "Episode 16",
+          "duration": "24 min"
+        },
+        {
+          "number": 17,
+          "title": "Episode 17",
+          "duration": "24 min"
+        },
+        {
+          "number": 18,
+          "title": "Episode 18",
+          "duration": "24 min"
+        },
+        {
+          "number": 19,
+          "title": "Episode 19",
+          "duration": "24 min"
+        },
+        {
+          "number": 20,
+          "title": "Episode 20",
+          "duration": "24 min"
+        },
+        {
+          "number": 21,
+          "title": "Episode 21",
+          "duration": "24 min"
+        },
+        {
+          "number": 22,
+          "title": "Episode 22",
+          "duration": "24 min"
+        },
+        {
+          "number": 23,
+          "title": "Episode 23",
+          "duration": "24 min"
+        },
+        {
+          "number": 24,
+          "title": "Episode 24",
+          "duration": "24 min"
+        },
+        {
+          "number": 25,
+          "title": "Episode 25",
+          "duration": "24 min"
+        }
+      ]
+    },
+    {
+      "id": "sample-10",
+      "slug_id": "sample-anime-10",
+      "title": "Paper Lanterns",
+      "year": 2022,
+      "type": "TV",
+      "status": "Airing",
+      "episodes_total": 13,
+      "poster": "https://sample.invalid/poster/10.svg",
+      "genre": [
+        "Comedy",
+        "Slice of Life"
+      ],
+      "rating": "8.9",
+      "studio": "Lantern Pictures",
+      "plot": "Sample synopsis for preview only. A short description of the series appears here, clamped to a few lines in the featured hero and shown in full on the details page.",
+      "updated_at": "2026-10-21T12:00:00Z",
+      "episodes": [
+        {
+          "number": 1,
+          "title": "Episode 1",
+          "duration": "24 min"
+        },
+        {
+          "number": 2,
+          "title": "Episode 2",
+          "duration": "24 min"
+        },
+        {
+          "number": 3,
+          "title": "Episode 3",
+          "duration": "24 min"
+        },
+        {
+          "number": 4,
+          "title": "Episode 4",
+          "duration": "24 min"
+        },
+        {
+          "number": 5,
+          "title": "Episode 5",
+          "duration": "24 min"
+        }
+      ]
+    },
+    {
+      "id": "sample-11",
+      "slug_id": "sample-anime-11",
+      "title": "Echoes of Aria",
+      "year": 2026,
+      "type": "Movie",
+      "status": "Completed",
+      "episodes_total": 1,
+      "poster": "https://sample.invalid/poster/11.svg",
+      "genre": [
+        "Fantasy",
+        "Mystery"
+      ],
+      "rating": "8.2",
+      "studio": "Kite Works",
+      "plot": "Sample synopsis for preview only. A short description of the series appears here, clamped to a few lines in the featured hero and shown in full on the details page.",
+      "updated_at": "2026-10-20T12:00:00Z",
+      "episodes": [
+        {
+          "number": 1,
+          "title": "Echoes of Aria",
+          "duration": "112 min"
+        }
+      ]
+    },
+    {
+      "id": "sample-12",
+      "slug_id": "sample-anime-12",
+      "title": "Winter Court",
+      "year": 2025,
+      "type": "TV",
+      "status": "Completed",
+      "episodes_total": 24,
+      "poster": "https://sample.invalid/poster/12.svg",
+      "genre": [
+        "Sci-Fi",
+        "Slice of Life"
+      ],
+      "rating": "8.0",
+      "studio": "Studio Aurora",
+      "plot": "Sample synopsis for preview only. A short description of the series appears here, clamped to a few lines in the featured hero and shown in full on the details page.",
+      "updated_at": "2026-10-19T12:00:00Z",
+      "episodes": [
+        {
+          "number": 1,
+          "title": "Episode 1",
+          "duration": "24 min"
+        },
+        {
+          "number": 2,
+          "title": "Episode 2",
+          "duration": "24 min"
+        },
+        {
+          "number": 3,
+          "title": "Episode 3",
+          "duration": "24 min"
+        },
+        {
+          "number": 4,
+          "title": "Episode 4",
+          "duration": "24 min"
+        },
+        {
+          "number": 5,
+          "title": "Episode 5",
+          "duration": "24 min"
+        },
+        {
+          "number": 6,
+          "title": "Episode 6",
+          "duration": "24 min"
+        },
+        {
+          "number": 7,
+          "title": "Episode 7",
+          "duration": "24 min"
+        },
+        {
+          "number": 8,
+          "title": "Episode 8",
+          "duration": "24 min"
+        },
+        {
+          "number": 9,
+          "title": "Episode 9",
+          "duration": "24 min"
+        },
+        {
+          "number": 10,
+          "title": "Episode 10",
+          "duration": "24 min"
+        },
+        {
+          "number": 11,
+          "title": "Episode 11",
+          "duration": "24 min"
+        },
+        {
+          "number": 12,
+          "title": "Episode 12",
+          "duration": "24 min"
+        },
+        {
+          "number": 13,
+          "title": "Episode 13",
+          "duration": "24 min"
+        },
+        {
+          "number": 14,
+          "title": "Episode 14",
+          "duration": "24 min"
+        },
+        {
+          "number": 15,
+          "title": "Episode 15",
+          "duration": "24 min"
+        },
+        {
+          "number": 16,
+          "title": "Episode 16",
+          "duration": "24 min"
+        },
+        {
+          "number": 17,
+          "title": "Episode 17",
+          "duration": "24 min"
+        },
+        {
+          "number": 18,
+          "title": "Episode 18",
+          "duration": "24 min"
+        },
+        {
+          "number": 19,
+          "title": "Episode 19",
+          "duration": "24 min"
+        },
+        {
+          "number": 20,
+          "title": "Episode 20",
+          "duration": "24 min"
+        },
+        {
+          "number": 21,
+          "title": "Episode 21",
+          "duration": "24 min"
+        },
+        {
+          "number": 22,
+          "title": "Episode 22",
+          "duration": "24 min"
+        },
+        {
+          "number": 23,
+          "title": "Episode 23",
+          "duration": "24 min"
+        },
+        {
+          "number": 24,
+          "title": "Episode 24",
+          "duration": "24 min"
+        }
+      ]
+    },
+    {
+      "id": "sample-13",
+      "slug_id": "sample-anime-13",
+      "title": "Cinder Knight",
+      "year": 2024,
+      "type": "TV",
+      "status": "Airing",
+      "episodes_total": 24,
+      "poster": "https://sample.invalid/poster/13.svg",
+      "genre": [
+        "Romance",
+        "Slice of Life"
+      ],
+      "rating": "8.3",
+      "studio": "Lantern Pictures",
+      "plot": "Sample synopsis for preview only. A short description of the series appears here, clamped to a few lines in the featured hero and shown in full on the details page.",
+      "updated_at": "2026-10-18T12:00:00Z",
+      "episodes": [
+        {
+          "number": 1,
+          "title": "Episode 1",
+          "duration": "24 min"
+        },
+        {
+          "number": 2,
+          "title": "Episode 2",
+          "duration": "24 min"
+        },
+        {
+          "number": 3,
+          "title": "Episode 3",
+          "duration": "24 min"
+        },
+        {
+          "number": 4,
+          "title": "Episode 4",
+          "duration": "24 min"
+        },
+        {
+          "number": 5,
+          "title": "Episode 5",
+          "duration": "24 min"
+        },
+        {
+          "number": 6,
+          "title": "Episode 6",
+          "duration": "24 min"
+        },
+        {
+          "number": 7,
+          "title": "Episode 7",
+          "duration": "24 min"
+        },
+        {
+          "number": 8,
+          "title": "Episode 8",
+          "duration": "24 min"
+        },
+        {
+          "number": 9,
+          "title": "Episode 9",
+          "duration": "24 min"
+        },
+        {
+          "number": 10,
+          "title": "Episode 10",
+          "duration": "24 min"
+        },
+        {
+          "number": 11,
+          "title": "Episode 11",
+          "duration": "24 min"
+        },
+        {
+          "number": 12,
+          "title": "Episode 12",
+          "duration": "24 min"
+        },
+        {
+          "number": 13,
+          "title": "Episode 13",
+          "duration": "24 min"
+        },
+        {
+          "number": 14,
+          "title": "Episode 14",
+          "duration": "24 min"
+        }
+      ]
+    },
+    {
+      "id": "sample-14",
+      "slug_id": "sample-anime-14",
+      "title": "Sundown Express",
+      "year": 2023,
+      "type": "TV",
+      "status": "Airing",
+      "episodes_total": 12,
+      "poster": "https://sample.invalid/poster/14.svg",
+      "genre": [
+        "Comedy",
+        "Slice of Life"
+      ],
+      "rating": "8.5",
+      "studio": "Studio Aurora",
+      "plot": "Sample synopsis for preview only. A short description of the series appears here, clamped to a few lines in the featured hero and shown in full on the details page.",
+      "updated_at": "2026-10-17T12:00:00Z",
+      "episodes": [
+        {
+          "number": 1,
+          "title": "Episode 1",
+          "duration": "24 min"
+        },
+        {
+          "number": 2,
+          "title": "Episode 2",
+          "duration": "24 min"
+        },
+        {
+          "number": 3,
+          "title": "Episode 3",
+          "duration": "24 min"
+        },
+        {
+          "number": 4,
+          "title": "Episode 4",
+          "duration": "24 min"
+        },
+        {
+          "number": 5,
+          "title": "Episode 5",
+          "duration": "24 min"
+        }
+      ]
+    },
+    {
+      "id": "sample-15",
+      "slug_id": "sample-anime-15",
+      "title": "Hollow Crown",
+      "year": 2022,
+      "type": "TV",
+      "status": "Completed",
+      "episodes_total": 12,
+      "poster": "https://sample.invalid/poster/15.svg",
+      "genre": [
+        "Comedy",
+        "Slice of Life"
+      ],
+      "rating": "7.7",
+      "studio": "Lantern Pictures",
+      "plot": "Sample synopsis for preview only. A short description of the series appears here, clamped to a few lines in the featured hero and shown in full on the details page.",
+      "updated_at": "2026-10-16T12:00:00Z",
+      "episodes": [
+        {
+          "number": 1,
+          "title": "Episode 1",
+          "duration": "24 min"
+        },
+        {
+          "number": 2,
+          "title": "Episode 2",
+          "duration": "24 min"
+        },
+        {
+          "number": 3,
+          "title": "Episode 3",
+          "duration": "24 min"
+        },
+        {
+          "number": 4,
+          "title": "Episode 4",
+          "duration": "24 min"
+        },
+        {
+          "number": 5,
+          "title": "Episode 5",
+          "duration": "24 min"
+        },
+        {
+          "number": 6,
+          "title": "Episode 6",
+          "duration": "24 min"
+        },
+        {
+          "number": 7,
+          "title": "Episode 7",
+          "duration": "24 min"
+        },
+        {
+          "number": 8,
+          "title": "Episode 8",
+          "duration": "24 min"
+        },
+        {
+          "number": 9,
+          "title": "Episode 9",
+          "duration": "24 min"
+        },
+        {
+          "number": 10,
+          "title": "Episode 10",
+          "duration": "24 min"
+        },
+        {
+          "number": 11,
+          "title": "Episode 11",
+          "duration": "24 min"
+        },
+        {
+          "number": 12,
+          "title": "Episode 12",
+          "duration": "24 min"
+        }
+      ]
+    },
+    {
+      "id": "sample-16",
+      "slug_id": "sample-anime-16",
+      "title": "Orbit Club",
+      "year": 2026,
+      "type": "Movie",
+      "status": "Completed",
+      "episodes_total": 1,
+      "poster": "https://sample.invalid/poster/16.svg",
+      "genre": [
+        "Slice of Life",
+        "Romance"
+      ],
+      "rating": "7.5",
+      "studio": "Studio Aurora",
+      "plot": "Sample synopsis for preview only. A short description of the series appears here, clamped to a few lines in the featured hero and shown in full on the details page.",
+      "updated_at": "2026-10-15T12:00:00Z",
+      "episodes": [
+        {
+          "number": 1,
+          "title": "Orbit Club",
+          "duration": "112 min"
+        }
+      ]
+    }
+  ]
+}

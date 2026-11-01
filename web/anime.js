@@ -1,0 +1,184 @@
+// FilmGo anime page. Served only while ANIME_ENABLED=1 on the server; otherwise /anime shows the coming-soon page.
+const fontStylesheet=document.createElement('link');fontStylesheet.rel='stylesheet';fontStylesheet.href='https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap';document.head.append(fontStylesheet);
+const $=id=>document.getElementById(id);
+const el=(tag,cls,text)=>{const e=document.createElement(tag);if(cls)e.className=cls;if(text!==undefined)e.textContent=text;return e;};
+const FALLBACK_POSTER='https://i.ibb.co/TMJ6YCC4/IMG-33a2f581-8ff4-4a5e-9e64-e43c900000c2.png';
+const poster=a=>a.poster&&(/^https:\/\//.test(a.poster)||/^\/posters\/[a-f0-9]{24}\.jpg$/.test(a.poster))?a.poster:FALLBACK_POSTER;
+function startPoster(img){const source=img.dataset.posterSrc;if(!source)return;delete img.dataset.posterSrc;img.loading='eager';img.src=source;}
+const posterObserver='IntersectionObserver'in window?new IntersectionObserver(entries=>{for(const entry of entries){if(!entry.isIntersecting)continue;posterObserver.unobserve(entry.target);startPoster(entry.target);}},{rootMargin:'1600px 0px'}):null;
+function image(a,cls,eager=false,priority=false){const img=el('img',cls);img.alt='';img.loading=eager?'eager':'lazy';img.decoding='async';img.classList.add('poster-loading');if(priority)img.fetchPriority='high';img.addEventListener('load',()=>{img.classList.remove('poster-loading');img.classList.add('poster-loaded');},{once:true});img.onerror=()=>{if(img.src!==FALLBACK_POSTER){img.src=FALLBACK_POSTER;}else{img.onerror=null;img.removeAttribute('src');img.classList.remove('poster-loading');img.classList.add('poster-failed');}};img.dataset.posterSrc=poster(a);if(eager||!posterObserver)startPoster(img);else posterObserver.observe(img);return img;}
+function playIcon(){const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');svg.setAttribute('viewBox','0 0 24 24');svg.setAttribute('width','17');svg.setAttribute('height','17');svg.setAttribute('fill','currentColor');svg.setAttribute('aria-hidden','true');const p=document.createElementNS('http://www.w3.org/2000/svg','path');p.setAttribute('d','M8 5v14l11-7L8 5Z');svg.append(p);return svg;}
+
+const grid=$('anime-grid'),searchInput=$('anime-search'),empty=$('anime-empty'),home=$('anime-home'),detail=$('anime-detail'),pagination=$('anime-pagination');
+const yearFilter=$('filter-year'),genreFilter=$('filter-genre'),sortFilter=$('filter-sort');
+const heroEl=$('anime-hero'),shelvesEl=$('anime-shelves'),introEl=$('anime-intro');
+let items=[],loaded=false,page=1,updatingFilters=false;
+const PAGE_SIZE=()=>window.matchMedia('(min-width: 768px)').matches?24:20;
+const genresOf=a=>(Array.isArray(a.genre)?a.genre:typeof a.genre==='string'?a.genre.split(','):[]).map(g=>String(g).trim()).filter(Boolean);
+const ratingOf=a=>{const r=parseFloat(a.rating);return Number.isFinite(r)?r:0;};
+const updatedOf=a=>Date.parse(a.updated_at)||0;
+const slugOf=a=>'/anime/title/'+encodeURIComponent(a.slug_id||a.id);
+const latestEp=a=>Array.isArray(a.episodes)&&a.episodes.length?Math.max(...a.episodes.map(e=>Number(e.number)||0)):Number(a.episodes_released)||0;
+const goTo=(link)=>link.addEventListener('click',e=>{if(e.ctrlKey||e.metaKey||e.shiftKey||e.altKey)return;e.preventDefault();history.pushState({},'',link.href);route();});
+function skeleton(){grid.replaceChildren();for(let i=0;i<8;i++){const box=el('div');box.append(el('div','shimmer aspect-[2/3] rounded-2xl'),el('div','shimmer mt-3 h-4 w-3/4 rounded-md'),el('div','shimmer mt-2 h-3 w-1/2 rounded-md'));grid.append(box);}}
+
+// Accessible custom popovers; native selects remain as the state source.
+function initCustomFilters(){
+ const filters=[yearFilter,genreFilter,sortFilter];
+ const closeAll=()=>{for(const select of filters){const box=select.closest('.catalog-filter');box.classList.remove('open');box.querySelector('.filter-trigger').setAttribute('aria-expanded','false');}};
+ for(const select of filters){
+  const box=select.closest('.catalog-filter');
+  select.classList.add('visually-hidden-select');
+  const trigger=el('button','filter-trigger');trigger.type='button';trigger.setAttribute('aria-label',select.getAttribute('aria-label')||'Filter options');trigger.setAttribute('aria-haspopup','listbox');trigger.setAttribute('aria-expanded','false');
+  const label=el('span','filter-trigger-label');const arrow=el('span','filter-chevron');arrow.innerHTML='<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>';trigger.append(label,arrow);
+  const panel=el('div','filter-panel');panel.setAttribute('role','listbox');panel.setAttribute('aria-label',select.getAttribute('aria-label')||'Filter options');
+  box.append(trigger,panel);
+  const refresh=()=>{
+   label.textContent=select.selectedOptions[0]?.textContent||'All';
+   panel.replaceChildren();
+   for(const option of select.options){
+    const item=el('button','filter-option'+(option.value===select.value?' selected':''),option.textContent);
+    item.type='button';item.setAttribute('role','option');item.setAttribute('aria-selected',String(option.value===select.value));
+    item.addEventListener('click',()=>{select.value=option.value;select.dispatchEvent(new Event('change'));closeAll();trigger.focus();});
+    panel.append(item);
+   }
+  };
+  select.addEventListener('change',refresh);
+  trigger.addEventListener('click',()=>{const open=box.classList.contains('open');closeAll();if(!open){box.classList.add('open');trigger.setAttribute('aria-expanded','true');}});
+  trigger.addEventListener('keydown',event=>{if(event.key==='ArrowDown'||event.key==='Enter'&& !box.classList.contains('open')){event.preventDefault();closeAll();box.classList.add('open');trigger.setAttribute('aria-expanded','true');panel.querySelector('button')?.focus();}});
+  panel.addEventListener('keydown',event=>{const buttons=[...panel.querySelectorAll('button')],index=buttons.indexOf(document.activeElement);if(event.key==='ArrowDown'||event.key==='ArrowUp'){event.preventDefault();buttons[(index+(event.key==='ArrowDown'?1:-1)+buttons.length)%buttons.length]?.focus();}if(event.key==='Escape'){closeAll();trigger.focus();}});
+  refresh();
+ }
+ document.addEventListener('click',event=>{if(!event.target.closest('.catalog-filter'))closeAll();});
+ document.addEventListener('keydown',event=>{if(event.key==='Escape')closeAll();});
+}
+initCustomFilters();
+
+function updateFilters(){
+ const oldYear=yearFilter.value,oldGenre=genreFilter.value;
+ const years=[...new Set(items.map(a=>String(a.year||'').trim()).filter(y=>/^\d{4}$/.test(y)))].sort((a,b)=>Number(b)-Number(a));
+ const genres=[...new Set(items.flatMap(genresOf))].sort((a,b)=>a.localeCompare(b));
+ const fill=(select,values,label)=>{select.replaceChildren(new Option(label,''));for(const value of values)select.add(new Option(value,value));};
+ fill(yearFilter,years,'All years');fill(genreFilter,genres,'All genres');
+ updatingFilters=true;yearFilter.value=years.includes(oldYear)?oldYear:'';genreFilter.value=genres.includes(oldGenre)?oldGenre:'';
+ yearFilter.dispatchEvent(new Event('change'));genreFilter.dispatchEvent(new Event('change'));
+ updatingFilters=false;
+}
+function card(a,i,eager=2){
+ const link=el('a','movie-card group block min-w-0');link.href=slugOf(a);
+ const wrap=el('div','poster-wrap');wrap.append(image(a,'poster',i<eager));
+ const ep=latestEp(a);
+ if(a.status==='Airing'&&a.type!=='Movie'&&ep)wrap.append(el('span','anime-badge','EP '+ep));
+ if(a.rating)wrap.append(el('span','absolute bottom-2 left-2 rounded-md bg-zinc-950/85 px-2 py-1 text-[11px] font-bold text-white backdrop-blur','★ '+a.rating));
+ const info=el('div','search-result-info');info.append(el('h3','truncate text-sm font-semibold text-zinc-100',a.title),el('p','mt-1 text-xs text-zinc-500',[a.year,a.type].filter(Boolean).join(' · ')));
+ link.append(wrap,info);goTo(link);return link;
+}
+function shelf(title,list){
+ const sec=el('section','tv-shelf');const head=el('div','tv-shelf-head');head.append(el('h2','tv-section-title',title));
+ const ctrl=el('div','tv-shelf-ctrl');const prev=el('button','tv-arrow','‹'),next=el('button','tv-arrow','›');prev.type=next.type='button';prev.setAttribute('aria-label','Scroll left');next.setAttribute('aria-label','Scroll right');ctrl.append(prev,next);head.append(ctrl);
+ const row=el('div','tv-row');list.forEach((a,i)=>row.append(card(a,i,4)));
+ const by=dir=>row.scrollBy({left:dir*row.clientWidth*.85,behavior:'smooth'});prev.onclick=()=>by(-1);next.onclick=()=>by(1);
+ sec.append(head,row);return sec;
+}
+function buildHome(){
+ if(!items.length){heroEl.hidden=true;shelvesEl.hidden=true;return;}
+ const pool=items.filter(a=>a.poster);
+ const featured=[...pool].sort((a,b)=>updatedOf(b)-updatedOf(a)).slice(0,24).sort((a,b)=>ratingOf(b)-ratingOf(a))[0]||pool[0];
+ if(featured){
+  const bg=el('div','tv-hero-bg');bg.style.backgroundImage='url("'+poster(featured).replace(/"/g,'%22')+'")';
+  const body=el('div','tv-hero-body');body.append(el('span','tv-eyebrow','Featured'),el('h1','tv-hero-title',featured.title));
+  const bits=[];if(featured.rating)bits.push('★ '+featured.rating);if(featured.year)bits.push(String(featured.year));if(featured.episodes_total)bits.push(featured.episodes_total+' eps');const g=genresOf(featured);if(g.length)bits.push(g.slice(0,2).join(' · '));
+  body.append(el('p','tv-hero-meta',bits.join('  ·  ')));
+  if(featured.plot)body.append(el('p','tv-hero-plot',featured.plot));
+  const actions=el('div','tv-hero-actions');const play=el('a','tv-btn tv-btn-primary');play.append(playIcon(),document.createTextNode('Watch now'));play.href=slugOf(featured);goTo(play);
+  const more=el('a','tv-btn tv-btn-ghost','Browse library');more.href='#anime-results-title';more.addEventListener('click',e=>{e.preventDefault();$('anime-results-title').scrollIntoView({behavior:'smooth',block:'start'});});
+  actions.append(play,more);body.append(actions);
+  const art=el('a','tv-hero-art');art.href=slugOf(featured);art.setAttribute('aria-label',featured.title);art.append(image(featured,'poster',true,true));goTo(art);
+  heroEl.replaceChildren(bg,body,art);
+ }
+ const fresh=[...pool].filter(a=>a.status==='Airing').sort((a,b)=>updatedOf(b)-updatedOf(a)).slice(0,14);
+ const top=[...pool].filter(a=>ratingOf(a)>0).sort((a,b)=>ratingOf(b)-ratingOf(a)).slice(0,14);
+ const shelves=[];if(fresh.length)shelves.push(shelf('New episodes',fresh));if(top.length)shelves.push(shelf('Top rated',top));
+ shelvesEl.replaceChildren(...shelves);syncHome();
+}
+function syncHome(){
+ const onHome=location.pathname.replace(/\/$/,'')==='/anime'&&loaded&&!searchInput.value.trim()&&!yearFilter.value&&!genreFilter.value&&sortFilter.value==='default'&&page===1;
+ heroEl.hidden=shelvesEl.hidden=!onHome||!heroEl.childElementCount;introEl.hidden=!!onHome;
+}
+function renderPagination(total){
+ pagination.replaceChildren();
+ const pages=Math.ceil(total/PAGE_SIZE());
+ pagination.classList.toggle('hidden',pages<=1);
+ if(pages<=1)return;
+ const add=(label,target,disabled=false,current=false)=>{
+  const button=el('button','page-button'+(current?' active':''),label);button.type='button';button.disabled=disabled;
+  if(current)button.setAttribute('aria-current','page');
+  button.addEventListener('click',()=>{page=target;render();home.scrollIntoView({behavior:'smooth',block:'start'});});
+  pagination.append(button);
+ };
+ add('‹',page-1,page===1);for(let n=1;n<=pages;n++)add(String(n),n,false,n===page);add('›',page+1,page===pages);
+}
+function render(){
+ if(!loaded)return;
+ const q=searchInput.value.trim().toLowerCase(),year=yearFilter.value,genre=genreFilter.value;
+ const rows=items.filter(a=>(!q||(a.title+' '+(a.title_alt||'')+' '+a.year+' '+genresOf(a).join(' ')).toLowerCase().includes(q))&&(!year||String(a.year)===year)&&(!genre||genresOf(a).some(g=>g.toLowerCase()===genre.toLowerCase())));
+ rows.sort((a,b)=>{
+  switch(sortFilter.value){
+   case 'year-asc':return (Number(a.year)||0)-(Number(b.year)||0)||String(a.title).localeCompare(String(b.title));
+   case 'year-desc':return (Number(b.year)||0)-(Number(a.year)||0)||String(a.title).localeCompare(String(b.title));
+   case 'title-asc':return String(a.title).localeCompare(String(b.title));
+   case 'title-desc':return String(b.title).localeCompare(String(a.title));
+   case 'rating-desc':return ratingOf(b)-ratingOf(a)||String(a.title).localeCompare(String(b.title));
+   default:return updatedOf(b)-updatedOf(a)||String(a.title).localeCompare(String(b.title));
+  }
+ });
+ const size=PAGE_SIZE();page=Math.max(1,Math.min(page,Math.ceil(rows.length/size)||1));
+ posterObserver?.disconnect();grid.replaceChildren();
+ $('anime-count').textContent=rows.length+' '+(rows.length===1?'title':'titles');
+ empty.classList.toggle('hidden',rows.length>0);
+ empty.textContent=q||year||genre?'No anime match your filters.':items.length?'No anime match your filters.':'No anime available yet.';
+ const eager=window.matchMedia('(min-width: 1280px)').matches?6:window.matchMedia('(min-width: 768px)').matches?4:2;
+ rows.slice((page-1)*size,page*size).forEach((a,i)=>grid.append(card(a,i,eager)));
+ renderPagination(rows.length);syncHome();
+}
+function showDetail(a){
+ const root=$('detail-content');root.replaceChildren();
+ const layout=el('div','detail-hero');layout.append(image(a,'detail-poster',true,true));
+ const info=el('div');info.append(el('p','anime-kicker','Anime details'),el('h1','anime-detail-title',a.title));
+ info.append(el('p','anime-detail-meta',[a.year,a.type,a.episodes_total?a.episodes_total+' episodes':'',a.status].filter(Boolean).join(' · ')));
+ if(a.rating)info.append(el('p','anime-detail-rating','★ '+a.rating));
+ const g=genresOf(a);if(g.length)info.append(el('p','anime-detail-line',g.join(' · ')));
+ if(a.studio)info.append(el('p','anime-detail-line','Studio: '+a.studio));
+ layout.append(info);root.append(layout);
+ const overview=el('div','anime-overview');overview.append(el('h2','','Overview'),el('p','',a.plot||'No synopsis available yet.'));root.append(overview);
+ const eps=el('div','anime-eps');const head=el('div','anime-eps-head');const list=Array.isArray(a.episodes)?[...a.episodes].sort((x,y)=>(Number(x.number)||0)-(Number(y.number)||0)):[];
+ head.append(el('h2','','Episodes'),el('span','',list.length?list.length+' available':''));eps.append(head);
+ if(!list.length)eps.append(el('div','anime-empty-eps','Episodes will appear here once they are added.'));
+ for(const e of list){
+  const row=el('div','anime-ep');row.append(el('div','anime-ep-num',String(e.number)));
+  const text=el('div');text.append(el('p','anime-ep-title',e.title||'Episode '+e.number),el('p','anime-ep-sub',[e.duration,e.released].filter(Boolean).join(' · ')||'Episode '+e.number));
+  const play=el('button','anime-ep-play');play.type='button';play.disabled=true;play.title='Playback is not connected yet';play.append(playIcon(),document.createTextNode('Play'));
+  row.append(text,play);eps.append(row);
+ }
+ root.append(eps);document.title=a.title+' — FilmGo';
+}
+function route(){
+ const match=location.pathname.match(/^\/anime\/title\/([^/]+)\/?$/);
+ $('anime-back')?.classList.toggle('visible',!!match);
+ if(match){
+  const key=decodeURIComponent(match[1]),a=items.find(x=>x.slug_id===key||x.id===key);
+  home.classList.add('hidden');detail.classList.remove('hidden');
+  if(a)showDetail(a);else if(!loaded){$('detail-content').replaceChildren(el('div','detail-loading','Loading anime details…'));document.title='Loading anime — FilmGo';}
+  else{$('detail-content').replaceChildren(el('p','text-zinc-400','Anime not found.'));document.title='Anime not found — FilmGo';}
+ }else{home.classList.remove('hidden');detail.classList.add('hidden');document.title='FilmGo — Anime';if(loaded)render();}
+ window.scrollTo(0,0);
+}
+searchInput.addEventListener('input',()=>{page=1;render();});
+for(const select of [yearFilter,genreFilter,sortFilter])select.addEventListener('change',()=>{if(updatingFilters)return;page=1;render();});
+window.addEventListener('popstate',route);
+(async()=>{
+ skeleton();
+ try{const response=await fetch('/api/anime',{cache:'no-store',credentials:'same-origin'});if(!response.ok)throw Error('Anime unavailable');const data=await response.json();items=Array.isArray(data.anime)?data.anime:[];}
+ catch{items=[];}
+ loaded=true;updateFilters();buildHome();route();
+})();

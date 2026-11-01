@@ -195,6 +195,13 @@ const index=fs.readFileSync(new URL('../web/index.html',import.meta.url)).toStri
 const catalogHtml=fs.readFileSync(new URL('../web/catalog.html',import.meta.url));
 const catalogJs=fs.readFileSync(new URL('../web/catalog.js',import.meta.url));
 const catalogCss=fs.readFileSync(new URL('../web/catalog.css',import.meta.url));
+// The anime UI and data ship with the app for future use; the public route is always coming soon.
+const animeHtml=fs.readFileSync(new URL('../web/anime.html',import.meta.url));
+const animeSoonHtml=fs.readFileSync(new URL('../web/anime-soon.html',import.meta.url));
+const animeJs=fs.readFileSync(new URL('../web/anime.js',import.meta.url));
+const animeCss=fs.readFileSync(new URL('../web/anime.css',import.meta.url));
+const animeSoonCss=fs.readFileSync(new URL('../web/anime-soon.css',import.meta.url));
+const accountChipJs=fs.readFileSync(new URL('../web/account-chip.js',import.meta.url));
 const tailwindCss=fs.readFileSync(new URL('../web/tailwind.css',import.meta.url));
 const brandAssets=new Map([
  ['/manifest.webmanifest',{body:fs.readFileSync(new URL('../web/manifest.webmanifest',import.meta.url)),type:'application/manifest+json',cache:'public, max-age=86400'}],
@@ -255,7 +262,7 @@ const posterBackgrounds=new Map(['bg-04.webp','bg-05.webp','bg-06.webp','bg-28.w
  '/posters/background/'+name,
  fs.readFileSync(new URL('../web/posters/background/'+name,import.meta.url))
 ]));
-async function renderCatalogPage(req){
+async function renderCatalogPage(req,source=catalogHtml){
  let session=null,user=null;
  try{session=await authenticated(req);if(session)user=await profile(session.number);}catch{}
  const authenticatedState=Boolean(session);
@@ -266,7 +273,7 @@ async function renderCatalogPage(req){
  const accountLink='<a href="/profile" class="tv-account'+(authenticatedState?' catalog-account-avatar':'')+'" id="catalog-account-link" aria-live="polite" aria-busy="false" aria-label="'+(authenticatedState?'Open profile':'Sign in')+'" data-server-authenticated="'+String(authenticatedState)+'">'+accountContent+'</a>';
  // Keep authentication server-rendered so the redesign cannot briefly show
  // the guest label for an already authenticated user.
- return catalogHtml.toString('utf8').replace(/<a\b[^>]*\bid="catalog-account-link"[^>]*>[\s\S]*?<\/a>/,accountLink);
+ return source.toString('utf8').replace(/<a\b[^>]*\bid="catalog-account-link"[^>]*>[\s\S]*?<\/a>/,accountLink);
 }
 const server=http.createServer(async(req,res)=>{
  try{
@@ -456,6 +463,14 @@ const server=http.createServer(async(req,res)=>{
     if(req.headers['if-none-match']===publicCatalogEtag){res.writeHead(304,headers);return res.end();}
     res.writeHead(200,headers);return res.end(JSON.stringify(catalog));
    }
+  if(req.method==='GET'&&url.pathname==='/anime-soon.css'){res.writeHead(200,{'Content-Type':'text/css; charset=utf-8','Cache-Control':'public, max-age=300'});return res.end(animeSoonCss);}
+  if(req.method==='GET'&&url.pathname==='/account-chip.js'){res.writeHead(200,{'Content-Type':'text/javascript; charset=utf-8','Cache-Control':'public, max-age=300'});return res.end(accountChipJs);}
+  if(req.method==='GET'&&url.pathname==='/anime.css')return send(res,404,{error:'Anime is coming soon'});
+  if(req.method==='GET'&&url.pathname==='/anime.js')return send(res,404,{error:'Anime is coming soon'});
+  if(req.method==='GET'&&(url.pathname==='/anime'||url.pathname==='/anime/'||(url.pathname.startsWith('/anime/title/')&&/^[-a-zA-Z0-9_]+$/.test(url.pathname.slice(13).replace(/\/$/,''))))){
+   const headers={'Content-Type':'text/html; charset=utf-8','Cache-Control':'no-store','X-Robots-Tag':'noindex','Content-Security-Policy':"default-src 'self'; img-src 'self' https: data:; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; base-uri 'none'; frame-ancestors 'none'"};
+   res.writeHead(200,headers);return res.end(await renderCatalogPage(req,animeSoonHtml));
+  }
   if(req.method==='GET'&&url.pathname==='/tailwind.css'){res.writeHead(200,{'Content-Type':'text/css; charset=utf-8','Cache-Control':'public, max-age=86400','X-Content-Type-Options':'nosniff'});return res.end(tailwindCss);}
   if(req.method==='GET'&&url.pathname==='/catalog.css'){res.writeHead(200,{'Content-Type':'text/css; charset=utf-8','Cache-Control':'public, max-age=300','X-Content-Type-Options':'nosniff'});return res.end(catalogCss);}
   if(req.method==='GET'&&url.pathname==='/catalog.js'){res.writeHead(200,{'Content-Type':'text/javascript; charset=utf-8','Cache-Control':'public, max-age=300','X-Content-Type-Options':'nosniff'});return res.end(catalogJs);}

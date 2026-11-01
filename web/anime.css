@@ -1,0 +1,25 @@
+/* Anime page extras. Layout, cards, hero, shelves, filters and pagination reuse catalog.css. */
+.anime-badge{position:absolute;top:8px;left:8px;padding:4px 8px;border-radius:7px;background:rgba(9,9,11,.85);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);font-size:11px;font-weight:700;color:#f4f4f5}
+.anime-search-shell{position:static;background:none;backdrop-filter:none;-webkit-backdrop-filter:none;padding:0;margin:0 0 18px}
+.catalog-search-field>#anime-search{flex:1;min-width:0;height:100%;padding:0;border:0;background:transparent;color:#f4f4f5;font-size:14px;outline:none}
+#anime-search::placeholder{color:#858891}
+#anime-search::-webkit-search-cancel-button{display:none}
+.anime-kicker{margin:0 0 8px;font-size:12px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#71717a}
+.anime-detail-title{margin:0;font-size:clamp(26px,5vw,48px);line-height:1.08;font-weight:800;letter-spacing:-.03em;overflow-wrap:anywhere}
+.anime-detail-meta,.anime-detail-line{margin:12px 0 0;font-size:14px;color:#a1a1aa}
+.anime-detail-rating{margin:12px 0 0;font-size:14px;font-weight:600;color:#e4e4e7}
+.anime-overview{max-width:760px;margin-top:36px;padding-top:28px;border-top:1px solid #27272a}
+.anime-overview h2,.anime-eps-head h2{margin:0;font-size:18px;font-weight:700}
+.anime-overview p{margin:12px 0 0;font-size:14px;line-height:1.75;color:#a1a1aa}
+.anime-eps{max-width:760px;margin-top:36px}
+.anime-eps-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:14px}
+.anime-eps-head span{font-size:12px;color:#71717a}
+.anime-ep{display:grid;grid-template-columns:44px minmax(0,1fr) auto;gap:14px;align-items:center;margin-bottom:8px;padding:12px 14px;border:1px solid #27272a;border-radius:14px;background:rgba(255,255,255,.035)}
+.anime-ep-num{display:grid;place-items:center;width:44px;height:44px;border-radius:12px;background:#27272a;font-size:14px;font-weight:700;color:#f4f4f5}
+.anime-ep-title{margin:0;font-size:14px;font-weight:600;color:#f4f4f5;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.anime-ep-sub{margin:3px 0 0;font-size:12px;color:#71717a}
+.anime-ep-play{display:inline-flex;align-items:center;gap:6px;height:36px;padding:0 14px;border:1px solid #3f3f46;border-radius:999px;background:#18181b;color:#a1a1aa;font-size:12px;font-weight:700;cursor:not-allowed}
+.anime-empty-eps{padding:18px;border:1px dashed #3f3f46;border-radius:14px;font-size:13px;color:#71717a;text-align:center}
+
+/* Phones: show the Movies / Anime pill under the header (catalog.css hides it below 560px; movies page is left as-is). */
+@media(max-width:560px){.tv-nav-inner{row-gap:10px}.tv-nav-links{display:flex;grid-column:1/-1;grid-row:2}.tv-nav-links a{flex:1;text-align:center;padding:8px 0}}
