@@ -60,6 +60,7 @@ def anime_filename_parts(raw):
     value = re.sub(r'[._]+', ' ', value)
     # Language/release labels are not part of the anime title.
     value = re.sub(r'(?i)(?:tamil|telugu|malayalam|kannada|hindi|english|தமிழ்|tam|mal|hin|eng|jap)', ' ', value)
+    value = re.sub(r'\s+', ' ', value).strip()
     episode = None
     season = None
     part = None
