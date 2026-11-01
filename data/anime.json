@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-01T11:35:59.848Z",
+  "updated_at": "2026-11-01T11:36:04.096Z",
   "anime": [
     {
       "slug_id": "naruto-shippuden",
@@ -1974,6 +1974,17 @@
           "file_size": 98445960,
           "file_name": "Naruto Shippuden S08 Tamil EP180.mkv",
           "mime_type": "video/x-matroska"
+        },
+        {
+          "slug_id": "tCCKGneRz-gaoEHO",
+          "telegram_message_id": 187,
+          "episode": 181,
+          "season": 8,
+          "part": null,
+          "quality": "720p",
+          "file_size": 109200383,
+          "file_name": "Naruto Shippuden S08 Tamil EP181.mkv",
+          "mime_type": "video/x-matroska"
         }
       ],
       "year": 2007,
@@ -1991,7 +2002,7 @@
       "status": "Finished",
       "episodes_total": 500,
       "studio": "Studio Pierrot",
-      "updated_at": "2026-11-01T11:35:59.848Z"
+      "updated_at": "2026-11-01T11:36:04.096Z"
     }
   ]
 }
