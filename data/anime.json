@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-01T16:48:52.519Z",
+  "updated_at": "2026-11-01T16:48:57.168Z",
   "anime": [
     {
       "slug_id": "naruto",
@@ -1999,6 +1999,17 @@
           "file_size": 121210806,
           "file_name": "_Naruto_S07_E174_Blu_Ray_480p_x264_Tamil_+_Telugu_+_Hindi_+_Malayalam.mkv",
           "mime_type": "video/x-matroska"
+        },
+        {
+          "slug_id": "XBCX52mGwc9t54GY",
+          "telegram_message_id": 552,
+          "episode": 175,
+          "season": 7,
+          "part": null,
+          "quality": "480p",
+          "file_size": 106988321,
+          "file_name": "_Naruto_S07_E175_Blu_Ray_480p_x264_Tamil_+_Telugu_+_Hindi_+_Malayalam.mkv",
+          "mime_type": "video/x-matroska"
         }
       ],
       "year": 2002,
@@ -2016,7 +2027,7 @@
       "status": "Finished",
       "episodes_total": 220,
       "studio": "Studio Pierrot",
-      "updated_at": "2026-11-01T16:48:52.519Z"
+      "updated_at": "2026-11-01T16:48:57.167Z"
     },
     {
       "slug_id": "naruto-shippuden",
