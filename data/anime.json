@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": 1793569365,
+  "updated_at": "2026-11-01T21:43:17.460Z",
   "anime": [
     {
       "slug_id": "naruto",
@@ -24337,6 +24337,47 @@
       "studio": "MAPPA",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Attack_on_Titan_season_4",
       "updated_at": "2026-11-01T21:42:40Z"
+    },
+    {
+      "slug_id": "anime",
+      "title": "Attack on Titan The Final Chapter 30",
+      "episodes": [
+        {
+          "slug_id": "IWQ2ujQ1THh0Ql95",
+          "telegram_message_id": 879,
+          "episode": 1,
+          "season": 4,
+          "special_type": null,
+          "part": null,
+          "quality": "720p",
+          "file_size": 271033138,
+          "file_name": "_Attack_on_Titan_The_Final_Chapter_S04_E01_30_Tamil_720p_@official.mkv",
+          "mime_type": "video/x-matroska",
+          "qualities": {
+            "720P": {
+              "slug_id": "IWQ2ujQ1THh0Ql95",
+              "telegram_message_id": 879,
+              "episode": 1,
+              "season": 4,
+              "special_type": null,
+              "part": null,
+              "quality": "720p",
+              "file_size": 271033138,
+              "file_name": "_Attack_on_Titan_The_Final_Chapter_S04_E01_30_Tamil_720p_@official.mkv",
+              "mime_type": "video/x-matroska"
+            }
+          }
+        }
+      ],
+      "year": "2026",
+      "poster": "https://upload.wikimedia.org/wikipedia/en/d/d6/Shingeki_no_Kyojin_manga_volume_1.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+      "plot": "Attack on Titan  is a Japanese manga series written and illustrated by Hajime Isayama. Set in a world where humanity is forced to live in cities surrounded by three enormous walls that protect them from gigantic man-eating humanoids referred to as Titans, the story follows Eren Yeager, an adolescent boy who vows to exterminate the Titans after they bring about the destruction of his hometown and the death of his mother. It was serialized in Kodansha's monthly magazine Bessatsu Shōnen Magazine from September 2009 to April 2021, with its chapters collected in 34 tankōbon volumes.",
+      "genre": [],
+      "rating": null,
+      "status": null,
+      "episodes_total": null,
+      "studio": null,
+      "updated_at": "2026-11-01T21:43:17.460Z"
     }
   ]
 }
