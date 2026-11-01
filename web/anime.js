@@ -3,6 +3,7 @@ const fontStylesheet=document.createElement('link');fontStylesheet.rel='styleshe
 const $=id=>document.getElementById(id);
 const el=(tag,cls,text)=>{const e=document.createElement(tag);if(cls)e.className=cls;if(text!==undefined)e.textContent=text;return e;};
 const FALLBACK_POSTER='https://i.ibb.co/TMJ6YCC4/IMG-33a2f581-8ff4-4a5e-9e64-e43c900000c2.png';
+const SEASON_BANNERS={'naruto-shippuden':{1:'/banners/naruto-shippuden-season-1.webp',2:'/banners/naruto-shippuden-season-2.webp',3:'/banners/naruto-shippuden-season-3.webp',4:'/banners/naruto-shippuden-season-4.webp'}};
 const poster=a=>a.poster&&(/^https:\/\//.test(a.poster)||/^\/posters\/[a-f0-9]{24}\.jpg$/.test(a.poster))?a.poster:FALLBACK_POSTER;
 function startPoster(img){const source=img.dataset.posterSrc;if(!source)return;delete img.dataset.posterSrc;img.loading='eager';img.src=source;}
 const posterObserver='IntersectionObserver'in window?new IntersectionObserver(entries=>{for(const entry of entries){if(!entry.isIntersecting)continue;posterObserver.unobserve(entry.target);startPoster(entry.target);}},{rootMargin:'1600px 0px'}):null;
@@ -157,8 +158,7 @@ function showDetail(a){
  if(!list.length)eps.append(el('div','anime-empty-eps','Episodes will appear here once they are added.'));
  const seasons=new Map();for(const episode of list){const season=Number(episode.season)||1;if(!seasons.has(season))seasons.set(season,[]);seasons.get(season).push(episode);}
  for(const [season,seasonEpisodes] of seasons){
-  const frame=seasonEpisodes.map(e=>e.frame).find(Boolean)||a.poster||'';const divider=el('section','anime-season-divider');if(frame)divider.style.backgroundImage='linear-gradient(90deg,rgba(9,9,11,.96) 0%,rgba(9,9,11,.7) 58%,rgba(9,9,11,.2)),url("'+frame.replaceAll('"','%22')+'")';
-  const dividerBody=el('div','anime-season-divider-body');dividerBody.append(el('span','anime-season-kicker','Episode guide'),el('h3','',`Season ${season}`));const dates=seasonEpisodes.map(e=>e.released).filter(Boolean).sort();if(dates.length)dividerBody.append(el('p','',dates.length>1?dates[0]+' – '+dates.at(-1):dates[0]));divider.append(dividerBody);eps.append(divider);
+  const banner=SEASON_BANNERS[a.slug_id]?.[season],frame=banner||seasonEpisodes.map(e=>e.frame).find(Boolean)||a.poster||'';const divider=el('section','anime-season-divider');divider.setAttribute('aria-label',`Season ${season}`);if(frame)divider.style.backgroundImage='url("'+frame.replaceAll('"','%22')+'")';eps.append(divider);
   for(const e of seasonEpisodes){
    const number=episodeNumber(e),row=el('div','anime-ep');if(e.frame){const thumb=el('img','anime-ep-frame');thumb.src=e.frame;thumb.alt='';thumb.loading='lazy';row.append(thumb);}else row.append(el('div','anime-ep-num',String(number).padStart(2,'0')));
    const text=el('div');text.append(el('p','anime-ep-title',e.title||'Episode '+number),el('p','anime-ep-sub',[e.released,e.quality,e.duration,e.part&&'Part '+e.part].filter(Boolean).join(' · ')||'Episode '+number));
