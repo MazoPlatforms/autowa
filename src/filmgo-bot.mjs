@@ -296,7 +296,9 @@ async function startAnimeDraft(file,messageId,detected=null){
  const parts=animeFilenameParts(file.file_name||'');
  if(!parts.episode)return say(ADMIN_ID,'I could not identify the anime episode. Use a filename such as Naruto Shippuden - 001 [720p].mkv.');
  const d={kind:'anime',message_id:messageId,file_name:file.file_name||'',file_size:Number(file.file_size||0),mime_type:file.mime_type||'',title:parts.title,titleCandidates:parts.titleCandidates,season:parts.season,episode:parts.episode,part:parts.part,quality:parts.quality,slug_id:animeSlug(parts.title),episode_slug_id:crypto.randomBytes(12).toString('base64url')};
- const metadata=detected?.metadata||await anilistSearch(parts.title).catch(()=>null);if(metadata){Object.assign(d,metadata);d.slug_id=animeSlug(metadata.title);}d.stage='await-publish';await draftSave(d);return animeDraftPrompt(d);
+ const metadata=detected?.metadata||await anilistSearch(parts.title).catch(()=>null);if(metadata){Object.assign(d,metadata);d.slug_id=animeSlug(metadata.title);}d.stage='await-publish';await draftSave(d);
+ if(detected?.confidence>=.7){await say(ADMIN_ID,'Recognized '+d.title+' as anime ('+Math.round(detected.confidence*100)+'% confidence). Publishing automatically.');return publishAnimeDraft(d);}
+ return animeDraftPrompt(d);
 }
 async function startMovieDraft(file,messageId,chat){
  const name=file.file_name||'',parts=filenameParts(name);
