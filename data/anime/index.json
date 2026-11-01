@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": 1793560486,
+  "updated_at": 1793560994,
   "anime": [
     {
       "slug_id": "naruto",
@@ -33,7 +33,7 @@
         "10": "/banners/naruto-season-10.webp",
         "11": "/banners/naruto-season-11.webp"
       },
-      "updated_at": "2026-11-01T19:14:44Z"
+      "updated_at": "2026-11-01T19:23:12Z"
     },
     {
       "slug_id": "naruto-shippuden",
@@ -53,7 +53,7 @@
       "status": "Finished",
       "episodes_total": 500,
       "studio": "Studio Pierrot",
-      "updated_at": "2026-11-01T19:14:46Z"
+      "updated_at": "2026-11-01T19:23:14Z"
     },
     {
       "slug_id": "attack-on-titan",
@@ -72,7 +72,7 @@
       "episodes_total": 25,
       "year": 2013,
       "studio": "WIT STUDIO",
-      "updated_at": "2026-11-01T19:14:43Z"
+      "updated_at": "2026-11-01T19:23:11Z"
     }
   ]
 }
