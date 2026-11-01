@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-01T20:01:22.965Z",
+  "updated_at": "2026-11-01T20:01:39.269Z",
   "anime": [
     {
       "slug_id": "naruto",
@@ -20442,6 +20442,18 @@
               "file_size": 297014180,
               "file_name": "Attack on titan-(S02 - Ep02)-(தமிழ்)- 720p.mkv",
               "mime_type": "video/x-matroska"
+            },
+            "1080P": {
+              "slug_id": "AxXiUyrSJO1U0nh_",
+              "telegram_message_id": 694,
+              "episode": 2,
+              "season": 2,
+              "special_type": null,
+              "part": null,
+              "quality": "1080p",
+              "file_size": 370321325,
+              "file_name": "Attack on titan-(S02 - Ep02)-(தமிழ்)- 1080p.mkv",
+              "mime_type": "video/x-matroska"
             }
           }
         }
@@ -20460,7 +20472,7 @@
       "episodes_total": 25,
       "year": 2013,
       "studio": "WIT STUDIO",
-      "updated_at": "2026-11-01T20:01:22.965Z"
+      "updated_at": "2026-11-01T20:01:39.269Z"
     }
   ]
 }
