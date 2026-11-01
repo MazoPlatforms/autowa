@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-01T16:47:48.061Z",
+  "updated_at": "2026-11-01T16:47:52.556Z",
   "anime": [
     {
       "slug_id": "naruto",
@@ -1856,6 +1856,17 @@
           "file_size": 112794920,
           "file_name": "Naruto S06 E157 Blu-Ray - 480p - x264 - [Tamil + Telugu + Hi.mkv",
           "mime_type": "video/x-matroska"
+        },
+        {
+          "slug_id": "xXP57ZPBCM6aLnYW",
+          "telegram_message_id": 539,
+          "episode": 158,
+          "season": 6,
+          "part": null,
+          "quality": "480p",
+          "file_size": 118004581,
+          "file_name": "Naruto S06 E158 Blu-Ray - 480p - x264 - [Tamil + Telugu + Hi.mkv",
+          "mime_type": "video/x-matroska"
         }
       ],
       "year": 2002,
@@ -1873,7 +1884,7 @@
       "status": "Finished",
       "episodes_total": 220,
       "studio": "Studio Pierrot",
-      "updated_at": "2026-11-01T16:47:48.061Z"
+      "updated_at": "2026-11-01T16:47:52.556Z"
     },
     {
       "slug_id": "naruto-shippuden",
