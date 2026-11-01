@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-01T21:15:17.968Z",
+  "updated_at": "2026-11-01T21:15:34.471Z",
   "anime": [
     {
       "slug_id": "naruto",
@@ -23050,6 +23050,18 @@
               "file_size": 83654845,
               "file_name": "Attack on titan-(S04 - Ep12)-(தமிழ்)- 720p.mkv",
               "mime_type": "video/x-matroska"
+            },
+            "1080P": {
+              "slug_id": "LOlq_vEtp7ozHH_z",
+              "telegram_message_id": 826,
+              "episode": 12,
+              "season": 4,
+              "special_type": null,
+              "part": null,
+              "quality": "1080p",
+              "file_size": 157184363,
+              "file_name": "Attack on titan-(S04 - Ep12)-(தமிழ்)- 1080p.mkv",
+              "mime_type": "video/x-matroska"
             }
           }
         }
@@ -23068,7 +23080,7 @@
       "episodes_total": 25,
       "year": 2013,
       "studio": "WIT STUDIO",
-      "updated_at": "2026-11-01T21:15:17.968Z"
+      "updated_at": "2026-11-01T21:15:34.471Z"
     }
   ]
 }
