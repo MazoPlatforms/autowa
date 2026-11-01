@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-01T21:37:40.862Z",
+  "updated_at": "2026-11-01T21:37:56.058Z",
   "anime": [
     {
       "slug_id": "naruto",
@@ -23943,6 +23943,18 @@
               "file_size": 77338600,
               "file_name": "Attack on titan-(S04 - Ep25)-(தமிழ்)- 720p.mkv",
               "mime_type": "video/x-matroska"
+            },
+            "1080P": {
+              "slug_id": "0IeOCiSgnDHZM8QP",
+              "telegram_message_id": 865,
+              "episode": 25,
+              "season": 4,
+              "special_type": null,
+              "part": null,
+              "quality": "1080p",
+              "file_size": 153183755,
+              "file_name": "Attack on titan-(S04 - Ep25)-(தமிழ்)- 1080p.mkv",
+              "mime_type": "video/x-matroska"
             }
           }
         }
@@ -23961,7 +23973,7 @@
       "episodes_total": 25,
       "year": 2013,
       "studio": "WIT STUDIO",
-      "updated_at": "2026-11-01T21:37:40.862Z"
+      "updated_at": "2026-11-01T21:37:56.058Z"
     }
   ]
 }
