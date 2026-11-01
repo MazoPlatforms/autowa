@@ -330,7 +330,8 @@ def build_anime_catalog(messages):
         for episode in show['episodes']:
             previous = known_episodes.get(str(episode.get('telegram_message_id')))
             explicit_season = episode.pop('season_explicit', None)
-            episode['season'] = explicit_season and episode['season'] or (previous or {}).get('season') or manual_anime_season(show['title'], episode['episode']) or inferred_anime_season(episode['episode'], None, boundaries)
+            editorial_season = manual_anime_season(show['title'], episode['episode'])
+            episode['season'] = explicit_season and episode['season'] or editorial_season or (previous or {}).get('season') or inferred_anime_season(episode['episode'], None, boundaries)
             if previous:
                 for field, value in previous.items():
                     if field not in ('slug_id', 'telegram_message_id', 'file_name', 'file_size', 'mime_type') and value not in (None, '', []):
