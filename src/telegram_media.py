@@ -99,6 +99,23 @@ def tmdb_season_boundaries(title):
     except Exception:
         return []
 
+def tmdb_anime_metadata(title):
+    key = os.getenv('TMDB_API_KEY')
+    if not key:
+        return {'title': title}
+    try:
+        params = urllib.parse.urlencode({'api_key': key, 'query': title, 'language': 'en-US', 'include_adult': 'false'})
+        with urllib.request.urlopen(urllib.request.Request('https://api.themoviedb.org/3/search/tv?' + params, headers={'User-Agent': 'FilmGo/1.0'}), timeout=6) as response:
+            result = next(iter(json.load(response).get('results', [])), None)
+        if not result or not result.get('id'):
+            return {'title': title}
+        params = urllib.parse.urlencode({'api_key': key, 'language': 'en-US'})
+        with urllib.request.urlopen(urllib.request.Request('https://api.themoviedb.org/3/tv/%s?%s' % (result['id'], params), headers={'User-Agent': 'FilmGo/1.0'}), timeout=6) as response:
+            item = json.load(response)
+        return {'title': str(item.get('name') or result.get('name') or title)[:140], 'poster': ('https://image.tmdb.org/t/p/w780' + str(item.get('poster_path'))) if item.get('poster_path') else None, 'plot': str(item.get('overview') or '').strip()[:900], 'genre': [x.get('name') for x in item.get('genres') or [] if x.get('name')], 'rating': round(float(item.get('vote_average') or 0), 1) or None, 'status': str(item.get('status') or '').strip() or None, 'episodes_total': sum(int(x.get('episode_count') or 0) for x in item.get('seasons') or [] if int(x.get('season_number') or 0) > 0) or None, 'year': str(item.get('first_air_date') or '')[:4] or None, 'studio': (item.get('production_companies') or [{}])[0].get('name')}
+    except Exception:
+        return {'title': title}
+
 def inferred_anime_season(episode, explicit, boundaries):
     if explicit:
         return explicit
@@ -109,8 +126,20 @@ def inferred_anime_season(episode, explicit, boundaries):
         offset += count
     return 1
 
+def jikan_metadata(title):
+    try:
+        query = urllib.parse.urlencode({'q': title, 'limit': 5, 'sfw': 'true'})
+        with urllib.request.urlopen(urllib.request.Request('https://api.jikan.moe/v4/anime?' + query, headers={'User-Agent': 'FilmGo/1.0'}), timeout=6) as response:
+            rows = json.load(response).get('data', [])
+        if not rows:
+            return {'title': title}
+        item = rows[0]
+        return {'title': str(item.get('title_english') or item.get('title') or title)[:140], 'poster': ((item.get('images') or {}).get('jpg') or {}).get('large_image_url'), 'plot': str(item.get('synopsis') or '').strip()[:900], 'genre': [x.get('name') for x in item.get('genres') or [] if x.get('name')], 'rating': round(float(item.get('score') or 0), 1) or None, 'status': str(item.get('status') or '').replace('Currently Airing', 'Airing').replace('Finished Airing', 'Finished') or None, 'episodes_total': item.get('episodes'), 'year': ((item.get('aired') or {}).get('from') or '')[:4] or None, 'studio': (item.get('studios') or [{}])[0].get('name')}
+    except Exception:
+        return {'title': title}
+
 def anime_metadata(raw_title):
-    """Best-effort AniList enrichment; Telegram indexing still works offline."""
+    """Merge AniList and Jikan metadata; indexing still works if either API is unavailable."""
     title, _, _, _ = anime_filename_parts(raw_title)
     query = '''query ($search: String) { Media(search: $search, type: ANIME) { id title { romaji english native } coverImage { large } description(asHtml: false) genres averageScore status episodes startDate { year } studios { nodes { name } } } }'''
     try:
@@ -120,9 +149,14 @@ def anime_metadata(raw_title):
             media = json.load(response).get('data', {}).get('Media') or {}
         names = [media.get('title', {}).get(k) for k in ('english', 'romaji', 'native')]
         canonical = next((str(name).strip() for name in names if name), title)
-        return {'title': canonical[:140], 'poster': media.get('coverImage', {}).get('large'), 'plot': re.sub(r'<[^>]+>', '', str(media.get('description') or '')).strip()[:900], 'genre': media.get('genres') or [], 'rating': round((float(media.get('averageScore') or 0) / 10), 1) or None, 'status': media.get('status', '').title() or None, 'episodes_total': media.get('episodes'), 'year': (media.get('startDate') or {}).get('year'), 'studio': (((media.get('studios') or {}).get('nodes') or [{}])[0]).get('name')}
+        primary = {'title': canonical[:140], 'poster': media.get('coverImage', {}).get('large'), 'plot': re.sub(r'<[^>]+>', '', str(media.get('description') or '')).strip()[:900], 'genre': media.get('genres') or [], 'rating': round((float(media.get('averageScore') or 0) / 10), 1) or None, 'status': media.get('status', '').title() or None, 'episodes_total': media.get('episodes'), 'year': (media.get('startDate') or {}).get('year'), 'studio': (((media.get('studios') or {}).get('nodes') or [{}])[0]).get('name')}
+        fallback = jikan_metadata(canonical)
+        tmdb = tmdb_anime_metadata(canonical)
+        return {key: (value if value not in (None, '', [], 0) else (fallback.get(key) or tmdb.get(key))) for key, value in primary.items()}
     except Exception:
-        return {'title': title}
+        fallback = jikan_metadata(title)
+        tmdb = tmdb_anime_metadata(title)
+        return {key: (fallback.get(key) if fallback.get(key) not in (None, '', [], 0) else tmdb.get(key)) for key in set(fallback) | set(tmdb)}
 
 def anime_media_item(message):
     filename = str(getattr(message.file, 'name', '') or '')

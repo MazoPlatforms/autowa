@@ -15,12 +15,14 @@ The existing Koyeb Node.js API also runs a Telegram Bot API long poller. It is *
 The live anime catalog uses `TELEGRAM_ANIME_CHANNEL_ID` independently from
 `TELEGRAM_CHANNEL_ID`. Add the Telethon account to both channels. Anime files
 are grouped by normalized title and parsed season/episode/part values; AniList
-metadata and posters are best-effort enrichment and do not block indexing when
-the metadata service is unavailable.
+and Jikan/MAL metadata and posters are best-effort enrichment. TMDB supplies a
+third fallback and season boundaries when filenames contain only an overall
+episode number. These services do not block indexing when unavailable.
 
-When an admin sends a file to the bot, the bot now asks whether it is a movie
-or anime. Anime confirmation copies the file to the anime channel, updates the
-separate `data/anime.json` catalog, and dispatches the `Sync anime catalog`
+When an admin sends a file to the bot, the bot identifies movie versus anime
+using filename markers and metadata confidence. High-confidence anime is
+published automatically. Anime publishing copies the file to the anime
+channel, updates the separate `data/anime.json` catalog, and dispatches the `Sync anime catalog`
 workflow with event type `filmgo-anime-catalog-sync`.
 
 The bot **must be added as an administrator to the media channel**, with permission to see channel posts. A bot added after an upload cannot reliably receive old channel posts; the existing scheduled sync remains as a backstop. Configure the Koyeb service as always-on, not scale-to-zero. Only one service should own this bot token's updates. The polling offset and duplicate channel-message IDs are stored in Redis.

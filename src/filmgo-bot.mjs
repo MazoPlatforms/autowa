@@ -62,7 +62,7 @@ export const animeFilenameParts=name=>{
  match=raw.match(/\bpart\s*[- ]?(\d{1,2})\b/i);if(match){part=Number(match[1]);raw=raw.slice(0,match.index)+' '+raw.slice(match.index+match[0].length);}
  const qualityMatch=raw.match(ANIME_QUALITY),quality=qualityMatch?.[0]?.toLowerCase()==='4k'?'2160p':qualityMatch?.[0]?.toLowerCase()||'auto';
  const cut=qualityMatch?.index??Infinity;const title=(Number.isFinite(cut)?raw.slice(0,cut):raw).replace(/^[\s\[({]+|[\s\-\[\]({})]+$/g,'').replace(/\s+/g,' ').trim();
- return {title:title||'Untitled anime',titleCandidates:titleCandidates(title),season:season||1,episode,part,quality};
+ return {title:title||'Untitled anime',titleCandidates:titleCandidates(title),season,episode,part,quality};
 };
 async function catalog(){const r=await fetch('https://raw.githubusercontent.com/'+REPO+'/main/data/movies.json?ts='+Date.now(),{signal:AbortSignal.timeout(10000),cache:'no-store'});if(!r.ok)throw Error('Catalog unavailable');return (await r.json()).movies||[];}
 async function draftGet(){const raw=await redis('GET',DRAFT_KEY+ADMIN_ID);return raw?JSON.parse(raw):null;}
@@ -198,10 +198,20 @@ async function anilistSearch(title){
  const names=[media.title?.english,media.title?.romaji,media.title?.native].filter(Boolean);
  return {title:String(names[0]||title).slice(0,150),poster:media.coverImage?.large||null,plot:String(media.description||'').replace(/<[^>]+>/g,'').slice(0,900),genre:Array.isArray(media.genres)?media.genres:[],rating:Number(media.averageScore||0)?Number(media.averageScore)/10:null,status:media.status?String(media.status).toLowerCase().replace(/^./,c=>c.toUpperCase()):null,episodes_total:media.episodes||null,year:media.startDate?.year||null,studio:media.studios?.nodes?.[0]?.name||null};
 }
+async function jikanSearch(title){
+ try{const response=await fetch('https://api.jikan.moe/v4/anime?'+new URLSearchParams({q:title,limit:'5',sfw:'true'}),{headers:{'User-Agent':'FilmGo/1.0'},signal:AbortSignal.timeout(8000)});if(!response.ok)return null;const item=(await response.json()).data?.[0];if(!item)return null;return {title:String(item.title_english||item.title||title).slice(0,150),poster:item.images?.jpg?.large_image_url||null,plot:String(item.synopsis||'').slice(0,900),genre:(item.genres||[]).map(x=>x.name).filter(Boolean),rating:Number(item.score||0)||null,status:item.status==='Currently Airing'?'Airing':item.status==='Finished Airing'?'Finished':item.status||null,episodes_total:item.episodes||null,year:String(item.aired?.from||'').slice(0,4)||null,studio:item.studios?.[0]?.name||null};}catch{return null;}
+}
+async function tmdbAnimeSearch(title){
+ const key=process.env.TMDB_API_KEY;if(!key)return null;
+ try{const query=new URLSearchParams({api_key:key,query:title,language:'en-US',include_adult:'false'});const search=await fetch('https://api.themoviedb.org/3/search/tv?'+query,{signal:AbortSignal.timeout(8000)});if(!search.ok)return null;const result=(await search.json()).results?.[0];if(!result?.id)return null;const detail=await fetch('https://api.themoviedb.org/3/tv/'+result.id+'?'+new URLSearchParams({api_key:key,language:'en-US'}),{signal:AbortSignal.timeout(8000)});if(!detail.ok)return null;const item=await detail.json();return {title:String(item.name||result.name||title).slice(0,150),poster:item.poster_path?'https://image.tmdb.org/t/p/w780'+item.poster_path:null,plot:String(item.overview||'').slice(0,900),genre:(item.genres||[]).map(x=>x.name).filter(Boolean),rating:Number(item.vote_average||0)||null,status:item.status||null,episodes_total:(item.seasons||[]).filter(x=>Number(x.season_number)>0).reduce((sum,x)=>sum+Number(x.episode_count||0),0)||null,year:String(item.first_air_date||'').slice(0,4)||null,studio:item.production_companies?.[0]?.name||null};}catch{return null;}
+}
+async function animeMetadata(title){
+ const [ani,jikan,tmdb]=await Promise.all([anilistSearch(title).catch(()=>null),jikanSearch(title).catch(()=>null),tmdbAnimeSearch(title).catch(()=>null)]);const primary=ani||jikan||tmdb;if(!primary)return null;const fallbacks=[jikan,tmdb].filter(Boolean);return Object.fromEntries(Object.entries(primary).map(([key,value])=>[key,value===null||value===''||(Array.isArray(value)&&!value.length)?(fallbacks.find(item=>item[key]!==null&&item[key]!==''&&(!Array.isArray(item[key])||item[key].length))?.[key]??value):value]));
+}
 async function detectAnimeType(file){
  const parts=animeFilenameParts(file.file_name||'');const name=String(file.file_name||'');
  const explicitEpisode=/\b(?:S\d{1,2}\s*(?:-|x)?\s*E\d{1,4}|season\s*\d+\s*(?:episode|ep)\s*\d+|episode|ep)\b/i.test(name);
- const metadata=await anilistSearch(parts.title).catch(()=>null);const titleScore=metadata?.title?similarity(parts.title,metadata.title):0;
+ const metadata=await animeMetadata(parts.title).catch(()=>null);const titleScore=metadata?.title?similarity(parts.title,metadata.title):0;
  let confidence=0;if(explicitEpisode)confidence=.95;else if(parts.episode)confidence=.82;if(titleScore>=.7)confidence=Math.max(confidence,Math.min(.92,titleScore));
  return {anime:confidence>=.7,confidence,parts,metadata};
 }
@@ -310,7 +320,7 @@ async function startAnimeDraft(file,messageId,detected=null){
  if(!parts.episode)return say(ADMIN_ID,'I could not identify the anime episode. Use a filename such as Naruto Shippuden - 001 [720p].mkv.');
  parts.season=parts.season||await tmdbAnimeSeason(parts.title,parts.episode)||1;
  const d={kind:'anime',message_id:messageId,file_name:file.file_name||'',file_size:Number(file.file_size||0),mime_type:file.mime_type||'',title:parts.title,titleCandidates:parts.titleCandidates,season:parts.season,episode:parts.episode,part:parts.part,quality:parts.quality,slug_id:animeSlug(parts.title),episode_slug_id:crypto.randomBytes(12).toString('base64url')};
- const metadata=detected?.metadata||await anilistSearch(parts.title).catch(()=>null);if(metadata){Object.assign(d,metadata);d.slug_id=animeSlug(metadata.title);}d.stage='await-publish';await draftSave(d);
+ const metadata=detected?.metadata||await animeMetadata(parts.title).catch(()=>null);if(metadata){Object.assign(d,metadata);d.slug_id=animeSlug(metadata.title);}d.stage='await-publish';await draftSave(d);
  if(detected?.confidence>=.7){await say(ADMIN_ID,'Recognized '+d.title+' as anime ('+Math.round(detected.confidence*100)+'% confidence). Publishing automatically.');return publishAnimeDraft(d);}
  return animeDraftPrompt(d);
 }
