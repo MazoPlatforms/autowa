@@ -212,14 +212,7 @@ def load_existing_anime_catalog():
 def existing_show_for(title, existing):
     key = catalog_title_key(title)
     exact = next((item for item in existing if catalog_title_key(item.get('title')) == key), None)
-    if exact:
-        return exact
-    # Also absorb a stale release-tagged title from an older catalog.
-    for item in existing:
-        candidate = catalog_title_key(item.get('title'))
-        if candidate and (candidate.startswith(key) or key.startswith(candidate)) and min(len(candidate), len(key)) >= 6:
-            return item
-    return None
+    return exact
 def tmdb_show_id(title):
     key = os.getenv('TMDB_API_KEY')
     cache_key = str(title).casefold()
