@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-01T19:16:32.935Z",
+  "updated_at": "2026-11-01T19:16:47.035Z",
   "anime": [
     {
       "slug_id": "naruto",
@@ -8866,19 +8866,16 @@
           "mime_type": "video/x-matroska"
         },
         {
-          "slug_id": "TQ0WY5YZs-sREl9z",
-          "telegram_message_id": 608,
+          "slug_id": "zwf-c1wviGDiaFWN",
+          "telegram_message_id": 621,
           "episode": 3,
           "season": 1,
-          "special_type": "OAD",
+          "special_type": null,
           "part": null,
-          "quality": "720P",
-          "file_size": 110520261,
-          "file_name": "Attack On Titan - OAD EP03 [Tamil] 720p.mkv",
-          "mime_type": "video/x-matroska",
-          "title": "Distress",
-          "released": "2014-08-08",
-          "frame": "https://raw.githubusercontent.com/MazoPlatforms/autowa/main/web/frames/anime/attack-on-titan-oad-003.jpg"
+          "quality": "720p",
+          "file_size": 134355665,
+          "file_name": "Attack_On_Titan_S01_Ep03_தமிழ்_720p_@Anime_Tamil_Dubbed_Series_1.mkv",
+          "mime_type": "video/x-matroska"
         },
         {
           "slug_id": "cQx0snz6F7AsBzXA",
@@ -9006,7 +9003,7 @@
       "episodes_total": 25,
       "year": 2013,
       "studio": "WIT STUDIO",
-      "updated_at": "2026-11-01T19:16:32.935Z"
+      "updated_at": "2026-11-01T19:16:47.035Z"
     }
   ]
 }
