@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-01T11:39:27.454Z",
+  "updated_at": 1793533184,
   "anime": [
     {
       "slug_id": "naruto-shippuden",
@@ -2157,7 +2157,7 @@
           "episode": 197,
           "season": 10,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 168963871,
           "file_name": "Naruto Shippuden S10 E197 (720p) Tamil+Multi Audio ESub.mkv",
           "mime_type": "video/x-matroska"
@@ -2168,9 +2168,20 @@
           "episode": 198,
           "season": 10,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 160456283,
           "file_name": "Naruto Shippuden S10 E198 (720p) Tamil+Multi Audio ESub.mkv",
+          "mime_type": "video/x-matroska"
+        },
+        {
+          "slug_id": "PjEST4-WZWKkg0dB",
+          "telegram_message_id": 205,
+          "episode": 199,
+          "season": 10,
+          "part": null,
+          "quality": "720P",
+          "file_size": 142037174,
+          "file_name": "Naruto Shippuden S10 E199 [Tam+Mal+Hin+Eng+Jap] 720p HDRip H.mkv",
           "mime_type": "video/x-matroska"
         }
       ],
@@ -2189,32 +2200,7 @@
       "status": "Finished",
       "episodes_total": 500,
       "studio": "Studio Pierrot",
-      "updated_at": "2026-11-01T11:39:07.527Z"
-    },
-    {
-      "slug_id": "naruto-shippuden-tam-mal-hin-eng-jap",
-      "title": "Naruto Shippuden [Tam+Mal+Hin+Eng+Jap",
-      "episodes": [
-        {
-          "slug_id": "PjEST4-WZWKkg0dB",
-          "telegram_message_id": 205,
-          "episode": 199,
-          "season": 10,
-          "part": null,
-          "quality": "720p",
-          "file_size": 142037174,
-          "file_name": "Naruto Shippuden S10 E199 [Tam+Mal+Hin+Eng+Jap] 720p HDRip H.mkv",
-          "mime_type": "video/x-matroska"
-        }
-      ],
-      "poster": null,
-      "plot": "",
-      "genre": [],
-      "rating": null,
-      "status": null,
-      "episodes_total": null,
-      "studio": null,
-      "updated_at": "2026-11-01T11:39:27.454Z"
+      "updated_at": "2026-11-01T11:39:44Z"
     }
   ]
 }
