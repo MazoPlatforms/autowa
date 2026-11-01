@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-01T16:51:19.341Z",
+  "updated_at": "2026-11-01T16:51:25.420Z",
   "anime": [
     {
       "slug_id": "naruto",
@@ -2318,6 +2318,17 @@
           "file_size": 126743165,
           "file_name": "_Naruto_S08_E195_Blu_Ray_480p_x264_Tamil_+_Telugu_+_Hindi_+_Malayalam.mkv",
           "mime_type": "video/x-matroska"
+        },
+        {
+          "slug_id": "scy8eo-G5osN0X4H",
+          "telegram_message_id": 581,
+          "episode": 196,
+          "season": 8,
+          "part": null,
+          "quality": "480p",
+          "file_size": 127908174,
+          "file_name": "_Naruto_S08_E196_Blu_Ray_480p_x264_Tamil_+_Telugu_+_Hindi_+_Malayalam.mkv",
+          "mime_type": "video/x-matroska"
         }
       ],
       "year": 2002,
@@ -2335,7 +2346,7 @@
       "status": "Finished",
       "episodes_total": 220,
       "studio": "Studio Pierrot",
-      "updated_at": "2026-11-01T16:51:19.341Z"
+      "updated_at": "2026-11-01T16:51:25.420Z"
     },
     {
       "slug_id": "naruto-shippuden",
