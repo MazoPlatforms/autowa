@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": 1793556273,
+  "updated_at": 1793557526,
   "anime": {
     "slug_id": "attack-on-titan-oad",
     "title": "Attack On Titan - OAD",
@@ -48,11 +48,55 @@
         "file_size": 115243635,
         "file_name": "Attack On Titan - OAD EP04 [Tamil] 720p.mkv",
         "mime_type": "video/x-matroska"
+      },
+      {
+        "slug_id": "gD9C7QAAGu2zMZp4",
+        "telegram_message_id": 610,
+        "episode": 5,
+        "season": 1,
+        "part": null,
+        "quality": "720P",
+        "file_size": 170698243,
+        "file_name": "Attack On Titan - OAD EP05 [Tamil] 720p.mkv",
+        "mime_type": "video/x-matroska"
+      },
+      {
+        "slug_id": "9ktln_JR7BHnSsiK",
+        "telegram_message_id": 611,
+        "episode": 6,
+        "season": 1,
+        "part": null,
+        "quality": "720P",
+        "file_size": 58744918,
+        "file_name": "Attack On Titan - OAD EP06 [Tamil] 720p.mkv",
+        "mime_type": "video/x-matroska"
+      },
+      {
+        "slug_id": "nm1Q1XVa1X47aNhd",
+        "telegram_message_id": 612,
+        "episode": 7,
+        "season": 1,
+        "part": null,
+        "quality": "720P",
+        "file_size": 69806612,
+        "file_name": "Attack On Titan - OAD EP07 [Tamil] 720p.mkv",
+        "mime_type": "video/x-matroska"
+      },
+      {
+        "slug_id": "YUYYw66t9N4r_xEm",
+        "telegram_message_id": 613,
+        "episode": 8,
+        "season": 1,
+        "part": null,
+        "quality": "720P",
+        "file_size": 90344305,
+        "file_name": "Attack On Titan - OAD EP08 [Tamil] 720p.mkv",
+        "mime_type": "video/x-matroska"
       }
     ],
     "wikipedia_url": "https://en.wikipedia.org/wiki/Attack_on_Titan_(TV_series)",
     "plot": "Attack on Titan  is a Japanese dark fantasy anime television series based on the 2009–2021 manga series Attack on Titan by Hajime Isayama. The series premiered on April 7, 2013, and concluded on November 5, 2023. Animated by Wit Studio and MAPPA, the series aired on MBS and NHK General TV. In North America, the series has been streamed on Crunchyroll, Funimation, and Hulu. It also premiered its English dub on Adult Swim's Toonami programming block in the United States from May 3, 2014, to January 7, 2024.",
     "year": "2026",
-    "updated_at": "2026-11-01T18:04:30Z"
+    "updated_at": "2026-11-01T18:25:24Z"
   }
 }
