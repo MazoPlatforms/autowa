@@ -261,6 +261,10 @@ const brandAssets=new Map([
  ['/icons/filmgo-512.png',{body:fs.readFileSync(new URL('../web/icons/filmgo-512.png',import.meta.url)),type:'image/png',cache:'public, max-age=31536000, immutable'}],
  ['/icons/filmgo-maskable.png',{body:fs.readFileSync(new URL('../web/icons/filmgo-maskable.png',import.meta.url)),type:'image/png',cache:'public, max-age=31536000, immutable'}]
 ]);
+const animeBanners=new Map(['naruto-shippuden-season-1.webp','naruto-shippuden-season-2.webp','naruto-shippuden-season-3.webp','naruto-shippuden-season-4.webp'].map(name=>[
+ '/banners/'+name,
+ fs.readFileSync(new URL('../web/banners/'+name,import.meta.url))
+]));
 let publicCatalog=JSON.parse(fs.readFileSync(new URL('../data/movies.json',import.meta.url),'utf8'));
 let publicCatalogEtag='"'+crypto.createHash('sha256').update(JSON.stringify(publicCatalog)).digest('base64url')+'"';
 let catalogChecked=0,catalogPending=null;
@@ -323,6 +327,8 @@ const server=http.createServer(async(req,res)=>{
   const url=new URL(req.url,'http://localhost');
   const brandAsset=brandAssets.get(url.pathname);
   if(req.method==='GET'&&brandAsset){res.writeHead(200,{'Content-Type':brandAsset.type,'Cache-Control':brandAsset.cache,'X-Content-Type-Options':'nosniff'});return res.end(brandAsset.body);}
+  const animeBanner=animeBanners.get(url.pathname);
+  if(req.method==='GET'&&animeBanner){res.writeHead(200,{'Content-Type':'image/webp','Cache-Control':'public, max-age=31536000, immutable','X-Content-Type-Options':'nosniff'});return res.end(animeBanner);}
   const directDownload=url.pathname.match(/^\/download\/([A-Za-z0-9_-]{1,80})$/);
   if(req.method==='GET'&&directDownload){
    const quality=url.searchParams.get('quality')||'';
