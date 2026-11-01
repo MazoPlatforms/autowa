@@ -59,7 +59,7 @@ def anime_filename_parts(raw):
     value = re.sub(r'(?i)\.(mkv|mp4|avi|mov|webm)(\.\w+)?$', '', raw or '')
     value = re.sub(r'[._]+', ' ', value)
     # Language/release labels are not part of the anime title.
-    value = re.sub(r'(?i)(?:tamil|telugu|malayalam|kannada|hindi|english|தமிழ்)', ' ', value)
+    value = re.sub(r'(?i)(?:tamil|telugu|malayalam|kannada|hindi|english|தமிழ்|tam|mal|hin|eng|jap)', ' ', value)
     episode = None
     season = None
     part = None
@@ -84,6 +84,7 @@ def anime_filename_parts(raw):
     value = re.sub(r'(?i)\s+(?:தமிழ்|tamil|telugu|malayalam|kannada|hindi|english|2160p|1080p|720p|480p|4k|web[- ]?dl|webrip|bluray|brrip|hdrip|dvdrip|x264|x265|h264|h265|hevc|aac|ddp5?\.?(?:1|2)?|esub|multi|proper|repack|uncut|dual audio)\b.*$', '', value)
     value = re.sub(r'(?:\s*(?:\[[^]]*\]|\{[^}]*\}|\([^)]*\)))+\s*(?:@.*)?$', '', value)
     value = re.sub(r'\s+@.*$', '', value)
+    value = re.sub(r'\s*\+\s*', ' ', value)
     value = re.sub(r'\s+', ' ', value).strip(' -[]()')
     return (value[:140] or 'Untitled anime', season, episode, part)
 
