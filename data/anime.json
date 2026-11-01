@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-01T16:49:39.973Z",
+  "updated_at": "2026-11-01T16:49:45.013Z",
   "anime": [
     {
       "slug_id": "naruto",
@@ -2109,6 +2109,17 @@
           "file_size": 151994117,
           "file_name": "_Naruto_S07_E182_Blu_Ray_720p_x264_Tamil_+_Telugu_+_Hindi_+_Malayalam.mkv",
           "mime_type": "video/x-matroska"
+        },
+        {
+          "slug_id": "d6HOiJwuj-bOiFmf",
+          "telegram_message_id": 562,
+          "episode": 183,
+          "season": 7,
+          "part": null,
+          "quality": "720p",
+          "file_size": 114888595,
+          "file_name": "Naruto S7 E183 HDRip - 720p [Tamil].mp4",
+          "mime_type": "video/mp4"
         }
       ],
       "year": 2002,
@@ -2126,7 +2137,7 @@
       "status": "Finished",
       "episodes_total": 220,
       "studio": "Studio Pierrot",
-      "updated_at": "2026-11-01T16:49:39.973Z"
+      "updated_at": "2026-11-01T16:49:45.013Z"
     },
     {
       "slug_id": "naruto-shippuden",
