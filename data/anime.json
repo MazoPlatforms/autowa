@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": 1793569252,
+  "updated_at": "2026-11-01T21:41:06.658Z",
   "anime": [
     {
       "slug_id": "naruto",
@@ -24217,6 +24217,47 @@
       "year": 2013,
       "studio": "WIT STUDIO",
       "updated_at": "2026-11-01T21:40:49Z"
+    },
+    {
+      "slug_id": "anime",
+      "title": "Attack on Titan The Final Chapter 29",
+      "episodes": [
+        {
+          "slug_id": "f-4FWjKhbSfy2lZs",
+          "telegram_message_id": 875,
+          "episode": 1,
+          "season": 4,
+          "special_type": null,
+          "part": null,
+          "quality": "480p",
+          "file_size": 83895668,
+          "file_name": "_Attack_on_Titan_The_Final_Chapter_S04_E01_29_Tamil_480p_@official.mkv",
+          "mime_type": "video/x-matroska",
+          "qualities": {
+            "480P": {
+              "slug_id": "f-4FWjKhbSfy2lZs",
+              "telegram_message_id": 875,
+              "episode": 1,
+              "season": 4,
+              "special_type": null,
+              "part": null,
+              "quality": "480p",
+              "file_size": 83895668,
+              "file_name": "_Attack_on_Titan_The_Final_Chapter_S04_E01_29_Tamil_480p_@official.mkv",
+              "mime_type": "video/x-matroska"
+            }
+          }
+        }
+      ],
+      "year": "2026",
+      "poster": "https://upload.wikimedia.org/wikipedia/en/d/d6/Shingeki_no_Kyojin_manga_volume_1.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+      "plot": "Attack on Titan  is a Japanese manga series written and illustrated by Hajime Isayama. Set in a world where humanity is forced to live in cities surrounded by three enormous walls that protect them from gigantic man-eating humanoids referred to as Titans, the story follows Eren Yeager, an adolescent boy who vows to exterminate the Titans after they bring about the destruction of his hometown and the death of his mother. It was serialized in Kodansha's monthly magazine Bessatsu Shōnen Magazine from September 2009 to April 2021, with its chapters collected in 34 tankōbon volumes.",
+      "genre": [],
+      "rating": null,
+      "status": null,
+      "episodes_total": null,
+      "studio": null,
+      "updated_at": "2026-11-01T21:41:06.658Z"
     }
   ]
 }
