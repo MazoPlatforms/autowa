@@ -81,6 +81,10 @@ def anime_filename_parts(raw):
     match = re.search(r'(?i)\bpart\s*[- ]?(\d{1,2})\b', value)
     if match:
         part = int(match.group(1)); value = value[:match.start()] + ' ' + value[match.end():]
+    # Release tags can be wrapped in parentheses/brackets and can appear
+    # before language/audio labels. Remove those containers before trimming
+    # the remaining release suffix from the anime title.
+    value = re.sub(r'\s*(?:\[[^]]*\]|\{[^}]*\}|\([^)]*\))', ' ', value)
     value = re.sub(r'(?i)\s+(?:தமிழ்|tamil|telugu|malayalam|kannada|hindi|english|2160p|1080p|720p|480p|4k|web[- ]?dl|webrip|bluray|brrip|hdrip|dvdrip|x264|x265|h264|h265|hevc|aac|ddp5?\.?(?:1|2)?|esub|multi|proper|repack|uncut|dual audio)\b.*$', '', value)
     value = re.sub(r'(?:\s*(?:\[[^]]*\]|\{[^}]*\}|\([^)]*\)))+\s*(?:@.*)?$', '', value)
     value = re.sub(r'\s+@.*$', '', value)
