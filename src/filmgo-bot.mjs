@@ -261,7 +261,8 @@ async function detectAnimeType(file,caption=''){
  const explicitEpisode=/\b(?:S\d{1,2}\s*(?:-|x)?\s*E\d{1,4}|season\s*\d+\s*(?:episode|ep)\s*\d+|episode|ep)\b/i.test(name);
  const metadata=await animeMetadata(parts.title).catch(()=>null);const titleScore=metadata?.title?similarity(parts.title,metadata.title):0;
  let confidence=0;if(explicitEpisode)confidence=.95;else if(parts.episode)confidence=.82;if(titleScore>=.7)confidence=Math.max(confidence,Math.min(.92,titleScore));
- return {anime:confidence>=.7,confidence,parts,metadata};
+ const ambiguous=Boolean(parts.episode&&!explicitEpisode);
+ return {anime:confidence>=.7&&!ambiguous,confidence,parts,metadata,ambiguous};
 }
 function animeSlug(title){return String(title||'').normalize('NFKD').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'').slice(0,70)||'anime';}
 async function tmdbAnimeSeason(title,episode){
@@ -418,6 +419,12 @@ async function startMovieDraft(file,messageId,chat){
  if(trusted&&!d.replace){await say(chat,'Recognized '+d.title+' ('+d.year+') at '+Math.round((existing?found.confidence:omdbConfidence)*100)+'% confidence. Publishing automatically.');return publishDraft(d);}
  return draftPrompt(d);
 }
+async function askMediaType(file,messageId,detected){
+ const id=crypto.randomBytes(12).toString('hex');
+ await redis(MEDIA_CHOICE_KEY+id,JSON.stringify({file,message_id:messageId}),'EX',900);
+ const label=String(file.file_name||'file').slice(0,180);
+ return say(ADMIN_ID,'The filename contains an episode-like number, but it may be a movie sequel or an anime episode. Choose the media type for:\n\n'+label+'\n\nDetected confidence: '+Math.round(Number(detected.confidence||0)*100)+'%.',{reply_markup:{inline_keyboard:[[{text:'Movie',callback_data:'fg:type:movie:'+id},{text:'Anime',callback_data:'fg:type:anime:'+id}],[{text:'Cancel',callback_data:'fg:type:cancel:'+id}]]}});
+}
 async function onMessage(message,refresh){
  const from=String(message.from?.id||''),chat=message.chat?.id;
  const animeDeep=String(message.text||'').trim().match(/^\/start(?:@\w+)?\s+a_([A-Za-z0-9_-]{16})$/);
@@ -487,6 +494,7 @@ async function onMessage(message,refresh){
   const active=await draftGet();if(active)return say(chat,'There is already an active draft. Finish it or use /cancel before sending another file.');
   if(file.file_size>MAX_BYTES)return say(chat,'File exceeds the current 2 GB limit.');
   const detected=await detectAnimeType(file,message.caption||'');
+  if(detected.ambiguous)return askMediaType(file,message.message_id,detected);
   if(detected.anime){if(!ANIME_CHANNEL_ID)return say(chat,'Anime channel is not configured yet. Add TELEGRAM_ANIME_CHANNEL_ID and resend the file.');return startAnimeDraft(file,message.message_id,detected,message.caption||'');}
   return startMovieDraft(file,message.message_id,chat);
  }
@@ -545,6 +553,8 @@ async function onMessage(message,refresh){
 async function onCallback(q){
  if(String(q.from?.id)!==ADMIN_ID||String(q.message?.chat?.id)!==ADMIN_ID)return;
  const action=String(q.data||'');
+ const typeCancel=action.match(/^fg:type:cancel:([a-f0-9]{24})$/);
+ if(typeCancel){await tg('answerCallbackQuery',{callback_query_id:q.id});await redis('DEL',MEDIA_CHOICE_KEY+typeCancel[1]);await deleteConfirmation(q);return say(ADMIN_ID,'Media selection cancelled.');}
  const typeChoice=action.match(/^fg:type:(movie|anime):([a-f0-9]{24})$/);
  if(typeChoice){
   await tg('answerCallbackQuery',{callback_query_id:q.id});const key=MEDIA_CHOICE_KEY+typeChoice[2],raw=await redis('GET',key);if(!raw){await deleteConfirmation(q);return say(ADMIN_ID,'Media selection expired. Send the file again.');}
