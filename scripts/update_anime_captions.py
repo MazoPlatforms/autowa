@@ -62,6 +62,7 @@ async def main():
     client = TelegramClient(StringSession(os.environ["TELEGRAM_SESSION"]), int(os.environ["TELEGRAM_API_ID"]), os.environ["TELEGRAM_API_HASH"])
     updated = 0
     verified = 0
+    timed_out = []
     async with client:
         channel = int(os.environ["TELEGRAM_ANIME_CHANNEL_ID"])
         async for message in client.iter_messages(channel, limit=None):
@@ -73,17 +74,29 @@ async def main():
             if caption != (message.raw_text or "").strip():
                 print(f"{'DRY RUN ' if dry_run else ''}update message {message.id}: {caption.splitlines()[0]} · S{caption.splitlines()[2].split(':', 1)[1].strip()}E{caption.splitlines()[3].split(':', 1)[1].split('·')[0].strip()}", flush=True)
             if not dry_run and caption != (message.raw_text or "").strip():
-                await message.edit(caption)
+                try:
+                    await asyncio.wait_for(message.edit(caption), timeout=25)
+                except asyncio.TimeoutError:
+                    timed_out.append(message.id)
+                    print(f"timeout editing message {message.id}; continuing", flush=True)
+                    continue
                 await asyncio.sleep(0.4)
                 updated += 1
             if not dry_run:
-                current = await client.get_messages(channel, ids=message.id)
+                try:
+                    current = await asyncio.wait_for(client.get_messages(channel, ids=message.id), timeout=25)
+                except asyncio.TimeoutError:
+                    timed_out.append(message.id)
+                    print(f"timeout verifying message {message.id}; continuing", flush=True)
+                    continue
                 actual = (getattr(current, 'raw_text', '') or '').strip()
                 if actual != caption or not caption_is_canonical(actual):
                     raise RuntimeError(f"Caption verification failed for Telegram message {message.id}")
                 verified += 1
                 print(f"verified message {message.id}: {actual.splitlines()[0]}", flush=True)
-    print(f"Updated captions: {updated}; Verified captions: {verified}", flush=True)
+    print(f"Updated captions: {updated}; Verified captions: {verified}; Timed out: {len(timed_out)}", flush=True)
+    if timed_out:
+        raise RuntimeError("Telegram caption cleanup timed out for message(s): " + ", ".join(map(str, timed_out)))
 
 
 if __name__ == "__main__":
