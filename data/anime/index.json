@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": 1793556242,
+  "updated_at": 1793556273,
   "anime": [
     {
       "slug_id": "naruto",
@@ -33,7 +33,7 @@
         "10": "/banners/naruto-season-10.webp",
         "11": "/banners/naruto-season-11.webp"
       },
-      "updated_at": "2026-11-01T18:04:00Z"
+      "updated_at": "2026-11-01T18:04:32Z"
     },
     {
       "slug_id": "naruto-shippuden",
@@ -53,7 +53,7 @@
       "status": "Finished",
       "episodes_total": 500,
       "studio": "Studio Pierrot",
-      "updated_at": "2026-11-01T18:04:02Z"
+      "updated_at": "2026-11-01T18:04:33Z"
     },
     {
       "slug_id": "attack-on-titan-oad",
@@ -61,7 +61,7 @@
       "wikipedia_url": "https://en.wikipedia.org/wiki/Attack_on_Titan_(TV_series)",
       "plot": "Attack on Titan  is a Japanese dark fantasy anime television series based on the 2009–2021 manga series Attack on Titan by Hajime Isayama. The series premiered on April 7, 2013, and concluded on November 5, 2023. Animated by Wit Studio and MAPPA, the series aired on MBS and NHK General TV. In North America, the series has been streamed on Crunchyroll, Funimation, and Hulu. It also premiered its English dub on Adult Swim's Toonami programming block in the United States from May 3, 2014, to January 7, 2024.",
       "year": "2026",
-      "updated_at": "2026-11-01T18:03:58Z"
+      "updated_at": "2026-11-01T18:04:30Z"
     }
   ]
 }
