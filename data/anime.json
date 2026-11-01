@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-01T16:51:54.562Z",
+  "updated_at": "2026-11-01T16:51:59.639Z",
   "anime": [
     {
       "slug_id": "naruto",
@@ -2395,6 +2395,17 @@
           "file_size": 173493184,
           "file_name": "Naruto S8 E202 HDRip - 720p [Tamil].mp4",
           "mime_type": "video/mp4"
+        },
+        {
+          "slug_id": "uMRuNDLMEM9n9fDw",
+          "telegram_message_id": 588,
+          "episode": 203,
+          "season": 8,
+          "part": null,
+          "quality": "720p",
+          "file_size": 93676394,
+          "file_name": "Naruto S8 E203 HDRip - 720p [Tamil].mp4",
+          "mime_type": "video/mp4"
         }
       ],
       "year": 2002,
@@ -2412,7 +2423,7 @@
       "status": "Finished",
       "episodes_total": 220,
       "studio": "Studio Pierrot",
-      "updated_at": "2026-11-01T16:51:54.562Z"
+      "updated_at": "2026-11-01T16:51:59.639Z"
     },
     {
       "slug_id": "naruto-shippuden",
