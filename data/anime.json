@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-01T19:13:50.536Z",
+  "updated_at": "2026-11-01T19:14:04.940Z",
   "anime": [
     {
       "slug_id": "naruto",
@@ -8794,19 +8794,16 @@
       "title": "Attack on Titan",
       "episodes": [
         {
-          "slug_id": "OK5zYn_8BoFyTeZJ",
-          "telegram_message_id": 606,
+          "slug_id": "sCGOH84Jd6xNkpfy",
+          "telegram_message_id": 615,
           "episode": 1,
           "season": 1,
-          "special_type": "OAD",
+          "special_type": null,
           "part": null,
-          "quality": "720P",
-          "file_size": 118158912,
-          "file_name": "Attack On Titan - OAD EP01 [Tamil] 720p.mkv",
-          "mime_type": "video/x-matroska",
-          "title": "Ilse's Notebook: Notes from a Scout Regiment Member",
-          "released": "2013-12-09",
-          "frame": "https://raw.githubusercontent.com/MazoPlatforms/autowa/main/web/frames/anime/attack-on-titan-oad-001.jpg"
+          "quality": "720p",
+          "file_size": 145463116,
+          "file_name": "Attack_On_Titan_S01_Ep01_தமிழ்_720p_@Anime_Tamil_Dubbed_Series_1.mkv",
+          "mime_type": "video/x-matroska"
         },
         {
           "slug_id": "RyvfZDpOeBQyhB-I",
@@ -8940,7 +8937,7 @@
       "episodes_total": 25,
       "year": 2013,
       "studio": "WIT STUDIO",
-      "updated_at": "2026-11-01T19:13:50.536Z"
+      "updated_at": "2026-11-01T19:14:04.940Z"
     }
   ]
 }
