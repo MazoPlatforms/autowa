@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-01T11:32:00.994Z",
+  "updated_at": 1793532740,
   "anime": [
     {
       "slug_id": "naruto-shippuden",
@@ -346,6 +346,94 @@
           "file_size": 67737901,
           "file_name": "Naruto Shippuden - 032 [720p] [Dual] @Anime_Gallery.mkv",
           "mime_type": "video/x-matroska"
+        },
+        {
+          "slug_id": "XW5FUZzuhzJhoPB-",
+          "telegram_message_id": 150,
+          "episode": 144,
+          "season": 1,
+          "part": null,
+          "quality": "720P",
+          "file_size": 95283952,
+          "file_name": "Naruto Shippuden \n144 தமிழ் HDRip.mp4",
+          "mime_type": "video/mp4"
+        },
+        {
+          "slug_id": "KYzUSnuE1SL9L737",
+          "telegram_message_id": 151,
+          "episode": 145,
+          "season": 1,
+          "part": null,
+          "quality": "720P",
+          "file_size": 110638344,
+          "file_name": "Naruto Shippuden \n145 தமிழ் HDRip.mp4",
+          "mime_type": "video/mp4"
+        },
+        {
+          "slug_id": "AN4x78OVs5QAZ1yR",
+          "telegram_message_id": 152,
+          "episode": 146,
+          "season": 1,
+          "part": null,
+          "quality": "720P",
+          "file_size": 103459826,
+          "file_name": "Naruto Shippuden \n146 தமிழ் HDRip.mp4",
+          "mime_type": "video/mp4"
+        },
+        {
+          "slug_id": "cm0fNXO_wwsbZ4MB",
+          "telegram_message_id": 153,
+          "episode": 147,
+          "season": 1,
+          "part": null,
+          "quality": "720P",
+          "file_size": 98339314,
+          "file_name": "Naruto Shippuden \n147 தமிழ் HDRip.mp4",
+          "mime_type": "video/mp4"
+        },
+        {
+          "slug_id": "409SrG8Pl0SXubxp",
+          "telegram_message_id": 154,
+          "episode": 148,
+          "season": 1,
+          "part": null,
+          "quality": "720P",
+          "file_size": 88561407,
+          "file_name": "Naruto Shippuden \n148 தமிழ் HDRip.mp4",
+          "mime_type": "video/mp4"
+        },
+        {
+          "slug_id": "ZGGJZxTmW16NYUGV",
+          "telegram_message_id": 155,
+          "episode": 149,
+          "season": 1,
+          "part": null,
+          "quality": "720P",
+          "file_size": 115795924,
+          "file_name": "Naruto Shippuden \n149 தமிழ் HDRip.mp4",
+          "mime_type": "video/mp4"
+        },
+        {
+          "slug_id": "Fwcs21N7MYaLuZG2",
+          "telegram_message_id": 156,
+          "episode": 150,
+          "season": 1,
+          "part": null,
+          "quality": "720P",
+          "file_size": 102933427,
+          "file_name": "Naruto Shippuden \n150 தமிழ் HDRip.mp4",
+          "mime_type": "video/mp4"
+        },
+        {
+          "slug_id": "V9JTNwd8CeJ2Z5JU",
+          "telegram_message_id": 157,
+          "episode": 151,
+          "season": 1,
+          "part": null,
+          "quality": "720P",
+          "file_size": 107938448,
+          "file_name": "Naruto Shippuden \n151 தமிழ் HDRip.mp4",
+          "mime_type": "video/mp4"
         },
         {
           "slug_id": "1MrqEJI4YsowA2-q",
@@ -1567,94 +1655,6 @@
           "file_size": 182178554,
           "file_name": "Naruto Shippuden \n143 தமிழ் HDRip.mp4",
           "mime_type": "video/mp4"
-        },
-        {
-          "slug_id": "XW5FUZzuhzJhoPB-",
-          "telegram_message_id": 150,
-          "episode": 144,
-          "season": 1,
-          "part": null,
-          "quality": "720p",
-          "file_size": 95283952,
-          "file_name": "Naruto Shippuden \n144 தமிழ் HDRip.mp4",
-          "mime_type": "video/mp4"
-        },
-        {
-          "slug_id": "KYzUSnuE1SL9L737",
-          "telegram_message_id": 151,
-          "episode": 145,
-          "season": 1,
-          "part": null,
-          "quality": "720p",
-          "file_size": 110638344,
-          "file_name": "Naruto Shippuden \n145 தமிழ் HDRip.mp4",
-          "mime_type": "video/mp4"
-        },
-        {
-          "slug_id": "AN4x78OVs5QAZ1yR",
-          "telegram_message_id": 152,
-          "episode": 146,
-          "season": 1,
-          "part": null,
-          "quality": "720p",
-          "file_size": 103459826,
-          "file_name": "Naruto Shippuden \n146 தமிழ் HDRip.mp4",
-          "mime_type": "video/mp4"
-        },
-        {
-          "slug_id": "cm0fNXO_wwsbZ4MB",
-          "telegram_message_id": 153,
-          "episode": 147,
-          "season": 1,
-          "part": null,
-          "quality": "720p",
-          "file_size": 98339314,
-          "file_name": "Naruto Shippuden \n147 தமிழ் HDRip.mp4",
-          "mime_type": "video/mp4"
-        },
-        {
-          "slug_id": "409SrG8Pl0SXubxp",
-          "telegram_message_id": 154,
-          "episode": 148,
-          "season": 1,
-          "part": null,
-          "quality": "720p",
-          "file_size": 88561407,
-          "file_name": "Naruto Shippuden \n148 தமிழ் HDRip.mp4",
-          "mime_type": "video/mp4"
-        },
-        {
-          "slug_id": "ZGGJZxTmW16NYUGV",
-          "telegram_message_id": 155,
-          "episode": 149,
-          "season": 1,
-          "part": null,
-          "quality": "720p",
-          "file_size": 115795924,
-          "file_name": "Naruto Shippuden \n149 தமிழ் HDRip.mp4",
-          "mime_type": "video/mp4"
-        },
-        {
-          "slug_id": "Fwcs21N7MYaLuZG2",
-          "telegram_message_id": 156,
-          "episode": 150,
-          "season": 1,
-          "part": null,
-          "quality": "720p",
-          "file_size": 102933427,
-          "file_name": "Naruto Shippuden \n150 தமிழ் HDRip.mp4",
-          "mime_type": "video/mp4"
-        },
-        {
-          "slug_id": "V9JTNwd8CeJ2Z5JU",
-          "telegram_message_id": 157,
-          "episode": 151,
-          "season": 1,
-          "part": null,
-          "quality": "720p",
-          "file_size": 107938448,
-          "file_name": "Naruto Shippuden \n151 தமிழ் HDRip.mp4",
-          "mime_type": "video/mp4"
         }
       ],
       "year": 2007,
@@ -1672,7 +1672,7 @@
       "status": "Finished",
       "episodes_total": 500,
       "studio": "Studio Pierrot",
-      "updated_at": "2026-11-01T11:32:00.994Z"
+      "updated_at": "2026-11-01T11:32:20Z"
     }
   ]
 }
