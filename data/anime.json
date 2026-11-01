@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-01T19:17:54.942Z",
+  "updated_at": "2026-11-01T19:18:08.160Z",
   "anime": [
     {
       "slug_id": "naruto",
@@ -8890,19 +8890,16 @@
           "mime_type": "video/x-matroska"
         },
         {
-          "slug_id": "yKuyQqSCtqEBlnJv",
-          "telegram_message_id": 610,
+          "slug_id": "QCfTHgo__1Eyzdjr",
+          "telegram_message_id": 627,
           "episode": 5,
           "season": 1,
-          "special_type": "OAD",
+          "special_type": null,
           "part": null,
-          "quality": "720P",
-          "file_size": 170698243,
-          "file_name": "Attack On Titan - OAD EP05 [Tamil] 720p.mkv",
-          "mime_type": "video/x-matroska",
-          "title": "No Regrets - Part 2",
-          "released": "2015-04-09",
-          "frame": "https://raw.githubusercontent.com/MazoPlatforms/autowa/main/web/frames/anime/attack-on-titan-oad-005.jpg"
+          "quality": "720p",
+          "file_size": 195328531,
+          "file_name": "Attack_On_Titan_S01_Ep05_தமிழ்_720p_@Anime_Tamil_Dubbed_Series_1.mkv",
+          "mime_type": "video/x-matroska"
         },
         {
           "slug_id": "SIvCEFOw1vROfJ19",
@@ -9048,7 +9045,7 @@
       "episodes_total": 25,
       "year": 2013,
       "studio": "WIT STUDIO",
-      "updated_at": "2026-11-01T19:17:54.942Z"
+      "updated_at": "2026-11-01T19:18:08.160Z"
     }
   ]
 }
