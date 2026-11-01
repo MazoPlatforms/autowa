@@ -1,5 +1,38 @@
 {
   "schema_version": 1,
-  "updated_at": null,
-  "anime": []
+  "updated_at": "2026-11-01T07:34:59.247Z",
+  "anime": [
+    {
+      "slug_id": "narutoshippuden",
+      "title": "Naruto: Shippuden",
+      "episodes": [
+        {
+          "telegram_message_id": 3,
+          "episode": 1,
+          "season": 1,
+          "part": null,
+          "quality": "720p",
+          "file_size": 74584325,
+          "file_name": "Naruto Shippuden - 001 [720p] [Dual] @Anime_Gallery.mkv",
+          "mime_type": "video/x-matroska"
+        }
+      ],
+      "year": 2007,
+      "poster": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx1735-kGfVm0YqCPcu.png",
+      "plot": "Naruto: Shippuuden is the continuation of the original animated TV series Naruto. The story revolves around an older and slightly more matured Uzumaki Naruto and his quest to save his friend Uchiha Sasuke from the grips of the snake-like Shinobi, Orochimaru. After 2 and a half years Naruto finally returns to his village of Konoha, and sets about putting his ambitions to work, though it will not be easy, as he has amassed a few (more dangerous) enemies, in the likes of the shinobi organization; Akatsuki. \n(Source: Anime News Network)",
+      "genre": [
+        "Action",
+        "Adventure",
+        "Comedy",
+        "Drama",
+        "Fantasy",
+        "Supernatural"
+      ],
+      "rating": 8.2,
+      "status": "Finished",
+      "episodes_total": 500,
+      "studio": "Studio Pierrot",
+      "updated_at": "2026-11-01T07:34:59.247Z"
+    }
+  ]
 }
