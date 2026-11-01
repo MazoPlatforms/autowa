@@ -204,7 +204,9 @@ function requesterProgress(j){
 }
 async function downloadWithProgress(args,onProgress){
  await new Promise((resolve,reject)=>{
-  const child=spawn('python3',args[0]==='telegram'?['src/telegram_media.py','download',...args.slice(1)]:['src/download.py',...args],{stdio:['ignore','pipe','pipe']});
+  const telegramMode=args[0]==='telegram'||args[0]==='telegram-anime';
+  const telegramCommand=args[0]==='telegram-anime'?'download-anime':'download';
+  const child=spawn('python3',telegramMode?['src/telegram_media.py',telegramCommand,...args.slice(1)]:['src/download.py',...args],{stdio:['ignore','pipe','pipe']});
   let stdout='',stderr='';
   child.stdout.setEncoding('utf8');
   child.stdout.on('data',chunk=>{
