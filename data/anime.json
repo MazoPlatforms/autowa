@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-01T16:30:09.737Z",
+  "updated_at": "2026-11-01T16:30:14.463Z",
   "anime": [
     {
       "slug_id": "naruto",
@@ -671,6 +671,17 @@
           "file_size": 173581256,
           "file_name": "Naruto S2 E51 Tamil Dub 720p.mp4",
           "mime_type": "video/mp4"
+        },
+        {
+          "slug_id": "MxuN0Iy1qv77Obw6",
+          "telegram_message_id": 449,
+          "episode": 52,
+          "season": 2,
+          "part": null,
+          "quality": "720p",
+          "file_size": 205922002,
+          "file_name": "Naruto S2 E52 Tamil Dub 720p.mp4",
+          "mime_type": "video/mp4"
         }
       ],
       "year": 2002,
@@ -688,7 +699,7 @@
       "status": "Finished",
       "episodes_total": 220,
       "studio": "Studio Pierrot",
-      "updated_at": "2026-11-01T16:30:09.737Z"
+      "updated_at": "2026-11-01T16:30:14.463Z"
     },
     {
       "slug_id": "naruto-shippuden",
