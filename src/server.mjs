@@ -377,6 +377,24 @@ const server=http.createServer(async(req,res)=>{
    const anime=(catalog.anime||[]).filter(item=>!query||[item.title,item.title_alt,...(item.genre||[])].filter(Boolean).join(' ').toLowerCase().includes(query));
    return send(res,200,{anime,indexed_at:catalog.indexed_at||null,source:'telegram'});
   }
+  const animeStream=url.pathname.match(/^\/api\/anime\/stream\/(\d+)$/);
+  if((req.method==='GET'||req.method==='HEAD')&&animeStream){
+   const messageId=Number(animeStream[1]),catalog=await getAnimeCatalog();
+   const episode=(catalog.anime||[]).flatMap(item=>item.episodes||[]).find(item=>item.telegram_message_id===messageId);
+   if(!episode||!Number.isSafeInteger(episode.file_size)||episode.file_size<=0)return send(res,404,{error:'Anime episode unavailable'});
+   const session=await authenticatedStream(req);
+   if(!session)return send(res,401,{error:'Please sign in using your phone number.'});
+   if(!telegramAnimeReady)return send(res,503,{error:'Anime channel unavailable'});
+   const total=episode.file_size,range=req.headers.range;let start=0,end=Math.min(total-1,STREAM_RANGE_SIZE-1);
+   if(range){const match=/^bytes=(\d+)-(\d*)$/.exec(range);if(!match)return send(res,416,{error:'Invalid byte range'},{'Content-Range':'bytes */'+total});start=Number(match[1]);const requested=match[2]?Number(match[2]):total-1;if(!Number.isSafeInteger(start)||!Number.isSafeInteger(requested)||start>=total||requested<start)return send(res,416,{error:'Range unavailable'},{'Content-Range':'bytes */'+total});end=Math.min(requested,total-1,start+STREAM_RANGE_SIZE-1);}
+   const length=end-start+1;if(req.method==='HEAD')return send(res,405,{error:'HEAD is not available'});
+   const exempt=unlimitedRequests(session.number),reservation=await reserveDailyTokens(redis,hmac(session.number),tokenCostMilli(length,'stream'),{unlimited:exempt});
+   if(!reservation.allowed)return send(res,429,{error:'Daily tokens exhausted; reset is 00:00:00 UTC'});
+   let delivered=0,settled=false;const settle=async()=>{if(settled)return;settled=true;const actual=delivered?tokenCostMilli(delivered,'stream'):0;if(!exempt&&reservation.costMilli>actual)await releaseDailyTokens(redis,reservation,reservation.costMilli-actual).catch(()=>{});};res.once('finish',()=>{void settle()});res.once('close',()=>{void settle()});
+   const original=String(episode.file_name||'').trim(),ext=original.toLowerCase().match(/\.(mkv|mp4|webm|mov|avi|m4v)$/)?.[1]||'mp4',mime=String(episode.mime_type||'').toLowerCase();
+   const type=ext==='mkv'?'video/x-matroska':ext==='webm'?'video/webm':mime.includes('mp4')?'video/mp4':'application/octet-stream';const safe=(original||'anime-episode.'+ext).replace(/[^a-zA-Z0-9 ._()-]/g,'_').slice(0,180);const headers={'Content-Type':type,'Content-Length':String(length),'Content-Range':'bytes '+start+'-'+end+'/'+total,'Accept-Ranges':'bytes','Cache-Control':'no-store','X-Accel-Buffering':'no','Content-Disposition':'inline; filename="'+safe+'"'};
+   const child=spawn('python3',['src/telegram_stream.py',String(messageId),String(start),String(length),String(process.env.TELEGRAM_ANIME_CHANNEL_ID)],{env:process.env,stdio:['ignore','pipe','pipe']});let started=false,bytes=0,closed=false;const abort=()=>{if(!child.killed)child.kill('SIGTERM')};res.once('close',abort);child.stdout.on('data',chunk=>{if(closed)return;if(!started){res.writeHead(206,headers);started=true}bytes+=chunk.length;delivered+=chunk.length;if(!res.write(chunk))child.stdout.pause()});res.on('drain',()=>child.stdout.resume());let error='';child.stderr.on('data',chunk=>{error=(error+chunk.toString()).slice(-500)});child.on('error',()=>{closed=true;if(!res.headersSent)send(res,502,{error:'Anime media gateway unavailable'});else res.destroy()});child.on('close',code=>{if(closed)return;closed=true;if(!started)return send(res,502,{error:'Anime episode could not be retrieved'});if(code!==0||bytes!==length)return res.destroy();res.end()});return;
+  }
   if(req.method==='GET'&&url.pathname==='/health'){return send(res,200,{ok:true});}
   if(req.method==='GET'&&url.pathname.startsWith('/api/stream-availability/')){
    const id=url.pathname.slice('/api/stream-availability/'.length);
