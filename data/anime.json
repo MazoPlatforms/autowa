@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-01T20:53:21.066Z",
+  "updated_at": "2026-11-01T20:53:36.767Z",
   "anime": [
     {
       "slug_id": "naruto",
@@ -21650,6 +21650,32 @@
               "mime_type": "video/x-matroska"
             }
           }
+        },
+        {
+          "slug_id": "rE9E7vtYBCBRsHpn",
+          "telegram_message_id": 758,
+          "episode": 12,
+          "season": 3,
+          "special_type": null,
+          "part": null,
+          "quality": "480p",
+          "file_size": 59189143,
+          "file_name": "Attack on titan-(S03 - Ep12)-(தமிழ்)- 480p.mkv",
+          "mime_type": "video/x-matroska",
+          "qualities": {
+            "480P": {
+              "slug_id": "rE9E7vtYBCBRsHpn",
+              "telegram_message_id": 758,
+              "episode": 12,
+              "season": 3,
+              "special_type": null,
+              "part": null,
+              "quality": "480p",
+              "file_size": 59189143,
+              "file_name": "Attack on titan-(S03 - Ep12)-(தமிழ்)- 480p.mkv",
+              "mime_type": "video/x-matroska"
+            }
+          }
         }
       ],
       "wikipedia_url": "https://en.wikipedia.org/wiki/Attack_on_Titan_(TV_series)",
@@ -21666,7 +21692,7 @@
       "episodes_total": 25,
       "year": 2013,
       "studio": "WIT STUDIO",
-      "updated_at": "2026-11-01T20:53:21.066Z"
+      "updated_at": "2026-11-01T20:53:36.767Z"
     }
   ]
 }
