@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": 1793556273,
+  "updated_at": "2026-11-01T18:24:19.857Z",
   "anime": [
     {
       "slug_id": "naruto",
@@ -8208,7 +8208,7 @@
       "updated_at": "2026-11-01T18:04:33Z"
     },
     {
-      "slug_id": "attack-on-titan-oad",
+      "slug_id": "anime",
       "title": "Attack On Titan - OAD",
       "episodes": [
         {
@@ -8254,12 +8254,29 @@
           "file_size": 115243635,
           "file_name": "Attack On Titan - OAD EP04 [Tamil] 720p.mkv",
           "mime_type": "video/x-matroska"
+        },
+        {
+          "slug_id": "gD9C7QAAGu2zMZp4",
+          "telegram_message_id": 610,
+          "episode": 5,
+          "season": 1,
+          "part": null,
+          "quality": "720p",
+          "file_size": 170698243,
+          "file_name": "Attack On Titan - OAD EP05 [Tamil] 720p.mkv",
+          "mime_type": "video/x-matroska"
         }
       ],
       "wikipedia_url": "https://en.wikipedia.org/wiki/Attack_on_Titan_(TV_series)",
       "plot": "Attack on Titan  is a Japanese dark fantasy anime television series based on the 2009–2021 manga series Attack on Titan by Hajime Isayama. The series premiered on April 7, 2013, and concluded on November 5, 2023. Animated by Wit Studio and MAPPA, the series aired on MBS and NHK General TV. In North America, the series has been streamed on Crunchyroll, Funimation, and Hulu. It also premiered its English dub on Adult Swim's Toonami programming block in the United States from May 3, 2014, to January 7, 2024.",
       "year": "2026",
-      "updated_at": "2026-11-01T18:04:30Z"
+      "updated_at": "2026-11-01T18:24:19.857Z",
+      "poster": null,
+      "genre": [],
+      "rating": null,
+      "status": null,
+      "episodes_total": null,
+      "studio": null
     }
   ]
 }
