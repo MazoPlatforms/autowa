@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-01T12:09:52.522Z",
+  "updated_at": "2026-11-01T12:09:56.924Z",
   "anime": [
     {
       "slug_id": "naruto-shippuden",
@@ -2513,6 +2513,17 @@
           "file_size": 199018812,
           "file_name": "Naruto Shippuden [S11] {EP:229) (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
+        },
+        {
+          "slug_id": "heCqUl_QwesXiOjk",
+          "telegram_message_id": 236,
+          "episode": 230,
+          "season": 11,
+          "part": null,
+          "quality": "720p",
+          "file_size": 84120281,
+          "file_name": "Naruto Shippuden [S11] {EP:230) (7200p) Tamil.mkv",
+          "mime_type": "video/x-matroska"
         }
       ],
       "year": 2007,
@@ -2530,7 +2541,7 @@
       "status": "Finished",
       "episodes_total": 500,
       "studio": "Studio Pierrot",
-      "updated_at": "2026-11-01T12:09:52.522Z"
+      "updated_at": "2026-11-01T12:09:56.924Z"
     }
   ]
 }
