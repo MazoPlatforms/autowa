@@ -86,6 +86,14 @@ def season_from_caption(caption):
     match = re.search(r'(?i)\b(?:season|s)\s*[:#-]?\s*(\d{1,2})\b', str(caption or ''))
     return int(match.group(1)) if match else None
 
+def anime_caption_parts(caption):
+    value = str(caption or '')
+    title_match = re.search(r'(?im)^\s*(?:anime|series|title)\s*:\s*(.+)$', value)
+    episode_match = re.search(r'(?i)\b(?:episode|ep)\s*[:#-]?\s*(\d{1,4})\b', value)
+    quality_match = re.search(r'(?i)\b(?:quality\s*:\s*)?(2160p|1080p|720p|480p|360p|4k)\b', value)
+    raw_quality = quality_match.group(1).lower() if quality_match else None
+    return {'title': title_match.group(1).strip() if title_match else None, 'season': season_from_caption(value), 'episode': int(episode_match.group(1)) if episode_match else None, 'quality': '2160p' if raw_quality == '4k' else raw_quality, 'part': None}
+
 def tmdb_season_boundaries(title):
     key = os.getenv('TMDB_API_KEY')
     if not key:
@@ -229,9 +237,13 @@ def anime_media_item(message):
     if not filename or not getattr(message, 'file', None):
         return None
     title, season, episode, part = anime_filename_parts(filename)
-    season = season or season_from_caption(getattr(message, 'raw_text', ''))
+    caption = anime_caption_parts(getattr(message, 'raw_text', ''))
+    title = caption['title'] or title
+    season = season or caption['season']
+    episode = episode or caption['episode']
+    part = part or caption['part']
     quality_match = re.search(r'(?i)\b(2160p|1080p|720p|480p|4k)\b', filename)
-    quality = quality_match.group(1).upper() if quality_match else 'AUTO'
+    quality = quality_match.group(1).upper() if quality_match else (caption['quality'].upper() if caption['quality'] else 'AUTO')
     size = int(getattr(message.file, 'size', 0) or 0)
     if not episode or not quality or not 0 < size <= 2000000000:
         return None

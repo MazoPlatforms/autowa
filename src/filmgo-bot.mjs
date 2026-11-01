@@ -68,6 +68,26 @@ function seasonFromCaption(caption){
  const match=String(caption||'').match(/\b(?:season|s)\s*[:#-]?\s*(\d{1,2})\b/i);
  return match?Number(match[1]):null;
 }
+function animeCaptionParts(caption){
+ const value=String(caption||'');
+ const pick=(pattern)=>value.match(pattern)?.[1]?.trim()||null;
+ const title=pick(/^\s*(?:anime|series|title)\s*:\s*(.+)$/im);
+ const season=seasonFromCaption(value);
+ const episode=Number(pick(/\b(?:episode|ep)\s*[:#-]?\s*(\d{1,4})\b/i))||null;
+ const rawQuality=pick(/\bquality\s*:\s*(2160p|1080p|720p|480p|360p|4k)\b/i)||pick(/\b(2160p|1080p|720p|480p|360p|4k)\b/i);
+ const quality=rawQuality?.toLowerCase()==='4k'?'2160p':rawQuality?.toLowerCase()||null;
+ const part=Number(pick(/\bpart\s*[:#-]?\s*(\d{1,2})\b/i))||null;
+ return {title,season,episode,quality,part};
+}
+function animePartsFromMessage(file,caption){
+ const parts=animeFilenameParts(file.file_name||''),fromCaption=animeCaptionParts(caption);
+ if(fromCaption.title){parts.title=fromCaption.title;parts.titleCandidates=titleCandidates(parts.title);}
+ if(!parts.season)parts.season=fromCaption.season;
+ if(!parts.episode)parts.episode=fromCaption.episode;
+ if(!parts.quality||parts.quality==='auto')parts.quality=fromCaption.quality||parts.quality;
+ if(!parts.part)parts.part=fromCaption.part;
+ return parts;
+}
 async function catalog(){const r=await fetch('https://raw.githubusercontent.com/'+REPO+'/main/data/movies.json?ts='+Date.now(),{signal:AbortSignal.timeout(10000),cache:'no-store'});if(!r.ok)throw Error('Catalog unavailable');return (await r.json()).movies||[];}
 async function draftGet(){const raw=await redis('GET',DRAFT_KEY+ADMIN_ID);return raw?JSON.parse(raw):null;}
 async function draftSave(d){await redis('SET',DRAFT_KEY+ADMIN_ID,JSON.stringify(d),'EX',86400*7);}
@@ -216,8 +236,7 @@ async function animeMetadata(title){
  const [ani,jikan,tmdb,wikipedia]=await Promise.all([anilistSearch(title).catch(()=>null),jikanSearch(title).catch(()=>null),tmdbAnimeSearch(title).catch(()=>null),wikipediaSearch(title).catch(()=>null)]);const primary=ani||jikan||tmdb||wikipedia;if(!primary)return null;const fallbacks=[jikan,tmdb,wikipedia].filter(Boolean);return Object.fromEntries(Object.entries(primary).map(([key,value])=>[key,value===null||value===''||(Array.isArray(value)&&!value.length)?(fallbacks.find(item=>item[key]!==null&&item[key]!==''&&(!Array.isArray(item[key])||item[key].length))?.[key]??value):value]));
 }
 async function detectAnimeType(file,caption=''){
- const parts=animeFilenameParts(file.file_name||'');const name=String(file.file_name||'');
- if(!parts.season)parts.season=seasonFromCaption(caption);
+ const parts=animePartsFromMessage(file,caption);const name=String(file.file_name||'')+'\n'+caption;
  const explicitEpisode=/\b(?:S\d{1,2}\s*(?:-|x)?\s*E\d{1,4}|season\s*\d+\s*(?:episode|ep)\s*\d+|episode|ep)\b/i.test(name);
  const metadata=await animeMetadata(parts.title).catch(()=>null);const titleScore=metadata?.title?similarity(parts.title,metadata.title):0;
  let confidence=0;if(explicitEpisode)confidence=.95;else if(parts.episode)confidence=.82;if(titleScore>=.7)confidence=Math.max(confidence,Math.min(.92,titleScore));
@@ -324,8 +343,7 @@ async function probe(input){
  return {size:null,drive:false,url:u.url};
 }
 async function startAnimeDraft(file,messageId,detected=null,caption=''){
- const parts=animeFilenameParts(file.file_name||'');
- if(!parts.season)parts.season=seasonFromCaption(caption);
+ const parts=animePartsFromMessage(file,caption);
  if(!parts.episode)return say(ADMIN_ID,'I could not identify the anime episode. Use a filename such as Naruto Shippuden - 001 [720p].mkv.');
  parts.season=parts.season||await tmdbAnimeSeason(parts.title,parts.episode)||1;
  const d={kind:'anime',message_id:messageId,file_name:file.file_name||'',file_size:Number(file.file_size||0),mime_type:file.mime_type||'',title:parts.title,titleCandidates:parts.titleCandidates,season:parts.season,episode:parts.episode,part:parts.part,quality:parts.quality,slug_id:animeSlug(parts.title),episode_slug_id:crypto.randomBytes(12).toString('base64url')};
