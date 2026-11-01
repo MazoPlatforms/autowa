@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-01T22:08:55.656Z",
+  "updated_at": "2026-11-01T22:09:11.750Z",
   "anime": [
     {
       "slug_id": "naruto",
@@ -19468,6 +19468,18 @@
               "title": "Lost Girls: Lost in the Cruel World",
               "released": "2018-08-09",
               "frame": "https://raw.githubusercontent.com/MazoPlatforms/autowa/main/web/frames/anime/attack-on-titan-oad-008.jpg"
+            },
+            "480P": {
+              "slug_id": "EPXimwcsxeh3gp4-",
+              "telegram_message_id": 895,
+              "episode": 8,
+              "season": 1,
+              "special_type": "OAD",
+              "part": null,
+              "quality": "480p",
+              "file_size": 40544034,
+              "file_name": "Attack On Titan - OAD EP08 [Tamil] 480p.mkv",
+              "mime_type": "video/x-matroska"
             }
           }
         },
@@ -24515,7 +24527,7 @@
         "4": "/banners/attack-on-titan-season-4.webp",
         "OAD": "/banners/attack-on-titan-oad.webp"
       },
-      "updated_at": "2026-11-01T22:08:55.656Z"
+      "updated_at": "2026-11-01T22:09:11.750Z"
     }
   ]
 }
