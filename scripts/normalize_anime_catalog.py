@@ -21,9 +21,9 @@ def fixed_slug(message_id):
 
 def normalize_variant(value):
     item = dict(value)
-    message_id = item.get("telegram_message_id")
-    if message_id:
-        item["slug_id"] = fixed_slug(message_id)
+    # A quality is a variant of the episode, not a separately addressable
+    # episode.  Keep its Telegram identity, but use the parent episode slug.
+    item.pop("slug_id", None)
     item.pop("slug_aliases", None)
     return item
 
@@ -45,15 +45,22 @@ def main():
                 quality: normalize_variant(value)
                 for quality, value in variants.items()
             }
+            parent_slug = str(episode.get("slug_id") or "").strip()
+            if not parent_slug:
+                parent_slug = fixed_slug(min(
+                    int(value.get("telegram_message_id"))
+                    for value in variants.values()
+                    if value.get("telegram_message_id") is not None
+                ))
             identity = (
                 episode.get("special_type") or "",
                 int(episode.get("season") or 1),
                 int(episode.get("episode") or episode.get("number") or 0),
                 int(episode.get("part") or 0),
             )
-            compact[identity] = normalized
+            compact[identity] = (parent_slug, normalized)
         episodes = []
-        for variants in compact.values():
+        for parent_slug, variants in compact.values():
             preferred = next(
                 (key for key in variants if key.casefold() == "720p"),
                 sorted(
@@ -63,6 +70,7 @@ def main():
                 )[0],
             )
             primary = dict(variants[preferred])
+            primary["slug_id"] = parent_slug
             primary["qualities"] = variants
             episodes.append(primary)
         episodes.sort(key=lambda item: (

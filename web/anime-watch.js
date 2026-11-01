@@ -110,14 +110,14 @@ function suggestions(items){
  sec.append(row);return sec;
 }
 
-function confirmAnimeRequest(anime,episode,channel){
+function confirmAnimeRequest(anime,episode,channel,quality){
  const overlay=el('div','filmgo-sheet-overlay'),sheet=el('div','filmgo-sheet');sheet.setAttribute('role','dialog');sheet.setAttribute('aria-modal','true');
  const number=Number(episode.episode??episode.number)||0,season=Number(episode.season)||1,platform=channel==='telegram'?'Telegram':'WhatsApp';
  sheet.append(el('h2','','Confirm anime request'),el('p','filmgo-sheet-description',(anime.title||'Anime')+' · Season '+season+' · Episode '+number+' via '+platform+'? Your daily tokens are charged by file size and delivery method.'));
  const buttons=el('div','filmgo-sheet-buttons'),cancel=el('button','filmgo-open-button','Cancel'),confirm=el('button','filmgo-download-button','Confirm');
  const close=()=>{document.removeEventListener('keydown',esc);overlay.remove();};const esc=e=>{if(e.key==='Escape')close();};cancel.addEventListener('click',close);overlay.addEventListener('click',e=>{if(e.target===overlay)close();});
  confirm.addEventListener('click',async()=>{confirm.disabled=true;confirm.textContent='Preparing…';try{
-  const endpoint=channel==='telegram'?'/api/anime-telegram-link':'/api/anime-request',payload=channel==='telegram'?{episode_slug_id:episode.slug_id}:{episode_slug_id:episode.slug_id,rights_confirmed:true};
+  const endpoint=channel==='telegram'?'/api/anime-telegram-link':'/api/anime-request',payload=channel==='telegram'?{episode_slug_id:episode.slug_id,quality}:{episode_slug_id:episode.slug_id,quality,rights_confirmed:true};
   const response=await fetch(endpoint,{method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)}),data=await response.json();
   if(response.status===401){close();location.href='/profile?return='+encodeURIComponent(location.pathname);return;}if(!response.ok)throw Error(data.error||'Request failed');
   if(channel==='telegram'){close();location.href=data.url;return;}
@@ -151,13 +151,13 @@ async function main(){
  const notice=el('div','filmgo-token-notice filmgo-signin-notice');notice.setAttribute('role','status');notice.setAttribute('aria-live','polite');notice.hidden=true;section.append(notice);
  const status=el('p','filmgo-stream-status','');status.setAttribute('role','status');status.setAttribute('aria-live','polite');status.style.cssText='min-height:0;margin:10px 0 0;font-size:13px;color:#a1a1aa';
 
- const variants=Object.entries(episode.qualities||{}).map(([quality,value])=>[quality,value]).filter(([,value])=>value?.slug_id);
+ const variants=Object.entries(episode.qualities||{}).map(([quality,value])=>[quality,value]);
  const qualityValue=String(episode.quality||variants[0]?.[0]||'720P').toUpperCase();
- const streamUrl=value=>'/api/anime/stream/'+encodeURIComponent(value?.slug_id||episode.slug_id);
+ const streamUrl=(value,quality)=>'/api/anime/stream/'+encodeURIComponent(episode.slug_id)+'?quality='+encodeURIComponent(quality||value?.quality||qualityValue);
  const KEY='filmgo-anime-pos:'+episode.slug_id;
  const ui=buildPlayer(streamUrl(episode),episode.frame&&/^https:\/\//.test(episode.frame)?episode.frame:'',{
   qualities:variants.map(([quality])=>({label:quality,value:quality.toUpperCase()})),selectedQuality:qualityValue,
-  onQualityChange:quality=>{const variant=episode.qualities?.[quality]||episode.qualities?.[quality.toUpperCase()];if(!variant)return'';Object.assign(episode,variant);updateActions();return streamUrl(variant);},
+  onQualityChange:quality=>{const variant=episode.qualities?.[quality]||episode.qualities?.[quality.toUpperCase()];if(!variant)return'';Object.assign(episode,variant,{slug_id:episode.slug_id,quality});updateActions(quality);return streamUrl(variant,quality);},
   nextUrl:nextEp?watchUrl(nextEp):'',title:anime.title||'Anime',subtitle:[epLabel,epTitle].filter(Boolean).join(' · '),
   save:(t,d)=>{try{localStorage.setItem(KEY,String(Math.floor(t)));}catch{}},
   resume:()=>{try{return Number(localStorage.getItem(KEY))||0;}catch{return 0;}},
@@ -168,14 +168,14 @@ async function main(){
  section.append(ui.player);
 
  const actions=el('div','filmgo-player-actions');actions.setAttribute('inert','');
- const dl=el('a','filmgo-download-button','Download');dl.href='/api/anime/download/'+encodeURIComponent(episode.slug_id);dl.setAttribute('download','');dl.setAttribute('aria-label','Download '+(anime.title||'episode')+' '+epLabel);
+ const dl=el('a','filmgo-download-button','Download');dl.href='/api/anime/download/'+encodeURIComponent(episode.slug_id)+'?quality='+encodeURIComponent(qualityValue);dl.setAttribute('download','');dl.setAttribute('aria-label','Download '+(anime.title||'episode')+' '+epLabel);
  const shareTitle=(anime.title?anime.title+' · ':'')+epLabel;
  const wa=el('button','filmgo-open-button','WhatsApp');wa.type='button';wa.setAttribute('aria-label','Request this episode on WhatsApp');
  const tg=el('button','filmgo-open-button','Telegram');tg.type='button';tg.setAttribute('aria-label','Request this episode on Telegram');
  for(const [b,k] of [[dl,'download'],[wa,'whatsapp'],[tg,'telegram']]){b.prepend(actionIcon(k));b.style.gap='8px';}
- function updateActions(){dl.href='/api/anime/download/'+encodeURIComponent(episode.slug_id);dl.setAttribute('aria-label','Download '+(anime.title||'episode')+' '+epLabel);}
+ function updateActions(quality=qualityValue){dl.href='/api/anime/download/'+encodeURIComponent(episode.slug_id)+'?quality='+encodeURIComponent(quality);dl.setAttribute('aria-label','Download '+(anime.title||'episode')+' '+epLabel);}
  actions.append(dl,wa,tg);section.append(actions,status);
- wa.addEventListener('click',()=>confirmAnimeRequest(anime,episode,'whatsapp'));tg.addEventListener('click',()=>confirmAnimeRequest(anime,episode,'telegram'));
+ wa.addEventListener('click',()=>confirmAnimeRequest(anime,episode,'whatsapp',String(episode.quality||qualityValue).toUpperCase()));tg.addEventListener('click',()=>confirmAnimeRequest(anime,episode,'telegram',String(episode.quality||qualityValue).toUpperCase()));
 
  const nav=el('nav','anime-episode-nav');nav.setAttribute('aria-label','Episode navigation');
  if(prevEp){const a=el('a','anime-nav-button');a.href=watchUrl(prevEp);a.setAttribute('aria-label','Previous episode');a.append(g('prev',18),document.createTextNode('Ep '+numOf(prevEp)));nav.append(a);}

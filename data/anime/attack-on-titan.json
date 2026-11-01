@@ -1,72 +1,11 @@
 {
   "schema_version": 1,
-  "updated_at": 1793570999,
+  "updated_at": 1793569746,
   "anime": {
     "slug_id": "attack-on-titan",
     "title": "Attack on Titan",
     "episodes": [
       {
-        "slug_id": "S7Io1YJwbbrWQldC",
-        "telegram_message_id": 606,
-        "episode": 1,
-        "season": 1,
-        "special_type": "OAD",
-        "part": null,
-        "quality": "720P",
-        "file_size": 118158912,
-        "file_name": "Attack On Titan - OAD EP01 [Tamil] 720p.mkv",
-        "mime_type": "video/x-matroska",
-        "title": "Ilse's Notebook: Notes from a Scout Regiment Member",
-        "released": "2013-12-09",
-        "frame": "https://raw.githubusercontent.com/MazoPlatforms/autowa/main/web/frames/anime/attack-on-titan-oad-001.jpg",
-        "qualities": {
-          "1080P": {
-            "slug_id": "kwb24sXstaIrRH_p",
-            "telegram_message_id": 882,
-            "episode": 1,
-            "season": 1,
-            "special_type": "OAD",
-            "part": null,
-            "quality": "1080P",
-            "file_size": 204516072,
-            "file_name": "Attack On Titan - OAD EP01 [Tamil] 1080p.mkv",
-            "mime_type": "video/x-matroska",
-            "title": "Ilse's Notebook: Notes from a Scout Regiment Member",
-            "released": "2013-12-09"
-          },
-          "480P": {
-            "slug_id": "92NpymxhpBKqbesB",
-            "telegram_message_id": 881,
-            "episode": 1,
-            "season": 1,
-            "special_type": "OAD",
-            "part": null,
-            "quality": "480P",
-            "file_size": 49494125,
-            "file_name": "Attack On Titan - OAD EP01 [Tamil] 480p.mkv",
-            "mime_type": "video/x-matroska",
-            "title": "Ilse's Notebook: Notes from a Scout Regiment Member",
-            "released": "2013-12-09"
-          },
-          "720P": {
-            "slug_id": "S7Io1YJwbbrWQldC",
-            "telegram_message_id": 606,
-            "episode": 1,
-            "season": 1,
-            "special_type": "OAD",
-            "part": null,
-            "quality": "720P",
-            "file_size": 118158912,
-            "file_name": "Attack On Titan - OAD EP01 [Tamil] 720p.mkv",
-            "mime_type": "video/x-matroska",
-            "title": "Ilse's Notebook: Notes from a Scout Regiment Member",
-            "released": "2013-12-09",
-            "frame": "https://raw.githubusercontent.com/MazoPlatforms/autowa/main/web/frames/anime/attack-on-titan-oad-001.jpg"
-          }
-        }
-      },
-      {
-        "slug_id": "KOxiJxm_Je2XMGdZ",
         "telegram_message_id": 615,
         "episode": 1,
         "season": 1,
@@ -79,9 +18,9 @@
         "title": "To You, in 2000 Years - The Fall of Shiganshina (1)",
         "released": "2013-04-07",
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242650.jpg",
+        "slug_id": "KOxiJxm_Je2XMGdZ",
         "qualities": {
           "1080P": {
-            "slug_id": "abl3pmMjsOicBH_e",
             "telegram_message_id": 616,
             "episode": 1,
             "season": 1,
@@ -96,7 +35,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242650.jpg"
           },
           "720P": {
-            "slug_id": "KOxiJxm_Je2XMGdZ",
             "telegram_message_id": 615,
             "episode": 1,
             "season": 1,
@@ -111,7 +49,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242650.jpg"
           },
           "480P": {
-            "slug_id": "0GOR9xO_5utjT9Wv",
             "telegram_message_id": 614,
             "episode": 1,
             "season": 1,
@@ -128,67 +65,37 @@
         }
       },
       {
-        "slug_id": "ZV1a2vaLGofROOm6",
-        "telegram_message_id": 607,
-        "episode": 2,
+        "telegram_message_id": 606,
+        "episode": 1,
         "season": 1,
         "special_type": "OAD",
         "part": null,
         "quality": "720P",
-        "file_size": 138397289,
-        "file_name": "Attack On Titan - OAD EP02 [Tamil] 720p.mkv",
+        "file_size": 118158912,
+        "file_name": "Attack On Titan - OAD EP01 [Tamil] 720p.mkv",
         "mime_type": "video/x-matroska",
-        "title": "The Sudden Visitor: The Torturous Curse of Youth",
-        "released": "2014-04-09",
-        "frame": "https://raw.githubusercontent.com/MazoPlatforms/autowa/main/web/frames/anime/attack-on-titan-oad-002.jpg",
+        "title": "Ilse's Notebook: Notes from a Scout Regiment Member",
+        "released": "2013-12-09",
+        "frame": "https://raw.githubusercontent.com/MazoPlatforms/autowa/main/web/frames/anime/attack-on-titan-oad-001.jpg",
+        "slug_id": "S7Io1YJwbbrWQldC",
         "qualities": {
-          "1080P": {
-            "slug_id": "0HLEKJWTPlKCJUeA",
-            "telegram_message_id": 884,
-            "episode": 2,
-            "season": 1,
-            "special_type": "OAD",
-            "part": null,
-            "quality": "1080P",
-            "file_size": 225891541,
-            "file_name": "Attack On Titan - OAD EP02 [Tamil] 1080p.mkv",
-            "mime_type": "video/x-matroska",
-            "title": "The Sudden Visitor: The Torturous Curse of Youth",
-            "released": "2014-04-09"
-          },
-          "480P": {
-            "slug_id": "0qE-FXfxclzyujYs",
-            "telegram_message_id": 883,
-            "episode": 2,
-            "season": 1,
-            "special_type": "OAD",
-            "part": null,
-            "quality": "480P",
-            "file_size": 58334306,
-            "file_name": "Attack On Titan - OAD EP02 [Tamil] 480p.mkv",
-            "mime_type": "video/x-matroska",
-            "title": "The Sudden Visitor: The Torturous Curse of Youth",
-            "released": "2014-04-09"
-          },
           "720P": {
-            "slug_id": "ZV1a2vaLGofROOm6",
-            "telegram_message_id": 607,
-            "episode": 2,
+            "telegram_message_id": 606,
+            "episode": 1,
             "season": 1,
             "special_type": "OAD",
             "part": null,
             "quality": "720P",
-            "file_size": 138397289,
-            "file_name": "Attack On Titan - OAD EP02 [Tamil] 720p.mkv",
+            "file_size": 118158912,
+            "file_name": "Attack On Titan - OAD EP01 [Tamil] 720p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "The Sudden Visitor: The Torturous Curse of Youth",
-            "released": "2014-04-09",
-            "frame": "https://raw.githubusercontent.com/MazoPlatforms/autowa/main/web/frames/anime/attack-on-titan-oad-002.jpg"
+            "title": "Ilse's Notebook: Notes from a Scout Regiment Member",
+            "released": "2013-12-09",
+            "frame": "https://raw.githubusercontent.com/MazoPlatforms/autowa/main/web/frames/anime/attack-on-titan-oad-001.jpg"
           }
         }
       },
       {
-        "slug_id": "BVoVPwfrlP6eYinI",
         "telegram_message_id": 618,
         "episode": 2,
         "season": 1,
@@ -201,9 +108,9 @@
         "title": "That Day - The Fall of Shiganshina (2)",
         "released": "2013-04-14",
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242651.jpg",
+        "slug_id": "BVoVPwfrlP6eYinI",
         "qualities": {
           "1080P": {
-            "slug_id": "2ip_3awSUxg0a68u",
             "telegram_message_id": 619,
             "episode": 2,
             "season": 1,
@@ -218,7 +125,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242651.jpg"
           },
           "720P": {
-            "slug_id": "BVoVPwfrlP6eYinI",
             "telegram_message_id": 618,
             "episode": 2,
             "season": 1,
@@ -233,7 +139,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242651.jpg"
           },
           "480P": {
-            "slug_id": "tDEVxtf7DkkbIfOz",
             "telegram_message_id": 617,
             "episode": 2,
             "season": 1,
@@ -250,67 +155,37 @@
         }
       },
       {
-        "slug_id": "eKF7IOxIxxpJOe21",
-        "telegram_message_id": 608,
-        "episode": 3,
+        "telegram_message_id": 607,
+        "episode": 2,
         "season": 1,
         "special_type": "OAD",
         "part": null,
         "quality": "720P",
-        "file_size": 110520261,
-        "file_name": "Attack On Titan - OAD EP03 [Tamil] 720p.mkv",
+        "file_size": 138397289,
+        "file_name": "Attack On Titan - OAD EP02 [Tamil] 720p.mkv",
         "mime_type": "video/x-matroska",
-        "title": "Distress",
-        "released": "2014-08-08",
-        "frame": "https://raw.githubusercontent.com/MazoPlatforms/autowa/main/web/frames/anime/attack-on-titan-oad-003.jpg",
+        "title": "The Sudden Visitor: The Torturous Curse of Youth",
+        "released": "2014-04-09",
+        "frame": "https://raw.githubusercontent.com/MazoPlatforms/autowa/main/web/frames/anime/attack-on-titan-oad-002.jpg",
+        "slug_id": "ZV1a2vaLGofROOm6",
         "qualities": {
-          "1080P": {
-            "slug_id": "7uoCNF9sWpkSsnaI",
-            "telegram_message_id": 886,
-            "episode": 3,
-            "season": 1,
-            "special_type": "OAD",
-            "part": null,
-            "quality": "1080P",
-            "file_size": 209856282,
-            "file_name": "Attack On Titan - OAD EP03 [Tamil] 1080p.mkv",
-            "mime_type": "video/x-matroska",
-            "title": "Distress",
-            "released": "2014-08-08"
-          },
-          "480P": {
-            "slug_id": "_UoawYl-H7i_Oquh",
-            "telegram_message_id": 885,
-            "episode": 3,
-            "season": 1,
-            "special_type": "OAD",
-            "part": null,
-            "quality": "480P",
-            "file_size": 47098863,
-            "file_name": "Attack On Titan - OAD EP03 [Tamil] 480p.mkv",
-            "mime_type": "video/x-matroska",
-            "title": "Distress",
-            "released": "2014-08-08"
-          },
           "720P": {
-            "slug_id": "eKF7IOxIxxpJOe21",
-            "telegram_message_id": 608,
-            "episode": 3,
+            "telegram_message_id": 607,
+            "episode": 2,
             "season": 1,
             "special_type": "OAD",
             "part": null,
             "quality": "720P",
-            "file_size": 110520261,
-            "file_name": "Attack On Titan - OAD EP03 [Tamil] 720p.mkv",
+            "file_size": 138397289,
+            "file_name": "Attack On Titan - OAD EP02 [Tamil] 720p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Distress",
-            "released": "2014-08-08",
-            "frame": "https://raw.githubusercontent.com/MazoPlatforms/autowa/main/web/frames/anime/attack-on-titan-oad-003.jpg"
+            "title": "The Sudden Visitor: The Torturous Curse of Youth",
+            "released": "2014-04-09",
+            "frame": "https://raw.githubusercontent.com/MazoPlatforms/autowa/main/web/frames/anime/attack-on-titan-oad-002.jpg"
           }
         }
       },
       {
-        "slug_id": "Q5VCyuLG0TBdFBi2",
         "telegram_message_id": 621,
         "episode": 3,
         "season": 1,
@@ -323,9 +198,9 @@
         "title": "A Dim Light Amid Despair - Humanity's Comeback (1)",
         "released": "2013-04-21",
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242652.jpg",
+        "slug_id": "Q5VCyuLG0TBdFBi2",
         "qualities": {
           "1080P": {
-            "slug_id": "I-lcvk-cEOn5Pxlj",
             "telegram_message_id": 622,
             "episode": 3,
             "season": 1,
@@ -340,7 +215,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242652.jpg"
           },
           "720P": {
-            "slug_id": "Q5VCyuLG0TBdFBi2",
             "telegram_message_id": 621,
             "episode": 3,
             "season": 1,
@@ -355,7 +229,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242652.jpg"
           },
           "480P": {
-            "slug_id": "TgZaw9QTQTjbC7ke",
             "telegram_message_id": 620,
             "episode": 3,
             "season": 1,
@@ -372,67 +245,37 @@
         }
       },
       {
-        "slug_id": "GJ_xCyBFV4TOQJTL",
-        "telegram_message_id": 609,
-        "episode": 4,
+        "telegram_message_id": 608,
+        "episode": 3,
         "season": 1,
         "special_type": "OAD",
         "part": null,
         "quality": "720P",
-        "file_size": 115243635,
-        "file_name": "Attack On Titan - OAD EP04 [Tamil] 720p.mkv",
+        "file_size": 110520261,
+        "file_name": "Attack On Titan - OAD EP03 [Tamil] 720p.mkv",
         "mime_type": "video/x-matroska",
-        "title": "No Regrets - Part 1",
-        "released": "2014-12-09",
-        "frame": "https://raw.githubusercontent.com/MazoPlatforms/autowa/main/web/frames/anime/attack-on-titan-oad-004.jpg",
+        "title": "Distress",
+        "released": "2014-08-08",
+        "frame": "https://raw.githubusercontent.com/MazoPlatforms/autowa/main/web/frames/anime/attack-on-titan-oad-003.jpg",
+        "slug_id": "eKF7IOxIxxpJOe21",
         "qualities": {
-          "1080P": {
-            "slug_id": "JvjFdYTQhnAySz5M",
-            "telegram_message_id": 888,
-            "episode": 4,
-            "season": 1,
-            "special_type": "OAD",
-            "part": null,
-            "quality": "1080P",
-            "file_size": 209812105,
-            "file_name": "Attack On Titan - OAD EP04 [Tamil] 1080p.mkv",
-            "mime_type": "video/x-matroska",
-            "title": "No Regrets - Part 1",
-            "released": "2014-12-09"
-          },
-          "480P": {
-            "slug_id": "bf7ECbv_AtLP3ani",
-            "telegram_message_id": 887,
-            "episode": 4,
-            "season": 1,
-            "special_type": "OAD",
-            "part": null,
-            "quality": "480P",
-            "file_size": 49612494,
-            "file_name": "Attack On Titan - OAD EP04 [Tamil] 480p.mkv",
-            "mime_type": "video/x-matroska",
-            "title": "No Regrets - Part 1",
-            "released": "2014-12-09"
-          },
           "720P": {
-            "slug_id": "GJ_xCyBFV4TOQJTL",
-            "telegram_message_id": 609,
-            "episode": 4,
+            "telegram_message_id": 608,
+            "episode": 3,
             "season": 1,
             "special_type": "OAD",
             "part": null,
             "quality": "720P",
-            "file_size": 115243635,
-            "file_name": "Attack On Titan - OAD EP04 [Tamil] 720p.mkv",
+            "file_size": 110520261,
+            "file_name": "Attack On Titan - OAD EP03 [Tamil] 720p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "No Regrets - Part 1",
-            "released": "2014-12-09",
-            "frame": "https://raw.githubusercontent.com/MazoPlatforms/autowa/main/web/frames/anime/attack-on-titan-oad-004.jpg"
+            "title": "Distress",
+            "released": "2014-08-08",
+            "frame": "https://raw.githubusercontent.com/MazoPlatforms/autowa/main/web/frames/anime/attack-on-titan-oad-003.jpg"
           }
         }
       },
       {
-        "slug_id": "OKROVe_0NnIYFkyN",
         "telegram_message_id": 624,
         "episode": 4,
         "season": 1,
@@ -445,9 +288,9 @@
         "title": "The Night of the Closing Ceremony - Humanity's Comeback (2)",
         "released": "2013-04-28",
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357583.jpg",
+        "slug_id": "OKROVe_0NnIYFkyN",
         "qualities": {
           "1080P": {
-            "slug_id": "nqsMuugBoJ6VAoTp",
             "telegram_message_id": 625,
             "episode": 4,
             "season": 1,
@@ -462,7 +305,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357583.jpg"
           },
           "720P": {
-            "slug_id": "OKROVe_0NnIYFkyN",
             "telegram_message_id": 624,
             "episode": 4,
             "season": 1,
@@ -477,7 +319,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357583.jpg"
           },
           "480P": {
-            "slug_id": "uHaJZK1CY8mjgYc-",
             "telegram_message_id": 623,
             "episode": 4,
             "season": 1,
@@ -494,67 +335,37 @@
         }
       },
       {
-        "slug_id": "mJ6wkQDDkZ4Wf2N_",
-        "telegram_message_id": 610,
-        "episode": 5,
+        "telegram_message_id": 609,
+        "episode": 4,
         "season": 1,
         "special_type": "OAD",
         "part": null,
         "quality": "720P",
-        "file_size": 170698243,
-        "file_name": "Attack On Titan - OAD EP05 [Tamil] 720p.mkv",
+        "file_size": 115243635,
+        "file_name": "Attack On Titan - OAD EP04 [Tamil] 720p.mkv",
         "mime_type": "video/x-matroska",
-        "title": "No Regrets - Part 2",
-        "released": "2015-04-09",
-        "frame": "https://raw.githubusercontent.com/MazoPlatforms/autowa/main/web/frames/anime/attack-on-titan-oad-005.jpg",
+        "title": "No Regrets - Part 1",
+        "released": "2014-12-09",
+        "frame": "https://raw.githubusercontent.com/MazoPlatforms/autowa/main/web/frames/anime/attack-on-titan-oad-004.jpg",
+        "slug_id": "GJ_xCyBFV4TOQJTL",
         "qualities": {
-          "1080P": {
-            "slug_id": "IW4gLeL_x_uB1fid",
-            "telegram_message_id": 890,
-            "episode": 5,
-            "season": 1,
-            "special_type": "OAD",
-            "part": null,
-            "quality": "1080P",
-            "file_size": 267089254,
-            "file_name": "Attack On Titan - OAD EP05 [Tamil] 1080p.mkv",
-            "mime_type": "video/x-matroska",
-            "title": "No Regrets - Part 2",
-            "released": "2015-04-09"
-          },
-          "480P": {
-            "slug_id": "lbDHzrlqZ0XUQB4s",
-            "telegram_message_id": 889,
-            "episode": 5,
-            "season": 1,
-            "special_type": "OAD",
-            "part": null,
-            "quality": "480P",
-            "file_size": 70664006,
-            "file_name": "Attack On Titan - OAD EP05 [Tamil] 480p.mkv",
-            "mime_type": "video/x-matroska",
-            "title": "No Regrets - Part 2",
-            "released": "2015-04-09"
-          },
           "720P": {
-            "slug_id": "mJ6wkQDDkZ4Wf2N_",
-            "telegram_message_id": 610,
-            "episode": 5,
+            "telegram_message_id": 609,
+            "episode": 4,
             "season": 1,
             "special_type": "OAD",
             "part": null,
             "quality": "720P",
-            "file_size": 170698243,
-            "file_name": "Attack On Titan - OAD EP05 [Tamil] 720p.mkv",
+            "file_size": 115243635,
+            "file_name": "Attack On Titan - OAD EP04 [Tamil] 720p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "No Regrets - Part 2",
-            "released": "2015-04-09",
-            "frame": "https://raw.githubusercontent.com/MazoPlatforms/autowa/main/web/frames/anime/attack-on-titan-oad-005.jpg"
+            "title": "No Regrets - Part 1",
+            "released": "2014-12-09",
+            "frame": "https://raw.githubusercontent.com/MazoPlatforms/autowa/main/web/frames/anime/attack-on-titan-oad-004.jpg"
           }
         }
       },
       {
-        "slug_id": "ORPlN05jnLo7Oubn",
         "telegram_message_id": 627,
         "episode": 5,
         "season": 1,
@@ -567,9 +378,9 @@
         "title": "First Battle - The Struggle for Trost (1)",
         "released": "2013-05-05",
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357587.jpg",
+        "slug_id": "ORPlN05jnLo7Oubn",
         "qualities": {
           "1080P": {
-            "slug_id": "IlGL_s8O8m29eEQP",
             "telegram_message_id": 628,
             "episode": 5,
             "season": 1,
@@ -584,7 +395,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357587.jpg"
           },
           "720P": {
-            "slug_id": "ORPlN05jnLo7Oubn",
             "telegram_message_id": 627,
             "episode": 5,
             "season": 1,
@@ -599,7 +409,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357587.jpg"
           },
           "480P": {
-            "slug_id": "WMCnjxG7uHRyQp8B",
             "telegram_message_id": 626,
             "episode": 5,
             "season": 1,
@@ -616,67 +425,37 @@
         }
       },
       {
-        "slug_id": "U_ykhkWGnlpuXxIU",
-        "telegram_message_id": 611,
-        "episode": 6,
+        "telegram_message_id": 610,
+        "episode": 5,
         "season": 1,
         "special_type": "OAD",
         "part": null,
         "quality": "720P",
-        "file_size": 58744918,
-        "file_name": "Attack On Titan - OAD EP06 [Tamil] 720p.mkv",
+        "file_size": 170698243,
+        "file_name": "Attack On Titan - OAD EP05 [Tamil] 720p.mkv",
         "mime_type": "video/x-matroska",
-        "title": "Lost Girls: Wall Sina, Goodbye - Part 1",
-        "released": "2017-12-08",
-        "frame": "https://raw.githubusercontent.com/MazoPlatforms/autowa/main/web/frames/anime/attack-on-titan-oad-006.jpg",
+        "title": "No Regrets - Part 2",
+        "released": "2015-04-09",
+        "frame": "https://raw.githubusercontent.com/MazoPlatforms/autowa/main/web/frames/anime/attack-on-titan-oad-005.jpg",
+        "slug_id": "mJ6wkQDDkZ4Wf2N_",
         "qualities": {
-          "1080P": {
-            "slug_id": "4NguLS9SBWfnkfjY",
-            "telegram_message_id": 892,
-            "episode": 6,
-            "season": 1,
-            "special_type": "OAD",
-            "part": null,
-            "quality": "1080P",
-            "file_size": 206532887,
-            "file_name": "Attack On Titan - OAD EP06 [Tamil] 1080p.mkv",
-            "mime_type": "video/x-matroska",
-            "title": "Lost Girls: Wall Sina, Goodbye - Part 1",
-            "released": "2017-12-08"
-          },
-          "480P": {
-            "slug_id": "ZlEmyCaQjjq1Tw2i",
-            "telegram_message_id": 891,
-            "episode": 6,
-            "season": 1,
-            "special_type": "OAD",
-            "part": null,
-            "quality": "480P",
-            "file_size": 30333186,
-            "file_name": "Attack On Titan - OAD EP06 [Tamil] 480p.mkv",
-            "mime_type": "video/x-matroska",
-            "title": "Lost Girls: Wall Sina, Goodbye - Part 1",
-            "released": "2017-12-08"
-          },
           "720P": {
-            "slug_id": "U_ykhkWGnlpuXxIU",
-            "telegram_message_id": 611,
-            "episode": 6,
+            "telegram_message_id": 610,
+            "episode": 5,
             "season": 1,
             "special_type": "OAD",
             "part": null,
             "quality": "720P",
-            "file_size": 58744918,
-            "file_name": "Attack On Titan - OAD EP06 [Tamil] 720p.mkv",
+            "file_size": 170698243,
+            "file_name": "Attack On Titan - OAD EP05 [Tamil] 720p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Lost Girls: Wall Sina, Goodbye - Part 1",
-            "released": "2017-12-08",
-            "frame": "https://raw.githubusercontent.com/MazoPlatforms/autowa/main/web/frames/anime/attack-on-titan-oad-006.jpg"
+            "title": "No Regrets - Part 2",
+            "released": "2015-04-09",
+            "frame": "https://raw.githubusercontent.com/MazoPlatforms/autowa/main/web/frames/anime/attack-on-titan-oad-005.jpg"
           }
         }
       },
       {
-        "slug_id": "KUcn8ZzGNruU568B",
         "telegram_message_id": 630,
         "episode": 6,
         "season": 1,
@@ -689,9 +468,9 @@
         "title": "The World the Girl Saw - The Struggle for Trost (2)",
         "released": "2013-05-12",
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242630.jpg",
+        "slug_id": "KUcn8ZzGNruU568B",
         "qualities": {
           "1080P": {
-            "slug_id": "46LV-KwZ0D4_maPO",
             "telegram_message_id": 631,
             "episode": 6,
             "season": 1,
@@ -706,7 +485,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242630.jpg"
           },
           "720P": {
-            "slug_id": "KUcn8ZzGNruU568B",
             "telegram_message_id": 630,
             "episode": 6,
             "season": 1,
@@ -721,7 +499,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242630.jpg"
           },
           "480P": {
-            "slug_id": "2IPh_PDJqKcYeyXv",
             "telegram_message_id": 629,
             "episode": 6,
             "season": 1,
@@ -738,67 +515,37 @@
         }
       },
       {
-        "slug_id": "tBaAVUj0ihVqyXak",
-        "telegram_message_id": 612,
-        "episode": 7,
+        "telegram_message_id": 611,
+        "episode": 6,
         "season": 1,
         "special_type": "OAD",
         "part": null,
         "quality": "720P",
-        "file_size": 69806612,
-        "file_name": "Attack On Titan - OAD EP07 [Tamil] 720p.mkv",
+        "file_size": 58744918,
+        "file_name": "Attack On Titan - OAD EP06 [Tamil] 720p.mkv",
         "mime_type": "video/x-matroska",
-        "title": "Lost Girls: Wall Sina, Goodbye - Part 2",
-        "released": "2018-04-09",
-        "frame": "https://raw.githubusercontent.com/MazoPlatforms/autowa/main/web/frames/anime/attack-on-titan-oad-007.jpg",
+        "title": "Lost Girls: Wall Sina, Goodbye - Part 1",
+        "released": "2017-12-08",
+        "frame": "https://raw.githubusercontent.com/MazoPlatforms/autowa/main/web/frames/anime/attack-on-titan-oad-006.jpg",
+        "slug_id": "U_ykhkWGnlpuXxIU",
         "qualities": {
-          "1080P": {
-            "slug_id": "N2U338s3BhuyLQLZ",
-            "telegram_message_id": 894,
-            "episode": 7,
-            "season": 1,
-            "special_type": "OAD",
-            "part": null,
-            "quality": "1080P",
-            "file_size": 208144066,
-            "file_name": "Attack On Titan - OAD EP07 [Tamil] 1080p.mkv",
-            "mime_type": "video/x-matroska",
-            "title": "Lost Girls: Wall Sina, Goodbye - Part 2",
-            "released": "2018-04-09"
-          },
-          "480P": {
-            "slug_id": "yfYwqtEDGFqVo72E",
-            "telegram_message_id": 893,
-            "episode": 7,
-            "season": 1,
-            "special_type": "OAD",
-            "part": null,
-            "quality": "480P",
-            "file_size": 33068702,
-            "file_name": "Attack On Titan - OAD EP07 [Tamil] 480p.mkv",
-            "mime_type": "video/x-matroska",
-            "title": "Lost Girls: Wall Sina, Goodbye - Part 2",
-            "released": "2018-04-09"
-          },
           "720P": {
-            "slug_id": "tBaAVUj0ihVqyXak",
-            "telegram_message_id": 612,
-            "episode": 7,
+            "telegram_message_id": 611,
+            "episode": 6,
             "season": 1,
             "special_type": "OAD",
             "part": null,
             "quality": "720P",
-            "file_size": 69806612,
-            "file_name": "Attack On Titan - OAD EP07 [Tamil] 720p.mkv",
+            "file_size": 58744918,
+            "file_name": "Attack On Titan - OAD EP06 [Tamil] 720p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Lost Girls: Wall Sina, Goodbye - Part 2",
-            "released": "2018-04-09",
-            "frame": "https://raw.githubusercontent.com/MazoPlatforms/autowa/main/web/frames/anime/attack-on-titan-oad-007.jpg"
+            "title": "Lost Girls: Wall Sina, Goodbye - Part 1",
+            "released": "2017-12-08",
+            "frame": "https://raw.githubusercontent.com/MazoPlatforms/autowa/main/web/frames/anime/attack-on-titan-oad-006.jpg"
           }
         }
       },
       {
-        "slug_id": "49LF8Q_MBTW4uTkw",
         "telegram_message_id": 633,
         "episode": 7,
         "season": 1,
@@ -811,9 +558,9 @@
         "title": "Small Blade - The Struggle for Trost (3)",
         "released": "2013-05-19",
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242629.jpg",
+        "slug_id": "49LF8Q_MBTW4uTkw",
         "qualities": {
           "1080P": {
-            "slug_id": "Ws-IW_Jn7dSSSYTa",
             "telegram_message_id": 634,
             "episode": 7,
             "season": 1,
@@ -828,7 +575,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242629.jpg"
           },
           "720P": {
-            "slug_id": "49LF8Q_MBTW4uTkw",
             "telegram_message_id": 633,
             "episode": 7,
             "season": 1,
@@ -843,7 +589,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242629.jpg"
           },
           "480P": {
-            "slug_id": "CyATPg_wyizTNMWE",
             "telegram_message_id": 632,
             "episode": 7,
             "season": 1,
@@ -860,67 +605,37 @@
         }
       },
       {
-        "slug_id": "pfycixtEJOrCuRLT",
-        "telegram_message_id": 613,
-        "episode": 8,
+        "telegram_message_id": 612,
+        "episode": 7,
         "season": 1,
         "special_type": "OAD",
         "part": null,
         "quality": "720P",
-        "file_size": 90344305,
-        "file_name": "Attack On Titan - OAD EP08 [Tamil] 720p.mkv",
+        "file_size": 69806612,
+        "file_name": "Attack On Titan - OAD EP07 [Tamil] 720p.mkv",
         "mime_type": "video/x-matroska",
-        "title": "Lost Girls: Lost in the Cruel World",
-        "released": "2018-08-09",
-        "frame": "https://raw.githubusercontent.com/MazoPlatforms/autowa/main/web/frames/anime/attack-on-titan-oad-008.jpg",
+        "title": "Lost Girls: Wall Sina, Goodbye - Part 2",
+        "released": "2018-04-09",
+        "frame": "https://raw.githubusercontent.com/MazoPlatforms/autowa/main/web/frames/anime/attack-on-titan-oad-007.jpg",
+        "slug_id": "tBaAVUj0ihVqyXak",
         "qualities": {
-          "1080P": {
-            "slug_id": "oaE9kXDDBOwXeUc7",
-            "telegram_message_id": 896,
-            "episode": 8,
-            "season": 1,
-            "special_type": "OAD",
-            "part": null,
-            "quality": "1080P",
-            "file_size": 209568118,
-            "file_name": "Attack On Titan - OAD EP08 [Tamil] 1080p.mkv",
-            "mime_type": "video/x-matroska",
-            "title": "Lost Girls: Lost in the Cruel World",
-            "released": "2018-08-09"
-          },
-          "480P": {
-            "slug_id": "EPXimwcsxeh3gp4-",
-            "telegram_message_id": 895,
-            "episode": 8,
-            "season": 1,
-            "special_type": "OAD",
-            "part": null,
-            "quality": "480P",
-            "file_size": 40544034,
-            "file_name": "Attack On Titan - OAD EP08 [Tamil] 480p.mkv",
-            "mime_type": "video/x-matroska",
-            "title": "Lost Girls: Lost in the Cruel World",
-            "released": "2018-08-09"
-          },
           "720P": {
-            "slug_id": "pfycixtEJOrCuRLT",
-            "telegram_message_id": 613,
-            "episode": 8,
+            "telegram_message_id": 612,
+            "episode": 7,
             "season": 1,
             "special_type": "OAD",
             "part": null,
             "quality": "720P",
-            "file_size": 90344305,
-            "file_name": "Attack On Titan - OAD EP08 [Tamil] 720p.mkv",
+            "file_size": 69806612,
+            "file_name": "Attack On Titan - OAD EP07 [Tamil] 720p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Lost Girls: Lost in the Cruel World",
-            "released": "2018-08-09",
-            "frame": "https://raw.githubusercontent.com/MazoPlatforms/autowa/main/web/frames/anime/attack-on-titan-oad-008.jpg"
+            "title": "Lost Girls: Wall Sina, Goodbye - Part 2",
+            "released": "2018-04-09",
+            "frame": "https://raw.githubusercontent.com/MazoPlatforms/autowa/main/web/frames/anime/attack-on-titan-oad-007.jpg"
           }
         }
       },
       {
-        "slug_id": "-Hgg_BwMJPmaNckD",
         "telegram_message_id": 636,
         "episode": 8,
         "season": 1,
@@ -933,9 +648,9 @@
         "title": "I Can Hear His Heartbeat - The Struggle for Trost (4)",
         "released": "2013-05-26",
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242631.jpg",
+        "slug_id": "-Hgg_BwMJPmaNckD",
         "qualities": {
           "1080P": {
-            "slug_id": "Le4P0QfPr9SmFiZ_",
             "telegram_message_id": 637,
             "episode": 8,
             "season": 1,
@@ -950,7 +665,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242631.jpg"
           },
           "720P": {
-            "slug_id": "-Hgg_BwMJPmaNckD",
             "telegram_message_id": 636,
             "episode": 8,
             "season": 1,
@@ -965,7 +679,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242631.jpg"
           },
           "480P": {
-            "slug_id": "82qWbfaat9qQUvj7",
             "telegram_message_id": 635,
             "episode": 8,
             "season": 1,
@@ -982,7 +695,37 @@
         }
       },
       {
-        "slug_id": "RqvGskB19butmY7K",
+        "telegram_message_id": 613,
+        "episode": 8,
+        "season": 1,
+        "special_type": "OAD",
+        "part": null,
+        "quality": "720P",
+        "file_size": 90344305,
+        "file_name": "Attack On Titan - OAD EP08 [Tamil] 720p.mkv",
+        "mime_type": "video/x-matroska",
+        "title": "Lost Girls: Lost in the Cruel World",
+        "released": "2018-08-09",
+        "frame": "https://raw.githubusercontent.com/MazoPlatforms/autowa/main/web/frames/anime/attack-on-titan-oad-008.jpg",
+        "slug_id": "pfycixtEJOrCuRLT",
+        "qualities": {
+          "720P": {
+            "telegram_message_id": 613,
+            "episode": 8,
+            "season": 1,
+            "special_type": "OAD",
+            "part": null,
+            "quality": "720P",
+            "file_size": 90344305,
+            "file_name": "Attack On Titan - OAD EP08 [Tamil] 720p.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "Lost Girls: Lost in the Cruel World",
+            "released": "2018-08-09",
+            "frame": "https://raw.githubusercontent.com/MazoPlatforms/autowa/main/web/frames/anime/attack-on-titan-oad-008.jpg"
+          }
+        }
+      },
+      {
         "telegram_message_id": 639,
         "episode": 9,
         "season": 1,
@@ -995,9 +738,9 @@
         "title": "Whereabouts of His Left Arm - The Struggle for Trost (5)",
         "released": "2013-06-02",
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242632.jpg",
+        "slug_id": "RqvGskB19butmY7K",
         "qualities": {
           "1080P": {
-            "slug_id": "Nf7RM_P5bJHEAAgh",
             "telegram_message_id": 640,
             "episode": 9,
             "season": 1,
@@ -1012,7 +755,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242632.jpg"
           },
           "720P": {
-            "slug_id": "RqvGskB19butmY7K",
             "telegram_message_id": 639,
             "episode": 9,
             "season": 1,
@@ -1027,7 +769,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242632.jpg"
           },
           "480P": {
-            "slug_id": "V43sWeLyLTSpqvec",
             "telegram_message_id": 638,
             "episode": 9,
             "season": 1,
@@ -1044,7 +785,6 @@
         }
       },
       {
-        "slug_id": "wdQOpOaneu9Iv-MC",
         "telegram_message_id": 642,
         "episode": 10,
         "season": 1,
@@ -1057,9 +797,9 @@
         "title": "Response - The Struggle for Trost (6)",
         "released": "2013-06-09",
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242633.jpg",
+        "slug_id": "wdQOpOaneu9Iv-MC",
         "qualities": {
           "1080P": {
-            "slug_id": "75lvVGvaRbpj0KA3",
             "telegram_message_id": 643,
             "episode": 10,
             "season": 1,
@@ -1074,7 +814,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242633.jpg"
           },
           "720P": {
-            "slug_id": "wdQOpOaneu9Iv-MC",
             "telegram_message_id": 642,
             "episode": 10,
             "season": 1,
@@ -1089,7 +828,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242633.jpg"
           },
           "480P": {
-            "slug_id": "B9JPncm-jO3AYIbQ",
             "telegram_message_id": 641,
             "episode": 10,
             "season": 1,
@@ -1106,7 +844,6 @@
         }
       },
       {
-        "slug_id": "QUff8JISkqHoV5LH",
         "telegram_message_id": 645,
         "episode": 11,
         "season": 1,
@@ -1119,9 +856,9 @@
         "title": "Idol - The Struggle for Trost (7)",
         "released": "2013-06-16",
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357835.jpg",
+        "slug_id": "QUff8JISkqHoV5LH",
         "qualities": {
           "1080P": {
-            "slug_id": "_E_91Ohpl7tezzq4",
             "telegram_message_id": 646,
             "episode": 11,
             "season": 1,
@@ -1136,7 +873,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357835.jpg"
           },
           "720P": {
-            "slug_id": "QUff8JISkqHoV5LH",
             "telegram_message_id": 645,
             "episode": 11,
             "season": 1,
@@ -1151,7 +887,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357835.jpg"
           },
           "480P": {
-            "slug_id": "7I3PJSOo-D846P54",
             "telegram_message_id": 644,
             "episode": 11,
             "season": 1,
@@ -1168,7 +903,6 @@
         }
       },
       {
-        "slug_id": "9KISS62HL81aQJB_",
         "telegram_message_id": 648,
         "episode": 12,
         "season": 1,
@@ -1181,9 +915,9 @@
         "title": "Wound - The Struggle for Trost (8)",
         "released": "2013-06-23",
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357836.jpg",
+        "slug_id": "9KISS62HL81aQJB_",
         "qualities": {
           "1080P": {
-            "slug_id": "p1-hMOm5942q2DO5",
             "telegram_message_id": 649,
             "episode": 12,
             "season": 1,
@@ -1198,7 +932,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357836.jpg"
           },
           "720P": {
-            "slug_id": "9KISS62HL81aQJB_",
             "telegram_message_id": 648,
             "episode": 12,
             "season": 1,
@@ -1213,7 +946,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357836.jpg"
           },
           "480P": {
-            "slug_id": "oJLMFbKjL7CRBH_I",
             "telegram_message_id": 647,
             "episode": 12,
             "season": 1,
@@ -1230,7 +962,6 @@
         }
       },
       {
-        "slug_id": "OUK_M4H1nODZNzP1",
         "telegram_message_id": 651,
         "episode": 13,
         "season": 1,
@@ -1243,9 +974,9 @@
         "title": "Primal Desire - The Struggle for Trost (9)",
         "released": "2013-06-30",
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242637.jpg",
+        "slug_id": "OUK_M4H1nODZNzP1",
         "qualities": {
           "1080P": {
-            "slug_id": "jN78qbiYaAsVsDGX",
             "telegram_message_id": 652,
             "episode": 13,
             "season": 1,
@@ -1260,7 +991,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242637.jpg"
           },
           "720P": {
-            "slug_id": "OUK_M4H1nODZNzP1",
             "telegram_message_id": 651,
             "episode": 13,
             "season": 1,
@@ -1275,7 +1005,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242637.jpg"
           },
           "480P": {
-            "slug_id": "cuNhQb8QGjCyqKfg",
             "telegram_message_id": 650,
             "episode": 13,
             "season": 1,
@@ -1292,7 +1021,6 @@
         }
       },
       {
-        "slug_id": "X3w_KDeHa80AAQmJ",
         "telegram_message_id": 654,
         "episode": 14,
         "season": 1,
@@ -1305,9 +1033,9 @@
         "title": "Can't Look Into His Eyes - Eve of the Counterattack (1)",
         "released": "2013-07-14",
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242636.jpg",
+        "slug_id": "X3w_KDeHa80AAQmJ",
         "qualities": {
           "1080P": {
-            "slug_id": "IhDtXZuB6eXJIXB7",
             "telegram_message_id": 655,
             "episode": 14,
             "season": 1,
@@ -1322,7 +1050,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242636.jpg"
           },
           "720P": {
-            "slug_id": "X3w_KDeHa80AAQmJ",
             "telegram_message_id": 654,
             "episode": 14,
             "season": 1,
@@ -1337,7 +1064,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242636.jpg"
           },
           "480P": {
-            "slug_id": "uSbTjFw2mEahGMb_",
             "telegram_message_id": 653,
             "episode": 14,
             "season": 1,
@@ -1354,7 +1080,6 @@
         }
       },
       {
-        "slug_id": "GlcVlXlpJPhaUQ-l",
         "telegram_message_id": 657,
         "episode": 15,
         "season": 1,
@@ -1367,9 +1092,9 @@
         "title": "Special Operations Squad - Eve of the Counterattack (2)",
         "released": "2013-07-21",
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242639.jpg",
+        "slug_id": "GlcVlXlpJPhaUQ-l",
         "qualities": {
           "1080P": {
-            "slug_id": "7oWg91L2rxnEUStR",
             "telegram_message_id": 658,
             "episode": 15,
             "season": 1,
@@ -1384,7 +1109,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242639.jpg"
           },
           "720P": {
-            "slug_id": "GlcVlXlpJPhaUQ-l",
             "telegram_message_id": 657,
             "episode": 15,
             "season": 1,
@@ -1399,7 +1123,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242639.jpg"
           },
           "480P": {
-            "slug_id": "Ngcq_EbifCQz0APT",
             "telegram_message_id": 656,
             "episode": 15,
             "season": 1,
@@ -1416,7 +1139,6 @@
         }
       },
       {
-        "slug_id": "U2OqUAaGcvjoqbCb",
         "telegram_message_id": 660,
         "episode": 16,
         "season": 1,
@@ -1429,9 +1151,9 @@
         "title": "What Needs to Be Done Now - Eve of the Counterattack (3)",
         "released": "2013-07-28",
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242638.jpg",
+        "slug_id": "U2OqUAaGcvjoqbCb",
         "qualities": {
           "1080P": {
-            "slug_id": "Uack2rYxwu2MBJQn",
             "telegram_message_id": 661,
             "episode": 16,
             "season": 1,
@@ -1446,7 +1168,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242638.jpg"
           },
           "720P": {
-            "slug_id": "U2OqUAaGcvjoqbCb",
             "telegram_message_id": 660,
             "episode": 16,
             "season": 1,
@@ -1461,7 +1182,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242638.jpg"
           },
           "480P": {
-            "slug_id": "HIJKOBdW6dYRDhCH",
             "telegram_message_id": 659,
             "episode": 16,
             "season": 1,
@@ -1478,7 +1198,6 @@
         }
       },
       {
-        "slug_id": "CUxxKEJqeLYIDe8w",
         "telegram_message_id": 663,
         "episode": 17,
         "season": 1,
@@ -1491,9 +1210,9 @@
         "title": "Female Titan - The 57th Exterior Scouting Mission (1)",
         "released": "2013-08-04",
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357858.jpg",
+        "slug_id": "CUxxKEJqeLYIDe8w",
         "qualities": {
           "1080P": {
-            "slug_id": "Q90QOc1w5veuBLJK",
             "telegram_message_id": 664,
             "episode": 17,
             "season": 1,
@@ -1508,7 +1227,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357858.jpg"
           },
           "720P": {
-            "slug_id": "CUxxKEJqeLYIDe8w",
             "telegram_message_id": 663,
             "episode": 17,
             "season": 1,
@@ -1523,7 +1241,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357858.jpg"
           },
           "480P": {
-            "slug_id": "BV_4heH88ybBD6ak",
             "telegram_message_id": 662,
             "episode": 17,
             "season": 1,
@@ -1540,7 +1257,6 @@
         }
       },
       {
-        "slug_id": "3rOQjWVVuAw2UTBt",
         "telegram_message_id": 666,
         "episode": 18,
         "season": 1,
@@ -1553,9 +1269,9 @@
         "title": "Forest of Giant Trees - The 57th Exterior Scouting Mission (2)",
         "released": "2013-08-11",
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242640.jpg",
+        "slug_id": "3rOQjWVVuAw2UTBt",
         "qualities": {
           "1080P": {
-            "slug_id": "qqWQF1WGmczI7p_U",
             "telegram_message_id": 667,
             "episode": 18,
             "season": 1,
@@ -1570,7 +1286,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242640.jpg"
           },
           "720P": {
-            "slug_id": "3rOQjWVVuAw2UTBt",
             "telegram_message_id": 666,
             "episode": 18,
             "season": 1,
@@ -1585,7 +1300,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242640.jpg"
           },
           "480P": {
-            "slug_id": "TlL0sLEvI7Gs3-_V",
             "telegram_message_id": 665,
             "episode": 18,
             "season": 1,
@@ -1602,7 +1316,6 @@
         }
       },
       {
-        "slug_id": "9YAp16-donpNOjCJ",
         "telegram_message_id": 669,
         "episode": 19,
         "season": 1,
@@ -1615,9 +1328,9 @@
         "title": "Bite - The 57th Exterior Scouting Mission (3)",
         "released": "2013-08-18",
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242642.jpg",
+        "slug_id": "9YAp16-donpNOjCJ",
         "qualities": {
           "1080P": {
-            "slug_id": "2Oumw8KesaMtqLXl",
             "telegram_message_id": 670,
             "episode": 19,
             "season": 1,
@@ -1632,7 +1345,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242642.jpg"
           },
           "720P": {
-            "slug_id": "9YAp16-donpNOjCJ",
             "telegram_message_id": 669,
             "episode": 19,
             "season": 1,
@@ -1647,7 +1359,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242642.jpg"
           },
           "480P": {
-            "slug_id": "gFRg8oZIl0BcYEyn",
             "telegram_message_id": 668,
             "episode": 19,
             "season": 1,
@@ -1664,7 +1375,6 @@
         }
       },
       {
-        "slug_id": "_Dy8lC4jxHBppils",
         "telegram_message_id": 672,
         "episode": 20,
         "season": 1,
@@ -1677,9 +1387,9 @@
         "title": "Erwin Smith - The 57th Exterior Scouting Mission (4)",
         "released": "2013-08-25",
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242643.jpg",
+        "slug_id": "_Dy8lC4jxHBppils",
         "qualities": {
           "1080P": {
-            "slug_id": "KJWIcegSlH4Ecjrv",
             "telegram_message_id": 673,
             "episode": 20,
             "season": 1,
@@ -1694,7 +1404,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242643.jpg"
           },
           "720P": {
-            "slug_id": "_Dy8lC4jxHBppils",
             "telegram_message_id": 672,
             "episode": 20,
             "season": 1,
@@ -1709,7 +1418,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242643.jpg"
           },
           "480P": {
-            "slug_id": "hhEAxF74i2ffEcql",
             "telegram_message_id": 671,
             "episode": 20,
             "season": 1,
@@ -1726,7 +1434,6 @@
         }
       },
       {
-        "slug_id": "CyPM24LcZmjMr8WA",
         "telegram_message_id": 675,
         "episode": 21,
         "season": 1,
@@ -1739,9 +1446,9 @@
         "title": "Crushing Blow - The 57th Exterior Scouting Mission (5)",
         "released": "2013-09-01",
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357929.jpg",
+        "slug_id": "CyPM24LcZmjMr8WA",
         "qualities": {
           "1080P": {
-            "slug_id": "K7GOYeDAnHB9BF3t",
             "telegram_message_id": 676,
             "episode": 21,
             "season": 1,
@@ -1756,7 +1463,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357929.jpg"
           },
           "720P": {
-            "slug_id": "CyPM24LcZmjMr8WA",
             "telegram_message_id": 675,
             "episode": 21,
             "season": 1,
@@ -1771,7 +1477,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357929.jpg"
           },
           "480P": {
-            "slug_id": "U9G_dLSuvhxYWvnG",
             "telegram_message_id": 674,
             "episode": 21,
             "season": 1,
@@ -1788,7 +1493,6 @@
         }
       },
       {
-        "slug_id": "K8y8Vj-cHTXkbgoz",
         "telegram_message_id": 678,
         "episode": 22,
         "season": 1,
@@ -1801,9 +1505,9 @@
         "title": "The Defeated - The 57th Exterior Scouting Mission (6)",
         "released": "2013-09-08",
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242646.jpg",
+        "slug_id": "K8y8Vj-cHTXkbgoz",
         "qualities": {
           "1080P": {
-            "slug_id": "YZqjtvN6be7Oi2iW",
             "telegram_message_id": 679,
             "episode": 22,
             "season": 1,
@@ -1818,7 +1522,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242646.jpg"
           },
           "720P": {
-            "slug_id": "K8y8Vj-cHTXkbgoz",
             "telegram_message_id": 678,
             "episode": 22,
             "season": 1,
@@ -1833,7 +1536,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242646.jpg"
           },
           "480P": {
-            "slug_id": "x8LnxtvmAAYw64z-",
             "telegram_message_id": 677,
             "episode": 22,
             "season": 1,
@@ -1850,7 +1552,6 @@
         }
       },
       {
-        "slug_id": "xN3gf08SnOjtbRN5",
         "telegram_message_id": 681,
         "episode": 23,
         "season": 1,
@@ -1863,9 +1564,9 @@
         "title": "Smile - Assault on Stohess (1)",
         "released": "2013-09-15",
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242645.jpg",
+        "slug_id": "xN3gf08SnOjtbRN5",
         "qualities": {
           "1080P": {
-            "slug_id": "ntaPHF5cUZbXKGJ2",
             "telegram_message_id": 682,
             "episode": 23,
             "season": 1,
@@ -1880,7 +1581,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242645.jpg"
           },
           "720P": {
-            "slug_id": "xN3gf08SnOjtbRN5",
             "telegram_message_id": 681,
             "episode": 23,
             "season": 1,
@@ -1895,7 +1595,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242645.jpg"
           },
           "480P": {
-            "slug_id": "y5zR9twBTK2z0YRA",
             "telegram_message_id": 680,
             "episode": 23,
             "season": 1,
@@ -1912,7 +1611,6 @@
         }
       },
       {
-        "slug_id": "vfUIzhvV-lvyX08S",
         "telegram_message_id": 684,
         "episode": 24,
         "season": 1,
@@ -1925,9 +1623,9 @@
         "title": "Mercy - Assault on Stohess (2)",
         "released": "2013-09-22",
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242647.jpg",
+        "slug_id": "vfUIzhvV-lvyX08S",
         "qualities": {
           "1080P": {
-            "slug_id": "iZb9u2SjjHw6ESBd",
             "telegram_message_id": 685,
             "episode": 24,
             "season": 1,
@@ -1942,7 +1640,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242647.jpg"
           },
           "720P": {
-            "slug_id": "vfUIzhvV-lvyX08S",
             "telegram_message_id": 684,
             "episode": 24,
             "season": 1,
@@ -1957,7 +1654,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242647.jpg"
           },
           "480P": {
-            "slug_id": "JP7rMCo0CZAAMIzK",
             "telegram_message_id": 683,
             "episode": 24,
             "season": 1,
@@ -1974,7 +1670,6 @@
         }
       },
       {
-        "slug_id": "SIdlo-3XM4dNhU8P",
         "telegram_message_id": 687,
         "episode": 25,
         "season": 1,
@@ -1987,9 +1682,9 @@
         "title": "Wall: Raid on Stohess District (3)",
         "released": "2013-09-29",
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242648.jpg",
+        "slug_id": "SIdlo-3XM4dNhU8P",
         "qualities": {
           "1080P": {
-            "slug_id": "b22t228cK0sVj2J7",
             "telegram_message_id": 688,
             "episode": 25,
             "season": 1,
@@ -2004,7 +1699,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242648.jpg"
           },
           "720P": {
-            "slug_id": "SIdlo-3XM4dNhU8P",
             "telegram_message_id": 687,
             "episode": 25,
             "season": 1,
@@ -2019,7 +1713,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242648.jpg"
           },
           "480P": {
-            "slug_id": "tc3bDLOeKxac1S09",
             "telegram_message_id": 686,
             "episode": 25,
             "season": 1,
@@ -2036,7 +1729,6 @@
         }
       },
       {
-        "slug_id": "_LJKhwooKorjzo6E",
         "telegram_message_id": 690,
         "episode": 1,
         "season": 2,
@@ -2049,9 +1741,9 @@
         "title": "To You, in 2000 Years - The Fall of Shiganshina (1)",
         "released": "2013-04-07",
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242650.jpg",
+        "slug_id": "_LJKhwooKorjzo6E",
         "qualities": {
           "1080P": {
-            "slug_id": "Xv2CQt4xcPIZcU0B",
             "telegram_message_id": 691,
             "episode": 1,
             "season": 2,
@@ -2066,7 +1758,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242650.jpg"
           },
           "720P": {
-            "slug_id": "_LJKhwooKorjzo6E",
             "telegram_message_id": 690,
             "episode": 1,
             "season": 2,
@@ -2081,7 +1772,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242650.jpg"
           },
           "480P": {
-            "slug_id": "4e1cf7FHLg0cos1Q",
             "telegram_message_id": 689,
             "episode": 1,
             "season": 2,
@@ -2098,7 +1788,6 @@
         }
       },
       {
-        "slug_id": "gBD05Sf3H2rMYSCI",
         "telegram_message_id": 693,
         "episode": 2,
         "season": 2,
@@ -2111,9 +1800,9 @@
         "title": "That Day - The Fall of Shiganshina (2)",
         "released": "2013-04-14",
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242651.jpg",
+        "slug_id": "gBD05Sf3H2rMYSCI",
         "qualities": {
           "1080P": {
-            "slug_id": "vnzwV95iteSbi67P",
             "telegram_message_id": 694,
             "episode": 2,
             "season": 2,
@@ -2128,7 +1817,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242651.jpg"
           },
           "720P": {
-            "slug_id": "gBD05Sf3H2rMYSCI",
             "telegram_message_id": 693,
             "episode": 2,
             "season": 2,
@@ -2143,7 +1831,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242651.jpg"
           },
           "480P": {
-            "slug_id": "ORaDSoPP61uqpQKU",
             "telegram_message_id": 692,
             "episode": 2,
             "season": 2,
@@ -2160,7 +1847,6 @@
         }
       },
       {
-        "slug_id": "w0p0Hur_J3boY3tS",
         "telegram_message_id": 696,
         "episode": 3,
         "season": 2,
@@ -2173,9 +1859,9 @@
         "title": "A Dim Light Amid Despair - Humanity's Comeback (1)",
         "released": "2013-04-21",
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242652.jpg",
+        "slug_id": "w0p0Hur_J3boY3tS",
         "qualities": {
           "1080P": {
-            "slug_id": "5n5pqcqn-SOOiqgL",
             "telegram_message_id": 697,
             "episode": 3,
             "season": 2,
@@ -2190,7 +1876,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242652.jpg"
           },
           "720P": {
-            "slug_id": "w0p0Hur_J3boY3tS",
             "telegram_message_id": 696,
             "episode": 3,
             "season": 2,
@@ -2205,7 +1890,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242652.jpg"
           },
           "480P": {
-            "slug_id": "bxjbGKeAPgJbuVoW",
             "telegram_message_id": 695,
             "episode": 3,
             "season": 2,
@@ -2222,7 +1906,6 @@
         }
       },
       {
-        "slug_id": "2YcVedgx1q1fXfSz",
         "telegram_message_id": 699,
         "episode": 4,
         "season": 2,
@@ -2235,9 +1918,9 @@
         "title": "The Night of the Closing Ceremony - Humanity's Comeback (2)",
         "released": "2013-04-28",
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357583.jpg",
+        "slug_id": "2YcVedgx1q1fXfSz",
         "qualities": {
           "1080P": {
-            "slug_id": "FE6OMkU_m31m4zFQ",
             "telegram_message_id": 700,
             "episode": 4,
             "season": 2,
@@ -2252,7 +1935,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357583.jpg"
           },
           "720P": {
-            "slug_id": "2YcVedgx1q1fXfSz",
             "telegram_message_id": 699,
             "episode": 4,
             "season": 2,
@@ -2267,7 +1949,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357583.jpg"
           },
           "480P": {
-            "slug_id": "g0etai_yy8P2if2U",
             "telegram_message_id": 698,
             "episode": 4,
             "season": 2,
@@ -2284,7 +1965,6 @@
         }
       },
       {
-        "slug_id": "I_o2RGJEMo2z7lJT",
         "telegram_message_id": 702,
         "episode": 5,
         "season": 2,
@@ -2297,9 +1977,9 @@
         "title": "First Battle - The Struggle for Trost (1)",
         "released": "2013-05-05",
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357587.jpg",
+        "slug_id": "I_o2RGJEMo2z7lJT",
         "qualities": {
           "1080P": {
-            "slug_id": "KmsTpvEdgZIQqeMP",
             "telegram_message_id": 703,
             "episode": 5,
             "season": 2,
@@ -2314,7 +1994,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357587.jpg"
           },
           "720P": {
-            "slug_id": "I_o2RGJEMo2z7lJT",
             "telegram_message_id": 702,
             "episode": 5,
             "season": 2,
@@ -2329,7 +2008,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357587.jpg"
           },
           "480P": {
-            "slug_id": "Y0SbdPRGdbRI9vN7",
             "telegram_message_id": 701,
             "episode": 5,
             "season": 2,
@@ -2346,7 +2024,6 @@
         }
       },
       {
-        "slug_id": "R_0U6rOyyoi6E7ym",
         "telegram_message_id": 705,
         "episode": 6,
         "season": 2,
@@ -2359,9 +2036,9 @@
         "title": "The World the Girl Saw - The Struggle for Trost (2)",
         "released": "2013-05-12",
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242630.jpg",
+        "slug_id": "R_0U6rOyyoi6E7ym",
         "qualities": {
           "1080P": {
-            "slug_id": "sZbJkGEUuDv5SFel",
             "telegram_message_id": 706,
             "episode": 6,
             "season": 2,
@@ -2376,7 +2053,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242630.jpg"
           },
           "720P": {
-            "slug_id": "R_0U6rOyyoi6E7ym",
             "telegram_message_id": 705,
             "episode": 6,
             "season": 2,
@@ -2391,7 +2067,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242630.jpg"
           },
           "480P": {
-            "slug_id": "0brB5kYXc40y3lE8",
             "telegram_message_id": 704,
             "episode": 6,
             "season": 2,
@@ -2408,7 +2083,6 @@
         }
       },
       {
-        "slug_id": "ygw4BjGKnoPBOx39",
         "telegram_message_id": 708,
         "episode": 7,
         "season": 2,
@@ -2421,9 +2095,9 @@
         "title": "Small Blade - The Struggle for Trost (3)",
         "released": "2013-05-19",
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242629.jpg",
+        "slug_id": "ygw4BjGKnoPBOx39",
         "qualities": {
           "1080P": {
-            "slug_id": "IzwOJsCZcqtaPv9p",
             "telegram_message_id": 709,
             "episode": 7,
             "season": 2,
@@ -2438,7 +2112,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242629.jpg"
           },
           "720P": {
-            "slug_id": "ygw4BjGKnoPBOx39",
             "telegram_message_id": 708,
             "episode": 7,
             "season": 2,
@@ -2453,7 +2126,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242629.jpg"
           },
           "480P": {
-            "slug_id": "R6hLZxHk36e9ZLoO",
             "telegram_message_id": 707,
             "episode": 7,
             "season": 2,
@@ -2470,7 +2142,6 @@
         }
       },
       {
-        "slug_id": "hJCXFPWRtDjRipjn",
         "telegram_message_id": 711,
         "episode": 8,
         "season": 2,
@@ -2483,9 +2154,9 @@
         "title": "I Can Hear His Heartbeat - The Struggle for Trost (4)",
         "released": "2013-05-26",
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242631.jpg",
+        "slug_id": "hJCXFPWRtDjRipjn",
         "qualities": {
           "1080P": {
-            "slug_id": "2Uslpub30JwFLnAB",
             "telegram_message_id": 712,
             "episode": 8,
             "season": 2,
@@ -2500,7 +2171,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242631.jpg"
           },
           "720P": {
-            "slug_id": "hJCXFPWRtDjRipjn",
             "telegram_message_id": 711,
             "episode": 8,
             "season": 2,
@@ -2515,7 +2185,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242631.jpg"
           },
           "480P": {
-            "slug_id": "bV2bcHVtmlDk4Z1_",
             "telegram_message_id": 710,
             "episode": 8,
             "season": 2,
@@ -2532,7 +2201,6 @@
         }
       },
       {
-        "slug_id": "2_rT8XT_R4oWzN0J",
         "telegram_message_id": 714,
         "episode": 9,
         "season": 2,
@@ -2545,9 +2213,9 @@
         "title": "Whereabouts of His Left Arm - The Struggle for Trost (5)",
         "released": "2013-06-02",
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242632.jpg",
+        "slug_id": "2_rT8XT_R4oWzN0J",
         "qualities": {
           "1080P": {
-            "slug_id": "i49zskT5th_QeNee",
             "telegram_message_id": 715,
             "episode": 9,
             "season": 2,
@@ -2562,7 +2230,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242632.jpg"
           },
           "720P": {
-            "slug_id": "2_rT8XT_R4oWzN0J",
             "telegram_message_id": 714,
             "episode": 9,
             "season": 2,
@@ -2577,7 +2244,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242632.jpg"
           },
           "480P": {
-            "slug_id": "8omjiJPaVGf2xyfE",
             "telegram_message_id": 713,
             "episode": 9,
             "season": 2,
@@ -2594,7 +2260,6 @@
         }
       },
       {
-        "slug_id": "q99ZBtuRRflrHo1N",
         "telegram_message_id": 717,
         "episode": 10,
         "season": 2,
@@ -2607,9 +2272,9 @@
         "title": "Response - The Struggle for Trost (6)",
         "released": "2013-06-09",
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242633.jpg",
+        "slug_id": "q99ZBtuRRflrHo1N",
         "qualities": {
           "1080P": {
-            "slug_id": "d5ivcSqR6ERQU3E-",
             "telegram_message_id": 718,
             "episode": 10,
             "season": 2,
@@ -2624,7 +2289,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242633.jpg"
           },
           "720P": {
-            "slug_id": "q99ZBtuRRflrHo1N",
             "telegram_message_id": 717,
             "episode": 10,
             "season": 2,
@@ -2639,7 +2303,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242633.jpg"
           },
           "480P": {
-            "slug_id": "RxjbrTPzWkvLYtQ-",
             "telegram_message_id": 716,
             "episode": 10,
             "season": 2,
@@ -2656,7 +2319,6 @@
         }
       },
       {
-        "slug_id": "2MHkebNOEjm0HnOU",
         "telegram_message_id": 720,
         "episode": 11,
         "season": 2,
@@ -2669,9 +2331,9 @@
         "title": "Idol - The Struggle for Trost (7)",
         "released": "2013-06-16",
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357835.jpg",
+        "slug_id": "2MHkebNOEjm0HnOU",
         "qualities": {
           "1080P": {
-            "slug_id": "IFIML_m_HE2t6kUf",
             "telegram_message_id": 721,
             "episode": 11,
             "season": 2,
@@ -2686,7 +2348,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357835.jpg"
           },
           "720P": {
-            "slug_id": "2MHkebNOEjm0HnOU",
             "telegram_message_id": 720,
             "episode": 11,
             "season": 2,
@@ -2701,7 +2362,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357835.jpg"
           },
           "480P": {
-            "slug_id": "yQ0TjXWl-jXsR7N3",
             "telegram_message_id": 719,
             "episode": 11,
             "season": 2,
@@ -2718,7 +2378,6 @@
         }
       },
       {
-        "slug_id": "EI_ntMcUYqzvkE3Z",
         "telegram_message_id": 723,
         "episode": 12,
         "season": 2,
@@ -2731,9 +2390,9 @@
         "title": "Wound - The Struggle for Trost (8)",
         "released": "2013-06-23",
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357836.jpg",
+        "slug_id": "EI_ntMcUYqzvkE3Z",
         "qualities": {
           "1080P": {
-            "slug_id": "ed8rnh0tbbQHa6nw",
             "telegram_message_id": 724,
             "episode": 12,
             "season": 2,
@@ -2748,7 +2407,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357836.jpg"
           },
           "720P": {
-            "slug_id": "EI_ntMcUYqzvkE3Z",
             "telegram_message_id": 723,
             "episode": 12,
             "season": 2,
@@ -2763,7 +2421,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357836.jpg"
           },
           "480P": {
-            "slug_id": "ArqVFJWFo9P4-PIi",
             "telegram_message_id": 722,
             "episode": 12,
             "season": 2,
@@ -2780,7 +2437,6 @@
         }
       },
       {
-        "slug_id": "7mN6Ddw_b0I6Dn9F",
         "telegram_message_id": 726,
         "episode": 1,
         "season": 3,
@@ -2793,9 +2449,9 @@
         "title": "To You, in 2000 Years - The Fall of Shiganshina (1)",
         "released": "2013-04-07",
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242650.jpg",
+        "slug_id": "7mN6Ddw_b0I6Dn9F",
         "qualities": {
           "1080P": {
-            "slug_id": "5GlbGTbiL32-dZIX",
             "telegram_message_id": 727,
             "episode": 1,
             "season": 3,
@@ -2810,7 +2466,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242650.jpg"
           },
           "720P": {
-            "slug_id": "7mN6Ddw_b0I6Dn9F",
             "telegram_message_id": 726,
             "episode": 1,
             "season": 3,
@@ -2825,7 +2480,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242650.jpg"
           },
           "480P": {
-            "slug_id": "NT869Ii1wEyrcWlj",
             "telegram_message_id": 725,
             "episode": 1,
             "season": 3,
@@ -2842,7 +2496,6 @@
         }
       },
       {
-        "slug_id": "VKJoO-THAS5XiP_s",
         "telegram_message_id": 729,
         "episode": 2,
         "season": 3,
@@ -2855,9 +2508,9 @@
         "title": "That Day - The Fall of Shiganshina (2)",
         "released": "2013-04-14",
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242651.jpg",
+        "slug_id": "VKJoO-THAS5XiP_s",
         "qualities": {
           "1080P": {
-            "slug_id": "kFjS5BfbXHuhhMYD",
             "telegram_message_id": 730,
             "episode": 2,
             "season": 3,
@@ -2872,7 +2525,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242651.jpg"
           },
           "720P": {
-            "slug_id": "VKJoO-THAS5XiP_s",
             "telegram_message_id": 729,
             "episode": 2,
             "season": 3,
@@ -2887,7 +2539,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242651.jpg"
           },
           "480P": {
-            "slug_id": "_ahxaKKdvwn573Pb",
             "telegram_message_id": 728,
             "episode": 2,
             "season": 3,
@@ -2904,7 +2555,6 @@
         }
       },
       {
-        "slug_id": "g01_W-oxMc2TmtwD",
         "telegram_message_id": 732,
         "episode": 3,
         "season": 3,
@@ -2917,9 +2567,9 @@
         "title": "A Dim Light Amid Despair - Humanity's Comeback (1)",
         "released": "2013-04-21",
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242652.jpg",
+        "slug_id": "g01_W-oxMc2TmtwD",
         "qualities": {
           "1080P": {
-            "slug_id": "mi0Rz217nuOeEkhd",
             "telegram_message_id": 733,
             "episode": 3,
             "season": 3,
@@ -2934,7 +2584,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242652.jpg"
           },
           "720P": {
-            "slug_id": "g01_W-oxMc2TmtwD",
             "telegram_message_id": 732,
             "episode": 3,
             "season": 3,
@@ -2949,7 +2598,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242652.jpg"
           },
           "480P": {
-            "slug_id": "PquKwAkIaWxI9mTR",
             "telegram_message_id": 731,
             "episode": 3,
             "season": 3,
@@ -2966,7 +2614,6 @@
         }
       },
       {
-        "slug_id": "SJfiAJU5XGAZZuAo",
         "telegram_message_id": 735,
         "episode": 4,
         "season": 3,
@@ -2979,9 +2626,9 @@
         "title": "The Night of the Closing Ceremony - Humanity's Comeback (2)",
         "released": "2013-04-28",
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357583.jpg",
+        "slug_id": "SJfiAJU5XGAZZuAo",
         "qualities": {
           "1080P": {
-            "slug_id": "bK4B44TkslgaSxlU",
             "telegram_message_id": 736,
             "episode": 4,
             "season": 3,
@@ -2996,7 +2643,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357583.jpg"
           },
           "720P": {
-            "slug_id": "SJfiAJU5XGAZZuAo",
             "telegram_message_id": 735,
             "episode": 4,
             "season": 3,
@@ -3011,7 +2657,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357583.jpg"
           },
           "480P": {
-            "slug_id": "eYjf73MBP4GW9HSm",
             "telegram_message_id": 734,
             "episode": 4,
             "season": 3,
@@ -3028,7 +2673,6 @@
         }
       },
       {
-        "slug_id": "ZVDEc9kRf9kggrYX",
         "telegram_message_id": 738,
         "episode": 5,
         "season": 3,
@@ -3041,9 +2685,9 @@
         "title": "First Battle - The Struggle for Trost (1)",
         "released": "2013-05-05",
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357587.jpg",
+        "slug_id": "ZVDEc9kRf9kggrYX",
         "qualities": {
           "1080P": {
-            "slug_id": "9kYpEKWZhkDgmFQh",
             "telegram_message_id": 739,
             "episode": 5,
             "season": 3,
@@ -3058,7 +2702,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357587.jpg"
           },
           "720P": {
-            "slug_id": "ZVDEc9kRf9kggrYX",
             "telegram_message_id": 738,
             "episode": 5,
             "season": 3,
@@ -3073,7 +2716,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357587.jpg"
           },
           "480P": {
-            "slug_id": "CK2zc0TUKmhRwr5i",
             "telegram_message_id": 737,
             "episode": 5,
             "season": 3,
@@ -3090,7 +2732,6 @@
         }
       },
       {
-        "slug_id": "SlDkch6YcQdW8BTz",
         "telegram_message_id": 741,
         "episode": 6,
         "season": 3,
@@ -3103,9 +2744,9 @@
         "title": "The World the Girl Saw - The Struggle for Trost (2)",
         "released": "2013-05-12",
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242630.jpg",
+        "slug_id": "SlDkch6YcQdW8BTz",
         "qualities": {
           "1080P": {
-            "slug_id": "LXxTGObW4ahn7BY9",
             "telegram_message_id": 742,
             "episode": 6,
             "season": 3,
@@ -3120,7 +2761,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242630.jpg"
           },
           "720P": {
-            "slug_id": "SlDkch6YcQdW8BTz",
             "telegram_message_id": 741,
             "episode": 6,
             "season": 3,
@@ -3135,7 +2775,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242630.jpg"
           },
           "480P": {
-            "slug_id": "R5EBcR2UawiTVo_A",
             "telegram_message_id": 740,
             "episode": 6,
             "season": 3,
@@ -3152,7 +2791,6 @@
         }
       },
       {
-        "slug_id": "8hLhnMMVud72xDZY",
         "telegram_message_id": 744,
         "episode": 7,
         "season": 3,
@@ -3165,9 +2803,9 @@
         "title": "Small Blade - The Struggle for Trost (3)",
         "released": "2013-05-19",
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242629.jpg",
+        "slug_id": "8hLhnMMVud72xDZY",
         "qualities": {
           "1080P": {
-            "slug_id": "Cf0IoW1C-n8aVNgf",
             "telegram_message_id": 745,
             "episode": 7,
             "season": 3,
@@ -3182,7 +2820,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242629.jpg"
           },
           "720P": {
-            "slug_id": "8hLhnMMVud72xDZY",
             "telegram_message_id": 744,
             "episode": 7,
             "season": 3,
@@ -3197,7 +2834,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242629.jpg"
           },
           "480P": {
-            "slug_id": "t4hIPygGvA04aBPn",
             "telegram_message_id": 743,
             "episode": 7,
             "season": 3,
@@ -3214,7 +2850,6 @@
         }
       },
       {
-        "slug_id": "aXPF4yF-C7hSF3GE",
         "telegram_message_id": 747,
         "episode": 8,
         "season": 3,
@@ -3227,9 +2862,9 @@
         "title": "I Can Hear His Heartbeat - The Struggle for Trost (4)",
         "released": "2013-05-26",
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242631.jpg",
+        "slug_id": "aXPF4yF-C7hSF3GE",
         "qualities": {
           "1080P": {
-            "slug_id": "4zEl0KbW6ean-LFW",
             "telegram_message_id": 748,
             "episode": 8,
             "season": 3,
@@ -3244,7 +2879,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242631.jpg"
           },
           "720P": {
-            "slug_id": "aXPF4yF-C7hSF3GE",
             "telegram_message_id": 747,
             "episode": 8,
             "season": 3,
@@ -3259,7 +2893,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242631.jpg"
           },
           "480P": {
-            "slug_id": "V0AXs3tJX0gWPlo2",
             "telegram_message_id": 746,
             "episode": 8,
             "season": 3,
@@ -3276,7 +2909,6 @@
         }
       },
       {
-        "slug_id": "ui2LYA0lFDC3xYOx",
         "telegram_message_id": 750,
         "episode": 9,
         "season": 3,
@@ -3289,9 +2921,9 @@
         "title": "Whereabouts of His Left Arm - The Struggle for Trost (5)",
         "released": "2013-06-02",
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242632.jpg",
+        "slug_id": "ui2LYA0lFDC3xYOx",
         "qualities": {
           "1080P": {
-            "slug_id": "15Fjq1JhN5cAIgkB",
             "telegram_message_id": 751,
             "episode": 9,
             "season": 3,
@@ -3306,7 +2938,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242632.jpg"
           },
           "720P": {
-            "slug_id": "ui2LYA0lFDC3xYOx",
             "telegram_message_id": 750,
             "episode": 9,
             "season": 3,
@@ -3321,7 +2952,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242632.jpg"
           },
           "480P": {
-            "slug_id": "h9Sp-kNLFD56XWnC",
             "telegram_message_id": 749,
             "episode": 9,
             "season": 3,
@@ -3338,7 +2968,6 @@
         }
       },
       {
-        "slug_id": "Tu8juEkw5-6eOtQC",
         "telegram_message_id": 753,
         "episode": 10,
         "season": 3,
@@ -3351,9 +2980,9 @@
         "title": "Response - The Struggle for Trost (6)",
         "released": "2013-06-09",
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242633.jpg",
+        "slug_id": "Tu8juEkw5-6eOtQC",
         "qualities": {
           "1080P": {
-            "slug_id": "S6oen0-pK43wzb6S",
             "telegram_message_id": 754,
             "episode": 10,
             "season": 3,
@@ -3368,7 +2997,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242633.jpg"
           },
           "720P": {
-            "slug_id": "Tu8juEkw5-6eOtQC",
             "telegram_message_id": 753,
             "episode": 10,
             "season": 3,
@@ -3383,7 +3011,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242633.jpg"
           },
           "480P": {
-            "slug_id": "juxC4oAyzigRz2q5",
             "telegram_message_id": 752,
             "episode": 10,
             "season": 3,
@@ -3400,7 +3027,6 @@
         }
       },
       {
-        "slug_id": "p0lPLKspeojNs5fQ",
         "telegram_message_id": 756,
         "episode": 11,
         "season": 3,
@@ -3413,9 +3039,9 @@
         "title": "Idol - The Struggle for Trost (7)",
         "released": "2013-06-16",
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357835.jpg",
+        "slug_id": "p0lPLKspeojNs5fQ",
         "qualities": {
           "1080P": {
-            "slug_id": "rOCQUlUdEPKx37Mr",
             "telegram_message_id": 757,
             "episode": 11,
             "season": 3,
@@ -3430,7 +3056,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357835.jpg"
           },
           "720P": {
-            "slug_id": "p0lPLKspeojNs5fQ",
             "telegram_message_id": 756,
             "episode": 11,
             "season": 3,
@@ -3445,7 +3070,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357835.jpg"
           },
           "480P": {
-            "slug_id": "yjav8Bg7rWsQmns0",
             "telegram_message_id": 755,
             "episode": 11,
             "season": 3,
@@ -3462,7 +3086,6 @@
         }
       },
       {
-        "slug_id": "E0-JsneRPwpvUilI",
         "telegram_message_id": 759,
         "episode": 12,
         "season": 3,
@@ -3475,9 +3098,9 @@
         "title": "Wound - The Struggle for Trost (8)",
         "released": "2013-06-23",
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357836.jpg",
+        "slug_id": "E0-JsneRPwpvUilI",
         "qualities": {
           "1080P": {
-            "slug_id": "XDDm1adaZtvWB34f",
             "telegram_message_id": 760,
             "episode": 12,
             "season": 3,
@@ -3492,7 +3115,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357836.jpg"
           },
           "720P": {
-            "slug_id": "E0-JsneRPwpvUilI",
             "telegram_message_id": 759,
             "episode": 12,
             "season": 3,
@@ -3507,7 +3129,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357836.jpg"
           },
           "480P": {
-            "slug_id": "S6y3drGDZXT8tkZ9",
             "telegram_message_id": 758,
             "episode": 12,
             "season": 3,
@@ -3524,7 +3145,6 @@
         }
       },
       {
-        "slug_id": "G1nH-s_9_Ab2K8th",
         "telegram_message_id": 762,
         "episode": 13,
         "season": 3,
@@ -3537,9 +3157,9 @@
         "title": "Primal Desire - The Struggle for Trost (9)",
         "released": "2013-06-30",
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242637.jpg",
+        "slug_id": "G1nH-s_9_Ab2K8th",
         "qualities": {
           "1080P": {
-            "slug_id": "6M-u8VJ2i-43-2Zc",
             "telegram_message_id": 763,
             "episode": 13,
             "season": 3,
@@ -3554,7 +3174,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242637.jpg"
           },
           "720P": {
-            "slug_id": "G1nH-s_9_Ab2K8th",
             "telegram_message_id": 762,
             "episode": 13,
             "season": 3,
@@ -3569,7 +3188,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242637.jpg"
           },
           "480P": {
-            "slug_id": "oS_XSwE2vbc6QIza",
             "telegram_message_id": 761,
             "episode": 13,
             "season": 3,
@@ -3586,7 +3204,6 @@
         }
       },
       {
-        "slug_id": "IPTTvAoeqjQWZTxy",
         "telegram_message_id": 765,
         "episode": 14,
         "season": 3,
@@ -3599,9 +3216,9 @@
         "title": "Can't Look Into His Eyes - Eve of the Counterattack (1)",
         "released": "2013-07-14",
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242636.jpg",
+        "slug_id": "IPTTvAoeqjQWZTxy",
         "qualities": {
           "1080P": {
-            "slug_id": "H4cM3nAvtn5EFB1f",
             "telegram_message_id": 766,
             "episode": 14,
             "season": 3,
@@ -3616,7 +3233,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242636.jpg"
           },
           "720P": {
-            "slug_id": "IPTTvAoeqjQWZTxy",
             "telegram_message_id": 765,
             "episode": 14,
             "season": 3,
@@ -3631,7 +3247,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242636.jpg"
           },
           "480P": {
-            "slug_id": "FgASmw_fY21PmJ5e",
             "telegram_message_id": 764,
             "episode": 14,
             "season": 3,
@@ -3648,7 +3263,6 @@
         }
       },
       {
-        "slug_id": "B2Lq19bTGh2wIQxC",
         "telegram_message_id": 768,
         "episode": 15,
         "season": 3,
@@ -3661,9 +3275,9 @@
         "title": "Special Operations Squad - Eve of the Counterattack (2)",
         "released": "2013-07-21",
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242639.jpg",
+        "slug_id": "B2Lq19bTGh2wIQxC",
         "qualities": {
           "1080P": {
-            "slug_id": "B8x5V5HJ3g9QLEcf",
             "telegram_message_id": 769,
             "episode": 15,
             "season": 3,
@@ -3678,7 +3292,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242639.jpg"
           },
           "720P": {
-            "slug_id": "B2Lq19bTGh2wIQxC",
             "telegram_message_id": 768,
             "episode": 15,
             "season": 3,
@@ -3693,7 +3306,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242639.jpg"
           },
           "480P": {
-            "slug_id": "15GjyJIgzvaHQmYM",
             "telegram_message_id": 767,
             "episode": 15,
             "season": 3,
@@ -3710,7 +3322,6 @@
         }
       },
       {
-        "slug_id": "qkhUNtEhIIV5OpRC",
         "telegram_message_id": 771,
         "episode": 16,
         "season": 3,
@@ -3723,9 +3334,9 @@
         "title": "What Needs to Be Done Now - Eve of the Counterattack (3)",
         "released": "2013-07-28",
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242638.jpg",
+        "slug_id": "qkhUNtEhIIV5OpRC",
         "qualities": {
           "1080P": {
-            "slug_id": "IA1AcZYUQrMyyuIf",
             "telegram_message_id": 772,
             "episode": 16,
             "season": 3,
@@ -3740,7 +3351,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242638.jpg"
           },
           "720P": {
-            "slug_id": "qkhUNtEhIIV5OpRC",
             "telegram_message_id": 771,
             "episode": 16,
             "season": 3,
@@ -3755,7 +3365,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242638.jpg"
           },
           "480P": {
-            "slug_id": "Oc2Ce1i7dXNhesyq",
             "telegram_message_id": 770,
             "episode": 16,
             "season": 3,
@@ -3772,7 +3381,6 @@
         }
       },
       {
-        "slug_id": "uZVdFLGwpkl1iRIg",
         "telegram_message_id": 774,
         "episode": 17,
         "season": 3,
@@ -3785,9 +3393,9 @@
         "title": "Female Titan - The 57th Exterior Scouting Mission (1)",
         "released": "2013-08-04",
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357858.jpg",
+        "slug_id": "uZVdFLGwpkl1iRIg",
         "qualities": {
           "1080P": {
-            "slug_id": "afY_S8kzfxpW7Qud",
             "telegram_message_id": 775,
             "episode": 17,
             "season": 3,
@@ -3802,7 +3410,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357858.jpg"
           },
           "720P": {
-            "slug_id": "uZVdFLGwpkl1iRIg",
             "telegram_message_id": 774,
             "episode": 17,
             "season": 3,
@@ -3817,7 +3424,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357858.jpg"
           },
           "480P": {
-            "slug_id": "OwgnMrdOTBb-yxzo",
             "telegram_message_id": 773,
             "episode": 17,
             "season": 3,
@@ -3834,7 +3440,6 @@
         }
       },
       {
-        "slug_id": "H8OWflNnizwrYmfD",
         "telegram_message_id": 777,
         "episode": 18,
         "season": 3,
@@ -3847,9 +3452,9 @@
         "title": "Forest of Giant Trees - The 57th Exterior Scouting Mission (2)",
         "released": "2013-08-11",
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242640.jpg",
+        "slug_id": "H8OWflNnizwrYmfD",
         "qualities": {
           "1080P": {
-            "slug_id": "2BMc-P-vPbMhdogs",
             "telegram_message_id": 778,
             "episode": 18,
             "season": 3,
@@ -3864,7 +3469,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242640.jpg"
           },
           "720P": {
-            "slug_id": "H8OWflNnizwrYmfD",
             "telegram_message_id": 777,
             "episode": 18,
             "season": 3,
@@ -3879,7 +3483,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242640.jpg"
           },
           "480P": {
-            "slug_id": "zUfbpcPAvj6np7OP",
             "telegram_message_id": 776,
             "episode": 18,
             "season": 3,
@@ -3896,7 +3499,6 @@
         }
       },
       {
-        "slug_id": "j5blpNgCwWCRFQps",
         "telegram_message_id": 780,
         "episode": 19,
         "season": 3,
@@ -3909,9 +3511,9 @@
         "title": "Bite - The 57th Exterior Scouting Mission (3)",
         "released": "2013-08-18",
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242642.jpg",
+        "slug_id": "j5blpNgCwWCRFQps",
         "qualities": {
           "1080P": {
-            "slug_id": "9ZG770UrVyW5I0lg",
             "telegram_message_id": 781,
             "episode": 19,
             "season": 3,
@@ -3926,7 +3528,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242642.jpg"
           },
           "720P": {
-            "slug_id": "j5blpNgCwWCRFQps",
             "telegram_message_id": 780,
             "episode": 19,
             "season": 3,
@@ -3941,7 +3542,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242642.jpg"
           },
           "480P": {
-            "slug_id": "mrgskfJ8Psf_VY5T",
             "telegram_message_id": 779,
             "episode": 19,
             "season": 3,
@@ -3958,7 +3558,6 @@
         }
       },
       {
-        "slug_id": "SOJgvjLkmcTAh0ze",
         "telegram_message_id": 783,
         "episode": 20,
         "season": 3,
@@ -3971,9 +3570,9 @@
         "title": "Erwin Smith - The 57th Exterior Scouting Mission (4)",
         "released": "2013-08-25",
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242643.jpg",
+        "slug_id": "SOJgvjLkmcTAh0ze",
         "qualities": {
           "1080P": {
-            "slug_id": "do7k6qh9ysOQxcAU",
             "telegram_message_id": 784,
             "episode": 20,
             "season": 3,
@@ -3988,7 +3587,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242643.jpg"
           },
           "720P": {
-            "slug_id": "SOJgvjLkmcTAh0ze",
             "telegram_message_id": 783,
             "episode": 20,
             "season": 3,
@@ -4003,7 +3601,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242643.jpg"
           },
           "480P": {
-            "slug_id": "FjsicRZMZwkhYuA9",
             "telegram_message_id": 782,
             "episode": 20,
             "season": 3,
@@ -4020,7 +3617,6 @@
         }
       },
       {
-        "slug_id": "2yKJX6Hgp7uZPQ3d",
         "telegram_message_id": 786,
         "episode": 21,
         "season": 3,
@@ -4033,9 +3629,9 @@
         "title": "Crushing Blow - The 57th Exterior Scouting Mission (5)",
         "released": "2013-09-01",
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357929.jpg",
+        "slug_id": "2yKJX6Hgp7uZPQ3d",
         "qualities": {
           "1080P": {
-            "slug_id": "M_6Ygzc3_XiXWArK",
             "telegram_message_id": 787,
             "episode": 21,
             "season": 3,
@@ -4050,7 +3646,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357929.jpg"
           },
           "720P": {
-            "slug_id": "2yKJX6Hgp7uZPQ3d",
             "telegram_message_id": 786,
             "episode": 21,
             "season": 3,
@@ -4065,7 +3660,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357929.jpg"
           },
           "480P": {
-            "slug_id": "ZUCEBRK9fDsBxAXw",
             "telegram_message_id": 785,
             "episode": 21,
             "season": 3,
@@ -4082,7 +3676,6 @@
         }
       },
       {
-        "slug_id": "X2uDX1Klw3opRHjl",
         "telegram_message_id": 789,
         "episode": 22,
         "season": 3,
@@ -4095,9 +3688,9 @@
         "title": "The Defeated - The 57th Exterior Scouting Mission (6)",
         "released": "2013-09-08",
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242646.jpg",
+        "slug_id": "X2uDX1Klw3opRHjl",
         "qualities": {
           "1080P": {
-            "slug_id": "mN-mLztaklSSgS0y",
             "telegram_message_id": 790,
             "episode": 22,
             "season": 3,
@@ -4112,7 +3705,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242646.jpg"
           },
           "720P": {
-            "slug_id": "X2uDX1Klw3opRHjl",
             "telegram_message_id": 789,
             "episode": 22,
             "season": 3,
@@ -4127,7 +3719,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242646.jpg"
           },
           "480P": {
-            "slug_id": "qUvxq_Maepbrr_uS",
             "telegram_message_id": 788,
             "episode": 22,
             "season": 3,
@@ -4144,7 +3735,6 @@
         }
       },
       {
-        "slug_id": "wDCU9Q3P0Y5bi1HZ",
         "telegram_message_id": 792,
         "episode": 1,
         "season": 4,
@@ -4157,9 +3747,9 @@
         "title": "To You, in 2000 Years - The Fall of Shiganshina (1)",
         "released": "2013-04-07",
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242650.jpg",
+        "slug_id": "wDCU9Q3P0Y5bi1HZ",
         "qualities": {
           "1080P": {
-            "slug_id": "93NAZvneLyORmxMN",
             "telegram_message_id": 793,
             "episode": 1,
             "season": 4,
@@ -4174,7 +3764,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242650.jpg"
           },
           "720P": {
-            "slug_id": "wDCU9Q3P0Y5bi1HZ",
             "telegram_message_id": 792,
             "episode": 1,
             "season": 4,
@@ -4189,7 +3778,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242650.jpg"
           },
           "480P": {
-            "slug_id": "bbIlBwrW0uSvpvP2",
             "telegram_message_id": 791,
             "episode": 1,
             "season": 4,
@@ -4206,7 +3794,6 @@
         }
       },
       {
-        "slug_id": "BqOq2UYuBAx_UT5B",
         "telegram_message_id": 795,
         "episode": 2,
         "season": 4,
@@ -4219,9 +3806,9 @@
         "title": "That Day - The Fall of Shiganshina (2)",
         "released": "2013-04-14",
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242651.jpg",
+        "slug_id": "BqOq2UYuBAx_UT5B",
         "qualities": {
           "1080P": {
-            "slug_id": "baloDq0uQZ48NZyj",
             "telegram_message_id": 796,
             "episode": 2,
             "season": 4,
@@ -4236,7 +3823,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242651.jpg"
           },
           "720P": {
-            "slug_id": "BqOq2UYuBAx_UT5B",
             "telegram_message_id": 795,
             "episode": 2,
             "season": 4,
@@ -4251,7 +3837,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242651.jpg"
           },
           "480P": {
-            "slug_id": "C_WrjzEcomtB_3uh",
             "telegram_message_id": 794,
             "episode": 2,
             "season": 4,
@@ -4268,7 +3853,6 @@
         }
       },
       {
-        "slug_id": "l5QZrjmQSJJjbWfp",
         "telegram_message_id": 798,
         "episode": 3,
         "season": 4,
@@ -4281,9 +3865,9 @@
         "title": "A Dim Light Amid Despair - Humanity's Comeback (1)",
         "released": "2013-04-21",
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242652.jpg",
+        "slug_id": "l5QZrjmQSJJjbWfp",
         "qualities": {
           "1080P": {
-            "slug_id": "RK8WyEElB7W-GDT4",
             "telegram_message_id": 799,
             "episode": 3,
             "season": 4,
@@ -4298,7 +3882,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242652.jpg"
           },
           "720P": {
-            "slug_id": "l5QZrjmQSJJjbWfp",
             "telegram_message_id": 798,
             "episode": 3,
             "season": 4,
@@ -4313,7 +3896,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242652.jpg"
           },
           "480P": {
-            "slug_id": "6AYBeC6UOR4_GS5m",
             "telegram_message_id": 797,
             "episode": 3,
             "season": 4,
@@ -4330,7 +3912,6 @@
         }
       },
       {
-        "slug_id": "eQwnlGFoIfq1TTNS",
         "telegram_message_id": 801,
         "episode": 4,
         "season": 4,
@@ -4343,9 +3924,9 @@
         "title": "The Night of the Closing Ceremony - Humanity's Comeback (2)",
         "released": "2013-04-28",
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357583.jpg",
+        "slug_id": "eQwnlGFoIfq1TTNS",
         "qualities": {
           "1080P": {
-            "slug_id": "-ysTLv5LlccabIWV",
             "telegram_message_id": 802,
             "episode": 4,
             "season": 4,
@@ -4360,7 +3941,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357583.jpg"
           },
           "720P": {
-            "slug_id": "eQwnlGFoIfq1TTNS",
             "telegram_message_id": 801,
             "episode": 4,
             "season": 4,
@@ -4375,7 +3955,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357583.jpg"
           },
           "480P": {
-            "slug_id": "M4i7frYTvctuo1UT",
             "telegram_message_id": 800,
             "episode": 4,
             "season": 4,
@@ -4392,7 +3971,6 @@
         }
       },
       {
-        "slug_id": "qkdSOuPf6pkJESM5",
         "telegram_message_id": 804,
         "episode": 5,
         "season": 4,
@@ -4405,9 +3983,9 @@
         "title": "First Battle - The Struggle for Trost (1)",
         "released": "2013-05-05",
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357587.jpg",
+        "slug_id": "qkdSOuPf6pkJESM5",
         "qualities": {
           "1080P": {
-            "slug_id": "ltx5gnN2f8S6MNuh",
             "telegram_message_id": 805,
             "episode": 5,
             "season": 4,
@@ -4422,7 +4000,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357587.jpg"
           },
           "720P": {
-            "slug_id": "qkdSOuPf6pkJESM5",
             "telegram_message_id": 804,
             "episode": 5,
             "season": 4,
@@ -4437,7 +4014,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357587.jpg"
           },
           "480P": {
-            "slug_id": "CAPEOWptmj1yJLRy",
             "telegram_message_id": 803,
             "episode": 5,
             "season": 4,
@@ -4454,7 +4030,6 @@
         }
       },
       {
-        "slug_id": "kAvSLNOt6LgB6EfN",
         "telegram_message_id": 807,
         "episode": 6,
         "season": 4,
@@ -4467,9 +4042,9 @@
         "title": "The World the Girl Saw - The Struggle for Trost (2)",
         "released": "2013-05-12",
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242630.jpg",
+        "slug_id": "kAvSLNOt6LgB6EfN",
         "qualities": {
           "1080P": {
-            "slug_id": "wwVFw4gS5wcChiBr",
             "telegram_message_id": 808,
             "episode": 6,
             "season": 4,
@@ -4484,7 +4059,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242630.jpg"
           },
           "720P": {
-            "slug_id": "kAvSLNOt6LgB6EfN",
             "telegram_message_id": 807,
             "episode": 6,
             "season": 4,
@@ -4499,7 +4073,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242630.jpg"
           },
           "480P": {
-            "slug_id": "EXcUW3SuIhn09k1I",
             "telegram_message_id": 806,
             "episode": 6,
             "season": 4,
@@ -4516,7 +4089,6 @@
         }
       },
       {
-        "slug_id": "CCRPmpPbg_MRVM9b",
         "telegram_message_id": 810,
         "episode": 7,
         "season": 4,
@@ -4529,9 +4101,9 @@
         "title": "Small Blade - The Struggle for Trost (3)",
         "released": "2013-05-19",
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242629.jpg",
+        "slug_id": "CCRPmpPbg_MRVM9b",
         "qualities": {
           "1080P": {
-            "slug_id": "7cGttV2V1BGEptfI",
             "telegram_message_id": 811,
             "episode": 7,
             "season": 4,
@@ -4546,7 +4118,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242629.jpg"
           },
           "720P": {
-            "slug_id": "CCRPmpPbg_MRVM9b",
             "telegram_message_id": 810,
             "episode": 7,
             "season": 4,
@@ -4561,7 +4132,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242629.jpg"
           },
           "480P": {
-            "slug_id": "4Na2CiyAAPuR0riR",
             "telegram_message_id": 809,
             "episode": 7,
             "season": 4,
@@ -4578,7 +4148,6 @@
         }
       },
       {
-        "slug_id": "VDrSElbVOl9Vcvyp",
         "telegram_message_id": 813,
         "episode": 8,
         "season": 4,
@@ -4591,9 +4160,9 @@
         "title": "I Can Hear His Heartbeat - The Struggle for Trost (4)",
         "released": "2013-05-26",
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242631.jpg",
+        "slug_id": "VDrSElbVOl9Vcvyp",
         "qualities": {
           "1080P": {
-            "slug_id": "dI_aVYuFX6oZqrEZ",
             "telegram_message_id": 814,
             "episode": 8,
             "season": 4,
@@ -4608,7 +4177,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242631.jpg"
           },
           "720P": {
-            "slug_id": "VDrSElbVOl9Vcvyp",
             "telegram_message_id": 813,
             "episode": 8,
             "season": 4,
@@ -4623,7 +4191,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242631.jpg"
           },
           "480P": {
-            "slug_id": "OkU5ieGtkLg2yH4z",
             "telegram_message_id": 812,
             "episode": 8,
             "season": 4,
@@ -4640,7 +4207,6 @@
         }
       },
       {
-        "slug_id": "GLTOD0_IOFcHRDGs",
         "telegram_message_id": 816,
         "episode": 9,
         "season": 4,
@@ -4653,9 +4219,9 @@
         "title": "Whereabouts of His Left Arm - The Struggle for Trost (5)",
         "released": "2013-06-02",
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242632.jpg",
+        "slug_id": "GLTOD0_IOFcHRDGs",
         "qualities": {
           "1080P": {
-            "slug_id": "Dw1kUNgDBow4p5xI",
             "telegram_message_id": 817,
             "episode": 9,
             "season": 4,
@@ -4670,7 +4236,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242632.jpg"
           },
           "720P": {
-            "slug_id": "GLTOD0_IOFcHRDGs",
             "telegram_message_id": 816,
             "episode": 9,
             "season": 4,
@@ -4685,7 +4250,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242632.jpg"
           },
           "480P": {
-            "slug_id": "yyAzU6ZICD3PcAM7",
             "telegram_message_id": 815,
             "episode": 9,
             "season": 4,
@@ -4702,7 +4266,6 @@
         }
       },
       {
-        "slug_id": "nkXb_nrjZ1T3hTwm",
         "telegram_message_id": 819,
         "episode": 10,
         "season": 4,
@@ -4715,9 +4278,9 @@
         "title": "Response - The Struggle for Trost (6)",
         "released": "2013-06-09",
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242633.jpg",
+        "slug_id": "nkXb_nrjZ1T3hTwm",
         "qualities": {
           "1080P": {
-            "slug_id": "4JHu-vKHVOqm_5QX",
             "telegram_message_id": 820,
             "episode": 10,
             "season": 4,
@@ -4732,7 +4295,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242633.jpg"
           },
           "720P": {
-            "slug_id": "nkXb_nrjZ1T3hTwm",
             "telegram_message_id": 819,
             "episode": 10,
             "season": 4,
@@ -4747,7 +4309,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242633.jpg"
           },
           "480P": {
-            "slug_id": "cD93RaoeZMRQ27UH",
             "telegram_message_id": 818,
             "episode": 10,
             "season": 4,
@@ -4764,7 +4325,6 @@
         }
       },
       {
-        "slug_id": "uZ6mvoFl_hV1Orbw",
         "telegram_message_id": 822,
         "episode": 11,
         "season": 4,
@@ -4777,9 +4337,9 @@
         "title": "Idol - The Struggle for Trost (7)",
         "released": "2013-06-16",
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357835.jpg",
+        "slug_id": "uZ6mvoFl_hV1Orbw",
         "qualities": {
           "1080P": {
-            "slug_id": "5s5Em7cLJT740wBV",
             "telegram_message_id": 823,
             "episode": 11,
             "season": 4,
@@ -4794,7 +4354,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357835.jpg"
           },
           "720P": {
-            "slug_id": "uZ6mvoFl_hV1Orbw",
             "telegram_message_id": 822,
             "episode": 11,
             "season": 4,
@@ -4809,7 +4368,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357835.jpg"
           },
           "480P": {
-            "slug_id": "vCodfz3QwxnGr-xy",
             "telegram_message_id": 821,
             "episode": 11,
             "season": 4,
@@ -4826,7 +4384,6 @@
         }
       },
       {
-        "slug_id": "T_uq6SvFSccR6S0Z",
         "telegram_message_id": 825,
         "episode": 12,
         "season": 4,
@@ -4839,9 +4396,9 @@
         "title": "Wound - The Struggle for Trost (8)",
         "released": "2013-06-23",
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357836.jpg",
+        "slug_id": "T_uq6SvFSccR6S0Z",
         "qualities": {
           "1080P": {
-            "slug_id": "134RmjZ4r32erQPh",
             "telegram_message_id": 826,
             "episode": 12,
             "season": 4,
@@ -4856,7 +4413,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357836.jpg"
           },
           "720P": {
-            "slug_id": "T_uq6SvFSccR6S0Z",
             "telegram_message_id": 825,
             "episode": 12,
             "season": 4,
@@ -4871,7 +4427,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357836.jpg"
           },
           "480P": {
-            "slug_id": "dmfvlzLaaxwIAfjI",
             "telegram_message_id": 824,
             "episode": 12,
             "season": 4,
@@ -4888,7 +4443,6 @@
         }
       },
       {
-        "slug_id": "UYP8yTkaTjotT24V",
         "telegram_message_id": 828,
         "episode": 13,
         "season": 4,
@@ -4901,9 +4455,9 @@
         "title": "Primal Desire - The Struggle for Trost (9)",
         "released": "2013-06-30",
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242637.jpg",
+        "slug_id": "UYP8yTkaTjotT24V",
         "qualities": {
           "1080P": {
-            "slug_id": "PbRdn8SCX7ishN44",
             "telegram_message_id": 829,
             "episode": 13,
             "season": 4,
@@ -4918,7 +4472,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242637.jpg"
           },
           "720P": {
-            "slug_id": "UYP8yTkaTjotT24V",
             "telegram_message_id": 828,
             "episode": 13,
             "season": 4,
@@ -4933,7 +4486,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242637.jpg"
           },
           "480P": {
-            "slug_id": "uWQG-mMVwQy4zAVH",
             "telegram_message_id": 827,
             "episode": 13,
             "season": 4,
@@ -4950,7 +4502,6 @@
         }
       },
       {
-        "slug_id": "iUq-RvNHobJdI8zD",
         "telegram_message_id": 831,
         "episode": 14,
         "season": 4,
@@ -4963,9 +4514,9 @@
         "title": "Can't Look Into His Eyes - Eve of the Counterattack (1)",
         "released": "2013-07-14",
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242636.jpg",
+        "slug_id": "iUq-RvNHobJdI8zD",
         "qualities": {
           "1080P": {
-            "slug_id": "p2qqrVB8QtFUV7Mx",
             "telegram_message_id": 832,
             "episode": 14,
             "season": 4,
@@ -4980,7 +4531,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242636.jpg"
           },
           "720P": {
-            "slug_id": "iUq-RvNHobJdI8zD",
             "telegram_message_id": 831,
             "episode": 14,
             "season": 4,
@@ -4995,7 +4545,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242636.jpg"
           },
           "480P": {
-            "slug_id": "f8qCedqkCUhuiTZ-",
             "telegram_message_id": 830,
             "episode": 14,
             "season": 4,
@@ -5012,7 +4561,6 @@
         }
       },
       {
-        "slug_id": "Ee5k6zVLzoElKU0n",
         "telegram_message_id": 834,
         "episode": 15,
         "season": 4,
@@ -5025,9 +4573,9 @@
         "title": "Special Operations Squad - Eve of the Counterattack (2)",
         "released": "2013-07-21",
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242639.jpg",
+        "slug_id": "Ee5k6zVLzoElKU0n",
         "qualities": {
           "1080P": {
-            "slug_id": "Q9CW7tfaU8EA2D6U",
             "telegram_message_id": 835,
             "episode": 15,
             "season": 4,
@@ -5042,7 +4590,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242639.jpg"
           },
           "720P": {
-            "slug_id": "Ee5k6zVLzoElKU0n",
             "telegram_message_id": 834,
             "episode": 15,
             "season": 4,
@@ -5057,7 +4604,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242639.jpg"
           },
           "480P": {
-            "slug_id": "jtsf8vCrVHQQubAL",
             "telegram_message_id": 833,
             "episode": 15,
             "season": 4,
@@ -5074,7 +4620,6 @@
         }
       },
       {
-        "slug_id": "1ht3ufVjvPX5qDj2",
         "telegram_message_id": 837,
         "episode": 16,
         "season": 4,
@@ -5087,9 +4632,9 @@
         "title": "What Needs to Be Done Now - Eve of the Counterattack (3)",
         "released": "2013-07-28",
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242638.jpg",
+        "slug_id": "1ht3ufVjvPX5qDj2",
         "qualities": {
           "1080P": {
-            "slug_id": "R6NCSIP9xnEs2yTs",
             "telegram_message_id": 838,
             "episode": 16,
             "season": 4,
@@ -5104,7 +4649,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242638.jpg"
           },
           "720P": {
-            "slug_id": "1ht3ufVjvPX5qDj2",
             "telegram_message_id": 837,
             "episode": 16,
             "season": 4,
@@ -5119,7 +4663,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242638.jpg"
           },
           "480P": {
-            "slug_id": "Bln5mTgrYiciKcIH",
             "telegram_message_id": 836,
             "episode": 16,
             "season": 4,
@@ -5136,7 +4679,6 @@
         }
       },
       {
-        "slug_id": "_3qTvhqJ-8WjYT97",
         "telegram_message_id": 840,
         "episode": 17,
         "season": 4,
@@ -5149,9 +4691,9 @@
         "title": "Female Titan - The 57th Exterior Scouting Mission (1)",
         "released": "2013-08-04",
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357858.jpg",
+        "slug_id": "_3qTvhqJ-8WjYT97",
         "qualities": {
           "1080P": {
-            "slug_id": "7UjNPv_11UXrM14r",
             "telegram_message_id": 841,
             "episode": 17,
             "season": 4,
@@ -5166,7 +4708,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357858.jpg"
           },
           "720P": {
-            "slug_id": "_3qTvhqJ-8WjYT97",
             "telegram_message_id": 840,
             "episode": 17,
             "season": 4,
@@ -5181,7 +4722,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357858.jpg"
           },
           "480P": {
-            "slug_id": "aJcLNIwb2yLnAxTY",
             "telegram_message_id": 839,
             "episode": 17,
             "season": 4,
@@ -5198,7 +4738,6 @@
         }
       },
       {
-        "slug_id": "4P2hu-skQtrQHzTJ",
         "telegram_message_id": 843,
         "episode": 18,
         "season": 4,
@@ -5211,9 +4750,9 @@
         "title": "Forest of Giant Trees - The 57th Exterior Scouting Mission (2)",
         "released": "2013-08-11",
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242640.jpg",
+        "slug_id": "4P2hu-skQtrQHzTJ",
         "qualities": {
           "1080P": {
-            "slug_id": "_hO9PFAb09ysztIn",
             "telegram_message_id": 844,
             "episode": 18,
             "season": 4,
@@ -5228,7 +4767,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242640.jpg"
           },
           "720P": {
-            "slug_id": "4P2hu-skQtrQHzTJ",
             "telegram_message_id": 843,
             "episode": 18,
             "season": 4,
@@ -5243,7 +4781,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242640.jpg"
           },
           "480P": {
-            "slug_id": "ZzVfAiG1GZ3f3cPa",
             "telegram_message_id": 842,
             "episode": 18,
             "season": 4,
@@ -5260,7 +4797,6 @@
         }
       },
       {
-        "slug_id": "1jhcYrLpeU8R_cTa",
         "telegram_message_id": 846,
         "episode": 19,
         "season": 4,
@@ -5273,9 +4809,9 @@
         "title": "Bite - The 57th Exterior Scouting Mission (3)",
         "released": "2013-08-18",
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242642.jpg",
+        "slug_id": "1jhcYrLpeU8R_cTa",
         "qualities": {
           "1080P": {
-            "slug_id": "A02d9EYjtgiASlqj",
             "telegram_message_id": 847,
             "episode": 19,
             "season": 4,
@@ -5290,7 +4826,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242642.jpg"
           },
           "720P": {
-            "slug_id": "1jhcYrLpeU8R_cTa",
             "telegram_message_id": 846,
             "episode": 19,
             "season": 4,
@@ -5305,7 +4840,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242642.jpg"
           },
           "480P": {
-            "slug_id": "1cQNF4zV4dceCjeu",
             "telegram_message_id": 845,
             "episode": 19,
             "season": 4,
@@ -5322,7 +4856,6 @@
         }
       },
       {
-        "slug_id": "BA_IeOGezU6mkeKc",
         "telegram_message_id": 849,
         "episode": 20,
         "season": 4,
@@ -5335,9 +4868,9 @@
         "title": "Erwin Smith - The 57th Exterior Scouting Mission (4)",
         "released": "2013-08-25",
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242643.jpg",
+        "slug_id": "BA_IeOGezU6mkeKc",
         "qualities": {
           "1080P": {
-            "slug_id": "WnYMoO-Smirh64qO",
             "telegram_message_id": 850,
             "episode": 20,
             "season": 4,
@@ -5352,7 +4885,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242643.jpg"
           },
           "720P": {
-            "slug_id": "BA_IeOGezU6mkeKc",
             "telegram_message_id": 849,
             "episode": 20,
             "season": 4,
@@ -5367,7 +4899,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242643.jpg"
           },
           "480P": {
-            "slug_id": "Ryy07riaz4qSDj0C",
             "telegram_message_id": 848,
             "episode": 20,
             "season": 4,
@@ -5384,7 +4915,6 @@
         }
       },
       {
-        "slug_id": "aQ_JUDLdgujLDqv3",
         "telegram_message_id": 852,
         "episode": 21,
         "season": 4,
@@ -5397,9 +4927,9 @@
         "title": "Crushing Blow - The 57th Exterior Scouting Mission (5)",
         "released": "2013-09-01",
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357929.jpg",
+        "slug_id": "aQ_JUDLdgujLDqv3",
         "qualities": {
           "1080P": {
-            "slug_id": "Q8CDYN08v3FK-sx5",
             "telegram_message_id": 853,
             "episode": 21,
             "season": 4,
@@ -5414,7 +4944,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357929.jpg"
           },
           "720P": {
-            "slug_id": "aQ_JUDLdgujLDqv3",
             "telegram_message_id": 852,
             "episode": 21,
             "season": 4,
@@ -5429,7 +4958,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357929.jpg"
           },
           "480P": {
-            "slug_id": "8HbcThGFjsE_WXbA",
             "telegram_message_id": 851,
             "episode": 21,
             "season": 4,
@@ -5446,7 +4974,6 @@
         }
       },
       {
-        "slug_id": "fK5C6lAXVKBPz28f",
         "telegram_message_id": 855,
         "episode": 22,
         "season": 4,
@@ -5459,9 +4986,9 @@
         "title": "The Defeated - The 57th Exterior Scouting Mission (6)",
         "released": "2013-09-08",
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242646.jpg",
+        "slug_id": "fK5C6lAXVKBPz28f",
         "qualities": {
           "1080P": {
-            "slug_id": "TsE8CcoE1ouO-TWv",
             "telegram_message_id": 856,
             "episode": 22,
             "season": 4,
@@ -5476,7 +5003,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242646.jpg"
           },
           "720P": {
-            "slug_id": "fK5C6lAXVKBPz28f",
             "telegram_message_id": 855,
             "episode": 22,
             "season": 4,
@@ -5491,7 +5017,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242646.jpg"
           },
           "480P": {
-            "slug_id": "UzKgSULFYWWsOeT-",
             "telegram_message_id": 854,
             "episode": 22,
             "season": 4,
@@ -5508,7 +5033,6 @@
         }
       },
       {
-        "slug_id": "FhJSoFduH5fgMm89",
         "telegram_message_id": 858,
         "episode": 23,
         "season": 4,
@@ -5521,9 +5045,9 @@
         "title": "Smile - Assault on Stohess (1)",
         "released": "2013-09-15",
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242645.jpg",
+        "slug_id": "FhJSoFduH5fgMm89",
         "qualities": {
           "1080P": {
-            "slug_id": "hRTzNAOSCTz9RKnU",
             "telegram_message_id": 859,
             "episode": 23,
             "season": 4,
@@ -5538,7 +5062,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242645.jpg"
           },
           "720P": {
-            "slug_id": "FhJSoFduH5fgMm89",
             "telegram_message_id": 858,
             "episode": 23,
             "season": 4,
@@ -5553,7 +5076,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242645.jpg"
           },
           "480P": {
-            "slug_id": "83NcNbYM62j5P4uv",
             "telegram_message_id": 857,
             "episode": 23,
             "season": 4,
@@ -5570,7 +5092,6 @@
         }
       },
       {
-        "slug_id": "MNaGc4dTS7h04hMT",
         "telegram_message_id": 861,
         "episode": 24,
         "season": 4,
@@ -5583,9 +5104,9 @@
         "title": "Mercy - Assault on Stohess (2)",
         "released": "2013-09-22",
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242647.jpg",
+        "slug_id": "MNaGc4dTS7h04hMT",
         "qualities": {
           "1080P": {
-            "slug_id": "Fnifz5Mdd9hEZSmM",
             "telegram_message_id": 862,
             "episode": 24,
             "season": 4,
@@ -5600,7 +5121,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242647.jpg"
           },
           "720P": {
-            "slug_id": "MNaGc4dTS7h04hMT",
             "telegram_message_id": 861,
             "episode": 24,
             "season": 4,
@@ -5615,7 +5135,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242647.jpg"
           },
           "480P": {
-            "slug_id": "g3kK1JatAiYTfm0X",
             "telegram_message_id": 860,
             "episode": 24,
             "season": 4,
@@ -5632,7 +5151,6 @@
         }
       },
       {
-        "slug_id": "4m0S6dB9yb76c2X5",
         "telegram_message_id": 864,
         "episode": 25,
         "season": 4,
@@ -5645,9 +5163,9 @@
         "title": "Wall: Raid on Stohess District (3)",
         "released": "2013-09-29",
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242648.jpg",
+        "slug_id": "4m0S6dB9yb76c2X5",
         "qualities": {
           "1080P": {
-            "slug_id": "0IeOCiSgnDHZM8QP",
             "telegram_message_id": 865,
             "episode": 25,
             "season": 4,
@@ -5662,7 +5180,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242648.jpg"
           },
           "720P": {
-            "slug_id": "4m0S6dB9yb76c2X5",
             "telegram_message_id": 864,
             "episode": 25,
             "season": 4,
@@ -5677,7 +5194,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242648.jpg"
           },
           "480P": {
-            "slug_id": "ivroI64OM41QZi_O",
             "telegram_message_id": 863,
             "episode": 25,
             "season": 4,
@@ -5694,7 +5210,6 @@
         }
       },
       {
-        "slug_id": "ksNsDl6-X2WFhVIt",
         "telegram_message_id": 867,
         "episode": 26,
         "season": 4,
@@ -5707,9 +5222,9 @@
         "title": "Beast Titan",
         "released": "2017-04-01",
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/104/262363.jpg",
+        "slug_id": "ksNsDl6-X2WFhVIt",
         "qualities": {
           "1080P": {
-            "slug_id": "SZRSwIw6LNPx6-e-",
             "telegram_message_id": 868,
             "episode": 26,
             "season": 4,
@@ -5724,7 +5239,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/104/262363.jpg"
           },
           "720P": {
-            "slug_id": "ksNsDl6-X2WFhVIt",
             "telegram_message_id": 867,
             "episode": 26,
             "season": 4,
@@ -5739,7 +5253,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/104/262363.jpg"
           },
           "480P": {
-            "slug_id": "PwdEeneFf6HKwws6",
             "telegram_message_id": 866,
             "episode": 26,
             "season": 4,
@@ -5756,7 +5269,6 @@
         }
       },
       {
-        "slug_id": "iAejMDf2g77nDEmd",
         "telegram_message_id": 870,
         "episode": 27,
         "season": 4,
@@ -5769,9 +5281,9 @@
         "title": "I'm Home",
         "released": "2017-04-08",
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1358468.jpg",
+        "slug_id": "iAejMDf2g77nDEmd",
         "qualities": {
           "1080P": {
-            "slug_id": "Xt0ZiX-OdT9k1YQK",
             "telegram_message_id": 871,
             "episode": 27,
             "season": 4,
@@ -5786,7 +5298,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1358468.jpg"
           },
           "720P": {
-            "slug_id": "iAejMDf2g77nDEmd",
             "telegram_message_id": 870,
             "episode": 27,
             "season": 4,
@@ -5801,7 +5312,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1358468.jpg"
           },
           "480P": {
-            "slug_id": "9jfcYq2mn5wqh7Ih",
             "telegram_message_id": 869,
             "episode": 27,
             "season": 4,
@@ -5818,7 +5328,6 @@
         }
       },
       {
-        "slug_id": "WWReYmnqYydXRYTx",
         "telegram_message_id": 873,
         "episode": 28,
         "season": 4,
@@ -5831,9 +5340,9 @@
         "title": "Southwestward",
         "released": "2017-04-15",
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1358469.jpg",
+        "slug_id": "WWReYmnqYydXRYTx",
         "qualities": {
           "1080P": {
-            "slug_id": "DLwY3000jrpSIHVr",
             "telegram_message_id": 874,
             "episode": 28,
             "season": 4,
@@ -5848,7 +5357,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1358469.jpg"
           },
           "720P": {
-            "slug_id": "WWReYmnqYydXRYTx",
             "telegram_message_id": 873,
             "episode": 28,
             "season": 4,
@@ -5863,7 +5371,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1358469.jpg"
           },
           "480P": {
-            "slug_id": "4N9D6TKxraKzqT7S",
             "telegram_message_id": 872,
             "episode": 28,
             "season": 4,
@@ -5880,7 +5387,6 @@
         }
       },
       {
-        "slug_id": "TFBeRZJIwEqSY0oM",
         "telegram_message_id": 876,
         "episode": 29,
         "season": 4,
@@ -5893,9 +5399,9 @@
         "title": "Soldier",
         "released": "2017-04-22",
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/108/270511.jpg",
+        "slug_id": "TFBeRZJIwEqSY0oM",
         "qualities": {
           "1080P": {
-            "slug_id": "03jPgPt62Y43cIRf",
             "telegram_message_id": 877,
             "episode": 29,
             "season": 4,
@@ -5910,7 +5416,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/108/270511.jpg"
           },
           "720P": {
-            "slug_id": "TFBeRZJIwEqSY0oM",
             "telegram_message_id": 876,
             "episode": 29,
             "season": 4,
@@ -5925,7 +5430,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/108/270511.jpg"
           },
           "480P": {
-            "slug_id": "f-4FWjKhbSfy2lZs",
             "telegram_message_id": 875,
             "episode": 29,
             "season": 4,
@@ -5942,7 +5446,6 @@
         }
       },
       {
-        "slug_id": "IWQ2ujQ1THh0Ql95",
         "telegram_message_id": 879,
         "episode": 30,
         "season": 4,
@@ -5955,9 +5458,9 @@
         "title": "Historia",
         "released": "2017-04-29",
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1358479.jpg",
+        "slug_id": "IWQ2ujQ1THh0Ql95",
         "qualities": {
           "1080P": {
-            "slug_id": "t4Qjo_XFJxyu7ozf",
             "telegram_message_id": 880,
             "episode": 30,
             "season": 4,
@@ -5972,7 +5475,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1358479.jpg"
           },
           "720P": {
-            "slug_id": "IWQ2ujQ1THh0Ql95",
             "telegram_message_id": 879,
             "episode": 30,
             "season": 4,
@@ -5987,7 +5489,6 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1358479.jpg"
           },
           "480P": {
-            "slug_id": "yfPP5CHcBfisbEFD",
             "telegram_message_id": 878,
             "episode": 30,
             "season": 4,
@@ -6025,6 +5526,6 @@
       "3": "/banners/attack-on-titan-season-3.webp",
       "4": "/banners/attack-on-titan-season-4.webp"
     },
-    "updated_at": "2026-11-01T22:09:56Z"
+    "updated_at": "2026-11-01T21:49:04Z"
   }
 }

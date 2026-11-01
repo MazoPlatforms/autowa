@@ -1,8 +1,10 @@
 """Normalize every anime Telegram caption and assign one stable slug per message."""
 import asyncio
+import json
 import os
 import re
 import sys
+from pathlib import Path
 
 from telethon import TelegramClient
 from telethon.sessions import StringSession
@@ -21,7 +23,25 @@ def slugify(value):
     return re.sub(r"^-+|-+$", "", re.sub(r"[^a-z0-9]+", "-", value.casefold()))[:70] or "anime"
 
 
-def build_caption(message):
+def parent_slug_map():
+    """Map every quality message to its parent episode slug."""
+    try:
+        data = json.loads(Path("data/anime.json").read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return {}
+    result = {}
+    for show in data.get("anime", []):
+        for episode in show.get("episodes", []):
+            parent = str(episode.get("slug_id") or "").strip()
+            if not parent:
+                continue
+            for variant in [episode, *(episode.get("qualities") or {}).values()]:
+                if variant.get("telegram_message_id") is not None:
+                    result[str(variant["telegram_message_id"])] = parent
+    return result
+
+
+def build_caption(message, episode_slugs):
     filename = str(getattr(message.file, "name", "") or "")
     title, filename_season, episode, part = anime_filename_parts(filename)
     previous = anime_caption_parts(getattr(message, "raw_text", "") or "")
@@ -40,17 +60,18 @@ def build_caption(message):
         season_line,
         f"Episode: {episode}" + (f" · Part: {part}" if part else ""),
         f"Quality: {quality}",
-        f"Episode Slug ID: {fixed_anime_episode_slug(message.id)}",
+        f"Episode Slug ID: {episode_slugs.get(str(message.id), fixed_anime_episode_slug(message.id))}",
     ]
     return "\n".join(lines)
 
 
-def caption_is_canonical(caption, message_id):
+def caption_is_canonical(caption, message_id, episode_slugs):
     lines = [line.strip() for line in str(caption or "").splitlines()]
     anime = next((line.split(":", 1)[1].strip() for line in lines if line.lower().startswith("anime:")), "")
     slug = next((line.split(":", 1)[1].strip() for line in lines if line.lower().startswith("anime slug id:")), "")
     episode_slug = next((line.split(":", 1)[1].strip() for line in lines if line.lower().startswith("episode slug id:")), "")
-    return bool(anime and slug == slugify(anime) and episode_slug == fixed_anime_episode_slug(message_id))
+    expected = episode_slugs.get(str(message_id), fixed_anime_episode_slug(message_id))
+    return bool(anime and slug == slugify(anime) and episode_slug == expected)
 
 
 async def main():
@@ -59,6 +80,7 @@ async def main():
     if missing:
         raise SystemExit("Missing secrets: " + ", ".join(missing))
     dry_run = os.getenv("DRY_RUN", "false").casefold() == "true"
+    episode_slugs = parent_slug_map()
     client = TelegramClient(
         StringSession(os.environ["TELEGRAM_SESSION"]),
         int(os.environ["TELEGRAM_API_ID"]),
@@ -71,7 +93,7 @@ async def main():
         async for message in client.iter_messages(channel, limit=None):
             if not (message.document or message.video):
                 continue
-            caption = build_caption(message)
+            caption = build_caption(message, episode_slugs)
             if not caption:
                 print(f"skip message {message.id}: episode number not found", flush=True)
                 continue
@@ -95,7 +117,7 @@ async def main():
                     print(f"timeout verifying message {message.id}; continuing", flush=True)
                     continue
                 actual = (getattr(current_message, "raw_text", "") or "").strip()
-                if actual != caption or not caption_is_canonical(actual, message.id):
+                if actual != caption or not caption_is_canonical(actual, message.id, episode_slugs):
                     raise RuntimeError(f"Caption verification failed for Telegram message {message.id}")
                 verified += 1
     print(f"Updated captions: {updated}; Verified captions: {verified}; Timed out: {len(timed_out)}", flush=True)

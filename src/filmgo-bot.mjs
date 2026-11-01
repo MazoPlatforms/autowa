@@ -294,7 +294,20 @@ async function findAnimeDuplicate(d){
  const file=await response.json();const content=JSON.parse(Buffer.from(file.content.replace(/\s/g,''),'base64').toString('utf8'));
  const show=(content.anime||[]).find(item=>item.slug_id===d.slug_id||normalize(item.title)===normalize(d.title));
  if(!show)return null;
- return (show.episodes||[]).find(item=>Number(item.episode)===Number(d.episode)&&Number(item.season||1)===Number(d.season||1)&&String(item.special_type||'')===String(d.special_type||''))?.qualities?.[String(d.quality||'').toUpperCase()]||((show.episodes||[]).find(item=>Number(item.episode)===Number(d.episode)&&Number(item.season||1)===Number(d.season||1)&&String(item.special_type||'')===String(d.special_type||'')&&String(item.quality||'').toLowerCase()===String(d.quality||'').toLowerCase()))||null;
+ const episode=(show.episodes||[]).find(item=>Number(item.episode)===Number(d.episode)&&Number(item.season||1)===Number(d.season||1)&&String(item.special_type||'')===String(d.special_type||''));
+ if(!episode)return null;
+ const requestedQuality=String(d.quality||'').toUpperCase();
+ const variant=episode.qualities?.[requestedQuality]||((String(episode.quality||'').toUpperCase()===requestedQuality)?episode:null);
+ if(!variant)return null;
+ return {...variant,slug_id:episode.slug_id,episode_slug_id:episode.slug_id};
+}
+
+function selectAnimeVariant(episode, quality){
+ if(!episode)return null;
+ const variants=episode.qualities||{[String(episode.quality||'720P').toUpperCase()]:episode};
+ const key=quality?Object.keys(variants).find(value=>value.toLowerCase()===String(quality).toLowerCase()):Object.keys(variants).find(value=>value.toLowerCase()==='720p')||Object.keys(variants)[0];
+ if(!key)return null;
+ return {...episode,...variants[key],slug_id:episode.slug_id,quality:key};
 }
 async function saveAnimeMetadata(id,d){
  const [owner,name]=REPO.split('/');const url='https://api.github.com/repos/'+owner+'/'+name+'/contents/data/anime.json';const headers={Authorization:'Bearer '+GH_TOKEN,Accept:'application/vnd.github+json','Content-Type':'application/json','X-GitHub-Api-Version':'2022-11-28'};
@@ -303,7 +316,7 @@ async function saveAnimeMetadata(id,d){
   if(response.status===404){content={schema_version:1,updated_at:null,anime:[]};sha=undefined;}else{if(!response.ok)throw Error('Anime catalog read '+response.status);const file=await response.json();sha=file.sha;content=JSON.parse(Buffer.from(file.content.replace(/\s/g,''),'base64').toString('utf8'));}
   content.anime ||= [];const show=content.anime.find(item=>item.slug_id===d.slug_id)||content.anime.find(item=>normalize(item.title)===normalize(d.title));
   const episode={slug_id:d.episode_slug_id||crypto.randomBytes(12).toString('base64url'),telegram_message_id:Number(id),episode:Number(d.episode),season:Number(d.season||1),special_type:d.special_type||null,part:d.part?Number(d.part):null,quality:d.quality,file_size:Number(d.file_size||0),file_name:d.file_name||'',mime_type:d.mime_type||''};
-  const target=show||{slug_id:d.slug_id,title:d.title,episodes:[]};if(!Array.isArray(target.episodes))target.episodes=[];const index=target.episodes.findIndex(e=>Number(e.episode)===episode.episode&&Number(e.season||1)===episode.season&&String(e.special_type||'')===String(episode.special_type||''));if(index>=0){const current=target.episodes[index],variants={...(current.qualities||{[String(current.quality||'720P').toUpperCase()]:current}),[String(episode.quality||'720P').toUpperCase()]:episode},preferred=Object.keys(variants).find(key=>key.toLowerCase()==='720p')||Object.keys(variants)[0];target.episodes[index]={...variants[preferred],qualities:variants};}else target.episodes.push({...episode,qualities:{[String(episode.quality||'720P').toUpperCase()]:episode}});
+  const target=show||{slug_id:d.slug_id,title:d.title,episodes:[]};if(!Array.isArray(target.episodes))target.episodes=[];const index=target.episodes.findIndex(e=>Number(e.episode)===episode.episode&&Number(e.season||1)===episode.season&&String(e.special_type||'')===String(episode.special_type||''));if(index>=0){const current=target.episodes[index],parentSlug=current.slug_id||episode.slug_id,variants={...(current.qualities||{[String(current.quality||'720P').toUpperCase()]:current}),[String(episode.quality||'720P').toUpperCase()]:episode};for(const variant of Object.values(variants)){delete variant.slug_id;delete variant.slug_aliases;}const preferred=Object.keys(variants).find(key=>key.toLowerCase()==='720p')||Object.keys(variants)[0];target.episodes[index]={...variants[preferred],slug_id:parentSlug,qualities:variants};}else{const variant={...episode};delete variant.slug_id;target.episodes.push({...variant,qualities:{[String(episode.quality||'720P').toUpperCase()]:variant}});}
   Object.assign(target,{slug_id:d.slug_id,title:d.title,year:d.year||target.year,poster:d.poster||target.poster||null,plot:d.plot||target.plot||'',genre:d.genre||target.genre||[],rating:d.rating||target.rating||null,status:d.status||target.status||null,episodes_total:d.episodes_total||target.episodes_total||null,studio:d.studio||target.studio||null,updated_at:new Date().toISOString()});if(!show)content.anime.push(target);content.updated_at=new Date().toISOString();
   const body={message:'Update FilmGo anime metadata in canonical anime.json',content:Buffer.from(JSON.stringify(content,null,2)+'\n').toString('base64')};if(sha)body.sha=sha;const write=await fetch(url,{method:'PUT',headers,body:JSON.stringify(body),signal:AbortSignal.timeout(15000)});if(write.ok)return; if(write.status!==409&&write.status!==422)throw Error('Anime catalog write '+write.status);
  }
@@ -385,7 +398,7 @@ async function startAnimeDraft(file,messageId,detected=null,caption=''){
  parts.season=parts.season||(parts.special_type?1:(known?manualAnimeSeason(parts.title,parts.episode)||1:await tmdbAnimeSeason(parts.title,parts.episode)||1));
  const d={kind:'anime',message_id:messageId,file_name:file.file_name||'',file_size:Number(file.file_size||0),mime_type:file.mime_type||'',title:parts.title,titleCandidates:parts.titleCandidates,season:parts.season,episode:parts.episode,part:parts.part,special_type:parts.special_type,quality:parts.quality,slug_id:animeSlug(parts.title),episode_slug_id:crypto.randomBytes(12).toString('base64url')};
  const duplicate=await findAnimeDuplicate(d).catch(error=>{console.warn('Anime duplicate check failed:',error?.message||'unknown error');return null;});
- if(duplicate){d.existing=true;d.replace=true;d.existing_episode_message_id=Number(duplicate.telegram_message_id)||null;}
+ if(duplicate){d.existing=true;d.replace=true;d.episode_slug_id=duplicate.episode_slug_id||duplicate.slug_id;d.existing_episode_message_id=Number(duplicate.telegram_message_id)||null;}
  const metadata=known?null:(detected?.metadata||await animeMetadata(parts.title).catch(()=>null));if(metadata){Object.assign(d,metadata);d.slug_id=animeSlug(metadata.title);}d.stage='await-publish';await draftSave(d);
  if(detected?.confidence>=.7&&!d.replace){await say(ADMIN_ID,'Recognized '+d.title+' as anime ('+Math.round(detected.confidence*100)+'% confidence). Publishing automatically.');return publishAnimeDraft(d);}
  return animeDraftPrompt(d);

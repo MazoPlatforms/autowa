@@ -64,10 +64,10 @@ jobs:
           for item in source.get('anime', []):
               for episode in item.get('episodes', []):
                   variants=episode.get('qualities') or {str(episode.get('quality') or '720P').upper(): episode}
+                  episode['slug_id']=episode.get('slug_id') or fixed_slug(next(iter(variants.values())).get('telegram_message_id'))
                   for variant in variants.values():
-                      variant['slug_id']=variant.get('slug_id') or fixed_slug(variant.get('telegram_message_id'))
+                      variant.pop('slug_id', None)
                       variant.pop('slug_aliases', None)
-                  episode['slug_id']=episode.get('slug_id') or next(iter(variants.values())).get('slug_id')
                   episode.pop('slug_aliases', None)
               grouped={}
               for episode in item.get('episodes', []):

@@ -456,11 +456,13 @@ def build_anime_catalog(messages):
             variants = [episode, *(episode.get('qualities') or {}).values()]
             for variant in variants:
                 if variant.get('telegram_message_id') is not None:
-                    known_episodes[str(variant['telegram_message_id'])] = variant
+                    known_episodes[str(variant['telegram_message_id'])] = (variant, episode.get('slug_id'))
         boundaries = [] if known else tmdb_season_boundaries(show['title'])
         unique = {}
         for episode in show['episodes']:
-            previous = known_episodes.get(str(episode.get('telegram_message_id')))
+            previous_record = known_episodes.get(str(episode.get('telegram_message_id')))
+            previous = previous_record[0] if previous_record else None
+            previous_parent_slug = previous_record[1] if previous_record else None
             explicit_season = episode.pop('season_explicit', None)
             caption_season = episode.pop('caption_season', None)
             special_type = episode.get('special_type') or (previous or {}).get('special_type')
@@ -488,8 +490,9 @@ def build_anime_catalog(messages):
                     if field not in ('slug_id', 'telegram_message_id', 'file_name', 'file_size', 'mime_type') and value not in (None, '', []):
                         episode.setdefault(field, value)
             identity = (episode.get('special_type') or '', int(episode.get('season') or 1), int(episode.get('episode') or 0), int(episode.get('part') or 0))
-            entry = unique.setdefault(identity, {'qualities': {}})
+            entry = unique.setdefault(identity, {'slug_id': previous_parent_slug or episode.get('slug_id'), 'qualities': {}})
             variant = {key: value for key, value in episode.items() if key not in ('season_explicit', 'caption_season', 'qualities')}
+            variant.pop('slug_id', None)
             quality_key = str(episode.get('quality') or '720P').upper()
             entry['qualities'][quality_key] = variant
         episodes = []
@@ -497,6 +500,7 @@ def build_anime_catalog(messages):
             variants = entry['qualities']
             preferred = next((key for key in variants if key.casefold() == '720p'), sorted(variants, key=lambda key: int(re.search(r'\d+', key).group()) if re.search(r'\d+', key) else 0, reverse=True)[0])
             primary = dict(variants[preferred])
+            primary['slug_id'] = entry.get('slug_id') or fixed_anime_episode_slug(primary['telegram_message_id'])
             primary['qualities'] = variants
             episodes.append(primary)
         show['episodes'] = episodes
