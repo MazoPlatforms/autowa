@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-01T11:39:47.431Z",
+  "updated_at": "2026-11-01T11:39:52.294Z",
   "anime": [
     {
       "slug_id": "naruto-shippuden",
@@ -2183,6 +2183,17 @@
           "file_size": 142037174,
           "file_name": "Naruto Shippuden S10 E199 [Tam+Mal+Hin+Eng+Jap] 720p HDRip H.mkv",
           "mime_type": "video/x-matroska"
+        },
+        {
+          "slug_id": "0UGGwUNapwUmRRCT",
+          "telegram_message_id": 207,
+          "episode": 201,
+          "season": 10,
+          "part": null,
+          "quality": "720p",
+          "file_size": 128371940,
+          "file_name": "Naruto Shippuden S10 E201 (720p) Tamil+Multi Audio ESub.mkv",
+          "mime_type": "video/x-matroska"
         }
       ],
       "year": 2007,
@@ -2200,7 +2211,7 @@
       "status": "Finished",
       "episodes_total": 500,
       "studio": "Studio Pierrot",
-      "updated_at": "2026-11-01T11:39:44Z"
+      "updated_at": "2026-11-01T11:39:52.294Z"
     },
     {
       "slug_id": "naruto-shippuden-tam-mal-hin-eng-jap",
