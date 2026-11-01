@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-01T16:44:48.139Z",
+  "updated_at": "2026-11-01T16:44:53.058Z",
   "anime": [
     {
       "slug_id": "naruto",
@@ -1460,6 +1460,17 @@
           "file_size": 116789450,
           "file_name": "Naruto S5 E109 Tamil Dub 720p.mp4",
           "mime_type": "video/mp4"
+        },
+        {
+          "slug_id": "ICgcx9_XB7PAFAUs",
+          "telegram_message_id": 503,
+          "episode": 110,
+          "season": 5,
+          "part": null,
+          "quality": "720p",
+          "file_size": 108293504,
+          "file_name": "Naruto S5 E110 Tamil Dub 720p.mp4",
+          "mime_type": "video/mp4"
         }
       ],
       "year": 2002,
@@ -1477,7 +1488,7 @@
       "status": "Finished",
       "episodes_total": 220,
       "studio": "Studio Pierrot",
-      "updated_at": "2026-11-01T16:44:48.139Z"
+      "updated_at": "2026-11-01T16:44:53.058Z"
     },
     {
       "slug_id": "naruto-shippuden",
