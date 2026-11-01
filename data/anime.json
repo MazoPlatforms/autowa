@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-01T19:15:52.737Z",
+  "updated_at": "2026-11-01T19:16:06.646Z",
   "anime": [
     {
       "slug_id": "naruto",
@@ -8854,19 +8854,16 @@
           "frame": "https://raw.githubusercontent.com/MazoPlatforms/autowa/main/web/frames/anime/attack-on-titan-oad-001.jpg"
         },
         {
-          "slug_id": "RyvfZDpOeBQyhB-I",
-          "telegram_message_id": 607,
+          "slug_id": "Vcv0ofBlgKAAqlQn",
+          "telegram_message_id": 618,
           "episode": 2,
           "season": 1,
-          "special_type": "OAD",
+          "special_type": null,
           "part": null,
-          "quality": "720P",
-          "file_size": 138397289,
-          "file_name": "Attack On Titan - OAD EP02 [Tamil] 720p.mkv",
-          "mime_type": "video/x-matroska",
-          "title": "The Sudden Visitor: The Torturous Curse of Youth",
-          "released": "2014-04-09",
-          "frame": "https://raw.githubusercontent.com/MazoPlatforms/autowa/main/web/frames/anime/attack-on-titan-oad-002.jpg"
+          "quality": "720p",
+          "file_size": 171133240,
+          "file_name": "Attack_On_Titan_S01_Ep02_தமிழ்_720p_@Anime_Tamil_Dubbed_Series_1.mkv",
+          "mime_type": "video/x-matroska"
         },
         {
           "slug_id": "TQ0WY5YZs-sREl9z",
@@ -8985,7 +8982,7 @@
       "episodes_total": 25,
       "year": 2013,
       "studio": "WIT STUDIO",
-      "updated_at": "2026-11-01T19:15:52.737Z"
+      "updated_at": "2026-11-01T19:16:06.646Z"
     }
   ]
 }
