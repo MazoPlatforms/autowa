@@ -217,7 +217,7 @@ async function saveAnimeMetadata(id,d){
  throw Error('Anime catalog update conflict');
 }
 function telegramAnimeCaption(d){
- const lines=['Anime: '+captionValue(d.title,150),'Season: '+d.season,'Episode: '+d.episode+(d.part?' · Part: '+d.part:''),'Quality: '+captionValue(d.quality,30),'Slug ID: '+captionValue(d.episode_slug_id,80)];
+ const lines=['Anime: '+captionValue(d.title,150),'Anime Slug ID: '+captionValue(d.slug_id,80),'Season: '+d.season,'Episode: '+d.episode+(d.part?' · Part: '+d.part:''),'Quality: '+captionValue(d.quality,30),'Episode Slug ID: '+captionValue(d.episode_slug_id,80)];
  return lines.join('\n').slice(0,1024);
 }
 async function draftPrompt(d){const text=['FilmGo movie draft',d.title+' ('+d.year+')', 'Quality: '+d.quality,'File: '+d.file_name,'Metadata: '+(d.imdb_id?'OMDb '+d.imdb_id:'manual / existing'),d.replace?'Existing quality — replacement requires confirmation':d.existing?'New quality for existing movie':'New movie', 'Use /edit to change metadata, /poster to upload a JPEG poster, /cancel to discard.'].join('\n');await say(ADMIN_ID,text,{reply_markup:{inline_keyboard:[[{text:d.replace?'Confirm replacement':'Publish movie',callback_data:'fg:publish'},{text:'Cancel',callback_data:'fg:cancel'}]]}});}
