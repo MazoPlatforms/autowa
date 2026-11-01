@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-01T12:29:47.014Z",
+  "updated_at": "2026-11-01T12:29:50.946Z",
   "anime": [
     {
       "slug_id": "naruto-shippuden",
@@ -3701,6 +3701,17 @@
           "file_size": 79627259,
           "file_name": "Naruto Shippuden [S15] {EP:337} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
+        },
+        {
+          "slug_id": "G9KecWuDdd8HzPr1",
+          "telegram_message_id": 345,
+          "episode": 338,
+          "season": 15,
+          "part": null,
+          "quality": "720p",
+          "file_size": 55584362,
+          "file_name": "Naruto Shippuden [S15] {EP:338} (7200p) Tamil.mkv",
+          "mime_type": "video/x-matroska"
         }
       ],
       "year": 2007,
@@ -3718,7 +3729,7 @@
       "status": "Finished",
       "episodes_total": 500,
       "studio": "Studio Pierrot",
-      "updated_at": "2026-11-01T12:29:47.014Z"
+      "updated_at": "2026-11-01T12:29:50.946Z"
     }
   ]
 }
