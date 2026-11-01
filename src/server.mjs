@@ -30,6 +30,13 @@ async function redis(...args){
 }
 const OTP_TTL=300;
 const OTP_MESSAGE_PREFIX='otp-message:';
+const recurringWarningAt=new Map();
+function recurringWarn(key,message,interval=300000){
+ const now=Date.now(),last=recurringWarningAt.get(key)||0;
+ if(now-last<interval)return;
+ recurringWarningAt.set(key,now);
+ console.warn(message);
+}
 const otpMessageKey=number=>OTP_MESSAGE_PREFIX+hmac(number);
 const WA_VERIFY_TTL=300;
 const WA_VERIFY_PREFIX='wa-verify:';
@@ -64,7 +71,7 @@ async function cleanupExpiredOtpMessages(){
  }while(cursor!=='0');
 }
 function startOtpMessageCleanup(){
- const timer=setInterval(()=>{void cleanupExpiredOtpMessages().catch(error=>console.warn('OTP cleanup scan failed:',error.message));},30000);
+ const timer=setInterval(()=>{void cleanupExpiredOtpMessages().catch(error=>recurringWarn('otp-cleanup','OTP cleanup scan failed: '+error.message));},30000);
  timer.unref();
 }
 const UNLIMITED_REQUEST_NUMBER="+94779290433";
@@ -217,7 +224,7 @@ function refreshPublicCatalog(){
    if(!Array.isArray(data.movies)||data.movies.some(m=>!m||typeof m.slug_id!=='string'||!Number.isSafeInteger(m.telegram_message_id)))throw Error('Invalid catalog');
    publicCatalog=data;
    publicCatalogEtag='"'+crypto.createHash('sha256').update(JSON.stringify(publicCatalog)).digest('base64url')+'"';
-  }catch(err){console.warn('FilmGo catalog update failed; serving last valid copy:',err.message);}
+  }catch(err){recurringWarn('public-catalog','FilmGo catalog update failed; serving last valid copy: '+err.message);}
   finally{catalogChecked=Date.now();catalogPending=null;}
   return publicCatalog;
  })();
