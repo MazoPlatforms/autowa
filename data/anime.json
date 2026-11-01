@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-01T11:36:27.807Z",
+  "updated_at": "2026-11-01T11:36:31.420Z",
   "anime": [
     {
       "slug_id": "naruto-shippuden",
@@ -2051,6 +2051,17 @@
           "file_size": 93685159,
           "file_name": "Naruto Shippuden S09 Tamil EP187.mkv",
           "mime_type": "video/x-matroska"
+        },
+        {
+          "slug_id": "kJZrBkRXzVBqzOgr",
+          "telegram_message_id": 194,
+          "episode": 188,
+          "season": 9,
+          "part": null,
+          "quality": "720p",
+          "file_size": 90295281,
+          "file_name": "Naruto Shippuden S09 Tamil EP188.mkv",
+          "mime_type": "video/x-matroska"
         }
       ],
       "year": 2007,
@@ -2068,7 +2079,7 @@
       "status": "Finished",
       "episodes_total": 500,
       "studio": "Studio Pierrot",
-      "updated_at": "2026-11-01T11:36:27.807Z"
+      "updated_at": "2026-11-01T11:36:31.419Z"
     }
   ]
 }
