@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-01T19:19:56.140Z",
+  "updated_at": "2026-11-01T19:20:09.834Z",
   "anime": [
     {
       "slug_id": "naruto",
@@ -8926,19 +8926,16 @@
           "mime_type": "video/x-matroska"
         },
         {
-          "slug_id": "eUYtx4ah0TSY42BP",
-          "telegram_message_id": 613,
+          "slug_id": "ATtHlxsNipXQbgsl",
+          "telegram_message_id": 636,
           "episode": 8,
           "season": 1,
-          "special_type": "OAD",
+          "special_type": null,
           "part": null,
-          "quality": "720P",
-          "file_size": 90344305,
-          "file_name": "Attack On Titan - OAD EP08 [Tamil] 720p.mkv",
-          "mime_type": "video/x-matroska",
-          "title": "Lost Girls: Lost in the Cruel World",
-          "released": "2018-08-09",
-          "frame": "https://raw.githubusercontent.com/MazoPlatforms/autowa/main/web/frames/anime/attack-on-titan-oad-008.jpg"
+          "quality": "720p",
+          "file_size": 174389073,
+          "file_name": "Attack_On_Titan_S01_Ep08_தமிழ்_720p_@Anime_Tamil_Dubbed_Series_1.mkv",
+          "mime_type": "video/x-matroska"
         },
         {
           "slug_id": "8RwxRZhNT4Ycxx8s",
@@ -9111,7 +9108,7 @@
       "episodes_total": 25,
       "year": 2013,
       "studio": "WIT STUDIO",
-      "updated_at": "2026-11-01T19:19:56.140Z"
+      "updated_at": "2026-11-01T19:20:09.834Z"
     }
   ]
 }
