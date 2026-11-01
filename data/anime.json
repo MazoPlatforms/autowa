@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-01T22:06:37.449Z",
+  "updated_at": "2026-11-01T22:06:52.355Z",
   "anime": [
     {
       "slug_id": "naruto",
@@ -18890,6 +18890,18 @@
               "file_size": 47098863,
               "file_name": "Attack On Titan - OAD EP03 [Tamil] 480p.mkv",
               "mime_type": "video/x-matroska"
+            },
+            "1080P": {
+              "slug_id": "7uoCNF9sWpkSsnaI",
+              "telegram_message_id": 886,
+              "episode": 3,
+              "season": 1,
+              "special_type": "OAD",
+              "part": null,
+              "quality": "1080p",
+              "file_size": 209856282,
+              "file_name": "Attack On Titan - OAD EP03 [Tamil] 1080p.mkv",
+              "mime_type": "video/x-matroska"
             }
           }
         },
@@ -24407,7 +24419,7 @@
         "4": "/banners/attack-on-titan-season-4.webp",
         "OAD": "/banners/attack-on-titan-oad.webp"
       },
-      "updated_at": "2026-11-01T22:06:37.449Z"
+      "updated_at": "2026-11-01T22:06:52.355Z"
     }
   ]
 }
