@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-01T19:42:39.170Z",
+  "updated_at": "2026-11-01T19:42:58.774Z",
   "anime": [
     {
       "slug_id": "naruto",
@@ -19700,6 +19700,32 @@
               "mime_type": "video/x-matroska"
             }
           }
+        },
+        {
+          "slug_id": "o90_E9VoaFofKgUo",
+          "telegram_message_id": 659,
+          "episode": 16,
+          "season": 1,
+          "special_type": null,
+          "part": null,
+          "quality": "480p",
+          "file_size": 116521516,
+          "file_name": "Attack_On_Titan_S01_Ep16_தமிழ்_480p_@Anime_Tamil_Dubbed_Series_1.mkv",
+          "mime_type": "video/x-matroska",
+          "qualities": {
+            "480P": {
+              "slug_id": "o90_E9VoaFofKgUo",
+              "telegram_message_id": 659,
+              "episode": 16,
+              "season": 1,
+              "special_type": null,
+              "part": null,
+              "quality": "480p",
+              "file_size": 116521516,
+              "file_name": "Attack_On_Titan_S01_Ep16_தமிழ்_480p_@Anime_Tamil_Dubbed_Series_1.mkv",
+              "mime_type": "video/x-matroska"
+            }
+          }
         }
       ],
       "wikipedia_url": "https://en.wikipedia.org/wiki/Attack_on_Titan_(TV_series)",
@@ -19716,7 +19742,7 @@
       "episodes_total": 25,
       "year": 2013,
       "studio": "WIT STUDIO",
-      "updated_at": "2026-11-01T19:42:39.170Z"
+      "updated_at": "2026-11-01T19:42:58.774Z"
     }
   ]
 }
