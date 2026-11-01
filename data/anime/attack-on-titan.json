@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": 1793556273,
+  "updated_at": 1793557845,
   "anime": {
     "slug_id": "attack-on-titan",
     "title": "Attack on Titan",
@@ -10,52 +10,112 @@
         "telegram_message_id": 606,
         "episode": 1,
         "season": 1,
+        "special_type": "OAD",
         "part": null,
         "quality": "720P",
         "file_size": 118158912,
         "file_name": "Attack On Titan - OAD EP01 [Tamil] 720p.mkv",
-        "mime_type": "video/x-matroska",
-        "special_type": "OAD"
+        "mime_type": "video/x-matroska"
       },
       {
         "slug_id": "RyvfZDpOeBQyhB-I",
         "telegram_message_id": 607,
         "episode": 2,
         "season": 1,
+        "special_type": "OAD",
         "part": null,
         "quality": "720P",
         "file_size": 138397289,
         "file_name": "Attack On Titan - OAD EP02 [Tamil] 720p.mkv",
-        "mime_type": "video/x-matroska",
-        "special_type": "OAD"
+        "mime_type": "video/x-matroska"
       },
       {
         "slug_id": "TQ0WY5YZs-sREl9z",
         "telegram_message_id": 608,
         "episode": 3,
         "season": 1,
+        "special_type": "OAD",
         "part": null,
         "quality": "720P",
         "file_size": 110520261,
         "file_name": "Attack On Titan - OAD EP03 [Tamil] 720p.mkv",
-        "mime_type": "video/x-matroska",
-        "special_type": "OAD"
+        "mime_type": "video/x-matroska"
       },
       {
         "slug_id": "cQx0snz6F7AsBzXA",
         "telegram_message_id": 609,
         "episode": 4,
         "season": 1,
+        "special_type": "OAD",
         "part": null,
         "quality": "720P",
         "file_size": 115243635,
         "file_name": "Attack On Titan - OAD EP04 [Tamil] 720p.mkv",
-        "mime_type": "video/x-matroska",
-        "special_type": "OAD"
+        "mime_type": "video/x-matroska"
+      },
+      {
+        "slug_id": "yKuyQqSCtqEBlnJv",
+        "telegram_message_id": 610,
+        "episode": 5,
+        "season": 1,
+        "special_type": "OAD",
+        "part": null,
+        "quality": "720P",
+        "file_size": 170698243,
+        "file_name": "Attack On Titan - OAD EP05 [Tamil] 720p.mkv",
+        "mime_type": "video/x-matroska"
+      },
+      {
+        "slug_id": "SIvCEFOw1vROfJ19",
+        "telegram_message_id": 611,
+        "episode": 6,
+        "season": 1,
+        "special_type": "OAD",
+        "part": null,
+        "quality": "720P",
+        "file_size": 58744918,
+        "file_name": "Attack On Titan - OAD EP06 [Tamil] 720p.mkv",
+        "mime_type": "video/x-matroska"
+      },
+      {
+        "slug_id": "kdDHMqbwwLEH6ZRd",
+        "telegram_message_id": 612,
+        "episode": 7,
+        "season": 1,
+        "special_type": "OAD",
+        "part": null,
+        "quality": "720P",
+        "file_size": 69806612,
+        "file_name": "Attack On Titan - OAD EP07 [Tamil] 720p.mkv",
+        "mime_type": "video/x-matroska"
+      },
+      {
+        "slug_id": "eUYtx4ah0TSY42BP",
+        "telegram_message_id": 613,
+        "episode": 8,
+        "season": 1,
+        "special_type": "OAD",
+        "part": null,
+        "quality": "720P",
+        "file_size": 90344305,
+        "file_name": "Attack On Titan - OAD EP08 [Tamil] 720p.mkv",
+        "mime_type": "video/x-matroska"
       }
     ],
     "wikipedia_url": "https://en.wikipedia.org/wiki/Attack_on_Titan_(TV_series)",
-    "plot": "Attack on Titan  is a Japanese dark fantasy anime television series based on the 2009–2021 manga series Attack on Titan by Hajime Isayama. The series premiered on April 7, 2013, and concluded on November 5, 2023. Animated by Wit Studio and MAPPA, the series aired on MBS and NHK General TV. In North America, the series has been streamed on Crunchyroll, Funimation, and Hulu. It also premiered its English dub on Adult Swim's Toonami programming block in the United States from May 3, 2014, to January 7, 2024.",
-    "updated_at": "2026-11-01T18:04:30Z"
+    "plot": "Several hundred years ago, humans were nearly exterminated by titans. Titans are typically several stories tall, seem to have no intelligence, devour human beings and, worst of all, seem to do it for the pleasure rather than as a food source. A small percentage of humanity survived by walling themselves in a city protected by extremely high walls, even taller than the biggest of titans.\r\nFlash forward to the present and the city has not seen a titan in over 100 years. Teenage boy Eren and his foster sister Mikasa witness something horrific as the city walls are destroyed by a colossal titan that appears out of thin air. As the smaller titans flood the city, the two kids watch in horror as their mother is eaten alive. Eren vows that he will murder every single titan and take revenge for all of mankind.\r\n(Source: MangaHelpers)",
+    "poster": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx16498-buvcRTBx4NSm.jpg",
+    "genre": [
+      "Action",
+      "Drama",
+      "Fantasy",
+      "Mystery"
+    ],
+    "rating": 8.5,
+    "status": "Finished",
+    "episodes_total": 25,
+    "year": 2013,
+    "studio": "WIT STUDIO",
+    "updated_at": "2026-11-01T18:30:42Z"
   }
 }
