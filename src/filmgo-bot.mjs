@@ -235,8 +235,11 @@ async function wikipediaSearch(title){
 async function animeMetadata(title){
  const [ani,jikan,tmdb,wikipedia]=await Promise.all([anilistSearch(title).catch(()=>null),jikanSearch(title).catch(()=>null),tmdbAnimeSearch(title).catch(()=>null),wikipediaSearch(title).catch(()=>null)]);const primary=ani||jikan||tmdb||wikipedia;if(!primary)return null;const fallbacks=[jikan,tmdb,wikipedia].filter(Boolean);return Object.fromEntries(Object.entries(primary).map(([key,value])=>[key,value===null||value===''||(Array.isArray(value)&&!value.length)?(fallbacks.find(item=>item[key]!==null&&item[key]!==''&&(!Array.isArray(item[key])||item[key].length))?.[key]??value):value]));
 }
+const KNOWN_ANIME_TITLES=new Set(['narutoshippuden','narutoshippuuden']);
+const isKnownAnimeTitle=title=>KNOWN_ANIME_TITLES.has(normalize(title));
 async function detectAnimeType(file,caption=''){
  const parts=animePartsFromMessage(file,caption);const name=String(file.file_name||'')+'\n'+caption;
+ if(isKnownAnimeTitle(parts.title))return {anime:true,confidence:1,parts,known:true,metadata:null};
  const explicitEpisode=/\b(?:S\d{1,2}\s*(?:-|x)?\s*E\d{1,4}|season\s*\d+\s*(?:episode|ep)\s*\d+|episode|ep)\b/i.test(name);
  const metadata=await animeMetadata(parts.title).catch(()=>null);const titleScore=metadata?.title?similarity(parts.title,metadata.title):0;
  let confidence=0;if(explicitEpisode)confidence=.95;else if(parts.episode)confidence=.82;if(titleScore>=.7)confidence=Math.max(confidence,Math.min(.92,titleScore));
@@ -350,9 +353,10 @@ async function probe(input){
 async function startAnimeDraft(file,messageId,detected=null,caption=''){
  const parts=animePartsFromMessage(file,caption);
  if(!parts.episode)return say(ADMIN_ID,'I could not identify the anime episode. Use a filename such as Naruto Shippuden - 001 [720p].mkv.');
- parts.season=parts.season||manualAnimeSeason(parts.title,parts.episode)||await tmdbAnimeSeason(parts.title,parts.episode)||1;
+ const known=isKnownAnimeTitle(parts.title);
+ parts.season=parts.season||(known?1:manualAnimeSeason(parts.title,parts.episode)||await tmdbAnimeSeason(parts.title,parts.episode)||1);
  const d={kind:'anime',message_id:messageId,file_name:file.file_name||'',file_size:Number(file.file_size||0),mime_type:file.mime_type||'',title:parts.title,titleCandidates:parts.titleCandidates,season:parts.season,episode:parts.episode,part:parts.part,quality:parts.quality,slug_id:animeSlug(parts.title),episode_slug_id:crypto.randomBytes(12).toString('base64url')};
- const metadata=detected?.metadata||await animeMetadata(parts.title).catch(()=>null);if(metadata){Object.assign(d,metadata);d.slug_id=animeSlug(metadata.title);}d.stage='await-publish';await draftSave(d);
+ const metadata=known?null:(detected?.metadata||await animeMetadata(parts.title).catch(()=>null));if(metadata){Object.assign(d,metadata);d.slug_id=animeSlug(metadata.title);}d.stage='await-publish';await draftSave(d);
  if(detected?.confidence>=.7){await say(ADMIN_ID,'Recognized '+d.title+' as anime ('+Math.round(detected.confidence*100)+'% confidence). Publishing automatically.');return publishAnimeDraft(d);}
  return animeDraftPrompt(d);
 }
