@@ -116,6 +116,21 @@ def tmdb_anime_metadata(title):
     except Exception:
         return {'title': title}
 
+def wikipedia_metadata(title):
+    """Use Wikipedia's public API instead of scraping rendered HTML pages."""
+    try:
+        query = urllib.parse.urlencode({'action': 'query', 'list': 'search', 'srsearch': title + ' anime', 'format': 'json', 'utf8': '1', 'srlimit': '1'})
+        with urllib.request.urlopen(urllib.request.Request('https://en.wikipedia.org/w/api.php?' + query, headers={'User-Agent': 'FilmGo/1.0 (metadata; contact: admin@mzn.is-a.dev)'}), timeout=6) as response:
+            result = next(iter(json.load(response).get('query', {}).get('search', [])), None)
+        if not result or not result.get('title'):
+            return {'title': title}
+        page = urllib.parse.quote(str(result['title']).replace(' ', '_'), safe='')
+        with urllib.request.urlopen(urllib.request.Request('https://en.wikipedia.org/api/rest_v1/page/summary/' + page, headers={'User-Agent': 'FilmGo/1.0 (metadata; contact: admin@mzn.is-a.dev)'}), timeout=6) as response:
+            item = json.load(response)
+        return {'plot': str(item.get('extract') or '').strip()[:900], 'poster': ((item.get('thumbnail') or {}).get('source')), 'year': str((item.get('timestamp') or ''))[:4] or None, 'wikipedia_url': ((item.get('content_urls') or {}).get('desktop') or {}).get('page')}
+    except Exception:
+        return {}
+
 def inferred_anime_season(episode, explicit, boundaries):
     if explicit:
         return explicit
@@ -152,11 +167,13 @@ def anime_metadata(raw_title):
         primary = {'title': canonical[:140], 'poster': media.get('coverImage', {}).get('large'), 'plot': re.sub(r'<[^>]+>', '', str(media.get('description') or '')).strip()[:900], 'genre': media.get('genres') or [], 'rating': round((float(media.get('averageScore') or 0) / 10), 1) or None, 'status': media.get('status', '').title() or None, 'episodes_total': media.get('episodes'), 'year': (media.get('startDate') or {}).get('year'), 'studio': (((media.get('studios') or {}).get('nodes') or [{}])[0]).get('name')}
         fallback = jikan_metadata(canonical)
         tmdb = tmdb_anime_metadata(canonical)
-        return {key: (value if value not in (None, '', [], 0) else (fallback.get(key) or tmdb.get(key))) for key, value in primary.items()}
+        wikipedia = wikipedia_metadata(canonical)
+        return {key: (value if value not in (None, '', [], 0) else (fallback.get(key) or tmdb.get(key) or wikipedia.get(key))) for key, value in primary.items()} | ({'wikipedia_url': wikipedia['wikipedia_url']} if wikipedia.get('wikipedia_url') else {})
     except Exception:
         fallback = jikan_metadata(title)
         tmdb = tmdb_anime_metadata(title)
-        return {key: (fallback.get(key) if fallback.get(key) not in (None, '', [], 0) else tmdb.get(key)) for key in set(fallback) | set(tmdb)}
+        wikipedia = wikipedia_metadata(title)
+        return {key: (fallback.get(key) if fallback.get(key) not in (None, '', [], 0) else (tmdb.get(key) or wikipedia.get(key))) for key in set(fallback) | set(tmdb) | set(wikipedia)}
 
 def anime_media_item(message):
     filename = str(getattr(message.file, 'name', '') or '')

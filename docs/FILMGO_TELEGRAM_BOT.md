@@ -14,10 +14,12 @@ The existing Koyeb Node.js API also runs a Telegram Bot API long poller. It is *
 
 The live anime catalog uses `TELEGRAM_ANIME_CHANNEL_ID` independently from
 `TELEGRAM_CHANNEL_ID`. Add the Telethon account to both channels. Anime files
-are grouped by normalized title and parsed season/episode/part values; AniList
-and Jikan/MAL metadata and posters are best-effort enrichment. TMDB supplies a
-third fallback and season boundaries when filenames contain only an overall
-episode number. These services do not block indexing when unavailable.
+are grouped by normalized title and parsed season/episode/part values; AniList,
+Jikan/MAL, TMDB, and Wikipedia metadata and posters are best-effort enrichment.
+TMDB also supplies season boundaries when filenames contain only an overall
+episode number. These services do not block indexing when unavailable. The
+Wikipedia API is used instead of scraping rendered pages, which is more stable
+and respects the source's access rules.
 
 When an admin sends a file to the bot, the bot identifies movie versus anime
 using filename markers and metadata confidence. High-confidence anime is
