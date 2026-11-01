@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-01T16:31:54.187Z",
+  "updated_at": "2026-11-01T16:31:58.673Z",
   "anime": [
     {
       "slug_id": "naruto",
@@ -902,6 +902,17 @@
           "file_size": 139538399,
           "file_name": "Naruto S3 E74 Tamil Dub 720p.mp4",
           "mime_type": "video/mp4"
+        },
+        {
+          "slug_id": "wqK0pnt_Karxkthm",
+          "telegram_message_id": 470,
+          "episode": 77,
+          "season": 3,
+          "part": null,
+          "quality": "720p",
+          "file_size": 124286651,
+          "file_name": "Naruto S3 E77 Tamil Dub 720p.mp4",
+          "mime_type": "video/mp4"
         }
       ],
       "year": 2002,
@@ -919,7 +930,7 @@
       "status": "Finished",
       "episodes_total": 220,
       "studio": "Studio Pierrot",
-      "updated_at": "2026-11-01T16:31:54.187Z"
+      "updated_at": "2026-11-01T16:31:58.673Z"
     },
     {
       "slug_id": "naruto-shippuden",
