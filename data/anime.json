@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-01T11:31:31.890Z",
+  "updated_at": "2026-11-01T11:31:35.870Z",
   "anime": [
     {
       "slug_id": "naruto-shippuden",
@@ -1578,6 +1578,17 @@
           "file_size": 95283952,
           "file_name": "Naruto Shippuden \n144 தமிழ் HDRip.mp4",
           "mime_type": "video/mp4"
+        },
+        {
+          "slug_id": "KYzUSnuE1SL9L737",
+          "telegram_message_id": 151,
+          "episode": 145,
+          "season": 1,
+          "part": null,
+          "quality": "720p",
+          "file_size": 110638344,
+          "file_name": "Naruto Shippuden \n145 தமிழ் HDRip.mp4",
+          "mime_type": "video/mp4"
         }
       ],
       "year": 2007,
@@ -1595,7 +1606,7 @@
       "status": "Finished",
       "episodes_total": 500,
       "studio": "Studio Pierrot",
-      "updated_at": "2026-11-01T11:31:31.890Z"
+      "updated_at": "2026-11-01T11:31:35.870Z"
     }
   ]
 }
