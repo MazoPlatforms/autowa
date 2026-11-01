@@ -158,7 +158,8 @@ function showDetail(a){
  for(const e of list){
   const number=episodeNumber(e),row=el('div','anime-ep');row.append(el('div','anime-ep-num',String(number).padStart(2,'0')));
   const text=el('div');text.append(el('p','anime-ep-title',e.title||'Episode '+number),el('p','anime-ep-sub',[e.season&&'Season '+e.season,e.part&&'Part '+e.part,e.quality,e.duration,e.released].filter(Boolean).join(' · ')||'Episode '+number));
-  const play=el('a','anime-ep-play');play.href=e.slug_id?'/api/anime/stream/'+encodeURIComponent(e.slug_id):e.telegram_message_id?'/api/anime/stream/'+encodeURIComponent(e.telegram_message_id):'#';play.title='Play episode';play.append(playIcon(),document.createTextNode('Play'));
+  const episodeSlug=typeof e.slug_id==='string'&&/^[A-Za-z0-9_-]{8,80}$/.test(e.slug_id)?e.slug_id:'';
+  const play=el('a','anime-ep-play');play.href=episodeSlug?'/anime/watch/'+encodeURIComponent(episodeSlug):'#';play.title=episodeSlug?'Watch episode':'Episode link unavailable';if(!episodeSlug)play.setAttribute('aria-disabled','true');play.append(playIcon(),document.createTextNode('Play'));
   row.append(text,play);eps.append(row);
  }
  root.append(eps);document.title=a.title+' — FilmGo';
