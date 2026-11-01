@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": 1793568772,
+  "updated_at": "2026-11-01T21:34:34.858Z",
   "anime": [
     {
       "slug_id": "naruto",
@@ -23706,19 +23706,16 @@
           }
         },
         {
-          "slug_id": "8HbcThGFjsE_WXbA",
-          "telegram_message_id": 851,
+          "slug_id": "aQ_JUDLdgujLDqv3",
+          "telegram_message_id": 852,
           "episode": 21,
           "season": 4,
           "special_type": null,
           "part": null,
-          "quality": "480P",
-          "file_size": 36521180,
-          "file_name": "Attack on titan-(S04 - Ep21)-(தமிழ்)- 480p.mkv",
+          "quality": "720p",
+          "file_size": 142096141,
+          "file_name": "Attack on titan-(S04 - Ep21)-(தமிழ்)- 720p.mkv",
           "mime_type": "video/x-matroska",
-          "title": "Crushing Blow - The 57th Exterior Scouting Mission (5)",
-          "released": "2013-09-01",
-          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357929.jpg",
           "qualities": {
             "480P": {
               "slug_id": "8HbcThGFjsE_WXbA",
@@ -23734,6 +23731,18 @@
               "title": "Crushing Blow - The 57th Exterior Scouting Mission (5)",
               "released": "2013-09-01",
               "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357929.jpg"
+            },
+            "720P": {
+              "slug_id": "aQ_JUDLdgujLDqv3",
+              "telegram_message_id": 852,
+              "episode": 21,
+              "season": 4,
+              "special_type": null,
+              "part": null,
+              "quality": "720p",
+              "file_size": 142096141,
+              "file_name": "Attack on titan-(S04 - Ep21)-(தமிழ்)- 720p.mkv",
+              "mime_type": "video/x-matroska"
             }
           }
         }
@@ -23752,7 +23761,7 @@
       "episodes_total": 25,
       "year": 2013,
       "studio": "WIT STUDIO",
-      "updated_at": "2026-11-01T21:32:49Z"
+      "updated_at": "2026-11-01T21:34:34.858Z"
     }
   ]
 }
