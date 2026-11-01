@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-01T21:01:03.465Z",
+  "updated_at": "2026-11-01T21:01:19.070Z",
   "anime": [
     {
       "slug_id": "naruto",
@@ -22102,15 +22102,15 @@
           }
         },
         {
-          "slug_id": "7NUDPmsepYo-eCEe",
-          "telegram_message_id": 785,
+          "slug_id": "pvr5pHBZChZcliD_",
+          "telegram_message_id": 786,
           "episode": 21,
           "season": 3,
           "special_type": null,
           "part": null,
-          "quality": "480p",
-          "file_size": 55039828,
-          "file_name": "Attack on titan-(S03 - Ep21)-(தமிழ்)- 480p.mkv",
+          "quality": "720p",
+          "file_size": 112565878,
+          "file_name": "Attack on titan-(S03 - Ep21)-(தமிழ்)- 720p.mkv",
           "mime_type": "video/x-matroska",
           "qualities": {
             "480P": {
@@ -22123,6 +22123,18 @@
               "quality": "480p",
               "file_size": 55039828,
               "file_name": "Attack on titan-(S03 - Ep21)-(தமிழ்)- 480p.mkv",
+              "mime_type": "video/x-matroska"
+            },
+            "720P": {
+              "slug_id": "pvr5pHBZChZcliD_",
+              "telegram_message_id": 786,
+              "episode": 21,
+              "season": 3,
+              "special_type": null,
+              "part": null,
+              "quality": "720p",
+              "file_size": 112565878,
+              "file_name": "Attack on titan-(S03 - Ep21)-(தமிழ்)- 720p.mkv",
               "mime_type": "video/x-matroska"
             }
           }
@@ -22142,7 +22154,7 @@
       "episodes_total": 25,
       "year": 2013,
       "studio": "WIT STUDIO",
-      "updated_at": "2026-11-01T21:01:03.465Z"
+      "updated_at": "2026-11-01T21:01:19.070Z"
     }
   ]
 }
