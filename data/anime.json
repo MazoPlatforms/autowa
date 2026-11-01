@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-01T12:45:02.076Z",
+  "updated_at": 1793537124,
   "anime": [
     {
       "slug_id": "naruto-shippuden",
@@ -3829,7 +3829,7 @@
           "episode": 349,
           "season": 16,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 88372679,
           "file_name": "Naruto Shippuden [S16] {EP:349} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -3840,7 +3840,7 @@
           "episode": 350,
           "season": 16,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 76566628,
           "file_name": "Naruto Shippuden [S16] {EP:350} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -3851,7 +3851,7 @@
           "episode": 351,
           "season": 16,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 75289191,
           "file_name": "Naruto Shippuden [S16] {EP:351} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -3862,7 +3862,7 @@
           "episode": 352,
           "season": 16,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 62366632,
           "file_name": "Naruto Shippuden [S16] {EP:352} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -3873,7 +3873,7 @@
           "episode": 353,
           "season": 16,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 71382500,
           "file_name": "Naruto Shippuden [S16] {EP:353} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -3884,7 +3884,7 @@
           "episode": 354,
           "season": 16,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 79910520,
           "file_name": "Naruto Shippuden [S16] {EP:354} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -3895,7 +3895,7 @@
           "episode": 355,
           "season": 16,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 75823327,
           "file_name": "Naruto Shippuden [S16] {EP:355} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -3906,7 +3906,7 @@
           "episode": 356,
           "season": 16,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 74861609,
           "file_name": "Naruto Shippuden [S16] {EP:356} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -3917,7 +3917,7 @@
           "episode": 357,
           "season": 16,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 80960291,
           "file_name": "Naruto Shippuden [S16] {EP:357} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -3928,7 +3928,7 @@
           "episode": 358,
           "season": 16,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 77002147,
           "file_name": "Naruto Shippuden [S16] {EP:358} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -3939,7 +3939,7 @@
           "episode": 359,
           "season": 16,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 82117171,
           "file_name": "Naruto Shippuden [S16] {EP:359} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -3950,7 +3950,7 @@
           "episode": 360,
           "season": 16,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 103642775,
           "file_name": "Naruto Shippuden [S16] {EP:360} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
@@ -3971,7 +3971,7 @@
       "status": "Finished",
       "episodes_total": 500,
       "studio": "Studio Pierrot",
-      "updated_at": "2026-11-01T12:45:02.076Z"
+      "updated_at": "2026-11-01T12:45:24Z"
     }
   ]
 }
