@@ -195,6 +195,7 @@ def manual_anime_episode(title, season, episode):
 
 _TMDB_SHOW_CACHE = {}
 _TMDB_SEASON_CACHE = {}
+_TVMAZE_EPISODE_CACHE = {}
 
 def catalog_title_key(title):
     """Stable comparison key for titles and release-name variants."""
@@ -259,6 +260,41 @@ def tmdb_season_episodes(title, season):
         return mapped
     except Exception:
         _TMDB_SEASON_CACHE[cache_key] = {}
+        return {}
+
+def tvmaze_episode_guide(title):
+    """Fetch a global episode guide when a season-aware source is unavailable."""
+    cache_key = str(title or '').casefold()
+    if cache_key in _TVMAZE_EPISODE_CACHE:
+        return _TVMAZE_EPISODE_CACHE[cache_key]
+    try:
+        query = urllib.parse.urlencode({'q': title})
+        with urllib.request.urlopen(urllib.request.Request('https://api.tvmaze.com/search/shows?' + query, headers={'User-Agent': 'FilmGo/1.0'}), timeout=8) as response:
+            results = json.load(response)
+        target = None
+        best = 0
+        for result in results[:10]:
+            show = result.get('show') or {}
+            name = str(show.get('name') or '')
+            score = max(difflib.SequenceMatcher(None, cache_key, name.casefold()).ratio(), float(result.get('score') or 0) / 2)
+            if score > best:
+                best, target = score, show
+        if not target or best < 0.55 or not target.get('id'):
+            _TVMAZE_EPISODE_CACHE[cache_key] = {}
+            return {}
+        with urllib.request.urlopen(urllib.request.Request('https://api.tvmaze.com/shows/%s/episodes?specials=0' % target['id'], headers={'User-Agent': 'FilmGo/1.0'}), timeout=12) as response:
+            rows = json.load(response)
+        mapped = {}
+        for index, item in enumerate(rows, 1):
+            mapped[index] = {
+                'title': str(item.get('name') or '').strip() or None,
+                'released': str(item.get('airdate') or '').strip() or None,
+                'frame': ((item.get('image') or {}).get('medium')),
+            }
+        _TVMAZE_EPISODE_CACHE[cache_key] = mapped
+        return mapped
+    except Exception:
+        _TVMAZE_EPISODE_CACHE[cache_key] = {}
         return {}
 
 def jikan_metadata(title):
@@ -352,6 +388,8 @@ def build_anime_catalog(messages):
             episode['season'] = explicit_season and episode['season'] or editorial_season or caption_season or (previous or {}).get('season') or inferred_anime_season(episode['episode'], None, boundaries)
             guide_episode = manual_anime_episode(show['title'], episode['season'], episode['episode'])
             guide = tmdb_season_episodes(show['title'], episode['season']).get(guide_episode) or tmdb_season_episodes(show['title'], episode['season']).get(episode['episode'])
+            if not guide:
+                guide = tvmaze_episode_guide(show['title']).get(int(episode['episode'] or 0))
             if guide:
                 for field in ('title', 'released', 'frame'):
                     if guide.get(field):
