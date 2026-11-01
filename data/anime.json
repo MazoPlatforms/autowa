@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-01T22:06:52.355Z",
+  "updated_at": "2026-11-01T22:07:09.857Z",
   "anime": [
     {
       "slug_id": "naruto",
@@ -18996,6 +18996,18 @@
               "title": "No Regrets - Part 1",
               "released": "2014-12-09",
               "frame": "https://raw.githubusercontent.com/MazoPlatforms/autowa/main/web/frames/anime/attack-on-titan-oad-004.jpg"
+            },
+            "480P": {
+              "slug_id": "bf7ECbv_AtLP3ani",
+              "telegram_message_id": 887,
+              "episode": 4,
+              "season": 1,
+              "special_type": "OAD",
+              "part": null,
+              "quality": "480p",
+              "file_size": 49612494,
+              "file_name": "Attack On Titan - OAD EP04 [Tamil] 480p.mkv",
+              "mime_type": "video/x-matroska"
             }
           }
         },
@@ -24419,7 +24431,7 @@
         "4": "/banners/attack-on-titan-season-4.webp",
         "OAD": "/banners/attack-on-titan-oad.webp"
       },
-      "updated_at": "2026-11-01T22:06:52.355Z"
+      "updated_at": "2026-11-01T22:07:09.857Z"
     }
   ]
 }
