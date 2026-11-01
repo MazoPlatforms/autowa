@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": 1793535845,
+  "updated_at": "2026-11-01T12:24:29.546Z",
   "anime": [
     {
       "slug_id": "naruto-shippuden",
@@ -3261,6 +3261,17 @@
           "file_size": 76756547,
           "file_name": "Naruto Shippuden [S14] {EP:296} (7200p) Tamil.mkv",
           "mime_type": "video/x-matroska"
+        },
+        {
+          "slug_id": "5A1TgraaT1CJmSkl",
+          "telegram_message_id": 304,
+          "episode": 29,
+          "season": 1,
+          "part": null,
+          "quality": "720p",
+          "file_size": 201334205,
+          "file_name": "Naruto Shippuden \n29 தமிழ் HDRip.mp4",
+          "mime_type": "video/x-matroska"
         }
       ],
       "year": 2007,
@@ -3278,7 +3289,7 @@
       "status": "Finished",
       "episodes_total": 500,
       "studio": "Studio Pierrot",
-      "updated_at": "2026-11-01T12:24:05Z"
+      "updated_at": "2026-11-01T12:24:29.546Z"
     }
   ]
 }
