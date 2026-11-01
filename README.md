@@ -27,7 +27,8 @@ This repository includes a separate **Koyeb API + public web form**. Visitors do
 4. **Pair OTP bot**: On first startup, look for a QR in **private Koyeb service logs** and scan it with WhatsApp → Linked devices → Link a device. Once connected, the bot saves encrypted auth data in Redis and reconnects automatically. Do **not** expose logs containing QR codes or secrets. If QR output is unreadable in the hosting logs, pairing requires a separate secure setup route; it has not been implemented.
 5. Create a GitHub **production environment** with required reviewer approval (if your repository plan/settings support it) and the `WA_AUTH_CREDS` environment secret for the **separate movie publisher bot**. The publisher's creds-only authentication is still unreliable without its matching Signal keys.
 6. Add `TELEGRAM_ANIME_CHANNEL_ID=-1004325690397` in the same Koyeb service environment secrets. The Telethon account in `TELEGRAM_SESSION` must be a member of that channel. The Koyeb service refreshes anime metadata every two minutes and stores the result in Redis; no GitHub Actions secret is needed for the live website catalog.
-7. Test OTP to your own WhatsApp number, then a small authorized media file through a reviewed GitHub Actions dispatch. Do not open public registration until real tests pass.
+7. Add the same `TELEGRAM_ANIME_CHANNEL_ID` as a **production environment secret in GitHub Actions**. The `Sync anime catalog` workflow uses it to publish the separate `data/anime.json` file after the bot dispatches `filmgo-anime-catalog-sync`.
+8. Test OTP to your own WhatsApp number, then a small authorized media file through a reviewed GitHub Actions dispatch. Do not open public registration until real tests pass.
 
 **No Meta WhatsApp Cloud API credentials are required.** OTP sending now uses Baileys on Koyeb. Unofficial WhatsApp automation may be rate-limited or lead to account restrictions.
 

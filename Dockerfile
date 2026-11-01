@@ -9,6 +9,7 @@ COPY web/ ./web/
 COPY tailwind.config.cjs ./tailwind.config.cjs
 RUN npm run build:css && npm prune --omit=dev
 COPY data/movies.json ./data/movies.json
+COPY data/anime.json ./data/anime.json
 COPY site/countries.json ./site/countries.json
 ENV NODE_ENV=production PORT=8000
 EXPOSE 8000

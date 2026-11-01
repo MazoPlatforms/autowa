@@ -4,6 +4,7 @@ import {logFilmGo} from './filmgo-logs.mjs';
 const TOKEN=process.env.BOT_TOKEN||'';
 const ADMIN_ID=String(process.env.FILMGO_BOT_ADMIN_ID||'7744742903');
 const CHANNEL_ID=String(process.env.TELEGRAM_CHANNEL_ID||'');
+const ANIME_CHANNEL_ID=String(process.env.TELEGRAM_ANIME_CHANNEL_ID||'');
 const REDIS_URL=(process.env.UPSTASH_REDIS_REST_URL||'').replace(/\/$/,'');
 const REDIS_TOKEN=process.env.UPSTASH_REDIS_REST_TOKEN||'';
 const GH_TOKEN=process.env.GITHUB_DISPATCH_TOKEN||'';
@@ -13,9 +14,11 @@ const MAX_BYTES=2_000_000_000;
 const REFUND_TOKEN_SCRIPT="local raw=redis.call('GET',KEYS[1]); if not raw then return 0 end; local used=tonumber(raw); local cost=tonumber(ARGV[1]); if used<=cost then redis.call('DEL',KEYS[1]); return 0 end; return redis.call('INCRBY',KEYS[1],-cost)";
 const QUALITY=/\b(360|480|720|1080|1440|2160)p\b|\b4k\b/i;
 const DRAFT_KEY=prefix+'draft:';
+const MEDIA_CHOICE_KEY=prefix+'media-choice:';
 const OPTIONAL_FIELDS=[['imdb_id','IMDb ID'],['poster','Poster'],['genre','Genre'],['runtime','Runtime'],['director','Director'],['cast','Cast'],['plot','Plot']];
 const normalize=v=>String(v||'').normalize('NFKD').toLowerCase().replace(/[^a-z0-9]+/g,'');
 const TITLE_STOP_WORDS=new Set(['tamil','telugu','malayalam','kannada','hindi','english','movie','film','web','series','dual','audio','proper','repack','hdrip','webrip','bluray','brrip','dvdrip','hdtv','x264','x265','hevc','aac','esub','esubs','subtitles']);
+const ANIME_QUALITY=/\b(360|480|720|1080|1440|2160)p\b|\b4k\b/i;
 function titleCandidates(title){
  const clean=String(title||'').replace(/\s+/g,' ').trim();
  const tokens=clean.split(' ').filter(Boolean),out=[];
@@ -48,6 +51,19 @@ export const filenameParts=name=>{
  const quality=qualityMatch?.[0]?.toLowerCase()==='4k'?'2160p':qualityMatch?.[0]?.toLowerCase()||null;
  return {title,titleCandidates:titleCandidates(title),year:Number(yearMatch?.[1])||null,quality};
 };
+export const animeFilenameParts=name=>{
+ let raw=String(name||'').replace(/\.[^.]+$/,'').replace(/[._]+/g,' ').replace(/\s+/g,' ').trim();
+ let season=null,episode=null,part=null;
+ let match=raw.match(/\bS(\d{1,2})\s*(?:-|x)?\s*E(\d{1,4})\b/i);
+ if(match){season=Number(match[1]);episode=Number(match[2]);raw=raw.slice(0,match.index)+' '+raw.slice(match.index+match[0].length);}
+ else{match=raw.match(/\b(?:season|s)\s*[- ]?(\d{1,2})\b/i);if(match){season=Number(match[1]);raw=raw.slice(0,match.index)+' '+raw.slice(match.index+match[0].length);}}
+ match=raw.match(/\b(?:episode|ep|e)\s*[- ]?(\d{1,4})\b/i);if(match){episode=Number(match[1]);raw=raw.slice(0,match.index)+' '+raw.slice(match.index+match[0].length);}
+ if(!episode){match=raw.match(/(?<!\d)[- ]0*(\d{1,4})(?=\s*(?:\[[^\]]*\]|\([^)]*\)|\b(?:360|480|720|1080|2160|4k)p?\b|$))/i);if(match){episode=Number(match[1]);raw=raw.slice(0,match.index)+' '+raw.slice(match.index+match[0].length);}}
+ match=raw.match(/\bpart\s*[- ]?(\d{1,2})\b/i);if(match){part=Number(match[1]);raw=raw.slice(0,match.index)+' '+raw.slice(match.index+match[0].length);}
+ const qualityMatch=raw.match(ANIME_QUALITY),quality=qualityMatch?.[0]?.toLowerCase()==='4k'?'2160p':qualityMatch?.[0]?.toLowerCase()||'auto';
+ const cut=qualityMatch?.index??Infinity;const title=(Number.isFinite(cut)?raw.slice(0,cut):raw).replace(/^[\s\[({]+|[\s\-\[\]({})]+$/g,'').replace(/\s+/g,' ').trim();
+ return {title:title||'Untitled anime',titleCandidates:titleCandidates(title),season:season||1,episode,part,quality};
+};
 async function catalog(){const r=await fetch('https://raw.githubusercontent.com/'+REPO+'/main/data/movies.json?ts='+Date.now(),{signal:AbortSignal.timeout(10000),cache:'no-store'});if(!r.ok)throw Error('Catalog unavailable');return (await r.json()).movies||[];}
 async function draftGet(){const raw=await redis('GET',DRAFT_KEY+ADMIN_ID);return raw?JSON.parse(raw):null;}
 async function draftSave(d){await redis('SET',DRAFT_KEY+ADMIN_ID,JSON.stringify(d),'EX',86400*7);}
@@ -73,6 +89,7 @@ async function askOmdbConfirmation(d,result){
  return say(ADMIN_ID,'OMDb result found. Is this the correct movie?\n\n'+details,{reply_markup:{inline_keyboard:[[{text:'Yes, use this result',callback_data:'fg:omdb:yes'},{text:'No, enter details manually',callback_data:'fg:omdb:no'}]]}});
 }
 async function resumeDraft(d){
+ if(d.kind==='anime'&&d.stage==='await-publish')return animeDraftPrompt(d);
  if(d.stage==='await-title')return say(ADMIN_ID,'Please send the movie title for the uploaded file.');
  if(d.stage==='await-year')return say(ADMIN_ID,'What is the release year for "'+d.title+'"? Send the four-digit year.');
  if(d.stage==='await-omdb-confirm'&&d.omdb_candidate){const c=d.omdb_candidate;return say(ADMIN_ID,'OMDb result found. Is this the correct movie?\n\n'+[c.title+' ('+c.year+')',c.imdb_id?'IMDb: '+c.imdb_id:'',c.genre?'Genre: '+c.genre:'',c.runtime?'Runtime: '+c.runtime:'',c.director?'Director: '+c.director:'',c.cast?'Cast: '+c.cast:'',c.plot?'Plot: '+c.plot:''].filter(Boolean).join('\n'),{reply_markup:{inline_keyboard:[[{text:'Yes, use this result',callback_data:'fg:omdb:yes'},{text:'No, enter details manually',callback_data:'fg:omdb:no'}]]}});}
@@ -174,6 +191,33 @@ async function resolveOmdbMovie(title,year,extraCandidates=[]){
  return {movie,confidence:winner.score,source:'imdb-suggestion'};
 }
 function movieFields(x){return {title:x.Title,year:Number(String(x.Year).slice(0,4)),imdb_id:x.imdbID,poster:x.Poster?.startsWith('https://')?x.Poster:null,genre:x.Genre,runtime:x.Runtime,director:x.Director,cast:x.Actors,plot:x.Plot};}
+async function anilistSearch(title){
+ const query='query ($search: String) { Media(search: $search, type: ANIME) { id title { romaji english native } coverImage { large } description(asHtml: false) genres averageScore status episodes startDate { year } studios { nodes { name } } } }';
+ const response=await fetch('https://graphql.anilist.co',{method:'POST',headers:{'Content-Type':'application/json','User-Agent':'FilmGo/1.0'},body:JSON.stringify({query,variables:{search:title}}),signal:AbortSignal.timeout(10000)});
+ if(!response.ok)return null;const media=(await response.json()).data?.Media;if(!media)return null;
+ const names=[media.title?.english,media.title?.romaji,media.title?.native].filter(Boolean);
+ return {title:String(names[0]||title).slice(0,150),poster:media.coverImage?.large||null,plot:String(media.description||'').replace(/<[^>]+>/g,'').slice(0,900),genre:Array.isArray(media.genres)?media.genres:[],rating:Number(media.averageScore||0)?Number(media.averageScore)/10:null,status:media.status?String(media.status).toLowerCase().replace(/^./,c=>c.toUpperCase()):null,episodes_total:media.episodes||null,year:media.startDate?.year||null,studio:media.studios?.nodes?.[0]?.name||null};
+}
+function animeSlug(title){return normalize(title).slice(0,70)||crypto.randomBytes(12).toString('base64url');}
+function animeDraftPrompt(d){
+ const lines=['FilmGo anime draft',d.title,'Season: '+d.season+' · Episode: '+d.episode+(d.part?' · Part: '+d.part:''),'Quality: '+d.quality,'File: '+d.file_name,d.poster?'Poster: ready':'Poster: '+(d.poster_error||'AniList / fallback'),'Use /edit to change metadata or /cancel to discard.'];
+ return say(ADMIN_ID,lines.join('\n'),{reply_markup:{inline_keyboard:[[{text:'Publish anime',callback_data:'fg:publish'},{text:'Cancel',callback_data:'fg:cancel'}]]}});
+}
+async function saveAnimeMetadata(id,d){
+ const [owner,name]=REPO.split('/');const url='https://api.github.com/repos/'+owner+'/'+name+'/contents/data/anime.json';const headers={Authorization:'Bearer '+GH_TOKEN,Accept:'application/vnd.github+json','Content-Type':'application/json','X-GitHub-Api-Version':'2022-11-28'};
+ for(let attempt=0;attempt<6;attempt++){
+  const response=await fetch(url,{headers,signal:AbortSignal.timeout(15000)});let content,sha;
+  if(response.status===404){content={schema_version:1,updated_at:null,anime:[]};sha=undefined;}else{if(!response.ok)throw Error('Anime catalog read '+response.status);const file=await response.json();sha=file.sha;content=JSON.parse(Buffer.from(file.content.replace(/\s/g,''),'base64').toString('utf8'));}
+  content.anime ||= [];const show=content.anime.find(item=>item.slug_id===d.slug_id)||content.anime.find(item=>normalize(item.title)===normalize(d.title));
+  const episode={telegram_message_id:Number(id),episode:Number(d.episode),season:Number(d.season||1),part:d.part?Number(d.part):null,quality:d.quality,file_size:Number(d.file_size||0),file_name:d.file_name||'',mime_type:d.mime_type||''};
+  const target=show||{slug_id:d.slug_id,title:d.title,episodes:[]};if(!Array.isArray(target.episodes))target.episodes=[];const index=target.episodes.findIndex(e=>Number(e.episode)===episode.episode&&Number(e.season||1)===episode.season&&String(e.quality).toLowerCase()===String(episode.quality).toLowerCase());if(index>=0)target.episodes[index]=episode;else target.episodes.push(episode);
+  Object.assign(target,{slug_id:d.slug_id,title:d.title,year:d.year||target.year,poster:d.poster||target.poster||null,plot:d.plot||target.plot||'',genre:d.genre||target.genre||[],rating:d.rating||target.rating||null,status:d.status||target.status||null,episodes_total:d.episodes_total||target.episodes_total||null,studio:d.studio||target.studio||null,updated_at:new Date().toISOString()});if(!show)content.anime.push(target);content.updated_at=new Date().toISOString();
+  const body={message:'Update FilmGo anime metadata in canonical anime.json',content:Buffer.from(JSON.stringify(content,null,2)+'\n').toString('base64')};if(sha)body.sha=sha;const write=await fetch(url,{method:'PUT',headers,body:JSON.stringify(body),signal:AbortSignal.timeout(15000)});if(write.ok)return; if(write.status!==409&&write.status!==422)throw Error('Anime catalog write '+write.status);
+ }
+ throw Error('Anime catalog update conflict');
+}
+function telegramAnimeCaption(d){return ['🍥 FilmGo Anime','','📺 '+d.title,'🎞️ Season '+d.season+' · Episode '+d.episode+(d.part?' · Part '+d.part:''),'','📺 Quality: '+d.quality,d.genre?.length?'🎭 Genre: '+d.genre.join(', '):'',d.plot?'📝 '+d.plot:'','','> Powered by Itz Maazin • https://mzn.is-a.dev/'].filter(Boolean).join('\n').slice(0,1024);}
+function telegramAnimeButtons(baseUrl,slug,messageId){const base=new URL(baseUrl);if(base.protocol!=='https:'||!/^[a-z0-9-]{2,80}$/i.test(slug))throw Error('Invalid anime link');return {inline_keyboard:[[{text:'▶️ Stream on FilmGo',url:new URL('/anime/title/'+encodeURIComponent(slug),base).href}]]};}
 async function draftPrompt(d){const text=['FilmGo movie draft',d.title+' ('+d.year+')', 'Quality: '+d.quality,'File: '+d.file_name,'Metadata: '+(d.imdb_id?'OMDb '+d.imdb_id:'manual / existing'),d.replace?'Existing quality — replacement requires confirmation':d.existing?'New quality for existing movie':'New movie', 'Use /edit to change metadata, /poster to upload a JPEG poster, /cancel to discard.'].join('\n');await say(ADMIN_ID,text,{reply_markup:{inline_keyboard:[[{text:d.replace?'Confirm replacement':'Publish movie',callback_data:'fg:publish'},{text:'Cancel',callback_data:'fg:cancel'}]]}});}
 async function posterUpload(d,photo){const info=await tg('getFile',{file_id:photo.file_id});if(!info.file_path||photo.file_size>5_000_000)throw Error('Poster too large or unavailable');const file=await fetch('https://api.telegram.org/file/bot'+TOKEN+'/'+info.file_path,{signal:AbortSignal.timeout(15000)});if(!file.ok)throw Error('Poster fetch failed');const bytes=new Uint8Array(await file.arrayBuffer());if(bytes.length>5_000_000||bytes[0]!==255||bytes[1]!==216)throw Error('Only JPEG posters under 5 MB');const path='web/posters/'+crypto.randomBytes(12).toString('hex')+'.jpg';const [owner,name]=REPO.split('/');const result=await fetch('https://api.github.com/repos/'+owner+'/'+name+'/contents/'+path,{method:'PUT',headers:{Authorization:'Bearer '+GH_TOKEN,Accept:'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28','Content-Type':'application/json'},body:JSON.stringify({message:'Add FilmGo movie poster',content:Buffer.from(bytes).toString('base64')}),signal:AbortSignal.timeout(20000)});if(!result.ok)throw Error('GitHub poster upload failed: '+result.status);d.poster='/posters/'+path.split('/').pop();await draftSave(d);}
 async function saveMovieMetadata(id,d){
@@ -205,8 +249,9 @@ async function saveMovieMetadata(id,d){
  }
  throw Error('Catalog update conflict');
 }
-async function publishDraft(d){const lock=prefix+'publishing:'+ADMIN_ID;if(await redis('SET',lock,'1','NX','EX',90)!=='OK')return say(ADMIN_ID,'Publishing is already running.');try{const caption=['Movie: '+d.title,'Year: '+d.year,'Quality: '+d.quality,...(d.slug_id?['Slug ID: '+d.slug_id]:[])].join('\n');const sent=await tg('copyMessage',{chat_id:CHANNEL_ID,from_chat_id:ADMIN_ID,message_id:d.message_id,caption},30000);await saveMovieMetadata(sent.message_id,d);await redis('DEL',DRAFT_KEY+ADMIN_ID);void logFilmGo('movies','🎬 Published: '+d.title+' ('+d.year+') · '+d.quality+' · channel #'+sent.message_id);await dispatch('filmgo-catalog-sync',{message_id:sent.message_id});await say(ADMIN_ID,'✅ Movie published successfully\n\n🎬 '+d.title+' ('+d.year+')\n📺 Quality: '+d.quality);}finally{await redis('DEL',lock);}}
+async function publishDraft(d){if(d.kind==='anime')return publishAnimeDraft(d);const lock=prefix+'publishing:'+ADMIN_ID;if(await redis('SET',lock,'1','NX','EX',90)!=='OK')return say(ADMIN_ID,'Publishing is already running.');try{const caption=['Movie: '+d.title,'Year: '+d.year,'Quality: '+d.quality,...(d.slug_id?['Slug ID: '+d.slug_id]:[])].join('\n');const sent=await tg('copyMessage',{chat_id:CHANNEL_ID,from_chat_id:ADMIN_ID,message_id:d.message_id,caption},30000);await saveMovieMetadata(sent.message_id,d);await redis('DEL',DRAFT_KEY+ADMIN_ID);void logFilmGo('movies','🎬 Published: '+d.title+' ('+d.year+') · '+d.quality+' · channel #'+sent.message_id);await dispatch('filmgo-catalog-sync',{message_id:sent.message_id});await say(ADMIN_ID,'✅ Movie published successfully\n\n🎬 '+d.title+' ('+d.year+')\n📺 Quality: '+d.quality);}finally{await redis('DEL',lock);}}
 
+async function publishAnimeDraft(d){const lock=prefix+'publishing:'+ADMIN_ID;if(await redis('SET',lock,'1','NX','EX',90)!=='OK')return say(ADMIN_ID,'Publishing is already running.');try{const baseUrl=process.env.FILMGO_PUBLIC_URL;const sent=await tg('copyMessage',{chat_id:ANIME_CHANNEL_ID,from_chat_id:ADMIN_ID,message_id:d.message_id,caption:telegramAnimeCaption(d),...(baseUrl?{reply_markup:telegramAnimeButtons(baseUrl,d.slug_id,d.message_id)}:{})},30000);const posted=sent.document||sent.video||{};await saveAnimeMetadata(sent.message_id,{...d,file_size:posted.file_size||d.file_size,mime_type:posted.mime_type||d.mime_type});await redis('DEL',DRAFT_KEY+ADMIN_ID);void logFilmGo('anime','🍥 Published: '+d.title+' S'+d.season+'E'+d.episode+' · '+d.quality+' · channel #'+sent.message_id);await dispatch('filmgo-anime-catalog-sync',{message_id:sent.message_id});await say(ADMIN_ID,'✅ Anime published successfully\n\n🍥 '+d.title+'\n🎞️ Season '+d.season+' · Episode '+d.episode+'\n📺 '+d.quality);}finally{await redis('DEL',lock);}}
 let running=false;
 async function redis(...args){
  const r=await fetch(REDIS_URL,{method:'POST',headers:{Authorization:'Bearer '+REDIS_TOKEN,'Content-Type':'application/json'},body:JSON.stringify(args),signal:AbortSignal.timeout(12000)});
@@ -237,6 +282,27 @@ async function probe(input){
  if(u.drive)return {size:null,drive:true,url:u.url};
  // Never fetch arbitrary URLs from the Koyeb service. GitHub runner performs the download.
  return {size:null,drive:false,url:u.url};
+}
+async function startAnimeDraft(file,messageId){
+ const parts=animeFilenameParts(file.file_name||'');
+ if(!parts.episode)return say(ADMIN_ID,'I could not identify the anime episode. Use a filename such as Naruto Shippuden - 001 [720p].mkv.');
+ const d={kind:'anime',message_id:messageId,file_name:file.file_name||'',file_size:Number(file.file_size||0),mime_type:file.mime_type||'',title:parts.title,titleCandidates:parts.titleCandidates,season:parts.season,episode:parts.episode,part:parts.part,quality:parts.quality,slug_id:animeSlug(parts.title)};
+ const metadata=await anilistSearch(parts.title).catch(()=>null);if(metadata){Object.assign(d,metadata);d.slug_id=animeSlug(metadata.title);}d.stage='await-publish';await draftSave(d);return animeDraftPrompt(d);
+}
+async function startMovieDraft(file,messageId,chat){
+ const name=file.file_name||'',parts=filenameParts(name);
+ if(!parts.quality)return say(chat,'Cannot identify quality from filename. Rename the file with 360p, 480p, 720p, 1080p or 2160p and resend.');
+ const movies=await catalog(),found=guessMovie(file,movies);let existing=found.best;
+ const title=existing?.title||parts.title,year=existing?.year||parts.year;
+ const d={message_id:messageId,file_name:name,title:title||'',titleCandidates:parts.titleCandidates,year:year||null,quality:parts.quality,existing:!!existing,replace:!!(existing&&Object.keys(existing.qualities||{}).some(q=>q.toLowerCase()===parts.quality)),slug_id:existing?.slug_id,manual_identity:!existing&&(!title||!year)};
+ if(!title)return askForTitle(d);if(!year)return askForYear(d);
+ const resolved=existing?null:await resolveOmdbMovie(title,year,parts.titleCandidates).catch(()=>null),omdb=resolved?.movie,omdbConfidence=omdb&&Number(String(omdb.Year).slice(0,4))===year?resolved.confidence:0;
+ if(resolved?.source==='imdb-suggestion'&&omdb&&omdbConfidence>=0.5&&omdbConfidence<0.7)return askOmdbConfirmation(d,omdb);
+ Object.assign(d,omdbConfidence>=0.6?movieFields(omdb):{});
+ if(omdbConfidence>=0.6){d.title=omdb.Title;d.year=Number(String(omdb.Year).slice(0,4));if(!existing&&omdb.imdbID)existing=movies.find(m=>m.imdb_id===omdb.imdbID)||null;if(existing){d.existing=true;d.slug_id=existing.slug_id;d.replace=Object.keys(existing.qualities||{}).some(q=>q.toLowerCase()===String(d.quality).toLowerCase());}}
+ const trusted=!!existing||omdbConfidence>=0.7;d.stage='await-publish';await draftSave(d);
+ if(trusted&&!d.replace){await say(chat,'Recognized '+d.title+' ('+d.year+') at '+Math.round((existing?found.confidence:omdbConfidence)*100)+'% confidence. Publishing automatically.');return publishDraft(d);}
+ return draftPrompt(d);
 }
 async function onMessage(message,refresh){
  const from=String(message.from?.id||''),chat=message.chat?.id;
@@ -276,41 +342,18 @@ async function onMessage(message,refresh){
  }
  if(from!==ADMIN_ID||String(chat)!==ADMIN_ID)return;
  const text=String(message.text||'').trim();
- if(/^\/(start|help)(?:@\w+)?$/.test(text)){await say(chat,'Send a movie file to create a draft. If title or year is missing, I will ask for it. /draft resumes the current step, /edit field=value changes metadata, /skip skips an optional metadata field, /poster requests a JPEG poster, and /cancel discards the draft. /download URL keeps the remote import workflow.');return;}
+ if(/^\/(start|help)(?:@\w+)?$/.test(text)){await say(chat,'Send a movie or anime file to create a draft. I will ask you to choose the media type, fetch metadata and show a publish button. /draft resumes the current step, /edit changes metadata, /poster requests a JPEG poster, and /cancel discards the draft. /download URL keeps the remote import workflow.');return;}
  if(/^\/status(?:@\w+)?$/.test(text)){await say(chat,'FilmGo bot online.');return;}
  if(/^\/draft(?:@\w+)?$/.test(text)){const d=await draftGet();return d?resumeDraft(d):say(chat,'No active draft. Send a movie file.');}
  if(/^\/cancel(?:@\w+)?$/.test(text)){await redis('DEL',DRAFT_KEY+ADMIN_ID);return say(chat,'Draft cancelled.');}
  const file=message.document||message.video;
  if(file){
-  const active=await draftGet();if(active)return say(chat,'There is already an active movie draft. Finish it or use /cancel before sending another file.');
+  const active=await draftGet();if(active)return say(chat,'There is already an active draft. Finish it or use /cancel before sending another file.');
   if(file.file_size>MAX_BYTES)return say(chat,'File exceeds the current 2 GB limit.');
-  const name=file.file_name||'',parts=filenameParts(name);
-  if(!parts.quality)return say(chat,'Cannot identify quality from filename. Rename the file with 360p, 480p, 720p, 1080p or 2160p and resend.');
-  const movies=await catalog(),found=guessMovie(file,movies);let existing=found.best;
-  const title=existing?.title||parts.title,year=existing?.year||parts.year;
-  const d={message_id:message.message_id,file_name:name,title:title||'',titleCandidates:parts.titleCandidates,year:year||null,quality:parts.quality,existing:!!existing,replace:!!(existing&&Object.keys(existing.qualities||{}).some(q=>q.toLowerCase()===parts.quality)),slug_id:existing?.slug_id,manual_identity:!existing&&(!title||!year)};
-  if(!title)return askForTitle(d);
-  if(!year)return askForYear(d);
-  const resolved=existing?null:await resolveOmdbMovie(title,year,parts.titleCandidates).catch(()=>null);
-  const omdb=resolved?.movie;
-  const omdbConfidence=omdb&&Number(String(omdb.Year).slice(0,4))===year?resolved.confidence:0;
-  if(resolved?.source==='imdb-suggestion'&&omdb&&omdbConfidence>=0.5&&omdbConfidence<0.7){
-   return askOmdbConfirmation(d,omdb);
-  }
-  Object.assign(d,omdbConfidence>=0.6?movieFields(omdb):{});
-  if(omdbConfidence>=0.6){
-   d.title=omdb.Title;d.year=Number(String(omdb.Year).slice(0,4));
-   if(!existing&&omdb.imdbID)existing=movies.find(m=>m.imdb_id===omdb.imdbID)||null;
-   if(existing){d.existing=true;d.slug_id=existing.slug_id;d.replace=Object.keys(existing.qualities||{}).some(q=>q.toLowerCase()===String(d.quality).toLowerCase());}
-  }
-  const trusted=!!existing||omdbConfidence>=0.7;
-  d.stage='await-publish';
-  await draftSave(d);
-  if(trusted&&!d.replace){
-   await say(chat,'Recognized '+d.title+' ('+d.year+') at '+Math.round((existing?found.confidence:omdbConfidence)*100)+'% confidence. Publishing automatically.');
-   return publishDraft(d);
-  }
-  return draftPrompt(d);
+  if(!ANIME_CHANNEL_ID)return startMovieDraft(file,message.message_id,chat);
+  const choice=crypto.randomBytes(12).toString('hex');
+  await redis(MEDIA_CHOICE_KEY+choice,JSON.stringify({message_id:message.message_id,file,admin:ADMIN_ID}),'EX',900);
+  return say(chat,'Choose the media type for this file:',{reply_markup:{inline_keyboard:[[{text:'🎬 Movie',callback_data:'fg:type:movie:'+choice},{text:'🍥 Anime',callback_data:'fg:type:anime:'+choice}]]}});
  }
  const d=await draftGet();
  if(message.photo?.length&&d){
@@ -367,6 +410,14 @@ async function onMessage(message,refresh){
 async function onCallback(q){
  if(String(q.from?.id)!==ADMIN_ID||String(q.message?.chat?.id)!==ADMIN_ID)return;
  const action=String(q.data||'');
+ const typeChoice=action.match(/^fg:type:(movie|anime):([a-f0-9]{24})$/);
+ if(typeChoice){
+  await tg('answerCallbackQuery',{callback_query_id:q.id});const key=MEDIA_CHOICE_KEY+typeChoice[2],raw=await redis('GET',key);if(!raw){await deleteConfirmation(q);return say(ADMIN_ID,'Media selection expired. Send the file again.');}
+  if(await redis(MEDIA_CHOICE_KEY+'claimed:'+typeChoice[2],'1','EX',900,'NX')!=='OK'){await deleteConfirmation(q);return say(ADMIN_ID,'This file was already selected.');}
+  const choice=JSON.parse(raw);await redis('DEL',key);await deleteConfirmation(q);
+  if(typeChoice[1]==='anime')return startAnimeDraft(choice.file,choice.message_id);
+  return startMovieDraft(choice.file,choice.message_id,ADMIN_ID);
+ }
  if(action==='fg:omdb:yes'||action==='fg:omdb:no'){
   await tg('answerCallbackQuery',{callback_query_id:q.id});const d=await draftGet();
   if(!d||d.stage!=='await-omdb-confirm'){await deleteConfirmation(q);return say(ADMIN_ID,'This OMDb confirmation has expired. Send the file again to start a new draft.');}

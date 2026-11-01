@@ -17,6 +17,11 @@ are grouped by normalized title and parsed season/episode/part values; AniList
 metadata and posters are best-effort enrichment and do not block indexing when
 the metadata service is unavailable.
 
+When an admin sends a file to the bot, the bot now asks whether it is a movie
+or anime. Anime confirmation copies the file to the anime channel, updates the
+separate `data/anime.json` catalog, and dispatches the `Sync anime catalog`
+workflow with event type `filmgo-anime-catalog-sync`.
+
 The bot **must be added as an administrator to the media channel**, with permission to see channel posts. A bot added after an upload cannot reliably receive old channel posts; the existing scheduled sync remains as a backstop. Configure the Koyeb service as always-on, not scale-to-zero. Only one service should own this bot token's updates. The polling offset and duplicate channel-message IDs are stored in Redis.
 
 ## Commands (admin's private chat only)
