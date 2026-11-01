@@ -58,7 +58,7 @@ export const animeFilenameParts=name=>{
  if(match){season=Number(match[1]);episode=Number(match[2]);raw=raw.slice(0,match.index)+' '+raw.slice(match.index+match[0].length);}
  else{match=raw.match(/\b(?:season|s)\s*[- ]?(\d{1,2})\b/i);if(match){season=Number(match[1]);raw=raw.slice(0,match.index)+' '+raw.slice(match.index+match[0].length);}}
  match=raw.match(/\b(?:episode|ep|e)\s*[- ]?(\d{1,4})\b/i);if(match){episode=Number(match[1]);raw=raw.slice(0,match.index)+' '+raw.slice(match.index+match[0].length);}
- if(!episode){match=raw.match(/(?<!\d)[- ]0*(\d{1,4})(?=\s*(?:\[[^\]]*\]|\([^)]*\)|\b(?:360|480|720|1080|2160|4k)p?\b|$))/i);if(match){episode=Number(match[1]);raw=raw.slice(0,match.index)+' '+raw.slice(match.index+match[0].length);}}
+ if(!episode){match=raw.match(/(?<!\d)[- ]0*(\d{1,4})(?=\s*(?:\[[^\]]*\]|\([^)]*\)|\b(?:360|480|720|1080|2160|4k)p?\b|$))/i);if(match&&!(Number(match[1])>=1900&&Number(match[1])<=2099)){episode=Number(match[1]);raw=raw.slice(0,match.index)+' '+raw.slice(match.index+match[0].length);}}
  match=raw.match(/\bpart\s*[- ]?(\d{1,2})\b/i);if(match){part=Number(match[1]);raw=raw.slice(0,match.index)+' '+raw.slice(match.index+match[0].length);}
  const qualityMatch=raw.match(ANIME_QUALITY),quality=qualityMatch?.[0]?.toLowerCase()==='4k'?'2160p':qualityMatch?.[0]?.toLowerCase()||'auto';
  const cut=qualityMatch?.index??Infinity;const title=(Number.isFinite(cut)?raw.slice(0,cut):raw).replace(/^[\s\[({]+|[\s\-\[\]({})]+$/g,'').replace(/\s+/g,' ').trim();
@@ -198,6 +198,13 @@ async function anilistSearch(title){
  const names=[media.title?.english,media.title?.romaji,media.title?.native].filter(Boolean);
  return {title:String(names[0]||title).slice(0,150),poster:media.coverImage?.large||null,plot:String(media.description||'').replace(/<[^>]+>/g,'').slice(0,900),genre:Array.isArray(media.genres)?media.genres:[],rating:Number(media.averageScore||0)?Number(media.averageScore)/10:null,status:media.status?String(media.status).toLowerCase().replace(/^./,c=>c.toUpperCase()):null,episodes_total:media.episodes||null,year:media.startDate?.year||null,studio:media.studios?.nodes?.[0]?.name||null};
 }
+async function detectAnimeType(file){
+ const parts=animeFilenameParts(file.file_name||'');const name=String(file.file_name||'');
+ const explicitEpisode=/\b(?:S\d{1,2}\s*(?:-|x)?\s*E\d{1,4}|season\s*\d+\s*(?:episode|ep)\s*\d+|episode|ep)\b/i.test(name);
+ const metadata=await anilistSearch(parts.title).catch(()=>null);const titleScore=metadata?.title?similarity(parts.title,metadata.title):0;
+ let confidence=0;if(explicitEpisode)confidence=.95;else if(parts.episode)confidence=.82;if(titleScore>=.7)confidence=Math.max(confidence,Math.min(.92,titleScore));
+ return {anime:confidence>=.7,confidence,parts,metadata};
+}
 function animeSlug(title){return String(title||'').normalize('NFKD').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'').slice(0,70)||'anime';}
 function animeDraftPrompt(d){
  const lines=['FilmGo anime draft',d.title,'Season: '+d.season+' · Episode: '+d.episode+(d.part?' · Part: '+d.part:''),'Quality: '+d.quality,'File: '+d.file_name,d.poster?'Poster: ready':'Poster: '+(d.poster_error||'AniList / fallback'),'Use /edit to change metadata or /cancel to discard.'];
@@ -285,11 +292,11 @@ async function probe(input){
  // Never fetch arbitrary URLs from the Koyeb service. GitHub runner performs the download.
  return {size:null,drive:false,url:u.url};
 }
-async function startAnimeDraft(file,messageId){
+async function startAnimeDraft(file,messageId,detected=null){
  const parts=animeFilenameParts(file.file_name||'');
  if(!parts.episode)return say(ADMIN_ID,'I could not identify the anime episode. Use a filename such as Naruto Shippuden - 001 [720p].mkv.');
  const d={kind:'anime',message_id:messageId,file_name:file.file_name||'',file_size:Number(file.file_size||0),mime_type:file.mime_type||'',title:parts.title,titleCandidates:parts.titleCandidates,season:parts.season,episode:parts.episode,part:parts.part,quality:parts.quality,slug_id:animeSlug(parts.title),episode_slug_id:crypto.randomBytes(12).toString('base64url')};
- const metadata=await anilistSearch(parts.title).catch(()=>null);if(metadata){Object.assign(d,metadata);d.slug_id=animeSlug(metadata.title);}d.stage='await-publish';await draftSave(d);return animeDraftPrompt(d);
+ const metadata=detected?.metadata||await anilistSearch(parts.title).catch(()=>null);if(metadata){Object.assign(d,metadata);d.slug_id=animeSlug(metadata.title);}d.stage='await-publish';await draftSave(d);return animeDraftPrompt(d);
 }
 async function startMovieDraft(file,messageId,chat){
  const name=file.file_name||'',parts=filenameParts(name);
@@ -344,7 +351,7 @@ async function onMessage(message,refresh){
  }
  if(from!==ADMIN_ID||String(chat)!==ADMIN_ID)return;
  const text=String(message.text||'').trim();
- if(/^\/(start|help)(?:@\w+)?$/.test(text)){await say(chat,'Send a movie or anime file to create a draft. I will ask you to choose the media type, fetch metadata and show a publish button. /draft resumes the current step, /edit changes metadata, /poster requests a JPEG poster, and /cancel discards the draft. /download URL keeps the remote import workflow.');return;}
+ if(/^\/(start|help)(?:@\w+)?$/.test(text)){await say(chat,'Send a movie or anime file to create a draft. I will identify the media type from the filename and metadata, then fetch details and show a publish button. /draft resumes the current step, /edit changes metadata, /poster requests a JPEG poster, and /cancel discards the draft. /download URL keeps the remote import workflow.');return;}
  if(/^\/status(?:@\w+)?$/.test(text)){await say(chat,'FilmGo bot online.');return;}
  if(/^\/draft(?:@\w+)?$/.test(text)){const d=await draftGet();return d?resumeDraft(d):say(chat,'No active draft. Send a movie file.');}
  if(/^\/cancel(?:@\w+)?$/.test(text)){await redis('DEL',DRAFT_KEY+ADMIN_ID);return say(chat,'Draft cancelled.');}
@@ -352,10 +359,9 @@ async function onMessage(message,refresh){
  if(file){
   const active=await draftGet();if(active)return say(chat,'There is already an active draft. Finish it or use /cancel before sending another file.');
   if(file.file_size>MAX_BYTES)return say(chat,'File exceeds the current 2 GB limit.');
-  if(!ANIME_CHANNEL_ID)return startMovieDraft(file,message.message_id,chat);
-  const choice=crypto.randomBytes(12).toString('hex');
-  await redis('SET',MEDIA_CHOICE_KEY+choice,JSON.stringify({message_id:message.message_id,file,admin:ADMIN_ID}),'EX',900);
-  return say(chat,'Choose the media type for this file:',{reply_markup:{inline_keyboard:[[{text:'🎬 Movie',callback_data:'fg:type:movie:'+choice},{text:'🍥 Anime',callback_data:'fg:type:anime:'+choice}]]}});
+  const detected=await detectAnimeType(file);
+  if(detected.anime){if(!ANIME_CHANNEL_ID)return say(chat,'Anime channel is not configured yet. Add TELEGRAM_ANIME_CHANNEL_ID and resend the file.');return startAnimeDraft(file,message.message_id,detected);}
+  return startMovieDraft(file,message.message_id,chat);
  }
  const d=await draftGet();
  if(message.photo?.length&&d){
