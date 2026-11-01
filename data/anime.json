@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": 1793528278,
+  "updated_at": "2026-11-01T11:10:26.613Z",
   "anime": [
     {
       "slug_id": "naruto-shippuden",
@@ -962,6 +962,17 @@
           "file_size": 107794634,
           "file_name": "Naruto Shippuden - 088 [720p] [Dual] @Anime_Gallery.mkv",
           "mime_type": "video/x-matroska"
+        },
+        {
+          "slug_id": "iLXbxmOovsHdXmOJ",
+          "telegram_message_id": 95,
+          "episode": 89,
+          "season": 5,
+          "part": null,
+          "quality": "720p",
+          "file_size": 143584930,
+          "file_name": "Naruto Shippuden \n89 தமிழ் HDRip.mp4",
+          "mime_type": "video/x-matroska"
         }
       ],
       "poster": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx1735-kGfVm0YqCPcu.png",
@@ -980,7 +991,7 @@
       "year": 2007,
       "studio": "Studio Pierrot",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Naruto_(TV_series)",
-      "updated_at": "2026-11-01T10:17:58Z"
+      "updated_at": "2026-11-01T11:10:26.613Z"
     }
   ]
 }
