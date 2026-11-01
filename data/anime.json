@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": 1793566974,
+  "updated_at": "2026-11-01T21:05:50.875Z",
   "anime": [
     {
       "slug_id": "naruto",
@@ -22464,6 +22464,32 @@
               "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242646.jpg"
             }
           }
+        },
+        {
+          "slug_id": "Y0pCZUcfZ_qYx7mo",
+          "telegram_message_id": 791,
+          "episode": 1,
+          "season": 4,
+          "special_type": null,
+          "part": null,
+          "quality": "480p",
+          "file_size": 31776548,
+          "file_name": "Attack on titan-(S04 - Ep01)-(தமிழ்)- 480p.mkv",
+          "mime_type": "video/x-matroska",
+          "qualities": {
+            "480P": {
+              "slug_id": "Y0pCZUcfZ_qYx7mo",
+              "telegram_message_id": 791,
+              "episode": 1,
+              "season": 4,
+              "special_type": null,
+              "part": null,
+              "quality": "480p",
+              "file_size": 31776548,
+              "file_name": "Attack on titan-(S04 - Ep01)-(தமிழ்)- 480p.mkv",
+              "mime_type": "video/x-matroska"
+            }
+          }
         }
       ],
       "wikipedia_url": "https://en.wikipedia.org/wiki/Attack_on_Titan_(TV_series)",
@@ -22480,7 +22506,7 @@
       "episodes_total": 25,
       "year": 2013,
       "studio": "WIT STUDIO",
-      "updated_at": "2026-11-01T21:02:52Z"
+      "updated_at": "2026-11-01T21:05:50.875Z"
     }
   ]
 }
