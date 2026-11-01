@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": 1793557845,
+  "updated_at": 1793558402,
   "anime": {
     "slug_id": "attack-on-titan",
     "title": "Attack on Titan",
@@ -15,7 +15,10 @@
         "quality": "720P",
         "file_size": 118158912,
         "file_name": "Attack On Titan - OAD EP01 [Tamil] 720p.mkv",
-        "mime_type": "video/x-matroska"
+        "mime_type": "video/x-matroska",
+        "title": "Ilse's Notebook: Notes from a Scout Regiment Member",
+        "released": "2013-12-09",
+        "frame": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx16498-buvcRTBx4NSm.jpg"
       },
       {
         "slug_id": "RyvfZDpOeBQyhB-I",
@@ -27,7 +30,10 @@
         "quality": "720P",
         "file_size": 138397289,
         "file_name": "Attack On Titan - OAD EP02 [Tamil] 720p.mkv",
-        "mime_type": "video/x-matroska"
+        "mime_type": "video/x-matroska",
+        "title": "The Sudden Visitor: The Torturous Curse of Youth",
+        "released": "2014-04-09",
+        "frame": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx16498-buvcRTBx4NSm.jpg"
       },
       {
         "slug_id": "TQ0WY5YZs-sREl9z",
@@ -39,7 +45,10 @@
         "quality": "720P",
         "file_size": 110520261,
         "file_name": "Attack On Titan - OAD EP03 [Tamil] 720p.mkv",
-        "mime_type": "video/x-matroska"
+        "mime_type": "video/x-matroska",
+        "title": "Distress",
+        "released": "2014-08-08",
+        "frame": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx16498-buvcRTBx4NSm.jpg"
       },
       {
         "slug_id": "cQx0snz6F7AsBzXA",
@@ -51,7 +60,10 @@
         "quality": "720P",
         "file_size": 115243635,
         "file_name": "Attack On Titan - OAD EP04 [Tamil] 720p.mkv",
-        "mime_type": "video/x-matroska"
+        "mime_type": "video/x-matroska",
+        "title": "No Regrets - Part 1",
+        "released": "2014-12-09",
+        "frame": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx16498-buvcRTBx4NSm.jpg"
       },
       {
         "slug_id": "yKuyQqSCtqEBlnJv",
@@ -63,7 +75,10 @@
         "quality": "720P",
         "file_size": 170698243,
         "file_name": "Attack On Titan - OAD EP05 [Tamil] 720p.mkv",
-        "mime_type": "video/x-matroska"
+        "mime_type": "video/x-matroska",
+        "title": "No Regrets - Part 2",
+        "released": "2015-04-09",
+        "frame": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx16498-buvcRTBx4NSm.jpg"
       },
       {
         "slug_id": "SIvCEFOw1vROfJ19",
@@ -75,7 +90,10 @@
         "quality": "720P",
         "file_size": 58744918,
         "file_name": "Attack On Titan - OAD EP06 [Tamil] 720p.mkv",
-        "mime_type": "video/x-matroska"
+        "mime_type": "video/x-matroska",
+        "title": "Lost Girls: Wall Sina, Goodbye - Part 1",
+        "released": "2017-12-08",
+        "frame": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx16498-buvcRTBx4NSm.jpg"
       },
       {
         "slug_id": "kdDHMqbwwLEH6ZRd",
@@ -87,7 +105,10 @@
         "quality": "720P",
         "file_size": 69806612,
         "file_name": "Attack On Titan - OAD EP07 [Tamil] 720p.mkv",
-        "mime_type": "video/x-matroska"
+        "mime_type": "video/x-matroska",
+        "title": "Lost Girls: Wall Sina, Goodbye - Part 2",
+        "released": "2018-04-09",
+        "frame": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx16498-buvcRTBx4NSm.jpg"
       },
       {
         "slug_id": "eUYtx4ah0TSY42BP",
@@ -99,7 +120,10 @@
         "quality": "720P",
         "file_size": 90344305,
         "file_name": "Attack On Titan - OAD EP08 [Tamil] 720p.mkv",
-        "mime_type": "video/x-matroska"
+        "mime_type": "video/x-matroska",
+        "title": "Lost Girls: Lost in the Cruel World",
+        "released": "2018-08-09",
+        "frame": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx16498-buvcRTBx4NSm.jpg"
       }
     ],
     "wikipedia_url": "https://en.wikipedia.org/wiki/Attack_on_Titan_(TV_series)",
@@ -116,6 +140,6 @@
     "episodes_total": 25,
     "year": 2013,
     "studio": "WIT STUDIO",
-    "updated_at": "2026-11-01T18:30:42Z"
+    "updated_at": "2026-11-01T18:40:00Z"
   }
 }
