@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": 1793537405,
+  "updated_at": "2026-11-01T12:50:10.264Z",
   "anime": [
     {
       "slug_id": "naruto-shippud",
@@ -27,9 +27,27 @@
           "file_size": 82840473,
           "file_name": "Naruto Shippud… - S18E373 [Tamil] 720p @Animes_Tamil_Hub.mkv",
           "mime_type": "video/x-matroska"
+        },
+        {
+          "slug_id": "-2oOl8Vem9ng-quV",
+          "telegram_message_id": 396,
+          "episode": 374,
+          "season": 18,
+          "part": null,
+          "quality": "480p",
+          "file_size": 40038963,
+          "file_name": "Naruto Shippud… - S18E374 [Tamil] 480p @Animes_Tamil_Hub.mkv",
+          "mime_type": "video/x-matroska"
         }
       ],
-      "updated_at": "2026-11-01T12:50:05Z"
+      "updated_at": "2026-11-01T12:50:10.264Z",
+      "poster": null,
+      "plot": "",
+      "genre": [],
+      "rating": null,
+      "status": null,
+      "episodes_total": null,
+      "studio": null
     },
     {
       "slug_id": "naruto-shippuden",
