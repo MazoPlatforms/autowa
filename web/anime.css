@@ -29,4 +29,4 @@
 
 /* Phones: show the Movies / Anime pill under the header (catalog.css hides it below 560px; movies page is left as-is). */
 @media(max-width:560px){.tv-nav-inner{row-gap:10px}.tv-nav-links{display:flex;grid-column:1/-1;grid-row:2}.tv-nav-links a{flex:1;text-align:center;padding:8px 0}}
-@media(max-width:560px){.anime-season-divider{aspect-ratio:2172/724}.anime-season-divider-body{padding:18px}.anime-ep{grid-template-columns:68px minmax(0,1fr) auto;gap:10px;padding:9px}.anime-ep-frame{width:68px;height:48px}.anime-ep-play{padding:0 10px;font-size:0}.anime-ep-play svg{width:17px;height:17px}}
+@media(max-width:560px){.anime-season-divider{aspect-ratio:2172/724}.anime-season-divider-body{padding:18px}.anime-ep{grid-template-columns:68px minmax(0,1fr) auto;gap:10px;padding:9px}.anime-ep-frame{width:68px;height:48px}.anime-ep-play{gap:5px;padding:0 10px;font-size:12px}.anime-ep-play svg{width:17px;height:17px;flex:none}}
