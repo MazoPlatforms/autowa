@@ -64,7 +64,7 @@ def anime_filename_parts(raw):
     episode = None
     season = None
     part = None
-    match = re.search(r'(?i)\bS(\d{1,2})\s*(?:-|x)?\s*E(\d{1,4})\b', value)
+    match = re.search(r'(?i)\bS(\d{1,2})\s*(?:-|x)?\s*E[O0]?(\d{1,4})\b', value)
     if match:
         season, episode = int(match.group(1)), int(match.group(2))
         value = value[:match.start()] + ' ' + value[match.end():]
@@ -72,7 +72,7 @@ def anime_filename_parts(raw):
         match = re.search(r'(?i)\b(?:season|s)\s*[- ]?(\d{1,2})\b', value)
         if match:
             season = int(match.group(1)); value = value[:match.start()] + ' ' + value[match.end():]
-        match = re.search(r'(?i)\b(?:episode|ep|e)\s*[:#-]?\s*(\d{1,4})\b', value)
+        match = re.search(r'(?i)\b(?:episode|ep|e[O0]?)\s*[:#-]?\s*(\d{1,4})\b', value)
         if match:
             episode = int(match.group(1)); value = value[:match.start()] + ' ' + value[match.end():]
     if episode is None:
@@ -88,7 +88,7 @@ def anime_filename_parts(raw):
     value = re.sub(r'\s*(?:\[[^]]*\]|\{[^}]*\}|\([^)]*\))', ' ', value)
     value = re.sub(r'[\[\]{}()]', ' ', value)
     value = re.sub(r'(?i)\b(?:multi(?:\s+audio)?|audio|esub|esubs)\b', ' ', value)
-    value = re.sub(r'(?i)\s+(?:தமிழ்|tamil|telugu|malayalam|kannada|hindi|english|2160p|1080p|720p|480p|4k|web[- ]?dl|webrip|bluray|brrip|hdrip|dvdrip|x264|x265|h264|h265|hevc|aac|ddp5?\.?(?:1|2)?|esub|multi|proper|repack|uncut|dual audio)\b.*$', '', value)
+    value = re.sub(r'(?i)\s+(?:தமிழ்|tamil|telugu|malayalam|kannada|hindi|english|2160p|1080p|720p|480p|4k|web[- ]?dl|webrip|blu[- ]?ray|bluray|brrip|hdrip|dvdrip|x264|x265|h264|h265|hevc|aac|ddp5?\.?(?:1|2)?|esub|multi|proper|repack|uncut|dub|dual audio)\b.*$', '', value)
     value = re.sub(r'(?:\s*(?:\[[^]]*\]|\{[^}]*\}|\([^)]*\)))+\s*(?:@.*)?$', '', value)
     value = re.sub(r'\s+@.*$', '', value)
     value = re.sub(r'\s*\+\s*', ' ', value)
