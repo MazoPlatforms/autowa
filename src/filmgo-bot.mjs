@@ -19,7 +19,7 @@ const MEDIA_CHOICE_KEY=prefix+'media-choice:';
 const OPTIONAL_FIELDS=[['imdb_id','IMDb ID'],['poster','Poster'],['genre','Genre'],['runtime','Runtime'],['director','Director'],['cast','Cast'],['plot','Plot']];
 const normalize=v=>String(v||'').normalize('NFKD').toLowerCase().replace(/[^a-z0-9]+/g,'');
 const TITLE_STOP_WORDS=new Set(['tamil','telugu','malayalam','kannada','hindi','english','movie','film','web','series','dual','audio','proper','repack','hdrip','webrip','bluray','brrip','dvdrip','hdtv','x264','x265','hevc','aac','esub','esubs','subtitles']);
-const ANIME_QUALITY=/\b(360|480|720|1080|1440|2160)p\b|\b4k\b/i;
+const ANIME_QUALITY=/\b(360|480|720|1080|1440|2160)l?p\b|\b4k\b/i;
 function titleCandidates(title){
  const clean=String(title||'').replace(/\s+/g,' ').trim();
  const tokens=clean.split(' ').filter(Boolean),out=[];
@@ -62,7 +62,7 @@ export const animeFilenameParts=name=>{
  match=raw.match(/\b(?:episode|ep|e[o0]?)\s*[:#-]?\s*(\d{1,4})\b/i);if(match){episode=Number(match[1]);raw=raw.slice(0,match.index)+' '+raw.slice(match.index+match[0].length);}
  if(!episode){match=raw.match(/(?<!\d)[- ]0*(\d{1,4})(?=\s*(?:\[[^\]]*\]|\([^)]*\)|(?:360|480|720|1080|2160|4k)p?|tamil|telugu|malayalam|kannada|hindi|english|தமிழ்|hdrip|webrip|bluray|web-dl|$))/iu);if(match&&!(Number(match[1])>=1900&&Number(match[1])<=2099)){episode=Number(match[1]);raw=raw.slice(0,match.index)+' '+raw.slice(match.index+match[0].length);}}
  match=raw.match(/\bpart\s*[- ]?(\d{1,2})\b/i);if(match){part=Number(match[1]);raw=raw.slice(0,match.index)+' '+raw.slice(match.index+match[0].length);}
- const qualityMatch=raw.match(ANIME_QUALITY),quality=qualityMatch?.[0]?.toLowerCase()==='4k'?'2160p':qualityMatch?.[0]?.toLowerCase()||'720p';
+ const qualityMatch=raw.match(ANIME_QUALITY),quality=qualityMatch?.[0]?.toLowerCase()==='4k'?'2160p':qualityMatch?.[0]?.toLowerCase().replace('lp','p')||'720p';
  const cut=qualityMatch?.index??Infinity;let title=(Number.isFinite(cut)?raw.slice(0,cut):raw).replace(/\s+(?:தமிழ்|tamil|telugu|malayalam|kannada|hindi|english|hdrip|webrip|blu[- ]?ray|bluray|web[- ]?dl|proper|repack|dub|dual(?:\s+audio)?).*$/iu,'').replace(/\b(?:OAD|OVA|specials?)\b/giu,' ').replace(/\s+@.*$/,'').replace(/\s*(?:\[[^\]]*\]|\{[^}]*\}|\([^)]*\))+/g,' ').replace(/\b(?:multi(?:\s+audio)?|audio|esub|esubs)\b/giu,' ').replace(/\s*\+\s*/g,' ').replace(/^[\s\[({]+|[\s\-\[\]({})]+$/g,'').replace(/\s+/g,' ').trim();
  if(normalize(title).startsWith('narutoshippud'))title='Naruto Shippuden';
  if(normalize(title)==='attackontitack')title='Attack on Titan';
@@ -79,7 +79,7 @@ function animeCaptionParts(caption){
  const title=pick(/^\s*(?:anime|series|title)\s*:\s*(.+)$/im);
  const season=seasonFromCaption(value);
  const episode=Number(pick(/\b(?:episode|ep)\s*[:#-]?\s*(\d{1,4})\b/i))||null;
- const rawQuality=pick(/\bquality\s*:\s*(2160p|1080p|720p|480p|360p|4k)\b/i)||pick(/\b(2160p|1080p|720p|480p|360p|4k)\b/i);
+ const rawQuality=pick(/\bquality\s*:\s*(2160l?p|1080l?p|720l?p|480l?p|360l?p|4k)\b/i)||pick(/\b(2160l?p|1080l?p|720l?p|480l?p|360l?p|4k)\b/i);
  const quality=rawQuality?.toLowerCase()==='4k'?'2160p':rawQuality?.toLowerCase()||null;
  const part=Number(pick(/\bpart\s*[:#-]?\s*(\d{1,2})\b/i))||null;
  return {title,season,episode,quality,part};
