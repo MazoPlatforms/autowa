@@ -272,7 +272,12 @@ const brandAssets=new Map([
  ['/icons/filmgo-512.png',{body:fs.readFileSync(new URL('../web/icons/filmgo-512.png',import.meta.url)),type:'image/png',cache:'public, max-age=31536000, immutable'}],
  ['/icons/filmgo-maskable.png',{body:fs.readFileSync(new URL('../web/icons/filmgo-maskable.png',import.meta.url)),type:'image/png',cache:'public, max-age=31536000, immutable'}]
 ]);
-const animeBanners=new Map([...Array.from({length:11},(_,i)=>'naruto-season-'+(i+1)+'.webp'),...Array.from({length:18},(_,i)=>'naruto-shippuden-season-'+(i+1)+'.webp')].map(name=>[
+const animeBanners=new Map([
+ ...Array.from({length:11},(_,i)=>'naruto-season-'+(i+1)+'.webp'),
+ ...Array.from({length:18},(_,i)=>'naruto-shippuden-season-'+(i+1)+'.webp'),
+ 'attack-on-titan-oad.webp',
+ ...Array.from({length:4},(_,i)=>'attack-on-titan-season-'+(i+1)+'.webp')
+].map(name=>[
  '/banners/'+name,
  fs.readFileSync(new URL('../web/banners/'+name,import.meta.url))
 ]));
@@ -630,6 +635,7 @@ const server=http.createServer(async(req,res)=>{
   if(req.method==='GET'&&url.pathname==='/poster-wall.js'){res.writeHead(200,{'Content-Type':'text/javascript; charset=utf-8','Cache-Control':'public, max-age=300','X-Content-Type-Options':'nosniff'});return res.end(posterWallJs);}
   if(req.method==='GET'&&url.pathname==='/phone-format.js'){res.writeHead(200,{'Content-Type':'text/javascript; charset=utf-8','Cache-Control':'public, max-age=300','X-Content-Type-Options':'nosniff'});return res.end(phoneFormatJs);}
   if(req.method==='GET'&&posterBackgrounds.has(url.pathname)){res.writeHead(200,{'Content-Type':'image/webp','Cache-Control':'public, max-age=31536000, immutable','X-Content-Type-Options':'nosniff'});return res.end(posterBackgrounds.get(url.pathname));}
+  if(req.method==='GET'&&animeBanners.has(url.pathname)){res.writeHead(200,{'Content-Type':'image/webp','Cache-Control':'public, max-age=31536000, immutable','X-Content-Type-Options':'nosniff'});return res.end(animeBanners.get(url.pathname));}
   if(req.method==='GET'&&url.pathname==='/app.js'){res.writeHead(200,{'Content-Type':'text/javascript; charset=utf-8','Cache-Control':'no-store','X-Content-Type-Options':'nosniff'});return res.end(appJs);}
   if(req.method==='GET'&&url.pathname==='/countries.json'){res.writeHead(200,{'Content-Type':'application/json','Cache-Control':'public, max-age=86400'});return res.end(countries);}
   if(req.method!=='POST'||!['/api/otp/start','/api/otp/verify','/api/otp/whatsapp/start','/api/otp/whatsapp/status','/api/request','/api/anime-request','/api/profile','/api/plans/continue','/api/logout'].includes(url.pathname))return send(res,404,{error:'Not found'});
