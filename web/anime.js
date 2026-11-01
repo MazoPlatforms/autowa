@@ -150,14 +150,11 @@ function showDetail(a){
  const bg=el('div','tv-detail-bg');bg.setAttribute('aria-hidden','true');bg.style.setProperty('--bg-img','url("'+poster(a).replace(/"/g,'%22')+'")');root.append(bg);
  const layout=el('div','detail-hero');layout.append(image(a,'detail-poster',true,true));
  const info=el('div');info.append(el('p','anime-kicker','Anime details'),el('h1','anime-detail-title',a.title));
- info.append(el('p','anime-detail-meta',[a.year,a.type,a.episodes_total?a.episodes_total+' episodes':'',a.status].filter(Boolean).join(' · ')));
+ info.append(el('p','anime-detail-meta',[a.year,a.episodes_total?a.episodes_total+' episodes':''].filter(Boolean).join(' · ')));
  if(a.rating)info.append(el('p','anime-detail-rating','★ '+a.rating));
  const g=genresOf(a);if(g.length)info.append(el('p','anime-detail-line',g.join(' · ')));
- if(a.studio)info.append(el('p','anime-detail-line','Studio: '+a.studio));
- {const firstEp=(Array.isArray(a.episodes)?[...a.episodes]:[]).sort((x,y)=>(Number(x.season)||1)-(Number(y.season)||1)||episodeNumber(x)-episodeNumber(y)).find(e=>typeof e.slug_id==='string'&&/^[A-Za-z0-9_-]{8,80}$/.test(e.slug_id));
-  if(firstEp){const cta=el('a','tv-btn tv-btn-primary anime-detail-cta');cta.href='/anime/watch/'+encodeURIComponent(firstEp.slug_id);cta.append(playIcon(),document.createTextNode('Watch '+(String(firstEp.special_type||'').trim()||'Episode')+' '+episodeNumber(firstEp)));info.append(cta);}}
  layout.append(info);root.append(layout);
- const overview=el('div','anime-overview');overview.append(el('h2','','Overview'),el('p','',a.plot||'No synopsis available yet.'));root.append(overview);
+ const overview=el('div','anime-overview');overview.append(el('h2','','Overview'),el('p','',a.plot||'No synopsis available yet.'));if(a.studio)overview.append(el('p','anime-detail-line','Studio: '+a.studio));root.append(overview);
  const eps=el('div','anime-eps');const head=el('div','anime-eps-head');const list=Array.isArray(a.episodes)?[...a.episodes].sort((x,y)=>(Number(x.season)||1)-(Number(y.season)||1)||episodeNumber(x)-episodeNumber(y)):[];
  head.append(el('h2','','Episodes'),el('span','',list.length?list.length+' available':''));eps.append(head);
  if(!list.length)eps.append(el('div','anime-empty-eps','Episodes will appear here once they are added.'));
