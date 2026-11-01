@@ -89,7 +89,7 @@ def anime_filename_parts(raw):
     value = re.sub(r'\s*(?:\[[^]]*\]|\{[^}]*\}|\([^)]*\))', ' ', value)
     value = re.sub(r'[\[\]{}()]', ' ', value)
     value = re.sub(r'(?i)\b(?:multi(?:\s+audio)?|audio|esub|esubs)\b', ' ', value)
-    value = re.sub(r'(?i)\s+(?:தமிழ்|tamil|telugu|malayalam|kannada|hindi|english|2160p|1080p|720p|480p|4k|web[- ]?dl|webrip|blu[- ]?ray|bluray|brrip|hdrip|dvdrip|x264|x265|h264|h265|hevc|aac|ddp5?\.?(?:1|2)?|esub|multi|proper|repack|uncut|dub|dual audio)\b.*$', '', value)
+    value = re.sub(r'(?i)\s+(?:தமிழ்|tamil|telugu|malayalam|kannada|hindi|english|2160p|1080p|720p|480p|360p|4k|web[- ]?dl|webrip|blu[- ]?ray|bluray|brrip|hdrip|dvdrip|x264|x265|h264|h265|hevc|aac|ddp5?\.?(?:1|2)?|esub|multi|proper|repack|uncut|dub|dual audio)\b.*$', '', value)
     value = re.sub(r'(?:\s*(?:\[[^]]*\]|\{[^}]*\}|\([^)]*\)))+\s*(?:@.*)?$', '', value)
     value = re.sub(r'\s+@.*$', '', value)
     value = re.sub(r'\s*\+\s*', ' ', value)
@@ -395,7 +395,7 @@ def anime_media_item(message):
     season = season or caption['season']
     episode = episode or caption['episode']
     part = part or caption['part']
-    quality_match = re.search(r'(?i)\b(2160p|1080p|720p|480p|4k)\b', filename)
+    quality_match = re.search(r'(?i)\b(2160p|1080p|720p|480p|360p|4k)\b', filename)
     quality = quality_match.group(1).upper() if quality_match else (caption['quality'].upper() if caption['quality'] else '720P')
     size = int(getattr(message.file, 'size', 0) or 0)
     if not episode or not quality or not 0 < size <= 2000000000:
@@ -439,11 +439,12 @@ def build_anime_catalog(messages):
             if canonical_title and catalog_title_key(canonical_title) != catalog_title_key(show['title']):
                 show['title'] = canonical_title[:140]
                 show['slug_id'] = re.sub(r'[^a-z0-9]+', '-', canonical_title.casefold()).strip('-')[:80] or show['slug_id']
-        known_episodes = {
-            str(ep.get('telegram_message_id')): ep
-            for ep in (known or {}).get('episodes', [])
-            if ep.get('telegram_message_id') is not None
-        }
+        known_episodes = {}
+        for episode in (known or {}).get('episodes', []):
+            variants = [episode, *(episode.get('qualities') or {}).values()]
+            for variant in variants:
+                if variant.get('telegram_message_id') is not None:
+                    known_episodes[str(variant['telegram_message_id'])] = variant
         boundaries = [] if known else tmdb_season_boundaries(show['title'])
         unique = {}
         for episode in show['episodes']:
@@ -474,8 +475,19 @@ def build_anime_catalog(messages):
                 for field, value in previous.items():
                     if field not in ('slug_id', 'telegram_message_id', 'file_name', 'file_size', 'mime_type') and value not in (None, '', []):
                         episode.setdefault(field, value)
-            unique[str(episode.get('telegram_message_id'))] = episode
-        show['episodes'] = list(unique.values())
+            identity = (episode.get('special_type') or '', int(episode.get('season') or 1), int(episode.get('episode') or 0), int(episode.get('part') or 0))
+            entry = unique.setdefault(identity, {'qualities': {}})
+            variant = {key: value for key, value in episode.items() if key not in ('season_explicit', 'caption_season', 'qualities')}
+            quality_key = str(episode.get('quality') or '720P').upper()
+            entry['qualities'][quality_key] = variant
+        episodes = []
+        for identity, entry in unique.items():
+            variants = entry['qualities']
+            preferred = next((key for key in variants if key.casefold() == '720p'), sorted(variants, key=lambda key: int(re.search(r'\d+', key).group()) if re.search(r'\d+', key) else 0, reverse=True)[0])
+            primary = dict(variants[preferred])
+            primary['qualities'] = variants
+            episodes.append(primary)
+        show['episodes'] = episodes
         show['episodes'].sort(key=lambda e: (e.get('season') or 1, e.get('episode') or 0, e.get('part') or 0, e.get('quality') or ''))
         show['updated_at'] = time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime())
         result.append(show)

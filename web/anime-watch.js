@@ -61,8 +61,9 @@ function buildPlayer(src,posterUrl,hooks){
  const close=el('button','filmgo-settings-close');close.type='button';close.setAttribute('aria-label','Close player settings');close.append(playerIcon('close'));panel.append(close);
  const speedWrap=el('label','filmgo-setting');speedWrap.append(playerIcon('speed'),el('span','','Playback speed'));const speed=el('select','filmgo-setting-select');for(const r of [.5,.75,1,1.25,1.5,1.75,2]){const o=el('option','',r===1?'Normal':r+'×');o.value=String(r);if(r===1)o.selected=true;speed.append(o);}speedWrap.append(speed);
  const volWrap=el('label','filmgo-setting');volWrap.append(playerIcon('volume'),el('span','','Player volume'));const vol=el('input','filmgo-setting-range');vol.type='range';vol.min='0';vol.max='1';vol.step='0.01';vol.value='1';vol.setAttribute('aria-label','Player volume');volWrap.append(vol);
+ const qualityWrap=el('label','filmgo-setting');qualityWrap.append(playerIcon('quality'),el('span','','Quality'));const quality=el('select','filmgo-setting-select');for(const option of hooks.qualities||[]){const item=el('option','',option.label);item.value=option.value;item.selected=option.value===hooks.selectedQuality;quality.append(item);}qualityWrap.hidden=quality.options.length<2;
  const pip=el('button','filmgo-settings-action');pip.type='button';pip.setAttribute('aria-label','Picture in picture');pip.append(playerIcon('pip'),el('span','','Picture in picture'));pip.disabled=!(document.pictureInPictureEnabled&&video.requestPictureInPicture);
- panel.append(speedWrap,volWrap,pip);
+ panel.append(speedWrap,qualityWrap,volWrap,pip);
  player.append(viewport,panel,controls);
 
  let controlsTimer=0,feedbackTimer=0,tapTimer=0,lastTap=0,lastSave=0;
@@ -72,11 +73,13 @@ function buildPlayer(src,posterUrl,hooks){
  const syncMute=()=>{const m=video.muted||video.volume===0;mute.replaceChildren(g(m?'mute':'volume',20));mute.setAttribute('aria-label',m?'Unmute':'Mute');mute.title=m?'Unmute':'Mute';vol.value=String(video.muted?0:video.volume);};
  const seekBy=s=>{const d=Number.isFinite(video.duration)?video.duration:Infinity;video.currentTime=Math.max(0,Math.min(d,video.currentTime+s));showFeedback((s<0?'−':'+')+Math.abs(s)+'s',g(s<0?'back10':'fwd10',26));showControls();};
  const toggle=()=>{if(video.paused)video.play().catch(()=>{});else video.pause();};
+ const switchSource=next=>{if(!next||video.src.endsWith(next))return;const position=video.currentTime,wasPlaying=!video.paused;video.src=next;video.load();video.addEventListener('loadedmetadata',()=>{if(Number.isFinite(position))video.currentTime=position;if(wasPlaying)video.play().catch(()=>{});},{once:true});};
  play.addEventListener('click',()=>{showControls();toggle();});back.addEventListener('click',()=>seekBy(-10));fwd.addEventListener('click',()=>seekBy(10));
  if(nextBtn)nextBtn.addEventListener('click',()=>{location.href=hooks.nextUrl;});
  mute.addEventListener('click',()=>{video.muted=!video.muted;if(!video.muted&&video.volume===0)video.volume=1;syncMute();});
  vol.addEventListener('input',()=>{video.volume=Number(vol.value);video.muted=video.volume===0;syncMute();});
  speed.addEventListener('change',()=>{video.playbackRate=Number(speed.value);});
+ quality.addEventListener('change',()=>{const next=hooks.onQualityChange?.(quality.value);if(next)switchSource(next);});
  pip.addEventListener('click',async()=>{try{if(document.pictureInPictureElement)await document.exitPictureInPicture();else await video.requestPictureInPicture();}catch{}});
  settingsButton.addEventListener('click',()=>{panel.hidden=!panel.hidden;settingsButton.setAttribute('aria-expanded',String(!panel.hidden));player.classList.toggle('settings-open',!panel.hidden);showControls();});
  close.addEventListener('click',()=>{panel.hidden=true;settingsButton.setAttribute('aria-expanded','false');player.classList.remove('settings-open');showControls();});
@@ -99,7 +102,7 @@ function buildPlayer(src,posterUrl,hooks){
  video.addEventListener('ended',()=>{update();showControls();hooks.clear?.();hooks.ended?.();});
  video.addEventListener('error',()=>{loading.hidden=true;hooks.error?.(video.error);});
  update();syncMute();
- return {player,video,loading,start(){video.src=src;video.load();}};
+ return {player,video,loading,start(){video.src=src;video.load();},switchSource};
 }
 
 function episodePicker(episodes,currentSlug){
@@ -168,8 +171,13 @@ async function main(){
  const notice=el('div','filmgo-token-notice filmgo-signin-notice');notice.setAttribute('role','status');notice.setAttribute('aria-live','polite');notice.hidden=true;section.append(notice);
  const status=el('p','filmgo-stream-status','');status.setAttribute('role','status');status.setAttribute('aria-live','polite');status.style.cssText='min-height:0;margin:10px 0 0;font-size:13px;color:#a1a1aa';
 
+ const variants=Object.entries(episode.qualities||{}).map(([quality,value])=>[quality,value]).filter(([,value])=>value?.slug_id);
+ const qualityValue=String(episode.quality||variants[0]?.[0]||'720P').toUpperCase();
+ const streamUrl=value=>'/api/anime/stream/'+encodeURIComponent(value?.slug_id||episode.slug_id);
  const KEY='filmgo-anime-pos:'+episode.slug_id;
- const ui=buildPlayer('/api/anime/stream/'+encodeURIComponent(episode.slug_id),episode.frame&&/^https:\/\//.test(episode.frame)?episode.frame:'',{
+ const ui=buildPlayer(streamUrl(episode),episode.frame&&/^https:\/\//.test(episode.frame)?episode.frame:'',{
+  qualities:variants.map(([quality])=>({label:quality,value:quality.toUpperCase()})),selectedQuality:qualityValue,
+  onQualityChange:quality=>{const variant=episode.qualities?.[quality]||episode.qualities?.[quality.toUpperCase()];if(!variant)return'';Object.assign(episode,variant);updateActions();return streamUrl(variant);},
   nextUrl:nextEp?watchUrl(nextEp):'',
   save:(t,d)=>{try{localStorage.setItem(KEY,String(Math.floor(t)));}catch{}},
   resume:()=>{try{return Number(localStorage.getItem(KEY))||0;}catch{return 0;}},
@@ -185,6 +193,7 @@ async function main(){
  const wa=el('button','filmgo-open-button','WhatsApp');wa.type='button';wa.setAttribute('aria-label','Request this episode on WhatsApp');
  const tg=el('button','filmgo-open-button','Telegram');tg.type='button';tg.setAttribute('aria-label','Request this episode on Telegram');
  for(const [b,k] of [[dl,'download'],[wa,'whatsapp'],[tg,'telegram']]){b.prepend(actionIcon(k));b.style.gap='8px';}
+ function updateActions(){dl.href='/api/anime/download/'+encodeURIComponent(episode.slug_id);dl.setAttribute('aria-label','Download '+(anime.title||'episode')+' '+epLabel);}
  actions.append(dl,wa,tg);section.append(actions,status);
  wa.addEventListener('click',()=>confirmAnimeRequest(anime,episode,'whatsapp'));tg.addEventListener('click',()=>confirmAnimeRequest(anime,episode,'telegram'));
 

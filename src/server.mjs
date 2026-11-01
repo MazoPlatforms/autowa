@@ -127,7 +127,7 @@ async function refreshAnimeCatalog(){
    const previous=await redis('GET','telegram:anime:v1').catch(()=>null);
    if(previous){
     try{
-     const oldEpisodes=new Map((JSON.parse(previous).anime||[]).flatMap(item=>item.episodes||[]).filter(item=>item.telegram_message_id&&item.slug_id).map(item=>[String(item.telegram_message_id),item.slug_id]));
+     const oldEpisodes=new Map((JSON.parse(previous).anime||[]).flatMap(item=>(item.episodes||[]).flatMap(episode=>[episode,...Object.values(episode.qualities||{})])).filter(item=>item.telegram_message_id&&item.slug_id).map(item=>[String(item.telegram_message_id),item.slug_id]));
      for(const show of data.anime)for(const episode of show.episodes||[]){const old=oldEpisodes.get(String(episode.telegram_message_id));if(old)episode.slug_id=old;}
     }catch{}
    }
@@ -161,6 +161,14 @@ async function getAnimeCatalog(){
  for(const anime of data.anime||[])for(const episode of anime.episodes||[]){if(!episode.slug_id){episode.slug_id=crypto.randomBytes(12).toString('base64url');changed=true;}}
  if(changed)await redis('SET','telegram:anime:v1',JSON.stringify(data));
  return data;
+}
+function findAnimeEpisode(catalog, requestedId){
+ const id=String(requestedId);
+ for(const anime of catalog.anime||[])for(const episode of anime.episodes||[]){
+  if(String(episode.slug_id)===id||String(episode.telegram_message_id)===id)return {anime,episode};
+  for(const variant of Object.values(episode.qualities||{}))if(String(variant?.slug_id)===id||String(variant?.telegram_message_id)===id)return {anime,episode:{...episode,...variant,qualities:episode.qualities}};
+ }
+ return null;
 }
 async function limit(key,max,seconds){
  const name='rate:'+hmac(key),n=Number(await redis('INCR',name));
@@ -371,7 +379,7 @@ const server=http.createServer(async(req,res)=>{
    let publicBase;try{const origin=new URL(req.headers.origin||'');if(origin.protocol!=='https:'||origin.host!==req.headers.host||origin.username||origin.password)return send(res,403,{error:'Origin rejected'});publicBase=origin.origin;}catch{return send(res,403,{error:'Origin rejected'});}
    if(req.headers['content-type']?.split(';')[0]!=='application/json')return send(res,415,{error:'JSON required'});
    const input=await body(req),slug=String(input.episode_slug_id||'');if(!/^[A-Za-z0-9_-]{8,80}$/.test(slug))return send(res,400,{error:'Invalid anime episode'});
-   const catalog=await getAnimeCatalog();let episode=null,anime=null;for(const item of catalog.anime||[]){const found=(item.episodes||[]).find(ep=>ep.slug_id===slug);if(found){anime=item;episode=found;break;}}
+   const catalog=await getAnimeCatalog(),found=findAnimeEpisode(catalog,slug),anime=found?.anime,episode=found?.episode;
    if(!episode||!anime)return send(res,404,{error:'Anime episode unavailable'});
    const token=crypto.randomBytes(12).toString('base64url');await redis('SET','filmgo:anime-deeplink:'+token,JSON.stringify({episode_slug_id:slug,telegram_message_id:Number(episode.telegram_message_id),anime_title:anime.title,anime_year:anime.year||null,episode_title:episode.title||'',special_type:episode.special_type||null,season:Number(episode.season)||1,episode:Number(episode.episode??episode.number)||0,quality:episode.quality||'720p',file_size:Number(episode.file_size||0),account_hash:hmac(session.number),unlimited:unlimitedRequests(session.number),base_url:publicBase}),'EX',600);
    return send(res,200,{url:'https://t.me/mzn_filmgobot?start=a_'+token});
@@ -424,13 +432,13 @@ const server=http.createServer(async(req,res)=>{
   const animeEpisodeApi=url.pathname.match(/^\/api\/anime\/episode\/([A-Za-z0-9_-]{8,80})$/);
   if(req.method==='GET'&&animeEpisodeApi){
    const catalog=await getAnimeCatalog(),episodeSlug=animeEpisodeApi[1];
-   for(const anime of catalog.anime||[]){const episode=(anime.episodes||[]).find(item=>item.slug_id===episodeSlug);if(episode)return send(res,200,{anime:{slug_id:anime.slug_id,title:anime.title,poster:anime.poster||null,year:anime.year||null,plot:anime.plot||'',episodes:(anime.episodes||[]).map(item=>({slug_id:item.slug_id,season:item.season,episode:item.episode,number:item.number,title:item.title,released:item.released}))},suggestions:(catalog.anime||[]).filter(item=>item.slug_id!==anime.slug_id).slice(0,8).map(item=>({slug_id:item.slug_id,title:item.title,poster:item.poster||null,year:item.year||null})),episode});}
+   const found=findAnimeEpisode(catalog,episodeSlug);if(found){const {anime,episode}=found;return send(res,200,{anime:{slug_id:anime.slug_id,title:anime.title,poster:anime.poster||null,year:anime.year||null,plot:anime.plot||'',episodes:(anime.episodes||[]).map(item=>({slug_id:item.slug_id,qualities:item.qualities||{},season:item.season,episode:item.episode,number:item.number,title:item.title,released:item.released,special_type:item.special_type}))},suggestions:(catalog.anime||[]).filter(item=>item.slug_id!==anime.slug_id).slice(0,8).map(item=>({slug_id:item.slug_id,title:item.title,poster:item.poster||null,year:item.year||null})),episode});}
    return send(res,404,{error:'Anime episode unavailable'});
   }
   const animeDownload=url.pathname.match(/^\/api\/anime\/download\/([A-Za-z0-9_-]{8,80})$/);
   if((req.method==='GET'||req.method==='HEAD')&&animeDownload){
    const requestedId=animeDownload[1],catalog=await getAnimeCatalog();
-   const episode=(catalog.anime||[]).flatMap(item=>item.episodes||[]).find(item=>item.slug_id===requestedId||String(item.telegram_message_id)===requestedId);
+   const episode=findAnimeEpisode(catalog,requestedId)?.episode;
    const messageId=Number(episode?.telegram_message_id),total=Number(episode?.file_size||0);
    if(!episode||!Number.isSafeInteger(messageId)||!Number.isSafeInteger(total)||total<=0)return send(res,404,{error:'Anime episode unavailable'});
    const session=await authenticatedStream(req);if(!session)return send(res,401,{error:'Please sign in using your phone number.'});
@@ -448,7 +456,7 @@ const server=http.createServer(async(req,res)=>{
   const animeStream=url.pathname.match(/^\/api\/anime\/stream\/([A-Za-z0-9_-]{8,80})$/);
   if((req.method==='GET'||req.method==='HEAD')&&animeStream){
    const requestedId=animeStream[1],catalog=await getAnimeCatalog();
-   const episode=(catalog.anime||[]).flatMap(item=>item.episodes||[]).find(item=>item.slug_id===requestedId||String(item.telegram_message_id)===requestedId);
+   const episode=findAnimeEpisode(catalog,requestedId)?.episode;
    const messageId=Number(episode?.telegram_message_id);
    const total=Number(episode?.file_size);
    if(!episode||!Number.isSafeInteger(messageId)||!Number.isSafeInteger(total)||total<=0)return send(res,404,{error:'Anime episode unavailable'});
@@ -714,7 +722,7 @@ const server=http.createServer(async(req,res)=>{
   }
   if(url.pathname==='/api/anime-request'){
    if(data.rights_confirmed!==true||typeof data.episode_slug_id!=='string'||!/^[A-Za-z0-9_-]{8,80}$/.test(data.episode_slug_id))return send(res,400,{error:'Select an anime episode and confirm distribution rights'});
-   const catalog=await getAnimeCatalog();let episode=null,anime=null;for(const item of catalog.anime||[]){const found=(item.episodes||[]).find(ep=>ep.slug_id===data.episode_slug_id);if(found){anime=item;episode=found;break;}}
+   const catalog=await getAnimeCatalog(),found=findAnimeEpisode(catalog,data.episode_slug_id),anime=found?.anime,episode=found?.episode;
    if(!episode||!anime)return send(res,404,{error:'Anime episode unavailable'});
    const messageId=Number(episode.telegram_message_id),size=Number(episode.file_size||0);if(!Number.isSafeInteger(messageId)||!Number.isSafeInteger(size)||size<=0)return send(res,503,{error:'Anime episode size unavailable; try again later'});
    if(!telegramAnimeReady)return send(res,503,{error:'Anime delivery is temporarily unavailable'});
