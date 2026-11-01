@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "updated_at": "2026-10-31T18:48:30.986200+00:00",
+  "updated_at": "2026-11-01T17:58:04.816432+00:00",
   "movies": [
     {
       "id": "telegram-117",
@@ -2856,7 +2856,7 @@
         }
       },
       "imdb_id": "tt27419466",
-      "poster": "https://m.media-amazon.com/images/M/MV5BNWEyZDViMGYtZjcyNy00OWI3LWJmOWUtNTUzMmJmMWI3ZGNmXkEyXkFqcGc@._V1_.jpg",
+      "poster": "https://m.media-amazon.com/images/M/MV5BMTQ1OTQ2Y2UtMzllNS00ODFiLWFkNGItNGRjOWRlMjIwNTRlXkEyXkFqcGc@._V1_.jpg",
       "genre": [
         "Action",
         "Adventure",
