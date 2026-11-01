@@ -474,8 +474,6 @@ def build_anime_catalog(messages):
                 for field, value in previous.items():
                     if field not in ('slug_id', 'telegram_message_id', 'file_name', 'file_size', 'mime_type') and value not in (None, '', []):
                         episode.setdefault(field, value)
-            if special_type and not episode.get('frame') and show.get('poster'):
-                episode['frame'] = show['poster']
             unique[str(episode.get('telegram_message_id'))] = episode
         show['episodes'] = list(unique.values())
         show['episodes'].sort(key=lambda e: (e.get('season') or 1, e.get('episode') or 0, e.get('part') or 0, e.get('quality') or ''))
