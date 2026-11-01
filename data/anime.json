@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": 1793572535,
+  "updated_at": "2026-11-01T22:37:21.563Z",
   "anime": [
     {
       "slug_id": "naruto",
@@ -23692,13 +23692,51 @@
       "year": 2013,
       "studio": "WIT STUDIO",
       "season_banners": {
-        "OAD": "/banners/attack-on-titan-oad.webp",
         "1": "/banners/attack-on-titan-season-1.webp",
         "2": "/banners/attack-on-titan-season-2.webp",
         "3": "/banners/attack-on-titan-season-3.webp",
-        "4": "/banners/attack-on-titan-season-4.webp"
+        "4": "/banners/attack-on-titan-season-4.webp",
+        "OAD": "/banners/attack-on-titan-oad.webp"
       },
       "updated_at": "2026-11-01T22:35:33Z"
+    },
+    {
+      "slug_id": "aranmanai-hq",
+      "title": "Aranmanai HQ",
+      "episodes": [
+        {
+          "telegram_message_id": 897,
+          "episode": 2,
+          "season": 1,
+          "special_type": null,
+          "part": null,
+          "quality": "720p",
+          "file_size": 1667037504,
+          "file_name": "Aranmanai 2 (2016) Tamil HQ HDRip - 720p - x264 - (DD+5..mkv",
+          "mime_type": "video/x-matroska",
+          "qualities": {
+            "720P": {
+              "telegram_message_id": 897,
+              "episode": 2,
+              "season": 1,
+              "special_type": null,
+              "part": null,
+              "quality": "720p",
+              "file_size": 1667037504,
+              "file_name": "Aranmanai 2 (2016) Tamil HQ HDRip - 720p - x264 - (DD+5..mkv",
+              "mime_type": "video/x-matroska"
+            }
+          }
+        }
+      ],
+      "poster": null,
+      "plot": "",
+      "genre": [],
+      "rating": null,
+      "status": null,
+      "episodes_total": null,
+      "studio": null,
+      "updated_at": "2026-11-01T22:37:21.563Z"
     }
   ]
 }
