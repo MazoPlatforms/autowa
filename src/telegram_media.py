@@ -253,7 +253,7 @@ def anime_media_item(message):
     episode = episode or caption['episode']
     part = part or caption['part']
     quality_match = re.search(r'(?i)\b(2160p|1080p|720p|480p|4k)\b', filename)
-    quality = quality_match.group(1).upper() if quality_match else (caption['quality'].upper() if caption['quality'] else 'AUTO')
+    quality = quality_match.group(1).upper() if quality_match else (caption['quality'].upper() if caption['quality'] else '720P')
     size = int(getattr(message.file, 'size', 0) or 0)
     if not episode or not quality or not 0 < size <= 2000000000:
         return None
