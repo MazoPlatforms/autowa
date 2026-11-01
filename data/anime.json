@@ -1,54 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-01T12:50:15.654Z",
+  "updated_at": 1793537437,
   "anime": [
-    {
-      "slug_id": "naruto-shippud",
-      "title": "Naruto Shippud…",
-      "episodes": [
-        {
-          "slug_id": "tZmVkaJgZaVFyfTj",
-          "telegram_message_id": 392,
-          "episode": 370,
-          "season": 17,
-          "part": null,
-          "quality": "720P",
-          "file_size": 61565918,
-          "file_name": "Naruto Shippud… - S17E370 [Tamil] 720p @Animes_Tamil.mkv",
-          "mime_type": "video/x-matroska"
-        },
-        {
-          "slug_id": "atyuGAtvh0Yf6cXd",
-          "telegram_message_id": 395,
-          "episode": 373,
-          "season": 18,
-          "part": null,
-          "quality": "720P",
-          "file_size": 82840473,
-          "file_name": "Naruto Shippud… - S18E373 [Tamil] 720p @Animes_Tamil_Hub.mkv",
-          "mime_type": "video/x-matroska"
-        },
-        {
-          "slug_id": "-2oOl8Vem9ng-quV",
-          "telegram_message_id": 396,
-          "episode": 374,
-          "season": 18,
-          "part": null,
-          "quality": "480p",
-          "file_size": 40038963,
-          "file_name": "Naruto Shippud… - S18E374 [Tamil] 480p @Animes_Tamil_Hub.mkv",
-          "mime_type": "video/x-matroska"
-        }
-      ],
-      "updated_at": "2026-11-01T12:50:10.264Z",
-      "poster": null,
-      "plot": "",
-      "genre": [],
-      "rating": null,
-      "status": null,
-      "episodes_total": null,
-      "studio": null
-    },
     {
       "slug_id": "naruto-shippuden",
       "title": "Naruto Shippuden",
@@ -4003,17 +3956,6 @@
           "mime_type": "video/x-matroska"
         },
         {
-          "slug_id": "LK0T45u_MlfFDcr5",
-          "telegram_message_id": 383,
-          "episode": 361,
-          "season": 16,
-          "part": null,
-          "quality": "360P",
-          "file_size": 205717992,
-          "file_name": "Naruto Shippuden - S16 E361 Multi 360pTamil.mkv",
-          "mime_type": "video/x-matroska"
-        },
-        {
           "slug_id": "VExA94LMMppRzesp",
           "telegram_message_id": 384,
           "episode": 362,
@@ -4022,6 +3964,83 @@
           "quality": "720P",
           "file_size": 119556000,
           "file_name": "Naruto shippuden S16 Ep 362 [ Tamil + Multi ].mkv",
+          "mime_type": "video/x-matroska"
+        },
+        {
+          "slug_id": "aLlDFpojTX1unLgw",
+          "telegram_message_id": 391,
+          "episode": 369,
+          "season": 17,
+          "part": null,
+          "quality": "720P",
+          "file_size": 160379943,
+          "file_name": "Naruto Shippuden S17 E369 720p Tamil.Mp4",
+          "mime_type": "video/mp4"
+        },
+        {
+          "slug_id": "f-MEQnPOxOic882X",
+          "telegram_message_id": 393,
+          "episode": 371,
+          "season": 17,
+          "part": null,
+          "quality": "720P",
+          "file_size": 140144773,
+          "file_name": "Naruto Shippuden S17E371 Tamil.mkv",
+          "mime_type": "video/x-matroska"
+        },
+        {
+          "slug_id": "lU6mBtpY0UMMUMp1",
+          "telegram_message_id": 394,
+          "episode": 372,
+          "season": 17,
+          "part": null,
+          "quality": "720P",
+          "file_size": 80645010,
+          "file_name": "Naruto Shippuden S17E372 Tamil.mkv",
+          "mime_type": "video/x-matroska"
+        },
+        {
+          "slug_id": "U1u79FCjpfLCSls5",
+          "telegram_message_id": 397,
+          "episode": 375,
+          "season": 18,
+          "part": null,
+          "quality": "720P",
+          "file_size": 126793930,
+          "file_name": "Naruto Shippuden S18E375 Tamil.mkv",
+          "mime_type": "video/x-matroska"
+        }
+      ],
+      "year": 2007,
+      "poster": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx1735-kGfVm0YqCPcu.png",
+      "plot": "Naruto: Shippuuden is the continuation of the original animated TV series Naruto. The story revolves around an older and slightly more matured Uzumaki Naruto and his quest to save his friend Uchiha Sasuke from the grips of the snake-like Shinobi, Orochimaru. After 2 and a half years Naruto finally returns to his village of Konoha, and sets about putting his ambitions to work, though it will not be easy, as he has amassed a few (more dangerous) enemies, in the likes of the shinobi organization; Akatsuki. \n(Source: Anime News Network)",
+      "genre": [
+        "Action",
+        "Adventure",
+        "Comedy",
+        "Drama",
+        "Fantasy",
+        "Supernatural"
+      ],
+      "rating": 8.2,
+      "status": "Finished",
+      "episodes_total": 500,
+      "studio": "Studio Pierrot",
+      "updated_at": "2026-11-01T12:50:37Z"
+    },
+    {
+      "slug_id": "naruto-shippud",
+      "title": "Naruto Shippud…",
+      "episodes": [
+        {
+          "slug_id": "LK0T45u_MlfFDcr5",
+          "telegram_message_id": 383,
+          "episode": 361,
+          "season": 16,
+          "part": null,
+          "quality": "360P",
+          "file_size": 205717992,
+          "file_name": "Naruto Shippuden - S16 E361 Multi 360pTamil.mkv",
           "mime_type": "video/x-matroska"
         },
         {
@@ -4091,66 +4110,40 @@
           "mime_type": "video/x-matroska"
         },
         {
-          "slug_id": "aLlDFpojTX1unLgw",
-          "telegram_message_id": 391,
-          "episode": 369,
+          "slug_id": "tZmVkaJgZaVFyfTj",
+          "telegram_message_id": 392,
+          "episode": 370,
           "season": 17,
           "part": null,
           "quality": "720P",
-          "file_size": 160379943,
-          "file_name": "Naruto Shippuden S17 E369 720p Tamil.Mp4",
-          "mime_type": "video/mp4"
-        },
-        {
-          "slug_id": "f-MEQnPOxOic882X",
-          "telegram_message_id": 393,
-          "episode": 371,
-          "season": 17,
-          "part": null,
-          "quality": "720P",
-          "file_size": 140144773,
-          "file_name": "Naruto Shippuden S17E371 Tamil.mkv",
+          "file_size": 61565918,
+          "file_name": "Naruto Shippud… - S17E370 [Tamil] 720p @Animes_Tamil.mkv",
           "mime_type": "video/x-matroska"
         },
         {
-          "slug_id": "lU6mBtpY0UMMUMp1",
-          "telegram_message_id": 394,
-          "episode": 372,
-          "season": 17,
-          "part": null,
-          "quality": "720P",
-          "file_size": 80645010,
-          "file_name": "Naruto Shippuden S17E372 Tamil.mkv",
-          "mime_type": "video/x-matroska"
-        },
-        {
-          "slug_id": "U1u79FCjpfLCSls5",
-          "telegram_message_id": 397,
-          "episode": 375,
+          "slug_id": "atyuGAtvh0Yf6cXd",
+          "telegram_message_id": 395,
+          "episode": 373,
           "season": 18,
           "part": null,
-          "quality": "720p",
-          "file_size": 126793930,
-          "file_name": "Naruto Shippuden S18E375 Tamil.mkv",
+          "quality": "720P",
+          "file_size": 82840473,
+          "file_name": "Naruto Shippud… - S18E373 [Tamil] 720p @Animes_Tamil_Hub.mkv",
+          "mime_type": "video/x-matroska"
+        },
+        {
+          "slug_id": "-2oOl8Vem9ng-quV",
+          "telegram_message_id": 396,
+          "episode": 374,
+          "season": 18,
+          "part": null,
+          "quality": "480P",
+          "file_size": 40038963,
+          "file_name": "Naruto Shippud… - S18E374 [Tamil] 480p @Animes_Tamil_Hub.mkv",
           "mime_type": "video/x-matroska"
         }
       ],
-      "year": 2007,
-      "poster": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx1735-kGfVm0YqCPcu.png",
-      "plot": "Naruto: Shippuuden is the continuation of the original animated TV series Naruto. The story revolves around an older and slightly more matured Uzumaki Naruto and his quest to save his friend Uchiha Sasuke from the grips of the snake-like Shinobi, Orochimaru. After 2 and a half years Naruto finally returns to his village of Konoha, and sets about putting his ambitions to work, though it will not be easy, as he has amassed a few (more dangerous) enemies, in the likes of the shinobi organization; Akatsuki. \n(Source: Anime News Network)",
-      "genre": [
-        "Action",
-        "Adventure",
-        "Comedy",
-        "Drama",
-        "Fantasy",
-        "Supernatural"
-      ],
-      "rating": 8.2,
-      "status": "Finished",
-      "episodes_total": 500,
-      "studio": "Studio Pierrot",
-      "updated_at": "2026-11-01T12:50:15.654Z"
+      "updated_at": "2026-11-01T12:50:37Z"
     }
   ]
 }
