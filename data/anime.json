@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-01T16:34:01.990Z",
+  "updated_at": "2026-11-01T16:34:06.957Z",
   "anime": [
     {
       "slug_id": "naruto",
@@ -1177,6 +1177,17 @@
           "file_size": 109419027,
           "file_name": "Naruto S4 E101 Tamil Dub 720p.mp4",
           "mime_type": "video/mp4"
+        },
+        {
+          "slug_id": "cHF4GKS5qafJCrNe",
+          "telegram_message_id": 495,
+          "episode": 102,
+          "season": 4,
+          "part": null,
+          "quality": "720p",
+          "file_size": 114694405,
+          "file_name": "Naruto S4 E102 Tamil Dub 720p.mp4",
+          "mime_type": "video/mp4"
         }
       ],
       "year": 2002,
@@ -1194,7 +1205,7 @@
       "status": "Finished",
       "episodes_total": 220,
       "studio": "Studio Pierrot",
-      "updated_at": "2026-11-01T16:34:01.990Z"
+      "updated_at": "2026-11-01T16:34:06.957Z"
     },
     {
       "slug_id": "naruto-shippuden",
