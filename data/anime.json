@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": 1793534198,
+  "updated_at": 1793534267,
   "anime": [
     {
       "slug_id": "naruto-shippuden",
@@ -2185,6 +2185,17 @@
           "mime_type": "video/x-matroska"
         },
         {
+          "slug_id": "lpcTOWfJQfxH4-KQ",
+          "telegram_message_id": 206,
+          "episode": 200,
+          "season": 10,
+          "part": null,
+          "quality": "720P",
+          "file_size": 128536678,
+          "file_name": "_Naruto_Shippuden_S10_E200_Tam+Mal+Hin+Eng+Jap_720p_HDRip_Multi.mkv",
+          "mime_type": "video/x-matroska"
+        },
+        {
           "slug_id": "0UGGwUNapwUmRRCT",
           "telegram_message_id": 207,
           "episode": 201,
@@ -2431,25 +2442,7 @@
       "status": "Finished",
       "episodes_total": 500,
       "studio": "Studio Pierrot",
-      "updated_at": "2026-11-01T11:56:38Z"
-    },
-    {
-      "slug_id": "naruto-shippuden-tam-mal-hin-eng-jap",
-      "title": "Naruto Shippuden Tam+Mal+Hin+Eng+Jap",
-      "episodes": [
-        {
-          "slug_id": "lpcTOWfJQfxH4-KQ",
-          "telegram_message_id": 206,
-          "episode": 200,
-          "season": 10,
-          "part": null,
-          "quality": "720P",
-          "file_size": 128536678,
-          "file_name": "_Naruto_Shippuden_S10_E200_Tam+Mal+Hin+Eng+Jap_720p_HDRip_Multi.mkv",
-          "mime_type": "video/x-matroska"
-        }
-      ],
-      "updated_at": "2026-11-01T11:56:38Z"
+      "updated_at": "2026-11-01T11:57:47Z"
     }
   ]
 }
