@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-01T16:15:25.187Z",
+  "updated_at": "2026-11-01T16:15:38.146Z",
   "anime": [
     {
       "slug_id": "naruto-shippuden",
@@ -5417,6 +5417,17 @@
           "file_size": 80853980,
           "file_name": "Naruto S1 E14 Tamil Dub 720p.mp4",
           "mime_type": "video/mp4"
+        },
+        {
+          "slug_id": "lq9GHo5335Hbi56t",
+          "telegram_message_id": 412,
+          "episode": 15,
+          "season": 1,
+          "part": null,
+          "quality": "720p",
+          "file_size": 92361510,
+          "file_name": "Naruto S1 E15 Tamil Dub 720p.mp4",
+          "mime_type": "video/mp4"
         }
       ],
       "year": 2002,
@@ -5434,7 +5445,7 @@
       "status": "Finished",
       "episodes_total": 220,
       "studio": "Studio Pierrot",
-      "updated_at": "2026-11-01T16:15:25.187Z"
+      "updated_at": "2026-11-01T16:15:38.146Z"
     }
   ]
 }
