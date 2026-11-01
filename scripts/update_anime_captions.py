@@ -33,6 +33,8 @@ def parent_slug_map():
     for show in data.get("anime", []):
         for episode in show.get("episodes", []):
             parent = str(episode.get("slug_id") or "").strip()
+            if not parent and episode.get("telegram_message_id") is not None:
+                parent = fixed_anime_episode_slug(episode["telegram_message_id"])
             if not parent:
                 continue
             for variant in [episode, *(episode.get("qualities") or {}).values()]:

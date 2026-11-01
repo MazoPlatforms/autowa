@@ -61,10 +61,20 @@ jobs:
               previous=json.load(open('data/anime.json', encoding='utf-8'))
           except (FileNotFoundError, json.JSONDecodeError):
               previous={}
+          previous_parents={}
+          for previous_item in previous.get('anime', []):
+              for previous_episode in previous_item.get('episodes', []):
+                  identity=(previous_episode.get('special_type') or '', int(previous_episode.get('season') or 1), int(previous_episode.get('episode') or previous_episode.get('number') or 0), int(previous_episode.get('part') or 0))
+                  parent=previous_episode.get('slug_id')
+                  if not parent:
+                      parent=fixed_slug(previous_episode.get('telegram_message_id')) if previous_episode.get('telegram_message_id') is not None else None
+                  if parent:
+                      previous_parents[(previous_item.get('slug_id'), identity)]=parent
           for item in source.get('anime', []):
               for episode in item.get('episodes', []):
                   variants=episode.get('qualities') or {str(episode.get('quality') or '720P').upper(): episode}
-                  episode['slug_id']=episode.get('slug_id') or fixed_slug(next(iter(variants.values())).get('telegram_message_id'))
+                  identity=(episode.get('special_type') or '', int(episode.get('season') or 1), int(episode.get('episode') or episode.get('number') or 0), int(episode.get('part') or 0))
+                  episode['slug_id']=previous_parents.get((item.get('slug_id'), identity)) or episode.get('slug_id') or fixed_slug(next(iter(variants.values())).get('telegram_message_id'))
                   for variant in variants.values():
                       variant.pop('slug_id', None)
                       variant.pop('slug_aliases', None)
@@ -72,13 +82,15 @@ jobs:
               grouped={}
               for episode in item.get('episodes', []):
                   identity=(episode.get('special_type') or '', int(episode.get('season') or 1), int(episode.get('episode') or episode.get('number') or 0), int(episode.get('part') or 0))
-                  entry=grouped.setdefault(identity, {})
+                  entry=grouped.setdefault(identity, {'parent_slug': episode.get('slug_id'), 'variants': {}})
                   variants=episode.get('qualities') or {str(episode.get('quality') or '720P').upper(): episode}
-                  entry.update(variants)
+                  entry['parent_slug']=entry.get('parent_slug') or episode.get('slug_id')
+                  entry['variants'].update(variants)
               compact=[]
-              for variants in grouped.values():
+              for group in grouped.values():
+                  variants=group['variants']
                   preferred=next((key for key in variants if key.casefold()=='720p'), sorted(variants, key=lambda key: int(''.join(ch for ch in key if ch.isdigit()) or 0), reverse=True)[0])
-                  primary=dict(variants[preferred]); primary['qualities']=variants; compact.append(primary)
+                  primary=dict(variants[preferred]); primary['slug_id']=group['parent_slug']; primary['qualities']=variants; compact.append(primary)
               item['episodes']=compact
           output={'schema_version':1,'updated_at':source.get('indexed_at'),'anime':source.get('anime',[])}
           priority={'naruto': 0, 'naruto-shippuden': 1}
