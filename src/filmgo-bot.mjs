@@ -65,6 +65,7 @@ export const animeFilenameParts=name=>{
  const qualityMatch=raw.match(ANIME_QUALITY),quality=qualityMatch?.[0]?.toLowerCase()==='4k'?'2160p':qualityMatch?.[0]?.toLowerCase()||'720p';
  const cut=qualityMatch?.index??Infinity;let title=(Number.isFinite(cut)?raw.slice(0,cut):raw).replace(/\s+(?:தமிழ்|tamil|telugu|malayalam|kannada|hindi|english|hdrip|webrip|blu[- ]?ray|bluray|web[- ]?dl|proper|repack|dub|dual(?:\s+audio)?).*$/iu,'').replace(/\s+@.*$/,'').replace(/\s*(?:\[[^\]]*\]|\{[^}]*\}|\([^)]*\))+/g,' ').replace(/\b(?:multi(?:\s+audio)?|audio|esub|esubs)\b/giu,' ').replace(/\s*\+\s*/g,' ').replace(/^[\s\[({]+|[\s\-\[\]({})]+$/g,'').replace(/\s+/g,' ').trim();
  if(normalize(title).startsWith('narutoshippud'))title='Naruto Shippuden';
+ if(normalize(title)==='attackontitack')title='Attack on Titan';
  return {title:title||'Untitled anime',titleCandidates:titleCandidates(title),season,episode,part,quality};
 };
 function seasonFromCaption(caption){

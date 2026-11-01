@@ -98,6 +98,7 @@ def anime_filename_parts(raw):
     # show record instead of creating a second truncated anime.
     if re.sub(r'[^a-z0-9]+', '', value.casefold()).startswith('narutoshippud'):
         value = 'Naruto Shippuden'
+    value = canonical_anime_release_title(value)
     return (value[:140] or 'Untitled anime', season, episode, part)
 
 def season_from_caption(caption):
@@ -201,6 +202,10 @@ def catalog_title_key(title):
     """Stable comparison key for titles and release-name variants."""
     return re.sub(r'[^a-z0-9]+', '', str(title or '').casefold())
 
+def canonical_anime_release_title(title):
+    """Normalize common release-name misspellings before metadata lookup."""
+    return {'attackontitack': 'Attack on Titan'}.get(catalog_title_key(title), title)
+
 def load_existing_anime_catalog():
     """Load local metadata so known shows do not hit APIs on every refresh."""
     try:
@@ -226,7 +231,18 @@ def load_existing_anime_catalog():
 def existing_show_for(title, existing):
     key = catalog_title_key(title)
     exact = next((item for item in existing if catalog_title_key(item.get('title')) == key), None)
-    return exact
+    if exact:
+        return exact
+    # Correct small release-name typos (for example Titack -> Titan) without
+    # reviving the old unsafe prefix matching that merged Naruto titles.
+    candidates = []
+    for item in existing:
+        candidate = catalog_title_key(item.get('title'))
+        if len(key) >= 8 and len(candidate) >= 8:
+            score = difflib.SequenceMatcher(None, key, candidate).ratio()
+            if score >= 0.86:
+                candidates.append((score, item))
+    return max(candidates, key=lambda pair: pair[0])[1] if candidates else None
 def tmdb_show_id(title):
     key = os.getenv('TMDB_API_KEY')
     cache_key = str(title).casefold()
@@ -380,6 +396,12 @@ def build_anime_catalog(messages):
         else:
             meta = anime_metadata(show['title'])
             show.update({k: v for k, v in meta.items() if v not in (None, '', [])})
+            # Metadata providers can normalize misspelled release names. Keep
+            # the canonical title and slug together for all future uploads.
+            canonical_title = str(meta.get('title') or '').strip()
+            if canonical_title and catalog_title_key(canonical_title) != catalog_title_key(show['title']):
+                show['title'] = canonical_title[:140]
+                show['slug_id'] = re.sub(r'[^a-z0-9]+', '-', canonical_title.casefold()).strip('-')[:80] or show['slug_id']
         known_episodes = {
             str(ep.get('telegram_message_id')): ep
             for ep in (known or {}).get('episodes', [])
