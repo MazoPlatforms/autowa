@@ -567,7 +567,7 @@ const server=http.createServer(async(req,res)=>{
   const animeWatchPage=url.pathname.match(/^\/anime\/watch\/([A-Za-z0-9_-]{8,80})\/?$/);
   if(req.method==='GET'&&animeWatchPage){
    const headers={'Content-Type':'text/html; charset=utf-8','Cache-Control':'no-store','X-Robots-Tag':'noindex','Content-Security-Policy':"default-src 'self'; img-src 'self' https: data:; media-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; base-uri 'none'; frame-ancestors 'none'"};
-   res.writeHead(200,headers);return res.end(animeWatchHtml);
+   res.writeHead(200,headers);return res.end(await renderCatalogPage(req,animeWatchHtml));
   }
   if(req.method==='GET'&&(url.pathname==='/anime'||url.pathname==='/anime/'||(url.pathname.startsWith('/anime/title/')&&/^[-a-zA-Z0-9_]+$/.test(url.pathname.slice(13).replace(/\/$/,''))))){
    const headers={'Content-Type':'text/html; charset=utf-8','Cache-Control':'no-store','X-Robots-Tag':'noindex','Content-Security-Policy':"default-src 'self'; img-src 'self' https: data:; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; base-uri 'none'; frame-ancestors 'none'"};
