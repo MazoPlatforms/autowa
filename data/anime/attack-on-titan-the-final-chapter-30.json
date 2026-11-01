@@ -6,7 +6,7 @@
     "title": "Attack on Titan Final Season THE FINAL CHAPTERS Special 2",
     "episodes": [
       {
-        "slug_id": "IWQ2ujQ1THh0Ql95",
+        "slug_id": "Ml-7UEqdhN_RNQGJ",
         "telegram_message_id": 879,
         "episode": 1,
         "season": 4,
@@ -18,7 +18,7 @@
         "mime_type": "video/x-matroska",
         "qualities": {
           "1080P": {
-            "slug_id": "t4Qjo_XFJxyu7ozf",
+            "slug_id": "ehpbgF41VbIOyWYj",
             "telegram_message_id": 880,
             "episode": 1,
             "season": 4,
@@ -30,7 +30,7 @@
             "mime_type": "video/x-matroska"
           },
           "720P": {
-            "slug_id": "IWQ2ujQ1THh0Ql95",
+            "slug_id": "Ml-7UEqdhN_RNQGJ",
             "telegram_message_id": 879,
             "episode": 1,
             "season": 4,
@@ -42,7 +42,7 @@
             "mime_type": "video/x-matroska"
           },
           "480P": {
-            "slug_id": "yfPP5CHcBfisbEFD",
+            "slug_id": "-AYc6rAbp-vg0M19",
             "telegram_message_id": 878,
             "episode": 1,
             "season": 4,

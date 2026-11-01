@@ -31,6 +31,11 @@ def normalize_variant(value):
 def main():
     document = json.loads(ANIME.read_text(encoding="utf-8"))
     for show in document.get("anime", []):
+        if show.get("slug_id") == "attack-on-titan":
+            show["season_banners"] = {
+                "OAD": "/banners/attack-on-titan-oad.webp",
+                **{str(number): f"/banners/attack-on-titan-season-{number}.webp" for number in range(1, 5)},
+            }
         compact = {}
         for episode in show.get("episodes", []):
             variants = episode.get("qualities") or {

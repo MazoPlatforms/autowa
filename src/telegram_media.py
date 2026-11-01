@@ -65,9 +65,10 @@ def anime_filename_parts(raw):
     episode = None
     season = None
     part = None
-    match = re.search(r'(?i)\bS(\d{1,2})\s*(?:-|x)?\s*E[O0]?(\d{1,4})\b', value)
+    final_match = re.search(r'(?i)\b(?:the\s+)?final\s+chapters?\b.*?\bS(\d{1,2})\s*(?:-|x)?\s*E[O0]?(\d{1,4})\s+(\d{1,4})\b', value)
+    match = final_match or re.search(r'(?i)\bS(\d{1,2})\s*(?:-|x)?\s*E[O0]?(\d{1,4})\b', value)
     if match:
-        season, episode = int(match.group(1)), int(match.group(2))
+        season, episode = int(match.group(1)), int(match.group(3) if final_match else match.group(2))
         value = value[:match.start()] + ' ' + value[match.end():]
     else:
         match = re.search(r'(?i)\b(?:season|s)\s*[- ]?(\d{1,2})\b', value)
@@ -239,7 +240,11 @@ def catalog_title_key(title):
 def canonical_anime_release_title(title):
     """Normalize common release-name misspellings before metadata lookup."""
     value = re.sub(r'(?i)\s*[-:()]?\s*(?:OAD|OVA|specials?)\s*$', '', str(title or '')).strip(' -:()')
-    return {'attackontitack': 'Attack on Titan'}.get(catalog_title_key(value), value)
+    return {
+        'attackontitack': 'Attack on Titan',
+        'attackontitanthefinalchapter': 'Attack on Titan',
+        'attackontitanthefinalchapters': 'Attack on Titan',
+    }.get(catalog_title_key(value), value)
 
 def load_existing_anime_catalog():
     """Load local metadata so known shows do not hit APIs on every refresh."""

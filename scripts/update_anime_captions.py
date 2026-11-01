@@ -25,7 +25,7 @@ def build_caption(message):
     filename = str(getattr(message.file, "name", "") or "")
     title, filename_season, episode, part = anime_filename_parts(filename)
     previous = anime_caption_parts(getattr(message, "raw_text", "") or "")
-    title = previous["title"] or title
+    title = title or previous["title"]
     season = filename_season or previous["season"] or manual_anime_season(title, episode)
     episode = episode or previous["episode"]
     if not episode:
