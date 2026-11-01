@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-01T19:40:21.265Z",
+  "updated_at": "2026-11-01T19:40:37.170Z",
   "anime": [
     {
       "slug_id": "naruto",
@@ -19552,15 +19552,15 @@
           }
         },
         {
-          "slug_id": "oNr7kvLnfPLT3w6X",
-          "telegram_message_id": 650,
+          "slug_id": "VR_JfoUIKcBVjVeb",
+          "telegram_message_id": 651,
           "episode": 13,
           "season": 1,
           "special_type": null,
           "part": null,
-          "quality": "480p",
-          "file_size": 145650907,
-          "file_name": "Attack_On_Titan_S01_Ep13_தமிழ்_480p_@Anime_Tamil_Dubbed_Series_1.mkv",
+          "quality": "720p",
+          "file_size": 267179536,
+          "file_name": "Attack_On_Titan_S01_Ep13_தமிழ்_720p_@Anime_Tamil_Dubbed_Series_1.mkv",
           "mime_type": "video/x-matroska",
           "qualities": {
             "480P": {
@@ -19573,6 +19573,18 @@
               "quality": "480p",
               "file_size": 145650907,
               "file_name": "Attack_On_Titan_S01_Ep13_தமிழ்_480p_@Anime_Tamil_Dubbed_Series_1.mkv",
+              "mime_type": "video/x-matroska"
+            },
+            "720P": {
+              "slug_id": "VR_JfoUIKcBVjVeb",
+              "telegram_message_id": 651,
+              "episode": 13,
+              "season": 1,
+              "special_type": null,
+              "part": null,
+              "quality": "720p",
+              "file_size": 267179536,
+              "file_name": "Attack_On_Titan_S01_Ep13_தமிழ்_720p_@Anime_Tamil_Dubbed_Series_1.mkv",
               "mime_type": "video/x-matroska"
             }
           }
@@ -19592,7 +19604,7 @@
       "episodes_total": 25,
       "year": 2013,
       "studio": "WIT STUDIO",
-      "updated_at": "2026-11-01T19:40:21.265Z"
+      "updated_at": "2026-11-01T19:40:37.170Z"
     }
   ]
 }
