@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-01T21:16:36.774Z",
+  "updated_at": "2026-11-01T21:16:52.066Z",
   "anime": [
     {
       "slug_id": "naruto",
@@ -23116,15 +23116,15 @@
           }
         },
         {
-          "slug_id": "ol0AvKBEHlP5sGwY",
-          "telegram_message_id": 830,
+          "slug_id": "pXHCd5OYer_1BKQU",
+          "telegram_message_id": 831,
           "episode": 14,
           "season": 4,
           "special_type": null,
           "part": null,
-          "quality": "480p",
-          "file_size": 30850298,
-          "file_name": "Attack on titan-(S04 - Ep14)-(தமிழ்)- 480p.mkv",
+          "quality": "720p",
+          "file_size": 119630638,
+          "file_name": "Attack on titan-(S04 - Ep14)-(தமிழ்)- 720p.mkv",
           "mime_type": "video/x-matroska",
           "qualities": {
             "480P": {
@@ -23137,6 +23137,18 @@
               "quality": "480p",
               "file_size": 30850298,
               "file_name": "Attack on titan-(S04 - Ep14)-(தமிழ்)- 480p.mkv",
+              "mime_type": "video/x-matroska"
+            },
+            "720P": {
+              "slug_id": "pXHCd5OYer_1BKQU",
+              "telegram_message_id": 831,
+              "episode": 14,
+              "season": 4,
+              "special_type": null,
+              "part": null,
+              "quality": "720p",
+              "file_size": 119630638,
+              "file_name": "Attack on titan-(S04 - Ep14)-(தமிழ்)- 720p.mkv",
               "mime_type": "video/x-matroska"
             }
           }
@@ -23156,7 +23168,7 @@
       "episodes_total": 25,
       "year": 2013,
       "studio": "WIT STUDIO",
-      "updated_at": "2026-11-01T21:16:36.774Z"
+      "updated_at": "2026-11-01T21:16:52.066Z"
     }
   ]
 }
