@@ -5,11 +5,7 @@ function actionIcon(kind){
  svg.setAttribute('viewBox','0 0 24 24');svg.setAttribute('width','17');svg.setAttribute('height','17');svg.setAttribute('fill',kind==='download'?'none':'currentColor');svg.setAttribute('stroke',kind==='download'?'currentColor':'none');svg.setAttribute('stroke-width','1.8');svg.setAttribute('stroke-linecap','round');svg.setAttribute('stroke-linejoin','round');svg.setAttribute('aria-hidden','true');
  const path=document.createElementNS('http://www.w3.org/2000/svg','path');path.setAttribute('d',paths[kind]);svg.append(path);return svg;
 }
-function playerIcon(kind){
- const paths={play:'M8 5v14l11-7L8 5Z',pause:'M7 5h3v14H7V5Zm7 0h3v14h-3V5Z',settings:'M19.43 12.98c.04-.32.07-.65.07-.98s-.02-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.37-.31-.6-.22l-2.49 1c-.52-.4-1.08-.73-1.69-.98L14.5 2.42C14.47 2.18 14.25 2 14 2h-4c-.25 0-.46.18-.5.42L9.12 5.07c-.61.25-1.18.59-1.69.98l-2.49-1c-.23-.08-.48 0-.6.22l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.08.65-.08.98s.03.66.08.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.12.22.37.31.6.22l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.04.24.25.42.5.42h4c.25 0 .46-.18.5-.42l.38-2.65c.61-.25 1.18-.58 1.69-.98l2.49 1c.23.08.48 0 .6-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zM12 15.5A3.5 3.5 0 1 1 12 8a3.5 3.5 0 0 1 0 7.5z',fullscreen:'M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5',close:'M6 6l12 12M18 6 6 18',pip:'M4 6h16v12H4zM12 12h6v4h-6z',speed:'M4 14h16M7 10h10M10 6h4',audio:'M4 10v4h3l5 3V7l-5 3H4Zm12 1a3 3 0 0 1 0 2M18 8a6 6 0 0 1 0 8',subtitles:'M4 6h16v12H4zM7 14h4m2 0h4M7 10h10',volume:'M4 10v4h3l5 3V7l-5 3H4Z',quality:'M4 6h16v12H4zM8 10h8M8 14h5'};
- const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');svg.setAttribute('viewBox','0 0 24 24');svg.setAttribute('width','17');svg.setAttribute('height','17');svg.setAttribute('fill',kind==='play'||kind==='pause'||kind==='settings'?'currentColor':'none');svg.setAttribute('stroke',kind==='play'||kind==='pause'||kind==='settings'?'none':'currentColor');svg.setAttribute('stroke-width','1.8');svg.setAttribute('stroke-linecap','round');svg.setAttribute('stroke-linejoin','round');svg.setAttribute('aria-hidden','true');
- const path=document.createElementNS('http://www.w3.org/2000/svg','path');path.setAttribute('d',paths[kind]);svg.append(path);return svg;
-}
+function playerIcon(kind,size){return FilmGoPlayerUI.icon(kind,size);}
 
 const slug=decodeURIComponent(location.pathname.split('/').filter(Boolean).at(-1)||'');
 const $=id=>document.getElementById(id),root=$('watch-root');
@@ -28,7 +24,7 @@ const G={
 };
 const g=(k,s)=>glyph(G[k],s);
 const fail=(text,signin=false)=>{const box=el('section','anime-watch-state');box.setAttribute('role','alert');box.append(document.createTextNode(text));if(signin){const a=el('a','','Sign in using Phone');a.href='/profile?return='+encodeURIComponent(location.pathname);box.append(document.createTextNode(' '),a);}root.replaceChildren(box);};
-const formatTime=v=>{if(!Number.isFinite(v)||v<0)return'00:00';const t=Math.floor(v),h=Math.floor(t/3600),m=Math.floor(t%3600/60),s=t%60;return(h?String(h).padStart(2,'0')+':':'')+String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');};
+const formatTime=v=>{if(!Number.isFinite(v)||v<0)return'00:00';const t=Math.floor(v),h=Math.floor(t/3600),m=Math.floor(t%3600/60),s=t%60;return(h?h+':':'')+String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');};
 const dateLabel=v=>{if(!v)return'';const d=new Date(String(v).slice(0,10)+'T00:00:00Z');return Number.isNaN(d.getTime())?'':new Intl.DateTimeFormat('en-US',{month:'short',day:'numeric',year:'numeric',timeZone:'UTC'}).format(d);};
 const numOf=e=>Number(e?.episode??e?.number)||0;
 const seasonOf=e=>Number(e?.season)||1;
@@ -38,48 +34,32 @@ const FALLBACK_POSTER='https://i.ibb.co/TMJ6YCC4/IMG-33a2f581-8ff4-4a5e-9e64-e43
 const safePoster=p=>typeof p==='string'&&(/^https:\/\//.test(p)||/^\/posters\/[a-f0-9]{24}\.jpg$/.test(p))?p:FALLBACK_POSTER;
 
 function buildPlayer(src,posterUrl,hooks){
- const player=el('div','filmgo-player-shell');player.tabIndex=0;player.setAttribute('aria-label','Anime player. Tap to show or hide controls, Space plays or pauses, arrows seek, F toggles fullscreen.');player.setAttribute('inert','');
+ const ui=FilmGoPlayerUI.create({title:hooks.title,subtitle:hooks.subtitle,nextUrl:hooks.nextUrl});
+ const player=ui.player;player.setAttribute('aria-label','Anime player. Tap to show or hide controls, Space plays or pauses, arrows seek, F toggles fullscreen.');player.setAttribute('inert','');
  player.addEventListener('contextmenu',e=>e.preventDefault());
- const viewport=el('div','filmgo-player-viewport');
+ const viewport=ui.viewport;
  const video=el('video','filmgo-player');video.preload='metadata';video.playsInline=true;video.setAttribute('playsinline','');video.setAttribute('controlsList','nodownload');video.setAttribute('aria-label','FilmGo built-in anime player');video.addEventListener('contextmenu',e=>e.preventDefault());video.addEventListener('dragstart',e=>e.preventDefault());
  if(posterUrl)video.poster=posterUrl;
- const loading=el('div','filmgo-loading-overlay');loading.hidden=true;loading.setAttribute('role','status');loading.setAttribute('aria-label','Loading');loading.append(el('span','filmgo-loading-spinner'));
- const feedback=el('div','filmgo-seek-feedback');feedback.setAttribute('aria-live','polite');feedback.setAttribute('aria-atomic','true');
- viewport.append(video,loading,feedback);
- const controls=el('div','filmgo-controls');
- const progress=el('input','filmgo-progress');progress.type='range';progress.min='0';progress.max='1000';progress.value='0';progress.setAttribute('aria-label','Seek');
- const row=el('div','filmgo-control-row'),left=el('div','filmgo-control-left'),right=el('div','filmgo-control-right');
- const btn=(cls,label,icon)=>{const b=el('button','filmgo-control-button '+cls);b.type='button';b.setAttribute('aria-label',label);b.title=label;b.append(icon);return b;};
- const play=btn('filmgo-play','Play',playerIcon('play')),back=btn('anime-skip','Back 10 seconds',g('back10',22)),fwd=btn('anime-skip','Forward 10 seconds',g('fwd10',22));
- const time=el('span','filmgo-time','00:00 / 00:00');
- const mute=btn('anime-mute','Mute',g('volume',20));
- const nextBtn=hooks.nextUrl?btn('anime-next-ep','Next episode',g('skipNext',20)):null;
- const settingsButton=btn('filmgo-settings-toggle','Player settings',playerIcon('settings'));settingsButton.setAttribute('aria-expanded','false');
- const fullscreen=btn('filmgo-fullscreen','Full screen',playerIcon('fullscreen'));
- left.append(play,back,fwd,time);right.append(mute);if(nextBtn)right.append(nextBtn);right.append(settingsButton,fullscreen);row.append(left,right);controls.append(progress,row);
- const panel=el('div','filmgo-settings-panel');panel.hidden=true;panel.setAttribute('role','group');panel.setAttribute('aria-label','Player settings');
- const close=el('button','filmgo-settings-close');close.type='button';close.setAttribute('aria-label','Close player settings');close.append(playerIcon('close'));panel.append(close);
- const speedWrap=el('label','filmgo-setting');speedWrap.append(playerIcon('speed'),el('span','','Playback speed'));const speed=el('select','filmgo-setting-select');for(const r of [.5,.75,1,1.25,1.5,1.75,2]){const o=el('option','',r===1?'Normal':r+'×');o.value=String(r);if(r===1)o.selected=true;speed.append(o);}speedWrap.append(speed);
- const volWrap=el('label','filmgo-setting');volWrap.append(playerIcon('volume'),el('span','','Player volume'));const vol=el('input','filmgo-setting-range');vol.type='range';vol.min='0';vol.max='1';vol.step='0.01';vol.value='1';vol.setAttribute('aria-label','Player volume');volWrap.append(vol);
- const qualityWrap=el('label','filmgo-setting');qualityWrap.append(playerIcon('quality'),el('span','','Quality'));const quality=el('select','filmgo-setting-select');for(const option of hooks.qualities||[]){const item=el('option','',option.label);item.value=option.value;item.selected=option.value===hooks.selectedQuality;quality.append(item);}qualityWrap.hidden=quality.options.length<2;
- const pip=el('button','filmgo-settings-action');pip.type='button';pip.setAttribute('aria-label','Picture in picture');pip.append(playerIcon('pip'),el('span','','Picture in picture'));pip.disabled=!(document.pictureInPictureEnabled&&video.requestPictureInPicture);
- panel.append(speedWrap,qualityWrap,volWrap,pip);
- player.append(viewport,panel,controls);
-
+ const loading=ui.loading,feedback=ui.feedback;
+ viewport.prepend(video);
+ const controls=ui.controls,progress=ui.progress,play=ui.play,time=ui.time,nextBtn=ui.nextBtn,settingsButton=ui.settingsButton,fullscreen=ui.fullscreen,panel=ui.menu,close=ui.menuClose,vol=ui.volume,pip=ui.pip,back=ui.back,fwd=ui.fwd;
+ const speed=ui.select('speed');for(const r of [.5,.75,1,1.25,1.5,1.75,2]){const o=el('option','',r===1?'Normal':r+'×');o.value=String(r);if(r===1)o.selected=true;speed.append(o);}
+ for(const option of hooks.qualities||[]){const b=el('button','filmgo-quality-button'+(option.value===hooks.selectedQuality?' active':''),option.label);b.type='button';b.addEventListener('click',()=>{const next=hooks.onQualityChange?.(option.value);if(next){switchSource(next);for(const x of ui.qualityRow.children)x.classList.toggle('active',x===b);}});ui.qualityRow.append(b);}
+ ui.qualityRow.hidden=(hooks.qualities||[]).length<2;
+ if(hooks.selectedQuality)ui.setBadge(hooks.selectedQuality);
+ pip.disabled=!(document.pictureInPictureEnabled&&video.requestPictureInPicture);
  let controlsTimer=0,feedbackTimer=0,tapTimer=0,lastTap=0,lastSave=0;
  const showFeedback=(msg,icon)=>{feedback.replaceChildren();if(icon)feedback.append(icon);feedback.append(document.createTextNode(msg));feedback.classList.add('visible');clearTimeout(feedbackTimer);feedbackTimer=setTimeout(()=>feedback.classList.remove('visible'),650);};
  const showControls=()=>{player.classList.remove('controls-hidden');clearTimeout(controlsTimer);if(!video.paused)controlsTimer=setTimeout(()=>{if(panel.hidden)player.classList.add('controls-hidden');},3200);};
  const update=(pos=video.currentTime)=>{const d=Number.isFinite(video.duration)?video.duration:0;time.textContent=formatTime(pos)+' / '+formatTime(d);progress.value=String(d?Math.round(pos/d*1000):0);progress.style.setProperty('--progress',d?(pos/d*100)+'%':'0%');play.replaceChildren(playerIcon(video.paused?'play':'pause'));const l=video.paused?'Play':'Pause';play.setAttribute('aria-label',l);play.title=l;player.classList.toggle('is-playing',!video.paused);};
- const syncMute=()=>{const m=video.muted||video.volume===0;mute.replaceChildren(g(m?'mute':'volume',20));mute.setAttribute('aria-label',m?'Unmute':'Mute');mute.title=m?'Unmute':'Mute';vol.value=String(video.muted?0:video.volume);};
+ const syncMute=()=>{vol.value=String(video.muted?0:video.volume);};
  const seekBy=s=>{const d=Number.isFinite(video.duration)?video.duration:Infinity;video.currentTime=Math.max(0,Math.min(d,video.currentTime+s));showFeedback((s<0?'−':'+')+Math.abs(s)+'s',g(s<0?'back10':'fwd10',26));showControls();};
  const toggle=()=>{if(video.paused)video.play().catch(()=>{});else video.pause();};
  const switchSource=next=>{if(!next||video.src.endsWith(next))return;const position=video.currentTime,wasPlaying=!video.paused;video.src=next;video.load();video.addEventListener('loadedmetadata',()=>{if(Number.isFinite(position))video.currentTime=position;if(wasPlaying)video.play().catch(()=>{});},{once:true});};
- play.addEventListener('click',()=>{showControls();toggle();});back.addEventListener('click',()=>seekBy(-10));fwd.addEventListener('click',()=>seekBy(10));
+ play.addEventListener('click',()=>{showControls();toggle();});
  if(nextBtn)nextBtn.addEventListener('click',()=>{location.href=hooks.nextUrl;});
- mute.addEventListener('click',()=>{video.muted=!video.muted;if(!video.muted&&video.volume===0)video.volume=1;syncMute();});
  vol.addEventListener('input',()=>{video.volume=Number(vol.value);video.muted=video.volume===0;syncMute();});
  speed.addEventListener('change',()=>{video.playbackRate=Number(speed.value);});
- quality.addEventListener('change',()=>{const next=hooks.onQualityChange?.(quality.value);if(next)switchSource(next);});
  pip.addEventListener('click',async()=>{try{if(document.pictureInPictureElement)await document.exitPictureInPicture();else await video.requestPictureInPicture();}catch{}});
  settingsButton.addEventListener('click',()=>{panel.hidden=!panel.hidden;settingsButton.setAttribute('aria-expanded',String(!panel.hidden));player.classList.toggle('settings-open',!panel.hidden);showControls();});
  close.addEventListener('click',()=>{panel.hidden=true;settingsButton.setAttribute('aria-expanded','false');player.classList.remove('settings-open');showControls();});
@@ -178,7 +158,7 @@ async function main(){
  const ui=buildPlayer(streamUrl(episode),episode.frame&&/^https:\/\//.test(episode.frame)?episode.frame:'',{
   qualities:variants.map(([quality])=>({label:quality,value:quality.toUpperCase()})),selectedQuality:qualityValue,
   onQualityChange:quality=>{const variant=episode.qualities?.[quality]||episode.qualities?.[quality.toUpperCase()];if(!variant)return'';Object.assign(episode,variant);updateActions();return streamUrl(variant);},
-  nextUrl:nextEp?watchUrl(nextEp):'',
+  nextUrl:nextEp?watchUrl(nextEp):'',title:anime.title||'Anime',subtitle:[epLabel,epTitle].filter(Boolean).join(' · '),
   save:(t,d)=>{try{localStorage.setItem(KEY,String(Math.floor(t)));}catch{}},
   resume:()=>{try{return Number(localStorage.getItem(KEY))||0;}catch{return 0;}},
   clear:()=>{try{localStorage.removeItem(KEY);}catch{}},

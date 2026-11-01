@@ -243,6 +243,8 @@ const index=fs.readFileSync(new URL('../web/index.html',import.meta.url)).toStri
 const catalogHtml=fs.readFileSync(new URL('../web/catalog.html',import.meta.url));
 const catalogJs=fs.readFileSync(new URL('../web/catalog.js',import.meta.url));
 const catalogCss=fs.readFileSync(new URL('../web/catalog.css',import.meta.url));
+const playerUiJs=fs.readFileSync(new URL('../web/player-ui.js',import.meta.url));
+const playerCss=fs.readFileSync(new URL('../web/player.css',import.meta.url));
 // The anime UI and data ship with the app for future use; the public route is always coming soon.
 const animeHtml=fs.readFileSync(new URL('../web/anime.html',import.meta.url));
 const animeWatchHtml=fs.readFileSync(new URL('../web/anime-watch.html',import.meta.url));
@@ -611,6 +613,8 @@ const server=http.createServer(async(req,res)=>{
    res.writeHead(200,headers);return res.end(await renderCatalogPage(req,animeHtml));
   }
   if(req.method==='GET'&&url.pathname==='/tailwind.css'){res.writeHead(200,{'Content-Type':'text/css; charset=utf-8','Cache-Control':'public, max-age=86400','X-Content-Type-Options':'nosniff'});return res.end(tailwindCss);}
+  if(req.method==='GET'&&url.pathname==='/player.css'){res.writeHead(200,{'Content-Type':'text/css; charset=utf-8','Cache-Control':'public, max-age=300','X-Content-Type-Options':'nosniff'});return res.end(playerCss);}
+  if(req.method==='GET'&&url.pathname==='/player-ui.js'){res.writeHead(200,{'Content-Type':'text/javascript; charset=utf-8','Cache-Control':'public, max-age=300','X-Content-Type-Options':'nosniff'});return res.end(playerUiJs);}
   if(req.method==='GET'&&url.pathname==='/catalog.css'){res.writeHead(200,{'Content-Type':'text/css; charset=utf-8','Cache-Control':'public, max-age=300','X-Content-Type-Options':'nosniff'});return res.end(catalogCss);}
   if(req.method==='GET'&&url.pathname==='/catalog.js'){res.writeHead(200,{'Content-Type':'text/javascript; charset=utf-8','Cache-Control':'public, max-age=300','X-Content-Type-Options':'nosniff'});return res.end(catalogJs);}
   if(req.method==='GET'&&(url.pathname==='/'||url.pathname==='/search'||(url.pathname.startsWith('/title/')&&/^[-a-zA-Z0-9_]+$/.test(url.pathname.slice(7).replace(/\/$/,''))))){res.writeHead(200,{'Content-Type':'text/html; charset=utf-8','Cache-Control':'no-store','Content-Security-Policy':"default-src 'self'; img-src 'self' https: data:; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src 'self'; base-uri 'none'; frame-ancestors 'none'"});return res.end(await renderCatalogPage(req));}

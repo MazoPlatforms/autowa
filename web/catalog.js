@@ -5,11 +5,7 @@ function actionIcon(kind){
  svg.setAttribute('viewBox','0 0 24 24');svg.setAttribute('width','17');svg.setAttribute('height','17');svg.setAttribute('fill',kind==='download'?'none':'currentColor');svg.setAttribute('stroke',kind==='download'?'currentColor':'none');svg.setAttribute('stroke-width','1.8');svg.setAttribute('stroke-linecap','round');svg.setAttribute('stroke-linejoin','round');svg.setAttribute('aria-hidden','true');
  const path=document.createElementNS('http://www.w3.org/2000/svg','path');path.setAttribute('d',paths[kind]);svg.append(path);return svg;
 }
-function playerIcon(kind){
- const paths={play:'M8 5v14l11-7L8 5Z',pause:'M7 5h3v14H7V5Zm7 0h3v14h-3V5Z',settings:'M19.43 12.98c.04-.32.07-.65.07-.98s-.02-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.37-.31-.6-.22l-2.49 1c-.52-.4-1.08-.73-1.69-.98L14.5 2.42C14.47 2.18 14.25 2 14 2h-4c-.25 0-.46.18-.5.42L9.12 5.07c-.61.25-1.18.59-1.69.98l-2.49-1c-.23-.08-.48 0-.6.22l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.08.65-.08.98s.03.66.08.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.12.22.37.31.6.22l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.04.24.25.42.5.42h4c.25 0 .46-.18.5-.42l.38-2.65c.61-.25 1.18-.58 1.69-.98l2.49 1c.23.08.48 0 .6-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zM12 15.5A3.5 3.5 0 1 1 12 8a3.5 3.5 0 0 1 0 7.5z',fullscreen:'M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5',close:'M6 6l12 12M18 6 6 18',pip:'M4 6h16v12H4zM12 12h6v4h-6z',speed:'M4 14h16M7 10h10M10 6h4',audio:'M4 10v4h3l5 3V7l-5 3H4Zm12 1a3 3 0 0 1 0 2M18 8a6 6 0 0 1 0 8',subtitles:'M4 6h16v12H4zM7 14h4m2 0h4M7 10h10',volume:'M4 10v4h3l5 3V7l-5 3H4Z',quality:'M4 6h16v12H4zM8 10h8M8 14h5'};
- const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');svg.setAttribute('viewBox','0 0 24 24');svg.setAttribute('width','17');svg.setAttribute('height','17');svg.setAttribute('fill',kind==='play'||kind==='pause'||kind==='settings'?'currentColor':'none');svg.setAttribute('stroke',kind==='play'||kind==='pause'||kind==='settings'?'none':'currentColor');svg.setAttribute('stroke-width','1.8');svg.setAttribute('stroke-linecap','round');svg.setAttribute('stroke-linejoin','round');svg.setAttribute('aria-hidden','true');
- const path=document.createElementNS('http://www.w3.org/2000/svg','path');path.setAttribute('d',paths[kind]);svg.append(path);return svg;
-}
+function playerIcon(kind,size){return FilmGoPlayerUI.icon(kind,size);}
 function confirmMovieRequest(movie,channel){
  const overlay=el('div','filmgo-sheet-overlay');const sheet=el('div','filmgo-sheet');
  sheet.setAttribute('role','dialog');sheet.setAttribute('aria-modal','true');
@@ -154,32 +150,21 @@ function showDetail(m){const root=$('detail-content');root.replaceChildren();con
 const section=el('section','mt-9 max-w-3xl border-t border-zinc-800 pt-8 filmgo-watch');
 section.append(el('h2','mb-4 text-lg font-bold','Watch & download'));
 const accessNotice=el('div','filmgo-token-notice filmgo-signin-notice');accessNotice.setAttribute('role','status');accessNotice.setAttribute('aria-live','polite');section.append(accessNotice);
-const player=el('div','filmgo-player-shell');player.tabIndex=0;player.setAttribute('aria-label','Movie player. Single tap shows or hides controls, double tap pauses, Space plays or pauses, arrows seek, F toggles fullscreen.');
+const ui=FilmGoPlayerUI.create({title:m.title,subtitle:[m.year,m.runtime].filter(Boolean).join(' · ')});
+const player=ui.player,viewport=ui.viewport;player.setAttribute('aria-label','Movie player. Single tap shows or hides controls, double tap pauses, Space plays or pauses, arrows seek, F toggles fullscreen.');
 player.setAttribute('inert','');
 player.addEventListener('contextmenu',event=>event.preventDefault());
-const viewport=el('div','filmgo-player-viewport');
 let video=el('video','filmgo-player');
 video.preload='auto';video.playsInline=true;video.setAttribute('playsinline','');video.setAttribute('controlsList','nodownload');
 video.addEventListener('contextmenu',event=>event.preventDefault());
 video.addEventListener('dragstart',event=>event.preventDefault());
 video.poster='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 9%22%3E%3Crect width=%2216%22 height=%229%22 fill=%22%2309090b%22/%3E%3C/svg%3E';video.setAttribute('aria-label','FilmGo built-in movie player');
-const loadingOverlay=el('div','filmgo-loading-overlay');loadingOverlay.hidden=true;loadingOverlay.setAttribute('role','status');loadingOverlay.setAttribute('aria-label','Loading');loadingOverlay.append(el('span','filmgo-loading-spinner'));
-const seekFeedback=el('div','filmgo-seek-feedback','');seekFeedback.setAttribute('aria-live','polite');seekFeedback.setAttribute('aria-atomic','true');
-viewport.append(video,loadingOverlay,seekFeedback);
-const controls=el('div','filmgo-controls');
-const progress=el('input','filmgo-progress');progress.type='range';progress.min='0';progress.max='1000';progress.value='0';progress.setAttribute('aria-label','Seek');
-const controlRow=el('div','filmgo-control-row');
-const play=el('button','filmgo-control-button filmgo-play');play.type='button';play.setAttribute('aria-label','Play');play.append(playerIcon('play'));
-const time=el('span','filmgo-time','00:00:00 / 00:00:00');
-const settingsButton=el('button','filmgo-control-button filmgo-settings-toggle');settingsButton.type='button';settingsButton.setAttribute('aria-label','Player settings');settingsButton.setAttribute('aria-expanded','false');settingsButton.append(playerIcon('settings'));
-const fullscreen=el('button','filmgo-control-button filmgo-fullscreen');fullscreen.type='button';fullscreen.setAttribute('aria-label','Full screen');fullscreen.append(playerIcon('fullscreen'));
-const settingsPanel=el('div','filmgo-settings-panel');settingsPanel.hidden=true;settingsPanel.setAttribute('aria-label','Player settings');settingsPanel.setAttribute('role','group');
-const settingsClose=el('button','filmgo-settings-close');settingsClose.type='button';settingsClose.setAttribute('aria-label','Close player settings');settingsClose.append(playerIcon('close'));settingsPanel.append(settingsClose);
-const controlLeft=el('div','filmgo-control-left'),controlRight=el('div','filmgo-control-right');
-controlLeft.append(play,time);controlRight.append(settingsButton,fullscreen);controlRow.append(controlLeft,controlRight);controls.append(progress,controlRow);player.append(viewport,settingsPanel,controls);section.append(player);
-const makeSetting=(label,id)=>{const wrap=el('label','filmgo-setting');const iconKind=id==='filmgo-speed'?'speed':id==='filmgo-audio-track'?'audio':'subtitles';wrap.append(playerIcon(iconKind),el('span','',label));const select=el('select','filmgo-setting-select');select.id=id;wrap.append(select);settingsPanel.append(wrap);return select;};
-const volumeWrap=el('label','filmgo-setting');volumeWrap.append(playerIcon('volume'),el('span','','Player volume'));const volume=el('input','filmgo-setting-range');volume.type='range';volume.min='0';volume.max='1';volume.step='0.01';volume.value='1';volume.setAttribute('aria-label','Player volume');volumeWrap.append(volume);settingsPanel.append(volumeWrap);
-const pip=el('button','filmgo-settings-action');pip.type='button';pip.setAttribute('aria-label','Picture in picture');pip.append(playerIcon('pip'),el('span','', 'Picture in picture'));pip.disabled=!(document.pictureInPictureEnabled&&video.requestPictureInPicture);settingsPanel.append(pip);
+const loadingOverlay=ui.loading,seekFeedback=ui.feedback;
+viewport.prepend(video);
+const controls=ui.controls,progress=ui.progress,play=ui.play,time=ui.time,settingsButton=ui.settingsButton,fullscreen=ui.fullscreen,settingsPanel=ui.menu,settingsClose=ui.menuClose,volume=ui.volume,pip=ui.pip;
+section.append(player);
+const makeSetting=(label,id)=>ui.select(id);
+pip.disabled=!(document.pictureInPictureEnabled&&video.requestPictureInPicture);
 const speedSelect=makeSetting('Playback speed','filmgo-speed');for(const rate of [0.25,0.5,0.75,1,1.25,1.5,1.75,2]){const option=el('option','',rate===1?'Normal':rate+'×');option.value=String(rate);if(rate===1)option.selected=true;speedSelect.append(option);}
 speedSelect.addEventListener('change',()=>{video.playbackRate=Number(speedSelect.value);});
 const audioSelect=makeSetting('Audio track','filmgo-audio-track');const subtitleSelect=makeSetting('Subtitles','filmgo-subtitles');
@@ -193,9 +178,9 @@ for(const [button,kind] of [[download,'download'],[whatsapp,'whatsapp'],[telegra
 actions.append(download,whatsapp,telegram);section.append(actions,status);root.append(section);
 const slug=encodeURIComponent(m.slug_id||'');const qualities=Object.keys(m.qualities||{[m.quality]:m}).filter(Boolean).sort((a,b)=>parseInt(a)-parseInt(b));
 let selected=qualities.find(q=>q.toLowerCase()==='720p')||qualities[0],activeQuality=null,stagedVideo=null;
-const qualityRow=el('div','filmgo-quality-options');const qualityLabel=el('p','filmgo-quality-label');qualityLabel.append(playerIcon('quality'),el('span','', 'Quality'));
-if(qualities.length>1)settingsPanel.prepend(qualityLabel,qualityRow);
+const qualityRow=ui.qualityRow;
 for(const q of qualities){const button=el('button','filmgo-quality-button',q);button.type='button';button.addEventListener('click',()=>setQuality(q));qualityRow.append(button);}
+qualityRow.hidden=qualities.length<2;
 const isActive=()=>root.isConnected&&location.pathname==='/title/'+slug;
 let movieAccessState='checking';
 let streamAvailability=null;
@@ -254,7 +239,7 @@ whatsapp.addEventListener('click',()=>{if(movieAccessState==='signed-in')confirm
 telegram.addEventListener('click',()=>{if(movieAccessState==='signed-in')confirmMovieRequest(m,'telegram');});
 const setStatus=value=>{if(isActive())status.textContent=value;};
 const setLoading=(value,show=true)=>{if(!isActive())return;loadingOverlay.hidden=!show;};
-const formatTime=value=>{if(!Number.isFinite(value)||value<0)return '--:--:--';const total=Math.floor(value),hours=Math.floor(total/3600),minutes=Math.floor(total%3600/60),seconds=total%60;return String(hours).padStart(2,'0')+':'+String(minutes).padStart(2,'0')+':'+String(seconds).padStart(2,'0');};
+const formatTime=value=>{if(!Number.isFinite(value)||value<0)return '00:00';const total=Math.floor(value),hours=Math.floor(total/3600),minutes=Math.floor(total%3600/60),seconds=total%60;return (hours?hours+':'+String(minutes).padStart(2,'0'):String(minutes).padStart(2,'0'))+':'+String(seconds).padStart(2,'0');};
 const updateControls=(position=video.currentTime)=>{const duration=video.duration||0;time.textContent=formatTime(position)+' / '+formatTime(duration);progress.value=String(duration?Math.round(position/duration*1000):0);progress.style.setProperty('--progress',duration?((position/duration)*100)+'%':'0%');play.replaceChildren(playerIcon(video.paused?'play':'pause'));play.setAttribute('aria-label',video.paused?'Play':'Pause');player.classList.toggle('is-playing',!video.paused);};
 let tapTimer=0,lastTap=0,feedbackTimer=0,controlsTimer=0;
 const showFeedback=message=>{seekFeedback.textContent=message;seekFeedback.classList.add('visible');clearTimeout(feedbackTimer);feedbackTimer=setTimeout(()=>seekFeedback.classList.remove('visible'),650);};
