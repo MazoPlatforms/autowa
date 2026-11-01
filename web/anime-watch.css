@@ -32,3 +32,6 @@
 .anime-suggestions .tv-row{padding-bottom:6px}
 .anime-watch .filmgo-player-actions a{text-decoration:none}
 @media(max-width:560px){.anime-watch-hero{padding:14px;border-radius:20px}.anime-nav-button{padding:0 14px}.anime-ep-grid{grid-template-columns:repeat(auto-fill,minmax(54px,1fr))}}
+
+/* Watch page keeps the global header but drops the Movies / Anime toggle: two-column header (brand | account). */
+.tv-nav-inner{grid-template-columns:1fr auto}

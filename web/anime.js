@@ -147,12 +147,15 @@ function render(){
 }
 function showDetail(a){
  const root=$('detail-content');root.replaceChildren();
+ const bg=el('div','tv-detail-bg');bg.setAttribute('aria-hidden','true');bg.style.setProperty('--bg-img','url("'+poster(a).replace(/"/g,'%22')+'")');root.append(bg);
  const layout=el('div','detail-hero');layout.append(image(a,'detail-poster',true,true));
  const info=el('div');info.append(el('p','anime-kicker','Anime details'),el('h1','anime-detail-title',a.title));
  info.append(el('p','anime-detail-meta',[a.year,a.type,a.episodes_total?a.episodes_total+' episodes':'',a.status].filter(Boolean).join(' · ')));
  if(a.rating)info.append(el('p','anime-detail-rating','★ '+a.rating));
  const g=genresOf(a);if(g.length)info.append(el('p','anime-detail-line',g.join(' · ')));
  if(a.studio)info.append(el('p','anime-detail-line','Studio: '+a.studio));
+ {const firstEp=(Array.isArray(a.episodes)?[...a.episodes]:[]).sort((x,y)=>(Number(x.season)||1)-(Number(y.season)||1)||episodeNumber(x)-episodeNumber(y)).find(e=>typeof e.slug_id==='string'&&/^[A-Za-z0-9_-]{8,80}$/.test(e.slug_id));
+  if(firstEp){const cta=el('a','tv-btn tv-btn-primary anime-detail-cta');cta.href='/anime/watch/'+encodeURIComponent(firstEp.slug_id);cta.append(playIcon(),document.createTextNode('Watch '+(String(firstEp.special_type||'').trim()||'Episode')+' '+episodeNumber(firstEp)));info.append(cta);}}
  layout.append(info);root.append(layout);
  const overview=el('div','anime-overview');overview.append(el('h2','','Overview'),el('p','',a.plot||'No synopsis available yet.'));root.append(overview);
  const eps=el('div','anime-eps');const head=el('div','anime-eps-head');const list=Array.isArray(a.episodes)?[...a.episodes].sort((x,y)=>(Number(x.season)||1)-(Number(y.season)||1)||episodeNumber(x)-episodeNumber(y)):[];
@@ -181,6 +184,7 @@ async function loadAnimeDetail(key){
 function route(){
  const match=location.pathname.match(/^\/anime\/title\/([^/]+)\/?$/);
  $('anime-back')?.classList.toggle('visible',!!match);
+ document.body.classList.toggle('is-detail',!!match);
  if(match){
   const key=decodeURIComponent(match[1]),a=items.find(x=>x.slug_id===key||x.id===key);
   home.classList.add('hidden');detail.classList.remove('hidden');
@@ -194,6 +198,8 @@ function route(){
 searchInput.addEventListener('input',()=>{page=1;render();});
 for(const select of [yearFilter,genreFilter,sortFilter])select.addEventListener('change',()=>{if(updatingFilters)return;page=1;render();});
 window.addEventListener('popstate',route);
+$('detail-close')?.addEventListener('click',e=>{if(e.ctrlKey||e.metaKey||e.shiftKey||e.altKey)return;if(location.pathname.startsWith('/anime/title/')){e.preventDefault();history.pushState({},'','/anime');route();}});
+{let lastY=0;window.addEventListener('scroll',()=>{const btn=$('detail-close');if(!btn)return;const y=window.scrollY;if(y<=120||y<lastY-4)btn.classList.remove('is-tucked');else if(y>lastY+4)btn.classList.add('is-tucked');lastY=y;},{passive:true});}
 (async()=>{
  if(location.pathname.startsWith('/anime/title/'))route();else skeleton();
  try{const response=await fetch('/api/anime?summary=1',{cache:'no-store',credentials:'same-origin'});if(!response.ok)throw Error('Anime unavailable');const data=await response.json();items=Array.isArray(data.anime)?data.anime:[];}

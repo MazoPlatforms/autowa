@@ -740,3 +740,28 @@ html{background:#0a0a0b;scroll-behavior:smooth}
 #detail-content>div.tv-detail-bg:not(.detail-hero){max-width:none!important;margin:0!important;padding:0!important;border:0!important}
 #catalog-results-title{scroll-margin-top:84px}
 @media(max-width:640px){.tv .detail-hero h1{font-size:clamp(24px,7.4vw,32px)!important;overflow-wrap:break-word!important;word-break:normal;letter-spacing:-.025em!important}.tv .detail-hero{grid-template-columns:116px minmax(0,1fr)!important;gap:16px!important}}
+
+/* ---------- Detail overlay (movie + anime details) ----------
+   On /title/{slug} and /anime/title/{slug} the global header and the Movies / Anime toggle are hidden and the
+   page reads as an overlay on top of the home view, closed with a single floating X. body.is-detail is set by
+   catalog.js / anime.js route(). Every other page keeps the header. */
+.detail-close{display:none}
+body.is-detail .tv-nav{display:none}
+body.is-detail .tv-main{padding-top:clamp(64px,9vw,84px)}
+body.is-detail .detail-close{position:fixed;z-index:40;top:max(14px,env(safe-area-inset-top));right:max(clamp(16px,4vw,48px),calc((100vw - 1280px)/2 + clamp(16px,4vw,48px)));display:grid;place-items:center;width:44px;height:44px;border:1px solid rgba(255,255,255,.2);border-radius:50%;background:rgba(18,18,20,.55);backdrop-filter:blur(18px) saturate(170%);-webkit-backdrop-filter:blur(18px) saturate(170%);color:#fafafa;box-shadow:0 8px 28px rgba(0,0,0,.45);transition:background .2s,border-color .2s,opacity .25s,transform .25s cubic-bezier(.2,.7,.2,1)}
+body.is-detail .detail-close:hover{background:rgba(255,255,255,.18);border-color:rgba(255,255,255,.34);transform:scale(1.06)}
+body.is-detail .detail-close:active{transform:scale(.94)}
+/* Tucks away while scrolling down so it never covers episode Play buttons; returns on scroll up. */
+body.is-detail .detail-close.is-tucked{opacity:0;transform:translateY(-72px) scale(.9);pointer-events:none}
+body.is-detail .detail-close:focus-visible{outline:2px solid #fafafa;outline-offset:3px}
+body.is-detail .tv-detail-bg{top:-84px}
+@keyframes detail-overlay-in{from{opacity:0;transform:translateY(22px) scale(.992)}to{opacity:1;transform:none}}
+body.is-detail #catalog-detail,body.is-detail #anime-detail{animation:detail-overlay-in .42s cubic-bezier(.2,.8,.2,1) both}
+.tv #anime-detail{position:relative;isolation:isolate;padding-top:24px}
+/* Hero polish: roomier poster, rating pill, calmer meta lines */
+body.is-detail .detail-hero{padding-top:8px}
+body.is-detail .detail-poster{border-radius:22px!important;box-shadow:0 36px 90px rgba(0,0,0,.7),0 0 0 1px rgba(255,255,255,.12)!important}
+body.is-detail .detail-hero p.font-semibold.text-zinc-200,body.is-detail .anime-detail-rating{display:inline-flex;align-items:center;gap:6px;width:fit-content;padding:5px 13px;border-radius:999px;background:rgba(252,211,77,.12);border:1px solid rgba(252,211,77,.28);color:#fcd34d!important;font-size:13px!important;font-weight:700}
+body.is-detail #detail-content>div.mt-9,body.is-detail #detail-content>section.mt-9{margin-top:40px!important}
+body.is-detail #catalog-detail .mt-9.max-w-3xl p.leading-7{max-width:68ch;color:#b4b4bc}
+@media(max-width:640px){body.is-detail .tv-main{padding-top:68px}body.is-detail .detail-close{width:42px;height:42px}}
