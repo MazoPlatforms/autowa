@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-01T21:41:51.461Z",
+  "updated_at": 1793569365,
   "anime": [
     {
       "slug_id": "naruto",
@@ -6555,7 +6555,7 @@
         "10": "/banners/naruto-season-10.webp",
         "11": "/banners/naruto-season-11.webp"
       },
-      "updated_at": "2026-11-01T21:40:51Z"
+      "updated_at": "2026-11-01T21:42:44Z"
     },
     {
       "slug_id": "naruto-shippuden",
@@ -18545,7 +18545,7 @@
       "status": "Finished",
       "episodes_total": 500,
       "studio": "Studio Pierrot",
-      "updated_at": "2026-11-01T21:40:52Z"
+      "updated_at": "2026-11-01T21:42:45Z"
     },
     {
       "slug_id": "attack-on-titan",
@@ -24216,22 +24216,22 @@
       "episodes_total": 25,
       "year": 2013,
       "studio": "WIT STUDIO",
-      "updated_at": "2026-11-01T21:40:49Z"
+      "updated_at": "2026-11-01T21:42:42Z"
     },
     {
-      "slug_id": "anime",
-      "title": "Attack on Titan The Final Chapter 30",
+      "slug_id": "attack-on-titan-the-final-chapter-30",
+      "title": "Attack on Titan Final Season THE FINAL CHAPTERS Special 2",
       "episodes": [
         {
-          "slug_id": "TFBeRZJIwEqSY0oM",
-          "telegram_message_id": 876,
+          "slug_id": "yfPP5CHcBfisbEFD",
+          "telegram_message_id": 878,
           "episode": 1,
           "season": 4,
           "special_type": null,
           "part": null,
-          "quality": "720p",
-          "file_size": 228831315,
-          "file_name": "_Attack_on_Titan_The_Final_Chapter_S04_E01_29_Tamil_720p_@official.mkv",
+          "quality": "480P",
+          "file_size": 141237376,
+          "file_name": "_Attack_on_Titan_The_Final_Chapter_S04_E01_30_Tamil_480p_@official.mkv",
           "mime_type": "video/x-matroska",
           "qualities": {
             "480P": {
@@ -24241,9 +24241,57 @@
               "season": 4,
               "special_type": null,
               "part": null,
-              "quality": "480p",
+              "quality": "480P",
               "file_size": 141237376,
               "file_name": "_Attack_on_Titan_The_Final_Chapter_S04_E01_30_Tamil_480p_@official.mkv",
+              "mime_type": "video/x-matroska"
+            }
+          }
+        }
+      ],
+      "poster": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx162314-qIWdAAFtvY8J.jpg",
+      "plot": "Eren, as the Founding Titan, advances on Fort Salta with countless other Titans. Appearing before the refugees, who stand on the brink of despair, are Mikasa, Armin, Jean, Conny, Reiner, Pieck, and Levi, who narrowly escaped from the rumbling. The battle between former comrades and childhood friends with Eren concludes here.\n\n(Source: Crunchyroll)",
+      "genre": [
+        "Action",
+        "Drama",
+        "Fantasy",
+        "Psychological",
+        "Romance"
+      ],
+      "rating": 8.7,
+      "status": "Finished",
+      "episodes_total": 1,
+      "year": 2023,
+      "studio": "MAPPA",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Attack_on_Titan_season_4",
+      "updated_at": "2026-11-01T21:42:33Z"
+    },
+    {
+      "slug_id": "attack-on-titan-the-final-chapter-29",
+      "title": "Attack on Titan Final Season THE FINAL CHAPTERS Special 2",
+      "episodes": [
+        {
+          "slug_id": "TFBeRZJIwEqSY0oM",
+          "telegram_message_id": 876,
+          "episode": 1,
+          "season": 4,
+          "special_type": null,
+          "part": null,
+          "quality": "720P",
+          "file_size": 228831315,
+          "file_name": "_Attack_on_Titan_The_Final_Chapter_S04_E01_29_Tamil_720p_@official.mkv",
+          "mime_type": "video/x-matroska",
+          "qualities": {
+            "1080P": {
+              "slug_id": "03jPgPt62Y43cIRf",
+              "telegram_message_id": 877,
+              "episode": 1,
+              "season": 4,
+              "special_type": null,
+              "part": null,
+              "quality": "1080P",
+              "file_size": 333221128,
+              "file_name": "_Attack_on_Titan_The_Final_Chapter_S04_E01_29_Tamil_1080p_@official.mkv",
               "mime_type": "video/x-matroska"
             },
             "720P": {
@@ -24253,35 +24301,42 @@
               "season": 4,
               "special_type": null,
               "part": null,
-              "quality": "720p",
+              "quality": "720P",
               "file_size": 228831315,
               "file_name": "_Attack_on_Titan_The_Final_Chapter_S04_E01_29_Tamil_720p_@official.mkv",
               "mime_type": "video/x-matroska"
             },
-            "1080P": {
-              "slug_id": "03jPgPt62Y43cIRf",
-              "telegram_message_id": 877,
+            "480P": {
+              "slug_id": "f-4FWjKhbSfy2lZs",
+              "telegram_message_id": 875,
               "episode": 1,
               "season": 4,
               "special_type": null,
               "part": null,
-              "quality": "1080p",
-              "file_size": 333221128,
-              "file_name": "_Attack_on_Titan_The_Final_Chapter_S04_E01_29_Tamil_1080p_@official.mkv",
+              "quality": "480P",
+              "file_size": 83895668,
+              "file_name": "_Attack_on_Titan_The_Final_Chapter_S04_E01_29_Tamil_480p_@official.mkv",
               "mime_type": "video/x-matroska"
             }
           }
         }
       ],
-      "year": "2026",
-      "poster": "https://upload.wikimedia.org/wikipedia/en/d/d6/Shingeki_no_Kyojin_manga_volume_1.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
-      "plot": "\n\nAttack on Titan is a Japanese dark fantasy anime television series based on Hajime Isayama's Attack on Titan manga series. It is set in a world where humanity lives inside cities surrounded by enormous walls due to the Titans, gigantic humanoid beings who devour humans seemingly without reason. The story follows the adventures of Eren Yeager, and his friends Mikasa Ackerman and Armin Arlert, whose lives are changed forever after the Colossal Titan breaches the wall of their home town. Vowing revenge and to reclaim the world from the Titans, Eren and his friends join the Scout Regiment, an elite group of soldiers who fight Titans.",
-      "genre": [],
-      "rating": null,
-      "status": null,
-      "episodes_total": null,
-      "studio": null,
-      "updated_at": "2026-11-01T21:41:51.461Z"
+      "poster": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx162314-qIWdAAFtvY8J.jpg",
+      "plot": "Eren, as the Founding Titan, advances on Fort Salta with countless other Titans. Appearing before the refugees, who stand on the brink of despair, are Mikasa, Armin, Jean, Conny, Reiner, Pieck, and Levi, who narrowly escaped from the rumbling. The battle between former comrades and childhood friends with Eren concludes here.\n\n(Source: Crunchyroll)",
+      "genre": [
+        "Action",
+        "Drama",
+        "Fantasy",
+        "Psychological",
+        "Romance"
+      ],
+      "rating": 8.7,
+      "status": "Finished",
+      "episodes_total": 1,
+      "year": 2023,
+      "studio": "MAPPA",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Attack_on_Titan_season_4",
+      "updated_at": "2026-11-01T21:42:40Z"
     }
   ]
 }

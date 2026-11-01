@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": 1793569252,
+  "updated_at": 1793569365,
   "anime": {
     "slug_id": "attack-on-titan",
     "title": "Attack on Titan",
@@ -5670,6 +5670,6 @@
     "episodes_total": 25,
     "year": 2013,
     "studio": "WIT STUDIO",
-    "updated_at": "2026-11-01T21:40:49Z"
+    "updated_at": "2026-11-01T21:42:42Z"
   }
 }
