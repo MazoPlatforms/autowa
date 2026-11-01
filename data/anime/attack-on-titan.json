@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "updated_at": 1793563838,
+  "updated_at": 1793566974,
   "anime": {
     "slug_id": "attack-on-titan",
     "title": "Attack on Titan",
     "episodes": [
       {
-        "slug_id": "8vbWLvFtoju2Oi2M",
+        "slug_id": "-Bfp3Mrk5iBry12L",
         "telegram_message_id": 615,
         "episode": 1,
         "season": 1,
@@ -21,7 +21,7 @@
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242650.jpg",
         "qualities": {
           "1080P": {
-            "slug_id": "rnfokvOMZsDipB2V",
+            "slug_id": "Oxa3INZOfXudXk9x",
             "telegram_message_id": 616,
             "episode": 1,
             "season": 1,
@@ -36,7 +36,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242650.jpg"
           },
           "720P": {
-            "slug_id": "8vbWLvFtoju2Oi2M",
+            "slug_id": "-Bfp3Mrk5iBry12L",
             "telegram_message_id": 615,
             "episode": 1,
             "season": 1,
@@ -51,7 +51,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242650.jpg"
           },
           "480P": {
-            "slug_id": "imYSOY2nhYWvAoJL",
+            "slug_id": "v536-OLpfPb5P3Fa",
             "telegram_message_id": 614,
             "episode": 1,
             "season": 1,
@@ -68,7 +68,7 @@
         }
       },
       {
-        "slug_id": "aQ8x5UaicEdF7Wfg",
+        "slug_id": "x8NnmC06G2MVEJ5o",
         "telegram_message_id": 606,
         "episode": 1,
         "season": 1,
@@ -83,7 +83,7 @@
         "frame": "https://raw.githubusercontent.com/MazoPlatforms/autowa/main/web/frames/anime/attack-on-titan-oad-001.jpg",
         "qualities": {
           "720P": {
-            "slug_id": "aQ8x5UaicEdF7Wfg",
+            "slug_id": "x8NnmC06G2MVEJ5o",
             "telegram_message_id": 606,
             "episode": 1,
             "season": 1,
@@ -100,7 +100,7 @@
         }
       },
       {
-        "slug_id": "euENqv5fmvo7jG_-",
+        "slug_id": "X9JBhzKLNgeaC8Z2",
         "telegram_message_id": 618,
         "episode": 2,
         "season": 1,
@@ -115,7 +115,7 @@
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242651.jpg",
         "qualities": {
           "1080P": {
-            "slug_id": "hMOH_awMbK5lZcD5",
+            "slug_id": "6IiRnEJe8xdghnzN",
             "telegram_message_id": 619,
             "episode": 2,
             "season": 1,
@@ -130,7 +130,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242651.jpg"
           },
           "720P": {
-            "slug_id": "euENqv5fmvo7jG_-",
+            "slug_id": "X9JBhzKLNgeaC8Z2",
             "telegram_message_id": 618,
             "episode": 2,
             "season": 1,
@@ -145,7 +145,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242651.jpg"
           },
           "480P": {
-            "slug_id": "bMtv4vhLSSks7nWD",
+            "slug_id": "wHTqYwgA0bC3AXhD",
             "telegram_message_id": 617,
             "episode": 2,
             "season": 1,
@@ -162,7 +162,7 @@
         }
       },
       {
-        "slug_id": "g912uY3Y3nehve0-",
+        "slug_id": "KIBT6SaJJiuIXCz3",
         "telegram_message_id": 607,
         "episode": 2,
         "season": 1,
@@ -177,7 +177,7 @@
         "frame": "https://raw.githubusercontent.com/MazoPlatforms/autowa/main/web/frames/anime/attack-on-titan-oad-002.jpg",
         "qualities": {
           "720P": {
-            "slug_id": "g912uY3Y3nehve0-",
+            "slug_id": "KIBT6SaJJiuIXCz3",
             "telegram_message_id": 607,
             "episode": 2,
             "season": 1,
@@ -194,7 +194,7 @@
         }
       },
       {
-        "slug_id": "op6tfv9hXBBYMcyA",
+        "slug_id": "ylWYV7syy4M3Hs1p",
         "telegram_message_id": 621,
         "episode": 3,
         "season": 1,
@@ -209,7 +209,7 @@
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242652.jpg",
         "qualities": {
           "1080P": {
-            "slug_id": "v8lb6RK8pPegpd5s",
+            "slug_id": "X0amvkEUf-CiGOeC",
             "telegram_message_id": 622,
             "episode": 3,
             "season": 1,
@@ -224,7 +224,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242652.jpg"
           },
           "720P": {
-            "slug_id": "op6tfv9hXBBYMcyA",
+            "slug_id": "ylWYV7syy4M3Hs1p",
             "telegram_message_id": 621,
             "episode": 3,
             "season": 1,
@@ -239,7 +239,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242652.jpg"
           },
           "480P": {
-            "slug_id": "e7gyBpBcfE86oVFJ",
+            "slug_id": "17tdp6vLyc6IxRkv",
             "telegram_message_id": 620,
             "episode": 3,
             "season": 1,
@@ -256,7 +256,7 @@
         }
       },
       {
-        "slug_id": "-G6DlCdZfff407tV",
+        "slug_id": "Rt8LGP0kXuRZu8Km",
         "telegram_message_id": 608,
         "episode": 3,
         "season": 1,
@@ -271,7 +271,7 @@
         "frame": "https://raw.githubusercontent.com/MazoPlatforms/autowa/main/web/frames/anime/attack-on-titan-oad-003.jpg",
         "qualities": {
           "720P": {
-            "slug_id": "-G6DlCdZfff407tV",
+            "slug_id": "Rt8LGP0kXuRZu8Km",
             "telegram_message_id": 608,
             "episode": 3,
             "season": 1,
@@ -288,7 +288,7 @@
         }
       },
       {
-        "slug_id": "6wxZbzISgwgJqJfe",
+        "slug_id": "k4bz-OXv-xi7dZKJ",
         "telegram_message_id": 624,
         "episode": 4,
         "season": 1,
@@ -303,7 +303,7 @@
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357583.jpg",
         "qualities": {
           "1080P": {
-            "slug_id": "BjJKgBiFPnusKTH6",
+            "slug_id": "mvMwL_gGqQZmizer",
             "telegram_message_id": 625,
             "episode": 4,
             "season": 1,
@@ -318,7 +318,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357583.jpg"
           },
           "720P": {
-            "slug_id": "6wxZbzISgwgJqJfe",
+            "slug_id": "k4bz-OXv-xi7dZKJ",
             "telegram_message_id": 624,
             "episode": 4,
             "season": 1,
@@ -333,7 +333,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357583.jpg"
           },
           "480P": {
-            "slug_id": "2WPnyURlZYa8KhDy",
+            "slug_id": "6IWWt38NSTCrvdnm",
             "telegram_message_id": 623,
             "episode": 4,
             "season": 1,
@@ -350,7 +350,7 @@
         }
       },
       {
-        "slug_id": "3LAdhMqxKoPYSara",
+        "slug_id": "DRLhN8nBd7vWqFmg",
         "telegram_message_id": 609,
         "episode": 4,
         "season": 1,
@@ -365,7 +365,7 @@
         "frame": "https://raw.githubusercontent.com/MazoPlatforms/autowa/main/web/frames/anime/attack-on-titan-oad-004.jpg",
         "qualities": {
           "720P": {
-            "slug_id": "3LAdhMqxKoPYSara",
+            "slug_id": "DRLhN8nBd7vWqFmg",
             "telegram_message_id": 609,
             "episode": 4,
             "season": 1,
@@ -382,7 +382,7 @@
         }
       },
       {
-        "slug_id": "rvM3TF_XpCBLwnUZ",
+        "slug_id": "Mce39PmXrWlFc_fF",
         "telegram_message_id": 627,
         "episode": 5,
         "season": 1,
@@ -397,7 +397,7 @@
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357587.jpg",
         "qualities": {
           "1080P": {
-            "slug_id": "igLYJj5Mine7OPzU",
+            "slug_id": "EtcEJV1QIsnC5zhq",
             "telegram_message_id": 628,
             "episode": 5,
             "season": 1,
@@ -412,7 +412,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357587.jpg"
           },
           "720P": {
-            "slug_id": "rvM3TF_XpCBLwnUZ",
+            "slug_id": "Mce39PmXrWlFc_fF",
             "telegram_message_id": 627,
             "episode": 5,
             "season": 1,
@@ -427,7 +427,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357587.jpg"
           },
           "480P": {
-            "slug_id": "cXbJjOcYKqojXlKE",
+            "slug_id": "KboPFdQaGEk-_4Ta",
             "telegram_message_id": 626,
             "episode": 5,
             "season": 1,
@@ -444,7 +444,7 @@
         }
       },
       {
-        "slug_id": "5SlixS1JXEE_rlJc",
+        "slug_id": "rv1sWdPfjiNLLPTU",
         "telegram_message_id": 610,
         "episode": 5,
         "season": 1,
@@ -459,7 +459,7 @@
         "frame": "https://raw.githubusercontent.com/MazoPlatforms/autowa/main/web/frames/anime/attack-on-titan-oad-005.jpg",
         "qualities": {
           "720P": {
-            "slug_id": "5SlixS1JXEE_rlJc",
+            "slug_id": "rv1sWdPfjiNLLPTU",
             "telegram_message_id": 610,
             "episode": 5,
             "season": 1,
@@ -476,7 +476,7 @@
         }
       },
       {
-        "slug_id": "M-DNGqG4l2t9r3WY",
+        "slug_id": "yUPrhdq9HkPbCYzg",
         "telegram_message_id": 630,
         "episode": 6,
         "season": 1,
@@ -491,7 +491,7 @@
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242630.jpg",
         "qualities": {
           "1080P": {
-            "slug_id": "c98udu85rOLZ0i5g",
+            "slug_id": "zQd3cbHf1EsHBKj8",
             "telegram_message_id": 631,
             "episode": 6,
             "season": 1,
@@ -506,7 +506,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242630.jpg"
           },
           "720P": {
-            "slug_id": "M-DNGqG4l2t9r3WY",
+            "slug_id": "yUPrhdq9HkPbCYzg",
             "telegram_message_id": 630,
             "episode": 6,
             "season": 1,
@@ -521,7 +521,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242630.jpg"
           },
           "480P": {
-            "slug_id": "h0QcovmWbnb5ZNOx",
+            "slug_id": "eVqk5AC82lv4ZScY",
             "telegram_message_id": 629,
             "episode": 6,
             "season": 1,
@@ -538,7 +538,7 @@
         }
       },
       {
-        "slug_id": "xgjf1LFMVYa8fWn1",
+        "slug_id": "tfor7ejmSXJMkaar",
         "telegram_message_id": 611,
         "episode": 6,
         "season": 1,
@@ -553,7 +553,7 @@
         "frame": "https://raw.githubusercontent.com/MazoPlatforms/autowa/main/web/frames/anime/attack-on-titan-oad-006.jpg",
         "qualities": {
           "720P": {
-            "slug_id": "xgjf1LFMVYa8fWn1",
+            "slug_id": "tfor7ejmSXJMkaar",
             "telegram_message_id": 611,
             "episode": 6,
             "season": 1,
@@ -570,7 +570,7 @@
         }
       },
       {
-        "slug_id": "PGZb0kLNODFucjjW",
+        "slug_id": "GTqGOQVMiGUGUwyc",
         "telegram_message_id": 633,
         "episode": 7,
         "season": 1,
@@ -585,7 +585,7 @@
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242629.jpg",
         "qualities": {
           "1080P": {
-            "slug_id": "_bEZiahPGWI4_SdM",
+            "slug_id": "FEfm_CEev2UicNLU",
             "telegram_message_id": 634,
             "episode": 7,
             "season": 1,
@@ -600,7 +600,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242629.jpg"
           },
           "720P": {
-            "slug_id": "PGZb0kLNODFucjjW",
+            "slug_id": "GTqGOQVMiGUGUwyc",
             "telegram_message_id": 633,
             "episode": 7,
             "season": 1,
@@ -615,7 +615,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242629.jpg"
           },
           "480P": {
-            "slug_id": "VREDN4XUQbk0EOXp",
+            "slug_id": "sJaInAFyZhNotrxu",
             "telegram_message_id": 632,
             "episode": 7,
             "season": 1,
@@ -632,7 +632,7 @@
         }
       },
       {
-        "slug_id": "v22UrZfT5IH_FwaV",
+        "slug_id": "WE7RXP6zEGeGW0xs",
         "telegram_message_id": 612,
         "episode": 7,
         "season": 1,
@@ -647,7 +647,7 @@
         "frame": "https://raw.githubusercontent.com/MazoPlatforms/autowa/main/web/frames/anime/attack-on-titan-oad-007.jpg",
         "qualities": {
           "720P": {
-            "slug_id": "v22UrZfT5IH_FwaV",
+            "slug_id": "WE7RXP6zEGeGW0xs",
             "telegram_message_id": 612,
             "episode": 7,
             "season": 1,
@@ -664,7 +664,7 @@
         }
       },
       {
-        "slug_id": "Q1Zwy1gPHp9RHemP",
+        "slug_id": "KSokcnrC5UtqMhUG",
         "telegram_message_id": 636,
         "episode": 8,
         "season": 1,
@@ -679,7 +679,7 @@
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242631.jpg",
         "qualities": {
           "1080P": {
-            "slug_id": "2HEqVvXnJOD3vZSS",
+            "slug_id": "6AoK6ObrpaP-iLVm",
             "telegram_message_id": 637,
             "episode": 8,
             "season": 1,
@@ -694,7 +694,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242631.jpg"
           },
           "720P": {
-            "slug_id": "Q1Zwy1gPHp9RHemP",
+            "slug_id": "KSokcnrC5UtqMhUG",
             "telegram_message_id": 636,
             "episode": 8,
             "season": 1,
@@ -709,7 +709,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242631.jpg"
           },
           "480P": {
-            "slug_id": "XAGIBFnUF1fvxbi6",
+            "slug_id": "wj2shHNg-Av2sGNj",
             "telegram_message_id": 635,
             "episode": 8,
             "season": 1,
@@ -726,7 +726,7 @@
         }
       },
       {
-        "slug_id": "uPfqM6OrJeN9ycNz",
+        "slug_id": "WAVZoDmsLkXlbEif",
         "telegram_message_id": 613,
         "episode": 8,
         "season": 1,
@@ -741,7 +741,7 @@
         "frame": "https://raw.githubusercontent.com/MazoPlatforms/autowa/main/web/frames/anime/attack-on-titan-oad-008.jpg",
         "qualities": {
           "720P": {
-            "slug_id": "uPfqM6OrJeN9ycNz",
+            "slug_id": "WAVZoDmsLkXlbEif",
             "telegram_message_id": 613,
             "episode": 8,
             "season": 1,
@@ -758,7 +758,7 @@
         }
       },
       {
-        "slug_id": "UDCNslLIxRtJVehI",
+        "slug_id": "SCOFD4pTF3oq2f6a",
         "telegram_message_id": 639,
         "episode": 9,
         "season": 1,
@@ -773,7 +773,7 @@
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242632.jpg",
         "qualities": {
           "1080P": {
-            "slug_id": "pF5o9YJ0-w8-Y5qY",
+            "slug_id": "xq1oAu_B013ofhim",
             "telegram_message_id": 640,
             "episode": 9,
             "season": 1,
@@ -788,7 +788,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242632.jpg"
           },
           "720P": {
-            "slug_id": "UDCNslLIxRtJVehI",
+            "slug_id": "SCOFD4pTF3oq2f6a",
             "telegram_message_id": 639,
             "episode": 9,
             "season": 1,
@@ -803,7 +803,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242632.jpg"
           },
           "480P": {
-            "slug_id": "bKeTfAr0zEdG_cBP",
+            "slug_id": "q2WQa4In9FZCdZoh",
             "telegram_message_id": 638,
             "episode": 9,
             "season": 1,
@@ -820,7 +820,7 @@
         }
       },
       {
-        "slug_id": "Db4kIQBtdsWYxGXA",
+        "slug_id": "1W9nCJAbEa18ltOU",
         "telegram_message_id": 642,
         "episode": 10,
         "season": 1,
@@ -835,7 +835,7 @@
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242633.jpg",
         "qualities": {
           "1080P": {
-            "slug_id": "q_bXUpZkqVEPpNuC",
+            "slug_id": "4j3WuYYpFXdRYZxY",
             "telegram_message_id": 643,
             "episode": 10,
             "season": 1,
@@ -850,7 +850,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242633.jpg"
           },
           "720P": {
-            "slug_id": "Db4kIQBtdsWYxGXA",
+            "slug_id": "1W9nCJAbEa18ltOU",
             "telegram_message_id": 642,
             "episode": 10,
             "season": 1,
@@ -865,7 +865,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242633.jpg"
           },
           "480P": {
-            "slug_id": "f6QpJaNSuzVF5kww",
+            "slug_id": "_52nKiuOTG_Ve4Dc",
             "telegram_message_id": 641,
             "episode": 10,
             "season": 1,
@@ -882,7 +882,7 @@
         }
       },
       {
-        "slug_id": "vqiOK2WOK5haebHo",
+        "slug_id": "Pv5UZMouHMfWpFSI",
         "telegram_message_id": 645,
         "episode": 11,
         "season": 1,
@@ -897,7 +897,7 @@
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357835.jpg",
         "qualities": {
           "1080P": {
-            "slug_id": "w7NNhFEAt-y0nejR",
+            "slug_id": "aiMviNKcksvystvG",
             "telegram_message_id": 646,
             "episode": 11,
             "season": 1,
@@ -912,7 +912,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357835.jpg"
           },
           "720P": {
-            "slug_id": "vqiOK2WOK5haebHo",
+            "slug_id": "Pv5UZMouHMfWpFSI",
             "telegram_message_id": 645,
             "episode": 11,
             "season": 1,
@@ -927,7 +927,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357835.jpg"
           },
           "480P": {
-            "slug_id": "IO61qYWCaOTIqdq1",
+            "slug_id": "DNmuwcQ5kcsmIJHh",
             "telegram_message_id": 644,
             "episode": 11,
             "season": 1,
@@ -944,7 +944,7 @@
         }
       },
       {
-        "slug_id": "pm39jGn2jZbcKw_X",
+        "slug_id": "1psb8XEWGhgrJkwA",
         "telegram_message_id": 648,
         "episode": 12,
         "season": 1,
@@ -959,7 +959,7 @@
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357836.jpg",
         "qualities": {
           "1080P": {
-            "slug_id": "HzY4nLSaXIRrv60P",
+            "slug_id": "amxbxcXPogLlJM5g",
             "telegram_message_id": 649,
             "episode": 12,
             "season": 1,
@@ -974,7 +974,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357836.jpg"
           },
           "720P": {
-            "slug_id": "pm39jGn2jZbcKw_X",
+            "slug_id": "1psb8XEWGhgrJkwA",
             "telegram_message_id": 648,
             "episode": 12,
             "season": 1,
@@ -989,7 +989,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357836.jpg"
           },
           "480P": {
-            "slug_id": "de-prcawjvyus0Ag",
+            "slug_id": "tOnpp1G9H0ldXze_",
             "telegram_message_id": 647,
             "episode": 12,
             "season": 1,
@@ -1006,7 +1006,7 @@
         }
       },
       {
-        "slug_id": "mUVQnaTWg92612cb",
+        "slug_id": "8v87qCsP56ODsgtv",
         "telegram_message_id": 651,
         "episode": 13,
         "season": 1,
@@ -1021,7 +1021,7 @@
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242637.jpg",
         "qualities": {
           "1080P": {
-            "slug_id": "mXqILRp-4qF6W6ds",
+            "slug_id": "M5dJdAnEpR5jQBQp",
             "telegram_message_id": 652,
             "episode": 13,
             "season": 1,
@@ -1036,7 +1036,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242637.jpg"
           },
           "720P": {
-            "slug_id": "mUVQnaTWg92612cb",
+            "slug_id": "8v87qCsP56ODsgtv",
             "telegram_message_id": 651,
             "episode": 13,
             "season": 1,
@@ -1051,7 +1051,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242637.jpg"
           },
           "480P": {
-            "slug_id": "LqOJTZGJ5deUUmcH",
+            "slug_id": "A8IA1K-7ydyp8Yx1",
             "telegram_message_id": 650,
             "episode": 13,
             "season": 1,
@@ -1068,7 +1068,7 @@
         }
       },
       {
-        "slug_id": "LhB6fasfG9sCGCha",
+        "slug_id": "or_KvrZoggWQahav",
         "telegram_message_id": 654,
         "episode": 14,
         "season": 1,
@@ -1083,7 +1083,7 @@
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242636.jpg",
         "qualities": {
           "1080P": {
-            "slug_id": "TQZqMc3l1u1vy4Gq",
+            "slug_id": "kxfCDNGp59xUBWdQ",
             "telegram_message_id": 655,
             "episode": 14,
             "season": 1,
@@ -1098,7 +1098,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242636.jpg"
           },
           "720P": {
-            "slug_id": "LhB6fasfG9sCGCha",
+            "slug_id": "or_KvrZoggWQahav",
             "telegram_message_id": 654,
             "episode": 14,
             "season": 1,
@@ -1113,7 +1113,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242636.jpg"
           },
           "480P": {
-            "slug_id": "vCoAtvdTnP93By9s",
+            "slug_id": "MpxvrVKYDGT0fYum",
             "telegram_message_id": 653,
             "episode": 14,
             "season": 1,
@@ -1130,7 +1130,7 @@
         }
       },
       {
-        "slug_id": "mJRnPlbj_pPwzrDa",
+        "slug_id": "ru2fgEtDR9ScpYBw",
         "telegram_message_id": 657,
         "episode": 15,
         "season": 1,
@@ -1145,7 +1145,7 @@
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242639.jpg",
         "qualities": {
           "1080P": {
-            "slug_id": "Xq3_LCEs77I1ozzn",
+            "slug_id": "kByaTqmJZnbiiE4P",
             "telegram_message_id": 658,
             "episode": 15,
             "season": 1,
@@ -1160,7 +1160,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242639.jpg"
           },
           "720P": {
-            "slug_id": "mJRnPlbj_pPwzrDa",
+            "slug_id": "ru2fgEtDR9ScpYBw",
             "telegram_message_id": 657,
             "episode": 15,
             "season": 1,
@@ -1175,7 +1175,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242639.jpg"
           },
           "480P": {
-            "slug_id": "CBd1RoROlk15Y6U2",
+            "slug_id": "ixSpwLcPHWonq1sY",
             "telegram_message_id": 656,
             "episode": 15,
             "season": 1,
@@ -1192,7 +1192,7 @@
         }
       },
       {
-        "slug_id": "AovjssgI3OHI8TlR",
+        "slug_id": "YTWUW6lN82BA23Z2",
         "telegram_message_id": 660,
         "episode": 16,
         "season": 1,
@@ -1207,7 +1207,7 @@
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242638.jpg",
         "qualities": {
           "1080P": {
-            "slug_id": "7G4LRy62B1MyjcY1",
+            "slug_id": "_8pM3mNfAaxSQ8VZ",
             "telegram_message_id": 661,
             "episode": 16,
             "season": 1,
@@ -1222,7 +1222,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242638.jpg"
           },
           "720P": {
-            "slug_id": "AovjssgI3OHI8TlR",
+            "slug_id": "YTWUW6lN82BA23Z2",
             "telegram_message_id": 660,
             "episode": 16,
             "season": 1,
@@ -1237,7 +1237,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242638.jpg"
           },
           "480P": {
-            "slug_id": "5XSD4RWCZl56OSHl",
+            "slug_id": "qrTaQNvo9SaL-b6R",
             "telegram_message_id": 659,
             "episode": 16,
             "season": 1,
@@ -1254,7 +1254,7 @@
         }
       },
       {
-        "slug_id": "ivPj_40Ebvrf6Hoo",
+        "slug_id": "oxON6H8hISEqRzrZ",
         "telegram_message_id": 663,
         "episode": 17,
         "season": 1,
@@ -1269,7 +1269,7 @@
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357858.jpg",
         "qualities": {
           "1080P": {
-            "slug_id": "G2iHvZkGwXyVLZu1",
+            "slug_id": "Nrbjtfw4jtOgZRFM",
             "telegram_message_id": 664,
             "episode": 17,
             "season": 1,
@@ -1284,7 +1284,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357858.jpg"
           },
           "720P": {
-            "slug_id": "ivPj_40Ebvrf6Hoo",
+            "slug_id": "oxON6H8hISEqRzrZ",
             "telegram_message_id": 663,
             "episode": 17,
             "season": 1,
@@ -1299,7 +1299,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357858.jpg"
           },
           "480P": {
-            "slug_id": "hHAsv_NNf6NHFkCv",
+            "slug_id": "pvVvg2ZP0S5Htghs",
             "telegram_message_id": 662,
             "episode": 17,
             "season": 1,
@@ -1316,7 +1316,7 @@
         }
       },
       {
-        "slug_id": "S_eck5XyHYdfd-j5",
+        "slug_id": "Isi-g7ZGOu5iROqD",
         "telegram_message_id": 666,
         "episode": 18,
         "season": 1,
@@ -1331,7 +1331,7 @@
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242640.jpg",
         "qualities": {
           "1080P": {
-            "slug_id": "NbCco6377E1CK339",
+            "slug_id": "37qZBbb-3U_QHl3r",
             "telegram_message_id": 667,
             "episode": 18,
             "season": 1,
@@ -1346,7 +1346,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242640.jpg"
           },
           "720P": {
-            "slug_id": "S_eck5XyHYdfd-j5",
+            "slug_id": "Isi-g7ZGOu5iROqD",
             "telegram_message_id": 666,
             "episode": 18,
             "season": 1,
@@ -1361,7 +1361,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242640.jpg"
           },
           "480P": {
-            "slug_id": "EZ-EzI1eOeh3jpMQ",
+            "slug_id": "-xRBvpt4-tGDqtpa",
             "telegram_message_id": 665,
             "episode": 18,
             "season": 1,
@@ -1378,7 +1378,7 @@
         }
       },
       {
-        "slug_id": "teirrmM48XfdPs7b",
+        "slug_id": "RhFIWEWMYs4gt78Q",
         "telegram_message_id": 669,
         "episode": 19,
         "season": 1,
@@ -1393,7 +1393,7 @@
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242642.jpg",
         "qualities": {
           "1080P": {
-            "slug_id": "JuDoSC0uXvj3zprN",
+            "slug_id": "UPjuNF3LZYEbaPfQ",
             "telegram_message_id": 670,
             "episode": 19,
             "season": 1,
@@ -1408,7 +1408,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242642.jpg"
           },
           "720P": {
-            "slug_id": "teirrmM48XfdPs7b",
+            "slug_id": "RhFIWEWMYs4gt78Q",
             "telegram_message_id": 669,
             "episode": 19,
             "season": 1,
@@ -1423,7 +1423,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242642.jpg"
           },
           "480P": {
-            "slug_id": "1kDUos60o3dGt9Le",
+            "slug_id": "XM1mqcmBnLVNybs6",
             "telegram_message_id": 668,
             "episode": 19,
             "season": 1,
@@ -1440,7 +1440,7 @@
         }
       },
       {
-        "slug_id": "rCYMDuY9em-SsQQM",
+        "slug_id": "k6YR4CgUJXP_ffRr",
         "telegram_message_id": 672,
         "episode": 20,
         "season": 1,
@@ -1455,7 +1455,7 @@
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242643.jpg",
         "qualities": {
           "1080P": {
-            "slug_id": "5uhWE0DelAfHBEqr",
+            "slug_id": "1PNdiy5T6XIyJ-pa",
             "telegram_message_id": 673,
             "episode": 20,
             "season": 1,
@@ -1470,7 +1470,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242643.jpg"
           },
           "720P": {
-            "slug_id": "rCYMDuY9em-SsQQM",
+            "slug_id": "k6YR4CgUJXP_ffRr",
             "telegram_message_id": 672,
             "episode": 20,
             "season": 1,
@@ -1485,7 +1485,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242643.jpg"
           },
           "480P": {
-            "slug_id": "kAHtBWHcRIr6PByo",
+            "slug_id": "NS6GsJQYq39XwdFL",
             "telegram_message_id": 671,
             "episode": 20,
             "season": 1,
@@ -1502,7 +1502,7 @@
         }
       },
       {
-        "slug_id": "Iwbm2azkojHlcErX",
+        "slug_id": "HlF5xHN73xdQo0ko",
         "telegram_message_id": 675,
         "episode": 21,
         "season": 1,
@@ -1517,7 +1517,7 @@
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357929.jpg",
         "qualities": {
           "1080P": {
-            "slug_id": "qtNybV11qZBd6MB0",
+            "slug_id": "mh8vr0rDofZJ7-bl",
             "telegram_message_id": 676,
             "episode": 21,
             "season": 1,
@@ -1532,7 +1532,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357929.jpg"
           },
           "720P": {
-            "slug_id": "Iwbm2azkojHlcErX",
+            "slug_id": "HlF5xHN73xdQo0ko",
             "telegram_message_id": 675,
             "episode": 21,
             "season": 1,
@@ -1547,7 +1547,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357929.jpg"
           },
           "480P": {
-            "slug_id": "eFS9tFKvBZPDOvUr",
+            "slug_id": "VYGK3C4mGA88xCRs",
             "telegram_message_id": 674,
             "episode": 21,
             "season": 1,
@@ -1564,7 +1564,7 @@
         }
       },
       {
-        "slug_id": "nfnMbE6jx-tL4Hwr",
+        "slug_id": "MqquSEEgVqXlPaW5",
         "telegram_message_id": 678,
         "episode": 22,
         "season": 1,
@@ -1579,7 +1579,7 @@
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242646.jpg",
         "qualities": {
           "1080P": {
-            "slug_id": "WgKYFVVB-LfSRpDb",
+            "slug_id": "IFdGVtw_c1tFuo8C",
             "telegram_message_id": 679,
             "episode": 22,
             "season": 1,
@@ -1594,7 +1594,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242646.jpg"
           },
           "720P": {
-            "slug_id": "nfnMbE6jx-tL4Hwr",
+            "slug_id": "MqquSEEgVqXlPaW5",
             "telegram_message_id": 678,
             "episode": 22,
             "season": 1,
@@ -1609,7 +1609,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242646.jpg"
           },
           "480P": {
-            "slug_id": "TMeZjYN8t7MF_00T",
+            "slug_id": "S3TV3yTr8-kgRymk",
             "telegram_message_id": 677,
             "episode": 22,
             "season": 1,
@@ -1626,7 +1626,7 @@
         }
       },
       {
-        "slug_id": "KkYtp_veufjxaU07",
+        "slug_id": "rpXSIJ0Ff0ODm3qk",
         "telegram_message_id": 681,
         "episode": 23,
         "season": 1,
@@ -1641,7 +1641,7 @@
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242645.jpg",
         "qualities": {
           "1080P": {
-            "slug_id": "1TyUnGMbTRAz8o-3",
+            "slug_id": "N0A59FCEFDvThvwX",
             "telegram_message_id": 682,
             "episode": 23,
             "season": 1,
@@ -1656,7 +1656,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242645.jpg"
           },
           "720P": {
-            "slug_id": "KkYtp_veufjxaU07",
+            "slug_id": "rpXSIJ0Ff0ODm3qk",
             "telegram_message_id": 681,
             "episode": 23,
             "season": 1,
@@ -1671,7 +1671,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242645.jpg"
           },
           "480P": {
-            "slug_id": "24f5Q2Zkgb0FyBwM",
+            "slug_id": "OWEoZCcslAYntSok",
             "telegram_message_id": 680,
             "episode": 23,
             "season": 1,
@@ -1688,7 +1688,7 @@
         }
       },
       {
-        "slug_id": "jLbxqC6ytYs9M1sy",
+        "slug_id": "sBW48wI_nvXAqiiN",
         "telegram_message_id": 684,
         "episode": 24,
         "season": 1,
@@ -1703,7 +1703,7 @@
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242647.jpg",
         "qualities": {
           "1080P": {
-            "slug_id": "Lj5L9D4a2yyUpcPF",
+            "slug_id": "0kw8sn5PnE14tu_p",
             "telegram_message_id": 685,
             "episode": 24,
             "season": 1,
@@ -1718,7 +1718,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242647.jpg"
           },
           "720P": {
-            "slug_id": "jLbxqC6ytYs9M1sy",
+            "slug_id": "sBW48wI_nvXAqiiN",
             "telegram_message_id": 684,
             "episode": 24,
             "season": 1,
@@ -1733,7 +1733,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242647.jpg"
           },
           "480P": {
-            "slug_id": "WzQXVAtPLelsT_lV",
+            "slug_id": "4Lo9TTB0mfYuCtYx",
             "telegram_message_id": 683,
             "episode": 24,
             "season": 1,
@@ -1750,7 +1750,7 @@
         }
       },
       {
-        "slug_id": "gFWwONqeAiEimhf_",
+        "slug_id": "fL-bxQTALZ5OsLFM",
         "telegram_message_id": 687,
         "episode": 25,
         "season": 1,
@@ -1765,7 +1765,7 @@
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242648.jpg",
         "qualities": {
           "1080P": {
-            "slug_id": "8XOVASEo28bnVwGl",
+            "slug_id": "8qxAbgz0jUHQmmOu",
             "telegram_message_id": 688,
             "episode": 25,
             "season": 1,
@@ -1780,7 +1780,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242648.jpg"
           },
           "720P": {
-            "slug_id": "gFWwONqeAiEimhf_",
+            "slug_id": "fL-bxQTALZ5OsLFM",
             "telegram_message_id": 687,
             "episode": 25,
             "season": 1,
@@ -1795,7 +1795,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242648.jpg"
           },
           "480P": {
-            "slug_id": "mpYw8iZ7fAAwXBGE",
+            "slug_id": "ypToWUACtaxUOZMc",
             "telegram_message_id": 686,
             "episode": 25,
             "season": 1,
@@ -1812,7 +1812,7 @@
         }
       },
       {
-        "slug_id": "uJgrUK1Mflw2osEY",
+        "slug_id": "VLD0bJ7Wz0aZAZu-",
         "telegram_message_id": 690,
         "episode": 1,
         "season": 2,
@@ -1827,7 +1827,7 @@
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242650.jpg",
         "qualities": {
           "1080P": {
-            "slug_id": "GTbW91E9VaLkcmeP",
+            "slug_id": "UmUGvDHN5o_qVMxu",
             "telegram_message_id": 691,
             "episode": 1,
             "season": 2,
@@ -1842,7 +1842,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242650.jpg"
           },
           "720P": {
-            "slug_id": "uJgrUK1Mflw2osEY",
+            "slug_id": "VLD0bJ7Wz0aZAZu-",
             "telegram_message_id": 690,
             "episode": 1,
             "season": 2,
@@ -1857,7 +1857,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242650.jpg"
           },
           "480P": {
-            "slug_id": "WRWMkGK-05VOCIcs",
+            "slug_id": "qIUw5JL8vzQ_enG9",
             "telegram_message_id": 689,
             "episode": 1,
             "season": 2,
@@ -1874,7 +1874,7 @@
         }
       },
       {
-        "slug_id": "1ubTJswBm5dRjkd4",
+        "slug_id": "EA7YH506gVzBYY7K",
         "telegram_message_id": 693,
         "episode": 2,
         "season": 2,
@@ -1889,7 +1889,7 @@
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242651.jpg",
         "qualities": {
           "1080P": {
-            "slug_id": "rWeZVkEA6QpA0NSI",
+            "slug_id": "QvXPPyAtQvZmsO5C",
             "telegram_message_id": 694,
             "episode": 2,
             "season": 2,
@@ -1904,7 +1904,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242651.jpg"
           },
           "720P": {
-            "slug_id": "1ubTJswBm5dRjkd4",
+            "slug_id": "EA7YH506gVzBYY7K",
             "telegram_message_id": 693,
             "episode": 2,
             "season": 2,
@@ -1919,7 +1919,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242651.jpg"
           },
           "480P": {
-            "slug_id": "JAfS-qKybgnh_1Gd",
+            "slug_id": "PSkbVVxlHtbX_mT4",
             "telegram_message_id": 692,
             "episode": 2,
             "season": 2,
@@ -1936,7 +1936,7 @@
         }
       },
       {
-        "slug_id": "Mqynp-uvfx2QyPAG",
+        "slug_id": "P7wSR9Ldz1_T7FPF",
         "telegram_message_id": 696,
         "episode": 3,
         "season": 2,
@@ -1951,7 +1951,7 @@
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242652.jpg",
         "qualities": {
           "1080P": {
-            "slug_id": "-Lx0ZFGQHTdf7BwF",
+            "slug_id": "CmZ8mvgEwrvN26vK",
             "telegram_message_id": 697,
             "episode": 3,
             "season": 2,
@@ -1966,7 +1966,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242652.jpg"
           },
           "720P": {
-            "slug_id": "Mqynp-uvfx2QyPAG",
+            "slug_id": "P7wSR9Ldz1_T7FPF",
             "telegram_message_id": 696,
             "episode": 3,
             "season": 2,
@@ -1981,7 +1981,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242652.jpg"
           },
           "480P": {
-            "slug_id": "DCRDPGJaJ-jGSYOk",
+            "slug_id": "Cn3TC-um9woqZ5Lm",
             "telegram_message_id": 695,
             "episode": 3,
             "season": 2,
@@ -1998,7 +1998,7 @@
         }
       },
       {
-        "slug_id": "nWye7aUaSoy-sYRO",
+        "slug_id": "Xr5WiTI31NStNxJO",
         "telegram_message_id": 699,
         "episode": 4,
         "season": 2,
@@ -2013,7 +2013,7 @@
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357583.jpg",
         "qualities": {
           "1080P": {
-            "slug_id": "ClX9goWn2MXMxnEn",
+            "slug_id": "QWT_sHTIipVfsbgJ",
             "telegram_message_id": 700,
             "episode": 4,
             "season": 2,
@@ -2028,7 +2028,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357583.jpg"
           },
           "720P": {
-            "slug_id": "nWye7aUaSoy-sYRO",
+            "slug_id": "Xr5WiTI31NStNxJO",
             "telegram_message_id": 699,
             "episode": 4,
             "season": 2,
@@ -2043,7 +2043,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357583.jpg"
           },
           "480P": {
-            "slug_id": "YbFI7qhLKODhVrGd",
+            "slug_id": "IPTfsjxyhCGVTXfM",
             "telegram_message_id": 698,
             "episode": 4,
             "season": 2,
@@ -2060,7 +2060,7 @@
         }
       },
       {
-        "slug_id": "DxsX8coDNFaZq7d1",
+        "slug_id": "o2qTGSPTySwIyKAp",
         "telegram_message_id": 702,
         "episode": 5,
         "season": 2,
@@ -2075,7 +2075,7 @@
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357587.jpg",
         "qualities": {
           "1080P": {
-            "slug_id": "zpiRArPupsSA00gU",
+            "slug_id": "atVdsjsPOhHIu8rd",
             "telegram_message_id": 703,
             "episode": 5,
             "season": 2,
@@ -2090,7 +2090,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357587.jpg"
           },
           "720P": {
-            "slug_id": "DxsX8coDNFaZq7d1",
+            "slug_id": "o2qTGSPTySwIyKAp",
             "telegram_message_id": 702,
             "episode": 5,
             "season": 2,
@@ -2105,7 +2105,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357587.jpg"
           },
           "480P": {
-            "slug_id": "AVYzuaOHssA2hpfl",
+            "slug_id": "IEVWO1QGSGx7RbMN",
             "telegram_message_id": 701,
             "episode": 5,
             "season": 2,
@@ -2122,7 +2122,7 @@
         }
       },
       {
-        "slug_id": "1Prl_mK7fXukkDmm",
+        "slug_id": "7hzC4kEXOgt0kAOi",
         "telegram_message_id": 705,
         "episode": 6,
         "season": 2,
@@ -2137,7 +2137,7 @@
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242630.jpg",
         "qualities": {
           "1080P": {
-            "slug_id": "KOuO066gKP426Ohi",
+            "slug_id": "lt4kXWZ904oBzRRc",
             "telegram_message_id": 706,
             "episode": 6,
             "season": 2,
@@ -2152,7 +2152,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242630.jpg"
           },
           "720P": {
-            "slug_id": "1Prl_mK7fXukkDmm",
+            "slug_id": "7hzC4kEXOgt0kAOi",
             "telegram_message_id": 705,
             "episode": 6,
             "season": 2,
@@ -2167,7 +2167,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242630.jpg"
           },
           "480P": {
-            "slug_id": "nixO1XmVTMKwlAeM",
+            "slug_id": "y8_kJzvSshkZZ4h3",
             "telegram_message_id": 704,
             "episode": 6,
             "season": 2,
@@ -2184,7 +2184,7 @@
         }
       },
       {
-        "slug_id": "foZL_L0t_WOQmyj6",
+        "slug_id": "9D_ng-U86Z5kqVkZ",
         "telegram_message_id": 708,
         "episode": 7,
         "season": 2,
@@ -2199,7 +2199,7 @@
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242629.jpg",
         "qualities": {
           "1080P": {
-            "slug_id": "edjTbjhno4qiM7PG",
+            "slug_id": "QU5PycH0mnwVqpz-",
             "telegram_message_id": 709,
             "episode": 7,
             "season": 2,
@@ -2214,7 +2214,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242629.jpg"
           },
           "720P": {
-            "slug_id": "foZL_L0t_WOQmyj6",
+            "slug_id": "9D_ng-U86Z5kqVkZ",
             "telegram_message_id": 708,
             "episode": 7,
             "season": 2,
@@ -2229,7 +2229,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242629.jpg"
           },
           "480P": {
-            "slug_id": "vzNcGwfLnVuVijbM",
+            "slug_id": "xR4Q7TzCN-34taDw",
             "telegram_message_id": 707,
             "episode": 7,
             "season": 2,
@@ -2246,7 +2246,7 @@
         }
       },
       {
-        "slug_id": "340-3EDkLROv2QI8",
+        "slug_id": "Y9yjKl4NYg4ZVLYf",
         "telegram_message_id": 711,
         "episode": 8,
         "season": 2,
@@ -2261,7 +2261,7 @@
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242631.jpg",
         "qualities": {
           "1080P": {
-            "slug_id": "gVsXAb8eebzk45Xj",
+            "slug_id": "_YKRUBHvOucy4frs",
             "telegram_message_id": 712,
             "episode": 8,
             "season": 2,
@@ -2276,7 +2276,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242631.jpg"
           },
           "720P": {
-            "slug_id": "340-3EDkLROv2QI8",
+            "slug_id": "Y9yjKl4NYg4ZVLYf",
             "telegram_message_id": 711,
             "episode": 8,
             "season": 2,
@@ -2291,7 +2291,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242631.jpg"
           },
           "480P": {
-            "slug_id": "zsCvYbHaonj_RQry",
+            "slug_id": "pEWmNgYXEiFMWEDC",
             "telegram_message_id": 710,
             "episode": 8,
             "season": 2,
@@ -2308,7 +2308,7 @@
         }
       },
       {
-        "slug_id": "Nnz8HSqSTdaVNT_T",
+        "slug_id": "35ttBIpUx6mqBMjX",
         "telegram_message_id": 714,
         "episode": 9,
         "season": 2,
@@ -2323,7 +2323,7 @@
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242632.jpg",
         "qualities": {
           "1080P": {
-            "slug_id": "IcaJlnoyMq1HsPky",
+            "slug_id": "JaBvDMhneIA3FFCP",
             "telegram_message_id": 715,
             "episode": 9,
             "season": 2,
@@ -2338,7 +2338,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242632.jpg"
           },
           "720P": {
-            "slug_id": "Nnz8HSqSTdaVNT_T",
+            "slug_id": "35ttBIpUx6mqBMjX",
             "telegram_message_id": 714,
             "episode": 9,
             "season": 2,
@@ -2353,7 +2353,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242632.jpg"
           },
           "480P": {
-            "slug_id": "nLzQ7s7LCJRGe-gH",
+            "slug_id": "Cn-lyTrQB1MujzJl",
             "telegram_message_id": 713,
             "episode": 9,
             "season": 2,
@@ -2370,7 +2370,7 @@
         }
       },
       {
-        "slug_id": "qro2WxGVVugk4PeU",
+        "slug_id": "T2dkZt2Q0qiYV1kr",
         "telegram_message_id": 717,
         "episode": 10,
         "season": 2,
@@ -2385,7 +2385,7 @@
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242633.jpg",
         "qualities": {
           "1080P": {
-            "slug_id": "gy52NO_Zf3Nb5snw",
+            "slug_id": "MPwIPswy1HRuuqZc",
             "telegram_message_id": 718,
             "episode": 10,
             "season": 2,
@@ -2400,7 +2400,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242633.jpg"
           },
           "720P": {
-            "slug_id": "qro2WxGVVugk4PeU",
+            "slug_id": "T2dkZt2Q0qiYV1kr",
             "telegram_message_id": 717,
             "episode": 10,
             "season": 2,
@@ -2415,7 +2415,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242633.jpg"
           },
           "480P": {
-            "slug_id": "oKsyncrMAScgIQoq",
+            "slug_id": "fI-TEU36jIclSAkc",
             "telegram_message_id": 716,
             "episode": 10,
             "season": 2,
@@ -2432,7 +2432,7 @@
         }
       },
       {
-        "slug_id": "ApHmBAu45HGPq2Vg",
+        "slug_id": "ic-vpsfxGSO0HYWM",
         "telegram_message_id": 720,
         "episode": 11,
         "season": 2,
@@ -2447,7 +2447,7 @@
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357835.jpg",
         "qualities": {
           "1080P": {
-            "slug_id": "GzibVpVXC9inUoVY",
+            "slug_id": "FVSZfvhFhtmsfgKW",
             "telegram_message_id": 721,
             "episode": 11,
             "season": 2,
@@ -2462,7 +2462,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357835.jpg"
           },
           "720P": {
-            "slug_id": "ApHmBAu45HGPq2Vg",
+            "slug_id": "ic-vpsfxGSO0HYWM",
             "telegram_message_id": 720,
             "episode": 11,
             "season": 2,
@@ -2477,7 +2477,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357835.jpg"
           },
           "480P": {
-            "slug_id": "cr_oiUdu8rBXGQKP",
+            "slug_id": "1bHHRBqqYgo2qLXV",
             "telegram_message_id": 719,
             "episode": 11,
             "season": 2,
@@ -2494,7 +2494,7 @@
         }
       },
       {
-        "slug_id": "ORp27gOvYgs-CKdV",
+        "slug_id": "0KubDkbzFjyTmhlI",
         "telegram_message_id": 723,
         "episode": 12,
         "season": 2,
@@ -2509,7 +2509,7 @@
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357836.jpg",
         "qualities": {
           "1080P": {
-            "slug_id": "eM1t9r1wr5OvR8HI",
+            "slug_id": "ggmPL_0K20GQuORu",
             "telegram_message_id": 724,
             "episode": 12,
             "season": 2,
@@ -2524,7 +2524,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357836.jpg"
           },
           "720P": {
-            "slug_id": "ORp27gOvYgs-CKdV",
+            "slug_id": "0KubDkbzFjyTmhlI",
             "telegram_message_id": 723,
             "episode": 12,
             "season": 2,
@@ -2539,7 +2539,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357836.jpg"
           },
           "480P": {
-            "slug_id": "8nc15wVt3yxmp6uo",
+            "slug_id": "B0TlH9c-7blshkDk",
             "telegram_message_id": 722,
             "episode": 12,
             "season": 2,
@@ -2552,6 +2552,1370 @@
             "title": "Wound - The Struggle for Trost (8)",
             "released": "2013-06-23",
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357836.jpg"
+          }
+        }
+      },
+      {
+        "slug_id": "0wmNJkfmy7HtS6ue",
+        "telegram_message_id": 726,
+        "episode": 1,
+        "season": 3,
+        "special_type": null,
+        "part": null,
+        "quality": "720P",
+        "file_size": 66460358,
+        "file_name": "Attack on titan-(S03 - Ep01)-(தமிழ்)- 720p.mkv",
+        "mime_type": "video/x-matroska",
+        "title": "To You, in 2000 Years - The Fall of Shiganshina (1)",
+        "released": "2013-04-07",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242650.jpg",
+        "qualities": {
+          "1080P": {
+            "slug_id": "FcgjcPFYFpCIZnTv",
+            "telegram_message_id": 727,
+            "episode": 1,
+            "season": 3,
+            "special_type": null,
+            "part": null,
+            "quality": "1080P",
+            "file_size": 106132552,
+            "file_name": "Attack on titan-(S03 - Ep01)-(தமிழ்)- 1080p.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "To You, in 2000 Years - The Fall of Shiganshina (1)",
+            "released": "2013-04-07",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242650.jpg"
+          },
+          "720P": {
+            "slug_id": "0wmNJkfmy7HtS6ue",
+            "telegram_message_id": 726,
+            "episode": 1,
+            "season": 3,
+            "special_type": null,
+            "part": null,
+            "quality": "720P",
+            "file_size": 66460358,
+            "file_name": "Attack on titan-(S03 - Ep01)-(தமிழ்)- 720p.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "To You, in 2000 Years - The Fall of Shiganshina (1)",
+            "released": "2013-04-07",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242650.jpg"
+          },
+          "480P": {
+            "slug_id": "3iY5Ugd047CZjvpO",
+            "telegram_message_id": 725,
+            "episode": 1,
+            "season": 3,
+            "special_type": null,
+            "part": null,
+            "quality": "480P",
+            "file_size": 44019359,
+            "file_name": "Attack on titan-(S03 - Ep01)-(தமிழ்)- 480p.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "To You, in 2000 Years - The Fall of Shiganshina (1)",
+            "released": "2013-04-07",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242650.jpg"
+          }
+        }
+      },
+      {
+        "slug_id": "7k-WSN4YD0j2X_hU",
+        "telegram_message_id": 729,
+        "episode": 2,
+        "season": 3,
+        "special_type": null,
+        "part": null,
+        "quality": "720P",
+        "file_size": 135657782,
+        "file_name": "Attack on titan-(S03 - Ep02)-(தமிழ்)- 720p.mkv",
+        "mime_type": "video/x-matroska",
+        "title": "That Day - The Fall of Shiganshina (2)",
+        "released": "2013-04-14",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242651.jpg",
+        "qualities": {
+          "1080P": {
+            "slug_id": "BTwNpzh83rcTW2HZ",
+            "telegram_message_id": 730,
+            "episode": 2,
+            "season": 3,
+            "special_type": null,
+            "part": null,
+            "quality": "1080P",
+            "file_size": 306219727,
+            "file_name": "Attack on titan-(S03 - Ep02)-(தமிழ்)- 1080p.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "That Day - The Fall of Shiganshina (2)",
+            "released": "2013-04-14",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242651.jpg"
+          },
+          "720P": {
+            "slug_id": "7k-WSN4YD0j2X_hU",
+            "telegram_message_id": 729,
+            "episode": 2,
+            "season": 3,
+            "special_type": null,
+            "part": null,
+            "quality": "720P",
+            "file_size": 135657782,
+            "file_name": "Attack on titan-(S03 - Ep02)-(தமிழ்)- 720p.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "That Day - The Fall of Shiganshina (2)",
+            "released": "2013-04-14",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242651.jpg"
+          },
+          "480P": {
+            "slug_id": "wWD7HR9Nm0DBvWv7",
+            "telegram_message_id": 728,
+            "episode": 2,
+            "season": 3,
+            "special_type": null,
+            "part": null,
+            "quality": "480P",
+            "file_size": 66375770,
+            "file_name": "Attack on titan-(S03 - Ep02)-(தமிழ்)- 480p.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "That Day - The Fall of Shiganshina (2)",
+            "released": "2013-04-14",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242651.jpg"
+          }
+        }
+      },
+      {
+        "slug_id": "_2UM4ap3DyvdGLXq",
+        "telegram_message_id": 732,
+        "episode": 3,
+        "season": 3,
+        "special_type": null,
+        "part": null,
+        "quality": "720P",
+        "file_size": 110170439,
+        "file_name": "Attack on titan-(S03 - Ep03)-(தமிழ்)- 720p.mkv",
+        "mime_type": "video/x-matroska",
+        "title": "A Dim Light Amid Despair - Humanity's Comeback (1)",
+        "released": "2013-04-21",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242652.jpg",
+        "qualities": {
+          "1080P": {
+            "slug_id": "foRQIR7BWqEC6_PX",
+            "telegram_message_id": 733,
+            "episode": 3,
+            "season": 3,
+            "special_type": null,
+            "part": null,
+            "quality": "1080P",
+            "file_size": 229739022,
+            "file_name": "Attack on titan-(S03 - Ep03)-(தமிழ்)- 1080p.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "A Dim Light Amid Despair - Humanity's Comeback (1)",
+            "released": "2013-04-21",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242652.jpg"
+          },
+          "720P": {
+            "slug_id": "_2UM4ap3DyvdGLXq",
+            "telegram_message_id": 732,
+            "episode": 3,
+            "season": 3,
+            "special_type": null,
+            "part": null,
+            "quality": "720P",
+            "file_size": 110170439,
+            "file_name": "Attack on titan-(S03 - Ep03)-(தமிழ்)- 720p.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "A Dim Light Amid Despair - Humanity's Comeback (1)",
+            "released": "2013-04-21",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242652.jpg"
+          },
+          "480P": {
+            "slug_id": "942IZ4ezFydUIFtW",
+            "telegram_message_id": 731,
+            "episode": 3,
+            "season": 3,
+            "special_type": null,
+            "part": null,
+            "quality": "480P",
+            "file_size": 53426095,
+            "file_name": "Attack on titan-(S03 - Ep03)-(தமிழ்)- 480p.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "A Dim Light Amid Despair - Humanity's Comeback (1)",
+            "released": "2013-04-21",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242652.jpg"
+          }
+        }
+      },
+      {
+        "slug_id": "5i23Qycxr3ecyqrU",
+        "telegram_message_id": 735,
+        "episode": 4,
+        "season": 3,
+        "special_type": null,
+        "part": null,
+        "quality": "720P",
+        "file_size": 144094859,
+        "file_name": "Attack on titan-(S03 - Ep04)-(தமிழ்)- 720p.mkv",
+        "mime_type": "video/x-matroska",
+        "title": "The Night of the Closing Ceremony - Humanity's Comeback (2)",
+        "released": "2013-04-28",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357583.jpg",
+        "qualities": {
+          "1080P": {
+            "slug_id": "gcICY6klXjsoKN1e",
+            "telegram_message_id": 736,
+            "episode": 4,
+            "season": 3,
+            "special_type": null,
+            "part": null,
+            "quality": "1080P",
+            "file_size": 291127075,
+            "file_name": "Attack on titan-(S03 - Ep04)-(தமிழ்)- 1080p.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "The Night of the Closing Ceremony - Humanity's Comeback (2)",
+            "released": "2013-04-28",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357583.jpg"
+          },
+          "720P": {
+            "slug_id": "5i23Qycxr3ecyqrU",
+            "telegram_message_id": 735,
+            "episode": 4,
+            "season": 3,
+            "special_type": null,
+            "part": null,
+            "quality": "720P",
+            "file_size": 144094859,
+            "file_name": "Attack on titan-(S03 - Ep04)-(தமிழ்)- 720p.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "The Night of the Closing Ceremony - Humanity's Comeback (2)",
+            "released": "2013-04-28",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357583.jpg"
+          },
+          "480P": {
+            "slug_id": "sdXZN7uIkjheHWOL",
+            "telegram_message_id": 734,
+            "episode": 4,
+            "season": 3,
+            "special_type": null,
+            "part": null,
+            "quality": "480P",
+            "file_size": 65979012,
+            "file_name": "Attack on titan-(S03 - Ep04)-(தமிழ்)- 480p.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "The Night of the Closing Ceremony - Humanity's Comeback (2)",
+            "released": "2013-04-28",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357583.jpg"
+          }
+        }
+      },
+      {
+        "slug_id": "WvVSAOFlMMJm_EK0",
+        "telegram_message_id": 738,
+        "episode": 5,
+        "season": 3,
+        "special_type": null,
+        "part": null,
+        "quality": "720P",
+        "file_size": 127829319,
+        "file_name": "Attack on titan-(S03 - Ep05)-(தமிழ்)- 720p.mkv",
+        "mime_type": "video/x-matroska",
+        "title": "First Battle - The Struggle for Trost (1)",
+        "released": "2013-05-05",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357587.jpg",
+        "qualities": {
+          "1080P": {
+            "slug_id": "XJ5bi5t2ZUujyyUL",
+            "telegram_message_id": 739,
+            "episode": 5,
+            "season": 3,
+            "special_type": null,
+            "part": null,
+            "quality": "1080P",
+            "file_size": 266087510,
+            "file_name": "Attack on titan-(S03 - Ep05)-(தமிழ்)- 1080p.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "First Battle - The Struggle for Trost (1)",
+            "released": "2013-05-05",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357587.jpg"
+          },
+          "720P": {
+            "slug_id": "WvVSAOFlMMJm_EK0",
+            "telegram_message_id": 738,
+            "episode": 5,
+            "season": 3,
+            "special_type": null,
+            "part": null,
+            "quality": "720P",
+            "file_size": 127829319,
+            "file_name": "Attack on titan-(S03 - Ep05)-(தமிழ்)- 720p.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "First Battle - The Struggle for Trost (1)",
+            "released": "2013-05-05",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357587.jpg"
+          },
+          "480P": {
+            "slug_id": "W7QBjgaZbmm-UXuV",
+            "telegram_message_id": 737,
+            "episode": 5,
+            "season": 3,
+            "special_type": null,
+            "part": null,
+            "quality": "480P",
+            "file_size": 60314038,
+            "file_name": "Attack on titan-(S03 - Ep05)-(தமிழ்)- 480p.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "First Battle - The Struggle for Trost (1)",
+            "released": "2013-05-05",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357587.jpg"
+          }
+        }
+      },
+      {
+        "slug_id": "6yoACJaSA-Vo_c1G",
+        "telegram_message_id": 741,
+        "episode": 6,
+        "season": 3,
+        "special_type": null,
+        "part": null,
+        "quality": "720P",
+        "file_size": 137343389,
+        "file_name": "Attack on titan-(S03 - Ep06)-(தமிழ்)- 720p.mkv",
+        "mime_type": "video/x-matroska",
+        "title": "The World the Girl Saw - The Struggle for Trost (2)",
+        "released": "2013-05-12",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242630.jpg",
+        "qualities": {
+          "1080P": {
+            "slug_id": "WjEN2kiJt0aP-l6w",
+            "telegram_message_id": 742,
+            "episode": 6,
+            "season": 3,
+            "special_type": null,
+            "part": null,
+            "quality": "1080P",
+            "file_size": 288807304,
+            "file_name": "Attack on titan-(S03 - Ep06)-(தமிழ்)- 1080p.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "The World the Girl Saw - The Struggle for Trost (2)",
+            "released": "2013-05-12",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242630.jpg"
+          },
+          "720P": {
+            "slug_id": "6yoACJaSA-Vo_c1G",
+            "telegram_message_id": 741,
+            "episode": 6,
+            "season": 3,
+            "special_type": null,
+            "part": null,
+            "quality": "720P",
+            "file_size": 137343389,
+            "file_name": "Attack on titan-(S03 - Ep06)-(தமிழ்)- 720p.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "The World the Girl Saw - The Struggle for Trost (2)",
+            "released": "2013-05-12",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242630.jpg"
+          },
+          "480P": {
+            "slug_id": "bPdLJSuZigGAnlmP",
+            "telegram_message_id": 740,
+            "episode": 6,
+            "season": 3,
+            "special_type": null,
+            "part": null,
+            "quality": "480P",
+            "file_size": 61069342,
+            "file_name": "Attack on titan-(S03 - Ep06)-(தமிழ்)- 480p.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "The World the Girl Saw - The Struggle for Trost (2)",
+            "released": "2013-05-12",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242630.jpg"
+          }
+        }
+      },
+      {
+        "slug_id": "4xMIDYzSrnC_z-yH",
+        "telegram_message_id": 744,
+        "episode": 7,
+        "season": 3,
+        "special_type": null,
+        "part": null,
+        "quality": "720P",
+        "file_size": 185046110,
+        "file_name": "Attack on titan-(S03 - Ep07)-(தமிழ்)- 720p.mkv",
+        "mime_type": "video/x-matroska",
+        "title": "Small Blade - The Struggle for Trost (3)",
+        "released": "2013-05-19",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242629.jpg",
+        "qualities": {
+          "1080P": {
+            "slug_id": "il6Q5fKKqYR34WVq",
+            "telegram_message_id": 745,
+            "episode": 7,
+            "season": 3,
+            "special_type": null,
+            "part": null,
+            "quality": "1080P",
+            "file_size": 391069393,
+            "file_name": "Attack on titan-(S03 - Ep07)-(தமிழ்)- 1080p.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "Small Blade - The Struggle for Trost (3)",
+            "released": "2013-05-19",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242629.jpg"
+          },
+          "720P": {
+            "slug_id": "4xMIDYzSrnC_z-yH",
+            "telegram_message_id": 744,
+            "episode": 7,
+            "season": 3,
+            "special_type": null,
+            "part": null,
+            "quality": "720P",
+            "file_size": 185046110,
+            "file_name": "Attack on titan-(S03 - Ep07)-(தமிழ்)- 720p.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "Small Blade - The Struggle for Trost (3)",
+            "released": "2013-05-19",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242629.jpg"
+          },
+          "480P": {
+            "slug_id": "FWFghWJpyO4-6xHO",
+            "telegram_message_id": 743,
+            "episode": 7,
+            "season": 3,
+            "special_type": null,
+            "part": null,
+            "quality": "480P",
+            "file_size": 82968171,
+            "file_name": "Attack on titan-(S03 - Ep07)-(தமிழ்)- 480p.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "Small Blade - The Struggle for Trost (3)",
+            "released": "2013-05-19",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242629.jpg"
+          }
+        }
+      },
+      {
+        "slug_id": "uHg5qQYSFIm8ylBA",
+        "telegram_message_id": 747,
+        "episode": 8,
+        "season": 3,
+        "special_type": null,
+        "part": null,
+        "quality": "720P",
+        "file_size": 185059402,
+        "file_name": "Attack on titan-(S03 - Ep08)-(தமிழ்)- 720p.mkv",
+        "mime_type": "video/x-matroska",
+        "title": "I Can Hear His Heartbeat - The Struggle for Trost (4)",
+        "released": "2013-05-26",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242631.jpg",
+        "qualities": {
+          "1080P": {
+            "slug_id": "zC3ZN-ecpOlZl4kQ",
+            "telegram_message_id": 748,
+            "episode": 8,
+            "season": 3,
+            "special_type": null,
+            "part": null,
+            "quality": "1080P",
+            "file_size": 395466723,
+            "file_name": "Attack on titan-(S03 - Ep08)-(தமிழ்)- 1080p.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "I Can Hear His Heartbeat - The Struggle for Trost (4)",
+            "released": "2013-05-26",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242631.jpg"
+          },
+          "720P": {
+            "slug_id": "uHg5qQYSFIm8ylBA",
+            "telegram_message_id": 747,
+            "episode": 8,
+            "season": 3,
+            "special_type": null,
+            "part": null,
+            "quality": "720P",
+            "file_size": 185059402,
+            "file_name": "Attack on titan-(S03 - Ep08)-(தமிழ்)- 720p.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "I Can Hear His Heartbeat - The Struggle for Trost (4)",
+            "released": "2013-05-26",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242631.jpg"
+          },
+          "480P": {
+            "slug_id": "70IHSZcYys2hHM56",
+            "telegram_message_id": 746,
+            "episode": 8,
+            "season": 3,
+            "special_type": null,
+            "part": null,
+            "quality": "480P",
+            "file_size": 77257994,
+            "file_name": "Attack on titan-(S03 - Ep08)-(தமிழ்)- 480p.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "I Can Hear His Heartbeat - The Struggle for Trost (4)",
+            "released": "2013-05-26",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242631.jpg"
+          }
+        }
+      },
+      {
+        "slug_id": "17KoY46BWjQCJyvy",
+        "telegram_message_id": 750,
+        "episode": 9,
+        "season": 3,
+        "special_type": null,
+        "part": null,
+        "quality": "720P",
+        "file_size": 190104227,
+        "file_name": "Attack on titan-(S03 - Ep09)-(தமிழ்)- 720p.mkv",
+        "mime_type": "video/x-matroska",
+        "title": "Whereabouts of His Left Arm - The Struggle for Trost (5)",
+        "released": "2013-06-02",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242632.jpg",
+        "qualities": {
+          "1080P": {
+            "slug_id": "D5-0jLlzEX3HM8ig",
+            "telegram_message_id": 751,
+            "episode": 9,
+            "season": 3,
+            "special_type": null,
+            "part": null,
+            "quality": "1080P",
+            "file_size": 411517169,
+            "file_name": "Attack on titan-(S03 - Ep09)-(தமிழ்)- 1080p.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "Whereabouts of His Left Arm - The Struggle for Trost (5)",
+            "released": "2013-06-02",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242632.jpg"
+          },
+          "720P": {
+            "slug_id": "17KoY46BWjQCJyvy",
+            "telegram_message_id": 750,
+            "episode": 9,
+            "season": 3,
+            "special_type": null,
+            "part": null,
+            "quality": "720P",
+            "file_size": 190104227,
+            "file_name": "Attack on titan-(S03 - Ep09)-(தமிழ்)- 720p.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "Whereabouts of His Left Arm - The Struggle for Trost (5)",
+            "released": "2013-06-02",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242632.jpg"
+          },
+          "480P": {
+            "slug_id": "WR_cWZOo68fcHn03",
+            "telegram_message_id": 749,
+            "episode": 9,
+            "season": 3,
+            "special_type": null,
+            "part": null,
+            "quality": "480P",
+            "file_size": 78242913,
+            "file_name": "Attack on titan-(S03 - Ep09)-(தமிழ்)- 480p.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "Whereabouts of His Left Arm - The Struggle for Trost (5)",
+            "released": "2013-06-02",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242632.jpg"
+          }
+        }
+      },
+      {
+        "slug_id": "rV6IG41jAS31qVje",
+        "telegram_message_id": 753,
+        "episode": 10,
+        "season": 3,
+        "special_type": null,
+        "part": null,
+        "quality": "720P",
+        "file_size": 138313508,
+        "file_name": "Attack on titan-(S03 - Ep10)-(தமிழ்)- 720p.mkv",
+        "mime_type": "video/x-matroska",
+        "title": "Response - The Struggle for Trost (6)",
+        "released": "2013-06-09",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242633.jpg",
+        "qualities": {
+          "1080P": {
+            "slug_id": "vjWXjETrESaqXhLn",
+            "telegram_message_id": 754,
+            "episode": 10,
+            "season": 3,
+            "special_type": null,
+            "part": null,
+            "quality": "1080P",
+            "file_size": 278689921,
+            "file_name": "Attack on titan-(S03 - Ep10)-(தமிழ்)- 1080p.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "Response - The Struggle for Trost (6)",
+            "released": "2013-06-09",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242633.jpg"
+          },
+          "720P": {
+            "slug_id": "rV6IG41jAS31qVje",
+            "telegram_message_id": 753,
+            "episode": 10,
+            "season": 3,
+            "special_type": null,
+            "part": null,
+            "quality": "720P",
+            "file_size": 138313508,
+            "file_name": "Attack on titan-(S03 - Ep10)-(தமிழ்)- 720p.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "Response - The Struggle for Trost (6)",
+            "released": "2013-06-09",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242633.jpg"
+          },
+          "480P": {
+            "slug_id": "uH-J8nKVI39RP2SW",
+            "telegram_message_id": 752,
+            "episode": 10,
+            "season": 3,
+            "special_type": null,
+            "part": null,
+            "quality": "480P",
+            "file_size": 62838775,
+            "file_name": "Attack on titan-(S03 - Ep10)-(தமிழ்)- 480p.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "Response - The Struggle for Trost (6)",
+            "released": "2013-06-09",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242633.jpg"
+          }
+        }
+      },
+      {
+        "slug_id": "uvVJmzrzXcxEGz01",
+        "telegram_message_id": 756,
+        "episode": 11,
+        "season": 3,
+        "special_type": null,
+        "part": null,
+        "quality": "720P",
+        "file_size": 118853942,
+        "file_name": "Attack on titan-(S03 - Ep11)-(தமிழ்)- 720p.mkv",
+        "mime_type": "video/x-matroska",
+        "title": "Idol - The Struggle for Trost (7)",
+        "released": "2013-06-16",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357835.jpg",
+        "qualities": {
+          "1080P": {
+            "slug_id": "uwm800cLtNcFQWI-",
+            "telegram_message_id": 757,
+            "episode": 11,
+            "season": 3,
+            "special_type": null,
+            "part": null,
+            "quality": "1080P",
+            "file_size": 215292080,
+            "file_name": "Attack on titan-(S03 - Ep11)-(தமிழ்)- 1080p.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "Idol - The Struggle for Trost (7)",
+            "released": "2013-06-16",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357835.jpg"
+          },
+          "720P": {
+            "slug_id": "uvVJmzrzXcxEGz01",
+            "telegram_message_id": 756,
+            "episode": 11,
+            "season": 3,
+            "special_type": null,
+            "part": null,
+            "quality": "720P",
+            "file_size": 118853942,
+            "file_name": "Attack on titan-(S03 - Ep11)-(தமிழ்)- 720p.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "Idol - The Struggle for Trost (7)",
+            "released": "2013-06-16",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357835.jpg"
+          },
+          "480P": {
+            "slug_id": "KA-TM7iiwy-khDEq",
+            "telegram_message_id": 755,
+            "episode": 11,
+            "season": 3,
+            "special_type": null,
+            "part": null,
+            "quality": "480P",
+            "file_size": 55926730,
+            "file_name": "Attack on titan-(S03 - Ep11)-(தமிழ்)- 480p.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "Idol - The Struggle for Trost (7)",
+            "released": "2013-06-16",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357835.jpg"
+          }
+        }
+      },
+      {
+        "slug_id": "oYfVY84quH8aOs7j",
+        "telegram_message_id": 759,
+        "episode": 12,
+        "season": 3,
+        "special_type": null,
+        "part": null,
+        "quality": "720P",
+        "file_size": 122029652,
+        "file_name": "Attack on titan-(S03 - Ep12)-(தமிழ்)- 720p.mkv",
+        "mime_type": "video/x-matroska",
+        "title": "Wound - The Struggle for Trost (8)",
+        "released": "2013-06-23",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357836.jpg",
+        "qualities": {
+          "1080P": {
+            "slug_id": "E74nXJPg1StQNBEj",
+            "telegram_message_id": 760,
+            "episode": 12,
+            "season": 3,
+            "special_type": null,
+            "part": null,
+            "quality": "1080P",
+            "file_size": 287120737,
+            "file_name": "Attack on titan-(S03 - Ep12)-(தமிழ்)- 1080p.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "Wound - The Struggle for Trost (8)",
+            "released": "2013-06-23",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357836.jpg"
+          },
+          "720P": {
+            "slug_id": "oYfVY84quH8aOs7j",
+            "telegram_message_id": 759,
+            "episode": 12,
+            "season": 3,
+            "special_type": null,
+            "part": null,
+            "quality": "720P",
+            "file_size": 122029652,
+            "file_name": "Attack on titan-(S03 - Ep12)-(தமிழ்)- 720p.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "Wound - The Struggle for Trost (8)",
+            "released": "2013-06-23",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357836.jpg"
+          },
+          "480P": {
+            "slug_id": "pumM3Gznlrwt2hjV",
+            "telegram_message_id": 758,
+            "episode": 12,
+            "season": 3,
+            "special_type": null,
+            "part": null,
+            "quality": "480P",
+            "file_size": 59189143,
+            "file_name": "Attack on titan-(S03 - Ep12)-(தமிழ்)- 480p.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "Wound - The Struggle for Trost (8)",
+            "released": "2013-06-23",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357836.jpg"
+          }
+        }
+      },
+      {
+        "slug_id": "Uw8GrzI1N8aPX9fP",
+        "telegram_message_id": 762,
+        "episode": 13,
+        "season": 3,
+        "special_type": null,
+        "part": null,
+        "quality": "720P",
+        "file_size": 173482021,
+        "file_name": "Attack on titan-(S03 - Ep13)-(தமிழ்)- 720p.mkv",
+        "mime_type": "video/x-matroska",
+        "title": "Primal Desire - The Struggle for Trost (9)",
+        "released": "2013-06-30",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242637.jpg",
+        "qualities": {
+          "1080P": {
+            "slug_id": "JbIOl2peRH6t57HR",
+            "telegram_message_id": 763,
+            "episode": 13,
+            "season": 3,
+            "special_type": null,
+            "part": null,
+            "quality": "1080P",
+            "file_size": 353819008,
+            "file_name": "Attack on titan-(S03 - Ep13)-(தமிழ்)- 1080p.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "Primal Desire - The Struggle for Trost (9)",
+            "released": "2013-06-30",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242637.jpg"
+          },
+          "720P": {
+            "slug_id": "Uw8GrzI1N8aPX9fP",
+            "telegram_message_id": 762,
+            "episode": 13,
+            "season": 3,
+            "special_type": null,
+            "part": null,
+            "quality": "720P",
+            "file_size": 173482021,
+            "file_name": "Attack on titan-(S03 - Ep13)-(தமிழ்)- 720p.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "Primal Desire - The Struggle for Trost (9)",
+            "released": "2013-06-30",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242637.jpg"
+          },
+          "480P": {
+            "slug_id": "VqFIJXgT0wYooq-k",
+            "telegram_message_id": 761,
+            "episode": 13,
+            "season": 3,
+            "special_type": null,
+            "part": null,
+            "quality": "480P",
+            "file_size": 76074663,
+            "file_name": "Attack on titan-(S03 - Ep13)-(தமிழ்)- 480p.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "Primal Desire - The Struggle for Trost (9)",
+            "released": "2013-06-30",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242637.jpg"
+          }
+        }
+      },
+      {
+        "slug_id": "zza0S3qSf7ndPShm",
+        "telegram_message_id": 765,
+        "episode": 14,
+        "season": 3,
+        "special_type": null,
+        "part": null,
+        "quality": "720P",
+        "file_size": 194100305,
+        "file_name": "Attack on titan-(S03 - Ep14)-(தமிழ்)- 720p.mkv",
+        "mime_type": "video/x-matroska",
+        "title": "Can't Look Into His Eyes - Eve of the Counterattack (1)",
+        "released": "2013-07-14",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242636.jpg",
+        "qualities": {
+          "1080P": {
+            "slug_id": "grvcIW80LpvMIJxb",
+            "telegram_message_id": 766,
+            "episode": 14,
+            "season": 3,
+            "special_type": null,
+            "part": null,
+            "quality": "1080P",
+            "file_size": 414643633,
+            "file_name": "Attack on titan-(S03 - Ep14)-(தமிழ்)- 1080p.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "Can't Look Into His Eyes - Eve of the Counterattack (1)",
+            "released": "2013-07-14",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242636.jpg"
+          },
+          "720P": {
+            "slug_id": "zza0S3qSf7ndPShm",
+            "telegram_message_id": 765,
+            "episode": 14,
+            "season": 3,
+            "special_type": null,
+            "part": null,
+            "quality": "720P",
+            "file_size": 194100305,
+            "file_name": "Attack on titan-(S03 - Ep14)-(தமிழ்)- 720p.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "Can't Look Into His Eyes - Eve of the Counterattack (1)",
+            "released": "2013-07-14",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242636.jpg"
+          },
+          "480P": {
+            "slug_id": "KF8xUqiQzUe7dceT",
+            "telegram_message_id": 764,
+            "episode": 14,
+            "season": 3,
+            "special_type": null,
+            "part": null,
+            "quality": "480P",
+            "file_size": 84927684,
+            "file_name": "Attack on titan-(S03 - Ep14)-(தமிழ்)- 480p.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "Can't Look Into His Eyes - Eve of the Counterattack (1)",
+            "released": "2013-07-14",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242636.jpg"
+          }
+        }
+      },
+      {
+        "slug_id": "jQN3oJvPTZzvZlqz",
+        "telegram_message_id": 768,
+        "episode": 15,
+        "season": 3,
+        "special_type": null,
+        "part": null,
+        "quality": "720P",
+        "file_size": 163507514,
+        "file_name": "Attack on titan-(S03 - Ep15)-(தமிழ்)- 720p.mkv",
+        "mime_type": "video/x-matroska",
+        "title": "Special Operations Squad - Eve of the Counterattack (2)",
+        "released": "2013-07-21",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242639.jpg",
+        "qualities": {
+          "1080P": {
+            "slug_id": "QILhp9F2Pz3Gvva6",
+            "telegram_message_id": 769,
+            "episode": 15,
+            "season": 3,
+            "special_type": null,
+            "part": null,
+            "quality": "1080P",
+            "file_size": 324147384,
+            "file_name": "Attack on titan-(S03 - Ep15)-(தமிழ்)- 1080p.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "Special Operations Squad - Eve of the Counterattack (2)",
+            "released": "2013-07-21",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242639.jpg"
+          },
+          "720P": {
+            "slug_id": "jQN3oJvPTZzvZlqz",
+            "telegram_message_id": 768,
+            "episode": 15,
+            "season": 3,
+            "special_type": null,
+            "part": null,
+            "quality": "720P",
+            "file_size": 163507514,
+            "file_name": "Attack on titan-(S03 - Ep15)-(தமிழ்)- 720p.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "Special Operations Squad - Eve of the Counterattack (2)",
+            "released": "2013-07-21",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242639.jpg"
+          },
+          "480P": {
+            "slug_id": "WKZ_obgXG7uhl0uc",
+            "telegram_message_id": 767,
+            "episode": 15,
+            "season": 3,
+            "special_type": null,
+            "part": null,
+            "quality": "480P",
+            "file_size": 72074315,
+            "file_name": "Attack on titan-(S03 - Ep15)-(தமிழ்)- 480p.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "Special Operations Squad - Eve of the Counterattack (2)",
+            "released": "2013-07-21",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242639.jpg"
+          }
+        }
+      },
+      {
+        "slug_id": "F56qyjK-TsS7yZq9",
+        "telegram_message_id": 771,
+        "episode": 16,
+        "season": 3,
+        "special_type": null,
+        "part": null,
+        "quality": "720P",
+        "file_size": 175197808,
+        "file_name": "Attack on titan-(S03 - Ep16)-(தமிழ்)- 720p.mkv",
+        "mime_type": "video/x-matroska",
+        "title": "What Needs to Be Done Now - Eve of the Counterattack (3)",
+        "released": "2013-07-28",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242638.jpg",
+        "qualities": {
+          "1080P": {
+            "slug_id": "VHEPzWRPG4bgUvqY",
+            "telegram_message_id": 772,
+            "episode": 16,
+            "season": 3,
+            "special_type": null,
+            "part": null,
+            "quality": "1080P",
+            "file_size": 354936754,
+            "file_name": "Attack on titan-(S03 - Ep16)-(தமிழ்)- 1080p.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "What Needs to Be Done Now - Eve of the Counterattack (3)",
+            "released": "2013-07-28",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242638.jpg"
+          },
+          "720P": {
+            "slug_id": "F56qyjK-TsS7yZq9",
+            "telegram_message_id": 771,
+            "episode": 16,
+            "season": 3,
+            "special_type": null,
+            "part": null,
+            "quality": "720P",
+            "file_size": 175197808,
+            "file_name": "Attack on titan-(S03 - Ep16)-(தமிழ்)- 720p.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "What Needs to Be Done Now - Eve of the Counterattack (3)",
+            "released": "2013-07-28",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242638.jpg"
+          },
+          "480P": {
+            "slug_id": "GP_truKcKdAznLxT",
+            "telegram_message_id": 770,
+            "episode": 16,
+            "season": 3,
+            "special_type": null,
+            "part": null,
+            "quality": "480P",
+            "file_size": 72852253,
+            "file_name": "Attack on titan-(S03 - Ep16)-(தமிழ்)- 480p.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "What Needs to Be Done Now - Eve of the Counterattack (3)",
+            "released": "2013-07-28",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242638.jpg"
+          }
+        }
+      },
+      {
+        "slug_id": "6nX6jPJ2Kzq-rFP8",
+        "telegram_message_id": 774,
+        "episode": 17,
+        "season": 3,
+        "special_type": null,
+        "part": null,
+        "quality": "720P",
+        "file_size": 202026528,
+        "file_name": "Attack on titan-(S03 - Ep17)-(தமிழ்)- 720p.mkv",
+        "mime_type": "video/x-matroska",
+        "title": "Female Titan - The 57th Exterior Scouting Mission (1)",
+        "released": "2013-08-04",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357858.jpg",
+        "qualities": {
+          "1080P": {
+            "slug_id": "mi-HIMV5_KhzBL0o",
+            "telegram_message_id": 775,
+            "episode": 17,
+            "season": 3,
+            "special_type": null,
+            "part": null,
+            "quality": "1080P",
+            "file_size": 420000657,
+            "file_name": "Attack on titan-(S03 - Ep17)-(தமிழ்)- 1080p.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "Female Titan - The 57th Exterior Scouting Mission (1)",
+            "released": "2013-08-04",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357858.jpg"
+          },
+          "720P": {
+            "slug_id": "6nX6jPJ2Kzq-rFP8",
+            "telegram_message_id": 774,
+            "episode": 17,
+            "season": 3,
+            "special_type": null,
+            "part": null,
+            "quality": "720P",
+            "file_size": 202026528,
+            "file_name": "Attack on titan-(S03 - Ep17)-(தமிழ்)- 720p.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "Female Titan - The 57th Exterior Scouting Mission (1)",
+            "released": "2013-08-04",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357858.jpg"
+          },
+          "480P": {
+            "slug_id": "dl2P1QEi9hJ3AvtY",
+            "telegram_message_id": 773,
+            "episode": 17,
+            "season": 3,
+            "special_type": null,
+            "part": null,
+            "quality": "480P",
+            "file_size": 88522821,
+            "file_name": "Attack on titan-(S03 - Ep17)-(தமிழ்)- 480p.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "Female Titan - The 57th Exterior Scouting Mission (1)",
+            "released": "2013-08-04",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357858.jpg"
+          }
+        }
+      },
+      {
+        "slug_id": "DNaqZS-6xXhwZKB8",
+        "telegram_message_id": 777,
+        "episode": 18,
+        "season": 3,
+        "special_type": null,
+        "part": null,
+        "quality": "720P",
+        "file_size": 144943154,
+        "file_name": "Attack on titan-(S03 - Ep18)-(தமிழ்)- 720p.mkv",
+        "mime_type": "video/x-matroska",
+        "title": "Forest of Giant Trees - The 57th Exterior Scouting Mission (2)",
+        "released": "2013-08-11",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242640.jpg",
+        "qualities": {
+          "1080P": {
+            "slug_id": "c2R8Fuk6QXOFEu_u",
+            "telegram_message_id": 778,
+            "episode": 18,
+            "season": 3,
+            "special_type": null,
+            "part": null,
+            "quality": "1080P",
+            "file_size": 265894368,
+            "file_name": "Attack on titan-(S03 - Ep18)-(தமிழ்)- 1080p.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "Forest of Giant Trees - The 57th Exterior Scouting Mission (2)",
+            "released": "2013-08-11",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242640.jpg"
+          },
+          "720P": {
+            "slug_id": "DNaqZS-6xXhwZKB8",
+            "telegram_message_id": 777,
+            "episode": 18,
+            "season": 3,
+            "special_type": null,
+            "part": null,
+            "quality": "720P",
+            "file_size": 144943154,
+            "file_name": "Attack on titan-(S03 - Ep18)-(தமிழ்)- 720p.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "Forest of Giant Trees - The 57th Exterior Scouting Mission (2)",
+            "released": "2013-08-11",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242640.jpg"
+          },
+          "480P": {
+            "slug_id": "UdV4PH4duoHfei7T",
+            "telegram_message_id": 776,
+            "episode": 18,
+            "season": 3,
+            "special_type": null,
+            "part": null,
+            "quality": "480P",
+            "file_size": 59845993,
+            "file_name": "Attack on titan-(S03 - Ep18)-(தமிழ்)- 480p.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "Forest of Giant Trees - The 57th Exterior Scouting Mission (2)",
+            "released": "2013-08-11",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242640.jpg"
+          }
+        }
+      },
+      {
+        "slug_id": "1XS2OXiA8fN-QlZP",
+        "telegram_message_id": 780,
+        "episode": 19,
+        "season": 3,
+        "special_type": null,
+        "part": null,
+        "quality": "720P",
+        "file_size": 144110741,
+        "file_name": "Attack on titan-(S03 - Ep19)-(தமிழ்)- 720p.mkv",
+        "mime_type": "video/x-matroska",
+        "title": "Bite - The 57th Exterior Scouting Mission (3)",
+        "released": "2013-08-18",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242642.jpg",
+        "qualities": {
+          "1080P": {
+            "slug_id": "B7T5ygBDpfnM_6jB",
+            "telegram_message_id": 781,
+            "episode": 19,
+            "season": 3,
+            "special_type": null,
+            "part": null,
+            "quality": "1080P",
+            "file_size": 287160439,
+            "file_name": "Attack on titan-(S03 - Ep19)-(தமிழ்)- 1080p.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "Bite - The 57th Exterior Scouting Mission (3)",
+            "released": "2013-08-18",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242642.jpg"
+          },
+          "720P": {
+            "slug_id": "1XS2OXiA8fN-QlZP",
+            "telegram_message_id": 780,
+            "episode": 19,
+            "season": 3,
+            "special_type": null,
+            "part": null,
+            "quality": "720P",
+            "file_size": 144110741,
+            "file_name": "Attack on titan-(S03 - Ep19)-(தமிழ்)- 720p.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "Bite - The 57th Exterior Scouting Mission (3)",
+            "released": "2013-08-18",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242642.jpg"
+          },
+          "480P": {
+            "slug_id": "kjGg3eBacf1ESOOV",
+            "telegram_message_id": 779,
+            "episode": 19,
+            "season": 3,
+            "special_type": null,
+            "part": null,
+            "quality": "480P",
+            "file_size": 63877049,
+            "file_name": "Attack on titan-(S03 - Ep19)-(தமிழ்)- 480p.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "Bite - The 57th Exterior Scouting Mission (3)",
+            "released": "2013-08-18",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242642.jpg"
+          }
+        }
+      },
+      {
+        "slug_id": "l_U96qgQGJxqlZr_",
+        "telegram_message_id": 783,
+        "episode": 20,
+        "season": 3,
+        "special_type": null,
+        "part": null,
+        "quality": "720P",
+        "file_size": 123046425,
+        "file_name": "Attack on titan-(S03 - Ep20)-(தமிழ்)- 720p.mkv",
+        "mime_type": "video/x-matroska",
+        "title": "Erwin Smith - The 57th Exterior Scouting Mission (4)",
+        "released": "2013-08-25",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242643.jpg",
+        "qualities": {
+          "1080P": {
+            "slug_id": "LtqXclPmFThTxV4m",
+            "telegram_message_id": 784,
+            "episode": 20,
+            "season": 3,
+            "special_type": null,
+            "part": null,
+            "quality": "1080P",
+            "file_size": 197530400,
+            "file_name": "Attack on titan-(S03 - Ep20)-(தமிழ்)- 1080p.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "Erwin Smith - The 57th Exterior Scouting Mission (4)",
+            "released": "2013-08-25",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242643.jpg"
+          },
+          "720P": {
+            "slug_id": "l_U96qgQGJxqlZr_",
+            "telegram_message_id": 783,
+            "episode": 20,
+            "season": 3,
+            "special_type": null,
+            "part": null,
+            "quality": "720P",
+            "file_size": 123046425,
+            "file_name": "Attack on titan-(S03 - Ep20)-(தமிழ்)- 720p.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "Erwin Smith - The 57th Exterior Scouting Mission (4)",
+            "released": "2013-08-25",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242643.jpg"
+          },
+          "480P": {
+            "slug_id": "0hjWeR2OJ4cQdtli",
+            "telegram_message_id": 782,
+            "episode": 20,
+            "season": 3,
+            "special_type": null,
+            "part": null,
+            "quality": "480P",
+            "file_size": 55053691,
+            "file_name": "Attack on titan-(S03 - Ep20)-(தமிழ்)- 480p.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "Erwin Smith - The 57th Exterior Scouting Mission (4)",
+            "released": "2013-08-25",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242643.jpg"
+          }
+        }
+      },
+      {
+        "slug_id": "0nm285sj8levHsI6",
+        "telegram_message_id": 786,
+        "episode": 21,
+        "season": 3,
+        "special_type": null,
+        "part": null,
+        "quality": "720P",
+        "file_size": 112565878,
+        "file_name": "Attack on titan-(S03 - Ep21)-(தமிழ்)- 720p.mkv",
+        "mime_type": "video/x-matroska",
+        "title": "Crushing Blow - The 57th Exterior Scouting Mission (5)",
+        "released": "2013-09-01",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357929.jpg",
+        "qualities": {
+          "1080P": {
+            "slug_id": "RsqWfrgYAAEMOxnV",
+            "telegram_message_id": 787,
+            "episode": 21,
+            "season": 3,
+            "special_type": null,
+            "part": null,
+            "quality": "1080P",
+            "file_size": 231147326,
+            "file_name": "Attack on titan-(S03 - Ep21)-(தமிழ்)- 1080p.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "Crushing Blow - The 57th Exterior Scouting Mission (5)",
+            "released": "2013-09-01",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357929.jpg"
+          },
+          "720P": {
+            "slug_id": "0nm285sj8levHsI6",
+            "telegram_message_id": 786,
+            "episode": 21,
+            "season": 3,
+            "special_type": null,
+            "part": null,
+            "quality": "720P",
+            "file_size": 112565878,
+            "file_name": "Attack on titan-(S03 - Ep21)-(தமிழ்)- 720p.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "Crushing Blow - The 57th Exterior Scouting Mission (5)",
+            "released": "2013-09-01",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357929.jpg"
+          },
+          "480P": {
+            "slug_id": "zcQJRbjRARyj67-k",
+            "telegram_message_id": 785,
+            "episode": 21,
+            "season": 3,
+            "special_type": null,
+            "part": null,
+            "quality": "480P",
+            "file_size": 55039828,
+            "file_name": "Attack on titan-(S03 - Ep21)-(தமிழ்)- 480p.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "Crushing Blow - The 57th Exterior Scouting Mission (5)",
+            "released": "2013-09-01",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357929.jpg"
+          }
+        }
+      },
+      {
+        "slug_id": "aaavNq5a2hwZnQtc",
+        "telegram_message_id": 789,
+        "episode": 22,
+        "season": 3,
+        "special_type": null,
+        "part": null,
+        "quality": "720P",
+        "file_size": 151538741,
+        "file_name": "Attack on titan-(S03 - Ep22)-(தமிழ்)- 720p.mkv",
+        "mime_type": "video/x-matroska",
+        "title": "The Defeated - The 57th Exterior Scouting Mission (6)",
+        "released": "2013-09-08",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242646.jpg",
+        "qualities": {
+          "1080P": {
+            "slug_id": "olYE_VV-dwWSa6Ea",
+            "telegram_message_id": 790,
+            "episode": 22,
+            "season": 3,
+            "special_type": null,
+            "part": null,
+            "quality": "1080P",
+            "file_size": 281273996,
+            "file_name": "Attack on titan-(S03 - Ep22)-(தமிழ்)- 1080p.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "The Defeated - The 57th Exterior Scouting Mission (6)",
+            "released": "2013-09-08",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242646.jpg"
+          },
+          "720P": {
+            "slug_id": "aaavNq5a2hwZnQtc",
+            "telegram_message_id": 789,
+            "episode": 22,
+            "season": 3,
+            "special_type": null,
+            "part": null,
+            "quality": "720P",
+            "file_size": 151538741,
+            "file_name": "Attack on titan-(S03 - Ep22)-(தமிழ்)- 720p.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "The Defeated - The 57th Exterior Scouting Mission (6)",
+            "released": "2013-09-08",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242646.jpg"
+          },
+          "480P": {
+            "slug_id": "mwmqtsU1t4RmYwVx",
+            "telegram_message_id": 788,
+            "episode": 22,
+            "season": 3,
+            "special_type": null,
+            "part": null,
+            "quality": "480P",
+            "file_size": 62860647,
+            "file_name": "Attack on titan-(S03 - Ep22)-(தமிழ்)- 480p.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "The Defeated - The 57th Exterior Scouting Mission (6)",
+            "released": "2013-09-08",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242646.jpg"
           }
         }
       }
@@ -2570,6 +3934,6 @@
     "episodes_total": 25,
     "year": 2013,
     "studio": "WIT STUDIO",
-    "updated_at": "2026-11-01T20:10:35Z"
+    "updated_at": "2026-11-01T21:02:52Z"
   }
 }
