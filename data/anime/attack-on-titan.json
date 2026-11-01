@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "updated_at": 1793561088,
+  "updated_at": 1793561981,
   "anime": {
     "slug_id": "attack-on-titan",
     "title": "Attack on Titan",
     "episodes": [
       {
-        "slug_id": "2UXCzZxUgb5VTzlm",
+        "slug_id": "Wgki9gKMmqkOMBlq",
         "telegram_message_id": 615,
         "episode": 1,
         "season": 1,
@@ -21,7 +21,7 @@
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242650.jpg",
         "qualities": {
           "1080P": {
-            "slug_id": "S9Wr3JHywXwxNVI8",
+            "slug_id": "CFoqd7lblqZNlP0K",
             "telegram_message_id": 616,
             "episode": 1,
             "season": 1,
@@ -36,7 +36,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242650.jpg"
           },
           "720P": {
-            "slug_id": "2UXCzZxUgb5VTzlm",
+            "slug_id": "Wgki9gKMmqkOMBlq",
             "telegram_message_id": 615,
             "episode": 1,
             "season": 1,
@@ -51,7 +51,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242650.jpg"
           },
           "480P": {
-            "slug_id": "6wBvcDwhOka2IH9L",
+            "slug_id": "8al-E7j5ARImm9Oa",
             "telegram_message_id": 614,
             "episode": 1,
             "season": 1,
@@ -68,7 +68,7 @@
         }
       },
       {
-        "slug_id": "iNjc90RyGlGbQMdK",
+        "slug_id": "iZMumAvOB8NeAyMP",
         "telegram_message_id": 606,
         "episode": 1,
         "season": 1,
@@ -83,7 +83,7 @@
         "frame": "https://raw.githubusercontent.com/MazoPlatforms/autowa/main/web/frames/anime/attack-on-titan-oad-001.jpg",
         "qualities": {
           "720P": {
-            "slug_id": "iNjc90RyGlGbQMdK",
+            "slug_id": "iZMumAvOB8NeAyMP",
             "telegram_message_id": 606,
             "episode": 1,
             "season": 1,
@@ -100,7 +100,7 @@
         }
       },
       {
-        "slug_id": "4H6btowHJEv2beuX",
+        "slug_id": "x4lEF_z1ikJQdg3Z",
         "telegram_message_id": 618,
         "episode": 2,
         "season": 1,
@@ -115,7 +115,7 @@
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242651.jpg",
         "qualities": {
           "1080P": {
-            "slug_id": "9jx4sSDiQVYZJ5x0",
+            "slug_id": "kG9MEOgp9jcBIe7S",
             "telegram_message_id": 619,
             "episode": 2,
             "season": 1,
@@ -130,7 +130,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242651.jpg"
           },
           "720P": {
-            "slug_id": "4H6btowHJEv2beuX",
+            "slug_id": "x4lEF_z1ikJQdg3Z",
             "telegram_message_id": 618,
             "episode": 2,
             "season": 1,
@@ -145,7 +145,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242651.jpg"
           },
           "480P": {
-            "slug_id": "zs8ZrHGwGRKp-eji",
+            "slug_id": "07l7Jy_sjL32Ob87",
             "telegram_message_id": 617,
             "episode": 2,
             "season": 1,
@@ -162,7 +162,7 @@
         }
       },
       {
-        "slug_id": "zAPhEhXUz4kv_CHF",
+        "slug_id": "zG8vt7LGxW8F07M2",
         "telegram_message_id": 607,
         "episode": 2,
         "season": 1,
@@ -177,7 +177,7 @@
         "frame": "https://raw.githubusercontent.com/MazoPlatforms/autowa/main/web/frames/anime/attack-on-titan-oad-002.jpg",
         "qualities": {
           "720P": {
-            "slug_id": "zAPhEhXUz4kv_CHF",
+            "slug_id": "zG8vt7LGxW8F07M2",
             "telegram_message_id": 607,
             "episode": 2,
             "season": 1,
@@ -194,7 +194,7 @@
         }
       },
       {
-        "slug_id": "JTntXjtnqu91Pqsb",
+        "slug_id": "S31S_HOqJ4Aj8RP-",
         "telegram_message_id": 621,
         "episode": 3,
         "season": 1,
@@ -209,7 +209,7 @@
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242652.jpg",
         "qualities": {
           "1080P": {
-            "slug_id": "r3XUjqf6Diah2x3I",
+            "slug_id": "0R2WquBLjm1BngIy",
             "telegram_message_id": 622,
             "episode": 3,
             "season": 1,
@@ -224,7 +224,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242652.jpg"
           },
           "720P": {
-            "slug_id": "JTntXjtnqu91Pqsb",
+            "slug_id": "S31S_HOqJ4Aj8RP-",
             "telegram_message_id": 621,
             "episode": 3,
             "season": 1,
@@ -239,7 +239,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242652.jpg"
           },
           "480P": {
-            "slug_id": "LdT6dDhSlGSSPM92",
+            "slug_id": "FGs2iRV7PefdQb7U",
             "telegram_message_id": 620,
             "episode": 3,
             "season": 1,
@@ -256,7 +256,7 @@
         }
       },
       {
-        "slug_id": "FbX7HPzp64GeNy-e",
+        "slug_id": "xgjVTV0KuyiItJHk",
         "telegram_message_id": 608,
         "episode": 3,
         "season": 1,
@@ -271,7 +271,7 @@
         "frame": "https://raw.githubusercontent.com/MazoPlatforms/autowa/main/web/frames/anime/attack-on-titan-oad-003.jpg",
         "qualities": {
           "720P": {
-            "slug_id": "FbX7HPzp64GeNy-e",
+            "slug_id": "xgjVTV0KuyiItJHk",
             "telegram_message_id": 608,
             "episode": 3,
             "season": 1,
@@ -288,7 +288,7 @@
         }
       },
       {
-        "slug_id": "oAEDRCXRbmejbn16",
+        "slug_id": "uSW1QjIJ6VW0xYxr",
         "telegram_message_id": 624,
         "episode": 4,
         "season": 1,
@@ -303,7 +303,7 @@
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357583.jpg",
         "qualities": {
           "1080P": {
-            "slug_id": "tUPLuty6aJ-XsRc9",
+            "slug_id": "hlHzmawuMfyrKmi5",
             "telegram_message_id": 625,
             "episode": 4,
             "season": 1,
@@ -318,7 +318,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357583.jpg"
           },
           "720P": {
-            "slug_id": "oAEDRCXRbmejbn16",
+            "slug_id": "uSW1QjIJ6VW0xYxr",
             "telegram_message_id": 624,
             "episode": 4,
             "season": 1,
@@ -333,7 +333,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357583.jpg"
           },
           "480P": {
-            "slug_id": "fj5XS3-dDmAdDlmC",
+            "slug_id": "vf9wnRVMVL2TUIPg",
             "telegram_message_id": 623,
             "episode": 4,
             "season": 1,
@@ -350,7 +350,7 @@
         }
       },
       {
-        "slug_id": "t-erWfS1BTK9GcB-",
+        "slug_id": "yrrtJa45isHOlZDi",
         "telegram_message_id": 609,
         "episode": 4,
         "season": 1,
@@ -365,7 +365,7 @@
         "frame": "https://raw.githubusercontent.com/MazoPlatforms/autowa/main/web/frames/anime/attack-on-titan-oad-004.jpg",
         "qualities": {
           "720P": {
-            "slug_id": "t-erWfS1BTK9GcB-",
+            "slug_id": "yrrtJa45isHOlZDi",
             "telegram_message_id": 609,
             "episode": 4,
             "season": 1,
@@ -382,7 +382,7 @@
         }
       },
       {
-        "slug_id": "Hg6Q5xeuIno8b_JW",
+        "slug_id": "XdyZ1Lk-DaARkgFf",
         "telegram_message_id": 627,
         "episode": 5,
         "season": 1,
@@ -397,7 +397,7 @@
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357587.jpg",
         "qualities": {
           "1080P": {
-            "slug_id": "J_M-GdqO52K73hOT",
+            "slug_id": "BDF_Vt8ETc0HRHcD",
             "telegram_message_id": 628,
             "episode": 5,
             "season": 1,
@@ -412,7 +412,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357587.jpg"
           },
           "720P": {
-            "slug_id": "Hg6Q5xeuIno8b_JW",
+            "slug_id": "XdyZ1Lk-DaARkgFf",
             "telegram_message_id": 627,
             "episode": 5,
             "season": 1,
@@ -427,7 +427,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357587.jpg"
           },
           "480P": {
-            "slug_id": "PKobW4cavuoxgN9j",
+            "slug_id": "yShvxNl5dd5k3KYR",
             "telegram_message_id": 626,
             "episode": 5,
             "season": 1,
@@ -444,7 +444,7 @@
         }
       },
       {
-        "slug_id": "ggQdrGnIegyKPDt0",
+        "slug_id": "mt4OF6B43sTbPNw3",
         "telegram_message_id": 610,
         "episode": 5,
         "season": 1,
@@ -459,7 +459,7 @@
         "frame": "https://raw.githubusercontent.com/MazoPlatforms/autowa/main/web/frames/anime/attack-on-titan-oad-005.jpg",
         "qualities": {
           "720P": {
-            "slug_id": "ggQdrGnIegyKPDt0",
+            "slug_id": "mt4OF6B43sTbPNw3",
             "telegram_message_id": 610,
             "episode": 5,
             "season": 1,
@@ -476,7 +476,7 @@
         }
       },
       {
-        "slug_id": "-zgUTLRbIBIORDgZ",
+        "slug_id": "qhWJa6r0o8q8wEv8",
         "telegram_message_id": 630,
         "episode": 6,
         "season": 1,
@@ -491,7 +491,7 @@
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242630.jpg",
         "qualities": {
           "1080P": {
-            "slug_id": "BSK7KHGlzOhysApw",
+            "slug_id": "7MtaxRakoL_SEiOL",
             "telegram_message_id": 631,
             "episode": 6,
             "season": 1,
@@ -506,7 +506,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242630.jpg"
           },
           "720P": {
-            "slug_id": "-zgUTLRbIBIORDgZ",
+            "slug_id": "qhWJa6r0o8q8wEv8",
             "telegram_message_id": 630,
             "episode": 6,
             "season": 1,
@@ -521,7 +521,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242630.jpg"
           },
           "480P": {
-            "slug_id": "hIlVJToBRqJ1UvIa",
+            "slug_id": "Ig3uEmPBEnnuhVcM",
             "telegram_message_id": 629,
             "episode": 6,
             "season": 1,
@@ -538,7 +538,7 @@
         }
       },
       {
-        "slug_id": "ps5_RoYllYLV9Pip",
+        "slug_id": "PC89jEtR-Zp74NpW",
         "telegram_message_id": 611,
         "episode": 6,
         "season": 1,
@@ -553,7 +553,7 @@
         "frame": "https://raw.githubusercontent.com/MazoPlatforms/autowa/main/web/frames/anime/attack-on-titan-oad-006.jpg",
         "qualities": {
           "720P": {
-            "slug_id": "ps5_RoYllYLV9Pip",
+            "slug_id": "PC89jEtR-Zp74NpW",
             "telegram_message_id": 611,
             "episode": 6,
             "season": 1,
@@ -570,7 +570,7 @@
         }
       },
       {
-        "slug_id": "zH8Taz-BytJGuUHS",
+        "slug_id": "PWMPnP5gmGZtN6FC",
         "telegram_message_id": 633,
         "episode": 7,
         "season": 1,
@@ -585,7 +585,7 @@
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242629.jpg",
         "qualities": {
           "1080P": {
-            "slug_id": "MJFSqLso10d7Shmk",
+            "slug_id": "xO54m2JrmPdvCwGi",
             "telegram_message_id": 634,
             "episode": 7,
             "season": 1,
@@ -600,7 +600,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242629.jpg"
           },
           "720P": {
-            "slug_id": "zH8Taz-BytJGuUHS",
+            "slug_id": "PWMPnP5gmGZtN6FC",
             "telegram_message_id": 633,
             "episode": 7,
             "season": 1,
@@ -615,7 +615,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242629.jpg"
           },
           "480P": {
-            "slug_id": "lrTFRFdFbiTuTwGB",
+            "slug_id": "XBSGcz-R3k2Kscx9",
             "telegram_message_id": 632,
             "episode": 7,
             "season": 1,
@@ -632,7 +632,7 @@
         }
       },
       {
-        "slug_id": "NAT117CDFd5uSaUa",
+        "slug_id": "x_9arjApiF4mOq1j",
         "telegram_message_id": 612,
         "episode": 7,
         "season": 1,
@@ -647,7 +647,7 @@
         "frame": "https://raw.githubusercontent.com/MazoPlatforms/autowa/main/web/frames/anime/attack-on-titan-oad-007.jpg",
         "qualities": {
           "720P": {
-            "slug_id": "NAT117CDFd5uSaUa",
+            "slug_id": "x_9arjApiF4mOq1j",
             "telegram_message_id": 612,
             "episode": 7,
             "season": 1,
@@ -664,7 +664,7 @@
         }
       },
       {
-        "slug_id": "ZLhMyHksfVe-WNW3",
+        "slug_id": "UsWl1FKg-rlIdpd4",
         "telegram_message_id": 636,
         "episode": 8,
         "season": 1,
@@ -679,7 +679,7 @@
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242631.jpg",
         "qualities": {
           "1080P": {
-            "slug_id": "qtPS70ClaXVkQ5v0",
+            "slug_id": "Fe3zoxPscNpAwOzV",
             "telegram_message_id": 637,
             "episode": 8,
             "season": 1,
@@ -694,7 +694,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242631.jpg"
           },
           "720P": {
-            "slug_id": "ZLhMyHksfVe-WNW3",
+            "slug_id": "UsWl1FKg-rlIdpd4",
             "telegram_message_id": 636,
             "episode": 8,
             "season": 1,
@@ -709,7 +709,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242631.jpg"
           },
           "480P": {
-            "slug_id": "dtkjZ01BYgQ6xuSA",
+            "slug_id": "XuAuR0jfW0oaludM",
             "telegram_message_id": 635,
             "episode": 8,
             "season": 1,
@@ -726,7 +726,7 @@
         }
       },
       {
-        "slug_id": "fS6Kb-64bCYzT7O6",
+        "slug_id": "cN-gdguKLCkA7Pcy",
         "telegram_message_id": 613,
         "episode": 8,
         "season": 1,
@@ -741,7 +741,7 @@
         "frame": "https://raw.githubusercontent.com/MazoPlatforms/autowa/main/web/frames/anime/attack-on-titan-oad-008.jpg",
         "qualities": {
           "720P": {
-            "slug_id": "fS6Kb-64bCYzT7O6",
+            "slug_id": "cN-gdguKLCkA7Pcy",
             "telegram_message_id": 613,
             "episode": 8,
             "season": 1,
@@ -758,7 +758,7 @@
         }
       },
       {
-        "slug_id": "TVZs6NPDl1_-mqMl",
+        "slug_id": "hWQl1L5rEWeXlkae",
         "telegram_message_id": 639,
         "episode": 9,
         "season": 1,
@@ -773,7 +773,7 @@
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242632.jpg",
         "qualities": {
           "1080P": {
-            "slug_id": "N1OxSKl09rXzsGep",
+            "slug_id": "AFrRlDbc9Xc0uPL6",
             "telegram_message_id": 640,
             "episode": 9,
             "season": 1,
@@ -788,7 +788,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242632.jpg"
           },
           "720P": {
-            "slug_id": "TVZs6NPDl1_-mqMl",
+            "slug_id": "hWQl1L5rEWeXlkae",
             "telegram_message_id": 639,
             "episode": 9,
             "season": 1,
@@ -803,7 +803,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242632.jpg"
           },
           "480P": {
-            "slug_id": "FoIRTa7bI1sZWIEv",
+            "slug_id": "fr3WYJR3rpcMx9IJ",
             "telegram_message_id": 638,
             "episode": 9,
             "season": 1,
@@ -820,7 +820,7 @@
         }
       },
       {
-        "slug_id": "w5nayZDv2NLh0Vn5",
+        "slug_id": "DCYHFNBmoXMePnPz",
         "telegram_message_id": 642,
         "episode": 10,
         "season": 1,
@@ -835,7 +835,7 @@
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242633.jpg",
         "qualities": {
           "1080P": {
-            "slug_id": "aZFQIenOiBXreQq4",
+            "slug_id": "J97PrzU6CTfbb7Z1",
             "telegram_message_id": 643,
             "episode": 10,
             "season": 1,
@@ -850,7 +850,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242633.jpg"
           },
           "720P": {
-            "slug_id": "w5nayZDv2NLh0Vn5",
+            "slug_id": "DCYHFNBmoXMePnPz",
             "telegram_message_id": 642,
             "episode": 10,
             "season": 1,
@@ -865,7 +865,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242633.jpg"
           },
           "480P": {
-            "slug_id": "CPTxTu8ccUpmvIzL",
+            "slug_id": "nuQ5HaBqKnO-HJHb",
             "telegram_message_id": 641,
             "episode": 10,
             "season": 1,
@@ -882,7 +882,7 @@
         }
       },
       {
-        "slug_id": "rku8LFLLQ4Jk6N1z",
+        "slug_id": "R4kQmQX5VjrtFrZM",
         "telegram_message_id": 645,
         "episode": 11,
         "season": 1,
@@ -897,7 +897,7 @@
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357835.jpg",
         "qualities": {
           "1080P": {
-            "slug_id": "L_bq-80mczaj8vcQ",
+            "slug_id": "4GF67bVzciAPcnND",
             "telegram_message_id": 646,
             "episode": 11,
             "season": 1,
@@ -912,7 +912,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357835.jpg"
           },
           "720P": {
-            "slug_id": "rku8LFLLQ4Jk6N1z",
+            "slug_id": "R4kQmQX5VjrtFrZM",
             "telegram_message_id": 645,
             "episode": 11,
             "season": 1,
@@ -927,7 +927,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357835.jpg"
           },
           "480P": {
-            "slug_id": "aqT1VcRLSbbu3ufL",
+            "slug_id": "M0bS7Q1Ic1c5bJc4",
             "telegram_message_id": 644,
             "episode": 11,
             "season": 1,
@@ -944,22 +944,52 @@
         }
       },
       {
-        "slug_id": "XcV28b8o593bL4oR",
-        "telegram_message_id": 647,
+        "slug_id": "rbZxnjMymVmowb6a",
+        "telegram_message_id": 648,
         "episode": 12,
         "season": 1,
         "special_type": null,
         "part": null,
-        "quality": "480P",
-        "file_size": 135640778,
-        "file_name": "Attack_On_Titan_S01_Ep12_தமிழ்_480p_@Anime_Tamil_Dubbed_Series_1.mkv",
+        "quality": "720P",
+        "file_size": 245795379,
+        "file_name": "Attack_On_Titan_S01_Ep12_தமிழ்_720p_@Anime_Tamil_Dubbed_Series_1.mkv",
         "mime_type": "video/x-matroska",
         "title": "Wound - The Struggle for Trost (8)",
         "released": "2013-06-23",
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357836.jpg",
         "qualities": {
+          "1080P": {
+            "slug_id": "zIrS4hKWzD9WrcDf",
+            "telegram_message_id": 649,
+            "episode": 12,
+            "season": 1,
+            "special_type": null,
+            "part": null,
+            "quality": "1080P",
+            "file_size": 481765272,
+            "file_name": "Attack_On_Titan_S01_Ep12_தமிழ்_1080p_@Anime_Tamil_Dubbed_Series.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "Wound - The Struggle for Trost (8)",
+            "released": "2013-06-23",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357836.jpg"
+          },
+          "720P": {
+            "slug_id": "rbZxnjMymVmowb6a",
+            "telegram_message_id": 648,
+            "episode": 12,
+            "season": 1,
+            "special_type": null,
+            "part": null,
+            "quality": "720P",
+            "file_size": 245795379,
+            "file_name": "Attack_On_Titan_S01_Ep12_தமிழ்_720p_@Anime_Tamil_Dubbed_Series_1.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "Wound - The Struggle for Trost (8)",
+            "released": "2013-06-23",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357836.jpg"
+          },
           "480P": {
-            "slug_id": "XcV28b8o593bL4oR",
+            "slug_id": "ANEV1hqKMGKkeVFV",
             "telegram_message_id": 647,
             "episode": 12,
             "season": 1,
@@ -990,6 +1020,6 @@
     "episodes_total": 25,
     "year": 2013,
     "studio": "WIT STUDIO",
-    "updated_at": "2026-11-01T19:24:45Z"
+    "updated_at": "2026-11-01T19:39:38Z"
   }
 }
