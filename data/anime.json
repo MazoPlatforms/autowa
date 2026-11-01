@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-01T20:03:37.770Z",
+  "updated_at": "2026-11-01T20:03:52.372Z",
   "anime": [
     {
       "slug_id": "naruto",
@@ -20558,15 +20558,15 @@
           }
         },
         {
-          "slug_id": "fsO249MIMycBANZA",
-          "telegram_message_id": 701,
+          "slug_id": "FSc2afI81I_5tq0n",
+          "telegram_message_id": 702,
           "episode": 5,
           "season": 2,
           "special_type": null,
           "part": null,
-          "quality": "480p",
-          "file_size": 69000558,
-          "file_name": "Attack on titan-(S02 - Ep05)-(தமிழ்)- 480p.mkv",
+          "quality": "720p",
+          "file_size": 235571199,
+          "file_name": "Attack on titan-(S02 - Ep05)-(தமிழ்)- 720p.mkv",
           "mime_type": "video/x-matroska",
           "qualities": {
             "480P": {
@@ -20579,6 +20579,18 @@
               "quality": "480p",
               "file_size": 69000558,
               "file_name": "Attack on titan-(S02 - Ep05)-(தமிழ்)- 480p.mkv",
+              "mime_type": "video/x-matroska"
+            },
+            "720P": {
+              "slug_id": "FSc2afI81I_5tq0n",
+              "telegram_message_id": 702,
+              "episode": 5,
+              "season": 2,
+              "special_type": null,
+              "part": null,
+              "quality": "720p",
+              "file_size": 235571199,
+              "file_name": "Attack on titan-(S02 - Ep05)-(தமிழ்)- 720p.mkv",
               "mime_type": "video/x-matroska"
             }
           }
@@ -20598,7 +20610,7 @@
       "episodes_total": 25,
       "year": 2013,
       "studio": "WIT STUDIO",
-      "updated_at": "2026-11-01T20:03:37.770Z"
+      "updated_at": "2026-11-01T20:03:52.372Z"
     }
   ]
 }
