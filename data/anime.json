@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": 1793569746,
+  "updated_at": "2026-11-01T22:05:36.756Z",
   "anime": [
     {
       "slug_id": "naruto",
@@ -18642,6 +18642,18 @@
               "title": "Ilse's Notebook: Notes from a Scout Regiment Member",
               "released": "2013-12-09",
               "frame": "https://raw.githubusercontent.com/MazoPlatforms/autowa/main/web/frames/anime/attack-on-titan-oad-001.jpg"
+            },
+            "480P": {
+              "slug_id": "92NpymxhpBKqbesB",
+              "telegram_message_id": 881,
+              "episode": 1,
+              "season": 1,
+              "special_type": "OAD",
+              "part": null,
+              "quality": "480p",
+              "file_size": 49494125,
+              "file_name": "Attack On Titan - OAD EP01 [Tamil] 480p.mkv",
+              "mime_type": "video/x-matroska"
             }
           }
         },
@@ -24341,13 +24353,13 @@
       "year": 2013,
       "studio": "WIT STUDIO",
       "season_banners": {
-        "OAD": "/banners/attack-on-titan-oad.webp",
         "1": "/banners/attack-on-titan-season-1.webp",
         "2": "/banners/attack-on-titan-season-2.webp",
         "3": "/banners/attack-on-titan-season-3.webp",
-        "4": "/banners/attack-on-titan-season-4.webp"
+        "4": "/banners/attack-on-titan-season-4.webp",
+        "OAD": "/banners/attack-on-titan-oad.webp"
       },
-      "updated_at": "2026-11-01T21:49:04Z"
+      "updated_at": "2026-11-01T22:05:36.756Z"
     }
   ]
 }
