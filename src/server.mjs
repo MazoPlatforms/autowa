@@ -124,6 +124,13 @@ async function refreshAnimeCatalog(){
    const {stdout}=await execFileAsync('python3',['src/telegram_media.py','index-anime'],{timeout:180000,maxBuffer:10*1024*1024,env:process.env});
    const data=JSON.parse(stdout);
    if(!Array.isArray(data.anime))throw Error('Invalid anime catalog response');
+   const previous=await redis('GET','telegram:anime:v1').catch(()=>null);
+   if(previous){
+    try{
+     const oldEpisodes=new Map((JSON.parse(previous).anime||[]).flatMap(item=>item.episodes||[]).filter(item=>item.telegram_message_id&&item.slug_id).map(item=>[String(item.telegram_message_id),item.slug_id]));
+     for(const show of data.anime)for(const episode of show.episodes||[]){const old=oldEpisodes.get(String(episode.telegram_message_id));if(old)episode.slug_id=old;}
+    }catch{}
+   }
    await redis('SET','telegram:anime:v1',JSON.stringify(data));
    telegramAnimeStatus={state:'ready',updated_at:Date.now(),error:null};
    console.log('Telegram anime catalog refreshed:',data.anime.length,'series');
@@ -377,10 +384,11 @@ const server=http.createServer(async(req,res)=>{
    const anime=(catalog.anime||[]).filter(item=>!query||[item.title,item.title_alt,...(item.genre||[])].filter(Boolean).join(' ').toLowerCase().includes(query));
    return send(res,200,{anime,indexed_at:catalog.indexed_at||null,source:'telegram'});
   }
-  const animeStream=url.pathname.match(/^\/api\/anime\/stream\/(\d+)$/);
+  const animeStream=url.pathname.match(/^\/api\/anime\/stream\/([A-Za-z0-9_-]{8,80})$/);
   if((req.method==='GET'||req.method==='HEAD')&&animeStream){
-   const messageId=Number(animeStream[1]),catalog=await getAnimeCatalog();
-   const episode=(catalog.anime||[]).flatMap(item=>item.episodes||[]).find(item=>item.telegram_message_id===messageId);
+   const requestedId=animeStream[1],catalog=await getAnimeCatalog();
+   const episode=(catalog.anime||[]).flatMap(item=>item.episodes||[]).find(item=>item.slug_id===requestedId||String(item.telegram_message_id)===requestedId);
+   const messageId=Number(episode?.telegram_message_id);
    if(!episode||!Number.isSafeInteger(episode.file_size)||episode.file_size<=0)return send(res,404,{error:'Anime episode unavailable'});
    const session=await authenticatedStream(req);
    if(!session)return send(res,401,{error:'Please sign in using your phone number.'});

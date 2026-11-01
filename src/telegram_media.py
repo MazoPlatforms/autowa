@@ -4,6 +4,7 @@ import difflib
 import json
 import os
 import re
+import secrets
 import sys
 import time
 import traceback
@@ -106,7 +107,7 @@ def anime_media_item(message):
     size = int(getattr(message.file, 'size', 0) or 0)
     if not episode or not quality or not 0 < size <= 2000000000:
         return None
-    return {'telegram_message_id': int(message.id), 'episode': episode, 'season': season or 1, 'part': part, 'quality': quality, 'file_size': size, 'file_name': filename[:240], 'mime_type': str(getattr(message.file, 'mime_type', '') or '')}
+    return {'slug_id': secrets.token_urlsafe(12), 'telegram_message_id': int(message.id), 'episode': episode, 'season': season or 1, 'part': part, 'quality': quality, 'file_size': size, 'file_name': filename[:240], 'mime_type': str(getattr(message.file, 'mime_type', '') or '')}
 
 def build_anime_catalog(messages):
     shows = {}

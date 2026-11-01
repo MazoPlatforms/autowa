@@ -50,8 +50,16 @@ jobs:
         run: |
           set -euo pipefail
           python - <<'PY'
-          import json
+          import json, secrets
           source=json.load(open('/tmp/anime-catalog.json', encoding='utf-8'))
+          try:
+              previous=json.load(open('data/anime.json', encoding='utf-8'))
+          except (FileNotFoundError, json.JSONDecodeError):
+              previous={}
+          old={str(ep.get('telegram_message_id')): ep.get('slug_id') for item in previous.get('anime', []) for ep in item.get('episodes', []) if ep.get('telegram_message_id') and ep.get('slug_id')}
+          for item in source.get('anime', []):
+              for episode in item.get('episodes', []):
+                  episode['slug_id']=old.get(str(episode.get('telegram_message_id')), episode.get('slug_id') or secrets.token_urlsafe(12))
           output={'schema_version':1,'updated_at':source.get('indexed_at'),'anime':source.get('anime',[])}
           json.dump(output, open('/tmp/updated-anime.json','w',encoding='utf-8'), ensure_ascii=False, indent=2)
           open('/tmp/updated-anime.json','a').write('\n')
