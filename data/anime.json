@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-01T11:37:02.802Z",
+  "updated_at": 1793533044,
   "anime": [
     {
       "slug_id": "naruto-shippuden",
@@ -1926,7 +1926,7 @@
           "episode": 176,
           "season": 8,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 88091263,
           "file_name": "Naruto Shippuden S08 Tamil EP176.mkv",
           "mime_type": "video/x-matroska"
@@ -1937,7 +1937,7 @@
           "episode": 177,
           "season": 8,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 106230469,
           "file_name": "Naruto Shippuden S08 Tamil EP177.mkv",
           "mime_type": "video/x-matroska"
@@ -1948,7 +1948,7 @@
           "episode": 178,
           "season": 8,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 88589211,
           "file_name": "Naruto Shippuden S08 Tamil EP178.mkv",
           "mime_type": "video/x-matroska"
@@ -1959,7 +1959,7 @@
           "episode": 179,
           "season": 8,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 92626394,
           "file_name": "Naruto Shippuden S08 Tamil EP179.mkv",
           "mime_type": "video/x-matroska"
@@ -1970,7 +1970,7 @@
           "episode": 180,
           "season": 8,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 98445960,
           "file_name": "Naruto Shippuden S08 Tamil EP180.mkv",
           "mime_type": "video/x-matroska"
@@ -1981,7 +1981,7 @@
           "episode": 181,
           "season": 8,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 109200383,
           "file_name": "Naruto Shippuden S08 Tamil EP181.mkv",
           "mime_type": "video/x-matroska"
@@ -1992,7 +1992,7 @@
           "episode": 182,
           "season": 8,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 90333753,
           "file_name": "Naruto Shippuden S08 Tamil EP182.mkv",
           "mime_type": "video/x-matroska"
@@ -2003,7 +2003,7 @@
           "episode": 183,
           "season": 8,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 112593388,
           "file_name": "Naruto Shippuden S08 Tamil EP183.mkv",
           "mime_type": "video/x-matroska"
@@ -2014,7 +2014,7 @@
           "episode": 184,
           "season": 8,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 117941188,
           "file_name": "Naruto Shippuden S08 Tamil EP184.mkv",
           "mime_type": "video/x-matroska"
@@ -2025,7 +2025,7 @@
           "episode": 185,
           "season": 8,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 151466538,
           "file_name": "Naruto Shippuden S08 Tamil EP185.mkv",
           "mime_type": "video/x-matroska"
@@ -2036,7 +2036,7 @@
           "episode": 186,
           "season": 8,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 91707970,
           "file_name": "Naruto Shippuden S08 Tamil EP186.mkv",
           "mime_type": "video/x-matroska"
@@ -2047,7 +2047,7 @@
           "episode": 187,
           "season": 9,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 93685159,
           "file_name": "Naruto Shippuden S09 Tamil EP187.mkv",
           "mime_type": "video/x-matroska"
@@ -2058,7 +2058,7 @@
           "episode": 188,
           "season": 9,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 90295281,
           "file_name": "Naruto Shippuden S09 Tamil EP188.mkv",
           "mime_type": "video/x-matroska"
@@ -2069,7 +2069,7 @@
           "episode": 189,
           "season": 9,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 102943058,
           "file_name": "Naruto Shippuden S09 Tamil EP189.mkv",
           "mime_type": "video/x-matroska"
@@ -2080,7 +2080,7 @@
           "episode": 190,
           "season": 9,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 131487793,
           "file_name": "Naruto Shippuden S09 Tamil EP190.mkv",
           "mime_type": "video/x-matroska"
@@ -2091,7 +2091,7 @@
           "episode": 191,
           "season": 9,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 97674956,
           "file_name": "Naruto Shippuden S09 Tamil EP191.mkv",
           "mime_type": "video/x-matroska"
@@ -2102,7 +2102,7 @@
           "episode": 192,
           "season": 9,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 100191268,
           "file_name": "Naruto Shippuden S09 Tamil EP192.mkv",
           "mime_type": "video/x-matroska"
@@ -2113,7 +2113,7 @@
           "episode": 193,
           "season": 9,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 101241908,
           "file_name": "Naruto Shippuden S09 Tamil EP193.mkv",
           "mime_type": "video/x-matroska"
@@ -2124,7 +2124,7 @@
           "episode": 194,
           "season": 9,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 108041539,
           "file_name": "Naruto Shippuden S09 Tamil EP194.mkv",
           "mime_type": "video/x-matroska"
@@ -2135,7 +2135,7 @@
           "episode": 195,
           "season": 9,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 86610312,
           "file_name": "Naruto Shippuden S09 Tamil EP195.mkv",
           "mime_type": "video/x-matroska"
@@ -2146,7 +2146,7 @@
           "episode": 196,
           "season": 9,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 90254751,
           "file_name": "Naruto Shippuden S09 Tamil EP196.mkv",
           "mime_type": "video/x-matroska"
@@ -2167,7 +2167,7 @@
       "status": "Finished",
       "episodes_total": 500,
       "studio": "Studio Pierrot",
-      "updated_at": "2026-11-01T11:37:02.802Z"
+      "updated_at": "2026-11-01T11:37:24Z"
     }
   ]
 }
