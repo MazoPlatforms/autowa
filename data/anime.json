@@ -1,18 +1,18 @@
 {
   "schema_version": 1,
-  "updated_at": 1793520005,
+  "updated_at": "2026-11-01T08:18:10.328Z",
   "anime": [
     {
       "slug_id": "naruto-shippuden",
       "title": "Naruto: Shippuden",
       "episodes": [
         {
-          "slug_id": "Gp1FuhyMeGmV2iqS",
-          "telegram_message_id": 4,
+          "slug_id": "cZ_r0zFy6P-khJ8H",
+          "telegram_message_id": 5,
           "episode": 1,
           "season": 1,
           "part": null,
-          "quality": "720P",
+          "quality": "720p",
           "file_size": 74584325,
           "file_name": "Naruto Shippuden - 001 [720p] [Dual] @Anime_Gallery.mkv",
           "mime_type": "video/x-matroska"
@@ -33,7 +33,7 @@
       "episodes_total": 500,
       "year": 2007,
       "studio": "Studio Pierrot",
-      "updated_at": "2026-11-01T08:00:05Z"
+      "updated_at": "2026-11-01T08:18:10.328Z"
     }
   ]
 }
