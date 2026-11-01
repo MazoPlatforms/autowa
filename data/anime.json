@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-01T16:45:31.959Z",
+  "updated_at": "2026-11-01T16:45:36.376Z",
   "anime": [
     {
       "slug_id": "naruto",
@@ -1559,6 +1559,17 @@
           "file_size": 161579368,
           "file_name": "Naruto S05 E130 Blu-Ray - 720p - x264 - [Tamil + Telugu + Hi.mkv",
           "mime_type": "video/x-matroska"
+        },
+        {
+          "slug_id": "RaDCTFcX0wQNzmPb",
+          "telegram_message_id": 512,
+          "episode": 131,
+          "season": 5,
+          "part": null,
+          "quality": "480p",
+          "file_size": 97629461,
+          "file_name": "Naruto S05 E131 Blu-Ray - 480p - x264 - [Tamil + Telugu + Hi.mkv",
+          "mime_type": "video/x-matroska"
         }
       ],
       "year": 2002,
@@ -1576,7 +1587,7 @@
       "status": "Finished",
       "episodes_total": 220,
       "studio": "Studio Pierrot",
-      "updated_at": "2026-11-01T16:45:31.959Z"
+      "updated_at": "2026-11-01T16:45:36.376Z"
     },
     {
       "slug_id": "naruto-shippuden",
