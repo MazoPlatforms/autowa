@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-01T20:59:42.266Z",
+  "updated_at": "2026-11-01T20:59:58.072Z",
   "anime": [
     {
       "slug_id": "naruto",
@@ -22036,6 +22036,18 @@
               "file_size": 144110741,
               "file_name": "Attack on titan-(S03 - Ep19)-(தமிழ்)- 720p.mkv",
               "mime_type": "video/x-matroska"
+            },
+            "1080P": {
+              "slug_id": "J5-ocNCnOZSlyHoJ",
+              "telegram_message_id": 781,
+              "episode": 19,
+              "season": 3,
+              "special_type": null,
+              "part": null,
+              "quality": "1080p",
+              "file_size": 287160439,
+              "file_name": "Attack on titan-(S03 - Ep19)-(தமிழ்)- 1080p.mkv",
+              "mime_type": "video/x-matroska"
             }
           }
         }
@@ -22054,7 +22066,7 @@
       "episodes_total": 25,
       "year": 2013,
       "studio": "WIT STUDIO",
-      "updated_at": "2026-11-01T20:59:42.266Z"
+      "updated_at": "2026-11-01T20:59:58.072Z"
     }
   ]
 }
