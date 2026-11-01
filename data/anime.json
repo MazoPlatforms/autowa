@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": 1793557526,
+  "updated_at": 1793556273,
   "anime": [
     {
       "slug_id": "naruto",
@@ -2947,7 +2947,7 @@
         "10": "/banners/naruto-season-10.webp",
         "11": "/banners/naruto-season-11.webp"
       },
-      "updated_at": "2026-11-01T18:25:25Z"
+      "updated_at": "2026-11-01T18:04:32Z"
     },
     {
       "slug_id": "naruto-shippuden",
@@ -8205,11 +8205,11 @@
       "status": "Finished",
       "episodes_total": 500,
       "studio": "Studio Pierrot",
-      "updated_at": "2026-11-01T18:25:26Z"
+      "updated_at": "2026-11-01T18:04:33Z"
     },
     {
-      "slug_id": "attack-on-titan-oad",
-      "title": "Attack On Titan - OAD",
+      "slug_id": "attack-on-titan",
+      "title": "Attack on Titan",
       "episodes": [
         {
           "slug_id": "OK5zYn_8BoFyTeZJ",
@@ -8220,7 +8220,8 @@
           "quality": "720P",
           "file_size": 118158912,
           "file_name": "Attack On Titan - OAD EP01 [Tamil] 720p.mkv",
-          "mime_type": "video/x-matroska"
+          "mime_type": "video/x-matroska",
+          "special_type": "OAD"
         },
         {
           "slug_id": "RyvfZDpOeBQyhB-I",
@@ -8231,7 +8232,8 @@
           "quality": "720P",
           "file_size": 138397289,
           "file_name": "Attack On Titan - OAD EP02 [Tamil] 720p.mkv",
-          "mime_type": "video/x-matroska"
+          "mime_type": "video/x-matroska",
+          "special_type": "OAD"
         },
         {
           "slug_id": "TQ0WY5YZs-sREl9z",
@@ -8242,7 +8244,8 @@
           "quality": "720P",
           "file_size": 110520261,
           "file_name": "Attack On Titan - OAD EP03 [Tamil] 720p.mkv",
-          "mime_type": "video/x-matroska"
+          "mime_type": "video/x-matroska",
+          "special_type": "OAD"
         },
         {
           "slug_id": "cQx0snz6F7AsBzXA",
@@ -8253,57 +8256,13 @@
           "quality": "720P",
           "file_size": 115243635,
           "file_name": "Attack On Titan - OAD EP04 [Tamil] 720p.mkv",
-          "mime_type": "video/x-matroska"
-        },
-        {
-          "slug_id": "gD9C7QAAGu2zMZp4",
-          "telegram_message_id": 610,
-          "episode": 5,
-          "season": 1,
-          "part": null,
-          "quality": "720P",
-          "file_size": 170698243,
-          "file_name": "Attack On Titan - OAD EP05 [Tamil] 720p.mkv",
-          "mime_type": "video/x-matroska"
-        },
-        {
-          "slug_id": "9ktln_JR7BHnSsiK",
-          "telegram_message_id": 611,
-          "episode": 6,
-          "season": 1,
-          "part": null,
-          "quality": "720P",
-          "file_size": 58744918,
-          "file_name": "Attack On Titan - OAD EP06 [Tamil] 720p.mkv",
-          "mime_type": "video/x-matroska"
-        },
-        {
-          "slug_id": "nm1Q1XVa1X47aNhd",
-          "telegram_message_id": 612,
-          "episode": 7,
-          "season": 1,
-          "part": null,
-          "quality": "720P",
-          "file_size": 69806612,
-          "file_name": "Attack On Titan - OAD EP07 [Tamil] 720p.mkv",
-          "mime_type": "video/x-matroska"
-        },
-        {
-          "slug_id": "YUYYw66t9N4r_xEm",
-          "telegram_message_id": 613,
-          "episode": 8,
-          "season": 1,
-          "part": null,
-          "quality": "720P",
-          "file_size": 90344305,
-          "file_name": "Attack On Titan - OAD EP08 [Tamil] 720p.mkv",
-          "mime_type": "video/x-matroska"
+          "mime_type": "video/x-matroska",
+          "special_type": "OAD"
         }
       ],
       "wikipedia_url": "https://en.wikipedia.org/wiki/Attack_on_Titan_(TV_series)",
       "plot": "Attack on Titan  is a Japanese dark fantasy anime television series based on the 2009–2021 manga series Attack on Titan by Hajime Isayama. The series premiered on April 7, 2013, and concluded on November 5, 2023. Animated by Wit Studio and MAPPA, the series aired on MBS and NHK General TV. In North America, the series has been streamed on Crunchyroll, Funimation, and Hulu. It also premiered its English dub on Adult Swim's Toonami programming block in the United States from May 3, 2014, to January 7, 2024.",
-      "year": "2026",
-      "updated_at": "2026-11-01T18:25:24Z"
+      "updated_at": "2026-11-01T18:04:30Z"
     }
   ]
 }

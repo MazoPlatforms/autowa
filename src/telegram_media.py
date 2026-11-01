@@ -82,6 +82,7 @@ def anime_filename_parts(raw):
     match = re.search(r'(?i)\bpart\s*[- ]?(\d{1,2})\b', value)
     if match:
         part = int(match.group(1)); value = value[:match.start()] + ' ' + value[match.end():]
+    value = re.sub(r'(?i)\b(?:OAD|OVA|specials?)\b', ' ', value)
     # Release tags can be wrapped in parentheses/brackets and can appear
     # before language/audio labels. Remove those containers before trimming
     # the remaining release suffix from the anime title.
@@ -112,6 +113,13 @@ def anime_caption_parts(caption):
     quality_match = re.search(r'(?i)\b(?:quality\s*:\s*)?(2160p|1080p|720p|480p|360p|4k)\b', value)
     raw_quality = quality_match.group(1).lower() if quality_match else None
     return {'title': title_match.group(1).strip() if title_match else None, 'season': season_from_caption(value), 'episode': int(episode_match.group(1)) if episode_match else None, 'quality': '2160p' if raw_quality == '4k' else raw_quality, 'part': None}
+
+def anime_special_type(filename):
+    match = re.search(r'(?i)\b(OAD|OVA|specials?)\b', str(filename or ''))
+    if not match:
+        return None
+    value = match.group(1).upper()
+    return 'OAD' if value == 'OAD' else 'OVA' if value == 'OVA' else 'Special'
 
 def tmdb_season_boundaries(title):
     key = os.getenv('TMDB_API_KEY')
@@ -204,7 +212,8 @@ def catalog_title_key(title):
 
 def canonical_anime_release_title(title):
     """Normalize common release-name misspellings before metadata lookup."""
-    return {'attackontitack': 'Attack on Titan'}.get(catalog_title_key(title), title)
+    value = re.sub(r'(?i)\s*[-:()]?\s*(?:OAD|OVA|specials?)\s*$', '', str(title or '')).strip(' -:()')
+    return {'attackontitack': 'Attack on Titan'}.get(catalog_title_key(value), value)
 
 def load_existing_anime_catalog():
     """Load local metadata so known shows do not hit APIs on every refresh."""
@@ -285,9 +294,9 @@ def tmdb_season_episodes(title, season):
         _TMDB_SEASON_CACHE[cache_key] = {}
         return {}
 
-def tvmaze_episode_guide(title):
+def tvmaze_episode_guide(title, specials=False):
     """Fetch a global episode guide when a season-aware source is unavailable."""
-    cache_key = str(title or '').casefold()
+    cache_key = str(title or '').casefold() + ('::specials' if specials else '')
     if cache_key in _TVMAZE_EPISODE_CACHE:
         return _TVMAZE_EPISODE_CACHE[cache_key]
     try:
@@ -305,8 +314,10 @@ def tvmaze_episode_guide(title):
         if not target or best < 0.55 or not target.get('id'):
             _TVMAZE_EPISODE_CACHE[cache_key] = {}
             return {}
-        with urllib.request.urlopen(urllib.request.Request('https://api.tvmaze.com/shows/%s/episodes?specials=0' % target['id'], headers={'User-Agent': 'FilmGo/1.0'}), timeout=12) as response:
+        with urllib.request.urlopen(urllib.request.Request('https://api.tvmaze.com/shows/%s/episodes?specials=%s' % (target['id'], '1' if specials else '0'), headers={'User-Agent': 'FilmGo/1.0'}), timeout=12) as response:
             rows = json.load(response)
+        if specials:
+            rows = [item for item in rows if int(item.get('season') or 0) == 0]
         mapped = {}
         for index, item in enumerate(rows, 1):
             mapped[index] = {
@@ -370,7 +381,7 @@ def anime_media_item(message):
     size = int(getattr(message.file, 'size', 0) or 0)
     if not episode or not quality or not 0 < size <= 2000000000:
         return None
-    return {'slug_id': secrets.token_urlsafe(12), 'telegram_message_id': int(message.id), 'episode': episode, 'season': season, 'season_explicit': bool(filename_season), 'caption_season': caption['season'], 'part': part, 'quality': quality, 'file_size': size, 'file_name': filename[:240], 'mime_type': str(getattr(message.file, 'mime_type', '') or '')}
+    return {'slug_id': secrets.token_urlsafe(12), 'telegram_message_id': int(message.id), 'episode': episode, 'season': season, 'season_explicit': bool(filename_season), 'caption_season': caption['season'], 'special_type': anime_special_type(filename), 'part': part, 'quality': quality, 'file_size': size, 'file_name': filename[:240], 'mime_type': str(getattr(message.file, 'mime_type', '') or '')}
 
 def build_anime_catalog(messages):
     existing = load_existing_anime_catalog()
@@ -393,6 +404,13 @@ def build_anime_catalog(messages):
         known = existing_show_for(show['title'], existing)
         if known:
             show.update({k: v for k, v in known.items() if k not in ('episodes', 'updated_at') and v not in (None, '', [])})
+            canonical_title = canonical_anime_release_title(show.get('title'))
+            if canonical_title and canonical_title != show.get('title'):
+                show['title'] = canonical_title
+                show['slug_id'] = re.sub(r'[^a-z0-9]+', '-', canonical_title.casefold()).strip('-')[:80] or show['slug_id']
+            if not show.get('poster') or not show.get('rating') or not show.get('genre') or not show.get('year'):
+                meta = anime_metadata(show['title'])
+                show.update({k: v for k, v in meta.items() if v not in (None, '', [], 0)})
         else:
             meta = anime_metadata(show['title'])
             show.update({k: v for k, v in meta.items() if v not in (None, '', [])})
@@ -413,12 +431,20 @@ def build_anime_catalog(messages):
             previous = known_episodes.get(str(episode.get('telegram_message_id')))
             explicit_season = episode.pop('season_explicit', None)
             caption_season = episode.pop('caption_season', None)
-            editorial_season = manual_anime_season(show['title'], episode['episode'])
-            episode['season'] = explicit_season and episode['season'] or editorial_season or caption_season or (previous or {}).get('season') or inferred_anime_season(episode['episode'], None, boundaries)
-            guide_episode = manual_anime_episode(show['title'], episode['season'], episode['episode'])
-            guide = tmdb_season_episodes(show['title'], episode['season']).get(guide_episode) or tmdb_season_episodes(show['title'], episode['season']).get(episode['episode'])
-            if not guide:
-                guide = tvmaze_episode_guide(show['title']).get(int(episode['episode'] or 0))
+            special_type = episode.get('special_type') or (previous or {}).get('special_type')
+            episode['special_type'] = special_type
+            if special_type:
+                episode['season'] = 1
+                guide = tmdb_season_episodes(show['title'], 0).get(int(episode['episode'] or 0))
+                if not guide:
+                    guide = tvmaze_episode_guide(show['title'], specials=True).get(int(episode['episode'] or 0))
+            else:
+                editorial_season = manual_anime_season(show['title'], episode['episode'])
+                episode['season'] = explicit_season and episode['season'] or editorial_season or caption_season or (previous or {}).get('season') or inferred_anime_season(episode['episode'], None, boundaries)
+                guide_episode = manual_anime_episode(show['title'], episode['season'], episode['episode'])
+                guide = tmdb_season_episodes(show['title'], episode['season']).get(guide_episode) or tmdb_season_episodes(show['title'], episode['season']).get(episode['episode'])
+                if not guide:
+                    guide = tvmaze_episode_guide(show['title']).get(int(episode['episode'] or 0))
             if guide:
                 for field in ('title', 'released', 'frame'):
                     if guide.get(field):

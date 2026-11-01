@@ -63,10 +63,11 @@ export const animeFilenameParts=name=>{
  if(!episode){match=raw.match(/(?<!\d)[- ]0*(\d{1,4})(?=\s*(?:\[[^\]]*\]|\([^)]*\)|(?:360|480|720|1080|2160|4k)p?|tamil|telugu|malayalam|kannada|hindi|english|தமிழ்|hdrip|webrip|bluray|web-dl|$))/iu);if(match&&!(Number(match[1])>=1900&&Number(match[1])<=2099)){episode=Number(match[1]);raw=raw.slice(0,match.index)+' '+raw.slice(match.index+match[0].length);}}
  match=raw.match(/\bpart\s*[- ]?(\d{1,2})\b/i);if(match){part=Number(match[1]);raw=raw.slice(0,match.index)+' '+raw.slice(match.index+match[0].length);}
  const qualityMatch=raw.match(ANIME_QUALITY),quality=qualityMatch?.[0]?.toLowerCase()==='4k'?'2160p':qualityMatch?.[0]?.toLowerCase()||'720p';
- const cut=qualityMatch?.index??Infinity;let title=(Number.isFinite(cut)?raw.slice(0,cut):raw).replace(/\s+(?:தமிழ்|tamil|telugu|malayalam|kannada|hindi|english|hdrip|webrip|blu[- ]?ray|bluray|web[- ]?dl|proper|repack|dub|dual(?:\s+audio)?).*$/iu,'').replace(/\s+@.*$/,'').replace(/\s*(?:\[[^\]]*\]|\{[^}]*\}|\([^)]*\))+/g,' ').replace(/\b(?:multi(?:\s+audio)?|audio|esub|esubs)\b/giu,' ').replace(/\s*\+\s*/g,' ').replace(/^[\s\[({]+|[\s\-\[\]({})]+$/g,'').replace(/\s+/g,' ').trim();
+ const cut=qualityMatch?.index??Infinity;let title=(Number.isFinite(cut)?raw.slice(0,cut):raw).replace(/\s+(?:தமிழ்|tamil|telugu|malayalam|kannada|hindi|english|hdrip|webrip|blu[- ]?ray|bluray|web[- ]?dl|proper|repack|dub|dual(?:\s+audio)?).*$/iu,'').replace(/\b(?:OAD|OVA|specials?)\b/giu,' ').replace(/\s+@.*$/,'').replace(/\s*(?:\[[^\]]*\]|\{[^}]*\}|\([^)]*\))+/g,' ').replace(/\b(?:multi(?:\s+audio)?|audio|esub|esubs)\b/giu,' ').replace(/\s*\+\s*/g,' ').replace(/^[\s\[({]+|[\s\-\[\]({})]+$/g,'').replace(/\s+/g,' ').trim();
  if(normalize(title).startsWith('narutoshippud'))title='Naruto Shippuden';
  if(normalize(title)==='attackontitack')title='Attack on Titan';
- return {title:title||'Untitled anime',titleCandidates:titleCandidates(title),season,episode,part,quality};
+ const specialMatch=raw.match(/\b(OAD|OVA|specials?)\b/i),special_type=specialMatch?(specialMatch[1].toUpperCase()==='OAD'?'OAD':specialMatch[1].toUpperCase()==='OVA'?'OVA':'Special'):null;
+ return {title:title||'Untitled anime',titleCandidates:titleCandidates(title),season,episode,part,quality,special_type};
 };
 function seasonFromCaption(caption){
  const match=String(caption||'').match(/\b(?:season|s)\s*[:#-]?\s*(\d{1,2})\b/i);
@@ -283,7 +284,7 @@ function manualAnimeSeason(title,episode){
  return boundaries.find(([,last])=>Number(episode)<=last)?.[0]||22;
 }
 function animeDraftPrompt(d){
- const lines=['FilmGo anime draft',d.title,'Season: '+d.season+' · Episode: '+d.episode+(d.part?' · Part: '+d.part:''),'Quality: '+d.quality,'File: '+d.file_name,d.replace?'Existing episode and quality found — replacement requires confirmation':d.poster?'Poster: ready':'Poster: '+(d.poster_error||'AniList / fallback'),'Use /edit to change metadata or /cancel to discard.'];
+ const lines=['FilmGo anime draft',d.title,d.special_type?(d.special_type+' · Episode: '+d.episode+(d.part?' · Part: '+d.part:'')):'Season: '+d.season+' · Episode: '+d.episode+(d.part?' · Part: '+d.part:''),'Quality: '+d.quality,'File: '+d.file_name,d.replace?'Existing episode and quality found — replacement requires confirmation':d.poster?'Poster: ready':'Poster: '+(d.poster_error||'AniList / fallback'),'Use /edit to change metadata or /cancel to discard.'];
  return say(ADMIN_ID,lines.join('\n'),{reply_markup:{inline_keyboard:[[{text:d.replace?'Replace existing':'Publish anime',callback_data:'fg:publish'},{text:'Cancel',callback_data:'fg:cancel'}]]}});
 }
 async function findAnimeDuplicate(d){
@@ -293,7 +294,7 @@ async function findAnimeDuplicate(d){
  const file=await response.json();const content=JSON.parse(Buffer.from(file.content.replace(/\s/g,''),'base64').toString('utf8'));
  const show=(content.anime||[]).find(item=>item.slug_id===d.slug_id||normalize(item.title)===normalize(d.title));
  if(!show)return null;
- return (show.episodes||[]).find(item=>Number(item.episode)===Number(d.episode)&&Number(item.season||1)===Number(d.season||1)&&String(item.quality||'').toLowerCase()===String(d.quality||'').toLowerCase())||null;
+ return (show.episodes||[]).find(item=>Number(item.episode)===Number(d.episode)&&Number(item.season||1)===Number(d.season||1)&&String(item.special_type||'')===String(d.special_type||'')&&String(item.quality||'').toLowerCase()===String(d.quality||'').toLowerCase())||null;
 }
 async function saveAnimeMetadata(id,d){
  const [owner,name]=REPO.split('/');const url='https://api.github.com/repos/'+owner+'/'+name+'/contents/data/anime.json';const headers={Authorization:'Bearer '+GH_TOKEN,Accept:'application/vnd.github+json','Content-Type':'application/json','X-GitHub-Api-Version':'2022-11-28'};
@@ -301,7 +302,7 @@ async function saveAnimeMetadata(id,d){
   const response=await fetch(url,{headers,signal:AbortSignal.timeout(15000)});let content,sha;
   if(response.status===404){content={schema_version:1,updated_at:null,anime:[]};sha=undefined;}else{if(!response.ok)throw Error('Anime catalog read '+response.status);const file=await response.json();sha=file.sha;content=JSON.parse(Buffer.from(file.content.replace(/\s/g,''),'base64').toString('utf8'));}
   content.anime ||= [];const show=content.anime.find(item=>item.slug_id===d.slug_id)||content.anime.find(item=>normalize(item.title)===normalize(d.title));
-  const episode={slug_id:d.episode_slug_id||crypto.randomBytes(12).toString('base64url'),telegram_message_id:Number(id),episode:Number(d.episode),season:Number(d.season||1),part:d.part?Number(d.part):null,quality:d.quality,file_size:Number(d.file_size||0),file_name:d.file_name||'',mime_type:d.mime_type||''};
+  const episode={slug_id:d.episode_slug_id||crypto.randomBytes(12).toString('base64url'),telegram_message_id:Number(id),episode:Number(d.episode),season:Number(d.season||1),special_type:d.special_type||null,part:d.part?Number(d.part):null,quality:d.quality,file_size:Number(d.file_size||0),file_name:d.file_name||'',mime_type:d.mime_type||''};
   const target=show||{slug_id:d.slug_id,title:d.title,episodes:[]};if(!Array.isArray(target.episodes))target.episodes=[];const index=target.episodes.findIndex(e=>Number(e.episode)===episode.episode&&Number(e.season||1)===episode.season&&String(e.quality).toLowerCase()===String(episode.quality).toLowerCase());if(index>=0)target.episodes[index]=episode;else target.episodes.push(episode);
   Object.assign(target,{slug_id:d.slug_id,title:d.title,year:d.year||target.year,poster:d.poster||target.poster||null,plot:d.plot||target.plot||'',genre:d.genre||target.genre||[],rating:d.rating||target.rating||null,status:d.status||target.status||null,episodes_total:d.episodes_total||target.episodes_total||null,studio:d.studio||target.studio||null,updated_at:new Date().toISOString()});if(!show)content.anime.push(target);content.updated_at=new Date().toISOString();
   const body={message:'Update FilmGo anime metadata in canonical anime.json',content:Buffer.from(JSON.stringify(content,null,2)+'\n').toString('base64')};if(sha)body.sha=sha;const write=await fetch(url,{method:'PUT',headers,body:JSON.stringify(body),signal:AbortSignal.timeout(15000)});if(write.ok)return; if(write.status!==409&&write.status!==422)throw Error('Anime catalog write '+write.status);
@@ -309,7 +310,7 @@ async function saveAnimeMetadata(id,d){
  throw Error('Anime catalog update conflict');
 }
 function telegramAnimeCaption(d){
- const lines=['Anime: '+captionValue(d.title,150),'Anime Slug ID: '+captionValue(d.slug_id,80),'Season: '+d.season,'Episode: '+d.episode+(d.part?' · Part: '+d.part:''),'Quality: '+captionValue(d.quality,30),'Episode Slug ID: '+captionValue(d.episode_slug_id,80)];
+ const lines=['Anime: '+captionValue(d.title,150),'Anime Slug ID: '+captionValue(d.slug_id,80),d.special_type?'Collection: '+d.special_type:'Season: '+d.season,'Episode: '+d.episode+(d.part?' · Part: '+d.part:''),'Quality: '+captionValue(d.quality,30),'Episode Slug ID: '+captionValue(d.episode_slug_id,80)];
  return lines.join('\n').slice(0,1024);
 }
 async function draftPrompt(d){const text=['FilmGo movie draft',d.title+' ('+d.year+')', 'Quality: '+d.quality,'File: '+d.file_name,'Metadata: '+(d.imdb_id?'OMDb '+d.imdb_id:'manual / existing'),d.replace?'Existing quality — replacement requires confirmation':d.existing?'New quality for existing movie':'New movie', 'Use /edit to change metadata, /poster to upload a JPEG poster, /cancel to discard.'].join('\n');await say(ADMIN_ID,text,{reply_markup:{inline_keyboard:[[{text:d.replace?'Confirm replacement':'Publish movie',callback_data:'fg:publish'},{text:'Cancel',callback_data:'fg:cancel'}]]}});}
@@ -381,8 +382,8 @@ async function startAnimeDraft(file,messageId,detected=null,caption=''){
  const parts=animePartsFromMessage(file,caption);
  if(!parts.episode)return say(ADMIN_ID,'I could not identify the anime episode. Use a filename such as Naruto Shippuden - 001 [720p].mkv.');
  const known=isKnownAnimeTitle(parts.title);
- parts.season=parts.season||(known?manualAnimeSeason(parts.title,parts.episode)||1:await tmdbAnimeSeason(parts.title,parts.episode)||1);
- const d={kind:'anime',message_id:messageId,file_name:file.file_name||'',file_size:Number(file.file_size||0),mime_type:file.mime_type||'',title:parts.title,titleCandidates:parts.titleCandidates,season:parts.season,episode:parts.episode,part:parts.part,quality:parts.quality,slug_id:animeSlug(parts.title),episode_slug_id:crypto.randomBytes(12).toString('base64url')};
+ parts.season=parts.season||(parts.special_type?1:(known?manualAnimeSeason(parts.title,parts.episode)||1:await tmdbAnimeSeason(parts.title,parts.episode)||1));
+ const d={kind:'anime',message_id:messageId,file_name:file.file_name||'',file_size:Number(file.file_size||0),mime_type:file.mime_type||'',title:parts.title,titleCandidates:parts.titleCandidates,season:parts.season,episode:parts.episode,part:parts.part,special_type:parts.special_type,quality:parts.quality,slug_id:animeSlug(parts.title),episode_slug_id:crypto.randomBytes(12).toString('base64url')};
  const duplicate=await findAnimeDuplicate(d).catch(error=>{console.warn('Anime duplicate check failed:',error?.message||'unknown error');return null;});
  if(duplicate){d.existing=true;d.replace=true;d.existing_episode_message_id=Number(duplicate.telegram_message_id)||null;}
  const metadata=known?null:(detected?.metadata||await animeMetadata(parts.title).catch(()=>null));if(metadata){Object.assign(d,metadata);d.slug_id=animeSlug(metadata.title);}d.stage='await-publish';await draftSave(d);
