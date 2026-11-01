@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "updated_at": 1793561981,
+  "updated_at": 1793562699,
   "anime": {
     "slug_id": "attack-on-titan",
     "title": "Attack on Titan",
     "episodes": [
       {
-        "slug_id": "Wgki9gKMmqkOMBlq",
+        "slug_id": "euP7SjUTgssNX9NU",
         "telegram_message_id": 615,
         "episode": 1,
         "season": 1,
@@ -21,7 +21,7 @@
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242650.jpg",
         "qualities": {
           "1080P": {
-            "slug_id": "CFoqd7lblqZNlP0K",
+            "slug_id": "b_bydye3ADwiPrci",
             "telegram_message_id": 616,
             "episode": 1,
             "season": 1,
@@ -36,7 +36,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242650.jpg"
           },
           "720P": {
-            "slug_id": "Wgki9gKMmqkOMBlq",
+            "slug_id": "euP7SjUTgssNX9NU",
             "telegram_message_id": 615,
             "episode": 1,
             "season": 1,
@@ -51,7 +51,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242650.jpg"
           },
           "480P": {
-            "slug_id": "8al-E7j5ARImm9Oa",
+            "slug_id": "spxeFaaIsEytAbRC",
             "telegram_message_id": 614,
             "episode": 1,
             "season": 1,
@@ -68,7 +68,7 @@
         }
       },
       {
-        "slug_id": "iZMumAvOB8NeAyMP",
+        "slug_id": "tYqUqO7GLUjE4zDZ",
         "telegram_message_id": 606,
         "episode": 1,
         "season": 1,
@@ -83,7 +83,7 @@
         "frame": "https://raw.githubusercontent.com/MazoPlatforms/autowa/main/web/frames/anime/attack-on-titan-oad-001.jpg",
         "qualities": {
           "720P": {
-            "slug_id": "iZMumAvOB8NeAyMP",
+            "slug_id": "tYqUqO7GLUjE4zDZ",
             "telegram_message_id": 606,
             "episode": 1,
             "season": 1,
@@ -100,7 +100,7 @@
         }
       },
       {
-        "slug_id": "x4lEF_z1ikJQdg3Z",
+        "slug_id": "JwNsknDF6g05Y6Og",
         "telegram_message_id": 618,
         "episode": 2,
         "season": 1,
@@ -115,7 +115,7 @@
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242651.jpg",
         "qualities": {
           "1080P": {
-            "slug_id": "kG9MEOgp9jcBIe7S",
+            "slug_id": "NAm6s16qcTkSe2Ki",
             "telegram_message_id": 619,
             "episode": 2,
             "season": 1,
@@ -130,7 +130,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242651.jpg"
           },
           "720P": {
-            "slug_id": "x4lEF_z1ikJQdg3Z",
+            "slug_id": "JwNsknDF6g05Y6Og",
             "telegram_message_id": 618,
             "episode": 2,
             "season": 1,
@@ -145,7 +145,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242651.jpg"
           },
           "480P": {
-            "slug_id": "07l7Jy_sjL32Ob87",
+            "slug_id": "x5o5ooEZmzn6X6g8",
             "telegram_message_id": 617,
             "episode": 2,
             "season": 1,
@@ -162,7 +162,7 @@
         }
       },
       {
-        "slug_id": "zG8vt7LGxW8F07M2",
+        "slug_id": "9W_C5nFGQ3k9uHtz",
         "telegram_message_id": 607,
         "episode": 2,
         "season": 1,
@@ -177,7 +177,7 @@
         "frame": "https://raw.githubusercontent.com/MazoPlatforms/autowa/main/web/frames/anime/attack-on-titan-oad-002.jpg",
         "qualities": {
           "720P": {
-            "slug_id": "zG8vt7LGxW8F07M2",
+            "slug_id": "9W_C5nFGQ3k9uHtz",
             "telegram_message_id": 607,
             "episode": 2,
             "season": 1,
@@ -194,7 +194,7 @@
         }
       },
       {
-        "slug_id": "S31S_HOqJ4Aj8RP-",
+        "slug_id": "w9_ozrNrppRCCIRg",
         "telegram_message_id": 621,
         "episode": 3,
         "season": 1,
@@ -209,7 +209,7 @@
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242652.jpg",
         "qualities": {
           "1080P": {
-            "slug_id": "0R2WquBLjm1BngIy",
+            "slug_id": "gFN-vvXpoD3ywtUj",
             "telegram_message_id": 622,
             "episode": 3,
             "season": 1,
@@ -224,7 +224,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242652.jpg"
           },
           "720P": {
-            "slug_id": "S31S_HOqJ4Aj8RP-",
+            "slug_id": "w9_ozrNrppRCCIRg",
             "telegram_message_id": 621,
             "episode": 3,
             "season": 1,
@@ -239,7 +239,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242652.jpg"
           },
           "480P": {
-            "slug_id": "FGs2iRV7PefdQb7U",
+            "slug_id": "X5r35F0Pp_em_Pkh",
             "telegram_message_id": 620,
             "episode": 3,
             "season": 1,
@@ -256,7 +256,7 @@
         }
       },
       {
-        "slug_id": "xgjVTV0KuyiItJHk",
+        "slug_id": "NYaPHKKQXpJrgoao",
         "telegram_message_id": 608,
         "episode": 3,
         "season": 1,
@@ -271,7 +271,7 @@
         "frame": "https://raw.githubusercontent.com/MazoPlatforms/autowa/main/web/frames/anime/attack-on-titan-oad-003.jpg",
         "qualities": {
           "720P": {
-            "slug_id": "xgjVTV0KuyiItJHk",
+            "slug_id": "NYaPHKKQXpJrgoao",
             "telegram_message_id": 608,
             "episode": 3,
             "season": 1,
@@ -288,7 +288,7 @@
         }
       },
       {
-        "slug_id": "uSW1QjIJ6VW0xYxr",
+        "slug_id": "5I0E0gvLtkt1GErP",
         "telegram_message_id": 624,
         "episode": 4,
         "season": 1,
@@ -303,7 +303,7 @@
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357583.jpg",
         "qualities": {
           "1080P": {
-            "slug_id": "hlHzmawuMfyrKmi5",
+            "slug_id": "wl_ViYSiuK-ghsMY",
             "telegram_message_id": 625,
             "episode": 4,
             "season": 1,
@@ -318,7 +318,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357583.jpg"
           },
           "720P": {
-            "slug_id": "uSW1QjIJ6VW0xYxr",
+            "slug_id": "5I0E0gvLtkt1GErP",
             "telegram_message_id": 624,
             "episode": 4,
             "season": 1,
@@ -333,7 +333,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357583.jpg"
           },
           "480P": {
-            "slug_id": "vf9wnRVMVL2TUIPg",
+            "slug_id": "9_u-0bw_1_jbMbgC",
             "telegram_message_id": 623,
             "episode": 4,
             "season": 1,
@@ -350,7 +350,7 @@
         }
       },
       {
-        "slug_id": "yrrtJa45isHOlZDi",
+        "slug_id": "Gz4hqFExd-sCqd3D",
         "telegram_message_id": 609,
         "episode": 4,
         "season": 1,
@@ -365,7 +365,7 @@
         "frame": "https://raw.githubusercontent.com/MazoPlatforms/autowa/main/web/frames/anime/attack-on-titan-oad-004.jpg",
         "qualities": {
           "720P": {
-            "slug_id": "yrrtJa45isHOlZDi",
+            "slug_id": "Gz4hqFExd-sCqd3D",
             "telegram_message_id": 609,
             "episode": 4,
             "season": 1,
@@ -382,7 +382,7 @@
         }
       },
       {
-        "slug_id": "XdyZ1Lk-DaARkgFf",
+        "slug_id": "uHpQ2BY1U4-zQDJ4",
         "telegram_message_id": 627,
         "episode": 5,
         "season": 1,
@@ -397,7 +397,7 @@
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357587.jpg",
         "qualities": {
           "1080P": {
-            "slug_id": "BDF_Vt8ETc0HRHcD",
+            "slug_id": "6rWSY6zsp7OO729v",
             "telegram_message_id": 628,
             "episode": 5,
             "season": 1,
@@ -412,7 +412,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357587.jpg"
           },
           "720P": {
-            "slug_id": "XdyZ1Lk-DaARkgFf",
+            "slug_id": "uHpQ2BY1U4-zQDJ4",
             "telegram_message_id": 627,
             "episode": 5,
             "season": 1,
@@ -427,7 +427,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357587.jpg"
           },
           "480P": {
-            "slug_id": "yShvxNl5dd5k3KYR",
+            "slug_id": "DNb1zBONdOGtSANu",
             "telegram_message_id": 626,
             "episode": 5,
             "season": 1,
@@ -444,7 +444,7 @@
         }
       },
       {
-        "slug_id": "mt4OF6B43sTbPNw3",
+        "slug_id": "-prKz3zs_9iLUAd9",
         "telegram_message_id": 610,
         "episode": 5,
         "season": 1,
@@ -459,7 +459,7 @@
         "frame": "https://raw.githubusercontent.com/MazoPlatforms/autowa/main/web/frames/anime/attack-on-titan-oad-005.jpg",
         "qualities": {
           "720P": {
-            "slug_id": "mt4OF6B43sTbPNw3",
+            "slug_id": "-prKz3zs_9iLUAd9",
             "telegram_message_id": 610,
             "episode": 5,
             "season": 1,
@@ -476,7 +476,7 @@
         }
       },
       {
-        "slug_id": "qhWJa6r0o8q8wEv8",
+        "slug_id": "qEsONLvV_mGe-vDK",
         "telegram_message_id": 630,
         "episode": 6,
         "season": 1,
@@ -491,7 +491,7 @@
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242630.jpg",
         "qualities": {
           "1080P": {
-            "slug_id": "7MtaxRakoL_SEiOL",
+            "slug_id": "6QvZ43fDjHFbTHxb",
             "telegram_message_id": 631,
             "episode": 6,
             "season": 1,
@@ -506,7 +506,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242630.jpg"
           },
           "720P": {
-            "slug_id": "qhWJa6r0o8q8wEv8",
+            "slug_id": "qEsONLvV_mGe-vDK",
             "telegram_message_id": 630,
             "episode": 6,
             "season": 1,
@@ -521,7 +521,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242630.jpg"
           },
           "480P": {
-            "slug_id": "Ig3uEmPBEnnuhVcM",
+            "slug_id": "iA5w4CvqxS_7BMBD",
             "telegram_message_id": 629,
             "episode": 6,
             "season": 1,
@@ -538,7 +538,7 @@
         }
       },
       {
-        "slug_id": "PC89jEtR-Zp74NpW",
+        "slug_id": "R804WWu22PYZrE_4",
         "telegram_message_id": 611,
         "episode": 6,
         "season": 1,
@@ -553,7 +553,7 @@
         "frame": "https://raw.githubusercontent.com/MazoPlatforms/autowa/main/web/frames/anime/attack-on-titan-oad-006.jpg",
         "qualities": {
           "720P": {
-            "slug_id": "PC89jEtR-Zp74NpW",
+            "slug_id": "R804WWu22PYZrE_4",
             "telegram_message_id": 611,
             "episode": 6,
             "season": 1,
@@ -570,7 +570,7 @@
         }
       },
       {
-        "slug_id": "PWMPnP5gmGZtN6FC",
+        "slug_id": "Y-GkREFDKlAMsVnf",
         "telegram_message_id": 633,
         "episode": 7,
         "season": 1,
@@ -585,7 +585,7 @@
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242629.jpg",
         "qualities": {
           "1080P": {
-            "slug_id": "xO54m2JrmPdvCwGi",
+            "slug_id": "nuB1Rbb0kVzta5dP",
             "telegram_message_id": 634,
             "episode": 7,
             "season": 1,
@@ -600,7 +600,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242629.jpg"
           },
           "720P": {
-            "slug_id": "PWMPnP5gmGZtN6FC",
+            "slug_id": "Y-GkREFDKlAMsVnf",
             "telegram_message_id": 633,
             "episode": 7,
             "season": 1,
@@ -615,7 +615,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242629.jpg"
           },
           "480P": {
-            "slug_id": "XBSGcz-R3k2Kscx9",
+            "slug_id": "KzPg-C32abhA3oRM",
             "telegram_message_id": 632,
             "episode": 7,
             "season": 1,
@@ -632,7 +632,7 @@
         }
       },
       {
-        "slug_id": "x_9arjApiF4mOq1j",
+        "slug_id": "ASpG_Sb1K16EVoWx",
         "telegram_message_id": 612,
         "episode": 7,
         "season": 1,
@@ -647,7 +647,7 @@
         "frame": "https://raw.githubusercontent.com/MazoPlatforms/autowa/main/web/frames/anime/attack-on-titan-oad-007.jpg",
         "qualities": {
           "720P": {
-            "slug_id": "x_9arjApiF4mOq1j",
+            "slug_id": "ASpG_Sb1K16EVoWx",
             "telegram_message_id": 612,
             "episode": 7,
             "season": 1,
@@ -664,7 +664,7 @@
         }
       },
       {
-        "slug_id": "UsWl1FKg-rlIdpd4",
+        "slug_id": "i_bDHKQhitq9itn0",
         "telegram_message_id": 636,
         "episode": 8,
         "season": 1,
@@ -679,7 +679,7 @@
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242631.jpg",
         "qualities": {
           "1080P": {
-            "slug_id": "Fe3zoxPscNpAwOzV",
+            "slug_id": "Quuj8YQW6YmaeRwm",
             "telegram_message_id": 637,
             "episode": 8,
             "season": 1,
@@ -694,7 +694,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242631.jpg"
           },
           "720P": {
-            "slug_id": "UsWl1FKg-rlIdpd4",
+            "slug_id": "i_bDHKQhitq9itn0",
             "telegram_message_id": 636,
             "episode": 8,
             "season": 1,
@@ -709,7 +709,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242631.jpg"
           },
           "480P": {
-            "slug_id": "XuAuR0jfW0oaludM",
+            "slug_id": "fzrX15UtlO-c4IO-",
             "telegram_message_id": 635,
             "episode": 8,
             "season": 1,
@@ -726,7 +726,7 @@
         }
       },
       {
-        "slug_id": "cN-gdguKLCkA7Pcy",
+        "slug_id": "x6IwyYPR7TRrokrN",
         "telegram_message_id": 613,
         "episode": 8,
         "season": 1,
@@ -741,7 +741,7 @@
         "frame": "https://raw.githubusercontent.com/MazoPlatforms/autowa/main/web/frames/anime/attack-on-titan-oad-008.jpg",
         "qualities": {
           "720P": {
-            "slug_id": "cN-gdguKLCkA7Pcy",
+            "slug_id": "x6IwyYPR7TRrokrN",
             "telegram_message_id": 613,
             "episode": 8,
             "season": 1,
@@ -758,7 +758,7 @@
         }
       },
       {
-        "slug_id": "hWQl1L5rEWeXlkae",
+        "slug_id": "06Ka9V2mj2LKx6jo",
         "telegram_message_id": 639,
         "episode": 9,
         "season": 1,
@@ -773,7 +773,7 @@
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242632.jpg",
         "qualities": {
           "1080P": {
-            "slug_id": "AFrRlDbc9Xc0uPL6",
+            "slug_id": "SjMei5EdYMFEyiWM",
             "telegram_message_id": 640,
             "episode": 9,
             "season": 1,
@@ -788,7 +788,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242632.jpg"
           },
           "720P": {
-            "slug_id": "hWQl1L5rEWeXlkae",
+            "slug_id": "06Ka9V2mj2LKx6jo",
             "telegram_message_id": 639,
             "episode": 9,
             "season": 1,
@@ -803,7 +803,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242632.jpg"
           },
           "480P": {
-            "slug_id": "fr3WYJR3rpcMx9IJ",
+            "slug_id": "sSRDucSf8bBmBYwp",
             "telegram_message_id": 638,
             "episode": 9,
             "season": 1,
@@ -820,7 +820,7 @@
         }
       },
       {
-        "slug_id": "DCYHFNBmoXMePnPz",
+        "slug_id": "q2W5zx4jFrIKMQb2",
         "telegram_message_id": 642,
         "episode": 10,
         "season": 1,
@@ -835,7 +835,7 @@
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242633.jpg",
         "qualities": {
           "1080P": {
-            "slug_id": "J97PrzU6CTfbb7Z1",
+            "slug_id": "wZoNk22GzQptw-eG",
             "telegram_message_id": 643,
             "episode": 10,
             "season": 1,
@@ -850,7 +850,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242633.jpg"
           },
           "720P": {
-            "slug_id": "DCYHFNBmoXMePnPz",
+            "slug_id": "q2W5zx4jFrIKMQb2",
             "telegram_message_id": 642,
             "episode": 10,
             "season": 1,
@@ -865,7 +865,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242633.jpg"
           },
           "480P": {
-            "slug_id": "nuQ5HaBqKnO-HJHb",
+            "slug_id": "dQUYZunA6AA3XdBS",
             "telegram_message_id": 641,
             "episode": 10,
             "season": 1,
@@ -882,7 +882,7 @@
         }
       },
       {
-        "slug_id": "R4kQmQX5VjrtFrZM",
+        "slug_id": "ZB3HsIgKRv6Ek54i",
         "telegram_message_id": 645,
         "episode": 11,
         "season": 1,
@@ -897,7 +897,7 @@
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357835.jpg",
         "qualities": {
           "1080P": {
-            "slug_id": "4GF67bVzciAPcnND",
+            "slug_id": "dr2vPecrG6vS61QC",
             "telegram_message_id": 646,
             "episode": 11,
             "season": 1,
@@ -912,7 +912,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357835.jpg"
           },
           "720P": {
-            "slug_id": "R4kQmQX5VjrtFrZM",
+            "slug_id": "ZB3HsIgKRv6Ek54i",
             "telegram_message_id": 645,
             "episode": 11,
             "season": 1,
@@ -927,7 +927,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357835.jpg"
           },
           "480P": {
-            "slug_id": "M0bS7Q1Ic1c5bJc4",
+            "slug_id": "Qrnww-OSfe2UKmun",
             "telegram_message_id": 644,
             "episode": 11,
             "season": 1,
@@ -944,7 +944,7 @@
         }
       },
       {
-        "slug_id": "rbZxnjMymVmowb6a",
+        "slug_id": "lN36oRgoqstkk1nF",
         "telegram_message_id": 648,
         "episode": 12,
         "season": 1,
@@ -959,7 +959,7 @@
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357836.jpg",
         "qualities": {
           "1080P": {
-            "slug_id": "zIrS4hKWzD9WrcDf",
+            "slug_id": "zF6z8Zn5JBr5CS1s",
             "telegram_message_id": 649,
             "episode": 12,
             "season": 1,
@@ -974,7 +974,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357836.jpg"
           },
           "720P": {
-            "slug_id": "rbZxnjMymVmowb6a",
+            "slug_id": "lN36oRgoqstkk1nF",
             "telegram_message_id": 648,
             "episode": 12,
             "season": 1,
@@ -989,7 +989,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357836.jpg"
           },
           "480P": {
-            "slug_id": "ANEV1hqKMGKkeVFV",
+            "slug_id": "qZdC21RtI2aD1ZLu",
             "telegram_message_id": 647,
             "episode": 12,
             "season": 1,
@@ -1002,6 +1002,812 @@
             "title": "Wound - The Struggle for Trost (8)",
             "released": "2013-06-23",
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357836.jpg"
+          }
+        }
+      },
+      {
+        "slug_id": "lY7YLHdBmx65tAPS",
+        "telegram_message_id": 651,
+        "episode": 13,
+        "season": 1,
+        "special_type": null,
+        "part": null,
+        "quality": "720P",
+        "file_size": 267179536,
+        "file_name": "Attack_On_Titan_S01_Ep13_தமிழ்_720p_@Anime_Tamil_Dubbed_Series_1.mkv",
+        "mime_type": "video/x-matroska",
+        "title": "Primal Desire - The Struggle for Trost (9)",
+        "released": "2013-06-30",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242637.jpg",
+        "qualities": {
+          "1080P": {
+            "slug_id": "yP648UALmlD6joCg",
+            "telegram_message_id": 652,
+            "episode": 13,
+            "season": 1,
+            "special_type": null,
+            "part": null,
+            "quality": "1080P",
+            "file_size": 513100875,
+            "file_name": "Attack_On_Titan_S01_Ep13_தமிழ்_1080p_@Anime_Tamil_Dubbed_Series.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "Primal Desire - The Struggle for Trost (9)",
+            "released": "2013-06-30",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242637.jpg"
+          },
+          "720P": {
+            "slug_id": "lY7YLHdBmx65tAPS",
+            "telegram_message_id": 651,
+            "episode": 13,
+            "season": 1,
+            "special_type": null,
+            "part": null,
+            "quality": "720P",
+            "file_size": 267179536,
+            "file_name": "Attack_On_Titan_S01_Ep13_தமிழ்_720p_@Anime_Tamil_Dubbed_Series_1.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "Primal Desire - The Struggle for Trost (9)",
+            "released": "2013-06-30",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242637.jpg"
+          },
+          "480P": {
+            "slug_id": "4vuJIrqYDYfHH8TP",
+            "telegram_message_id": 650,
+            "episode": 13,
+            "season": 1,
+            "special_type": null,
+            "part": null,
+            "quality": "480P",
+            "file_size": 145650907,
+            "file_name": "Attack_On_Titan_S01_Ep13_தமிழ்_480p_@Anime_Tamil_Dubbed_Series_1.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "Primal Desire - The Struggle for Trost (9)",
+            "released": "2013-06-30",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242637.jpg"
+          }
+        }
+      },
+      {
+        "slug_id": "VGRBKZophQGWckcL",
+        "telegram_message_id": 654,
+        "episode": 14,
+        "season": 1,
+        "special_type": null,
+        "part": null,
+        "quality": "720P",
+        "file_size": 192111965,
+        "file_name": "Attack_On_Titan_S01_Ep14_தமிழ்_720p_@Anime_Tamil_Dubbed_Series_1.mkv",
+        "mime_type": "video/x-matroska",
+        "title": "Can't Look Into His Eyes - Eve of the Counterattack (1)",
+        "released": "2013-07-14",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242636.jpg",
+        "qualities": {
+          "1080P": {
+            "slug_id": "wzO8cX22RXPk3Lcl",
+            "telegram_message_id": 655,
+            "episode": 14,
+            "season": 1,
+            "special_type": null,
+            "part": null,
+            "quality": "1080P",
+            "file_size": 405948161,
+            "file_name": "Attack_On_Titan_S01_Ep14_தமிழ்_1080p_@Anime_Tamil_Dubbed_Series.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "Can't Look Into His Eyes - Eve of the Counterattack (1)",
+            "released": "2013-07-14",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242636.jpg"
+          },
+          "720P": {
+            "slug_id": "VGRBKZophQGWckcL",
+            "telegram_message_id": 654,
+            "episode": 14,
+            "season": 1,
+            "special_type": null,
+            "part": null,
+            "quality": "720P",
+            "file_size": 192111965,
+            "file_name": "Attack_On_Titan_S01_Ep14_தமிழ்_720p_@Anime_Tamil_Dubbed_Series_1.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "Can't Look Into His Eyes - Eve of the Counterattack (1)",
+            "released": "2013-07-14",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242636.jpg"
+          },
+          "480P": {
+            "slug_id": "oByWM8E4XHS8Etbn",
+            "telegram_message_id": 653,
+            "episode": 14,
+            "season": 1,
+            "special_type": null,
+            "part": null,
+            "quality": "480P",
+            "file_size": 110825362,
+            "file_name": "Attack_On_Titan_S01_Ep14_தமிழ்_480p_@Anime_Tamil_Dubbed_Series_1.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "Can't Look Into His Eyes - Eve of the Counterattack (1)",
+            "released": "2013-07-14",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242636.jpg"
+          }
+        }
+      },
+      {
+        "slug_id": "j0u2WvHJxoCYStqe",
+        "telegram_message_id": 657,
+        "episode": 15,
+        "season": 1,
+        "special_type": null,
+        "part": null,
+        "quality": "720P",
+        "file_size": 201508440,
+        "file_name": "Attack_On_Titan_S01_Ep15_தமிழ்_720p_@Anime_Tamil_Dubbed_Series_1.mkv",
+        "mime_type": "video/x-matroska",
+        "title": "Special Operations Squad - Eve of the Counterattack (2)",
+        "released": "2013-07-21",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242639.jpg",
+        "qualities": {
+          "1080P": {
+            "slug_id": "EFfRhHnLobFbeTEF",
+            "telegram_message_id": 658,
+            "episode": 15,
+            "season": 1,
+            "special_type": null,
+            "part": null,
+            "quality": "1080P",
+            "file_size": 412697921,
+            "file_name": "Attack_On_Titan_S01_Ep15_தமிழ்_1080p_@Anime_Tamil_Dubbed_Series.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "Special Operations Squad - Eve of the Counterattack (2)",
+            "released": "2013-07-21",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242639.jpg"
+          },
+          "720P": {
+            "slug_id": "j0u2WvHJxoCYStqe",
+            "telegram_message_id": 657,
+            "episode": 15,
+            "season": 1,
+            "special_type": null,
+            "part": null,
+            "quality": "720P",
+            "file_size": 201508440,
+            "file_name": "Attack_On_Titan_S01_Ep15_தமிழ்_720p_@Anime_Tamil_Dubbed_Series_1.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "Special Operations Squad - Eve of the Counterattack (2)",
+            "released": "2013-07-21",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242639.jpg"
+          },
+          "480P": {
+            "slug_id": "1SbaxIwQsPczlnP3",
+            "telegram_message_id": 656,
+            "episode": 15,
+            "season": 1,
+            "special_type": null,
+            "part": null,
+            "quality": "480P",
+            "file_size": 113555089,
+            "file_name": "Attack_On_Titan_S01_Ep15_தமிழ்_480p_@Anime_Tamil_Dubbed_Series_1.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "Special Operations Squad - Eve of the Counterattack (2)",
+            "released": "2013-07-21",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242639.jpg"
+          }
+        }
+      },
+      {
+        "slug_id": "GvIvQ97T7wQdsbKS",
+        "telegram_message_id": 660,
+        "episode": 16,
+        "season": 1,
+        "special_type": null,
+        "part": null,
+        "quality": "720P",
+        "file_size": 205403960,
+        "file_name": "Attack_On_Titan_S01_Ep16_தமிழ்_720p_@Anime_Tamil_Dubbed_Series_1.mkv",
+        "mime_type": "video/x-matroska",
+        "title": "What Needs to Be Done Now - Eve of the Counterattack (3)",
+        "released": "2013-07-28",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242638.jpg",
+        "qualities": {
+          "1080P": {
+            "slug_id": "diW6zLgT7ck7gzSl",
+            "telegram_message_id": 661,
+            "episode": 16,
+            "season": 1,
+            "special_type": null,
+            "part": null,
+            "quality": "1080P",
+            "file_size": 415328954,
+            "file_name": "Attack_On_Titan_S01_Ep16_தமிழ்_1080p_@Anime_Tamil_Dubbed_Series.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "What Needs to Be Done Now - Eve of the Counterattack (3)",
+            "released": "2013-07-28",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242638.jpg"
+          },
+          "720P": {
+            "slug_id": "GvIvQ97T7wQdsbKS",
+            "telegram_message_id": 660,
+            "episode": 16,
+            "season": 1,
+            "special_type": null,
+            "part": null,
+            "quality": "720P",
+            "file_size": 205403960,
+            "file_name": "Attack_On_Titan_S01_Ep16_தமிழ்_720p_@Anime_Tamil_Dubbed_Series_1.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "What Needs to Be Done Now - Eve of the Counterattack (3)",
+            "released": "2013-07-28",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242638.jpg"
+          },
+          "480P": {
+            "slug_id": "Iceb0-cgjqRQeMpX",
+            "telegram_message_id": 659,
+            "episode": 16,
+            "season": 1,
+            "special_type": null,
+            "part": null,
+            "quality": "480P",
+            "file_size": 116521516,
+            "file_name": "Attack_On_Titan_S01_Ep16_தமிழ்_480p_@Anime_Tamil_Dubbed_Series_1.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "What Needs to Be Done Now - Eve of the Counterattack (3)",
+            "released": "2013-07-28",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242638.jpg"
+          }
+        }
+      },
+      {
+        "slug_id": "aCdwtNuv077WON2S",
+        "telegram_message_id": 663,
+        "episode": 17,
+        "season": 1,
+        "special_type": null,
+        "part": null,
+        "quality": "720P",
+        "file_size": 320797036,
+        "file_name": "Attack_On_Titan_S01_Ep17_தமிழ்_720p_@Anime_Tamil_Dubbed_Series_1.mkv",
+        "mime_type": "video/x-matroska",
+        "title": "Female Titan - The 57th Exterior Scouting Mission (1)",
+        "released": "2013-08-04",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357858.jpg",
+        "qualities": {
+          "1080P": {
+            "slug_id": "Dis12JGFsgmlXLtZ",
+            "telegram_message_id": 664,
+            "episode": 17,
+            "season": 1,
+            "special_type": null,
+            "part": null,
+            "quality": "1080P",
+            "file_size": 596542467,
+            "file_name": "Attack_On_Titan_S01_Ep17_தமிழ்_1080p_@Anime_Tamil_Dubbed_Series.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "Female Titan - The 57th Exterior Scouting Mission (1)",
+            "released": "2013-08-04",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357858.jpg"
+          },
+          "720P": {
+            "slug_id": "aCdwtNuv077WON2S",
+            "telegram_message_id": 663,
+            "episode": 17,
+            "season": 1,
+            "special_type": null,
+            "part": null,
+            "quality": "720P",
+            "file_size": 320797036,
+            "file_name": "Attack_On_Titan_S01_Ep17_தமிழ்_720p_@Anime_Tamil_Dubbed_Series_1.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "Female Titan - The 57th Exterior Scouting Mission (1)",
+            "released": "2013-08-04",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357858.jpg"
+          },
+          "480P": {
+            "slug_id": "NKVIKBV1-fhn1P7B",
+            "telegram_message_id": 662,
+            "episode": 17,
+            "season": 1,
+            "special_type": null,
+            "part": null,
+            "quality": "480P",
+            "file_size": 172840930,
+            "file_name": "Attack_On_Titan_S01_Ep17_தமிழ்_480p_@Anime_Tamil_Dubbed_Series_1.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "Female Titan - The 57th Exterior Scouting Mission (1)",
+            "released": "2013-08-04",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357858.jpg"
+          }
+        }
+      },
+      {
+        "slug_id": "QDu26MiTCmruGvjE",
+        "telegram_message_id": 666,
+        "episode": 18,
+        "season": 1,
+        "special_type": null,
+        "part": null,
+        "quality": "720P",
+        "file_size": 309789496,
+        "file_name": "Attack_On_Titan_S01_Ep18_தமிழ்_720p_@Anime_Tamil_Dubbed_Series_1.mkv",
+        "mime_type": "video/x-matroska",
+        "title": "Forest of Giant Trees - The 57th Exterior Scouting Mission (2)",
+        "released": "2013-08-11",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242640.jpg",
+        "qualities": {
+          "1080P": {
+            "slug_id": "p_s34wgpaK4acPRz",
+            "telegram_message_id": 667,
+            "episode": 18,
+            "season": 1,
+            "special_type": null,
+            "part": null,
+            "quality": "1080P",
+            "file_size": 566551383,
+            "file_name": "Attack_On_Titan_S01_Ep18_தமிழ்_1080p_@Anime_Tamil_Dubbed_Series.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "Forest of Giant Trees - The 57th Exterior Scouting Mission (2)",
+            "released": "2013-08-11",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242640.jpg"
+          },
+          "720P": {
+            "slug_id": "QDu26MiTCmruGvjE",
+            "telegram_message_id": 666,
+            "episode": 18,
+            "season": 1,
+            "special_type": null,
+            "part": null,
+            "quality": "720P",
+            "file_size": 309789496,
+            "file_name": "Attack_On_Titan_S01_Ep18_தமிழ்_720p_@Anime_Tamil_Dubbed_Series_1.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "Forest of Giant Trees - The 57th Exterior Scouting Mission (2)",
+            "released": "2013-08-11",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242640.jpg"
+          },
+          "480P": {
+            "slug_id": "J7I4D4KoKrbC3uAp",
+            "telegram_message_id": 665,
+            "episode": 18,
+            "season": 1,
+            "special_type": null,
+            "part": null,
+            "quality": "480P",
+            "file_size": 165015976,
+            "file_name": "Attack_On_Titan_S01_Ep18_தமிழ்_480p_@Anime_Tamil_Dubbed_Series_1.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "Forest of Giant Trees - The 57th Exterior Scouting Mission (2)",
+            "released": "2013-08-11",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242640.jpg"
+          }
+        }
+      },
+      {
+        "slug_id": "ZQ_wei9F8HS_IghW",
+        "telegram_message_id": 669,
+        "episode": 19,
+        "season": 1,
+        "special_type": null,
+        "part": null,
+        "quality": "720P",
+        "file_size": 279214270,
+        "file_name": "Attack_On_Titan_S01_Ep19_தமிழ்_720p_@Anime_Tamil_Dubbed_Series_1.mkv",
+        "mime_type": "video/x-matroska",
+        "title": "Bite - The 57th Exterior Scouting Mission (3)",
+        "released": "2013-08-18",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242642.jpg",
+        "qualities": {
+          "1080P": {
+            "slug_id": "MHmKe7vMkk76bSXN",
+            "telegram_message_id": 670,
+            "episode": 19,
+            "season": 1,
+            "special_type": null,
+            "part": null,
+            "quality": "1080P",
+            "file_size": 507381280,
+            "file_name": "Attack_On_Titan_S01_Ep19_தமிழ்_1080p_@Anime_Tamil_Dubbed_Series.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "Bite - The 57th Exterior Scouting Mission (3)",
+            "released": "2013-08-18",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242642.jpg"
+          },
+          "720P": {
+            "slug_id": "ZQ_wei9F8HS_IghW",
+            "telegram_message_id": 669,
+            "episode": 19,
+            "season": 1,
+            "special_type": null,
+            "part": null,
+            "quality": "720P",
+            "file_size": 279214270,
+            "file_name": "Attack_On_Titan_S01_Ep19_தமிழ்_720p_@Anime_Tamil_Dubbed_Series_1.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "Bite - The 57th Exterior Scouting Mission (3)",
+            "released": "2013-08-18",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242642.jpg"
+          },
+          "480P": {
+            "slug_id": "vTg_-EHf90PKguP4",
+            "telegram_message_id": 668,
+            "episode": 19,
+            "season": 1,
+            "special_type": null,
+            "part": null,
+            "quality": "480P",
+            "file_size": 150319375,
+            "file_name": "Attack_On_Titan_S01_Ep19_தமிழ்_480p_@Anime_Tamil_Dubbed_Series_1.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "Bite - The 57th Exterior Scouting Mission (3)",
+            "released": "2013-08-18",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242642.jpg"
+          }
+        }
+      },
+      {
+        "slug_id": "R8rq9jLtB6fj9sks",
+        "telegram_message_id": 672,
+        "episode": 20,
+        "season": 1,
+        "special_type": null,
+        "part": null,
+        "quality": "720P",
+        "file_size": 252279305,
+        "file_name": "Attack_On_Titan_S01_Ep20_தமிழ்_720p_@Anime_Tamil_Dubbed_Series_1.mkv",
+        "mime_type": "video/x-matroska",
+        "title": "Erwin Smith - The 57th Exterior Scouting Mission (4)",
+        "released": "2013-08-25",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242643.jpg",
+        "qualities": {
+          "1080P": {
+            "slug_id": "DgplHOGjKKpWjrwZ",
+            "telegram_message_id": 673,
+            "episode": 20,
+            "season": 1,
+            "special_type": null,
+            "part": null,
+            "quality": "1080P",
+            "file_size": 489208178,
+            "file_name": "Attack_On_Titan_S01_Ep20_தமிழ்_1080p_@Anime_Tamil_Dubbed_Series.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "Erwin Smith - The 57th Exterior Scouting Mission (4)",
+            "released": "2013-08-25",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242643.jpg"
+          },
+          "720P": {
+            "slug_id": "R8rq9jLtB6fj9sks",
+            "telegram_message_id": 672,
+            "episode": 20,
+            "season": 1,
+            "special_type": null,
+            "part": null,
+            "quality": "720P",
+            "file_size": 252279305,
+            "file_name": "Attack_On_Titan_S01_Ep20_தமிழ்_720p_@Anime_Tamil_Dubbed_Series_1.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "Erwin Smith - The 57th Exterior Scouting Mission (4)",
+            "released": "2013-08-25",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242643.jpg"
+          },
+          "480P": {
+            "slug_id": "-QCOpou6UNqBia2v",
+            "telegram_message_id": 671,
+            "episode": 20,
+            "season": 1,
+            "special_type": null,
+            "part": null,
+            "quality": "480P",
+            "file_size": 136745222,
+            "file_name": "Attack_On_Titan_S01_Ep20_தமிழ்_480p_@Anime_Tamil_Dubbed_Series_1.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "Erwin Smith - The 57th Exterior Scouting Mission (4)",
+            "released": "2013-08-25",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242643.jpg"
+          }
+        }
+      },
+      {
+        "slug_id": "4pRQhuhTKSN6Noov",
+        "telegram_message_id": 675,
+        "episode": 21,
+        "season": 1,
+        "special_type": null,
+        "part": null,
+        "quality": "720P",
+        "file_size": 337072937,
+        "file_name": "Attack_On_Titan_S01_Ep21_தமிழ்_720p_@Anime_Tamil_Dubbed_Series_1.mkv",
+        "mime_type": "video/x-matroska",
+        "title": "Crushing Blow - The 57th Exterior Scouting Mission (5)",
+        "released": "2013-09-01",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357929.jpg",
+        "qualities": {
+          "1080P": {
+            "slug_id": "d_1w8ZqKUXI8cSRV",
+            "telegram_message_id": 676,
+            "episode": 21,
+            "season": 1,
+            "special_type": null,
+            "part": null,
+            "quality": "1080P",
+            "file_size": 590630278,
+            "file_name": "Attack_On_Titan_S01_Ep21_தமிழ்_1080p_@Anime_Tamil_Dubbed_Series.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "Crushing Blow - The 57th Exterior Scouting Mission (5)",
+            "released": "2013-09-01",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357929.jpg"
+          },
+          "720P": {
+            "slug_id": "4pRQhuhTKSN6Noov",
+            "telegram_message_id": 675,
+            "episode": 21,
+            "season": 1,
+            "special_type": null,
+            "part": null,
+            "quality": "720P",
+            "file_size": 337072937,
+            "file_name": "Attack_On_Titan_S01_Ep21_தமிழ்_720p_@Anime_Tamil_Dubbed_Series_1.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "Crushing Blow - The 57th Exterior Scouting Mission (5)",
+            "released": "2013-09-01",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357929.jpg"
+          },
+          "480P": {
+            "slug_id": "3UeA0WUAtJi0O9tb",
+            "telegram_message_id": 674,
+            "episode": 21,
+            "season": 1,
+            "special_type": null,
+            "part": null,
+            "quality": "480P",
+            "file_size": 176157965,
+            "file_name": "Attack_On_Titan_S01_Ep21_தமிழ்_480p_@Anime_Tamil_Dubbed_Series_1.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "Crushing Blow - The 57th Exterior Scouting Mission (5)",
+            "released": "2013-09-01",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357929.jpg"
+          }
+        }
+      },
+      {
+        "slug_id": "62_8IFvIrbzC7elH",
+        "telegram_message_id": 678,
+        "episode": 22,
+        "season": 1,
+        "special_type": null,
+        "part": null,
+        "quality": "720P",
+        "file_size": 265526275,
+        "file_name": "Attack_On_Titan_S01_Ep22_தமிழ்_720p_@Anime_Tamil_Dubbed_Series_1.mkv",
+        "mime_type": "video/x-matroska",
+        "title": "The Defeated - The 57th Exterior Scouting Mission (6)",
+        "released": "2013-09-08",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242646.jpg",
+        "qualities": {
+          "1080P": {
+            "slug_id": "bZS_zV_2Zw_f7Foi",
+            "telegram_message_id": 679,
+            "episode": 22,
+            "season": 1,
+            "special_type": null,
+            "part": null,
+            "quality": "1080P",
+            "file_size": 494619334,
+            "file_name": "Attack_On_Titan_S01_Ep22_தமிழ்_1080p_@Anime_Tamil_Dubbed_Series.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "The Defeated - The 57th Exterior Scouting Mission (6)",
+            "released": "2013-09-08",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242646.jpg"
+          },
+          "720P": {
+            "slug_id": "62_8IFvIrbzC7elH",
+            "telegram_message_id": 678,
+            "episode": 22,
+            "season": 1,
+            "special_type": null,
+            "part": null,
+            "quality": "720P",
+            "file_size": 265526275,
+            "file_name": "Attack_On_Titan_S01_Ep22_தமிழ்_720p_@Anime_Tamil_Dubbed_Series_1.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "The Defeated - The 57th Exterior Scouting Mission (6)",
+            "released": "2013-09-08",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242646.jpg"
+          },
+          "480P": {
+            "slug_id": "zq_9fjsxJqv49WGk",
+            "telegram_message_id": 677,
+            "episode": 22,
+            "season": 1,
+            "special_type": null,
+            "part": null,
+            "quality": "480P",
+            "file_size": 143511497,
+            "file_name": "Attack_On_Titan_S01_Ep22_தமிழ்_480p_@Anime_Tamil_Dubbed_Series_1.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "The Defeated - The 57th Exterior Scouting Mission (6)",
+            "released": "2013-09-08",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242646.jpg"
+          }
+        }
+      },
+      {
+        "slug_id": "5ORsIb512C2d0UY5",
+        "telegram_message_id": 681,
+        "episode": 23,
+        "season": 1,
+        "special_type": null,
+        "part": null,
+        "quality": "720P",
+        "file_size": 202944789,
+        "file_name": "Attack_On_Titan_S01_Ep23_தமிழ்_720p_@Anime_Tamil_Dubbed_Series_1.mkv",
+        "mime_type": "video/x-matroska",
+        "title": "Smile - Assault on Stohess (1)",
+        "released": "2013-09-15",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242645.jpg",
+        "qualities": {
+          "1080P": {
+            "slug_id": "mOoCZQicAV3bKZU5",
+            "telegram_message_id": 682,
+            "episode": 23,
+            "season": 1,
+            "special_type": null,
+            "part": null,
+            "quality": "1080P",
+            "file_size": 415977975,
+            "file_name": "Attack_On_Titan_S01_Ep23_தமிழ்_1080p_@Anime_Tamil_Dubbed_Series.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "Smile - Assault on Stohess (1)",
+            "released": "2013-09-15",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242645.jpg"
+          },
+          "720P": {
+            "slug_id": "5ORsIb512C2d0UY5",
+            "telegram_message_id": 681,
+            "episode": 23,
+            "season": 1,
+            "special_type": null,
+            "part": null,
+            "quality": "720P",
+            "file_size": 202944789,
+            "file_name": "Attack_On_Titan_S01_Ep23_தமிழ்_720p_@Anime_Tamil_Dubbed_Series_1.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "Smile - Assault on Stohess (1)",
+            "released": "2013-09-15",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242645.jpg"
+          },
+          "480P": {
+            "slug_id": "G-5uuws1OD8jihpe",
+            "telegram_message_id": 680,
+            "episode": 23,
+            "season": 1,
+            "special_type": null,
+            "part": null,
+            "quality": "480P",
+            "file_size": 115612497,
+            "file_name": "Attack_On_Titan_S01_Ep23_தமிழ்_480p_@Anime_Tamil_Dubbed_Series_1.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "Smile - Assault on Stohess (1)",
+            "released": "2013-09-15",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242645.jpg"
+          }
+        }
+      },
+      {
+        "slug_id": "w_MuubqrgNfUGnpq",
+        "telegram_message_id": 684,
+        "episode": 24,
+        "season": 1,
+        "special_type": null,
+        "part": null,
+        "quality": "720P",
+        "file_size": 250567863,
+        "file_name": "Attack_On_Titan_S01_Ep24_தமிழ்_720p_@Anime_Tamil_Dubbed_Series_1.mkv",
+        "mime_type": "video/x-matroska",
+        "title": "Mercy - Assault on Stohess (2)",
+        "released": "2013-09-22",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242647.jpg",
+        "qualities": {
+          "1080P": {
+            "slug_id": "aGTGLqgK7_LZA2HV",
+            "telegram_message_id": 685,
+            "episode": 24,
+            "season": 1,
+            "special_type": null,
+            "part": null,
+            "quality": "1080P",
+            "file_size": 484642945,
+            "file_name": "Attack_On_Titan_S01_Ep24_தமிழ்_1080p_@Anime_Tamil_Dubbed_Series.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "Mercy - Assault on Stohess (2)",
+            "released": "2013-09-22",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242647.jpg"
+          },
+          "720P": {
+            "slug_id": "w_MuubqrgNfUGnpq",
+            "telegram_message_id": 684,
+            "episode": 24,
+            "season": 1,
+            "special_type": null,
+            "part": null,
+            "quality": "720P",
+            "file_size": 250567863,
+            "file_name": "Attack_On_Titan_S01_Ep24_தமிழ்_720p_@Anime_Tamil_Dubbed_Series_1.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "Mercy - Assault on Stohess (2)",
+            "released": "2013-09-22",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242647.jpg"
+          },
+          "480P": {
+            "slug_id": "pb_RekBvB_EWeptN",
+            "telegram_message_id": 683,
+            "episode": 24,
+            "season": 1,
+            "special_type": null,
+            "part": null,
+            "quality": "480P",
+            "file_size": 137869154,
+            "file_name": "Attack_On_Titan_S01_Ep24_தமிழ்_480p_@Anime_Tamil_Dubbed_Series_1.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "Mercy - Assault on Stohess (2)",
+            "released": "2013-09-22",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242647.jpg"
+          }
+        }
+      },
+      {
+        "slug_id": "1TmdnTynKjDoAmKy",
+        "telegram_message_id": 687,
+        "episode": 25,
+        "season": 1,
+        "special_type": null,
+        "part": null,
+        "quality": "720P",
+        "file_size": 252621418,
+        "file_name": "Attack_On_Titan_S01_Ep25_தமிழ்_720p_@Anime_Tamil_Dubbed_Series_1.mkv",
+        "mime_type": "video/x-matroska",
+        "title": "Wall: Raid on Stohess District (3)",
+        "released": "2013-09-29",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242648.jpg",
+        "qualities": {
+          "1080P": {
+            "slug_id": "wOv_70h_0Cozns1d",
+            "telegram_message_id": 688,
+            "episode": 25,
+            "season": 1,
+            "special_type": null,
+            "part": null,
+            "quality": "1080P",
+            "file_size": 487491065,
+            "file_name": "Attack_On_Titan_S01_Ep25_தமிழ்_1080p_@Anime_Tamil_Dubbed_Series.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "Wall: Raid on Stohess District (3)",
+            "released": "2013-09-29",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242648.jpg"
+          },
+          "720P": {
+            "slug_id": "1TmdnTynKjDoAmKy",
+            "telegram_message_id": 687,
+            "episode": 25,
+            "season": 1,
+            "special_type": null,
+            "part": null,
+            "quality": "720P",
+            "file_size": 252621418,
+            "file_name": "Attack_On_Titan_S01_Ep25_தமிழ்_720p_@Anime_Tamil_Dubbed_Series_1.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "Wall: Raid on Stohess District (3)",
+            "released": "2013-09-29",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242648.jpg"
+          },
+          "480P": {
+            "slug_id": "TYiWMI9WZbixDIs-",
+            "telegram_message_id": 686,
+            "episode": 25,
+            "season": 1,
+            "special_type": null,
+            "part": null,
+            "quality": "480P",
+            "file_size": 137649356,
+            "file_name": "Attack_On_Titan_S01_Ep25_தமிழ்_480p_@Anime_Tamil_Dubbed_Series_1.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "Wall: Raid on Stohess District (3)",
+            "released": "2013-09-29",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242648.jpg"
           }
         }
       }
@@ -1020,6 +1826,6 @@
     "episodes_total": 25,
     "year": 2013,
     "studio": "WIT STUDIO",
-    "updated_at": "2026-11-01T19:39:38Z"
+    "updated_at": "2026-11-01T19:51:35Z"
   }
 }
