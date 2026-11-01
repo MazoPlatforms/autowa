@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": 1793533287,
+  "updated_at": 1793534089,
   "anime": [
     {
       "slug_id": "naruto-shippuden",
@@ -2420,7 +2420,7 @@
       "status": "Finished",
       "episodes_total": 500,
       "studio": "Studio Pierrot",
-      "updated_at": "2026-11-01T11:41:27Z"
+      "updated_at": "2026-11-01T11:54:49Z"
     },
     {
       "slug_id": "naruto-shippuden-tam-mal-hin-eng-jap",
@@ -2438,7 +2438,7 @@
           "mime_type": "video/x-matroska"
         }
       ],
-      "updated_at": "2026-11-01T11:41:27Z"
+      "updated_at": "2026-11-01T11:54:49Z"
     }
   ]
 }
