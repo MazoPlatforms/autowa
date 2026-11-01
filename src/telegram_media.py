@@ -82,136 +82,8 @@ def anime_filename_parts(raw):
     value = re.sub(r'\s+', ' ', value).strip(' -[]()')
     return (value[:140] or 'Untitled anime', season, episode, part)
 
-def season_from_caption(caption):
-    match = re.search(r'(?i)\b(?:season|s)\s*[:#-]?\s*(\d{1,2})\b', str(caption or ''))
-    return int(match.group(1)) if match else None
-
-def anime_caption_parts(caption):
-    value = str(caption or '')
-    title_match = re.search(r'(?im)^\s*(?:anime|series|title)\s*:\s*(.+)$', value)
-    episode_match = re.search(r'(?i)\b(?:episode|ep)\s*[:#-]?\s*(\d{1,4})\b', value)
-    quality_match = re.search(r'(?i)\b(?:quality\s*:\s*)?(2160p|1080p|720p|480p|360p|4k)\b', value)
-    raw_quality = quality_match.group(1).lower() if quality_match else None
-    return {'title': title_match.group(1).strip() if title_match else None, 'season': season_from_caption(value), 'episode': int(episode_match.group(1)) if episode_match else None, 'quality': '2160p' if raw_quality == '4k' else raw_quality, 'part': None}
-
-def tmdb_season_boundaries(title):
-    key = os.getenv('TMDB_API_KEY')
-    if not key:
-        return []
-    try:
-        params = urllib.parse.urlencode({'api_key': key, 'query': title, 'language': 'en-US'})
-        with urllib.request.urlopen(urllib.request.Request('https://api.themoviedb.org/3/search/tv?' + params, headers={'User-Agent': 'FilmGo/1.0'}), timeout=6) as response:
-            results = json.load(response).get('results', [])
-        results.sort(key=lambda item: max(difflib.SequenceMatcher(None, str(title).casefold(), str(item.get('name') or '').casefold()).ratio(), difflib.SequenceMatcher(None, str(title).casefold(), str(item.get('original_name') or '').casefold()).ratio()), reverse=True)
-        if not results or not results[0].get('id'):
-            return []
-        params = urllib.parse.urlencode({'api_key': key, 'language': 'en-US'})
-        with urllib.request.urlopen(urllib.request.Request('https://api.themoviedb.org/3/tv/%s?%s' % (result[0]['id'], params), headers={'User-Agent': 'FilmGo/1.0'}), timeout=6) as response:
-            seasons = json.load(response).get('seasons', [])
-        return [(int(item.get('season_number')), int(item.get('episode_count') or 0)) for item in sorted(seasons, key=lambda item: int(item.get('season_number') or 0)) if int(item.get('season_number') or 0) > 0]
-    except Exception:
-        return []
-
-def tmdb_anime_metadata(title):
-    key = os.getenv('TMDB_API_KEY')
-    if not key:
-        return {'title': title}
-    try:
-        params = urllib.parse.urlencode({'api_key': key, 'query': title, 'language': 'en-US', 'include_adult': 'false'})
-        with urllib.request.urlopen(urllib.request.Request('https://api.themoviedb.org/3/search/tv?' + params, headers={'User-Agent': 'FilmGo/1.0'}), timeout=6) as response:
-            result = next(iter(json.load(response).get('results', [])), None)
-        if not result or not result.get('id'):
-            return {'title': title}
-        params = urllib.parse.urlencode({'api_key': key, 'language': 'en-US'})
-        with urllib.request.urlopen(urllib.request.Request('https://api.themoviedb.org/3/tv/%s?%s' % (result['id'], params), headers={'User-Agent': 'FilmGo/1.0'}), timeout=6) as response:
-            item = json.load(response)
-        return {'title': str(item.get('name') or result.get('name') or title)[:140], 'poster': ('https://image.tmdb.org/t/p/w780' + str(item.get('poster_path'))) if item.get('poster_path') else None, 'plot': str(item.get('overview') or '').strip()[:900], 'genre': [x.get('name') for x in item.get('genres') or [] if x.get('name')], 'rating': round(float(item.get('vote_average') or 0), 1) or None, 'status': str(item.get('status') or '').strip() or None, 'episodes_total': sum(int(x.get('episode_count') or 0) for x in item.get('seasons') or [] if int(x.get('season_number') or 0) > 0) or None, 'year': str(item.get('first_air_date') or '')[:4] or None, 'studio': (item.get('production_companies') or [{}])[0].get('name')}
-    except Exception:
-        return {'title': title}
-
-def wikipedia_metadata(title):
-    """Use Wikipedia's public API instead of scraping rendered HTML pages."""
-    try:
-        query = urllib.parse.urlencode({'action': 'query', 'list': 'search', 'srsearch': title + ' anime', 'format': 'json', 'utf8': '1', 'srlimit': '1'})
-        with urllib.request.urlopen(urllib.request.Request('https://en.wikipedia.org/w/api.php?' + query, headers={'User-Agent': 'FilmGo/1.0 (metadata; contact: admin@mzn.is-a.dev)'}), timeout=6) as response:
-            result = next(iter(json.load(response).get('query', {}).get('search', [])), None)
-        if not result or not result.get('title'):
-            return {'title': title}
-        page = urllib.parse.quote(str(result['title']).replace(' ', '_'), safe='')
-        with urllib.request.urlopen(urllib.request.Request('https://en.wikipedia.org/api/rest_v1/page/summary/' + page, headers={'User-Agent': 'FilmGo/1.0 (metadata; contact: admin@mzn.is-a.dev)'}), timeout=6) as response:
-            item = json.load(response)
-        return {'plot': str(item.get('extract') or '').strip()[:900], 'poster': ((item.get('thumbnail') or {}).get('source')), 'year': str((item.get('timestamp') or ''))[:4] or None, 'wikipedia_url': ((item.get('content_urls') or {}).get('desktop') or {}).get('page')}
-    except Exception:
-        return {}
-
-def inferred_anime_season(episode, explicit, boundaries):
-    if explicit:
-        return explicit
-    offset = 0
-    for season, count in boundaries:
-        if int(episode or 0) <= offset + count:
-            return season
-        offset += count
-    return 1
-
-_TMDB_SHOW_CACHE = {}
-_TMDB_SEASON_CACHE = {}
-def tmdb_show_id(title):
-    key = os.getenv('TMDB_API_KEY')
-    cache_key = str(title).casefold()
-    if cache_key in _TMDB_SHOW_CACHE:
-        return _TMDB_SHOW_CACHE[cache_key]
-    if not key:
-        return None
-    try:
-        params = urllib.parse.urlencode({'api_key': key, 'query': title, 'language': 'en-US', 'include_adult': 'false'})
-        with urllib.request.urlopen(urllib.request.Request('https://api.themoviedb.org/3/search/tv?' + params, headers={'User-Agent': 'FilmGo/1.0'}), timeout=6) as response:
-            result = next(iter(json.load(response).get('results', [])), None)
-        value = result.get('id') if result else None
-        _TMDB_SHOW_CACHE[cache_key] = value
-        return value
-    except Exception:
-        _TMDB_SHOW_CACHE[cache_key] = None
-        return None
-
-def tmdb_season_episodes(title, season):
-    """Fetch one TMDB season once and return its episode guide by number."""
-    key = os.getenv('TMDB_API_KEY')
-    cache_key = (str(title).casefold(), int(season or 1))
-    if cache_key in _TMDB_SEASON_CACHE:
-        return _TMDB_SEASON_CACHE[cache_key]
-    if not key:
-        return {}
-    try:
-        show_id = tmdb_show_id(title)
-        if not show_id:
-            _TMDB_SEASON_CACHE[cache_key] = {}
-            return {}
-        params = urllib.parse.urlencode({'api_key': key, 'language': 'en-US'})
-        endpoint = 'https://api.themoviedb.org/3/tv/%s/season/%s?%s' % (show_id, int(season or 1), params)
-        with urllib.request.urlopen(urllib.request.Request(endpoint, headers={'User-Agent': 'FilmGo/1.0'}), timeout=6) as response:
-            episodes = json.load(response).get('episodes', [])
-        mapped = {int(item.get('episode_number')): {'title': str(item.get('name') or '').strip() or None, 'released': str(item.get('air_date') or '').strip() or None, 'frame': ('https://image.tmdb.org/t/p/w780' + str(item.get('still_path'))) if item.get('still_path') else None} for item in episodes if item.get('episode_number') is not None}
-        _TMDB_SEASON_CACHE[cache_key] = mapped
-        return mapped
-    except Exception:
-        _TMDB_SEASON_CACHE[cache_key] = {}
-        return {}
-
-def jikan_metadata(title):
-    try:
-        query = urllib.parse.urlencode({'q': title, 'limit': 5, 'sfw': 'true'})
-        with urllib.request.urlopen(urllib.request.Request('https://api.jikan.moe/v4/anime?' + query, headers={'User-Agent': 'FilmGo/1.0'}), timeout=6) as response:
-            rows = json.load(response).get('data', [])
-        if not rows:
-            return {'title': title}
-        item = rows[0]
-        return {'title': str(item.get('title_english') or item.get('title') or title)[:140], 'poster': ((item.get('images') or {}).get('jpg') or {}).get('large_image_url'), 'plot': str(item.get('synopsis') or '').strip()[:900], 'genre': [x.get('name') for x in item.get('genres') or [] if x.get('name')], 'rating': round(float(item.get('score') or 0), 1) or None, 'status': str(item.get('status') or '').replace('Currently Airing', 'Airing').replace('Finished Airing', 'Finished') or None, 'episodes_total': item.get('episodes'), 'year': ((item.get('aired') or {}).get('from') or '')[:4] or None, 'studio': (item.get('studios') or [{}])[0].get('name')}
-    except Exception:
-        return {'title': title}
-
 def anime_metadata(raw_title):
-    """Merge AniList and Jikan metadata; indexing still works if either API is unavailable."""
+    """Best-effort AniList enrichment; Telegram indexing still works offline."""
     title, _, _, _ = anime_filename_parts(raw_title)
     query = '''query ($search: String) { Media(search: $search, type: ANIME) { id title { romaji english native } coverImage { large } description(asHtml: false) genres averageScore status episodes startDate { year } studios { nodes { name } } } }'''
     try:
@@ -221,33 +93,21 @@ def anime_metadata(raw_title):
             media = json.load(response).get('data', {}).get('Media') or {}
         names = [media.get('title', {}).get(k) for k in ('english', 'romaji', 'native')]
         canonical = next((str(name).strip() for name in names if name), title)
-        primary = {'title': canonical[:140], 'poster': media.get('coverImage', {}).get('large'), 'plot': re.sub(r'<[^>]+>', '', str(media.get('description') or '')).strip()[:900], 'genre': media.get('genres') or [], 'rating': round((float(media.get('averageScore') or 0) / 10), 1) or None, 'status': media.get('status', '').title() or None, 'episodes_total': media.get('episodes'), 'year': (media.get('startDate') or {}).get('year'), 'studio': (((media.get('studios') or {}).get('nodes') or [{}])[0]).get('name')}
-        fallback = jikan_metadata(canonical)
-        tmdb = tmdb_anime_metadata(canonical)
-        wikipedia = wikipedia_metadata(canonical)
-        return {key: (value if value not in (None, '', [], 0) else (fallback.get(key) or tmdb.get(key) or wikipedia.get(key))) for key, value in primary.items()} | ({'wikipedia_url': wikipedia['wikipedia_url']} if wikipedia.get('wikipedia_url') else {})
+        return {'title': canonical[:140], 'poster': media.get('coverImage', {}).get('large'), 'plot': re.sub(r'<[^>]+>', '', str(media.get('description') or '')).strip()[:900], 'genre': media.get('genres') or [], 'rating': round((float(media.get('averageScore') or 0) / 10), 1) or None, 'status': media.get('status', '').title() or None, 'episodes_total': media.get('episodes'), 'year': (media.get('startDate') or {}).get('year'), 'studio': (((media.get('studios') or {}).get('nodes') or [{}])[0]).get('name')}
     except Exception:
-        fallback = jikan_metadata(title)
-        tmdb = tmdb_anime_metadata(title)
-        wikipedia = wikipedia_metadata(title)
-        return {key: (fallback.get(key) if fallback.get(key) not in (None, '', [], 0) else (tmdb.get(key) or wikipedia.get(key))) for key in set(fallback) | set(tmdb) | set(wikipedia)}
+        return {'title': title}
 
 def anime_media_item(message):
     filename = str(getattr(message.file, 'name', '') or '')
     if not filename or not getattr(message, 'file', None):
         return None
     title, season, episode, part = anime_filename_parts(filename)
-    caption = anime_caption_parts(getattr(message, 'raw_text', ''))
-    title = caption['title'] or title
-    season = season or caption['season']
-    episode = episode or caption['episode']
-    part = part or caption['part']
     quality_match = re.search(r'(?i)\b(2160p|1080p|720p|480p|4k)\b', filename)
-    quality = quality_match.group(1).upper() if quality_match else (caption['quality'].upper() if caption['quality'] else 'AUTO')
+    quality = quality_match.group(1).upper() if quality_match else 'AUTO'
     size = int(getattr(message.file, 'size', 0) or 0)
     if not episode or not quality or not 0 < size <= 2000000000:
         return None
-    return {'slug_id': secrets.token_urlsafe(12), 'telegram_message_id': int(message.id), 'episode': episode, 'season': season, 'season_explicit': bool(season), 'part': part, 'quality': quality, 'file_size': size, 'file_name': filename[:240], 'mime_type': str(getattr(message.file, 'mime_type', '') or '')}
+    return {'slug_id': secrets.token_urlsafe(12), 'telegram_message_id': int(message.id), 'episode': episode, 'season': season or 1, 'part': part, 'quality': quality, 'file_size': size, 'file_name': filename[:240], 'mime_type': str(getattr(message.file, 'mime_type', '') or '')}
 
 def build_anime_catalog(messages):
     shows = {}
@@ -263,12 +123,6 @@ def build_anime_catalog(messages):
     for show in shows.values():
         meta = anime_metadata(show['title'])
         show.update({k: v for k, v in meta.items() if v not in (None, '', [])})
-        boundaries = tmdb_season_boundaries(show['title'])
-        for episode in show['episodes']:
-            episode['season'] = inferred_anime_season(episode['episode'], episode.pop('season_explicit', None) and episode['season'], boundaries)
-            guide = tmdb_season_episodes(show['title'], episode['season']).get(int(episode['episode']))
-            if guide:
-                episode.update({key: value for key, value in guide.items() if value})
         show['episodes'].sort(key=lambda e: (e.get('season') or 1, e.get('episode') or 0, e.get('part') or 0, e.get('quality') or ''))
         show['updated_at'] = time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime())
         result.append(show)
