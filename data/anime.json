@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": 1793560486,
+  "updated_at": "2026-11-01T19:15:52.737Z",
   "anime": [
     {
       "slug_id": "naruto",
@@ -8957,6 +8957,18 @@
           "title": "Lost Girls: Lost in the Cruel World",
           "released": "2018-08-09",
           "frame": "https://raw.githubusercontent.com/MazoPlatforms/autowa/main/web/frames/anime/attack-on-titan-oad-008.jpg"
+        },
+        {
+          "slug_id": "8RwxRZhNT4Ycxx8s",
+          "telegram_message_id": 617,
+          "episode": 2,
+          "season": 1,
+          "special_type": null,
+          "part": null,
+          "quality": "480p",
+          "file_size": 89374133,
+          "file_name": "Attack_On_Titan_S01_Ep02_தமிழ்_480p_@Anime_Tamil_Dubbed_Series_1.mkv",
+          "mime_type": "video/x-matroska"
         }
       ],
       "wikipedia_url": "https://en.wikipedia.org/wiki/Attack_on_Titan_(TV_series)",
@@ -8973,7 +8985,7 @@
       "episodes_total": 25,
       "year": 2013,
       "studio": "WIT STUDIO",
-      "updated_at": "2026-11-01T19:14:43Z"
+      "updated_at": "2026-11-01T19:15:52.737Z"
     }
   ]
 }
