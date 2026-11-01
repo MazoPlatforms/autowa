@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": 1793561088,
+  "updated_at": "2026-11-01T19:38:47.165Z",
   "anime": [
     {
       "slug_id": "naruto",
@@ -19490,19 +19490,16 @@
           }
         },
         {
-          "slug_id": "XcV28b8o593bL4oR",
-          "telegram_message_id": 647,
+          "slug_id": "OZdyGRlfLKQlMaW9",
+          "telegram_message_id": 648,
           "episode": 12,
           "season": 1,
           "special_type": null,
           "part": null,
-          "quality": "480P",
-          "file_size": 135640778,
-          "file_name": "Attack_On_Titan_S01_Ep12_தமிழ்_480p_@Anime_Tamil_Dubbed_Series_1.mkv",
+          "quality": "720p",
+          "file_size": 245795379,
+          "file_name": "Attack_On_Titan_S01_Ep12_தமிழ்_720p_@Anime_Tamil_Dubbed_Series_1.mkv",
           "mime_type": "video/x-matroska",
-          "title": "Wound - The Struggle for Trost (8)",
-          "released": "2013-06-23",
-          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357836.jpg",
           "qualities": {
             "480P": {
               "slug_id": "XcV28b8o593bL4oR",
@@ -19518,6 +19515,18 @@
               "title": "Wound - The Struggle for Trost (8)",
               "released": "2013-06-23",
               "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357836.jpg"
+            },
+            "720P": {
+              "slug_id": "OZdyGRlfLKQlMaW9",
+              "telegram_message_id": 648,
+              "episode": 12,
+              "season": 1,
+              "special_type": null,
+              "part": null,
+              "quality": "720p",
+              "file_size": 245795379,
+              "file_name": "Attack_On_Titan_S01_Ep12_தமிழ்_720p_@Anime_Tamil_Dubbed_Series_1.mkv",
+              "mime_type": "video/x-matroska"
             }
           }
         }
@@ -19536,7 +19545,7 @@
       "episodes_total": 25,
       "year": 2013,
       "studio": "WIT STUDIO",
-      "updated_at": "2026-11-01T19:24:45Z"
+      "updated_at": "2026-11-01T19:38:47.165Z"
     }
   ]
 }
