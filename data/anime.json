@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-01T08:23:38.578Z",
+  "updated_at": 1793521447,
   "anime": [
     {
       "slug_id": "naruto-shippuden",
@@ -287,7 +287,7 @@
           "episode": 26,
           "season": 1,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 111331523,
           "file_name": "Naruto Shippuden - 026 [720p] [Dual] @Anime_Gallery.mkv",
           "mime_type": "video/x-matroska"
@@ -298,7 +298,7 @@
           "episode": 27,
           "season": 1,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 71018533,
           "file_name": "Naruto Shippuden - 027 [720p] [Dual] @Anime_Gallery.mkv",
           "mime_type": "video/x-matroska"
@@ -309,7 +309,7 @@
           "episode": 28,
           "season": 1,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 98256724,
           "file_name": "Naruto Shippuden - 028 [720p] [Dual] @Anime_Gallery.mkv",
           "mime_type": "video/x-matroska"
@@ -320,7 +320,7 @@
           "episode": 30,
           "season": 1,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 86980589,
           "file_name": "Naruto Shippuden - 030 [720p] [Dual] @Anime_Gallery.mkv",
           "mime_type": "video/x-matroska"
@@ -331,7 +331,7 @@
           "episode": 31,
           "season": 1,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 69444059,
           "file_name": "Naruto Shippuden - 031 [720p] [Dual] @Anime_Gallery.mkv",
           "mime_type": "video/x-matroska"
@@ -342,7 +342,7 @@
           "episode": 32,
           "season": 1,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 67737901,
           "file_name": "Naruto Shippuden - 032 [720p] [Dual] @Anime_Gallery.mkv",
           "mime_type": "video/x-matroska"
@@ -363,7 +363,7 @@
       "episodes_total": 500,
       "year": 2007,
       "studio": "Studio Pierrot",
-      "updated_at": "2026-11-01T08:23:38.578Z"
+      "updated_at": "2026-11-01T08:24:07Z"
     }
   ]
 }
