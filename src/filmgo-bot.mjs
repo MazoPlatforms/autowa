@@ -413,8 +413,9 @@ async function onMessage(message,refresh){
   if(Number.isSafeInteger(Number(grant.telegram_message_id))&&Number(grant.telegram_message_id)>0&&grant.anime_title){
    anime={title:String(grant.anime_title),year:grant.anime_year||null};episode={slug_id:String(grant.episode_slug_id||''),telegram_message_id:Number(grant.telegram_message_id),title:String(grant.episode_title||''),season:Number(grant.season)||1,episode:Number(grant.episode)||0,quality:String(grant.quality||'720p'),file_size:Number(grant.file_size||0)};
   }else{
-   let animeList;try{animeList=await animeCatalog();}catch{return say(chat,'Anime delivery is temporarily unavailable. Please try again later.');}
+   let animeList=[];try{animeList=await animeCatalog();}catch{}
    for(const item of animeList){const found=(item.episodes||[]).find(ep=>ep.slug_id===grant.episode_slug_id);if(found){anime=item;episode=found;break;}}
+   if((!anime||!episode)&&grant.base_url){try{const response=await fetch(new URL('/api/anime/episode/'+encodeURIComponent(String(grant.episode_slug_id||'')),grant.base_url),{cache:'no-store',signal:AbortSignal.timeout(10000)});if(response.ok){const data=await response.json();anime=data.anime||null;episode=data.episode||null;}}catch{}}
   }
   if(!anime||!episode)return say(chat,'This anime episode link has expired. Please request it again from FilmGo.');
   const messageId=Number(episode.telegram_message_id),size=Number(episode.file_size||0);if(!Number.isSafeInteger(messageId)||!Number.isSafeInteger(size)||size<=0)return say(chat,'Anime episode is unavailable.');
