@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": 1793551990,
+  "updated_at": "2026-11-01T17:00:22.572Z",
   "anime": [
     {
       "slug_id": "naruto",
@@ -2805,6 +2805,17 @@
           "title": "To Each His Own Path",
           "released": "2006-12-07",
           "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/487/1217957.jpg"
+        },
+        {
+          "slug_id": "fNZiG95nVADRGMXt",
+          "telegram_message_id": 598,
+          "episode": 213,
+          "season": 9,
+          "part": null,
+          "quality": "720p",
+          "file_size": 141296254,
+          "file_name": "Naruto S9 E213 HDRip - 720p [Tamil].mp4",
+          "mime_type": "video/mp4"
         }
       ],
       "year": 2002,
@@ -2822,7 +2833,7 @@
       "status": "Finished",
       "episodes_total": 220,
       "studio": "Studio Pierrot",
-      "updated_at": "2026-11-01T16:53:08Z"
+      "updated_at": "2026-11-01T17:00:22.572Z"
     },
     {
       "slug_id": "naruto-shippuden",
