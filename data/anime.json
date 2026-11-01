@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": 1793569474,
+  "updated_at": 1793569746,
   "anime": [
     {
       "slug_id": "naruto",
@@ -6555,7 +6555,7 @@
         "10": "/banners/naruto-season-10.webp",
         "11": "/banners/naruto-season-11.webp"
       },
-      "updated_at": "2026-11-01T21:44:32Z"
+      "updated_at": "2026-11-01T21:49:05Z"
     },
     {
       "slug_id": "naruto-shippuden",
@@ -18545,7 +18545,7 @@
       "status": "Finished",
       "episodes_total": 500,
       "studio": "Studio Pierrot",
-      "updated_at": "2026-11-01T21:44:34Z"
+      "updated_at": "2026-11-01T21:49:06Z"
     },
     {
       "slug_id": "attack-on-titan",
@@ -23535,7 +23535,7 @@
           "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242640.jpg",
           "qualities": {
             "1080P": {
-              "slug_id": "xGL5fVKog8x0JXMx",
+              "slug_id": "_hO9PFAb09ysztIn",
               "telegram_message_id": 844,
               "episode": 18,
               "season": 4,
@@ -23582,7 +23582,7 @@
           }
         },
         {
-          "slug_id": "EzkEPK2vO1HYrzkC",
+          "slug_id": "1jhcYrLpeU8R_cTa",
           "telegram_message_id": 846,
           "episode": 19,
           "season": 4,
@@ -23597,7 +23597,7 @@
           "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242642.jpg",
           "qualities": {
             "1080P": {
-              "slug_id": "L7bNWS_IpCLErGMz",
+              "slug_id": "A02d9EYjtgiASlqj",
               "telegram_message_id": 847,
               "episode": 19,
               "season": 4,
@@ -23612,7 +23612,7 @@
               "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242642.jpg"
             },
             "720P": {
-              "slug_id": "EzkEPK2vO1HYrzkC",
+              "slug_id": "1jhcYrLpeU8R_cTa",
               "telegram_message_id": 846,
               "episode": 19,
               "season": 4,
@@ -23627,7 +23627,7 @@
               "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242642.jpg"
             },
             "480P": {
-              "slug_id": "PEDWhYYfj4nQlxeP",
+              "slug_id": "1cQNF4zV4dceCjeu",
               "telegram_message_id": 845,
               "episode": 19,
               "season": 4,
@@ -23644,7 +23644,7 @@
           }
         },
         {
-          "slug_id": "9Nbrl3S36NsCVaho",
+          "slug_id": "BA_IeOGezU6mkeKc",
           "telegram_message_id": 849,
           "episode": 20,
           "season": 4,
@@ -23659,7 +23659,7 @@
           "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242643.jpg",
           "qualities": {
             "1080P": {
-              "slug_id": "cYV67hrRaIj2fKhf",
+              "slug_id": "WnYMoO-Smirh64qO",
               "telegram_message_id": 850,
               "episode": 20,
               "season": 4,
@@ -23674,7 +23674,7 @@
               "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242643.jpg"
             },
             "720P": {
-              "slug_id": "9Nbrl3S36NsCVaho",
+              "slug_id": "BA_IeOGezU6mkeKc",
               "telegram_message_id": 849,
               "episode": 20,
               "season": 4,
@@ -23689,7 +23689,7 @@
               "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242643.jpg"
             },
             "480P": {
-              "slug_id": "V7klEuXqpOmXz4fr",
+              "slug_id": "Ryy07riaz4qSDj0C",
               "telegram_message_id": 848,
               "episode": 20,
               "season": 4,
@@ -23706,7 +23706,7 @@
           }
         },
         {
-          "slug_id": "Fh21wgjmwqrHPIyO",
+          "slug_id": "aQ_JUDLdgujLDqv3",
           "telegram_message_id": 852,
           "episode": 21,
           "season": 4,
@@ -23721,7 +23721,7 @@
           "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357929.jpg",
           "qualities": {
             "1080P": {
-              "slug_id": "36J2_T2UoEJgrelX",
+              "slug_id": "Q8CDYN08v3FK-sx5",
               "telegram_message_id": 853,
               "episode": 21,
               "season": 4,
@@ -23736,7 +23736,7 @@
               "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357929.jpg"
             },
             "720P": {
-              "slug_id": "Fh21wgjmwqrHPIyO",
+              "slug_id": "aQ_JUDLdgujLDqv3",
               "telegram_message_id": 852,
               "episode": 21,
               "season": 4,
@@ -23751,7 +23751,7 @@
               "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357929.jpg"
             },
             "480P": {
-              "slug_id": "VN5ToU2FieSCDuVV",
+              "slug_id": "8HbcThGFjsE_WXbA",
               "telegram_message_id": 851,
               "episode": 21,
               "season": 4,
@@ -23768,7 +23768,7 @@
           }
         },
         {
-          "slug_id": "u90dm1vEAC9tX3ly",
+          "slug_id": "fK5C6lAXVKBPz28f",
           "telegram_message_id": 855,
           "episode": 22,
           "season": 4,
@@ -23783,7 +23783,7 @@
           "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242646.jpg",
           "qualities": {
             "1080P": {
-              "slug_id": "dFJ4H6nrNWZtMm8S",
+              "slug_id": "TsE8CcoE1ouO-TWv",
               "telegram_message_id": 856,
               "episode": 22,
               "season": 4,
@@ -23798,7 +23798,7 @@
               "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242646.jpg"
             },
             "720P": {
-              "slug_id": "u90dm1vEAC9tX3ly",
+              "slug_id": "fK5C6lAXVKBPz28f",
               "telegram_message_id": 855,
               "episode": 22,
               "season": 4,
@@ -23813,7 +23813,7 @@
               "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242646.jpg"
             },
             "480P": {
-              "slug_id": "tEJ2bbEhbM3SCktI",
+              "slug_id": "UzKgSULFYWWsOeT-",
               "telegram_message_id": 854,
               "episode": 22,
               "season": 4,
@@ -23830,7 +23830,7 @@
           }
         },
         {
-          "slug_id": "t6UpeRE56QUFApll",
+          "slug_id": "FhJSoFduH5fgMm89",
           "telegram_message_id": 858,
           "episode": 23,
           "season": 4,
@@ -23845,7 +23845,7 @@
           "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242645.jpg",
           "qualities": {
             "1080P": {
-              "slug_id": "ovgFZFBlplm9Etwv",
+              "slug_id": "hRTzNAOSCTz9RKnU",
               "telegram_message_id": 859,
               "episode": 23,
               "season": 4,
@@ -23860,7 +23860,7 @@
               "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242645.jpg"
             },
             "720P": {
-              "slug_id": "t6UpeRE56QUFApll",
+              "slug_id": "FhJSoFduH5fgMm89",
               "telegram_message_id": 858,
               "episode": 23,
               "season": 4,
@@ -23875,7 +23875,7 @@
               "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242645.jpg"
             },
             "480P": {
-              "slug_id": "fMIFjzHFhn4ElTTA",
+              "slug_id": "83NcNbYM62j5P4uv",
               "telegram_message_id": 857,
               "episode": 23,
               "season": 4,
@@ -23892,7 +23892,7 @@
           }
         },
         {
-          "slug_id": "rLNMebvXeruP4n4r",
+          "slug_id": "MNaGc4dTS7h04hMT",
           "telegram_message_id": 861,
           "episode": 24,
           "season": 4,
@@ -23907,7 +23907,7 @@
           "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242647.jpg",
           "qualities": {
             "1080P": {
-              "slug_id": "zEFiFiXd8ToQjHRD",
+              "slug_id": "Fnifz5Mdd9hEZSmM",
               "telegram_message_id": 862,
               "episode": 24,
               "season": 4,
@@ -23922,7 +23922,7 @@
               "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242647.jpg"
             },
             "720P": {
-              "slug_id": "rLNMebvXeruP4n4r",
+              "slug_id": "MNaGc4dTS7h04hMT",
               "telegram_message_id": 861,
               "episode": 24,
               "season": 4,
@@ -23937,7 +23937,7 @@
               "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242647.jpg"
             },
             "480P": {
-              "slug_id": "AC--SIfm1T9CdFHa",
+              "slug_id": "g3kK1JatAiYTfm0X",
               "telegram_message_id": 860,
               "episode": 24,
               "season": 4,
@@ -23954,7 +23954,7 @@
           }
         },
         {
-          "slug_id": "EoP5RZZInLtjN82m",
+          "slug_id": "4m0S6dB9yb76c2X5",
           "telegram_message_id": 864,
           "episode": 25,
           "season": 4,
@@ -23969,7 +23969,7 @@
           "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242648.jpg",
           "qualities": {
             "1080P": {
-              "slug_id": "zHrC9fBLO4Peg34p",
+              "slug_id": "0IeOCiSgnDHZM8QP",
               "telegram_message_id": 865,
               "episode": 25,
               "season": 4,
@@ -23984,7 +23984,7 @@
               "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242648.jpg"
             },
             "720P": {
-              "slug_id": "EoP5RZZInLtjN82m",
+              "slug_id": "4m0S6dB9yb76c2X5",
               "telegram_message_id": 864,
               "episode": 25,
               "season": 4,
@@ -23999,7 +23999,7 @@
               "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242648.jpg"
             },
             "480P": {
-              "slug_id": "24ckXrlTqafkODaD",
+              "slug_id": "ivroI64OM41QZi_O",
               "telegram_message_id": 863,
               "episode": 25,
               "season": 4,
@@ -24016,7 +24016,7 @@
           }
         },
         {
-          "slug_id": "w7t5ss6P6jfJV-QF",
+          "slug_id": "ksNsDl6-X2WFhVIt",
           "telegram_message_id": 867,
           "episode": 26,
           "season": 4,
@@ -24031,7 +24031,7 @@
           "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/104/262363.jpg",
           "qualities": {
             "1080P": {
-              "slug_id": "2_VB9JWjv6xuNvvT",
+              "slug_id": "SZRSwIw6LNPx6-e-",
               "telegram_message_id": 868,
               "episode": 26,
               "season": 4,
@@ -24046,7 +24046,7 @@
               "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/104/262363.jpg"
             },
             "720P": {
-              "slug_id": "w7t5ss6P6jfJV-QF",
+              "slug_id": "ksNsDl6-X2WFhVIt",
               "telegram_message_id": 867,
               "episode": 26,
               "season": 4,
@@ -24061,7 +24061,7 @@
               "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/104/262363.jpg"
             },
             "480P": {
-              "slug_id": "wwTj_hLYmWRZ7dFW",
+              "slug_id": "PwdEeneFf6HKwws6",
               "telegram_message_id": 866,
               "episode": 26,
               "season": 4,
@@ -24078,7 +24078,7 @@
           }
         },
         {
-          "slug_id": "YWvoo-_9GvRJQjAf",
+          "slug_id": "iAejMDf2g77nDEmd",
           "telegram_message_id": 870,
           "episode": 27,
           "season": 4,
@@ -24093,7 +24093,7 @@
           "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1358468.jpg",
           "qualities": {
             "1080P": {
-              "slug_id": "4fMDIx_Wo5s_JI23",
+              "slug_id": "Xt0ZiX-OdT9k1YQK",
               "telegram_message_id": 871,
               "episode": 27,
               "season": 4,
@@ -24108,7 +24108,7 @@
               "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1358468.jpg"
             },
             "720P": {
-              "slug_id": "YWvoo-_9GvRJQjAf",
+              "slug_id": "iAejMDf2g77nDEmd",
               "telegram_message_id": 870,
               "episode": 27,
               "season": 4,
@@ -24123,7 +24123,7 @@
               "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1358468.jpg"
             },
             "480P": {
-              "slug_id": "eI1kFpmBUctHSyOp",
+              "slug_id": "9jfcYq2mn5wqh7Ih",
               "telegram_message_id": 869,
               "episode": 27,
               "season": 4,
@@ -24140,7 +24140,7 @@
           }
         },
         {
-          "slug_id": "sVeXpu0aCDeyBE8K",
+          "slug_id": "WWReYmnqYydXRYTx",
           "telegram_message_id": 873,
           "episode": 28,
           "season": 4,
@@ -24155,7 +24155,7 @@
           "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1358469.jpg",
           "qualities": {
             "1080P": {
-              "slug_id": "c-3kZeGTk6GZir6Z",
+              "slug_id": "DLwY3000jrpSIHVr",
               "telegram_message_id": 874,
               "episode": 28,
               "season": 4,
@@ -24170,7 +24170,7 @@
               "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1358469.jpg"
             },
             "720P": {
-              "slug_id": "sVeXpu0aCDeyBE8K",
+              "slug_id": "WWReYmnqYydXRYTx",
               "telegram_message_id": 873,
               "episode": 28,
               "season": 4,
@@ -24185,7 +24185,7 @@
               "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1358469.jpg"
             },
             "480P": {
-              "slug_id": "Qd8LuVtr4OubD49p",
+              "slug_id": "4N9D6TKxraKzqT7S",
               "telegram_message_id": 872,
               "episode": 28,
               "season": 4,
@@ -24198,6 +24198,130 @@
               "title": "Southwestward",
               "released": "2017-04-15",
               "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1358469.jpg"
+            }
+          }
+        },
+        {
+          "slug_id": "TFBeRZJIwEqSY0oM",
+          "telegram_message_id": 876,
+          "episode": 29,
+          "season": 4,
+          "special_type": null,
+          "part": null,
+          "quality": "720P",
+          "file_size": 228831315,
+          "file_name": "_Attack_on_Titan_The_Final_Chapter_S04_E01_29_Tamil_720p_@official.mkv",
+          "mime_type": "video/x-matroska",
+          "title": "Soldier",
+          "released": "2017-04-22",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/108/270511.jpg",
+          "qualities": {
+            "1080P": {
+              "slug_id": "03jPgPt62Y43cIRf",
+              "telegram_message_id": 877,
+              "episode": 29,
+              "season": 4,
+              "special_type": null,
+              "part": null,
+              "quality": "1080P",
+              "file_size": 333221128,
+              "file_name": "_Attack_on_Titan_The_Final_Chapter_S04_E01_29_Tamil_1080p_@official.mkv",
+              "mime_type": "video/x-matroska",
+              "title": "Soldier",
+              "released": "2017-04-22",
+              "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/108/270511.jpg"
+            },
+            "720P": {
+              "slug_id": "TFBeRZJIwEqSY0oM",
+              "telegram_message_id": 876,
+              "episode": 29,
+              "season": 4,
+              "special_type": null,
+              "part": null,
+              "quality": "720P",
+              "file_size": 228831315,
+              "file_name": "_Attack_on_Titan_The_Final_Chapter_S04_E01_29_Tamil_720p_@official.mkv",
+              "mime_type": "video/x-matroska",
+              "title": "Soldier",
+              "released": "2017-04-22",
+              "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/108/270511.jpg"
+            },
+            "480P": {
+              "slug_id": "f-4FWjKhbSfy2lZs",
+              "telegram_message_id": 875,
+              "episode": 29,
+              "season": 4,
+              "special_type": null,
+              "part": null,
+              "quality": "480P",
+              "file_size": 83895668,
+              "file_name": "_Attack_on_Titan_The_Final_Chapter_S04_E01_29_Tamil_480p_@official.mkv",
+              "mime_type": "video/x-matroska",
+              "title": "Soldier",
+              "released": "2017-04-22",
+              "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/108/270511.jpg"
+            }
+          }
+        },
+        {
+          "slug_id": "IWQ2ujQ1THh0Ql95",
+          "telegram_message_id": 879,
+          "episode": 30,
+          "season": 4,
+          "special_type": null,
+          "part": null,
+          "quality": "720P",
+          "file_size": 271033138,
+          "file_name": "_Attack_on_Titan_The_Final_Chapter_S04_E01_30_Tamil_720p_@official.mkv",
+          "mime_type": "video/x-matroska",
+          "title": "Historia",
+          "released": "2017-04-29",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1358479.jpg",
+          "qualities": {
+            "1080P": {
+              "slug_id": "t4Qjo_XFJxyu7ozf",
+              "telegram_message_id": 880,
+              "episode": 30,
+              "season": 4,
+              "special_type": null,
+              "part": null,
+              "quality": "1080P",
+              "file_size": 570070010,
+              "file_name": "_Attack_on_Titan_The_Final_Chapter_S04_E01_30_Tamil_1080p_@official.mkv",
+              "mime_type": "video/x-matroska",
+              "title": "Historia",
+              "released": "2017-04-29",
+              "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1358479.jpg"
+            },
+            "720P": {
+              "slug_id": "IWQ2ujQ1THh0Ql95",
+              "telegram_message_id": 879,
+              "episode": 30,
+              "season": 4,
+              "special_type": null,
+              "part": null,
+              "quality": "720P",
+              "file_size": 271033138,
+              "file_name": "_Attack_on_Titan_The_Final_Chapter_S04_E01_30_Tamil_720p_@official.mkv",
+              "mime_type": "video/x-matroska",
+              "title": "Historia",
+              "released": "2017-04-29",
+              "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1358479.jpg"
+            },
+            "480P": {
+              "slug_id": "yfPP5CHcBfisbEFD",
+              "telegram_message_id": 878,
+              "episode": 30,
+              "season": 4,
+              "special_type": null,
+              "part": null,
+              "quality": "480P",
+              "file_size": 141237376,
+              "file_name": "_Attack_on_Titan_The_Final_Chapter_S04_E01_30_Tamil_480p_@official.mkv",
+              "mime_type": "video/x-matroska",
+              "title": "Historia",
+              "released": "2017-04-29",
+              "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1358479.jpg"
             }
           }
         }
@@ -24216,158 +24340,14 @@
       "episodes_total": 25,
       "year": 2013,
       "studio": "WIT STUDIO",
-      "updated_at": "2026-11-01T21:44:30Z",
       "season_banners": {
         "OAD": "/banners/attack-on-titan-oad.webp",
         "1": "/banners/attack-on-titan-season-1.webp",
         "2": "/banners/attack-on-titan-season-2.webp",
         "3": "/banners/attack-on-titan-season-3.webp",
         "4": "/banners/attack-on-titan-season-4.webp"
-      }
-    },
-    {
-      "slug_id": "attack-on-titan-the-final-chapter-30",
-      "title": "Attack on Titan Final Season THE FINAL CHAPTERS Special 2",
-      "episodes": [
-        {
-          "slug_id": "Ml-7UEqdhN_RNQGJ",
-          "telegram_message_id": 879,
-          "episode": 1,
-          "season": 4,
-          "special_type": null,
-          "part": null,
-          "quality": "720P",
-          "file_size": 271033138,
-          "file_name": "_Attack_on_Titan_The_Final_Chapter_S04_E01_30_Tamil_720p_@official.mkv",
-          "mime_type": "video/x-matroska",
-          "qualities": {
-            "1080P": {
-              "slug_id": "ehpbgF41VbIOyWYj",
-              "telegram_message_id": 880,
-              "episode": 1,
-              "season": 4,
-              "special_type": null,
-              "part": null,
-              "quality": "1080P",
-              "file_size": 570070010,
-              "file_name": "_Attack_on_Titan_The_Final_Chapter_S04_E01_30_Tamil_1080p_@official.mkv",
-              "mime_type": "video/x-matroska"
-            },
-            "720P": {
-              "slug_id": "Ml-7UEqdhN_RNQGJ",
-              "telegram_message_id": 879,
-              "episode": 1,
-              "season": 4,
-              "special_type": null,
-              "part": null,
-              "quality": "720P",
-              "file_size": 271033138,
-              "file_name": "_Attack_on_Titan_The_Final_Chapter_S04_E01_30_Tamil_720p_@official.mkv",
-              "mime_type": "video/x-matroska"
-            },
-            "480P": {
-              "slug_id": "-AYc6rAbp-vg0M19",
-              "telegram_message_id": 878,
-              "episode": 1,
-              "season": 4,
-              "special_type": null,
-              "part": null,
-              "quality": "480P",
-              "file_size": 141237376,
-              "file_name": "_Attack_on_Titan_The_Final_Chapter_S04_E01_30_Tamil_480p_@official.mkv",
-              "mime_type": "video/x-matroska"
-            }
-          }
-        }
-      ],
-      "poster": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx162314-qIWdAAFtvY8J.jpg",
-      "plot": "Eren, as the Founding Titan, advances on Fort Salta with countless other Titans. Appearing before the refugees, who stand on the brink of despair, are Mikasa, Armin, Jean, Conny, Reiner, Pieck, and Levi, who narrowly escaped from the rumbling. The battle between former comrades and childhood friends with Eren concludes here.\n\n(Source: Crunchyroll)",
-      "genre": [
-        "Action",
-        "Drama",
-        "Fantasy",
-        "Psychological",
-        "Romance"
-      ],
-      "rating": 8.7,
-      "status": "Finished",
-      "episodes_total": 1,
-      "year": 2023,
-      "studio": "MAPPA",
-      "wikipedia_url": "https://en.wikipedia.org/wiki/Attack_on_Titan_season_4",
-      "updated_at": "2026-11-01T21:44:21Z"
-    },
-    {
-      "slug_id": "attack-on-titan-the-final-chapter-29",
-      "title": "Attack on Titan Final Season THE FINAL CHAPTERS Special 2",
-      "episodes": [
-        {
-          "slug_id": "-cdk79n6-10XI4uo",
-          "telegram_message_id": 876,
-          "episode": 1,
-          "season": 4,
-          "special_type": null,
-          "part": null,
-          "quality": "720P",
-          "file_size": 228831315,
-          "file_name": "_Attack_on_Titan_The_Final_Chapter_S04_E01_29_Tamil_720p_@official.mkv",
-          "mime_type": "video/x-matroska",
-          "qualities": {
-            "1080P": {
-              "slug_id": "TPmI4_o563Ckbye4",
-              "telegram_message_id": 877,
-              "episode": 1,
-              "season": 4,
-              "special_type": null,
-              "part": null,
-              "quality": "1080P",
-              "file_size": 333221128,
-              "file_name": "_Attack_on_Titan_The_Final_Chapter_S04_E01_29_Tamil_1080p_@official.mkv",
-              "mime_type": "video/x-matroska"
-            },
-            "720P": {
-              "slug_id": "-cdk79n6-10XI4uo",
-              "telegram_message_id": 876,
-              "episode": 1,
-              "season": 4,
-              "special_type": null,
-              "part": null,
-              "quality": "720P",
-              "file_size": 228831315,
-              "file_name": "_Attack_on_Titan_The_Final_Chapter_S04_E01_29_Tamil_720p_@official.mkv",
-              "mime_type": "video/x-matroska"
-            },
-            "480P": {
-              "slug_id": "hV0kHTWQyoJ7w3MP",
-              "telegram_message_id": 875,
-              "episode": 1,
-              "season": 4,
-              "special_type": null,
-              "part": null,
-              "quality": "480P",
-              "file_size": 83895668,
-              "file_name": "_Attack_on_Titan_The_Final_Chapter_S04_E01_29_Tamil_480p_@official.mkv",
-              "mime_type": "video/x-matroska"
-            }
-          }
-        }
-      ],
-      "poster": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx162314-qIWdAAFtvY8J.jpg",
-      "plot": "Eren, as the Founding Titan, advances on Fort Salta with countless other Titans. Appearing before the refugees, who stand on the brink of despair, are Mikasa, Armin, Jean, Conny, Reiner, Pieck, and Levi, who narrowly escaped from the rumbling. The battle between former comrades and childhood friends with Eren concludes here.\n\n(Source: Crunchyroll)",
-      "genre": [
-        "Action",
-        "Drama",
-        "Fantasy",
-        "Psychological",
-        "Romance"
-      ],
-      "rating": 8.7,
-      "status": "Finished",
-      "episodes_total": 1,
-      "year": 2023,
-      "studio": "MAPPA",
-      "wikipedia_url": "https://en.wikipedia.org/wiki/Attack_on_Titan_season_4",
-      "updated_at": "2026-11-01T21:44:27Z"
+      },
+      "updated_at": "2026-11-01T21:49:04Z"
     }
   ]
 }
