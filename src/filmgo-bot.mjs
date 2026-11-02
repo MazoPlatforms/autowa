@@ -56,7 +56,9 @@ export const animeFilenameParts=name=>{
  let raw=String(name||'').replace(/\.[^.]+$/,'').replace(/[._]+/g,' ').replace(/\s+/g,' ').trim();
  // Telegram release uploads may start with a channel/uploader tag such as
  // "@TamilMob_LinkZz -". It is metadata, not part of the anime title.
+ raw=raw.replace(/^@\s*(?:tamilmob|mob)(?:[_\s-]+linkzz)?\s*[-–—:]?\s*/iu,'');
  raw=raw.replace(/^@\s*[\w-]+(?:\s+[\w-]+){0,3}\s*[-–—:]\s*/u,'');
+ raw=raw.replace(/^@\s*[\w-]+\s+/u,'');
  raw=raw.replace(/(?:tamil|telugu|malayalam|kannada|hindi|english|தமிழ்|tam|mal|hin|eng|jap)/giu,' ').replace(/\s+/g,' ').trim();
  let season=null,episode=null,part=null;
  let match=raw.match(/\bS(\d{1,2})\s*(?:-|x)?\s*E[O0]?(\d{1,4})\b/i);
