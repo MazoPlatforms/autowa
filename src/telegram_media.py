@@ -256,6 +256,7 @@ def canonical_anime_release_title(title):
     """Normalize common release-name misspellings before metadata lookup."""
     value = re.sub(r'(?i)\s*[-:()]?\s*(?:OAD|OVA|specials?)\s*$', '', str(title or '')).strip(' -:()')
     return {
+        'jujutsukaisen': 'Jujutsu Kaisen',
         'attackontitack': 'Attack on Titan',
         'attackontitanthefinalchapter': 'Attack on Titan',
         'attackontitanthefinalchapters': 'Attack on Titan',
