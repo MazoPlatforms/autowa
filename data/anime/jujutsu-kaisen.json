@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "updated_at": 1793581805,
+  "updated_at": 1793582423,
   "anime": {
     "slug_id": "jujutsu-kaisen",
     "title": "JUJUTSU KAISEN",
     "episodes": [
       {
-        "telegram_message_id": 902,
+        "telegram_message_id": 905,
         "episode": 1,
         "season": 1,
         "special_type": null,
@@ -18,10 +18,10 @@
         "title": "Ryomen Sukuna",
         "released": "2020-10-02",
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/542/1355130.jpg",
-        "slug_id": "YKDUjRn5b5hsH7eZ",
+        "slug_id": "5719XgC4xRnr4_q_",
         "qualities": {
           "1080P": {
-            "telegram_message_id": 903,
+            "telegram_message_id": 906,
             "episode": 1,
             "season": 1,
             "special_type": null,
@@ -35,7 +35,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/542/1355130.jpg"
           },
           "720P": {
-            "telegram_message_id": 902,
+            "telegram_message_id": 905,
             "episode": 1,
             "season": 1,
             "special_type": null,
@@ -49,7 +49,7 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/542/1355130.jpg"
           },
           "480P": {
-            "telegram_message_id": 901,
+            "telegram_message_id": 904,
             "episode": 1,
             "season": 1,
             "special_type": null,
@@ -78,6 +78,6 @@
     "year": 2020,
     "studio": "Toho",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Jujutsu_Kaisen_(TV_series)",
-    "updated_at": "2026-11-02T01:09:59Z"
+    "updated_at": "2026-11-02T01:20:17Z"
   }
 }

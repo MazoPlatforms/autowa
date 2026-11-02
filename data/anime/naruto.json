@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": 1793582281,
+  "updated_at": 1793582423,
   "anime": {
     "slug_id": "naruto",
     "title": "Naruto",
@@ -6346,6 +6346,6 @@
       "10": "/banners/naruto-season-10.webp",
       "11": "/banners/naruto-season-11.webp"
     },
-    "updated_at": "2026-11-02T01:17:59Z"
+    "updated_at": "2026-11-02T01:20:21Z"
   }
 }

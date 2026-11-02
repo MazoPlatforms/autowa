@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": 1793582281,
+  "updated_at": 1793582423,
   "anime": {
     "slug_id": "naruto-shippuden",
     "title": "Naruto Shippuden",
@@ -11615,6 +11615,6 @@
     "status": "Finished",
     "episodes_total": 500,
     "studio": "Studio Pierrot",
-    "updated_at": "2026-11-02T01:18:01Z"
+    "updated_at": "2026-11-02T01:20:23Z"
   }
 }
