@@ -259,10 +259,8 @@ def canonical_anime_release_title(title):
     key = catalog_title_key(value)
     if key in ('jujutsukaisen', 'moblinkzzjujutsukaisen', 'linkzzjujutsukaisen') or key.endswith('jujutsukaisen') and ('moblinkzz' in key or 'linkzz' in key):
         return 'Jujutsu Kaisen'
-    # ``By Spy x Family`` is an uploader/release label used on Solo Leveling
-    # files, not the series title itself.
     if key == 'byspyxfamily':
-        return 'Solo Leveling'
+        return 'Spy x Family'
     # Uploader prefixes and catalogue labels can surround the real title
     # (for example ``By Spy X Family Solo Leveling`` or ``Catalogue Solo
     # Leveling``). They must never become separate anime records.
@@ -486,7 +484,10 @@ def anime_media_item(message):
     # that did not use a separator after the uploader name. Use the caption
     # only when the filename did not provide a usable title.
     title = title if title and title != 'Untitled anime' else (caption_title or title)
-    if catalog_title_key(caption_title) == 'sololeveling' or 'sololeveling' in catalog_title_key(caption_title):
+    filename_key = catalog_title_key(title)
+    if filename_key in ('spyxfamily', 'byspyxfamily'):
+        title = 'Spy x Family'
+    elif catalog_title_key(caption_title) == 'sololeveling' or 'sololeveling' in catalog_title_key(caption_title):
         title = 'Solo Leveling'
     title = canonical_anime_release_title(title)
     if caption.get('anime_slug_id') == 'solo-leveling':

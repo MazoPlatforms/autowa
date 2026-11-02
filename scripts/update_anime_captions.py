@@ -53,7 +53,12 @@ def build_caption(message, episode_slugs):
     title, filename_season, episode, part = anime_filename_parts(filename)
     previous = anime_caption_parts(getattr(message, "raw_text", "") or "")
     caption_title = canonical_anime_release_title(previous["title"] or "")
-    title = caption_title if "sololeveling" in re.sub(r"[^a-z0-9]+", "", caption_title.casefold()) else title or caption_title
+    filename_title = canonical_anime_release_title(title)
+    filename_key = re.sub(r"[^a-z0-9]+", "", filename_title.casefold())
+    if filename_key in ("spyxfamily", "byspyxfamily"):
+        title = "Spy x Family"
+    else:
+        title = caption_title if "sololeveling" in re.sub(r"[^a-z0-9]+", "", caption_title.casefold()) else title or caption_title
     title = canonical_anime_release_title(title)
     season = filename_season or previous["season"] or manual_anime_season(title, episode)
     episode = episode or previous["episode"]
