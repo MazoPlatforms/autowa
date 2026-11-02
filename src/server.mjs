@@ -254,7 +254,7 @@ const catalogJs=fs.readFileSync(new URL('../web/catalog.js',import.meta.url));
 const catalogCss=fs.readFileSync(new URL('../web/catalog.css',import.meta.url));
 const playerUiJs=fs.readFileSync(new URL('../web/player-ui.js',import.meta.url));
 const playerCss=fs.readFileSync(new URL('../web/player.css',import.meta.url));
-// The anime UI and data ship with the app for future use; the public route is always coming soon.
+// Anime metadata is rebuilt on startup so season-aware episode titles replace stale Redis data.
 const animeHtml=fs.readFileSync(new URL('../web/anime.html',import.meta.url));
 const animeWatchHtml=fs.readFileSync(new URL('../web/anime-watch.html',import.meta.url));
 const animeSoonHtml=fs.readFileSync(new URL('../web/anime-soon.html',import.meta.url));
