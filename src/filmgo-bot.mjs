@@ -56,7 +56,7 @@ export const animeFilenameParts=name=>{
  let raw=String(name||'').replace(/\.[^.]+$/,'').replace(/[._]+/g,' ').replace(/\s+/g,' ').trim();
  // Telegram release uploads may start with a channel/uploader tag such as
  // "@TamilMob_LinkZz -". It is metadata, not part of the anime title.
- raw=raw.replace(/^@[\w-]+(?:\s+[\w-]+){0,3}\s*[-–—:]\s*/u,'');
+ raw=raw.replace(/^@\s*[\w-]+(?:\s+[\w-]+){0,3}\s*[-–—:]\s*/u,'');
  raw=raw.replace(/(?:tamil|telugu|malayalam|kannada|hindi|english|தமிழ்|tam|mal|hin|eng|jap)/giu,' ').replace(/\s+/g,' ').trim();
  let season=null,episode=null,part=null;
  let match=raw.match(/\bS(\d{1,2})\s*(?:-|x)?\s*E[O0]?(\d{1,4})\b/i);
@@ -377,10 +377,19 @@ async function publishDraft(d){if(d.kind==='anime')return publishAnimeDraft(d);c
 
 async function publishAnimeDraft(d){const lock=prefix+'publishing:'+ADMIN_ID;if(await redis('SET',lock,'1','NX','EX',90)!=='OK')return say(ADMIN_ID,'Publishing is already running.');try{const sent=await tg('copyMessage',{chat_id:ANIME_CHANNEL_ID,from_chat_id:ADMIN_ID,message_id:d.message_id,caption:telegramAnimeCaption(d)},30000);const posted=sent.document||sent.video||{};await saveAnimeMetadata(sent.message_id,{...d,file_size:posted.file_size||d.file_size,mime_type:posted.mime_type||d.mime_type});if(d.replace&&d.existing_episode_message_id&&Number(d.existing_episode_message_id)!==Number(sent.message_id)){try{await tg('deleteMessage',{chat_id:ANIME_CHANNEL_ID,message_id:Number(d.existing_episode_message_id)});}catch(error){console.warn('Anime replacement cleanup failed:',error?.message||'unknown error');}}await redis('DEL',DRAFT_KEY+ADMIN_ID);void logFilmGo('anime','🍥 Published: '+d.title+' S'+d.season+'E'+d.episode+' · '+d.quality+' · channel #'+sent.message_id+(d.replace?' · replaced #'+d.existing_episode_message_id:''));await dispatch('filmgo-anime-catalog-sync',{message_id:sent.message_id});await say(ADMIN_ID,(d.replace?'✅ Anime replacement published successfully':'✅ Anime published successfully')+'\n\n🍥 '+d.title+'\n🎞️ Season '+d.season+' · Episode '+d.episode+'\n📺 '+d.quality);}finally{await redis('DEL',lock);}}
 let running=false;
+const sleep=ms=>new Promise(resolve=>setTimeout(resolve,ms));
 async function redis(...args){
- const r=await fetch(REDIS_URL,{method:'POST',headers:{Authorization:'Bearer '+REDIS_TOKEN,'Content-Type':'application/json'},body:JSON.stringify(args),signal:AbortSignal.timeout(12000)});
- if(!r.ok)throw Error('Bot Redis unavailable');
- const j=await r.json();if(j.error)throw Error('Bot Redis error');return j.result;
+ if(!REDIS_URL||!REDIS_TOKEN)throw Error('Bot Redis configuration missing');
+ let lastError=null;
+ for(let attempt=0;attempt<4;attempt++){
+  try{
+   const r=await fetch(REDIS_URL,{method:'POST',headers:{Authorization:'Bearer '+REDIS_TOKEN,'Content-Type':'application/json'},body:JSON.stringify(args),signal:AbortSignal.timeout(8000)});
+   if(!r.ok){lastError=Error('HTTP '+r.status);if(![408,425,429].includes(r.status)&&r.status<500)break;}
+   else{const j=await r.json();if(j.error){lastError=Error('Redis command failed');}else return j.result;}
+  }catch(error){lastError=error;}
+  if(attempt<3)await sleep(250*(2**attempt)+Math.floor(Math.random()*150));
+ }
+ throw Error('Bot Redis unavailable'+(lastError?.message?': '+lastError.message:''));
 }
 async function tg(method,data={},timeout=20000){
  const r=await fetch('https://api.telegram.org/bot'+TOKEN+'/'+method,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data),signal:AbortSignal.timeout(timeout)});

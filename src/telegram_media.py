@@ -61,7 +61,7 @@ def anime_filename_parts(raw):
     value = re.sub(r'[._]+', ' ', value)
     # Telegram release uploads may start with a channel/uploader tag such as
     # ``@TamilMob_LinkZz -``. It is metadata, not part of the anime title.
-    value = re.sub(r'^@[\w-]+(?:\s+[\w-]+){0,3}\s*[-–—:]\s*', '', value, flags=re.I)
+    value = re.sub(r'^@\s*[\w-]+(?:\s+[\w-]+){0,3}\s*[-–—:]\s*', '', value, flags=re.I)
     # Language/release labels are not part of the anime title.
     value = re.sub(r'(?i)(?:tamil|telugu|malayalam|kannada|hindi|english|தமிழ்|tam|mal|hin|eng|jap)', ' ', value)
     value = re.sub(r'\s+', ' ', value).strip()
@@ -437,15 +437,19 @@ def build_anime_catalog(messages):
         key = catalog_title_key((known or {}).get('title') or title)
         show = shows.setdefault(key, {
             'slug_id': (known or {}).get('slug_id') or re.sub(r'[^a-z0-9]+', '-', title.casefold()).strip('-')[:80] or 'anime',
-            'title': (known or {}).get('title') or title,
+            'title': title,
+            '_release_title': title,
             'episodes': [],
         })
         show['episodes'].append(item)
     result = []
     for show in shows.values():
+        release_title = show.pop('_release_title', None)
         known = existing_show_for(show['title'], existing)
         if known:
             show.update({k: v for k, v in known.items() if k not in ('episodes', 'updated_at') and v not in (None, '', [])})
+            if release_title:
+                show['title'] = canonical_anime_release_title(release_title)
             canonical_title = canonical_anime_release_title(show.get('title'))
             if canonical_title and canonical_title != show.get('title'):
                 show['title'] = canonical_title
@@ -456,6 +460,8 @@ def build_anime_catalog(messages):
         else:
             meta = anime_metadata(show['title'])
             show.update({k: v for k, v in meta.items() if v not in (None, '', [])})
+            if release_title:
+                show['title'] = canonical_anime_release_title(release_title)
             # Metadata providers can normalize misspelled release names. Keep
             # the canonical title and slug together for all future uploads.
             canonical_title = str(meta.get('title') or '').strip()
