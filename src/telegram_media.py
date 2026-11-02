@@ -622,6 +622,11 @@ def build_anime_catalog(messages):
                 if field not in ('episodes', 'updated_at') and target.get(field) in (None, '', [], {}):
                     target[field] = value
     for show in merged.values():
+        if show.get('slug_id') == 'solo-leveling':
+            show['season_banners'] = {
+                '1': '/banners/solo-leveling-season-1.webp',
+                '2': '/banners/solo-leveling-season-2.webp',
+            }
         episodes = {}
         for episode in show.get('episodes') or []:
             identity = (
