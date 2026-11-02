@@ -59,6 +59,7 @@ async def main():
     target = await client.get_entity(target_id)
     copied = skipped = 0
     seen = set()
+    source_episodes = {}
     try:
         async for message in client.iter_messages(source, min_id=START_ID - 1, max_id=END_ID + 1, reverse=True):
             if not (START_ID <= message.id <= END_ID) or not message.file:
@@ -75,6 +76,7 @@ async def main():
             caption, parts, episode_slug = parsed
             quality = parts["quality"].lower()
             identity = (parts["season"] or 1, parts["episode"], quality)
+            source_episodes.setdefault(identity[0], set()).add(identity[1])
             if identity in seen:
                 skipped += 1
                 continue
@@ -97,6 +99,11 @@ async def main():
             await asyncio.sleep(1.2)
     finally:
         await client.disconnect()
+    for season in sorted(source_episodes):
+        highest = max(source_episodes[season])
+        missing = sorted(set(range(1, highest + 1)) - source_episodes[season])
+        print(f"SOURCE season={season} episodes={','.join(map(str, sorted(source_episodes[season])))}", flush=True)
+        print(f"MISSING season={season} episodes={','.join(map(str, missing)) if missing else 'none'}", flush=True)
     print(f"Completed: copied={copied} skipped={skipped}", flush=True)
 
 
