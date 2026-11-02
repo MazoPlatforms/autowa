@@ -252,12 +252,13 @@ async function wikipediaSearch(title){
 async function animeMetadata(title){
  const [ani,jikan,tmdb,wikipedia]=await Promise.all([anilistSearch(title).catch(()=>null),jikanSearch(title).catch(()=>null),tmdbAnimeSearch(title).catch(()=>null),wikipediaSearch(title).catch(()=>null)]);const primary=ani||jikan||tmdb||wikipedia;if(!primary)return null;const fallbacks=[jikan,tmdb,wikipedia].filter(Boolean);return Object.fromEntries(Object.entries(primary).map(([key,value])=>[key,value===null||value===''||(Array.isArray(value)&&!value.length)?(fallbacks.find(item=>item[key]!==null&&item[key]!==''&&(!Array.isArray(item[key])||item[key].length))?.[key]??value):value]));
 }
-let KNOWN_ANIME_TITLES=new Set();
+let KNOWN_ANIME_TITLES=new Set(),KNOWN_ANIME_RECORDS=new Map();
 try{
  const catalog=JSON.parse(fs.readFileSync(new URL('../data/anime/index.json',import.meta.url),'utf8'));
- KNOWN_ANIME_TITLES=new Set((catalog.anime||[]).flatMap(item=>[item.title,item.title_alt]).filter(Boolean).map(normalize));
+ for(const item of catalog.anime||[]){for(const value of [item.title,item.title_alt,item.slug_id].filter(Boolean)){const key=normalize(value);KNOWN_ANIME_TITLES.add(key);if(!KNOWN_ANIME_RECORDS.has(key))KNOWN_ANIME_RECORDS.set(key,item);}}
 }catch(error){console.warn('Anime catalog fast-path unavailable:',error.message);}
-const isKnownAnimeTitle=title=>KNOWN_ANIME_TITLES.has(normalize(title));
+const isKnownAnimeTitle=title=>titleCandidates(title).some(value=>KNOWN_ANIME_TITLES.has(normalize(value)));
+const knownAnimeRecord=title=>titleCandidates(title).map(value=>KNOWN_ANIME_RECORDS.get(normalize(value))).find(Boolean)||null;
 async function detectAnimeType(file,caption=''){
  const parts=animePartsFromMessage(file,caption);const name=String(file.file_name||'')+'\n'+caption;
  if(isKnownAnimeTitle(parts.title))return {anime:true,confidence:1,parts,known:true,metadata:null};
@@ -419,12 +420,12 @@ async function probe(input){
 async function startAnimeDraft(file,messageId,detected=null,caption=''){
  const parts=animePartsFromMessage(file,caption);
  if(!parts.episode)return say(ADMIN_ID,'I could not identify the anime episode. Use a filename such as Naruto Shippuden - 001 [720p].mkv.');
- const known=isKnownAnimeTitle(parts.title);
+ const known=isKnownAnimeTitle(parts.title),knownRecord=knownAnimeRecord(parts.title);
  parts.season=parts.season||(parts.special_type?1:(known?manualAnimeSeason(parts.title,parts.episode)||1:await tmdbAnimeSeason(parts.title,parts.episode)||1));
  const d={kind:'anime',message_id:messageId,file_name:file.file_name||'',file_size:Number(file.file_size||0),mime_type:file.mime_type||'',title:parts.title,titleCandidates:parts.titleCandidates,season:parts.season,episode:parts.episode,part:parts.part,special_type:parts.special_type,quality:parts.quality,slug_id:animeSlug(parts.title),episode_slug_id:animeParentSlug(parts.title,parts.season,parts.episode,parts.special_type,parts.part)};
  const duplicate=await findAnimeDuplicate(d).catch(error=>{console.warn('Anime duplicate check failed:',error?.message||'unknown error');return null;});
  if(duplicate){d.episode_slug_id=duplicate.episode_slug_id||duplicate.slug_id;if(duplicate.same_quality){d.existing=true;d.replace=true;d.existing_episode_message_id=Number(duplicate.telegram_message_id)||null;}}
- const metadata=known?null:(detected?.metadata||await animeMetadata(parts.title).catch(()=>null));
+ const metadata=known?(knownRecord?{poster:knownRecord.poster||null,plot:knownRecord.plot||'',genre:knownRecord.genre||[],rating:knownRecord.rating||null,status:knownRecord.status||null,episodes_total:knownRecord.episodes_total||null,year:knownRecord.year||null,studio:knownRecord.studio||null}:null):(detected?.metadata||await animeMetadata(parts.title).catch(()=>null));
  // Metadata providers may return an all-caps display title. Keep the title
  // parsed from the release filename for drafts, captions, and the catalog;
  // provider metadata is still used for poster, plot, rating, and other fields.
