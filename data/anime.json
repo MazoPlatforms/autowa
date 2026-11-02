@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-02T01:51:05.957Z",
+  "updated_at": "2026-11-02T01:51:23.350Z",
   "anime": [
     {
       "slug_id": "naruto",
@@ -23872,6 +23872,45 @@
       "studio": "Toho",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Jujutsu_Kaisen_(TV_series)",
       "updated_at": "2026-11-02T01:51:05.957Z"
+    },
+    {
+      "slug_id": "mob-linkzz-jujutsu-kaisen",
+      "title": "@ Mob LinkZz Jujutsu Kaisen",
+      "episodes": [
+        {
+          "telegram_message_id": 916,
+          "episode": 4,
+          "season": 1,
+          "special_type": null,
+          "part": null,
+          "quality": "480p",
+          "file_size": 115046246,
+          "file_name": "@TamilMob_LinkZz Jujutsu Kaisen S01 E04 Blu-Ray - 480p - x26.mkv",
+          "mime_type": "video/x-matroska",
+          "qualities": {
+            "480P": {
+              "telegram_message_id": 916,
+              "episode": 4,
+              "season": 1,
+              "special_type": null,
+              "part": null,
+              "quality": "480p",
+              "file_size": 115046246,
+              "file_name": "@TamilMob_LinkZz Jujutsu Kaisen S01 E04 Blu-Ray - 480p - x26.mkv",
+              "mime_type": "video/x-matroska"
+            }
+          }
+        }
+      ],
+      "year": "2026",
+      "poster": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/df/David_Vincent_LA_Anime_Film_Festival_2017_Red_Carpet.jpg/330px-David_Vincent_LA_Anime_Film_Festival_2017_Red_Carpet.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "plot": "David Vincent is an American voice actor and voice director who provides voices for animation, anime and video games. Some roles include Grimmjow Jaegerjaquez in Bleach, Senketsu in Kill la Kill, Gilgamesh in Fate/Zero & Fate/stay night, Male Robin in Fire Emblem Awakening, the Super Smash Bros. series and Code Name: S.T.E.A.M., Marshall Law in the Tekken series, T. Hawk in Super Street Fighter IV, Richter Belmont in Castlevania: The Dracula X Chronicles, the narrator of JoJo's Bizarre Adventure, and Jin Kisaragi and Hakumen in the BlazBlue series. He also had a guest role in Ghost in the Shell.",
+      "genre": [],
+      "rating": null,
+      "status": null,
+      "episodes_total": null,
+      "studio": null,
+      "updated_at": "2026-11-02T01:51:23.350Z"
     }
   ]
 }
