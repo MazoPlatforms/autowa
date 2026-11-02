@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-02T01:19:20.241Z",
+  "updated_at": "2026-11-02T01:19:37.035Z",
   "anime": [
     {
       "slug_id": "naruto",
@@ -23705,15 +23705,16 @@
       "title": "Jujutsu Kaisen",
       "episodes": [
         {
-          "telegram_message_id": 904,
+          "telegram_message_id": 905,
           "episode": 1,
           "season": 1,
           "special_type": null,
           "part": null,
-          "quality": "480p",
-          "file_size": 108069408,
-          "file_name": "@TamilMob_LinkZz -Jujutsu Kaisen S01 E01 Blu-Ray - 480p - x2.mkv",
+          "quality": "720p",
+          "file_size": 209014033,
+          "file_name": "@TamilMob_LinkZz -Jujutsu Kaisen S01 E01 Blu-Ray - 720p - x2.mkv",
           "mime_type": "video/x-matroska",
+          "slug_id": "5719XgC4xRnr4_q_",
           "qualities": {
             "480P": {
               "telegram_message_id": 904,
@@ -23724,6 +23725,17 @@
               "quality": "480p",
               "file_size": 108069408,
               "file_name": "@TamilMob_LinkZz -Jujutsu Kaisen S01 E01 Blu-Ray - 480p - x2.mkv",
+              "mime_type": "video/x-matroska"
+            },
+            "720P": {
+              "telegram_message_id": 905,
+              "episode": 1,
+              "season": 1,
+              "special_type": null,
+              "part": null,
+              "quality": "720p",
+              "file_size": 209014033,
+              "file_name": "@TamilMob_LinkZz -Jujutsu Kaisen S01 E01 Blu-Ray - 720p - x2.mkv",
               "mime_type": "video/x-matroska"
             }
           }
@@ -23741,7 +23753,7 @@
       "status": "Finished",
       "episodes_total": 24,
       "studio": "Toho",
-      "updated_at": "2026-11-02T01:19:20.240Z"
+      "updated_at": "2026-11-02T01:19:37.035Z"
     }
   ]
 }
