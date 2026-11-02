@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": 1793644820,
+  "updated_at": 1793656490,
   "anime": [
     {
       "slug_id": "naruto",
@@ -33,7 +33,7 @@
         "10": "/banners/naruto-season-10.webp",
         "11": "/banners/naruto-season-11.webp"
       },
-      "updated_at": "2026-11-02T18:39:52Z"
+      "updated_at": "2026-11-02T21:54:20Z"
     },
     {
       "slug_id": "naruto-shippuden",
@@ -53,7 +53,7 @@
       "status": "Finished",
       "episodes_total": 500,
       "studio": "Studio Pierrot",
-      "updated_at": "2026-11-02T18:40:20Z"
+      "updated_at": "2026-11-02T21:54:50Z"
     },
     {
       "slug_id": "attack-on-titan",
@@ -79,7 +79,7 @@
         "3": "/banners/attack-on-titan-season-3.webp",
         "4": "/banners/attack-on-titan-season-4.webp"
       },
-      "updated_at": "2026-11-02T18:39:39Z"
+      "updated_at": "2026-11-02T21:54:06Z"
     },
     {
       "slug_id": "dan-da-dan",
@@ -100,7 +100,7 @@
       "year": 2024,
       "studio": "Science SARU",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Dan_Da_Dan%3A_First_Encounter",
-      "updated_at": "2026-11-02T18:39:21Z"
+      "updated_at": "2026-11-02T21:53:46Z"
     },
     {
       "slug_id": "jujutsu-kaisen",
@@ -123,7 +123,7 @@
         "2": "/banners/jujutsu-kaisen-season-2.webp",
         "3": "/banners/jujutsu-kaisen-season-3.webp"
       },
-      "updated_at": "2026-11-02T18:39:33Z"
+      "updated_at": "2026-11-02T21:53:59Z"
     },
     {
       "slug_id": "solo-leveling",
@@ -145,7 +145,7 @@
         "1": "/banners/solo-leveling-season-1.webp",
         "2": "/banners/solo-leveling-season-2.webp"
       },
-      "updated_at": "2026-11-02T18:39:23Z"
+      "updated_at": "2026-11-02T21:53:48Z"
     }
   ]
 }
