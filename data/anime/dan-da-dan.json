@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": 1793644672,
+  "updated_at": 1793644820,
   "anime": {
     "slug_id": "dan-da-dan",
     "title": "Dan Da Dan",
@@ -712,10 +712,10 @@
     ],
     "rating": 8.3,
     "status": "Finished",
-    "episodes_total": 12,
+    "episodes_total": 24,
     "year": 2024,
     "studio": "Science SARU",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Dan_Da_Dan%3A_First_Encounter",
-    "updated_at": "2026-11-02T18:37:10Z"
+    "updated_at": "2026-11-02T18:39:21Z"
   }
 }
