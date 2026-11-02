@@ -21,6 +21,7 @@ START_ID = int(os.getenv("START_MESSAGE_ID", "328"))
 END_ID = int(os.getenv("END_MESSAGE_ID", "548"))
 TITLE = "Jujutsu Kaisen"
 SLUG = "jujutsu-kaisen"
+DRY_RUN = os.getenv("DRY_RUN", "0") == "1"
 
 
 def caption_for(filename: str):
@@ -71,6 +72,7 @@ async def main():
                 continue
             parsed = caption_for(filename)
             if not parsed:
+                print(f"SKIP unparsed source={message.id} filename={filename}", flush=True)
                 skipped += 1
                 continue
             caption, parts, episode_slug = parsed
@@ -91,6 +93,10 @@ async def main():
                 skipped += 1
                 seen.add(identity)
                 print(f"SKIP existing source={message.id} episode={identity[1]} quality={quality}", flush=True)
+                continue
+            if DRY_RUN:
+                seen.add(identity)
+                print(f"DRY source={message.id} episode={identity[1]} quality={quality} filename={filename}", flush=True)
                 continue
             await client.send_file(target, message.media, caption=caption, force_document=True)
             copied += 1

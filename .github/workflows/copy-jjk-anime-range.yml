@@ -15,6 +15,10 @@ on:
         description: Last source message ID (inclusive)
         required: true
         default: '548'
+      dry_run:
+        description: Inspect filenames without copying files
+        required: true
+        default: 'false'
 
 permissions:
   contents: read
@@ -49,4 +53,5 @@ jobs:
           SOURCE_CHANNEL: ${{ inputs.source_channel }}
           START_MESSAGE_ID: ${{ inputs.start_message_id }}
           END_MESSAGE_ID: ${{ inputs.end_message_id }}
+          DRY_RUN: ${{ inputs.dry_run == 'true' && '1' || '0' }}
         run: python scripts/copy_jjk_anime_range.py
