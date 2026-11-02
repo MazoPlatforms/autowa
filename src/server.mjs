@@ -263,6 +263,9 @@ const animeCss=fs.readFileSync(new URL('../web/anime.css',import.meta.url));
 const animeWatchCss=fs.readFileSync(new URL('../web/anime-watch.css',import.meta.url));
 const animeWatchJs=fs.readFileSync(new URL('../web/anime-watch.js',import.meta.url));
 const animeSoonCss=fs.readFileSync(new URL('../web/anime-soon.css',import.meta.url));
+const adminHtml=fs.readFileSync(new URL('../web/admin.html',import.meta.url));
+const adminCss=fs.readFileSync(new URL('../web/admin.css',import.meta.url));
+const adminJs=fs.readFileSync(new URL('../web/admin.js',import.meta.url));
 const homeCss=fs.readFileSync(new URL('../web/home.css',import.meta.url));
 const accountChipJs=fs.readFileSync(new URL('../web/account-chip.js',import.meta.url));
 const tailwindCss=fs.readFileSync(new URL('../web/tailwind.css',import.meta.url));
@@ -395,6 +398,13 @@ const audioService=createAudioService({
 const server=http.createServer(async(req,res)=>{
  try{
   const url=new URL(req.url,'http://localhost');
+  if(url.pathname==='/admin'||url.pathname==='/admin.css'||url.pathname==='/admin.js'){
+   const session=await authenticated(req);
+   if(!session||session.number!=='+94779290433')return send(res,404,{error:'Not found'});
+   if(url.pathname==='/admin'){res.writeHead(200,{'Content-Type':'text/html; charset=utf-8','Cache-Control':'no-store','X-Robots-Tag':'noindex','Content-Security-Policy':"default-src 'self'; script-src 'self'; style-src 'self'; base-uri 'none'; frame-ancestors 'none'"});return res.end(adminHtml);}
+   const asset=url.pathname==='/admin.css'?{body:adminCss,type:'text/css; charset=utf-8'}:{body:adminJs,type:'text/javascript; charset=utf-8'};
+   return send(res,200,asset.body,{'Content-Type':asset.type,'Cache-Control':'no-store','X-Content-Type-Options':'nosniff'});
+  }
   if((url.pathname.startsWith('/api/audio')||url.pathname.startsWith('/internal/media/'))&&await audioService(req,res,url))return;
   const brandAsset=brandAssets.get(url.pathname);
   if(req.method==='GET'&&brandAsset){res.writeHead(200,{'Content-Type':brandAsset.type,'Cache-Control':brandAsset.cache,'X-Content-Type-Options':'nosniff'});return res.end(brandAsset.body);}
