@@ -263,6 +263,7 @@ const animeCss=fs.readFileSync(new URL('../web/anime.css',import.meta.url));
 const animeWatchCss=fs.readFileSync(new URL('../web/anime-watch.css',import.meta.url));
 const animeWatchJs=fs.readFileSync(new URL('../web/anime-watch.js',import.meta.url));
 const animeSoonCss=fs.readFileSync(new URL('../web/anime-soon.css',import.meta.url));
+const home2100Css=fs.readFileSync(new URL('../web/home-2100.css',import.meta.url));
 const accountChipJs=fs.readFileSync(new URL('../web/account-chip.js',import.meta.url));
 const tailwindCss=fs.readFileSync(new URL('../web/tailwind.css',import.meta.url));
 const brandAssets=new Map([
@@ -656,6 +657,7 @@ const server=http.createServer(async(req,res)=>{
     res.writeHead(200,headers);return res.end(JSON.stringify(catalog));
    }
   if(req.method==='GET'&&url.pathname==='/anime-soon.css'){res.writeHead(200,{'Content-Type':'text/css; charset=utf-8','Cache-Control':'public, max-age=300'});return res.end(animeSoonCss);}
+  if(req.method==='GET'&&url.pathname==='/home-2100.css'){res.writeHead(200,{'Content-Type':'text/css; charset=utf-8','Cache-Control':'public, max-age=300'});return res.end(home2100Css);}
   if(req.method==='GET'&&url.pathname==='/account-chip.js'){res.writeHead(200,{'Content-Type':'text/javascript; charset=utf-8','Cache-Control':'public, max-age=300'});return res.end(accountChipJs);}
   if(req.method==='GET'&&url.pathname==='/anime.css'){res.writeHead(200,{'Content-Type':'text/css; charset=utf-8','Cache-Control':'public, max-age=300'});return res.end(animeCss);}
   if(req.method==='GET'&&url.pathname==='/anime.js'){res.writeHead(200,{'Content-Type':'text/javascript; charset=utf-8','Cache-Control':'public, max-age=300'});return res.end(animeJs);}
