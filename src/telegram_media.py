@@ -259,6 +259,8 @@ def canonical_anime_release_title(title):
     key = catalog_title_key(value)
     if key in ('jujutsukaisen', 'moblinkzzjujutsukaisen', 'linkzzjujutsukaisen') or key.endswith('jujutsukaisen') and ('moblinkzz' in key or 'linkzz' in key):
         return 'Jujutsu Kaisen'
+    if key.startswith('sololeveling'):
+        return 'Solo Leveling'
     return {
         'attackontitack': 'Attack on Titan',
         'attackontitanthefinalchapter': 'Attack on Titan',
@@ -450,6 +452,14 @@ def anime_media_item(message):
         return None
     title, season, episode, part = anime_filename_parts(filename)
     caption = anime_caption_parts(getattr(message, 'raw_text', ''))
+    if caption.get('anime_slug_id') == 'solo-leveling':
+        # Canonical FilmGo captions are authoritative for copied releases whose
+        # original filename contains uploader text such as "By Spy x Family".
+        title = 'Solo Leveling'
+        if caption.get('season') is not None:
+            season = caption['season']
+        if caption.get('episode') is not None:
+            episode = caption['episode']
     # Older published captions may contain an uploader prefix even when the
     # filename has already been cleaned. Treat that caption value exactly like
     # a release filename so it cannot recreate a second anime record.
@@ -462,6 +472,8 @@ def anime_media_item(message):
     # that did not use a separator after the uploader name. Use the caption
     # only when the filename did not provide a usable title.
     title = title if title and title != 'Untitled anime' else (caption_title or title)
+    if caption.get('anime_slug_id') == 'solo-leveling':
+        title = 'Solo Leveling'
     filename_season = season
     season = season or caption['season']
     episode = episode or caption['episode']
