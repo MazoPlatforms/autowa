@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": 1793630162,
+  "updated_at": 1793633374,
   "anime": {
     "slug_id": "solo-leveling",
     "title": "Solo Leveling",
@@ -75,6 +75,37 @@
             "title": "I'm Used to It",
             "released": "2024-01-06",
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/498/1247043.jpg"
+          }
+        }
+      },
+      {
+        "telegram_message_id": 1234,
+        "episode": 2,
+        "season": 1,
+        "special_type": null,
+        "part": null,
+        "quality": "720P",
+        "file_size": 121678217,
+        "file_name": "Solo Leveling S01 E02 HDRip 720p Tamil ESub.mkv",
+        "mime_type": "video/x-matroska",
+        "title": "If I Had One More Chance",
+        "released": "2024-01-13",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/554/1385066.jpg",
+        "slug_id": "mjDYbyNyZxshu8Sb",
+        "qualities": {
+          "720P": {
+            "telegram_message_id": 1234,
+            "episode": 2,
+            "season": 1,
+            "special_type": null,
+            "part": null,
+            "quality": "720P",
+            "file_size": 121678217,
+            "file_name": "Solo Leveling S01 E02 HDRip 720p Tamil ESub.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "If I Had One More Chance",
+            "released": "2024-01-13",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/554/1385066.jpg"
           }
         }
       },
@@ -165,6 +196,20 @@
             "title": "I've Gotta Get Stronger",
             "released": "2024-01-27",
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/505/1264586.jpg"
+          },
+          "360P": {
+            "telegram_message_id": 1208,
+            "episode": 4,
+            "season": 1,
+            "special_type": null,
+            "part": null,
+            "quality": "360P",
+            "file_size": 82238410,
+            "file_name": "@Anime_Catalogue Solo leveling Ep04 360p.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "I've Gotta Get Stronger",
+            "released": "2024-01-27",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/505/1264586.jpg"
           }
         }
       },
@@ -183,6 +228,34 @@
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/505/1264587.jpg",
         "slug_id": "DyOIlb0dy1WmOXb8",
         "qualities": {
+          "1080P": {
+            "telegram_message_id": 1210,
+            "episode": 5,
+            "season": 1,
+            "special_type": null,
+            "part": null,
+            "quality": "1080P",
+            "file_size": 395127177,
+            "file_name": "@Anime_Catalogue Solo leveling Ep05 1080p.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "A Pretty Good Deal",
+            "released": "2024-02-03",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/505/1264587.jpg"
+          },
+          "360P": {
+            "telegram_message_id": 1209,
+            "episode": 5,
+            "season": 1,
+            "special_type": null,
+            "part": null,
+            "quality": "360P",
+            "file_size": 77481854,
+            "file_name": "@Anime_Catalogue Solo leveling Ep05 360p.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "A Pretty Good Deal",
+            "released": "2024-02-03",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/505/1264587.jpg"
+          },
           "720P": {
             "telegram_message_id": 1182,
             "episode": 5,
@@ -341,6 +414,20 @@
             "quality": "2160P",
             "file_size": 832985630,
             "file_name": "SOLO LEVELING S01 Ep08\nTamil by [SxF] 2160p [4K].mkv",
+            "mime_type": "video/x-matroska",
+            "title": "This Is Frustrating",
+            "released": "2024-03-02",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/506/1267363.jpg"
+          },
+          "480P": {
+            "telegram_message_id": 1212,
+            "episode": 8,
+            "season": 1,
+            "special_type": null,
+            "part": null,
+            "quality": "480P",
+            "file_size": 51708284,
+            "file_name": "By Spy X Family  Solo Leveling S01 Ep08 480p.mkv",
             "mime_type": "video/x-matroska",
             "title": "This Is Frustrating",
             "released": "2024-03-02",
@@ -879,10 +966,10 @@
     "year": 2024,
     "studio": "A-1 Pictures",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Solo_Leveling",
-    "updated_at": "2026-11-02T14:34:28Z",
     "season_banners": {
       "1": "/banners/solo-leveling-season-1.webp",
       "2": "/banners/solo-leveling-season-2.webp"
-    }
+    },
+    "updated_at": "2026-11-02T15:28:38Z"
   }
 }

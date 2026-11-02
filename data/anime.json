@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": 1793630162,
+  "updated_at": 1793633374,
   "anime": [
     {
       "slug_id": "naruto",
@@ -6347,7 +6347,7 @@
         "10": "/banners/naruto-season-10.webp",
         "11": "/banners/naruto-season-11.webp"
       },
-      "updated_at": "2026-11-02T14:35:35Z"
+      "updated_at": "2026-11-02T15:29:15Z"
     },
     {
       "slug_id": "naruto-shippuden",
@@ -17963,7 +17963,7 @@
       "status": "Finished",
       "episodes_total": 500,
       "studio": "Studio Pierrot",
-      "updated_at": "2026-11-02T14:36:02Z"
+      "updated_at": "2026-11-02T15:29:34Z"
     },
     {
       "slug_id": "attack-on-titan",
@@ -23698,7 +23698,7 @@
         "3": "/banners/attack-on-titan-season-3.webp",
         "4": "/banners/attack-on-titan-season-4.webp"
       },
-      "updated_at": "2026-11-02T14:35:23Z"
+      "updated_at": "2026-11-02T15:29:06Z"
     },
     {
       "slug_id": "spy-x-family",
@@ -23896,151 +23896,7 @@
       "year": 2022,
       "studio": "CloverWorks",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Spy_%C3%97_Family",
-      "updated_at": "2026-11-02T14:34:58Z"
-    },
-    {
-      "slug_id": "by-spy-x-family-solo-leveling",
-      "title": "By Spy X Family Solo Leveling",
-      "episodes": [
-        {
-          "telegram_message_id": 1212,
-          "episode": 8,
-          "season": 1,
-          "special_type": null,
-          "part": null,
-          "quality": "480P",
-          "file_size": 51708284,
-          "file_name": "By Spy X Family  Solo Leveling S01 Ep08 480p.mkv",
-          "mime_type": "video/x-matroska",
-          "slug_id": "m05sdFH3OkCAcAUW",
-          "qualities": {
-            "480P": {
-              "telegram_message_id": 1212,
-              "episode": 8,
-              "season": 1,
-              "special_type": null,
-              "part": null,
-              "quality": "480P",
-              "file_size": 51708284,
-              "file_name": "By Spy X Family  Solo Leveling S01 Ep08 480p.mkv",
-              "mime_type": "video/x-matroska"
-            }
-          }
-        }
-      ],
-      "wikipedia_url": "https://en.wikipedia.org/wiki/Spy_%C3%97_Family",
-      "year": "2026",
-      "plot": "Spy × Family is a Japanese web manga series written and illustrated by Tatsuya Endo. The story follows Agent Twilight, an enigmatic spy who has to \"build a family\" to execute a mission, not realizing that his adopted daughter is a telepath, and the woman he agrees to marry is a skilled assassin. The series has been serialized biweekly on Shueisha's Shōnen Jump+ app and website since March 2019, with its chapters collected in 17 tankōbon volumes as of April 2026. It is licensed in North America by Viz Media.",
-      "poster": "https://upload.wikimedia.org/wikipedia/en/5/51/Spy_Family_vol_1.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
-      "updated_at": "2026-11-02T14:35:06Z"
-    },
-    {
-      "slug_id": "catalogue-solo-leveling",
-      "title": "Catalogue Solo leveling",
-      "episodes": [
-        {
-          "telegram_message_id": 1208,
-          "episode": 4,
-          "season": 1,
-          "special_type": null,
-          "part": null,
-          "quality": "360P",
-          "file_size": 82238410,
-          "file_name": "@Anime_Catalogue Solo leveling Ep04 360p.mkv",
-          "mime_type": "video/x-matroska",
-          "slug_id": "ay0TxZwcXdGbC6j6",
-          "qualities": {
-            "360P": {
-              "telegram_message_id": 1208,
-              "episode": 4,
-              "season": 1,
-              "special_type": null,
-              "part": null,
-              "quality": "360P",
-              "file_size": 82238410,
-              "file_name": "@Anime_Catalogue Solo leveling Ep04 360p.mkv",
-              "mime_type": "video/x-matroska"
-            }
-          }
-        },
-        {
-          "telegram_message_id": 1210,
-          "episode": 5,
-          "season": 1,
-          "special_type": null,
-          "part": null,
-          "quality": "1080P",
-          "file_size": 395127177,
-          "file_name": "@Anime_Catalogue Solo leveling Ep05 1080p.mkv",
-          "mime_type": "video/x-matroska",
-          "slug_id": "WCWuYd-41NR2SQQq",
-          "qualities": {
-            "1080P": {
-              "telegram_message_id": 1210,
-              "episode": 5,
-              "season": 1,
-              "special_type": null,
-              "part": null,
-              "quality": "1080P",
-              "file_size": 395127177,
-              "file_name": "@Anime_Catalogue Solo leveling Ep05 1080p.mkv",
-              "mime_type": "video/x-matroska"
-            },
-            "360P": {
-              "telegram_message_id": 1209,
-              "episode": 5,
-              "season": 1,
-              "special_type": null,
-              "part": null,
-              "quality": "360P",
-              "file_size": 77481854,
-              "file_name": "@Anime_Catalogue Solo leveling Ep05 360p.mkv",
-              "mime_type": "video/x-matroska"
-            }
-          }
-        }
-      ],
-      "wikipedia_url": "https://en.wikipedia.org/wiki/Love_Hina",
-      "year": "2026",
-      "plot": "Love Hina  is a Japanese manga series written and illustrated by Ken Akamatsu. It was serialized in Kodansha's Weekly Shōnen Magazine from October 1998 to October 2001, with the chapters collected into 14 tankōbon volumes by Kodansha. The series tells the story of Keitarō Urashima and his attempts to find the girl with whom he made a childhood promise to enter the University of Tokyo. The manga was licensed for an English-language release in North America and the United Kingdom by Tokyopop, in Australia by Madman Entertainment, and in Singapore by Chuang Yi. Two novelizations of Love Hina, written by two anime series screenwriters, were also released in Japan by Kodansha. Both novels were later released in North America and the United Kingdom by Tokyopop.",
-      "poster": "https://upload.wikimedia.org/wikipedia/en/3/3c/Love_Hina_volume_1.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
-      "updated_at": "2026-11-02T14:35:13Z"
-    },
-    {
-      "slug_id": "document-2024-01-14-04-11-29",
-      "title": "document 2024-01-14 04-11-29",
-      "episodes": [
-        {
-          "telegram_message_id": 1228,
-          "episode": 2,
-          "season": 1,
-          "special_type": null,
-          "part": null,
-          "quality": "720P",
-          "file_size": 40212281,
-          "file_name": "document_2024-01-14_04-11-29.mp4",
-          "mime_type": "video/mp4",
-          "slug_id": "VOZ_KUI18bQMLO3D",
-          "qualities": {
-            "720P": {
-              "telegram_message_id": 1228,
-              "episode": 2,
-              "season": 1,
-              "special_type": null,
-              "part": null,
-              "quality": "720P",
-              "file_size": 40212281,
-              "file_name": "document_2024-01-14_04-11-29.mp4",
-              "mime_type": "video/mp4"
-            }
-          }
-        }
-      ],
-      "poster": "https://upload.wikimedia.org/wikipedia/en/2/21/One_Piece_DVD_21.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
-      "year": "2026",
-      "wikipedia_url": "https://en.wikipedia.org/wiki/One_Piece_season_21",
-      "plot": "The twenty-first season of the One Piece anime television series is produced by Toei Animation, directed by Tatsuya Nagamine, Wataru Matsumi, Satoshi Itō and Yasunori Koyama. The season began broadcasting on Fuji Television on January 7, 2024. Like the rest of the series, the season follows Monkey D. Luffy's adventures with his Straw Hat Pirates. The season adapts material from the \"Egghead\" story arc, from the rest of the 105th volume to the beginning of the 111th volume of the manga series One Piece by Eiichiro Oda. It deals with the Straw Hat Pirates meeting Dr. Vegapunk on the futuristic-looking island, Egghead, which leads into an event that shocks the world.",
-      "updated_at": "2026-11-02T14:34:58Z"
+      "updated_at": "2026-11-02T15:29:00Z"
     },
     {
       "slug_id": "document-2024-02-11-03-34-53",
@@ -24076,7 +23932,7 @@
       "year": "2026",
       "wikipedia_url": "https://en.wikipedia.org/wiki/One_Piece_season_21",
       "plot": "The twenty-first season of the One Piece anime television series is produced by Toei Animation, directed by Tatsuya Nagamine, Wataru Matsumi, Satoshi Itō and Yasunori Koyama. The season began broadcasting on Fuji Television on January 7, 2024. Like the rest of the series, the season follows Monkey D. Luffy's adventures with his Straw Hat Pirates. The season adapts material from the \"Egghead\" story arc, from the rest of the 105th volume to the beginning of the 111th volume of the manga series One Piece by Eiichiro Oda. It deals with the Straw Hat Pirates meeting Dr. Vegapunk on the futuristic-looking island, Egghead, which leads into an event that shocks the world.",
-      "updated_at": "2026-11-02T14:34:51Z"
+      "updated_at": "2026-11-02T15:29:00Z"
     },
     {
       "slug_id": "document-2024-02-11-03-42-22",
@@ -24112,7 +23968,7 @@
       "year": "2026",
       "wikipedia_url": "https://en.wikipedia.org/wiki/One_Piece_season_21",
       "plot": "The twenty-first season of the One Piece anime television series is produced by Toei Animation, directed by Tatsuya Nagamine, Wataru Matsumi, Satoshi Itō and Yasunori Koyama. The season began broadcasting on Fuji Television on January 7, 2024. Like the rest of the series, the season follows Monkey D. Luffy's adventures with his Straw Hat Pirates. The season adapts material from the \"Egghead\" story arc, from the rest of the 105th volume to the beginning of the 111th volume of the manga series One Piece by Eiichiro Oda. It deals with the Straw Hat Pirates meeting Dr. Vegapunk on the futuristic-looking island, Egghead, which leads into an event that shocks the world.",
-      "updated_at": "2026-11-02T14:34:43Z"
+      "updated_at": "2026-11-02T15:28:53Z"
     },
     {
       "slug_id": "document-2024-02-12-12-20-04",
@@ -24148,7 +24004,7 @@
       "year": "2026",
       "wikipedia_url": "https://en.wikipedia.org/wiki/One_Piece_season_21",
       "plot": "The twenty-first season of the One Piece anime television series is produced by Toei Animation, directed by Tatsuya Nagamine, Wataru Matsumi, Satoshi Itō and Yasunori Koyama. The season began broadcasting on Fuji Television on January 7, 2024. Like the rest of the series, the season follows Monkey D. Luffy's adventures with his Straw Hat Pirates. The season adapts material from the \"Egghead\" story arc, from the rest of the 105th volume to the beginning of the 111th volume of the manga series One Piece by Eiichiro Oda. It deals with the Straw Hat Pirates meeting Dr. Vegapunk on the futuristic-looking island, Egghead, which leads into an event that shocks the world.",
-      "updated_at": "2026-11-02T14:34:36Z"
+      "updated_at": "2026-11-02T15:28:45Z"
     },
     {
       "slug_id": "jujutsu-kaisen",
@@ -27261,14 +27117,14 @@
         "2": "/banners/jujutsu-kaisen-season-2.webp",
         "3": "/banners/jujutsu-kaisen-season-3.webp"
       },
-      "updated_at": "2026-11-02T14:35:17Z"
+      "updated_at": "2026-11-02T15:29:02Z"
     },
     {
       "slug_id": "solo-leveling",
       "title": "Solo Leveling",
       "episodes": [
         {
-          "telegram_message_id": 1233,
+          "telegram_message_id": 1235,
           "episode": 7,
           "season": 2,
           "special_type": null,
@@ -27283,7 +27139,7 @@
           "slug_id": "xvcVH0MZzyOvp5Ca",
           "qualities": {
             "720P": {
-              "telegram_message_id": 1233,
+              "telegram_message_id": 1235,
               "episode": 7,
               "season": 2,
               "special_type": null,
@@ -27312,11 +27168,7 @@
       "year": 2024,
       "studio": "A-1 Pictures",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Solo_Leveling",
-      "updated_at": "2026-11-02T14:34:27Z",
-      "season_banners": {
-        "1": "/banners/solo-leveling-season-1.webp",
-        "2": "/banners/solo-leveling-season-2.webp"
-      }
+      "updated_at": "2026-11-02T15:28:38Z"
     },
     {
       "slug_id": "solo-leveling",
@@ -27392,6 +27244,37 @@
               "title": "I'm Used to It",
               "released": "2024-01-06",
               "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/498/1247043.jpg"
+            }
+          }
+        },
+        {
+          "telegram_message_id": 1234,
+          "episode": 2,
+          "season": 1,
+          "special_type": null,
+          "part": null,
+          "quality": "720P",
+          "file_size": 121678217,
+          "file_name": "Solo Leveling S01 E02 HDRip 720p Tamil ESub.mkv",
+          "mime_type": "video/x-matroska",
+          "title": "If I Had One More Chance",
+          "released": "2024-01-13",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/554/1385066.jpg",
+          "slug_id": "mjDYbyNyZxshu8Sb",
+          "qualities": {
+            "720P": {
+              "telegram_message_id": 1234,
+              "episode": 2,
+              "season": 1,
+              "special_type": null,
+              "part": null,
+              "quality": "720P",
+              "file_size": 121678217,
+              "file_name": "Solo Leveling S01 E02 HDRip 720p Tamil ESub.mkv",
+              "mime_type": "video/x-matroska",
+              "title": "If I Had One More Chance",
+              "released": "2024-01-13",
+              "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/554/1385066.jpg"
             }
           }
         },
@@ -27482,6 +27365,20 @@
               "title": "I've Gotta Get Stronger",
               "released": "2024-01-27",
               "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/505/1264586.jpg"
+            },
+            "360P": {
+              "telegram_message_id": 1208,
+              "episode": 4,
+              "season": 1,
+              "special_type": null,
+              "part": null,
+              "quality": "360P",
+              "file_size": 82238410,
+              "file_name": "@Anime_Catalogue Solo leveling Ep04 360p.mkv",
+              "mime_type": "video/x-matroska",
+              "title": "I've Gotta Get Stronger",
+              "released": "2024-01-27",
+              "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/505/1264586.jpg"
             }
           }
         },
@@ -27500,6 +27397,34 @@
           "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/505/1264587.jpg",
           "slug_id": "DyOIlb0dy1WmOXb8",
           "qualities": {
+            "1080P": {
+              "telegram_message_id": 1210,
+              "episode": 5,
+              "season": 1,
+              "special_type": null,
+              "part": null,
+              "quality": "1080P",
+              "file_size": 395127177,
+              "file_name": "@Anime_Catalogue Solo leveling Ep05 1080p.mkv",
+              "mime_type": "video/x-matroska",
+              "title": "A Pretty Good Deal",
+              "released": "2024-02-03",
+              "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/505/1264587.jpg"
+            },
+            "360P": {
+              "telegram_message_id": 1209,
+              "episode": 5,
+              "season": 1,
+              "special_type": null,
+              "part": null,
+              "quality": "360P",
+              "file_size": 77481854,
+              "file_name": "@Anime_Catalogue Solo leveling Ep05 360p.mkv",
+              "mime_type": "video/x-matroska",
+              "title": "A Pretty Good Deal",
+              "released": "2024-02-03",
+              "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/505/1264587.jpg"
+            },
             "720P": {
               "telegram_message_id": 1182,
               "episode": 5,
@@ -27658,6 +27583,20 @@
               "quality": "2160P",
               "file_size": 832985630,
               "file_name": "SOLO LEVELING S01 Ep08\nTamil by [SxF] 2160p [4K].mkv",
+              "mime_type": "video/x-matroska",
+              "title": "This Is Frustrating",
+              "released": "2024-03-02",
+              "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/506/1267363.jpg"
+            },
+            "480P": {
+              "telegram_message_id": 1212,
+              "episode": 8,
+              "season": 1,
+              "special_type": null,
+              "part": null,
+              "quality": "480P",
+              "file_size": 51708284,
+              "file_name": "By Spy X Family  Solo Leveling S01 Ep08 480p.mkv",
               "mime_type": "video/x-matroska",
               "title": "This Is Frustrating",
               "released": "2024-03-02",
@@ -28196,11 +28135,11 @@
       "year": 2024,
       "studio": "A-1 Pictures",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Solo_Leveling",
-      "updated_at": "2026-11-02T14:34:28Z",
       "season_banners": {
         "1": "/banners/solo-leveling-season-1.webp",
         "2": "/banners/solo-leveling-season-2.webp"
-      }
+      },
+      "updated_at": "2026-11-02T15:28:38Z"
     }
   ]
 }
