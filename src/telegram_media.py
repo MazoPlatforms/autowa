@@ -255,8 +255,10 @@ def catalog_title_key(title):
 def canonical_anime_release_title(title):
     """Normalize common release-name misspellings before metadata lookup."""
     value = re.sub(r'(?i)\s*[-:()]?\s*(?:OAD|OVA|specials?)\s*$', '', str(title or '')).strip(' -:()')
+    key = catalog_title_key(value)
+    if key in ('jujutsukaisen', 'moblinkzzjujutsukaisen', 'linkzzjujutsukaisen') or key.endswith('jujutsukaisen') and ('moblinkzz' in key or 'linkzz' in key):
+        return 'Jujutsu Kaisen'
     return {
-        'jujutsukaisen': 'Jujutsu Kaisen',
         'attackontitack': 'Attack on Titan',
         'attackontitanthefinalchapter': 'Attack on Titan',
         'attackontitanthefinalchapters': 'Attack on Titan',
@@ -449,6 +451,7 @@ def build_anime_catalog(messages):
         if not item:
             continue
         title, _, _, _ = anime_filename_parts(str(getattr(message.file, 'name', '') or ''))
+        title = canonical_anime_release_title(title)
         known = existing_show_for(title, existing)
         key = catalog_title_key((known or {}).get('title') or title)
         show = shows.setdefault(key, {
