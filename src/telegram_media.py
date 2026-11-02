@@ -420,7 +420,11 @@ def anime_media_item(message):
     if caption_title:
         caption_title = re.sub(r'^@\s*[\w-]+(?:\s+[\w-]+){0,3}\s*[-–—:]\s*', '', caption_title, flags=re.I)
         caption_title = canonical_anime_release_title(caption_title)
-    title = caption_title or title
+    # Prefer the parsed filename: it is the authoritative release title and
+    # avoids reviving legacy captions such as ``@ Mob LinkZz Jujutsu Kaisen``
+    # that did not use a separator after the uploader name. Use the caption
+    # only when the filename did not provide a usable title.
+    title = title if title and title != 'Untitled anime' else (caption_title or title)
     filename_season = season
     season = season or caption['season']
     episode = episode or caption['episode']
