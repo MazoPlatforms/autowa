@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": 1793604129,
+  "updated_at": 1793604547,
   "anime": {
     "slug_id": "jujutsu-kaisen",
     "title": "Jujutsu kaisen",
@@ -2910,6 +2910,11 @@
     "year": 2020,
     "studio": "Toho",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Jujutsu_Kaisen_(TV_series)",
-    "updated_at": "2026-11-02T07:22:05Z"
+    "updated_at": "2026-11-02T07:29:02Z",
+    "season_banners": {
+      "1": "/banners/jujutsu-kaisen-season-1.webp",
+      "2": "/banners/jujutsu-kaisen-season-2.webp",
+      "3": "/banners/jujutsu-kaisen-season-3.webp"
+    }
   }
 }
