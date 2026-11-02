@@ -590,7 +590,46 @@ def build_anime_catalog(messages):
         show['episodes'].sort(key=lambda e: (e.get('season') or 1, e.get('episode') or 0, e.get('part') or 0, e.get('quality') or ''))
         show['updated_at'] = time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime())
         result.append(show)
-    return result
+    # A legacy catalog can contain several records that now resolve to the
+    # same canonical title. Merge them before returning the live catalog so a
+    # Koyeb refresh cannot reintroduce duplicate Solo Leveling cards.
+    merged = {}
+    for show in result:
+        show_key = str(show.get('slug_id') or catalog_title_key(show.get('title'))).casefold()
+        if 'sololeveling' in catalog_title_key(show.get('title')) or 'sololeveling' in show_key:
+            show_key = 'solo-leveling'
+            show['slug_id'] = 'solo-leveling'
+            show['title'] = 'Solo Leveling'
+        target = merged.setdefault(show_key, show)
+        if target is not show:
+            target['episodes'].extend(show.get('episodes') or [])
+            for field, value in show.items():
+                if field not in ('episodes', 'updated_at') and target.get(field) in (None, '', [], {}):
+                    target[field] = value
+    for show in merged.values():
+        episodes = {}
+        for episode in show.get('episodes') or []:
+            identity = (
+                episode.get('special_type') or '',
+                int(episode.get('season') or 1),
+                int(episode.get('episode') or episode.get('number') or 0),
+                int(episode.get('part') or 0),
+            )
+            entry = episodes.setdefault(identity, dict(episode))
+            variants = entry.setdefault('qualities', {})
+            incoming = episode.get('qualities') or {str(episode.get('quality') or '720P').upper(): episode}
+            variants.update(incoming)
+        compact = []
+        for entry in episodes.values():
+            variants = entry.get('qualities') or {}
+            preferred = next((key for key in variants if key.casefold() == '720p'), sorted(variants, key=lambda key: int(re.search(r'\d+', key).group()) if re.search(r'\d+', key) else 0, reverse=True)[0])
+            primary = dict(variants[preferred])
+            primary.update({key: value for key, value in entry.items() if key != 'qualities'})
+            primary['slug_id'] = entry.get('slug_id') or primary.get('slug_id')
+            primary['qualities'] = variants
+            compact.append(primary)
+        show['episodes'] = sorted(compact, key=lambda item: (item.get('season') or 1, item.get('episode') or 0, item.get('part') or 0))
+    return list(merged.values())
 
 def media_item(message, enrich=False):
     caption = message.message or ''
