@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": 1793585479,
+  "updated_at": 1793585639,
   "anime": {
     "slug_id": "mob-linkzz-jujutsu-kaisen",
     "title": "@ Mob LinkZz Jujutsu Kaisen",
@@ -433,6 +433,6 @@
     "poster": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/df/David_Vincent_LA_Anime_Film_Festival_2017_Red_Carpet.jpg/330px-David_Vincent_LA_Anime_Film_Festival_2017_Red_Carpet.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
     "plot": "David Vincent is an American voice actor and voice director who provides voices for animation, anime and video games. Some roles include Grimmjow Jaegerjaquez in Bleach, Senketsu in Kill la Kill, Gilgamesh in Fate/Zero & Fate/stay night, Male Robin in Fire Emblem Awakening, the Super Smash Bros. series and Code Name: S.T.E.A.M., Marshall Law in the Tekken series, T. Hawk in Super Street Fighter IV, Richter Belmont in Castlevania: The Dracula X Chronicles, the narrator of JoJo's Bizarre Adventure, and Jin Kisaragi and Hakumen in the BlazBlue series. He also had a guest role in Ghost in the Shell.",
     "year": "2026",
-    "updated_at": "2026-11-02T02:11:14Z"
+    "updated_at": "2026-11-02T02:13:52Z"
   }
 }
