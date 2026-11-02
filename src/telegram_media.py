@@ -228,6 +228,7 @@ def manual_anime_episode(title, season, episode):
 _TMDB_SHOW_CACHE = {}
 _TMDB_SEASON_CACHE = {}
 _TVMAZE_EPISODE_CACHE = {}
+_TVMAZE_SEASON_CACHE = {}
 
 ATTACK_ON_TITAN_OAD_GUIDE = {
     1: ('Ilse\'s Notebook: Notes from a Scout Regiment Member', '2013-12-09'),
@@ -380,6 +381,35 @@ def tvmaze_episode_guide(title, specials=False):
         _TVMAZE_EPISODE_CACHE[cache_key] = {}
         return {}
 
+def tvmaze_season_episode_guide(title, season):
+    """Fetch TVMaze metadata keyed by episode number within one season."""
+    cache_key = (str(title or '').casefold(), int(season or 1))
+    if cache_key in _TVMAZE_SEASON_CACHE:
+        return _TVMAZE_SEASON_CACHE[cache_key]
+    try:
+        query = urllib.parse.urlencode({'q': title})
+        with urllib.request.urlopen(urllib.request.Request('https://api.tvmaze.com/search/shows?' + query, headers={'User-Agent': 'FilmGo/1.0'}), timeout=8) as response:
+            results = json.load(response)
+        target = None
+        best = 0
+        for result in results[:10]:
+            show = result.get('show') or {}
+            name = str(show.get('name') or '')
+            score = max(difflib.SequenceMatcher(None, str(title).casefold(), name.casefold()).ratio(), float(result.get('score') or 0) / 2)
+            if score > best:
+                best, target = score, show
+        if not target or best < 0.55 or not target.get('id'):
+            _TVMAZE_SEASON_CACHE[cache_key] = {}
+            return {}
+        with urllib.request.urlopen(urllib.request.Request('https://api.tvmaze.com/shows/%s/episodes?specials=0' % target['id'], headers={'User-Agent': 'FilmGo/1.0'}), timeout=12) as response:
+            rows = json.load(response)
+        mapped = {int(item.get('number')): {'title': str(item.get('name') or '').strip() or None, 'released': str(item.get('airdate') or '').strip() or None, 'frame': ((item.get('image') or {}).get('medium'))} for item in rows if int(item.get('season') or 0) == int(season or 1) and item.get('number') is not None}
+        _TVMAZE_SEASON_CACHE[cache_key] = mapped
+        return mapped
+    except Exception:
+        _TVMAZE_SEASON_CACHE[cache_key] = {}
+        return {}
+
 def jikan_metadata(title):
     try:
         query = urllib.parse.urlencode({'q': title, 'limit': 5, 'sfw': 'true'})
@@ -516,7 +546,9 @@ def build_anime_catalog(messages):
                 guide_episode = manual_anime_episode(show['title'], episode['season'], episode['episode'])
                 guide = tmdb_season_episodes(show['title'], episode['season']).get(guide_episode) or tmdb_season_episodes(show['title'], episode['season']).get(episode['episode'])
                 if not guide:
-                    guide = tvmaze_episode_guide(show['title']).get(int(episode['episode'] or 0))
+                    # Episode numbers repeat in every season; never fall back
+                    # to a global guide keyed only by episode number.
+                    guide = tvmaze_season_episode_guide(show['title'], episode['season']).get(int(guide_episode or episode['episode'] or 0))
             if guide:
                 for field in ('title', 'released', 'frame'):
                     if guide.get(field):
