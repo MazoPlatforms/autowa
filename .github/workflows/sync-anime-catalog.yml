@@ -104,6 +104,13 @@ jobs:
           open('/tmp/updated-anime.json','a').write('\n')
           import os
           os.makedirs('data/anime', exist_ok=True)
+          # The split catalog is generated from the current Telegram channel.
+          # Remove obsolete show files so an old uploader-prefixed record cannot
+          # survive after its messages have been normalized into the canonical
+          # anime slug.
+          for name in os.listdir('data/anime'):
+              if name.endswith('.json') and name != 'index.json':
+                  os.remove(os.path.join('data/anime', name))
           index={'schema_version':1,'updated_at':output.get('updated_at'),'anime':[]}
           for item in output['anime']:
               with open(f"data/anime/{item['slug_id']}.json", 'w', encoding='utf-8') as handle:

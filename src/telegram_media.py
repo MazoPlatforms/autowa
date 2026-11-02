@@ -413,7 +413,14 @@ def anime_media_item(message):
         return None
     title, season, episode, part = anime_filename_parts(filename)
     caption = anime_caption_parts(getattr(message, 'raw_text', ''))
-    title = caption['title'] or title
+    # Older published captions may contain an uploader prefix even when the
+    # filename has already been cleaned. Treat that caption value exactly like
+    # a release filename so it cannot recreate a second anime record.
+    caption_title = caption['title']
+    if caption_title:
+        caption_title = re.sub(r'^@\s*[\w-]+(?:\s+[\w-]+){0,3}\s*[-–—:]\s*', '', caption_title, flags=re.I)
+        caption_title = canonical_anime_release_title(caption_title)
+    title = caption_title or title
     filename_season = season
     season = season or caption['season']
     episode = episode or caption['episode']
