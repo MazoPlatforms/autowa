@@ -398,7 +398,12 @@ async function redis(...args){
 }
 async function tg(method,data={},timeout=20000){
  const r=await fetch('https://api.telegram.org/bot'+TOKEN+'/'+method,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data),signal:AbortSignal.timeout(timeout)});
- const j=await r.json();if(!j.ok)throw Error('Telegram '+method+': '+String(j.description).slice(0,160));return j.result;
+ const j=await r.json();
+ // Telegram callback queries expire quickly. A user can still tap an old
+ // inline button after the update was already handled; that is harmless and
+ // must not turn into a bot-update error or block the remaining action.
+ if(!j.ok&&method==='answerCallbackQuery'&&/query is too old|query ID is invalid|response timeout expired/i.test(String(j.description||'')))return null;
+ if(!j.ok)throw Error('Telegram '+method+': '+String(j.description).slice(0,160));return j.result;
 }
 async function say(chat_id,text,extra={}){return tg('sendMessage',{chat_id,text,disable_web_page_preview:true,...extra});}
 async function deleteConfirmation(q){const chatId=q.message?.chat?.id,messageId=q.message?.message_id;if(chatId==null||!Number.isInteger(messageId))return;try{await tg('deleteMessage',{chat_id:chatId,message_id:messageId});}catch{}}
