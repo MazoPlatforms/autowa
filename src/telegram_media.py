@@ -260,7 +260,7 @@ def canonical_anime_release_title(title):
     if key in ('jujutsukaisen', 'moblinkzzjujutsukaisen', 'linkzzjujutsukaisen') or key.endswith('jujutsukaisen') and ('moblinkzz' in key or 'linkzz' in key):
         return 'Jujutsu Kaisen'
     if key == 'byspyxfamily':
-        return 'Spy x Family'
+        return 'Solo Leveling'
     # Uploader prefixes and catalogue labels can surround the real title
     # (for example ``By Spy X Family Solo Leveling`` or ``Catalogue Solo
     # Leveling``). They must never become separate anime records.
@@ -486,7 +486,7 @@ def anime_media_item(message):
     title = title if title and title != 'Untitled anime' else (caption_title or title)
     filename_key = catalog_title_key(title)
     if filename_key in ('spyxfamily', 'byspyxfamily'):
-        title = 'Spy x Family'
+        title = 'Solo Leveling'
     elif catalog_title_key(caption_title) == 'sololeveling' or 'sololeveling' in catalog_title_key(caption_title):
         title = 'Solo Leveling'
     title = canonical_anime_release_title(title)

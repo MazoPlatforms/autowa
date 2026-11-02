@@ -56,7 +56,7 @@ def build_caption(message, episode_slugs):
     filename_title = canonical_anime_release_title(title)
     filename_key = re.sub(r"[^a-z0-9]+", "", filename_title.casefold())
     if filename_key in ("spyxfamily", "byspyxfamily"):
-        title = "Spy x Family"
+        title = "Solo Leveling"
     else:
         title = caption_title if "sololeveling" in re.sub(r"[^a-z0-9]+", "", caption_title.casefold()) else title or caption_title
     title = canonical_anime_release_title(title)
