@@ -605,6 +605,10 @@ def build_anime_catalog(messages):
             episodes.append(primary)
         show['episodes'] = episodes
         show['episodes'].sort(key=lambda e: (e.get('season') or 1, e.get('episode') or 0, e.get('part') or 0, e.get('quality') or ''))
+        if show.get('slug_id') == 'solo-leveling':
+            show['episodes_total'] = 25
+        elif show.get('slug_id') == 'dan-da-dan':
+            show['episodes_total'] = 24
         show['updated_at'] = time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime())
         result.append(show)
     # A legacy catalog can contain several records that now resolve to the
