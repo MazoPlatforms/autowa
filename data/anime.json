@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-02T01:39:24.151Z",
+  "updated_at": 1793583599,
   "anime": [
     {
       "slug_id": "naruto",
@@ -6347,7 +6347,7 @@
         "10": "/banners/naruto-season-10.webp",
         "11": "/banners/naruto-season-11.webp"
       },
-      "updated_at": "2026-11-02T01:20:21Z"
+      "updated_at": "2026-11-02T01:39:57Z"
     },
     {
       "slug_id": "naruto-shippuden",
@@ -17963,7 +17963,7 @@
       "status": "Finished",
       "episodes_total": 500,
       "studio": "Studio Pierrot",
-      "updated_at": "2026-11-02T01:20:23Z"
+      "updated_at": "2026-11-02T01:39:59Z"
     },
     {
       "slug_id": "attack-on-titan",
@@ -23692,17 +23692,17 @@
       "year": 2013,
       "studio": "WIT STUDIO",
       "season_banners": {
+        "OAD": "/banners/attack-on-titan-oad.webp",
         "1": "/banners/attack-on-titan-season-1.webp",
         "2": "/banners/attack-on-titan-season-2.webp",
         "3": "/banners/attack-on-titan-season-3.webp",
-        "4": "/banners/attack-on-titan-season-4.webp",
-        "OAD": "/banners/attack-on-titan-oad.webp"
+        "4": "/banners/attack-on-titan-season-4.webp"
       },
-      "updated_at": "2026-11-02T01:20:19Z"
+      "updated_at": "2026-11-02T01:39:56Z"
     },
     {
       "slug_id": "jujutsu-kaisen",
-      "title": "Jujutsu Kaisen",
+      "title": "JUJUTSU KAISEN",
       "episodes": [
         {
           "telegram_message_id": 908,
@@ -23710,36 +23710,28 @@
           "season": 1,
           "special_type": null,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 209014033,
           "file_name": "@TamilMob_LinkZz -Jujutsu Kaisen S01 E01 Blu-Ray - 720p - x2.mkv",
           "mime_type": "video/x-matroska",
+          "title": "Ryomen Sukuna",
+          "released": "2020-10-02",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/542/1355130.jpg",
           "slug_id": "5719XgC4xRnr4_q_",
           "qualities": {
-            "1080P": {
-              "telegram_message_id": 906,
-              "episode": 1,
-              "season": 1,
-              "special_type": null,
-              "part": null,
-              "quality": "1080P",
-              "file_size": 304488934,
-              "file_name": "@TamilMob_LinkZz -Jujutsu Kaisen S01 E01 Blu-Ray - 1080p - H.mkv",
-              "mime_type": "video/x-matroska",
-              "title": "Ryomen Sukuna",
-              "released": "2020-10-02",
-              "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/542/1355130.jpg"
-            },
             "720P": {
               "telegram_message_id": 908,
               "episode": 1,
               "season": 1,
               "special_type": null,
               "part": null,
-              "quality": "720p",
+              "quality": "720P",
               "file_size": 209014033,
               "file_name": "@TamilMob_LinkZz -Jujutsu Kaisen S01 E01 Blu-Ray - 720p - x2.mkv",
-              "mime_type": "video/x-matroska"
+              "mime_type": "video/x-matroska",
+              "title": "Ryomen Sukuna",
+              "released": "2020-10-02",
+              "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/542/1355130.jpg"
             },
             "480P": {
               "telegram_message_id": 907,
@@ -23747,10 +23739,13 @@
               "season": 1,
               "special_type": null,
               "part": null,
-              "quality": "480p",
+              "quality": "480P",
               "file_size": 108069408,
               "file_name": "@TamilMob_LinkZz -Jujutsu Kaisen S01 E01 Blu-Ray - 480p - x2.mkv",
-              "mime_type": "video/x-matroska"
+              "mime_type": "video/x-matroska",
+              "title": "Ryomen Sukuna",
+              "released": "2020-10-02",
+              "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/542/1355130.jpg"
             }
           }
         }
@@ -23768,7 +23763,7 @@
       "year": 2020,
       "studio": "Toho",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Jujutsu_Kaisen_(TV_series)",
-      "updated_at": "2026-11-02T01:39:24.151Z"
+      "updated_at": "2026-11-02T01:39:54Z"
     }
   ]
 }
