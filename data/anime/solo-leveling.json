@@ -1,10 +1,41 @@
 {
   "schema_version": 1,
-  "updated_at": 1793633374,
+  "updated_at": 1793633518,
   "anime": {
     "slug_id": "solo-leveling",
     "title": "Solo Leveling",
     "episodes": [
+      {
+        "telegram_message_id": 1235,
+        "episode": 7,
+        "season": 2,
+        "special_type": null,
+        "part": null,
+        "quality": "720P",
+        "file_size": 237596757,
+        "file_name": "@Solo Leveling Tamil S02E7.mkv",
+        "mime_type": "video/x-matroska",
+        "title": "The 10th S-rank Hunter",
+        "released": "2025-02-15",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/556/1390105.jpg",
+        "slug_id": "xvcVH0MZzyOvp5Ca",
+        "qualities": {
+          "720P": {
+            "telegram_message_id": 1235,
+            "episode": 7,
+            "season": 2,
+            "special_type": null,
+            "part": null,
+            "quality": "720P",
+            "file_size": 237596757,
+            "file_name": "@Solo Leveling Tamil S02E7.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "The 10th S-rank Hunter",
+            "released": "2025-02-15",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/556/1390105.jpg"
+          }
+        }
+      },
       {
         "telegram_message_id": 1174,
         "episode": 1,
@@ -966,10 +997,10 @@
     "year": 2024,
     "studio": "A-1 Pictures",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Solo_Leveling",
+    "updated_at": "2026-11-02T15:30:51Z",
     "season_banners": {
       "1": "/banners/solo-leveling-season-1.webp",
       "2": "/banners/solo-leveling-season-2.webp"
-    },
-    "updated_at": "2026-11-02T15:28:38Z"
+    }
   }
 }
