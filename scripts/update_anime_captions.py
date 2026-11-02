@@ -76,6 +76,33 @@ def caption_is_canonical(caption, message_id, episode_slugs):
     return bool(anime and slug == slugify(anime) and episode_slug == expected)
 
 
+def discover_parent_slugs(messages, episode_slugs):
+    """Give every quality of one episode the same parent slug.
+
+    Newly uploaded qualities may not be in anime.json yet because catalog sync
+    runs asynchronously. Use an existing catalog slug when available; otherwise
+    derive one stable slug from the lowest Telegram message id in the group.
+    """
+    groups = {}
+    for message in messages:
+        filename = str(getattr(message.file, "name", "") or "")
+        title, filename_season, episode, part = anime_filename_parts(filename)
+        previous = anime_caption_parts(getattr(message, "raw_text", "") or "")
+        title = title or previous["title"]
+        season = filename_season or previous["season"] or manual_anime_season(title, episode)
+        episode = episode or previous["episode"]
+        special = anime_special_type(filename)
+        if not title or not episode:
+            continue
+        key = (slugify(title), special or "", int(season or 1), int(episode), int(part or previous["part"] or 0))
+        groups.setdefault(key, []).append(str(message.id))
+    for message_ids in groups.values():
+        parent = next((episode_slugs.get(message_id) for message_id in message_ids if episode_slugs.get(message_id)), None)
+        parent = parent or fixed_anime_episode_slug(min(map(int, message_ids)))
+        for message_id in message_ids:
+            episode_slugs[message_id] = parent
+
+
 async def main():
     required = ("TELEGRAM_API_ID", "TELEGRAM_API_HASH", "TELEGRAM_SESSION", "TELEGRAM_ANIME_CHANNEL_ID")
     missing = [key for key in required if not os.getenv(key)]
@@ -88,13 +115,18 @@ async def main():
         int(os.environ["TELEGRAM_API_ID"]),
         os.environ["TELEGRAM_API_HASH"],
     )
+    messages = []
+    async with client:
+        channel = int(os.environ["TELEGRAM_ANIME_CHANNEL_ID"])
+        async for message in client.iter_messages(channel, limit=None):
+            if message.document or message.video:
+                messages.append(message)
+    discover_parent_slugs(messages, episode_slugs)
     updated = verified = 0
     timed_out = []
     async with client:
         channel = int(os.environ["TELEGRAM_ANIME_CHANNEL_ID"])
-        async for message in client.iter_messages(channel, limit=None):
-            if not (message.document or message.video):
-                continue
+        for message in messages:
             caption = build_caption(message, episode_slugs)
             if not caption:
                 print(f"skip message {message.id}: episode number not found", flush=True)

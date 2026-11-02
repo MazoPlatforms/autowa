@@ -309,8 +309,11 @@ async function findAnimeDuplicate(d){
  if(!episode)return null;
  const requestedQuality=String(d.quality||'').toUpperCase();
  const variant=episode.qualities?.[requestedQuality]||((String(episode.quality||'').toUpperCase()===requestedQuality)?episode:null);
- if(!variant)return null;
- return {...variant,slug_id:episode.slug_id,episode_slug_id:episode.slug_id};
+ // A matching episode at another quality still owns the same parent slug.
+ // Only the matching quality is a replacement; a missing quality is a new
+ // variant that must inherit the existing episode slug.
+ if(!variant)return {slug_id:episode.slug_id,episode_slug_id:episode.slug_id,same_quality:false};
+ return {...variant,slug_id:episode.slug_id,episode_slug_id:episode.slug_id,same_quality:true};
 }
 
 function selectAnimeVariant(episode, quality){
@@ -409,7 +412,7 @@ async function startAnimeDraft(file,messageId,detected=null,caption=''){
  parts.season=parts.season||(parts.special_type?1:(known?manualAnimeSeason(parts.title,parts.episode)||1:await tmdbAnimeSeason(parts.title,parts.episode)||1));
  const d={kind:'anime',message_id:messageId,file_name:file.file_name||'',file_size:Number(file.file_size||0),mime_type:file.mime_type||'',title:parts.title,titleCandidates:parts.titleCandidates,season:parts.season,episode:parts.episode,part:parts.part,special_type:parts.special_type,quality:parts.quality,slug_id:animeSlug(parts.title),episode_slug_id:crypto.randomBytes(12).toString('base64url')};
  const duplicate=await findAnimeDuplicate(d).catch(error=>{console.warn('Anime duplicate check failed:',error?.message||'unknown error');return null;});
- if(duplicate){d.existing=true;d.replace=true;d.episode_slug_id=duplicate.episode_slug_id||duplicate.slug_id;d.existing_episode_message_id=Number(duplicate.telegram_message_id)||null;}
+ if(duplicate){d.episode_slug_id=duplicate.episode_slug_id||duplicate.slug_id;if(duplicate.same_quality){d.existing=true;d.replace=true;d.existing_episode_message_id=Number(duplicate.telegram_message_id)||null;}}
  const metadata=known?null:(detected?.metadata||await animeMetadata(parts.title).catch(()=>null));
  // Metadata providers may return an all-caps display title. Keep the title
  // parsed from the release filename for drafts, captions, and the catalog;
