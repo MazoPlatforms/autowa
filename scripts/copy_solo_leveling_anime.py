@@ -23,6 +23,10 @@ SLUG = "solo-leveling"
 DRY_RUN = os.getenv("DRY_RUN", "0") == "1"
 REVIEW_ONLY = os.getenv("REVIEW_ONLY", "0") == "1"
 ALLOW_VIDEO_SOURCE = os.getenv("ALLOW_VIDEO_SOURCE", "0") == "1"
+REPROCESS_SOURCE_IDS = {
+    int(value.strip()) for value in os.getenv("REPROCESS_SOURCE_IDS", "").split(",")
+    if value.strip().isdigit()
+}
 
 
 def quality_of(filename):
@@ -107,12 +111,14 @@ async def main():
     target = await client.get_entity(int(os.environ["TELEGRAM_ANIME_CHANNEL_ID"]))
     source_items = {}
     target_items = set()
+    target_messages = {}
     copied = skipped = 0
     try:
         async for message in client.iter_messages(target, limit=None):
             identity = caption_identity(getattr(message, "raw_text", ""))
             if identity:
                 target_items.add(identity)
+                target_messages.setdefault(identity, message.id)
 
         previous_messages = []
         async for message in client.iter_messages(source, reverse=True):
@@ -142,7 +148,8 @@ async def main():
                 continue
             caption, identity = parsed
             source_items.setdefault(identity[0], set()).add(identity[1])
-            if identity in target_items:
+            forced = message.id in REPROCESS_SOURCE_IDS
+            if identity in target_items and not forced:
                 skipped += 1
                 print(f"SKIP existing source={message.id} S{identity[0]:02d}E{identity[1]:02d} {identity[3]}", flush=True)
                 continue
@@ -159,6 +166,12 @@ async def main():
                     await client.send_file(target, downloaded, caption=caption, force_document=True)
             else:
                 await client.send_file(target, message.media, caption=caption, force_document=True)
+            if forced and identity in target_messages:
+                try:
+                    await client.delete_messages(target, [target_messages[identity]])
+                    print(f"DELETED old target={target_messages[identity]} for S{identity[0]:02d}E{identity[1]:02d} {identity[3]}", flush=True)
+                except Exception as error:
+                    print(f"WARN old-target-delete-failed identity={identity} error={error}", flush=True)
             target_items.add(identity)
             copied += 1
             print(f"COPIED source={message.id} S{identity[0]:02d}E{identity[1]:02d} {identity[3]}", flush=True)

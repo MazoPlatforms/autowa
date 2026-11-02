@@ -19,6 +19,10 @@ on:
         description: Download source MKV/MP4 videos and re-upload them as documents
         required: true
         default: 'true'
+      reprocess_source_ids:
+        description: Comma-separated source message IDs to download and re-upload as documents
+        required: false
+        default: ''
 
 permissions:
   contents: read
@@ -43,4 +47,5 @@ jobs:
           DRY_RUN: ${{ inputs.dry_run == 'true' && '1' || '0' }}
           REVIEW_ONLY: ${{ inputs.review_only == 'true' && '1' || '0' }}
           ALLOW_VIDEO_SOURCE: ${{ inputs.include_video_sources == 'true' && '1' || '0' }}
+          REPROCESS_SOURCE_IDS: ${{ inputs.reprocess_source_ids }}
         run: python scripts/copy_solo_leveling_anime.py
