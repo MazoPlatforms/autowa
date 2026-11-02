@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": 1793602878,
+  "updated_at": 1793603342,
   "anime": [
     {
       "slug_id": "naruto",
@@ -6347,7 +6347,7 @@
         "10": "/banners/naruto-season-10.webp",
         "11": "/banners/naruto-season-11.webp"
       },
-      "updated_at": "2026-11-02T07:01:17Z"
+      "updated_at": "2026-11-02T07:09:01Z"
     },
     {
       "slug_id": "naruto-shippuden",
@@ -17963,7 +17963,7 @@
       "status": "Finished",
       "episodes_total": 500,
       "studio": "Studio Pierrot",
-      "updated_at": "2026-11-02T07:01:18Z"
+      "updated_at": "2026-11-02T07:09:02Z"
     },
     {
       "slug_id": "attack-on-titan",
@@ -23698,14 +23698,14 @@
         "3": "/banners/attack-on-titan-season-3.webp",
         "4": "/banners/attack-on-titan-season-4.webp"
       },
-      "updated_at": "2026-11-02T07:01:16Z"
+      "updated_at": "2026-11-02T07:08:59Z"
     },
     {
       "slug_id": "jujutsu-kaisen",
       "title": "Jujutsu Kaisen",
       "episodes": [
         {
-          "telegram_message_id": 908,
+          "telegram_message_id": 1015,
           "episode": 1,
           "season": 1,
           "special_type": null,
@@ -23720,7 +23720,7 @@
           "slug_id": "5719XgC4xRnr4_q_",
           "qualities": {
             "1080P": {
-              "telegram_message_id": 909,
+              "telegram_message_id": 1016,
               "episode": 1,
               "season": 1,
               "special_type": null,
@@ -23734,7 +23734,7 @@
               "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/542/1355130.jpg"
             },
             "720P": {
-              "telegram_message_id": 908,
+              "telegram_message_id": 1015,
               "episode": 1,
               "season": 1,
               "special_type": null,
@@ -23748,7 +23748,7 @@
               "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/542/1355130.jpg"
             },
             "480P": {
-              "telegram_message_id": 907,
+              "telegram_message_id": 1014,
               "episode": 1,
               "season": 1,
               "special_type": null,
@@ -23764,7 +23764,7 @@
           }
         },
         {
-          "telegram_message_id": 911,
+          "telegram_message_id": 1018,
           "episode": 2,
           "season": 1,
           "special_type": null,
@@ -23779,7 +23779,7 @@
           "slug_id": "_oAKVz3K0Jb8ofj-",
           "qualities": {
             "1080P": {
-              "telegram_message_id": 912,
+              "telegram_message_id": 1019,
               "episode": 2,
               "season": 1,
               "special_type": null,
@@ -23793,7 +23793,7 @@
               "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/542/1355135.jpg"
             },
             "720P": {
-              "telegram_message_id": 911,
+              "telegram_message_id": 1018,
               "episode": 2,
               "season": 1,
               "special_type": null,
@@ -23807,7 +23807,7 @@
               "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/542/1355135.jpg"
             },
             "480P": {
-              "telegram_message_id": 910,
+              "telegram_message_id": 1017,
               "episode": 2,
               "season": 1,
               "special_type": null,
@@ -23823,7 +23823,7 @@
           }
         },
         {
-          "telegram_message_id": 914,
+          "telegram_message_id": 1021,
           "episode": 3,
           "season": 1,
           "special_type": null,
@@ -23838,7 +23838,7 @@
           "slug_id": "LZhpeMdwSP-N9NRy",
           "qualities": {
             "1080P": {
-              "telegram_message_id": 915,
+              "telegram_message_id": 1022,
               "episode": 3,
               "season": 1,
               "special_type": null,
@@ -23852,7 +23852,7 @@
               "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/288/721556.jpg"
             },
             "720P": {
-              "telegram_message_id": 914,
+              "telegram_message_id": 1021,
               "episode": 3,
               "season": 1,
               "special_type": null,
@@ -23866,7 +23866,7 @@
               "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/288/721556.jpg"
             },
             "480P": {
-              "telegram_message_id": 913,
+              "telegram_message_id": 1020,
               "episode": 3,
               "season": 1,
               "special_type": null,
@@ -23882,7 +23882,7 @@
           }
         },
         {
-          "telegram_message_id": 917,
+          "telegram_message_id": 1024,
           "episode": 4,
           "season": 1,
           "special_type": null,
@@ -23897,7 +23897,7 @@
           "slug_id": "zSVdZ-3nJHxwhRKW",
           "qualities": {
             "1080P": {
-              "telegram_message_id": 918,
+              "telegram_message_id": 1025,
               "episode": 4,
               "season": 1,
               "special_type": null,
@@ -23911,7 +23911,7 @@
               "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/288/721557.jpg"
             },
             "720P": {
-              "telegram_message_id": 917,
+              "telegram_message_id": 1024,
               "episode": 4,
               "season": 1,
               "special_type": null,
@@ -23925,7 +23925,7 @@
               "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/288/721557.jpg"
             },
             "480P": {
-              "telegram_message_id": 916,
+              "telegram_message_id": 1023,
               "episode": 4,
               "season": 1,
               "special_type": null,
@@ -23941,7 +23941,7 @@
           }
         },
         {
-          "telegram_message_id": 920,
+          "telegram_message_id": 1027,
           "episode": 5,
           "season": 1,
           "special_type": null,
@@ -23956,7 +23956,7 @@
           "slug_id": "t9W4duPBDsEn1EBi",
           "qualities": {
             "1080P": {
-              "telegram_message_id": 921,
+              "telegram_message_id": 1028,
               "episode": 5,
               "season": 1,
               "special_type": null,
@@ -23970,7 +23970,7 @@
               "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/542/1356097.jpg"
             },
             "720P": {
-              "telegram_message_id": 920,
+              "telegram_message_id": 1027,
               "episode": 5,
               "season": 1,
               "special_type": null,
@@ -23984,7 +23984,7 @@
               "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/542/1356097.jpg"
             },
             "480P": {
-              "telegram_message_id": 919,
+              "telegram_message_id": 1026,
               "episode": 5,
               "season": 1,
               "special_type": null,
@@ -24000,7 +24000,7 @@
           }
         },
         {
-          "telegram_message_id": 923,
+          "telegram_message_id": 1030,
           "episode": 6,
           "season": 1,
           "special_type": null,
@@ -24015,7 +24015,7 @@
           "slug_id": "LvGobfJRjtQkeZPg",
           "qualities": {
             "1080P": {
-              "telegram_message_id": 924,
+              "telegram_message_id": 1031,
               "episode": 6,
               "season": 1,
               "special_type": null,
@@ -24029,7 +24029,7 @@
               "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/542/1356106.jpg"
             },
             "720P": {
-              "telegram_message_id": 923,
+              "telegram_message_id": 1030,
               "episode": 6,
               "season": 1,
               "special_type": null,
@@ -24043,7 +24043,7 @@
               "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/542/1356106.jpg"
             },
             "480P": {
-              "telegram_message_id": 922,
+              "telegram_message_id": 1029,
               "episode": 6,
               "season": 1,
               "special_type": null,
@@ -24059,7 +24059,7 @@
           }
         },
         {
-          "telegram_message_id": 926,
+          "telegram_message_id": 1033,
           "episode": 7,
           "season": 1,
           "special_type": null,
@@ -24074,7 +24074,7 @@
           "slug_id": "j_y9aSiQprRFa_C6",
           "qualities": {
             "1080P": {
-              "telegram_message_id": 927,
+              "telegram_message_id": 1034,
               "episode": 7,
               "season": 1,
               "special_type": null,
@@ -24088,7 +24088,7 @@
               "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/542/1356167.jpg"
             },
             "720P": {
-              "telegram_message_id": 926,
+              "telegram_message_id": 1033,
               "episode": 7,
               "season": 1,
               "special_type": null,
@@ -24102,7 +24102,7 @@
               "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/542/1356167.jpg"
             },
             "480P": {
-              "telegram_message_id": 925,
+              "telegram_message_id": 1032,
               "episode": 7,
               "season": 1,
               "special_type": null,
@@ -24118,7 +24118,7 @@
           }
         },
         {
-          "telegram_message_id": 929,
+          "telegram_message_id": 1036,
           "episode": 8,
           "season": 1,
           "special_type": null,
@@ -24133,7 +24133,7 @@
           "slug_id": "jFE4O0sJF1mwryuS",
           "qualities": {
             "1080P": {
-              "telegram_message_id": 930,
+              "telegram_message_id": 1037,
               "episode": 8,
               "season": 1,
               "special_type": null,
@@ -24147,7 +24147,7 @@
               "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/542/1356172.jpg"
             },
             "720P": {
-              "telegram_message_id": 929,
+              "telegram_message_id": 1036,
               "episode": 8,
               "season": 1,
               "special_type": null,
@@ -24161,7 +24161,7 @@
               "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/542/1356172.jpg"
             },
             "480P": {
-              "telegram_message_id": 928,
+              "telegram_message_id": 1035,
               "episode": 8,
               "season": 1,
               "special_type": null,
@@ -24177,7 +24177,7 @@
           }
         },
         {
-          "telegram_message_id": 932,
+          "telegram_message_id": 1039,
           "episode": 9,
           "season": 1,
           "special_type": null,
@@ -24192,7 +24192,7 @@
           "slug_id": "__wgY2N7Ujnv7B74",
           "qualities": {
             "1080P": {
-              "telegram_message_id": 933,
+              "telegram_message_id": 1040,
               "episode": 9,
               "season": 1,
               "special_type": null,
@@ -24206,7 +24206,7 @@
               "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/542/1356191.jpg"
             },
             "720P": {
-              "telegram_message_id": 932,
+              "telegram_message_id": 1039,
               "episode": 9,
               "season": 1,
               "special_type": null,
@@ -24220,7 +24220,7 @@
               "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/542/1356191.jpg"
             },
             "480P": {
-              "telegram_message_id": 931,
+              "telegram_message_id": 1038,
               "episode": 9,
               "season": 1,
               "special_type": null,
@@ -24236,7 +24236,7 @@
           }
         },
         {
-          "telegram_message_id": 964,
+          "telegram_message_id": 1042,
           "episode": 10,
           "season": 1,
           "special_type": null,
@@ -24251,7 +24251,7 @@
           "slug_id": "sXUMfxbba1FZqO1N",
           "qualities": {
             "1080P": {
-              "telegram_message_id": 965,
+              "telegram_message_id": 1043,
               "episode": 10,
               "season": 1,
               "special_type": null,
@@ -24265,7 +24265,7 @@
               "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/288/721563.jpg"
             },
             "720P": {
-              "telegram_message_id": 964,
+              "telegram_message_id": 1042,
               "episode": 10,
               "season": 1,
               "special_type": null,
@@ -24279,7 +24279,7 @@
               "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/288/721563.jpg"
             },
             "480P": {
-              "telegram_message_id": 963,
+              "telegram_message_id": 1041,
               "episode": 10,
               "season": 1,
               "special_type": null,
@@ -24295,7 +24295,7 @@
           }
         },
         {
-          "telegram_message_id": 967,
+          "telegram_message_id": 1045,
           "episode": 11,
           "season": 1,
           "special_type": null,
@@ -24310,7 +24310,7 @@
           "slug_id": "vaXhaNLtxnyCB0xv",
           "qualities": {
             "1080P": {
-              "telegram_message_id": 968,
+              "telegram_message_id": 1046,
               "episode": 11,
               "season": 1,
               "special_type": null,
@@ -24324,7 +24324,7 @@
               "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/288/721564.jpg"
             },
             "720P": {
-              "telegram_message_id": 967,
+              "telegram_message_id": 1045,
               "episode": 11,
               "season": 1,
               "special_type": null,
@@ -24338,7 +24338,7 @@
               "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/288/721564.jpg"
             },
             "480P": {
-              "telegram_message_id": 966,
+              "telegram_message_id": 1044,
               "episode": 11,
               "season": 1,
               "special_type": null,
@@ -24354,7 +24354,7 @@
           }
         },
         {
-          "telegram_message_id": 970,
+          "telegram_message_id": 1048,
           "episode": 12,
           "season": 1,
           "special_type": null,
@@ -24369,7 +24369,7 @@
           "slug_id": "JsjANklx9YhiI4FF",
           "qualities": {
             "1080P": {
-              "telegram_message_id": 971,
+              "telegram_message_id": 1049,
               "episode": 12,
               "season": 1,
               "special_type": null,
@@ -24383,7 +24383,7 @@
               "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/542/1356699.jpg"
             },
             "720P": {
-              "telegram_message_id": 970,
+              "telegram_message_id": 1048,
               "episode": 12,
               "season": 1,
               "special_type": null,
@@ -24397,7 +24397,7 @@
               "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/542/1356699.jpg"
             },
             "480P": {
-              "telegram_message_id": 969,
+              "telegram_message_id": 1047,
               "episode": 12,
               "season": 1,
               "special_type": null,
@@ -24413,7 +24413,7 @@
           }
         },
         {
-          "telegram_message_id": 973,
+          "telegram_message_id": 1051,
           "episode": 13,
           "season": 1,
           "special_type": null,
@@ -24428,7 +24428,7 @@
           "slug_id": "bkLHsn8rAelxXPVW",
           "qualities": {
             "1080P": {
-              "telegram_message_id": 974,
+              "telegram_message_id": 1052,
               "episode": 13,
               "season": 1,
               "special_type": null,
@@ -24442,7 +24442,7 @@
               "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/290/727177.jpg"
             },
             "720P": {
-              "telegram_message_id": 973,
+              "telegram_message_id": 1051,
               "episode": 13,
               "season": 1,
               "special_type": null,
@@ -24456,7 +24456,7 @@
               "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/290/727177.jpg"
             },
             "480P": {
-              "telegram_message_id": 972,
+              "telegram_message_id": 1050,
               "episode": 13,
               "season": 1,
               "special_type": null,
@@ -24472,7 +24472,7 @@
           }
         },
         {
-          "telegram_message_id": 976,
+          "telegram_message_id": 1054,
           "episode": 14,
           "season": 1,
           "special_type": null,
@@ -24487,7 +24487,7 @@
           "slug_id": "yG38yZ6i6dhZ0Aw1",
           "qualities": {
             "1080P": {
-              "telegram_message_id": 977,
+              "telegram_message_id": 1055,
               "episode": 14,
               "season": 1,
               "special_type": null,
@@ -24501,7 +24501,7 @@
               "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/542/1357205.jpg"
             },
             "720P": {
-              "telegram_message_id": 976,
+              "telegram_message_id": 1054,
               "episode": 14,
               "season": 1,
               "special_type": null,
@@ -24515,7 +24515,7 @@
               "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/542/1357205.jpg"
             },
             "480P": {
-              "telegram_message_id": 975,
+              "telegram_message_id": 1053,
               "episode": 14,
               "season": 1,
               "special_type": null,
@@ -24531,7 +24531,7 @@
           }
         },
         {
-          "telegram_message_id": 979,
+          "telegram_message_id": 1057,
           "episode": 15,
           "season": 1,
           "special_type": null,
@@ -24546,7 +24546,7 @@
           "slug_id": "Sh4ONRiNRR0On4md",
           "qualities": {
             "1080P": {
-              "telegram_message_id": 980,
+              "telegram_message_id": 1058,
               "episode": 15,
               "season": 1,
               "special_type": null,
@@ -24560,7 +24560,7 @@
               "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/542/1357208.jpg"
             },
             "720P": {
-              "telegram_message_id": 979,
+              "telegram_message_id": 1057,
               "episode": 15,
               "season": 1,
               "special_type": null,
@@ -24574,7 +24574,7 @@
               "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/542/1357208.jpg"
             },
             "480P": {
-              "telegram_message_id": 978,
+              "telegram_message_id": 1056,
               "episode": 15,
               "season": 1,
               "special_type": null,
@@ -24590,7 +24590,7 @@
           }
         },
         {
-          "telegram_message_id": 982,
+          "telegram_message_id": 1060,
           "episode": 16,
           "season": 1,
           "special_type": null,
@@ -24605,7 +24605,7 @@
           "slug_id": "_7RCSFtgXFAPKqF0",
           "qualities": {
             "1080P": {
-              "telegram_message_id": 983,
+              "telegram_message_id": 1061,
               "episode": 16,
               "season": 1,
               "special_type": null,
@@ -24619,7 +24619,7 @@
               "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/318/797099.jpg"
             },
             "720P": {
-              "telegram_message_id": 982,
+              "telegram_message_id": 1060,
               "episode": 16,
               "season": 1,
               "special_type": null,
@@ -24633,7 +24633,7 @@
               "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/318/797099.jpg"
             },
             "480P": {
-              "telegram_message_id": 981,
+              "telegram_message_id": 1059,
               "episode": 16,
               "season": 1,
               "special_type": null,
@@ -24649,7 +24649,7 @@
           }
         },
         {
-          "telegram_message_id": 985,
+          "telegram_message_id": 1063,
           "episode": 17,
           "season": 1,
           "special_type": null,
@@ -24664,7 +24664,7 @@
           "slug_id": "r_n_GKCyKmyQtonV",
           "qualities": {
             "1080P": {
-              "telegram_message_id": 986,
+              "telegram_message_id": 1064,
               "episode": 17,
               "season": 1,
               "special_type": null,
@@ -24678,7 +24678,7 @@
               "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/318/797101.jpg"
             },
             "720P": {
-              "telegram_message_id": 985,
+              "telegram_message_id": 1063,
               "episode": 17,
               "season": 1,
               "special_type": null,
@@ -24692,7 +24692,7 @@
               "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/318/797101.jpg"
             },
             "480P": {
-              "telegram_message_id": 984,
+              "telegram_message_id": 1062,
               "episode": 17,
               "season": 1,
               "special_type": null,
@@ -24708,7 +24708,7 @@
           }
         },
         {
-          "telegram_message_id": 988,
+          "telegram_message_id": 1066,
           "episode": 18,
           "season": 1,
           "special_type": null,
@@ -24723,7 +24723,7 @@
           "slug_id": "TeuHhQNaulg6l-gJ",
           "qualities": {
             "1080P": {
-              "telegram_message_id": 989,
+              "telegram_message_id": 1067,
               "episode": 18,
               "season": 1,
               "special_type": null,
@@ -24737,7 +24737,7 @@
               "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/318/797103.jpg"
             },
             "720P": {
-              "telegram_message_id": 988,
+              "telegram_message_id": 1066,
               "episode": 18,
               "season": 1,
               "special_type": null,
@@ -24751,7 +24751,7 @@
               "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/318/797103.jpg"
             },
             "480P": {
-              "telegram_message_id": 987,
+              "telegram_message_id": 1065,
               "episode": 18,
               "season": 1,
               "special_type": null,
@@ -24767,7 +24767,7 @@
           }
         },
         {
-          "telegram_message_id": 935,
+          "telegram_message_id": 1069,
           "episode": 19,
           "season": 1,
           "special_type": null,
@@ -24782,7 +24782,7 @@
           "slug_id": "oOWrz_oRzpQ9gubW",
           "qualities": {
             "1080P": {
-              "telegram_message_id": 936,
+              "telegram_message_id": 1070,
               "episode": 19,
               "season": 1,
               "special_type": null,
@@ -24796,7 +24796,7 @@
               "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/318/797115.jpg"
             },
             "720P": {
-              "telegram_message_id": 935,
+              "telegram_message_id": 1069,
               "episode": 19,
               "season": 1,
               "special_type": null,
@@ -24810,7 +24810,7 @@
               "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/318/797115.jpg"
             },
             "480P": {
-              "telegram_message_id": 934,
+              "telegram_message_id": 1068,
               "episode": 19,
               "season": 1,
               "special_type": null,
@@ -24826,7 +24826,7 @@
           }
         },
         {
-          "telegram_message_id": 938,
+          "telegram_message_id": 1072,
           "episode": 20,
           "season": 1,
           "special_type": null,
@@ -24841,7 +24841,7 @@
           "slug_id": "uO9l0mHjTt8kSssk",
           "qualities": {
             "1080P": {
-              "telegram_message_id": 939,
+              "telegram_message_id": 1073,
               "episode": 20,
               "season": 1,
               "special_type": null,
@@ -24855,7 +24855,7 @@
               "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/318/797116.jpg"
             },
             "720P": {
-              "telegram_message_id": 938,
+              "telegram_message_id": 1072,
               "episode": 20,
               "season": 1,
               "special_type": null,
@@ -24869,7 +24869,7 @@
               "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/318/797116.jpg"
             },
             "480P": {
-              "telegram_message_id": 937,
+              "telegram_message_id": 1071,
               "episode": 20,
               "season": 1,
               "special_type": null,
@@ -24885,7 +24885,7 @@
           }
         },
         {
-          "telegram_message_id": 941,
+          "telegram_message_id": 1075,
           "episode": 21,
           "season": 1,
           "special_type": null,
@@ -24900,7 +24900,7 @@
           "slug_id": "nlGrw9iPlVz6iWxA",
           "qualities": {
             "1080P": {
-              "telegram_message_id": 942,
+              "telegram_message_id": 1076,
               "episode": 21,
               "season": 1,
               "special_type": null,
@@ -24914,7 +24914,7 @@
               "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/318/797117.jpg"
             },
             "720P": {
-              "telegram_message_id": 941,
+              "telegram_message_id": 1075,
               "episode": 21,
               "season": 1,
               "special_type": null,
@@ -24928,7 +24928,7 @@
               "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/318/797117.jpg"
             },
             "480P": {
-              "telegram_message_id": 940,
+              "telegram_message_id": 1074,
               "episode": 21,
               "season": 1,
               "special_type": null,
@@ -24944,7 +24944,7 @@
           }
         },
         {
-          "telegram_message_id": 944,
+          "telegram_message_id": 1078,
           "episode": 22,
           "season": 1,
           "special_type": null,
@@ -24959,7 +24959,7 @@
           "slug_id": "mwqd2_dcjrYyYahC",
           "qualities": {
             "1080P": {
-              "telegram_message_id": 1001,
+              "telegram_message_id": 1079,
               "episode": 22,
               "season": 1,
               "special_type": null,
@@ -24973,7 +24973,7 @@
               "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/318/797118.jpg"
             },
             "720P": {
-              "telegram_message_id": 944,
+              "telegram_message_id": 1078,
               "episode": 22,
               "season": 1,
               "special_type": null,
@@ -24987,7 +24987,7 @@
               "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/318/797118.jpg"
             },
             "480P": {
-              "telegram_message_id": 943,
+              "telegram_message_id": 1077,
               "episode": 22,
               "season": 1,
               "special_type": null,
@@ -25003,7 +25003,7 @@
           }
         },
         {
-          "telegram_message_id": 1003,
+          "telegram_message_id": 1081,
           "episode": 23,
           "season": 1,
           "special_type": null,
@@ -25018,7 +25018,7 @@
           "slug_id": "UziBzpDKdSTkuoP_",
           "qualities": {
             "1080P": {
-              "telegram_message_id": 1004,
+              "telegram_message_id": 1082,
               "episode": 23,
               "season": 1,
               "special_type": null,
@@ -25032,7 +25032,7 @@
               "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/318/797119.jpg"
             },
             "720P": {
-              "telegram_message_id": 1003,
+              "telegram_message_id": 1081,
               "episode": 23,
               "season": 1,
               "special_type": null,
@@ -25046,7 +25046,7 @@
               "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/318/797119.jpg"
             },
             "480P": {
-              "telegram_message_id": 1002,
+              "telegram_message_id": 1080,
               "episode": 23,
               "season": 1,
               "special_type": null,
@@ -25062,7 +25062,7 @@
           }
         },
         {
-          "telegram_message_id": 1006,
+          "telegram_message_id": 1084,
           "episode": 24,
           "season": 1,
           "special_type": null,
@@ -25077,7 +25077,7 @@
           "slug_id": "4sw24GUPkXoBjav_",
           "qualities": {
             "1080P": {
-              "telegram_message_id": 1007,
+              "telegram_message_id": 1085,
               "episode": 24,
               "season": 1,
               "special_type": null,
@@ -25091,7 +25091,7 @@
               "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/318/797122.jpg"
             },
             "720P": {
-              "telegram_message_id": 1006,
+              "telegram_message_id": 1084,
               "episode": 24,
               "season": 1,
               "special_type": null,
@@ -25105,7 +25105,7 @@
               "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/318/797122.jpg"
             },
             "480P": {
-              "telegram_message_id": 1005,
+              "telegram_message_id": 1083,
               "episode": 24,
               "season": 1,
               "special_type": null,
@@ -25121,7 +25121,7 @@
           }
         },
         {
-          "telegram_message_id": 1009,
+          "telegram_message_id": 1087,
           "episode": 1,
           "season": 2,
           "special_type": null,
@@ -25136,7 +25136,7 @@
           "slug_id": "R3DoALw5dRjbGHxs",
           "qualities": {
             "1080P": {
-              "telegram_message_id": 1010,
+              "telegram_message_id": 1088,
               "episode": 1,
               "season": 2,
               "special_type": null,
@@ -25150,7 +25150,7 @@
               "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/542/1355130.jpg"
             },
             "720P": {
-              "telegram_message_id": 1009,
+              "telegram_message_id": 1087,
               "episode": 1,
               "season": 2,
               "special_type": null,
@@ -25164,7 +25164,7 @@
               "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/542/1355130.jpg"
             },
             "480P": {
-              "telegram_message_id": 1008,
+              "telegram_message_id": 1086,
               "episode": 1,
               "season": 2,
               "special_type": null,
@@ -25180,7 +25180,7 @@
           }
         },
         {
-          "telegram_message_id": 1013,
+          "telegram_message_id": 1091,
           "episode": 2,
           "season": 2,
           "special_type": null,
@@ -25195,7 +25195,7 @@
           "slug_id": "I6vv3QzeigyZy1AS",
           "qualities": {
             "720P": {
-              "telegram_message_id": 1013,
+              "telegram_message_id": 1091,
               "episode": 2,
               "season": 2,
               "special_type": null,
@@ -25209,7 +25209,7 @@
               "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/542/1355135.jpg"
             },
             "1080P": {
-              "telegram_message_id": 1012,
+              "telegram_message_id": 1090,
               "episode": 2,
               "season": 2,
               "special_type": null,
@@ -25223,7 +25223,7 @@
               "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/542/1355135.jpg"
             },
             "480P": {
-              "telegram_message_id": 1011,
+              "telegram_message_id": 1089,
               "episode": 2,
               "season": 2,
               "special_type": null,
@@ -25252,7 +25252,7 @@
       "year": 2020,
       "studio": "Toho",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Jujutsu_Kaisen_(TV_series)",
-      "updated_at": "2026-11-02T07:01:15Z"
+      "updated_at": "2026-11-02T07:08:57Z"
     }
   ]
 }
