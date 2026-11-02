@@ -148,10 +148,11 @@ function render(){
 }
 function showDetail(a){
  const root=$('detail-content');root.replaceChildren();
+ const totalEpisodes=Array.isArray(a.episodes)?new Set(a.episodes.map(episode=>[episode.special_type||'',episode.season??1,episode.episode??episode.number??''].join(':'))).size:Number(a.episodes_total)||0;
  const bg=el('div','tv-detail-bg');bg.setAttribute('aria-hidden','true');bg.style.setProperty('--bg-img','url("'+poster(a).replace(/"/g,'%22')+'")');root.append(bg);
  const layout=el('div','detail-hero');layout.append(image(a,'detail-poster',true,true));
  const info=el('div');info.append(el('p','anime-kicker','Anime details'),el('h1','anime-detail-title',a.title));
- info.append(el('p','anime-detail-meta',[a.year,a.episodes_total?a.episodes_total+' episodes':''].filter(Boolean).join(' · ')));
+ info.append(el('p','anime-detail-meta',[a.year,totalEpisodes?totalEpisodes+' episodes':''].filter(Boolean).join(' · ')));
  if(a.rating)info.append(ratingTag('p','anime-detail-rating',a.rating));
  const g=genresOf(a);if(g.length)info.append(el('p','anime-detail-line',g.join(' · ')));
  layout.append(info);root.append(layout);
