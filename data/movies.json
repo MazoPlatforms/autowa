@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "updated_at": "2026-11-01T22:58:30.920934+00:00",
+  "updated_at": "2026-11-02T21:46:08.825485+00:00",
   "movies": [
     {
       "id": "telegram-120",
@@ -3522,7 +3522,7 @@
         }
       },
       "imdb_id": "tt27118357",
-      "poster": "https://m.media-amazon.com/images/M/MV5BNTAzMGQ2MGItMjk5OC00YWIwLThmMjUtYmNjMTIxNzVlZWQ4XkEyXkFqcGc@._V1_.jpg",
+      "poster": "https://m.media-amazon.com/images/M/MV5BNDEwYmQ5OGEtNDE0ZC00YjI1LTg4MDEtMGZhYTk0OGY3YjBkXkEyXkFqcGc@._V1_.jpg",
       "genre": [
         "Action",
         "Biography",
