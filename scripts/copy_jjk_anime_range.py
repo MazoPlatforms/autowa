@@ -75,7 +75,8 @@ async def main():
                 skipped += 1
                 continue
             filename = str(message.file.name or "")
-            if not re.search(r"(?i)\.mkv$", filename):
+            allowed_extension = r"(?i)\.(mkv|mp4)$" if LAST_FILE_COUNT > 0 else r"(?i)\.mkv$"
+            if not re.search(allowed_extension, filename):
                 skipped += 1
                 continue
             parsed = caption_for(filename)
