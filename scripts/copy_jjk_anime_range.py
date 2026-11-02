@@ -64,8 +64,10 @@ async def main():
     source_episodes = {}
     try:
         if LAST_FILE_COUNT > 0:
-            recent = [message async for message in client.iter_messages(source, limit=max(50, LAST_FILE_COUNT * 10)) if message.file]
+            recent = [message async for message in client.iter_messages(source, limit=max(50, LAST_FILE_COUNT * 10)) if message.media]
             messages = list(reversed(recent[:LAST_FILE_COUNT]))
+            for selected in messages:
+                print(f"SELECTED saved={selected.id} filename={getattr(selected.file, 'name', '') or ''} has_document={bool(selected.document)}", flush=True)
         else:
             messages = [message async for message in client.iter_messages(source, min_id=START_ID - 1, max_id=END_ID + 1, reverse=True)]
         for message in messages:
