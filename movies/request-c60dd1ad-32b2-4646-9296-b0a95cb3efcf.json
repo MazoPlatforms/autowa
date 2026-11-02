@@ -1,0 +1,13 @@
+{
+  "id": "request-c60dd1ad-32b2-4646-9296-b0a95cb3efcf",
+  "title": "Aranmanai",
+  "year": "2014",
+  "quality": "720p",
+  "enabled": false,
+  "status": "failed",
+  "failure_stage": "media_publishing",
+  "finished_at": "2026-11-02T00:29:19.132Z",
+  "request_origin": "koyeb_verified",
+  "workflow_run_id": "41367331843",
+  "workflow_run_url": "https://github.com/MazoPlatforms/autowa/actions/runs/41367331843"
+}
