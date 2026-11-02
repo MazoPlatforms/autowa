@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-02T01:54:28.557Z",
+  "updated_at": "2026-11-02T01:54:43.958Z",
   "anime": [
     {
       "slug_id": "naruto",
@@ -24051,6 +24051,17 @@
               "file_size": 241291475,
               "file_name": "@TamilMob_LinkZz Jujutsu Kaisen S01 E07 Blu-Ray - 720p -.mkv",
               "mime_type": "video/x-matroska"
+            },
+            "1080P": {
+              "telegram_message_id": 927,
+              "episode": 7,
+              "season": 1,
+              "special_type": null,
+              "part": null,
+              "quality": "1080p",
+              "file_size": 377579741,
+              "file_name": "@TamilMob_LinkZz Jujutsu Kaisen S01 E07 Blu-Ray - 1080p .mkv",
+              "mime_type": "video/x-matroska"
             }
           }
         }
@@ -24063,7 +24074,7 @@
       "status": null,
       "episodes_total": null,
       "studio": null,
-      "updated_at": "2026-11-02T01:54:28.557Z"
+      "updated_at": "2026-11-02T01:54:43.958Z"
     }
   ]
 }
