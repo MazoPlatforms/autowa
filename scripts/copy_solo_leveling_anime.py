@@ -91,7 +91,7 @@ def review_candidates(message, previous_messages):
 
 def caption_identity(text):
     text = str(text or "")
-    if not re.search(r"(?im)^\s*Anime Slug ID\s*:\s*solo-leveling\s*$", text):
+    if not re.search(rf"(?im)^\s*Anime Slug ID\s*:\s*{re.escape(SLUG)}\s*$", text):
         return None
     def number(label, default=None):
         match = re.search(rf"(?im)^\s*{label}\s*:\s*(\d+)\s*$", text)
