@@ -59,6 +59,9 @@ def anime_filename_parts(raw):
     """Parse common anime release names without requiring a fixed naming format."""
     value = re.sub(r'(?i)\.(mkv|mp4|avi|mov|webm)(\.\w+)?$', '', raw or '')
     value = re.sub(r'[._]+', ' ', value)
+    # Telegram release uploads may start with a channel/uploader tag such as
+    # ``@TamilMob_LinkZz -``. It is metadata, not part of the anime title.
+    value = re.sub(r'^@[\w-]+(?:\s+[\w-]+){0,3}\s*[-–—:]\s*', '', value, flags=re.I)
     # Language/release labels are not part of the anime title.
     value = re.sub(r'(?i)(?:tamil|telugu|malayalam|kannada|hindi|english|தமிழ்|tam|mal|hin|eng|jap)', ' ', value)
     value = re.sub(r'\s+', ' ', value).strip()
