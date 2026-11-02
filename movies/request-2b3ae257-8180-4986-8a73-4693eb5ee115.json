@@ -1,0 +1,13 @@
+{
+  "id": "request-2b3ae257-8180-4986-8a73-4693eb5ee115",
+  "title": "Boss Engira Baskaran",
+  "year": "2010",
+  "quality": "720p",
+  "enabled": false,
+  "status": "failed",
+  "failure_stage": "media_publishing",
+  "finished_at": "2026-11-02T02:08:11.764Z",
+  "request_origin": "koyeb_verified",
+  "workflow_run_id": "41375994355",
+  "workflow_run_url": "https://github.com/MazoPlatforms/autowa/actions/runs/41375994355"
+}
