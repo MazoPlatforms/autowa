@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "updated_at": 1793604547,
+  "updated_at": 1793604753,
   "anime": {
     "slug_id": "jujutsu-kaisen",
-    "title": "Jujutsu kaisen",
+    "title": "Jujutsu Kaisen",
     "episodes": [
       {
         "telegram_message_id": 1015,
@@ -2895,6 +2895,110 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/542/1355135.jpg"
           }
         }
+      },
+      {
+        "telegram_message_id": 1167,
+        "episode": 6,
+        "season": 3,
+        "special_type": null,
+        "part": null,
+        "quality": "720P",
+        "file_size": 241099670,
+        "file_name": "[@Anime_RTX] [S03-E06] Jujutsu Kaisen [720p] [Sub].mkv",
+        "mime_type": "video/x-matroska",
+        "title": "After Rain",
+        "released": "2020-11-06",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/542/1356106.jpg",
+        "slug_id": "IRKC7tJafmT6bhOm",
+        "qualities": {
+          "720P": {
+            "telegram_message_id": 1167,
+            "episode": 6,
+            "season": 3,
+            "special_type": null,
+            "part": null,
+            "quality": "720P",
+            "file_size": 241099670,
+            "file_name": "[@Anime_RTX] [S03-E06] Jujutsu Kaisen [720p] [Sub].mkv",
+            "mime_type": "video/x-matroska",
+            "title": "After Rain",
+            "released": "2020-11-06",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/542/1356106.jpg"
+          },
+          "480P": {
+            "telegram_message_id": 1166,
+            "episode": 6,
+            "season": 3,
+            "special_type": null,
+            "part": null,
+            "quality": "480P",
+            "file_size": 106713248,
+            "file_name": "[@Anime_RTX] [S03-E06] Jujutsu Kaisen [480p] [Sub].mkv",
+            "mime_type": "video/x-matroska",
+            "title": "After Rain",
+            "released": "2020-11-06",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/542/1356106.jpg"
+          }
+        }
+      },
+      {
+        "telegram_message_id": 1169,
+        "episode": 7,
+        "season": 3,
+        "special_type": null,
+        "part": null,
+        "quality": "720P",
+        "file_size": 137763595,
+        "file_name": "[@Anime_RTX] [S03-E07] Jujutsu Kaisen [720p] [Sub].mkv",
+        "mime_type": "video/x-matroska",
+        "title": "Assault",
+        "released": "2020-11-13",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/542/1356167.jpg",
+        "slug_id": "t0bOAkO--fNSg4Za",
+        "qualities": {
+          "1080P": {
+            "telegram_message_id": 1170,
+            "episode": 7,
+            "season": 3,
+            "special_type": null,
+            "part": null,
+            "quality": "1080P",
+            "file_size": 291748553,
+            "file_name": "[@Anime_RTX] [S03-E07] Jujutsu Kaisen [1080p] [Sub].mkv",
+            "mime_type": "video/x-matroska",
+            "title": "Assault",
+            "released": "2020-11-13",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/542/1356167.jpg"
+          },
+          "720P": {
+            "telegram_message_id": 1169,
+            "episode": 7,
+            "season": 3,
+            "special_type": null,
+            "part": null,
+            "quality": "720P",
+            "file_size": 137763595,
+            "file_name": "[@Anime_RTX] [S03-E07] Jujutsu Kaisen [720p] [Sub].mkv",
+            "mime_type": "video/x-matroska",
+            "title": "Assault",
+            "released": "2020-11-13",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/542/1356167.jpg"
+          },
+          "480P": {
+            "telegram_message_id": 1168,
+            "episode": 7,
+            "season": 3,
+            "special_type": null,
+            "part": null,
+            "quality": "480P",
+            "file_size": 77971101,
+            "file_name": "[@Anime_RTX] [S03-E07] Jujutsu Kaisen [480p] [Sub].mkv",
+            "mime_type": "video/x-matroska",
+            "title": "Assault",
+            "released": "2020-11-13",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/542/1356167.jpg"
+          }
+        }
       }
     ],
     "poster": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx113415-LHBAeoZDIsnF.jpg",
@@ -2910,11 +3014,11 @@
     "year": 2020,
     "studio": "Toho",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Jujutsu_Kaisen_(TV_series)",
-    "updated_at": "2026-11-02T07:29:02Z",
     "season_banners": {
       "1": "/banners/jujutsu-kaisen-season-1.webp",
       "2": "/banners/jujutsu-kaisen-season-2.webp",
       "3": "/banners/jujutsu-kaisen-season-3.webp"
-    }
+    },
+    "updated_at": "2026-11-02T07:32:21Z"
   }
 }

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": 1793604547,
+  "updated_at": 1793604753,
   "anime": [
     {
       "slug_id": "naruto",
@@ -33,7 +33,7 @@
         "10": "/banners/naruto-season-10.webp",
         "11": "/banners/naruto-season-11.webp"
       },
-      "updated_at": "2026-11-02T07:29:05Z"
+      "updated_at": "2026-11-02T07:32:31Z"
     },
     {
       "slug_id": "naruto-shippuden",
@@ -53,7 +53,7 @@
       "status": "Finished",
       "episodes_total": 500,
       "studio": "Studio Pierrot",
-      "updated_at": "2026-11-02T07:29:07Z"
+      "updated_at": "2026-11-02T07:32:33Z"
     },
     {
       "slug_id": "attack-on-titan",
@@ -79,11 +79,11 @@
         "3": "/banners/attack-on-titan-season-3.webp",
         "4": "/banners/attack-on-titan-season-4.webp"
       },
-      "updated_at": "2026-11-02T07:29:04Z"
+      "updated_at": "2026-11-02T07:32:30Z"
     },
     {
       "slug_id": "jujutsu-kaisen",
-      "title": "Jujutsu kaisen",
+      "title": "Jujutsu Kaisen",
       "poster": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx113415-LHBAeoZDIsnF.jpg",
       "plot": "A boy fights... for \"the right death.\"\n\nHardship, regret, shame: the negative feelings that humans feel become Curses that lurk in our everyday lives. The Curses run rampant throughout the world, capable of leading people to terrible misfortune and even death. What's more, the Curses can only be exorcised by another Curse.\n\nItadori Yuji is a boy with tremendous physical strength, though he lives a completely ordinary high school life. One day, to save a friend who has been attacked by Curses, he eats the finger of the Double-Faced Specter, taking the Curse into his own soul. From then on, he shares one body with the Double-Faced Specter. Guided by the most powerful of sorcerers, Gojou Satoru, Itadori is admitted to the Tokyo Metropolitan Technical High School of Sorcery, an organization that fights the Curses... and thus begins the heroic tale of a boy who became a Curse to exorcise a Cu",
       "genre": [
@@ -97,17 +97,17 @@
       "year": 2020,
       "studio": "Toho",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Jujutsu_Kaisen_(TV_series)",
-      "updated_at": "2026-11-02T07:29:02Z",
       "season_banners": {
         "1": "/banners/jujutsu-kaisen-season-1.webp",
         "2": "/banners/jujutsu-kaisen-season-2.webp",
         "3": "/banners/jujutsu-kaisen-season-3.webp"
-      }
+      },
+      "updated_at": "2026-11-02T07:32:21Z"
     },
     {
       "slug_id": "new-linkz-jujutsu-kaisen",
       "title": "New Linkz Jujutsu kaisen",
-      "updated_at": "2026-11-02T07:29:01Z"
+      "updated_at": "2026-11-02T07:32:28Z"
     }
   ]
 }
