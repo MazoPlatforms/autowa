@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-02T01:54:59.654Z",
+  "updated_at": "2026-11-02T01:55:15.251Z",
   "anime": [
     {
       "slug_id": "naruto",
@@ -24066,15 +24066,16 @@
           }
         },
         {
-          "telegram_message_id": 928,
+          "telegram_message_id": 929,
           "episode": 8,
           "season": 1,
           "special_type": null,
           "part": null,
-          "quality": "480p",
-          "file_size": 104753984,
-          "file_name": "@TamilMob_LinkZz Jujutsu Kaisen S01 E08 Blu-Ray - 480p -.mkv",
+          "quality": "720p",
+          "file_size": 181306504,
+          "file_name": "@TamilMob_LinkZz Jujutsu Kaisen S01 E08 Blu-Ray - 720p -.mkv",
           "mime_type": "video/x-matroska",
+          "slug_id": "D9LH2Gq_kTBZl-8n",
           "qualities": {
             "480P": {
               "telegram_message_id": 928,
@@ -24085,6 +24086,17 @@
               "quality": "480p",
               "file_size": 104753984,
               "file_name": "@TamilMob_LinkZz Jujutsu Kaisen S01 E08 Blu-Ray - 480p -.mkv",
+              "mime_type": "video/x-matroska"
+            },
+            "720P": {
+              "telegram_message_id": 929,
+              "episode": 8,
+              "season": 1,
+              "special_type": null,
+              "part": null,
+              "quality": "720p",
+              "file_size": 181306504,
+              "file_name": "@TamilMob_LinkZz Jujutsu Kaisen S01 E08 Blu-Ray - 720p -.mkv",
               "mime_type": "video/x-matroska"
             }
           }
@@ -24098,7 +24110,7 @@
       "status": null,
       "episodes_total": null,
       "studio": null,
-      "updated_at": "2026-11-02T01:54:59.654Z"
+      "updated_at": "2026-11-02T01:55:15.251Z"
     }
   ]
 }
