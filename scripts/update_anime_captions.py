@@ -16,7 +16,9 @@ from src.telegram_media import (
     anime_parent_slug,
     anime_special_type,
     fixed_anime_episode_slug,
+    generic_anime_filename,
     manual_anime_season,
+    canonical_anime_release_title,
 )
 
 
@@ -46,9 +48,13 @@ def parent_slug_map():
 
 def build_caption(message, episode_slugs):
     filename = str(getattr(message.file, "name", "") or "")
+    if generic_anime_filename(filename):
+        return None
     title, filename_season, episode, part = anime_filename_parts(filename)
     previous = anime_caption_parts(getattr(message, "raw_text", "") or "")
-    title = title or previous["title"]
+    caption_title = canonical_anime_release_title(previous["title"] or "")
+    title = caption_title if "sololeveling" in re.sub(r"[^a-z0-9]+", "", caption_title.casefold()) else title or caption_title
+    title = canonical_anime_release_title(title)
     season = filename_season or previous["season"] or manual_anime_season(title, episode)
     episode = episode or previous["episode"]
     if not episode:

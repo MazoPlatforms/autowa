@@ -270,6 +270,11 @@ def canonical_anime_release_title(title):
         'attackontitanthefinalchapters': 'Attack on Titan',
     }.get(catalog_title_key(value), value)
 
+def generic_anime_filename(filename):
+    """Reject Telegram's generic document/video names as anime releases."""
+    value = re.sub(r'(?i)\.(mkv|mp4|avi|mov|webm)(\.\w+)?$', '', str(filename or '')).strip()
+    return bool(re.fullmatch(r'(?i)(?:document|video|file)[ _-]*\d{4}[-_]\d{2}[-_]\d{2}(?:[ _-]\d{2}[-_]\d{2}[-_]\d{2})?', value))
+
 def load_existing_anime_catalog():
     """Load local metadata so known shows do not hit APIs on every refresh."""
     try:
@@ -453,6 +458,8 @@ def anime_media_item(message):
     filename = str(getattr(message.file, 'name', '') or '')
     if not filename or not getattr(message, 'file', None):
         return None
+    if generic_anime_filename(filename):
+        return None
     title, season, episode, part = anime_filename_parts(filename)
     caption = anime_caption_parts(getattr(message, 'raw_text', ''))
     if caption.get('anime_slug_id') == 'solo-leveling':
@@ -475,6 +482,9 @@ def anime_media_item(message):
     # that did not use a separator after the uploader name. Use the caption
     # only when the filename did not provide a usable title.
     title = title if title and title != 'Untitled anime' else (caption_title or title)
+    if catalog_title_key(caption_title) == 'sololeveling' or 'sololeveling' in catalog_title_key(caption_title):
+        title = 'Solo Leveling'
+    title = canonical_anime_release_title(title)
     if caption.get('anime_slug_id') == 'solo-leveling':
         title = 'Solo Leveling'
     filename_season = season
