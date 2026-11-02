@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-02T07:21:04.041Z",
+  "updated_at": "2026-11-02T07:21:19.750Z",
   "anime": [
     {
       "slug_id": "naruto",
@@ -26506,15 +26506,16 @@
           }
         },
         {
-          "telegram_message_id": 1160,
+          "telegram_message_id": 1161,
           "episode": 1,
           "season": 3,
           "special_type": null,
           "part": null,
-          "quality": "480p",
-          "file_size": 106553980,
-          "file_name": "[@Corner_Tamil] Jujutsu kaisen (S03-E01) [480p] ESub.mkv",
+          "quality": "720p",
+          "file_size": 240932562,
+          "file_name": "[@Corner_Tamil] Jujutsu kaisen (S03-E01) [720p] ESub.mkv",
           "mime_type": "video/x-matroska",
+          "slug_id": "1L-hnfxGaUvvGuKy",
           "qualities": {
             "480P": {
               "telegram_message_id": 1160,
@@ -26525,6 +26526,17 @@
               "quality": "480p",
               "file_size": 106553980,
               "file_name": "[@Corner_Tamil] Jujutsu kaisen (S03-E01) [480p] ESub.mkv",
+              "mime_type": "video/x-matroska"
+            },
+            "720P": {
+              "telegram_message_id": 1161,
+              "episode": 1,
+              "season": 3,
+              "special_type": null,
+              "part": null,
+              "quality": "720p",
+              "file_size": 240932562,
+              "file_name": "[@Corner_Tamil] Jujutsu kaisen (S03-E01) [720p] ESub.mkv",
               "mime_type": "video/x-matroska"
             }
           }
@@ -26543,7 +26555,7 @@
       "year": 2020,
       "studio": "Toho",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Jujutsu_Kaisen_(TV_series)",
-      "updated_at": "2026-11-02T07:21:04.041Z"
+      "updated_at": "2026-11-02T07:21:19.750Z"
     }
   ]
 }
