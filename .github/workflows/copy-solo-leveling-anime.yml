@@ -7,6 +7,14 @@ on:
         description: Source Telegram username or ID
         required: true
         default: Solo_leveling_tamil_ongoing
+      copy_title:
+        description: Canonical anime title to copy from the source channel
+        required: true
+        default: Solo Leveling
+      copy_slug:
+        description: Canonical anime slug for copied captions
+        required: true
+        default: solo-leveling
       dry_run:
         description: Inspect source files without copying
         required: true
@@ -44,6 +52,8 @@ jobs:
           TELEGRAM_SESSION: ${{ secrets.TELEGRAM_SESSION }}
           TELEGRAM_ANIME_CHANNEL_ID: ${{ secrets.TELEGRAM_ANIME_CHANNEL_ID }}
           SOURCE_CHANNEL: ${{ inputs.source_channel }}
+          COPY_TITLE: ${{ inputs.copy_title }}
+          COPY_SLUG: ${{ inputs.copy_slug }}
           DRY_RUN: ${{ inputs.dry_run == 'true' && '1' || '0' }}
           REVIEW_ONLY: ${{ inputs.review_only == 'true' && '1' || '0' }}
           ALLOW_VIDEO_SOURCE: ${{ inputs.include_video_sources == 'true' && '1' || '0' }}

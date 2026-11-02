@@ -1,4 +1,4 @@
-"""Copy Solo Leveling document uploads into FilmGo's anime channel.
+"""Copy selected anime document uploads into FilmGo's anime channel.
 
 Only MKV/MP4 files uploaded as documents are accepted. Telegram video messages,
 other media, and non-Solo-Leveling filenames are ignored.
@@ -18,8 +18,8 @@ from src.telegram_media import anime_filename_parts, anime_parent_slug, anime_sp
 
 
 SOURCE = os.getenv("SOURCE_CHANNEL", "Solo_leveling_tamil_ongoing")
-TITLE = "Solo Leveling"
-SLUG = "solo-leveling"
+TITLE = os.getenv("COPY_TITLE", "Solo Leveling")
+SLUG = os.getenv("COPY_SLUG", "solo-leveling")
 DRY_RUN = os.getenv("DRY_RUN", "0") == "1"
 REVIEW_ONLY = os.getenv("REVIEW_ONLY", "0") == "1"
 ALLOW_VIDEO_SOURCE = os.getenv("ALLOW_VIDEO_SOURCE", "0") == "1"
@@ -38,7 +38,8 @@ def solo_parts(raw):
     """Parse Solo Leveling even when uploader/release text surrounds Sxx/Eyy."""
     value = re.sub(r"(?i)\.(mkv|mp4)(\.\w+)?$", "", str(raw or ""))
     normalized = re.sub(r"[_._•]+", " ", value)
-    if not re.search(r"(?i)\bsolo\s+leveling\b", normalized):
+    marker = re.escape(TITLE).replace(r"\ ", r"\s+")
+    if not re.search(rf"(?i)\b{marker}\b", normalized):
         return None
     combined = re.search(r"(?i)\bS\s*0*(\d{1,2})\s*(?:-|x)?\s*E\s*0*(\d{1,3})\b", normalized)
     season_match = re.search(r"(?i)\b(?:season\s*|s\s*[o0]?\s*)0*(\d{1,2})\b", normalized)
