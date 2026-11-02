@@ -401,7 +401,7 @@ const server=http.createServer(async(req,res)=>{
   if(url.pathname==='/admin'||url.pathname==='/admin.css'||url.pathname==='/admin.js'){
    const session=await authenticated(req);
    if(!session||session.number!=='+94779290433')return send(res,404,{error:'Not found'});
-   if(url.pathname==='/admin'){res.writeHead(200,{'Content-Type':'text/html; charset=utf-8','Cache-Control':'no-store','X-Robots-Tag':'noindex','Content-Security-Policy':"default-src 'self'; script-src 'self'; style-src 'self'; base-uri 'none'; frame-ancestors 'none'"});return res.end(adminHtml);}
+   if(url.pathname==='/admin'){res.writeHead(200,{'Content-Type':'text/html; charset=utf-8','Cache-Control':'no-store','X-Robots-Tag':'noindex','Content-Security-Policy':"default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src 'self'; base-uri 'none'; frame-ancestors 'none'"});return res.end(adminHtml);}
    const asset=url.pathname==='/admin.css'?{body:adminCss,type:'text/css; charset=utf-8'}:{body:adminJs,type:'text/javascript; charset=utf-8'};
    res.writeHead(200,{'Content-Type':asset.type,'Cache-Control':'no-store','X-Content-Type-Options':'nosniff','Content-Security-Policy':"default-src 'self'; connect-src 'self'; base-uri 'none'; frame-ancestors 'none'"});
    return res.end(asset.body);
