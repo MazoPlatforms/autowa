@@ -3,12 +3,14 @@ import crypto from 'node:crypto';
 import fs from 'node:fs';
 import {execFile,spawn} from 'node:child_process';
 import {promisify} from 'node:util';
+import {Writable,finished as streamFinished} from 'node:stream';
 const execFileAsync=promisify(execFile);
 import {startWhatsApp,sendWhatsAppOtp,deleteWhatsAppOtp,getWhatsAppProfilePicture,getWhatsAppBotNumber,isWhatsAppNumber} from './whatsapp-otp.mjs';
 import {startFilmGoBot} from './filmgo-bot.mjs';
 import {logFilmGo} from './filmgo-logs.mjs';
 import {startStreamWorker,proxyRange,downloadFile,streamWorkerState} from './stream-worker.mjs';
 import {startFastStreamWorker,fastProxyRange,fastWarm} from './fast-stream-worker.mjs';
+import {createAudioService,telegramRangeReader} from './audio-tracks.mjs';
 import {DAILY_TOKEN_LIMIT,DAILY_TOKEN_LIMIT_MILLI,tokenCostMilli,tokenAmount,reserveDailyTokens,releaseDailyTokens,dailyTokenUsage} from './daily-tokens.mjs';
 
 const PORT=Number(process.env.PORT||8000);
@@ -344,9 +346,52 @@ async function renderCatalogPage(req,source=catalogHtml){
  // the guest label for an already authenticated user.
  return source.toString('utf8').replace(/<a\b[^>]*\bid="catalog-account-link"[^>]*>[\s\S]*?<\/a>/,accountLink);
 }
+// ---- MKV multi-audio: track list + on-the-fly audio conversion (see src/audio-tracks.mjs) ----
+const noopSend=()=>{};
+async function movieGatewayPart(out,messageId,size,off,setCurrent){
+ if(!fastStreaming&&streamWorkerState().state!=='ready')return null;
+ const part=new Writable({highWaterMark:1<<20,write(chunk,_enc,cb){if(out.destroyed)return cb();if(out.write(chunk))cb();else out.once('drain',cb);}});
+ part.writeHead=()=>{};setCurrent(part);
+ let got=0;const onChunk=n=>{got+=n;};let handled=false;
+ if(fastStreaming)handled=await fastProxyRange(part,{},{messageId,start:off,length:size,onChunk},noopSend);
+ if(!handled)handled=await proxyRange(part,{},{messageId,start:off,length:size,onChunk},noopSend);
+ if(!handled)return null;
+ await new Promise(done=>streamFinished(part,()=>done()));
+ return got===size;
+}
+function mediaExt(name,mime){const e=/\.(mp4|mkv|webm|mov|avi|m4v|mka)$/i.exec(String(name||''))?.[1]?.toLowerCase();if(e)return e;mime=String(mime||'').toLowerCase();return mime.includes('matroska')?'mkv':mime.includes('webm')?'webm':'';}
+const audioService=createAudioService({
+ port:PORT,hmac,
+ authenticated:authenticatedStream,
+ send:(res,status,data,headers)=>send(res,status,data,headers),
+ async resolve(kind,id,quality){
+  if(kind==='movie'){
+   if(!telegramReady)return null;
+   const record=((await getPublicCatalog()).movies||[]).find(m=>m.slug_id===id),movie=selectMovieVariant(record,quality||null);
+   if(!movie||!Number.isSafeInteger(movie.telegram_message_id)||!Number.isSafeInteger(movie.file_size)||movie.file_size<=0)return null;
+   const mid=movie.telegram_message_id;
+   return {ext:mediaExt(movie.file_name,movie.mime_type),total:movie.file_size,open:telegramRangeReader({
+    spawnPython:(s,l)=>spawn('python3',['src/telegram_stream.py',String(mid),String(s),String(l)],{env:process.env,stdio:['ignore','pipe','ignore']}),
+    gatewayRange:(out,size,off,setCurrent)=>movieGatewayPart(out,mid,size,off,setCurrent)})};
+  }
+  if(!telegramAnimeReady)return null;
+  const found=findAnimeEpisode(await getAnimeCatalog(),id),episode=selectAnimeVariant(found?.episode,quality||null),mid=Number(episode?.telegram_message_id),total=Number(episode?.file_size);
+  if(!episode||!Number.isSafeInteger(mid)||!Number.isSafeInteger(total)||total<=0)return null;
+  return {ext:mediaExt(episode.file_name,episode.mime_type),total,open:telegramRangeReader({
+   spawnPython:(s,l)=>spawn('python3',['src/telegram_stream.py',String(mid),String(s),String(l),String(process.env.TELEGRAM_ANIME_CHANNEL_ID)],{env:process.env,stdio:['ignore','pipe','ignore']}),
+   partSize:STREAM_RANGE_SIZE,firstPart:8*1024*1024})};
+ },
+ // Only the small converted audio is charged (not the file bytes ffmpeg reads), so watching with a
+ // converted track costs the same tokens as watching with the original track.
+ async reserve(session){
+  const exempt=unlimitedRequests(session.number),reservation=await reserveDailyTokens(redis,hmac(session.number),tokenCostMilli(2*1024*1024,'stream'),{unlimited:exempt});
+  return {allowed:reservation.allowed,async settle(delivered){const actual=delivered?tokenCostMilli(delivered,'stream'):0;if(!exempt&&reservation.allowed&&reservation.costMilli>actual)await releaseDailyTokens(redis,reservation,reservation.costMilli-actual).catch(()=>{});}};
+ }
+});
 const server=http.createServer(async(req,res)=>{
  try{
   const url=new URL(req.url,'http://localhost');
+  if((url.pathname.startsWith('/api/audio')||url.pathname.startsWith('/internal/media/'))&&await audioService(req,res,url))return;
   const brandAsset=brandAssets.get(url.pathname);
   if(req.method==='GET'&&brandAsset){res.writeHead(200,{'Content-Type':brandAsset.type,'Cache-Control':brandAsset.cache,'X-Content-Type-Options':'nosniff'});return res.end(brandAsset.body);}
   const animeBanner=animeBanners.get(url.pathname);

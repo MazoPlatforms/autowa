@@ -132,3 +132,15 @@ void inactiveMetadataExample;
 ```
 
 These values are retained as reference notes only. The active publisher does not use them.
+
+## MKV multi-audio and unsupported audio codecs
+
+Browsers can only decode some audio codecs inside MKV, and they play just the first track. FilmGo now
+reads the track list from the MKV header (first ~1 MiB, cached) and shows every track in the player's
+Audio menu. Tracks the browser cannot play (AC3, E-AC3, DTS, TrueHD, ...) or tracks other than the first
+are converted on the fly to an audio-only stream by `ffmpeg` (installed in the Dockerfile), starting at the
+viewer's position and kept in sync with the video. The video itself is still streamed untouched, and
+MP4/other containers and MKVs whose first track is browser-compatible are not affected at all.
+
+Optional environment variables: `FILMGO_AUDIO_CODEC` (`aac` default, or `opus`), `AUDIO_MAX_PROCS` (10),
+`AUDIO_LEAD_SECONDS` (30, how far ahead of playback the converter may read), `AUDIO_PACE` (1.5), `FFMPEG_PATH`.

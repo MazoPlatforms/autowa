@@ -129,7 +129,7 @@ function create(opts){
  let sleepTimer=0,sleepMin=0,loop=false,lastV=null;
  const custom={cues:null,name:'',delay:0,on:false,tracks:new WeakMap()};
  const syncSpeed=()=>{const s=speedSel();const r=s?Number(s.value)||1:1;speedChip.textContent=(r===1?'1':String(r))+'×';};
- const syncVideo=()=>{const v=getVideo();if(v&&v!==lastV){lastV=v;v.loop=loop;if(custom.on)applyCustom(v);}};
+ const syncVideo=()=>{const v=getVideo();if(v&&v!==lastV){lastV=v;v.loop=loop;if(custom.on)applyCustom(v);}if(v)initAudio(v);};
  const onMedia=e=>{
   const t=e.target;if(!(t instanceof HTMLVideoElement)||t.classList.contains('filmgo-staging-video'))return;
   if(e.type==='play'||e.type==='playing')player.classList.add('fgp-playing');
@@ -138,8 +138,9 @@ function create(opts){
   if(e.type==='progress'||e.type==='timeupdate'||e.type==='loadedmetadata'||e.type==='seeked')syncBuffered();
   if(e.type==='ratechange'||e.type==='loadedmetadata')syncSpeed();
   bigplay.setAttribute('aria-label',t.paused?'Play':'Pause');
+  if(t===A.video)sideMedia(e.type);
  };
- for(const n of ['play','playing','pause','emptied','ended','progress','timeupdate','loadedmetadata','seeked','ratechange'])viewport.addEventListener(n,onMedia,true);
+ for(const n of ['play','playing','pause','emptied','ended','progress','timeupdate','loadedmetadata','seeked','seeking','waiting','ratechange'])viewport.addEventListener(n,onMedia,true);
  new MutationObserver(syncVideo).observe(viewport,{childList:true});
 
  /* fullscreen icon */
@@ -179,6 +180,121 @@ function create(opts){
  const syncCc=()=>{cc.dataset.on=String(textTracks().some(t=>t.mode==='showing'));};
  const setSubs=track=>{for(const t of textTracks())t.mode=t===track?'showing':'disabled';const v=getVideo();custom.on=!!track&&custom.tracks.get(v)===track;syncCc();};
 
+ /* ---- multi-audio (MKV): server-listed tracks + synced audio-only stream for tracks the browser cannot play ---- */
+ const LANGS={eng:'English',tam:'Tamil',tel:'Telugu',mal:'Malayalam',kan:'Kannada',hin:'Hindi',jpn:'Japanese',kor:'Korean',chi:'Chinese',zho:'Chinese',spa:'Spanish',fre:'French',fra:'French',ger:'German',deu:'German',ita:'Italian',por:'Portuguese',rus:'Russian',ara:'Arabic',tha:'Thai',ind:'Indonesian',may:'Malay',msa:'Malay',ben:'Bengali',mar:'Marathi',guj:'Gujarati',pan:'Punjabi',urd:'Urdu',tur:'Turkish',vie:'Vietnamese',pol:'Polish',dut:'Dutch',nld:'Dutch',swe:'Swedish',heb:'Hebrew',per:'Persian',fas:'Persian',ukr:'Ukrainian',gre:'Greek',ell:'Greek',und:'Unknown',mul:'Multiple',zxx:'No speech'};
+ const langName=c=>LANGS[String(c||'').toLowerCase()]||(c&&c!=='und'?String(c).toUpperCase():'Unknown');
+ const chName=n=>n===1?'Mono':n===2?'2.0':n===6?'5.1':n===8?'7.1':n?n+'ch':'';
+ const srvLabel=t=>{const l=langName(t.lang);return t.name&&!t.name.toLowerCase().includes(l.toLowerCase())?l+' · '+t.name:l;};
+ const srvValue=t=>[t.codec,chName(t.channels)].filter(Boolean).join(' ');
+ const prefGet=()=>{try{return localStorage.getItem('fgp-audio-lang')||'';}catch{return'';}};
+ const prefSet=l=>{try{localStorage.setItem('fgp-audio-lang',l);}catch{}};
+ const mdesc=Object.getOwnPropertyDescriptor(HTMLMediaElement.prototype,'muted'),vdesc=Object.getOwnPropertyDescriptor(HTMLMediaElement.prototype,'volume');
+ const A={key:'',video:null,tracks:[],transcode:false,sel:-1,mode:'native',el:null,gen:0,t0:0,ready:false,parked:false,reqAt:0,latency:700,tries:0,tryAt:0,restartTimer:0,idleTimer:0,loop:0,startTimer:0,virt:null,failed:new Set()};
+ player.__audio=A;
+ const mediaRef=v=>{try{const u=new URL(v.currentSrc||v.src,location.href),m=u.pathname.match(/^\/api\/(anime\/)?stream\/([A-Za-z0-9_-]+)$/);return m?{kind:m[1]?'anime':'movie',id:m[2],quality:u.searchParams.get('quality')||''}:null;}catch{return null;}};
+ const sideVolume=()=>{if(A.el)A.el.volume=clamp(Number(volume.value)||0,0,1);};
+ {const prev=Object.getOwnPropertyDescriptor(volume,'value');Object.defineProperty(volume,'value',{configurable:true,get:prev.get,set(x){prev.set.call(this,x);sideVolume();}});volume.addEventListener('input',sideVolume);}
+ function holdVideoMuted(v){
+  if(A.virt&&A.virt.v===v)return;releaseVideoMuted();
+  A.virt={v,muted:mdesc.get.call(v),volume:vdesc.get.call(v)};mdesc.set.call(v,true);
+  Object.defineProperty(v,'muted',{configurable:true,get:()=>A.virt?A.virt.muted:mdesc.get.call(v),set:x=>{if(A.virt)A.virt.muted=!!x;sideVolume();}});
+  Object.defineProperty(v,'volume',{configurable:true,get:()=>A.virt?A.virt.volume:vdesc.get.call(v),set:x=>{if(A.virt)A.virt.volume=x;sideVolume();}});
+ }
+ function releaseVideoMuted(){
+  const r=A.virt;if(!r)return;A.virt=null;const v=r.v;
+  try{delete v.muted;delete v.volume;mdesc.set.call(v,r.muted);}catch{}
+ }
+ function sideEl(){
+  if(A.el)return A.el;const a=new Audio();a.preload='auto';a.setAttribute('playsinline','');A.el=a;
+  a.addEventListener('canplay',()=>{if(A.mode!=='side'||A.ready)return;A.ready=true;A.latency=Math.min(4000,Math.max(300,performance.now()-A.reqAt));const v=A.video;if(v&&!v.paused&&!v.seeking)sideBegin();});
+  a.addEventListener('ended',()=>{const v=A.video;if(A.mode==='side'&&v&&!v.ended&&!v.paused)sideRestart(0.4);});
+  a.addEventListener('error',()=>{if(A.mode!=='side'||!a.getAttribute('src'))return;sideFail();});
+  return a;
+ }
+ const sideUrl=(ref,track,t)=>'/api/audio/'+ref.kind+'/'+encodeURIComponent(ref.id)+'?quality='+encodeURIComponent(ref.quality)+'&track='+track+'&t='+t.toFixed(2);
+ function sideStop(park){
+  clearTimeout(A.startTimer);clearTimeout(A.restartTimer);A.gen++;A.ready=false;
+  if(A.el){A.el.pause();if(A.el.getAttribute('src')){A.el.removeAttribute('src');A.el.load();}}
+  A.parked=!!park;
+ }
+ function sideOpen(lead){
+  const v=A.video,ref=v&&mediaRef(v);if(!v||!ref||A.sel<0)return;
+  sideStop(false);sideEl();
+  const now=performance.now();if(now-A.tryAt>30000){A.tries=0;}A.tryAt=A.tryAt&&now-A.tryAt<30000?A.tryAt:now;
+  A.t0=Math.max(0,(v.currentTime||0)+lead);A.reqAt=now;const a=A.el;
+  a.src=sideUrl(ref,A.sel,A.t0);a.playbackRate=v.playbackRate||1;sideVolume();a.load();
+ }
+ // lead = how far ahead of the video the new audio stream starts; covers the time the server needs to open it.
+ const sideLead=()=>Math.min(4,Math.max(.6,A.latency/1000*1.25+.25));
+ function sideRestart(delay){clearTimeout(A.restartTimer);A.restartTimer=setTimeout(()=>{if(A.mode==='side')sideOpen(sideLead());},(delay||0)*1000);}
+ function sideBegin(){
+  const v=A.video,a=A.el;if(!v||!a||!A.ready||v.paused)return;
+  clearTimeout(A.startTimer);const gen=A.gen,wait=(A.t0-v.currentTime)/(v.playbackRate||1)*1000;
+  const go=()=>{if(gen!==A.gen||v.paused)return;a.play().catch(e=>{if(e&&e.name==='NotAllowedError')toast('Tap play to enable audio','audio');});};
+  if(wait>25)A.startTimer=setTimeout(go,wait);else go();
+ }
+ function sideFail(){
+  const now=performance.now();A.tries=now-A.tryAt>30000?1:A.tries+1;
+  if(A.tries<=2){sideRestart(.8);return;}
+  const t=A.tracks[A.sel];if(t)A.failed.add(t.i);
+  stopSideMode();toast('Audio track unavailable','audio');
+ }
+ function stopSideMode(){sideStop(false);A.mode='native';releaseVideoMuted();clearInterval(A.loop);A.loop=0;}
+ function startSideMode(){
+  A.mode='side';holdVideoMuted(A.video);sideEl();
+  if(!A.loop)A.loop=setInterval(sideSync,250);
+  const v=A.video;if(v&&v.paused){A.parked=true;}else sideOpen(sideLead());
+ }
+ function sideSync(){
+  const v=A.video,a=A.el;if(A.mode!=='side'||!v||!a||!A.ready||a.paused||v.paused||v.seeking)return;
+  const d=A.t0+a.currentTime-v.currentTime;                 // >0: audio is ahead of the picture
+  if(Math.abs(d)>1.2){sideRestart(0);return;}
+  const base=v.playbackRate||1;a.playbackRate=Math.abs(d)<.04?base:base*(1-clamp(d,-.5,.5)*.14);
+ }
+ // media events for the active video (called from onMedia)
+ function sideMedia(type){
+  const v=A.video;if(A.mode!=='side'||!v)return;
+  if(type==='pause'||type==='waiting'||type==='emptied'||type==='ended'){if(A.el)A.el.pause();clearTimeout(A.startTimer);
+   if(type==='pause'){clearTimeout(A.idleTimer);A.idleTimer=setTimeout(()=>{if(A.mode==='side'&&v.paused)sideStop(true);},20000);}}
+  else if(type==='seeking'){if(A.el)A.el.pause();clearTimeout(A.startTimer);sideRestart(.18);}
+  else if(type==='play'||type==='playing'){
+   clearTimeout(A.idleTimer);
+   if(A.parked){A.parked=false;sideOpen(sideLead());}
+   else if(A.ready&&!v.seeking){const d=A.t0+A.el.currentTime-v.currentTime;if(A.el.paused&&Math.abs(d)<1.2&&d>-.3){if(d>0.03)sideBegin();else A.el.play().catch(()=>{});}else if(A.el.paused&&!A.restartTimer)sideRestart(0);}
+  }
+  else if(type==='ratechange'&&A.el)A.el.playbackRate=v.playbackRate||1;
+ }
+ function chooseInitial(){
+  const pref=prefGet(),usable=A.tracks.filter(t=>!A.failed.has(t.i));
+  return (pref&&usable.find(t=>t.lang===pref))||usable.find(t=>t.default)||usable[0]||null;
+ }
+ function applyTrack(t,quiet){
+  if(!t)return;A.sel=t.i;
+  if(t.i===0&&t.native){if(A.mode==='side')stopSideMode();return;}
+  if(!A.transcode){if(!quiet)toast(t.i===0?'This audio format is not supported here':'Audio switching is not available','audio');if(A.mode==='side')stopSideMode();return;}
+  if(A.mode==='side'){sideOpen(sideLead());if(!quiet)toast('Switching audio…','audio');}
+  else startSideMode();
+ }
+ function pickTrack(t){prefSet(t.lang);A.failed.delete(t.i);applyTrack(t,false);if(t.i===0&&t.native)toast('Audio: '+srvLabel(t),'audio');if(!menu.hidden)render();}
+ function initAudio(v){
+  const ref=v&&mediaRef(v);
+  if(!ref){if(A.video){stopSideMode();}A.video=v||null;A.key='';A.tracks=[];A.sel=-1;return;}
+  const key=ref.kind+'|'+ref.id+'|'+ref.quality;
+  if(v===A.video&&key===A.key)return;
+  const carrying=A.mode==='side';
+  stopSideMode();A.video=v;A.key=key;A.tracks=[];A.sel=-1;A.transcode=false;A.failed.clear();
+  fetch('/api/audio-tracks/'+ref.kind+'/'+encodeURIComponent(ref.id)+'?quality='+encodeURIComponent(ref.quality),{credentials:'same-origin'})
+   .then(r=>r.ok?r.json():null).then(j=>{
+    if(!j||A.key!==key||A.video!==v)return;
+    A.tracks=Array.isArray(j.tracks)?j.tracks:[];A.transcode=!!j.transcode;
+    if(A.tracks.length)applyTrack(chooseInitial(),true);
+    if(!menu.hidden)render();
+   }).catch(()=>{});
+  void carrying;
+ }
+ const audioList=()=>A.tracks.length?A.tracks.map(t=>({label:srvLabel(t),value:srvValue(t),sel:A.sel===t.i,pick:()=>pickTrack(t)})):null;
+
+
  /* settings menu */
  const FIT=[['contain','Fit to screen'],['cover','Fill (crop)'],['fill','Stretch']];
  let page='root',pending=null;
@@ -206,8 +322,9 @@ function create(opts){
    menuTitle.textContent='Settings';
    if(qualityButtons().length>1)body.append(item({ico:'quality',label:'Quality',value:activeQuality(),go:1,run:()=>go('quality')}));
    body.append(item({ico:'speed',label:'Playback speed',value:speedLabel(),go:1,run:()=>go('speed')}));
-   const at=audioTracks(),act=at.find(t=>t.enabled);
-   body.append(item({ico:'audio',label:'Audio track',value:at.length>1?(act?trackName(act,at.indexOf(act),'Audio'):'Default'):'Default',go:at.length>1,disabled:at.length<2,run:()=>go('audio')}));
+   const sl=audioList(),at=audioTracks(),act=at.find(t=>t.enabled),cur=sl&&sl.find(x=>x.sel);
+   const multi=sl?sl.length>1:at.length>1;
+   body.append(item({ico:'audio',label:'Audio track',value:sl?(cur?cur.label:sl[0].label):(at.length>1?(act?trackName(act,at.indexOf(act),'Audio'):'Default'):'Default'),go:multi,disabled:!multi,run:()=>go('audio')}));
    const tt=textTracks(),sh=tt.find(t=>t.mode==='showing');
    body.append(item({ico:'subtitles',label:'Subtitles',value:sh?trackName(sh,tt.indexOf(sh),'Subtitle'):'Off',go:1,run:()=>go('subs')}));
    body.append(el('div','fgp-sep'));
@@ -222,9 +339,10 @@ function create(opts){
    menuTitle.textContent='Playback speed';const s=speedSel();
    for(const o of Array.from(s?s.options:[])){const on=s.value===o.value;body.append(item({label:o.textContent,sel:on,check:on,run:()=>{s.value=o.value;s.dispatchEvent(new Event('change',{bubbles:true}));syncSpeed();render();}}));}
   }else if(page==='audio'){
-   menuTitle.textContent='Audio track';const at=audioTracks();
-   at.forEach((t,i)=>body.append(item({label:trackName(t,i,'Audio'),sel:t.enabled,check:t.enabled,run:()=>{at.forEach(x=>{x.enabled=x===t;});render();}})));
-   if(!at.length)body.append(el('p','fgp-note','This video exposes a single audio track.'));
+   menuTitle.textContent='Audio track';const at=audioTracks(),sl=audioList();
+   if(sl){for(const x of sl)body.append(item({label:x.label,value:x.value,sel:x.sel,check:x.sel,run:x.pick}));if(sl.some(x=>!x.sel&&A.mode==='side'))body.append(el('p','fgp-note','Converted on the fly for your browser. Switching may take a moment.'));}
+   else at.forEach((t,i)=>body.append(item({label:trackName(t,i,'Audio'),sel:t.enabled,check:t.enabled,run:()=>{at.forEach(x=>{x.enabled=x===t;});render();}})));
+   if(!sl&&!at.length)body.append(el('p','fgp-note','This video exposes a single audio track.'));
   }else if(page==='subs'){
    menuTitle.textContent='Subtitles';const tt=textTracks();
    body.append(item({label:'Off',sel:!tt.some(t=>t.mode==='showing'),check:!tt.some(t=>t.mode==='showing'),run:()=>{setSubs(null);render();}}));

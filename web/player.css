@@ -96,7 +96,7 @@
 .fgp-item:disabled{opacity:.45;cursor:default}
 .fgp-item>svg{flex:none;width:21px;height:21px;opacity:.85}
 .fgp-item .l{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.fgp-item .v{flex:none;max-width:45%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--dim);font-size:13px}
+.fgp-item .v{flex:none;max-width:55%;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--dim);font-size:13px}
 .fgp-item .c{flex:none;width:18px;height:18px;opacity:.5}
 .fgp-item.sel{background:rgba(255,255,255,.12);font-weight:650}
 .fgp-item .ck{flex:none;width:19px;height:19px;color:#fff}
