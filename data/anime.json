@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-02T01:51:59.656Z",
+  "updated_at": "2026-11-02T01:52:20.653Z",
   "anime": [
     {
       "slug_id": "naruto",
@@ -23923,6 +23923,30 @@
               "mime_type": "video/x-matroska"
             }
           }
+        },
+        {
+          "telegram_message_id": 919,
+          "episode": 5,
+          "season": 1,
+          "special_type": null,
+          "part": null,
+          "quality": "480p",
+          "file_size": 99693336,
+          "file_name": "@TamilMob_LinkZz Jujutsu Kaisen S01 E05 Blu-Ray - 480p - x26.mkv",
+          "mime_type": "video/x-matroska",
+          "qualities": {
+            "480P": {
+              "telegram_message_id": 919,
+              "episode": 5,
+              "season": 1,
+              "special_type": null,
+              "part": null,
+              "quality": "480p",
+              "file_size": 99693336,
+              "file_name": "@TamilMob_LinkZz Jujutsu Kaisen S01 E05 Blu-Ray - 480p - x26.mkv",
+              "mime_type": "video/x-matroska"
+            }
+          }
         }
       ],
       "year": "2026",
@@ -23933,7 +23957,7 @@
       "status": null,
       "episodes_total": null,
       "studio": null,
-      "updated_at": "2026-11-02T01:51:59.656Z"
+      "updated_at": "2026-11-02T01:52:20.653Z"
     }
   ]
 }
