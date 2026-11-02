@@ -455,7 +455,7 @@ async function startMovieDraft(file,messageId,chat){
 }
 async function askMediaType(file,messageId,detected){
  const id=crypto.randomBytes(12).toString('hex');
- await redis(MEDIA_CHOICE_KEY+id,JSON.stringify({file,message_id:messageId}),'EX',900);
+ await redis('SET',MEDIA_CHOICE_KEY+id,JSON.stringify({file,message_id:messageId}),'EX',900);
  const label=String(file.file_name||'file').slice(0,180);
  return say(ADMIN_ID,'The filename contains an episode-like number, but it may be a movie sequel or an anime episode. Choose the media type for:\n\n'+label+'\n\nDetected confidence: '+Math.round(Number(detected.confidence||0)*100)+'%.',{reply_markup:{inline_keyboard:[[{text:'Movie',callback_data:'fg:type:movie:'+id},{text:'Anime',callback_data:'fg:type:anime:'+id}],[{text:'Cancel',callback_data:'fg:type:cancel:'+id}]]}});
 }
