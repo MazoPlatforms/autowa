@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": 1793585063,
+  "updated_at": 1793585479,
   "anime": [
     {
       "slug_id": "naruto",
@@ -33,7 +33,7 @@
         "10": "/banners/naruto-season-10.webp",
         "11": "/banners/naruto-season-11.webp"
       },
-      "updated_at": "2026-11-02T02:04:21Z"
+      "updated_at": "2026-11-02T02:11:18Z"
     },
     {
       "slug_id": "naruto-shippuden",
@@ -53,7 +53,7 @@
       "status": "Finished",
       "episodes_total": 500,
       "studio": "Studio Pierrot",
-      "updated_at": "2026-11-02T02:04:23Z"
+      "updated_at": "2026-11-02T02:11:19Z"
     },
     {
       "slug_id": "mob-linkzz-jujutsu-kaisen",
@@ -62,11 +62,11 @@
       "poster": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/df/David_Vincent_LA_Anime_Film_Festival_2017_Red_Carpet.jpg/330px-David_Vincent_LA_Anime_Film_Festival_2017_Red_Carpet.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
       "plot": "David Vincent is an American voice actor and voice director who provides voices for animation, anime and video games. Some roles include Grimmjow Jaegerjaquez in Bleach, Senketsu in Kill la Kill, Gilgamesh in Fate/Zero & Fate/stay night, Male Robin in Fire Emblem Awakening, the Super Smash Bros. series and Code Name: S.T.E.A.M., Marshall Law in the Tekken series, T. Hawk in Super Street Fighter IV, Richter Belmont in Castlevania: The Dracula X Chronicles, the narrator of JoJo's Bizarre Adventure, and Jin Kisaragi and Hakumen in the BlazBlue series. He also had a guest role in Ghost in the Shell.",
       "year": "2026",
-      "updated_at": "2026-11-02T02:04:15Z"
+      "updated_at": "2026-11-02T02:11:14Z"
     },
     {
       "slug_id": "attack-on-titan",
-      "title": "Attack on Titan",
+      "title": "Attack On Titan",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Attack_on_Titan_(TV_series)",
       "plot": "Several hundred years ago, humans were nearly exterminated by titans. Titans are typically several stories tall, seem to have no intelligence, devour human beings and, worst of all, seem to do it for the pleasure rather than as a food source. A small percentage of humanity survived by walling themselves in a city protected by extremely high walls, even taller than the biggest of titans.\r\nFlash forward to the present and the city has not seen a titan in over 100 years. Teenage boy Eren and his foster sister Mikasa witness something horrific as the city walls are destroyed by a colossal titan that appears out of thin air. As the smaller titans flood the city, the two kids watch in horror as their mother is eaten alive. Eren vows that he will murder every single titan and take revenge for all of mankind.\r\n(Source: MangaHelpers)",
       "poster": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx16498-buvcRTBx4NSm.jpg",
@@ -88,11 +88,11 @@
         "3": "/banners/attack-on-titan-season-3.webp",
         "4": "/banners/attack-on-titan-season-4.webp"
       },
-      "updated_at": "2026-11-02T02:04:19Z"
+      "updated_at": "2026-11-02T02:11:17Z"
     },
     {
       "slug_id": "jujutsu-kaisen",
-      "title": "JUJUTSU KAISEN",
+      "title": "Jujutsu Kaisen",
       "poster": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx113415-LHBAeoZDIsnF.jpg",
       "plot": "A boy fights... for \"the right death.\"\n\nHardship, regret, shame: the negative feelings that humans feel become Curses that lurk in our everyday lives. The Curses run rampant throughout the world, capable of leading people to terrible misfortune and even death. What's more, the Curses can only be exorcised by another Curse.\n\nItadori Yuji is a boy with tremendous physical strength, though he lives a completely ordinary high school life. One day, to save a friend who has been attacked by Curses, he eats the finger of the Double-Faced Specter, taking the Curse into his own soul. From then on, he shares one body with the Double-Faced Specter. Guided by the most powerful of sorcerers, Gojou Satoru, Itadori is admitted to the Tokyo Metropolitan Technical High School of Sorcery, an organization that fights the Curses... and thus begins the heroic tale of a boy who became a Curse to exorcise a Cu",
       "genre": [
@@ -106,7 +106,7 @@
       "year": 2020,
       "studio": "Toho",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Jujutsu_Kaisen_(TV_series)",
-      "updated_at": "2026-11-02T02:04:17Z"
+      "updated_at": "2026-11-02T02:11:15Z"
     }
   ]
 }
