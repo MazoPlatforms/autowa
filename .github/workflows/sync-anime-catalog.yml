@@ -54,6 +54,22 @@ jobs:
           python - <<'PY'
           import base64, hashlib, json
           source=json.load(open('/tmp/anime-catalog.json', encoding='utf-8'))
+          # Collapse legacy uploader-prefixed Solo Leveling records before
+          # writing the catalog. Older scans could produce records such as
+          # "By Spy X Family Solo Leveling" or "Catalogue Solo leveling".
+          consolidated={}
+          for item in source.get('anime', []):
+              title_key=''.join(ch for ch in str(item.get('title') or '').casefold() if ch.isalnum())
+              slug_key=str(item.get('slug_id') or '').casefold()
+              if 'sololeveling' in title_key or 'sololeveling' in slug_key:
+                  item['slug_id']='solo-leveling'
+                  item['title']='Solo Leveling'
+              key=item.get('slug_id') or title_key
+              if key not in consolidated:
+                  consolidated[key]=item
+              else:
+                  consolidated[key].setdefault('episodes', []).extend(item.get('episodes') or [])
+          source['anime']=list(consolidated.values())
           def fixed_slug(message_id):
               digest=hashlib.sha256(f'filmgo-anime-episode:{int(message_id)}'.encode()).digest()[:12]
               return base64.urlsafe_b64encode(digest).decode().rstrip('=')
@@ -102,6 +118,8 @@ jobs:
                   item['season_banners']={'OAD':'/banners/attack-on-titan-oad.webp', **{str(number): f'/banners/attack-on-titan-season-{number}.webp' for number in range(1, 5)}}
               if item.get('slug_id') == 'jujutsu-kaisen':
                   item['season_banners']={str(number): f'/banners/jujutsu-kaisen-season-{number}.webp' for number in range(1, 4)}
+              if item.get('slug_id') == 'solo-leveling':
+                  item['season_banners']={'1':'/banners/solo-leveling-season-1.webp','2':'/banners/solo-leveling-season-2.webp'}
           json.dump(output, open('/tmp/updated-anime.json','w',encoding='utf-8'), ensure_ascii=False, indent=2)
           open('/tmp/updated-anime.json','a').write('\n')
           import os
