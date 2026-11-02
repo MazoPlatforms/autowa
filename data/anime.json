@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": 1793581752,
+  "updated_at": "2026-11-02T01:09:15.913Z",
   "anime": [
     {
       "slug_id": "naruto",
@@ -23692,31 +23692,28 @@
       "year": 2013,
       "studio": "WIT STUDIO",
       "season_banners": {
-        "OAD": "/banners/attack-on-titan-oad.webp",
         "1": "/banners/attack-on-titan-season-1.webp",
         "2": "/banners/attack-on-titan-season-2.webp",
         "3": "/banners/attack-on-titan-season-3.webp",
-        "4": "/banners/attack-on-titan-season-4.webp"
+        "4": "/banners/attack-on-titan-season-4.webp",
+        "OAD": "/banners/attack-on-titan-oad.webp"
       },
       "updated_at": "2026-11-02T01:09:09Z"
     },
     {
       "slug_id": "jujutsu-kaisen",
-      "title": "JUJUTSU KAISEN",
+      "title": "Jujutsu Kaisen",
       "episodes": [
         {
-          "telegram_message_id": 901,
+          "telegram_message_id": 902,
           "episode": 1,
           "season": 1,
           "special_type": null,
           "part": null,
-          "quality": "480P",
-          "file_size": 108069408,
-          "file_name": "@TamilMob_LinkZz -Jujutsu Kaisen S01 E01 Blu-Ray - 480p - x2.mkv",
+          "quality": "720p",
+          "file_size": 209014033,
+          "file_name": "@TamilMob_LinkZz -Jujutsu Kaisen S01 E01 Blu-Ray - 720p - x2.mkv",
           "mime_type": "video/x-matroska",
-          "title": "Ryomen Sukuna",
-          "released": "2020-10-02",
-          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/542/1355130.jpg",
           "slug_id": "YKDUjRn5b5hsH7eZ",
           "qualities": {
             "480P": {
@@ -23732,6 +23729,17 @@
               "title": "Ryomen Sukuna",
               "released": "2020-10-02",
               "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/542/1355130.jpg"
+            },
+            "720P": {
+              "telegram_message_id": 902,
+              "episode": 1,
+              "season": 1,
+              "special_type": null,
+              "part": null,
+              "quality": "720p",
+              "file_size": 209014033,
+              "file_name": "@TamilMob_LinkZz -Jujutsu Kaisen S01 E01 Blu-Ray - 720p - x2.mkv",
+              "mime_type": "video/x-matroska"
             }
           }
         }
@@ -23749,7 +23757,7 @@
       "year": 2020,
       "studio": "Toho",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Jujutsu_Kaisen_(TV_series)",
-      "updated_at": "2026-11-02T01:09:08Z"
+      "updated_at": "2026-11-02T01:09:15.913Z"
     }
   ]
 }
