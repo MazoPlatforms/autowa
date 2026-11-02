@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-02T01:56:25.454Z",
+  "updated_at": 1793584635,
   "anime": [
     {
       "slug_id": "naruto",
@@ -6347,7 +6347,7 @@
         "10": "/banners/naruto-season-10.webp",
         "11": "/banners/naruto-season-11.webp"
       },
-      "updated_at": "2026-11-02T01:40:39Z"
+      "updated_at": "2026-11-02T01:57:13Z"
     },
     {
       "slug_id": "naruto-shippuden",
@@ -17963,7 +17963,300 @@
       "status": "Finished",
       "episodes_total": 500,
       "studio": "Studio Pierrot",
-      "updated_at": "2026-11-02T01:40:40Z"
+      "updated_at": "2026-11-02T01:57:15Z"
+    },
+    {
+      "slug_id": "mob-linkzz-jujutsu-kaisen",
+      "title": "@ Mob LinkZz Jujutsu Kaisen",
+      "episodes": [
+        {
+          "telegram_message_id": 917,
+          "episode": 4,
+          "season": 1,
+          "special_type": null,
+          "part": null,
+          "quality": "720P",
+          "file_size": 205479177,
+          "file_name": "@TamilMob_LinkZz Jujutsu Kaisen S01 E04 Blu-Ray - 720p - x26.mkv",
+          "mime_type": "video/x-matroska",
+          "slug_id": "5gGVU4jHEhsAOC6q",
+          "qualities": {
+            "1080P": {
+              "telegram_message_id": 918,
+              "episode": 4,
+              "season": 1,
+              "special_type": null,
+              "part": null,
+              "quality": "1080P",
+              "file_size": 302645585,
+              "file_name": "@TamilMob_LinkZz Jujutsu Kaisen S01 E04 Blu-Ray - 1080p - x2.mkv",
+              "mime_type": "video/x-matroska"
+            },
+            "720P": {
+              "telegram_message_id": 917,
+              "episode": 4,
+              "season": 1,
+              "special_type": null,
+              "part": null,
+              "quality": "720P",
+              "file_size": 205479177,
+              "file_name": "@TamilMob_LinkZz Jujutsu Kaisen S01 E04 Blu-Ray - 720p - x26.mkv",
+              "mime_type": "video/x-matroska"
+            },
+            "480P": {
+              "telegram_message_id": 916,
+              "episode": 4,
+              "season": 1,
+              "special_type": null,
+              "part": null,
+              "quality": "480P",
+              "file_size": 115046246,
+              "file_name": "@TamilMob_LinkZz Jujutsu Kaisen S01 E04 Blu-Ray - 480p - x26.mkv",
+              "mime_type": "video/x-matroska"
+            }
+          }
+        },
+        {
+          "telegram_message_id": 920,
+          "episode": 5,
+          "season": 1,
+          "special_type": null,
+          "part": null,
+          "quality": "720P",
+          "file_size": 175223178,
+          "file_name": "@TamilMob_LinkZz Jujutsu Kaisen S01 E05 Blu-Ray - 720p - x26.mkv",
+          "mime_type": "video/x-matroska",
+          "slug_id": "VKt2U4Xt6Mz2UcBA",
+          "qualities": {
+            "1080P": {
+              "telegram_message_id": 921,
+              "episode": 5,
+              "season": 1,
+              "special_type": null,
+              "part": null,
+              "quality": "1080P",
+              "file_size": 263833649,
+              "file_name": "@TamilMob_LinkZz Jujutsu Kaisen S01 E05 Blu-Ray - 1080p - #H.mkv",
+              "mime_type": "video/x-matroska"
+            },
+            "720P": {
+              "telegram_message_id": 920,
+              "episode": 5,
+              "season": 1,
+              "special_type": null,
+              "part": null,
+              "quality": "720P",
+              "file_size": 175223178,
+              "file_name": "@TamilMob_LinkZz Jujutsu Kaisen S01 E05 Blu-Ray - 720p - x26.mkv",
+              "mime_type": "video/x-matroska"
+            },
+            "480P": {
+              "telegram_message_id": 919,
+              "episode": 5,
+              "season": 1,
+              "special_type": null,
+              "part": null,
+              "quality": "480P",
+              "file_size": 99693336,
+              "file_name": "@TamilMob_LinkZz Jujutsu Kaisen S01 E05 Blu-Ray - 480p - x26.mkv",
+              "mime_type": "video/x-matroska"
+            }
+          }
+        },
+        {
+          "telegram_message_id": 923,
+          "episode": 6,
+          "season": 1,
+          "special_type": null,
+          "part": null,
+          "quality": "720P",
+          "file_size": 184195742,
+          "file_name": "@TamilMob_LinkZz Jujutsu Kaisen S01 E06 Blu-Ray - 720p - x26.mkv",
+          "mime_type": "video/x-matroska",
+          "slug_id": "hb1OJuElBwVrVRAm",
+          "qualities": {
+            "1080P": {
+              "telegram_message_id": 924,
+              "episode": 6,
+              "season": 1,
+              "special_type": null,
+              "part": null,
+              "quality": "1080P",
+              "file_size": 277859026,
+              "file_name": "@TamilMob_LinkZz Jujutsu Kaisen S01 E06 Blu-Ray - 1080p - #H.mkv",
+              "mime_type": "video/x-matroska"
+            },
+            "720P": {
+              "telegram_message_id": 923,
+              "episode": 6,
+              "season": 1,
+              "special_type": null,
+              "part": null,
+              "quality": "720P",
+              "file_size": 184195742,
+              "file_name": "@TamilMob_LinkZz Jujutsu Kaisen S01 E06 Blu-Ray - 720p - x26.mkv",
+              "mime_type": "video/x-matroska"
+            },
+            "480P": {
+              "telegram_message_id": 922,
+              "episode": 6,
+              "season": 1,
+              "special_type": null,
+              "part": null,
+              "quality": "480P",
+              "file_size": 107851375,
+              "file_name": "@TamilMob_LinkZz Jujutsu Kaisen S01 E06 Blu-Ray - 480p - x26.mkv",
+              "mime_type": "video/x-matroska"
+            }
+          }
+        },
+        {
+          "telegram_message_id": 926,
+          "episode": 7,
+          "season": 1,
+          "special_type": null,
+          "part": null,
+          "quality": "720P",
+          "file_size": 241291475,
+          "file_name": "@TamilMob_LinkZz Jujutsu Kaisen S01 E07 Blu-Ray - 720p -.mkv",
+          "mime_type": "video/x-matroska",
+          "slug_id": "LkpoGcEL9bH4iNWb",
+          "qualities": {
+            "1080P": {
+              "telegram_message_id": 927,
+              "episode": 7,
+              "season": 1,
+              "special_type": null,
+              "part": null,
+              "quality": "1080P",
+              "file_size": 377579741,
+              "file_name": "@TamilMob_LinkZz Jujutsu Kaisen S01 E07 Blu-Ray - 1080p .mkv",
+              "mime_type": "video/x-matroska"
+            },
+            "720P": {
+              "telegram_message_id": 926,
+              "episode": 7,
+              "season": 1,
+              "special_type": null,
+              "part": null,
+              "quality": "720P",
+              "file_size": 241291475,
+              "file_name": "@TamilMob_LinkZz Jujutsu Kaisen S01 E07 Blu-Ray - 720p -.mkv",
+              "mime_type": "video/x-matroska"
+            },
+            "480P": {
+              "telegram_message_id": 925,
+              "episode": 7,
+              "season": 1,
+              "special_type": null,
+              "part": null,
+              "quality": "480P",
+              "file_size": 128087469,
+              "file_name": "@TamilMob_LinkZz Jujutsu Kaisen S01 E07 Blu-Ray - 480p -.mkv",
+              "mime_type": "video/x-matroska"
+            }
+          }
+        },
+        {
+          "telegram_message_id": 929,
+          "episode": 8,
+          "season": 1,
+          "special_type": null,
+          "part": null,
+          "quality": "720P",
+          "file_size": 181306504,
+          "file_name": "@TamilMob_LinkZz Jujutsu Kaisen S01 E08 Blu-Ray - 720p -.mkv",
+          "mime_type": "video/x-matroska",
+          "slug_id": "D9LH2Gq_kTBZl-8n",
+          "qualities": {
+            "1080P": {
+              "telegram_message_id": 930,
+              "episode": 8,
+              "season": 1,
+              "special_type": null,
+              "part": null,
+              "quality": "1080P",
+              "file_size": 284171074,
+              "file_name": "@TamilMob_LinkZz Jujutsu Kaisen S01 E08 Blu-Ray - 1080p .mkv",
+              "mime_type": "video/x-matroska"
+            },
+            "720P": {
+              "telegram_message_id": 929,
+              "episode": 8,
+              "season": 1,
+              "special_type": null,
+              "part": null,
+              "quality": "720P",
+              "file_size": 181306504,
+              "file_name": "@TamilMob_LinkZz Jujutsu Kaisen S01 E08 Blu-Ray - 720p -.mkv",
+              "mime_type": "video/x-matroska"
+            },
+            "480P": {
+              "telegram_message_id": 928,
+              "episode": 8,
+              "season": 1,
+              "special_type": null,
+              "part": null,
+              "quality": "480P",
+              "file_size": 104753984,
+              "file_name": "@TamilMob_LinkZz Jujutsu Kaisen S01 E08 Blu-Ray - 480p -.mkv",
+              "mime_type": "video/x-matroska"
+            }
+          }
+        },
+        {
+          "telegram_message_id": 932,
+          "episode": 9,
+          "season": 1,
+          "special_type": null,
+          "part": null,
+          "quality": "720P",
+          "file_size": 191137762,
+          "file_name": "@TamilMob_LinkZz Jujutsu Kaisen S01 E09 Blu-Ray - 720p -.mkv",
+          "mime_type": "video/x-matroska",
+          "slug_id": "_GmIup52Mmndwfj9",
+          "qualities": {
+            "1080P": {
+              "telegram_message_id": 933,
+              "episode": 9,
+              "season": 1,
+              "special_type": null,
+              "part": null,
+              "quality": "1080P",
+              "file_size": 302863639,
+              "file_name": "@TamilMob_LinkZz Jujutsu Kaisen S01 E09 Blu-Ray - 1080p - #H.mkv",
+              "mime_type": "video/x-matroska"
+            },
+            "720P": {
+              "telegram_message_id": 932,
+              "episode": 9,
+              "season": 1,
+              "special_type": null,
+              "part": null,
+              "quality": "720P",
+              "file_size": 191137762,
+              "file_name": "@TamilMob_LinkZz Jujutsu Kaisen S01 E09 Blu-Ray - 720p -.mkv",
+              "mime_type": "video/x-matroska"
+            },
+            "480P": {
+              "telegram_message_id": 931,
+              "episode": 9,
+              "season": 1,
+              "special_type": null,
+              "part": null,
+              "quality": "480P",
+              "file_size": 106063508,
+              "file_name": "@TamilMob_LinkZz Jujutsu Kaisen S01 E09 Blu-Ray - 480p -.mkv",
+              "mime_type": "video/x-matroska"
+            }
+          }
+        }
+      ],
+      "wikipedia_url": "https://en.wikipedia.org/wiki/David_Vincent_(voice_actor)",
+      "poster": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/df/David_Vincent_LA_Anime_Film_Festival_2017_Red_Carpet.jpg/330px-David_Vincent_LA_Anime_Film_Festival_2017_Red_Carpet.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "plot": "David Vincent is an American voice actor and voice director who provides voices for animation, anime and video games. Some roles include Grimmjow Jaegerjaquez in Bleach, Senketsu in Kill la Kill, Gilgamesh in Fate/Zero & Fate/stay night, Male Robin in Fire Emblem Awakening, the Super Smash Bros. series and Code Name: S.T.E.A.M., Marshall Law in the Tekken series, T. Hawk in Super Street Fighter IV, Richter Belmont in Castlevania: The Dracula X Chronicles, the narrator of JoJo's Bizarre Adventure, and Jin Kisaragi and Hakumen in the BlazBlue series. He also had a guest role in Ghost in the Shell.",
+      "year": "2026",
+      "updated_at": "2026-11-02T01:57:09Z"
     },
     {
       "slug_id": "attack-on-titan",
@@ -23692,17 +23985,17 @@
       "year": 2013,
       "studio": "WIT STUDIO",
       "season_banners": {
+        "OAD": "/banners/attack-on-titan-oad.webp",
         "1": "/banners/attack-on-titan-season-1.webp",
         "2": "/banners/attack-on-titan-season-2.webp",
         "3": "/banners/attack-on-titan-season-3.webp",
-        "4": "/banners/attack-on-titan-season-4.webp",
-        "OAD": "/banners/attack-on-titan-oad.webp"
+        "4": "/banners/attack-on-titan-season-4.webp"
       },
-      "updated_at": "2026-11-02T01:40:37Z"
+      "updated_at": "2026-11-02T01:57:12Z"
     },
     {
       "slug_id": "jujutsu-kaisen",
-      "title": "Jujutsu Kaisen",
+      "title": "JUJUTSU KAISEN",
       "episodes": [
         {
           "telegram_message_id": 908,
@@ -23769,22 +24062,28 @@
           "season": 1,
           "special_type": null,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 184998216,
           "file_name": "@TamilMob_LinkZz -Jujutsu Kaisen S01 E02 Blu-Ray - 720p - x2.mkv",
           "mime_type": "video/x-matroska",
+          "title": "For Myself",
+          "released": "2020-10-09",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/542/1355135.jpg",
           "slug_id": "_oAKVz3K0Jb8ofj-",
           "qualities": {
-            "480P": {
-              "telegram_message_id": 910,
+            "1080P": {
+              "telegram_message_id": 912,
               "episode": 2,
               "season": 1,
               "special_type": null,
               "part": null,
-              "quality": "480p",
-              "file_size": 94324587,
-              "file_name": "@TamilMob_LinkZz -Jujutsu Kaisen S01 E02 Blu-Ray - 480p - x2.mkv",
-              "mime_type": "video/x-matroska"
+              "quality": "1080P",
+              "file_size": 265152652,
+              "file_name": "@TamilMob_LinkZz -Jujutsu Kaisen S01 E02 Blu-Ray - 1080p - H.mkv",
+              "mime_type": "video/x-matroska",
+              "title": "For Myself",
+              "released": "2020-10-09",
+              "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/542/1355135.jpg"
             },
             "720P": {
               "telegram_message_id": 911,
@@ -23792,21 +24091,27 @@
               "season": 1,
               "special_type": null,
               "part": null,
-              "quality": "720p",
+              "quality": "720P",
               "file_size": 184998216,
               "file_name": "@TamilMob_LinkZz -Jujutsu Kaisen S01 E02 Blu-Ray - 720p - x2.mkv",
-              "mime_type": "video/x-matroska"
+              "mime_type": "video/x-matroska",
+              "title": "For Myself",
+              "released": "2020-10-09",
+              "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/542/1355135.jpg"
             },
-            "1080P": {
-              "telegram_message_id": 912,
+            "480P": {
+              "telegram_message_id": 910,
               "episode": 2,
               "season": 1,
               "special_type": null,
               "part": null,
-              "quality": "1080p",
-              "file_size": 265152652,
-              "file_name": "@TamilMob_LinkZz -Jujutsu Kaisen S01 E02 Blu-Ray - 1080p - H.mkv",
-              "mime_type": "video/x-matroska"
+              "quality": "480P",
+              "file_size": 94324587,
+              "file_name": "@TamilMob_LinkZz -Jujutsu Kaisen S01 E02 Blu-Ray - 480p - x2.mkv",
+              "mime_type": "video/x-matroska",
+              "title": "For Myself",
+              "released": "2020-10-09",
+              "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/542/1355135.jpg"
             }
           }
         },
@@ -23816,22 +24121,28 @@
           "season": 1,
           "special_type": null,
           "part": null,
-          "quality": "720p",
+          "quality": "720P",
           "file_size": 180461013,
           "file_name": "@TamilMob_LinkZz -Jujutsu Kaisen S01 E03 Blu-Ray - 720p - x2.mkv",
           "mime_type": "video/x-matroska",
+          "title": "Girl of Steel",
+          "released": "2020-10-16",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/288/721556.jpg",
           "slug_id": "LZhpeMdwSP-N9NRy",
           "qualities": {
-            "480P": {
-              "telegram_message_id": 913,
+            "1080P": {
+              "telegram_message_id": 915,
               "episode": 3,
               "season": 1,
               "special_type": null,
               "part": null,
-              "quality": "480p",
-              "file_size": 105432022,
-              "file_name": "@TamilMob_LinkZz -Jujutsu Kaisen S01 E03 Blu-Ray - 480p - x2.mkv",
-              "mime_type": "video/x-matroska"
+              "quality": "1080P",
+              "file_size": 287120871,
+              "file_name": "@TamilMob_LinkZz -Jujutsu Kaisen S01 E03 Blu-Ray - 1080p - H.mkv",
+              "mime_type": "video/x-matroska",
+              "title": "Girl of Steel",
+              "released": "2020-10-16",
+              "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/288/721556.jpg"
             },
             "720P": {
               "telegram_message_id": 914,
@@ -23839,21 +24150,27 @@
               "season": 1,
               "special_type": null,
               "part": null,
-              "quality": "720p",
+              "quality": "720P",
               "file_size": 180461013,
               "file_name": "@TamilMob_LinkZz -Jujutsu Kaisen S01 E03 Blu-Ray - 720p - x2.mkv",
-              "mime_type": "video/x-matroska"
+              "mime_type": "video/x-matroska",
+              "title": "Girl of Steel",
+              "released": "2020-10-16",
+              "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/288/721556.jpg"
             },
-            "1080P": {
-              "telegram_message_id": 915,
+            "480P": {
+              "telegram_message_id": 913,
               "episode": 3,
               "season": 1,
               "special_type": null,
               "part": null,
-              "quality": "1080p",
-              "file_size": 287120871,
-              "file_name": "@TamilMob_LinkZz -Jujutsu Kaisen S01 E03 Blu-Ray - 1080p - H.mkv",
-              "mime_type": "video/x-matroska"
+              "quality": "480P",
+              "file_size": 105432022,
+              "file_name": "@TamilMob_LinkZz -Jujutsu Kaisen S01 E03 Blu-Ray - 480p - x2.mkv",
+              "mime_type": "video/x-matroska",
+              "title": "Girl of Steel",
+              "released": "2020-10-16",
+              "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/288/721556.jpg"
             }
           }
         }
@@ -23871,304 +24188,7 @@
       "year": 2020,
       "studio": "Toho",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Jujutsu_Kaisen_(TV_series)",
-      "updated_at": "2026-11-02T01:51:05.957Z"
-    },
-    {
-      "slug_id": "mob-linkzz-jujutsu-kaisen",
-      "title": "@ Mob LinkZz Jujutsu Kaisen",
-      "episodes": [
-        {
-          "telegram_message_id": 917,
-          "episode": 4,
-          "season": 1,
-          "special_type": null,
-          "part": null,
-          "quality": "720p",
-          "file_size": 205479177,
-          "file_name": "@TamilMob_LinkZz Jujutsu Kaisen S01 E04 Blu-Ray - 720p - x26.mkv",
-          "mime_type": "video/x-matroska",
-          "slug_id": "5gGVU4jHEhsAOC6q",
-          "qualities": {
-            "480P": {
-              "telegram_message_id": 916,
-              "episode": 4,
-              "season": 1,
-              "special_type": null,
-              "part": null,
-              "quality": "480p",
-              "file_size": 115046246,
-              "file_name": "@TamilMob_LinkZz Jujutsu Kaisen S01 E04 Blu-Ray - 480p - x26.mkv",
-              "mime_type": "video/x-matroska"
-            },
-            "720P": {
-              "telegram_message_id": 917,
-              "episode": 4,
-              "season": 1,
-              "special_type": null,
-              "part": null,
-              "quality": "720p",
-              "file_size": 205479177,
-              "file_name": "@TamilMob_LinkZz Jujutsu Kaisen S01 E04 Blu-Ray - 720p - x26.mkv",
-              "mime_type": "video/x-matroska"
-            },
-            "1080P": {
-              "telegram_message_id": 918,
-              "episode": 4,
-              "season": 1,
-              "special_type": null,
-              "part": null,
-              "quality": "1080p",
-              "file_size": 302645585,
-              "file_name": "@TamilMob_LinkZz Jujutsu Kaisen S01 E04 Blu-Ray - 1080p - x2.mkv",
-              "mime_type": "video/x-matroska"
-            }
-          }
-        },
-        {
-          "telegram_message_id": 920,
-          "episode": 5,
-          "season": 1,
-          "special_type": null,
-          "part": null,
-          "quality": "720p",
-          "file_size": 175223178,
-          "file_name": "@TamilMob_LinkZz Jujutsu Kaisen S01 E05 Blu-Ray - 720p - x26.mkv",
-          "mime_type": "video/x-matroska",
-          "slug_id": "VKt2U4Xt6Mz2UcBA",
-          "qualities": {
-            "480P": {
-              "telegram_message_id": 919,
-              "episode": 5,
-              "season": 1,
-              "special_type": null,
-              "part": null,
-              "quality": "480p",
-              "file_size": 99693336,
-              "file_name": "@TamilMob_LinkZz Jujutsu Kaisen S01 E05 Blu-Ray - 480p - x26.mkv",
-              "mime_type": "video/x-matroska"
-            },
-            "720P": {
-              "telegram_message_id": 920,
-              "episode": 5,
-              "season": 1,
-              "special_type": null,
-              "part": null,
-              "quality": "720p",
-              "file_size": 175223178,
-              "file_name": "@TamilMob_LinkZz Jujutsu Kaisen S01 E05 Blu-Ray - 720p - x26.mkv",
-              "mime_type": "video/x-matroska"
-            },
-            "1080P": {
-              "telegram_message_id": 921,
-              "episode": 5,
-              "season": 1,
-              "special_type": null,
-              "part": null,
-              "quality": "1080p",
-              "file_size": 263833649,
-              "file_name": "@TamilMob_LinkZz Jujutsu Kaisen S01 E05 Blu-Ray - 1080p - #H.mkv",
-              "mime_type": "video/x-matroska"
-            }
-          }
-        },
-        {
-          "telegram_message_id": 923,
-          "episode": 6,
-          "season": 1,
-          "special_type": null,
-          "part": null,
-          "quality": "720p",
-          "file_size": 184195742,
-          "file_name": "@TamilMob_LinkZz Jujutsu Kaisen S01 E06 Blu-Ray - 720p - x26.mkv",
-          "mime_type": "video/x-matroska",
-          "slug_id": "hb1OJuElBwVrVRAm",
-          "qualities": {
-            "480P": {
-              "telegram_message_id": 922,
-              "episode": 6,
-              "season": 1,
-              "special_type": null,
-              "part": null,
-              "quality": "480p",
-              "file_size": 107851375,
-              "file_name": "@TamilMob_LinkZz Jujutsu Kaisen S01 E06 Blu-Ray - 480p - x26.mkv",
-              "mime_type": "video/x-matroska"
-            },
-            "720P": {
-              "telegram_message_id": 923,
-              "episode": 6,
-              "season": 1,
-              "special_type": null,
-              "part": null,
-              "quality": "720p",
-              "file_size": 184195742,
-              "file_name": "@TamilMob_LinkZz Jujutsu Kaisen S01 E06 Blu-Ray - 720p - x26.mkv",
-              "mime_type": "video/x-matroska"
-            },
-            "1080P": {
-              "telegram_message_id": 924,
-              "episode": 6,
-              "season": 1,
-              "special_type": null,
-              "part": null,
-              "quality": "1080p",
-              "file_size": 277859026,
-              "file_name": "@TamilMob_LinkZz Jujutsu Kaisen S01 E06 Blu-Ray - 1080p - #H.mkv",
-              "mime_type": "video/x-matroska"
-            }
-          }
-        },
-        {
-          "telegram_message_id": 926,
-          "episode": 7,
-          "season": 1,
-          "special_type": null,
-          "part": null,
-          "quality": "720p",
-          "file_size": 241291475,
-          "file_name": "@TamilMob_LinkZz Jujutsu Kaisen S01 E07 Blu-Ray - 720p -.mkv",
-          "mime_type": "video/x-matroska",
-          "slug_id": "LkpoGcEL9bH4iNWb",
-          "qualities": {
-            "480P": {
-              "telegram_message_id": 925,
-              "episode": 7,
-              "season": 1,
-              "special_type": null,
-              "part": null,
-              "quality": "480p",
-              "file_size": 128087469,
-              "file_name": "@TamilMob_LinkZz Jujutsu Kaisen S01 E07 Blu-Ray - 480p -.mkv",
-              "mime_type": "video/x-matroska"
-            },
-            "720P": {
-              "telegram_message_id": 926,
-              "episode": 7,
-              "season": 1,
-              "special_type": null,
-              "part": null,
-              "quality": "720p",
-              "file_size": 241291475,
-              "file_name": "@TamilMob_LinkZz Jujutsu Kaisen S01 E07 Blu-Ray - 720p -.mkv",
-              "mime_type": "video/x-matroska"
-            },
-            "1080P": {
-              "telegram_message_id": 927,
-              "episode": 7,
-              "season": 1,
-              "special_type": null,
-              "part": null,
-              "quality": "1080p",
-              "file_size": 377579741,
-              "file_name": "@TamilMob_LinkZz Jujutsu Kaisen S01 E07 Blu-Ray - 1080p .mkv",
-              "mime_type": "video/x-matroska"
-            }
-          }
-        },
-        {
-          "telegram_message_id": 929,
-          "episode": 8,
-          "season": 1,
-          "special_type": null,
-          "part": null,
-          "quality": "720p",
-          "file_size": 181306504,
-          "file_name": "@TamilMob_LinkZz Jujutsu Kaisen S01 E08 Blu-Ray - 720p -.mkv",
-          "mime_type": "video/x-matroska",
-          "slug_id": "D9LH2Gq_kTBZl-8n",
-          "qualities": {
-            "480P": {
-              "telegram_message_id": 928,
-              "episode": 8,
-              "season": 1,
-              "special_type": null,
-              "part": null,
-              "quality": "480p",
-              "file_size": 104753984,
-              "file_name": "@TamilMob_LinkZz Jujutsu Kaisen S01 E08 Blu-Ray - 480p -.mkv",
-              "mime_type": "video/x-matroska"
-            },
-            "720P": {
-              "telegram_message_id": 929,
-              "episode": 8,
-              "season": 1,
-              "special_type": null,
-              "part": null,
-              "quality": "720p",
-              "file_size": 181306504,
-              "file_name": "@TamilMob_LinkZz Jujutsu Kaisen S01 E08 Blu-Ray - 720p -.mkv",
-              "mime_type": "video/x-matroska"
-            },
-            "1080P": {
-              "telegram_message_id": 930,
-              "episode": 8,
-              "season": 1,
-              "special_type": null,
-              "part": null,
-              "quality": "1080p",
-              "file_size": 284171074,
-              "file_name": "@TamilMob_LinkZz Jujutsu Kaisen S01 E08 Blu-Ray - 1080p .mkv",
-              "mime_type": "video/x-matroska"
-            }
-          }
-        },
-        {
-          "telegram_message_id": 932,
-          "episode": 9,
-          "season": 1,
-          "special_type": null,
-          "part": null,
-          "quality": "720p",
-          "file_size": 191137762,
-          "file_name": "@TamilMob_LinkZz Jujutsu Kaisen S01 E09 Blu-Ray - 720p -.mkv",
-          "mime_type": "video/x-matroska",
-          "slug_id": "_GmIup52Mmndwfj9",
-          "qualities": {
-            "480P": {
-              "telegram_message_id": 931,
-              "episode": 9,
-              "season": 1,
-              "special_type": null,
-              "part": null,
-              "quality": "480p",
-              "file_size": 106063508,
-              "file_name": "@TamilMob_LinkZz Jujutsu Kaisen S01 E09 Blu-Ray - 480p -.mkv",
-              "mime_type": "video/x-matroska"
-            },
-            "720P": {
-              "telegram_message_id": 932,
-              "episode": 9,
-              "season": 1,
-              "special_type": null,
-              "part": null,
-              "quality": "720p",
-              "file_size": 191137762,
-              "file_name": "@TamilMob_LinkZz Jujutsu Kaisen S01 E09 Blu-Ray - 720p -.mkv",
-              "mime_type": "video/x-matroska"
-            },
-            "1080P": {
-              "telegram_message_id": 933,
-              "episode": 9,
-              "season": 1,
-              "special_type": null,
-              "part": null,
-              "quality": "1080p",
-              "file_size": 302863639,
-              "file_name": "@TamilMob_LinkZz Jujutsu Kaisen S01 E09 Blu-Ray - 1080p - #H.mkv",
-              "mime_type": "video/x-matroska"
-            }
-          }
-        }
-      ],
-      "year": "2026",
-      "poster": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/df/David_Vincent_LA_Anime_Film_Festival_2017_Red_Carpet.jpg/330px-David_Vincent_LA_Anime_Film_Festival_2017_Red_Carpet.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-      "plot": "David Vincent is an American voice actor and voice director who provides voices for animation, anime and video games. Some roles include Grimmjow Jaegerjaquez in Bleach, Senketsu in Kill la Kill, Gilgamesh in Fate/Zero & Fate/stay night, Male Robin in Fire Emblem Awakening, the Super Smash Bros. series and Code Name: S.T.E.A.M., Marshall Law in the Tekken series, T. Hawk in Super Street Fighter IV, Richter Belmont in Castlevania: The Dracula X Chronicles, the narrator of JoJo's Bizarre Adventure, and Jin Kisaragi and Hakumen in the BlazBlue series. He also had a guest role in Ghost in the Shell.",
-      "genre": [],
-      "rating": null,
-      "status": null,
-      "episodes_total": null,
-      "studio": null,
-      "updated_at": "2026-11-02T01:56:25.454Z"
+      "updated_at": "2026-11-02T01:57:10Z"
     }
   ]
 }
