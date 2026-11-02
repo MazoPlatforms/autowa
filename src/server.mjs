@@ -284,7 +284,8 @@ const animeBanners=new Map([
  ...Array.from({length:11},(_,i)=>'naruto-season-'+(i+1)+'.webp'),
  ...Array.from({length:18},(_,i)=>'naruto-shippuden-season-'+(i+1)+'.webp'),
  'attack-on-titan-oad.webp',
- ...Array.from({length:4},(_,i)=>'attack-on-titan-season-'+(i+1)+'.webp')
+ ...Array.from({length:4},(_,i)=>'attack-on-titan-season-'+(i+1)+'.webp'),
+ ...Array.from({length:3},(_,i)=>'jujutsu-kaisen-season-'+(i+1)+'.webp')
 ].map(name=>[
  '/banners/'+name,
  fs.readFileSync(new URL('../web/banners/'+name,import.meta.url))
