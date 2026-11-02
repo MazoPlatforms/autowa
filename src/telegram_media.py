@@ -115,6 +115,14 @@ def fixed_anime_episode_slug(message_id):
     digest = hashlib.sha256(f'filmgo-anime-episode:{int(message_id)}'.encode()).digest()[:12]
     return base64.urlsafe_b64encode(digest).decode().rstrip('=')
 
+
+def anime_parent_slug(title, season, episode, special_type=None, part=0):
+    """Stable parent slug shared by every quality of one episode."""
+    normalized = re.sub(r'[^a-z0-9]+', '', str(title or '').casefold())
+    identity = ':'.join((normalized, str(special_type or '').casefold(), str(int(season or 1)), str(int(episode or 0)), str(int(part or 0))))
+    digest = hashlib.sha256(f'filmgo-anime-parent:{identity}'.encode()).digest()[:12]
+    return base64.urlsafe_b64encode(digest).decode().rstrip('=')
+
 def anime_caption_parts(caption):
     value = str(caption or '')
     title_match = re.search(r'(?im)^\s*(?:anime|series|title)\s*:\s*(.+)$', value)
@@ -493,7 +501,7 @@ def build_anime_catalog(messages):
                     if field not in ('slug_id', 'telegram_message_id', 'file_name', 'file_size', 'mime_type') and value not in (None, '', []):
                         episode.setdefault(field, value)
             identity = (episode.get('special_type') or '', int(episode.get('season') or 1), int(episode.get('episode') or 0), int(episode.get('part') or 0))
-            entry = unique.setdefault(identity, {'slug_id': previous_parent_slug or episode.get('slug_id'), 'qualities': {}})
+            entry = unique.setdefault(identity, {'slug_id': previous_parent_slug or anime_parent_slug(show['title'], identity[1], identity[2], identity[0], identity[3]), 'qualities': {}})
             variant = {key: value for key, value in episode.items() if key not in ('season_explicit', 'caption_season', 'qualities')}
             variant.pop('slug_id', None)
             quality_key = str(episode.get('quality') or '720P').upper()

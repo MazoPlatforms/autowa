@@ -13,6 +13,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 from src.telegram_media import (
     anime_caption_parts,
     anime_filename_parts,
+    anime_parent_slug,
     anime_special_type,
     fixed_anime_episode_slug,
     manual_anime_season,
@@ -96,8 +97,9 @@ def discover_parent_slugs(messages, episode_slugs):
             continue
         key = (slugify(title), special or "", int(season or 1), int(episode), int(part or previous["part"] or 0))
         groups.setdefault(key, []).append(str(message.id))
-    for message_ids in groups.values():
+    for key, message_ids in groups.items():
         parent = next((episode_slugs.get(message_id) for message_id in message_ids if episode_slugs.get(message_id)), None)
+        parent = parent or anime_parent_slug(key[0], key[2], key[3], key[1], key[4])
         parent = parent or fixed_anime_episode_slug(min(map(int, message_ids)))
         for message_id in message_ids:
             episode_slugs[message_id] = parent
