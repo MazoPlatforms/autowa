@@ -7,9 +7,12 @@ with the same canonical caption format used by the bot.
 import asyncio
 import os
 import re
+import sys
+from pathlib import Path
 from telethon import TelegramClient
 from telethon.sessions import StringSession
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from src.telegram_media import anime_filename_parts, anime_parent_slug, anime_special_type
 
 
