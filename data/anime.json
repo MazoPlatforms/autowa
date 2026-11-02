@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-02T02:01:56.851Z",
+  "updated_at": "2026-11-02T02:02:13.748Z",
   "anime": [
     {
       "slug_id": "naruto",
@@ -18297,13 +18297,37 @@
               "mime_type": "video/x-matroska"
             }
           }
+        },
+        {
+          "telegram_message_id": 937,
+          "episode": 20,
+          "season": 1,
+          "special_type": null,
+          "part": null,
+          "quality": "480p",
+          "file_size": 159580132,
+          "file_name": "@TamilMob_LinkZz Jujutsu Kaisen S01 E20 Blu-Ray - 480p -.mkv",
+          "mime_type": "video/x-matroska",
+          "qualities": {
+            "480P": {
+              "telegram_message_id": 937,
+              "episode": 20,
+              "season": 1,
+              "special_type": null,
+              "part": null,
+              "quality": "480p",
+              "file_size": 159580132,
+              "file_name": "@TamilMob_LinkZz Jujutsu Kaisen S01 E20 Blu-Ray - 480p -.mkv",
+              "mime_type": "video/x-matroska"
+            }
+          }
         }
       ],
       "wikipedia_url": "https://en.wikipedia.org/wiki/David_Vincent_(voice_actor)",
       "poster": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/df/David_Vincent_LA_Anime_Film_Festival_2017_Red_Carpet.jpg/330px-David_Vincent_LA_Anime_Film_Festival_2017_Red_Carpet.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
       "plot": "David Vincent is an American voice actor and voice director who provides voices for animation, anime and video games. Some roles include Grimmjow Jaegerjaquez in Bleach, Senketsu in Kill la Kill, Gilgamesh in Fate/Zero & Fate/stay night, Male Robin in Fire Emblem Awakening, the Super Smash Bros. series and Code Name: S.T.E.A.M., Marshall Law in the Tekken series, T. Hawk in Super Street Fighter IV, Richter Belmont in Castlevania: The Dracula X Chronicles, the narrator of JoJo's Bizarre Adventure, and Jin Kisaragi and Hakumen in the BlazBlue series. He also had a guest role in Ghost in the Shell.",
       "year": "2026",
-      "updated_at": "2026-11-02T02:01:56.851Z",
+      "updated_at": "2026-11-02T02:02:13.748Z",
       "genre": [],
       "rating": null,
       "status": null,
