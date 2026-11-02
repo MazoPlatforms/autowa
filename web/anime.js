@@ -1,15 +1,15 @@
 // FilmGo anime catalog. The server indexes the separate Telegram anime channel.
 const fontStylesheet=document.createElement('link');fontStylesheet.rel='stylesheet';fontStylesheet.href='https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap';document.head.append(fontStylesheet);
 const $=id=>document.getElementById(id);
-const el=(tag,cls,text)=>{const e=document.createElement(tag);if(cls)e.className=cls;if(text!==undefined)e.textContent=text;return e;};
+const el=(tag,cls,text)=>{const e=document.createElement(tag);if(cls)e.className=cls;if(text!==undefined)e.textContent=text;return e;};const iconSvg=(inner,size)=>{const s=document.createElementNS('http://www.w3.org/2000/svg','svg');s.setAttribute('viewBox','0 0 24 24');s.setAttribute('width',size);s.setAttribute('height',size);s.setAttribute('fill','none');s.setAttribute('stroke','currentColor');s.setAttribute('stroke-width','1.8');s.setAttribute('stroke-linecap','round');s.setAttribute('stroke-linejoin','round');s.setAttribute('aria-hidden','true');s.innerHTML=inner;return s;};const STAR_INNER='<path d="M12 4.2l2.3 4.9 5.3.7-3.9 3.7 1 5.3L12 16.2l-4.7 2.6 1-5.3-3.9-3.7 5.3-.7L12 4.2Z" fill="currentColor" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>';const CHEV_INNER={l:'<path d="M14.6 5.9 9.3 11.2a1.2 1.2 0 0 0 0 1.7l5.3 5.2"/>',r:'<path d="M9.4 5.9l5.3 5.3a1.2 1.2 0 0 1 0 1.7L9.4 18.1"/>'};const starIcon=()=>{const s=iconSvg(STAR_INNER,13);s.classList.add('fg-star');return s;};const chevIcon=dir=>iconSvg(CHEV_INNER[dir],18);const ratingTag=(tag,cls,text)=>{const e=el(tag,cls);e.append(starIcon(),document.createTextNode(text));return e;};
 const FALLBACK_POSTER='https://i.ibb.co/TMJ6YCC4/IMG-33a2f581-8ff4-4a5e-9e64-e43c900000c2.png';
 const SEASON_BANNERS={'naruto':{1:'/banners/naruto-season-1.webp',2:'/banners/naruto-season-2.webp',3:'/banners/naruto-season-3.webp',4:'/banners/naruto-season-4.webp',5:'/banners/naruto-season-5.webp',6:'/banners/naruto-season-6.webp',7:'/banners/naruto-season-7.webp',8:'/banners/naruto-season-8.webp',9:'/banners/naruto-season-9.webp',10:'/banners/naruto-season-10.webp',11:'/banners/naruto-season-11.webp'},'naruto-shippuden':{1:'/banners/naruto-shippuden-season-1.webp',2:'/banners/naruto-shippuden-season-2.webp',3:'/banners/naruto-shippuden-season-3.webp',4:'/banners/naruto-shippuden-season-4.webp',5:'/banners/naruto-shippuden-season-5.webp',6:'/banners/naruto-shippuden-season-6.webp',7:'/banners/naruto-shippuden-season-7.webp',8:'/banners/naruto-shippuden-season-8.webp',9:'/banners/naruto-shippuden-season-9.webp',10:'/banners/naruto-shippuden-season-10.webp',11:'/banners/naruto-shippuden-season-11.webp',12:'/banners/naruto-shippuden-season-12.webp',13:'/banners/naruto-shippuden-season-13.webp',14:'/banners/naruto-shippuden-season-14.webp',15:'/banners/naruto-shippuden-season-15.webp',16:'/banners/naruto-shippuden-season-16.webp',17:'/banners/naruto-shippuden-season-17.webp',18:'/banners/naruto-shippuden-season-18.webp'}};
 const poster=a=>a.poster&&(/^https:\/\//.test(a.poster)||/^\/posters\/[a-f0-9]{24}\.jpg$/.test(a.poster))?a.poster:FALLBACK_POSTER;
 function startPoster(img){const source=img.dataset.posterSrc;if(!source)return;delete img.dataset.posterSrc;img.loading='eager';img.src=source;}
 const posterObserver='IntersectionObserver'in window?new IntersectionObserver(entries=>{for(const entry of entries){if(!entry.isIntersecting)continue;posterObserver.unobserve(entry.target);startPoster(entry.target);}},{rootMargin:'1600px 0px'}):null;
 function image(a,cls,eager=false,priority=false){const img=el('img',cls);img.alt='';img.loading=eager?'eager':'lazy';img.decoding='async';img.classList.add('poster-loading');if(priority)img.fetchPriority='high';img.addEventListener('load',()=>{img.classList.remove('poster-loading');img.classList.add('poster-loaded');},{once:true});img.onerror=()=>{if(img.src!==FALLBACK_POSTER){img.src=FALLBACK_POSTER;}else{img.onerror=null;img.removeAttribute('src');img.classList.remove('poster-loading');img.classList.add('poster-failed');}};img.dataset.posterSrc=poster(a);if(eager||!posterObserver)startPoster(img);else posterObserver.observe(img);return img;}
-function playIcon(){const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');svg.setAttribute('viewBox','0 0 24 24');svg.setAttribute('width','17');svg.setAttribute('height','17');svg.setAttribute('fill','currentColor');svg.setAttribute('aria-hidden','true');const p=document.createElementNS('http://www.w3.org/2000/svg','path');p.setAttribute('d','M8 5v14l11-7L8 5Z');svg.append(p);return svg;}
-function chevronIcon(){const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');svg.setAttribute('viewBox','0 0 24 24');svg.setAttribute('width','20');svg.setAttribute('height','20');svg.setAttribute('fill','none');svg.setAttribute('stroke','currentColor');svg.setAttribute('stroke-width','2');svg.setAttribute('stroke-linecap','round');svg.setAttribute('stroke-linejoin','round');svg.setAttribute('aria-hidden','true');const path=document.createElementNS('http://www.w3.org/2000/svg','path');path.setAttribute('d','m6 9 6 6 6-6');svg.append(path);return svg;}
+function playIcon(){const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');svg.setAttribute('viewBox','0 0 24 24');svg.setAttribute('width','17');svg.setAttribute('height','17');svg.setAttribute('fill','currentColor');svg.setAttribute('aria-hidden','true');const p=document.createElementNS('http://www.w3.org/2000/svg','path');p.setAttribute('d','M8.6 6v12l9.4-6Z');p.setAttribute('stroke','currentColor');p.setAttribute('stroke-width','2.6');p.setAttribute('stroke-linejoin','round');svg.append(p);return svg;}
+function chevronIcon(){const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');svg.setAttribute('viewBox','0 0 24 24');svg.setAttribute('width','20');svg.setAttribute('height','20');svg.setAttribute('fill','none');svg.setAttribute('stroke','currentColor');svg.setAttribute('stroke-width','2');svg.setAttribute('stroke-linecap','round');svg.setAttribute('stroke-linejoin','round');svg.setAttribute('aria-hidden','true');const path=document.createElementNS('http://www.w3.org/2000/svg','path');path.setAttribute('d','M6.5 9.5 11 14a1.4 1.4 0 0 0 2 0l4.5-4.5');svg.append(path);return svg;}
 
 const grid=$('anime-grid'),searchInput=$('anime-search'),empty=$('anime-empty'),home=$('anime-home'),detail=$('anime-detail'),pagination=$('anime-pagination');
 const yearFilter=$('filter-year'),genreFilter=$('filter-genre'),sortFilter=$('filter-sort');
@@ -34,7 +34,7 @@ function initCustomFilters(){
   const box=select.closest('.catalog-filter');
   select.classList.add('visually-hidden-select');
   const trigger=el('button','filter-trigger');trigger.type='button';trigger.setAttribute('aria-label',select.getAttribute('aria-label')||'Filter options');trigger.setAttribute('aria-haspopup','listbox');trigger.setAttribute('aria-expanded','false');
-  const label=el('span','filter-trigger-label');const arrow=el('span','filter-chevron');arrow.innerHTML='<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>';trigger.append(label,arrow);
+  const label=el('span','filter-trigger-label');const arrow=el('span','filter-chevron');arrow.innerHTML='<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.5 9.5 11 14a1.4 1.4 0 0 0 2 0l4.5-4.5"/></svg>';trigger.append(label,arrow);
   const panel=el('div','filter-panel');panel.setAttribute('role','listbox');panel.setAttribute('aria-label',select.getAttribute('aria-label')||'Filter options');
   box.append(trigger,panel);
   const refresh=()=>{
@@ -73,13 +73,13 @@ function card(a,i,eager=2){
  const wrap=el('div','poster-wrap');wrap.append(image(a,'poster',i<eager));
  const ep=latestEp(a);
  if(a.status==='Airing'&&a.type!=='Movie'&&ep)wrap.append(el('span','anime-badge','EP '+ep));
- if(a.rating)wrap.append(el('span','absolute bottom-2 left-2 rounded-md bg-zinc-950/85 px-2 py-1 text-[11px] font-bold text-white backdrop-blur','★ '+a.rating));
+ if(a.rating)wrap.append(ratingTag('span','absolute bottom-2 left-2 rounded-md bg-zinc-950/85 px-2 py-1 text-[11px] font-bold text-white backdrop-blur',a.rating));
  const info=el('div','search-result-info');info.append(el('h3','truncate text-sm font-semibold text-zinc-100',a.title),el('p','mt-1 text-xs text-zinc-500',[a.year,a.type].filter(Boolean).join(' · ')));
  link.append(wrap,info);goTo(link);return link;
 }
 function shelf(title,list){
  const sec=el('section','tv-shelf');const head=el('div','tv-shelf-head');head.append(el('h2','tv-section-title',title));
- const ctrl=el('div','tv-shelf-ctrl');const prev=el('button','tv-arrow','‹'),next=el('button','tv-arrow','›');prev.type=next.type='button';prev.setAttribute('aria-label','Scroll left');next.setAttribute('aria-label','Scroll right');ctrl.append(prev,next);head.append(ctrl);
+ const ctrl=el('div','tv-shelf-ctrl');const prev=el('button','tv-arrow'),next=el('button','tv-arrow');prev.append(chevIcon('l'));next.append(chevIcon('r'));prev.type=next.type='button';prev.setAttribute('aria-label','Scroll left');next.setAttribute('aria-label','Scroll right');ctrl.append(prev,next);head.append(ctrl);
  const row=el('div','tv-row');list.forEach((a,i)=>row.append(card(a,i,4)));
  const by=dir=>row.scrollBy({left:dir*row.clientWidth*.85,behavior:'smooth'});prev.onclick=()=>by(-1);next.onclick=()=>by(1);
  sec.append(head,row);return sec;
@@ -91,8 +91,8 @@ function buildHome(){
  if(featured){
   const bg=el('div','tv-hero-bg');bg.style.backgroundImage='url("'+poster(featured).replace(/"/g,'%22')+'")';
   const body=el('div','tv-hero-body');body.append(el('span','tv-eyebrow','Featured'),el('h1','tv-hero-title',featured.title));
-  const bits=[];if(featured.rating)bits.push('★ '+featured.rating);if(featured.year)bits.push(String(featured.year));if(featured.episodes_total)bits.push(featured.episodes_total+' eps');const g=genresOf(featured);if(g.length)bits.push(g.slice(0,2).join(' · '));
-  body.append(el('p','tv-hero-meta',bits.join('  ·  ')));
+  const bits=[];if(featured.year)bits.push(String(featured.year));if(featured.episodes_total)bits.push(featured.episodes_total+' eps');const g=genresOf(featured);if(g.length)bits.push(g.slice(0,2).join(' · '));
+  const metaEl=el('p','tv-hero-meta');if(featured.rating)metaEl.append(starIcon(),document.createTextNode(' '+featured.rating+(bits.length?'  ·  ':'')));metaEl.append(document.createTextNode(bits.join('  ·  ')));body.append(metaEl);
   if(featured.plot)body.append(el('p','tv-hero-plot',featured.plot));
   const actions=el('div','tv-hero-actions');const play=el('a','tv-btn tv-btn-primary');play.append(playIcon(),document.createTextNode('Watch now'));play.href=slugOf(featured);goTo(play);
   const more=el('a','tv-btn tv-btn-ghost','Browse library');more.href='#anime-results-title';more.addEventListener('click',e=>{e.preventDefault();$('anime-results-title').scrollIntoView({behavior:'smooth',block:'start'});});
@@ -115,7 +115,7 @@ function renderPagination(total){
  pagination.classList.toggle('hidden',pages<=1);
  if(pages<=1)return;
  const add=(label,target,disabled=false,current=false)=>{
-  const button=el('button','page-button'+(current?' active':''),label);button.type='button';button.disabled=disabled;
+  const button=el('button','page-button'+(current?' active':''),label);button.type='button';button.disabled=disabled;if(label==='‹'||label==='›'){const isPrev=label==='‹';button.textContent='';button.append(chevIcon(isPrev?'l':'r'));button.setAttribute('aria-label',isPrev?'Previous page':'Next page');}
   if(current)button.setAttribute('aria-current','page');
   button.addEventListener('click',()=>{page=target;render();home.scrollIntoView({behavior:'smooth',block:'start'});});
   pagination.append(button);
@@ -151,7 +151,7 @@ function showDetail(a){
  const layout=el('div','detail-hero');layout.append(image(a,'detail-poster',true,true));
  const info=el('div');info.append(el('p','anime-kicker','Anime details'),el('h1','anime-detail-title',a.title));
  info.append(el('p','anime-detail-meta',[a.year,a.episodes_total?a.episodes_total+' episodes':''].filter(Boolean).join(' · ')));
- if(a.rating)info.append(el('p','anime-detail-rating','★ '+a.rating));
+ if(a.rating)info.append(ratingTag('p','anime-detail-rating',a.rating));
  const g=genresOf(a);if(g.length)info.append(el('p','anime-detail-line',g.join(' · ')));
  layout.append(info);root.append(layout);
  const overview=el('div','anime-overview');overview.append(el('h2','','Overview'),el('p','',a.plot||'No synopsis available yet.'));if(a.studio)overview.append(el('p','anime-detail-line','Studio: '+a.studio));root.append(overview);
