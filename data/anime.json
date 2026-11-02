@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": 1793605712,
+  "updated_at": 1793623750,
   "anime": [
     {
       "slug_id": "naruto",
@@ -6347,7 +6347,7 @@
         "10": "/banners/naruto-season-10.webp",
         "11": "/banners/naruto-season-11.webp"
       },
-      "updated_at": "2026-11-02T07:48:02Z"
+      "updated_at": "2026-11-02T12:48:45Z"
     },
     {
       "slug_id": "naruto-shippuden",
@@ -17963,7 +17963,7 @@
       "status": "Finished",
       "episodes_total": 500,
       "studio": "Studio Pierrot",
-      "updated_at": "2026-11-02T07:48:32Z"
+      "updated_at": "2026-11-02T12:49:10Z"
     },
     {
       "slug_id": "attack-on-titan",
@@ -23698,7 +23698,7 @@
         "3": "/banners/attack-on-titan-season-3.webp",
         "4": "/banners/attack-on-titan-season-4.webp"
       },
-      "updated_at": "2026-11-02T07:47:47Z"
+      "updated_at": "2026-11-02T12:48:34Z"
     },
     {
       "slug_id": "jujutsu-kaisen",
@@ -26811,7 +26811,648 @@
         "2": "/banners/jujutsu-kaisen-season-2.webp",
         "3": "/banners/jujutsu-kaisen-season-3.webp"
       },
-      "updated_at": "2026-11-02T07:47:41Z"
+      "updated_at": "2026-11-02T12:48:29Z"
+    },
+    {
+      "slug_id": "solo-leveling",
+      "title": "Solo Leveling",
+      "episodes": [
+        {
+          "telegram_message_id": 1174,
+          "episode": 1,
+          "season": 1,
+          "special_type": null,
+          "part": null,
+          "quality": "720P",
+          "file_size": 91761833,
+          "file_name": "Solo Leveling S01 E01 720p (Dual).mkv",
+          "mime_type": "video/x-matroska",
+          "title": "I'm Used to It",
+          "released": "2024-01-06",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/498/1247043.jpg",
+          "slug_id": "0OzgBSx2jXiCkumg",
+          "qualities": {
+            "1080P": {
+              "telegram_message_id": 1177,
+              "episode": 1,
+              "season": 1,
+              "special_type": null,
+              "part": null,
+              "quality": "1080P",
+              "file_size": 1073757421,
+              "file_name": "Solo leveling tamil S01E01 1080p.mp4",
+              "mime_type": "video/mp4",
+              "title": "I'm Used to It",
+              "released": "2024-01-06",
+              "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/498/1247043.jpg"
+            },
+            "360P": {
+              "telegram_message_id": 1176,
+              "episode": 1,
+              "season": 1,
+              "special_type": null,
+              "part": null,
+              "quality": "360P",
+              "file_size": 49067528,
+              "file_name": "Solo leveling tamil S01E01 360p.mp4",
+              "mime_type": "video/mp4",
+              "title": "I'm Used to It",
+              "released": "2024-01-06",
+              "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/498/1247043.jpg"
+            },
+            "480P": {
+              "telegram_message_id": 1175,
+              "episode": 1,
+              "season": 1,
+              "special_type": null,
+              "part": null,
+              "quality": "480P",
+              "file_size": 156037409,
+              "file_name": "Solo leveling tamil S01E01 480p.mp4",
+              "mime_type": "video/mp4",
+              "title": "I'm Used to It",
+              "released": "2024-01-06",
+              "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/498/1247043.jpg"
+            },
+            "720P": {
+              "telegram_message_id": 1174,
+              "episode": 1,
+              "season": 1,
+              "special_type": null,
+              "part": null,
+              "quality": "720P",
+              "file_size": 91761833,
+              "file_name": "Solo Leveling S01 E01 720p (Dual).mkv",
+              "mime_type": "video/x-matroska",
+              "title": "I'm Used to It",
+              "released": "2024-01-06",
+              "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/498/1247043.jpg"
+            }
+          }
+        },
+        {
+          "telegram_message_id": 1182,
+          "episode": 5,
+          "season": 1,
+          "special_type": null,
+          "part": null,
+          "quality": "720P",
+          "file_size": 138225237,
+          "file_name": "Solo Leveling S01E05 720p Tamil.mkv",
+          "mime_type": "video/x-matroska",
+          "title": "A Pretty Good Deal",
+          "released": "2024-02-03",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/505/1264587.jpg",
+          "slug_id": "DyOIlb0dy1WmOXb8",
+          "qualities": {
+            "720P": {
+              "telegram_message_id": 1182,
+              "episode": 5,
+              "season": 1,
+              "special_type": null,
+              "part": null,
+              "quality": "720P",
+              "file_size": 138225237,
+              "file_name": "Solo Leveling S01E05 720p Tamil.mkv",
+              "mime_type": "video/x-matroska",
+              "title": "A Pretty Good Deal",
+              "released": "2024-02-03",
+              "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/505/1264587.jpg"
+            },
+            "480P": {
+              "telegram_message_id": 1181,
+              "episode": 5,
+              "season": 1,
+              "special_type": null,
+              "part": null,
+              "quality": "480P",
+              "file_size": 57354983,
+              "file_name": "Solo Leveling S01 E05 (480P) [Tamil] .mkv",
+              "mime_type": "video/x-matroska",
+              "title": "A Pretty Good Deal",
+              "released": "2024-02-03",
+              "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/505/1264587.jpg"
+            }
+          }
+        },
+        {
+          "telegram_message_id": 1186,
+          "episode": 6,
+          "season": 1,
+          "special_type": null,
+          "part": null,
+          "quality": "720P",
+          "file_size": 124884174,
+          "file_name": "Solo Leveling S01E06 720p Tamil.mkv",
+          "mime_type": "video/x-matroska",
+          "title": "The Real Hunt Begins",
+          "released": "2024-02-10",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/505/1264588.jpg",
+          "slug_id": "9SjdOdNP7FtALiB0",
+          "qualities": {
+            "720P": {
+              "telegram_message_id": 1186,
+              "episode": 6,
+              "season": 1,
+              "special_type": null,
+              "part": null,
+              "quality": "720P",
+              "file_size": 124884174,
+              "file_name": "Solo Leveling S01E06 720p Tamil.mkv",
+              "mime_type": "video/x-matroska",
+              "title": "The Real Hunt Begins",
+              "released": "2024-02-10",
+              "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/505/1264588.jpg"
+            }
+          }
+        },
+        {
+          "telegram_message_id": 1179,
+          "episode": 7,
+          "season": 1,
+          "special_type": null,
+          "part": null,
+          "quality": "720P",
+          "file_size": 145448089,
+          "file_name": "[AL] Solo Leveling S1 - E07 720p Sub @Anime_Locus.mkv",
+          "mime_type": "video/x-matroska",
+          "title": "Let's See How Far I Can Go",
+          "released": "2024-02-17",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/505/1264589.jpg",
+          "slug_id": "-rFw70-zu5Nkq_A_",
+          "qualities": {
+            "1080P": {
+              "telegram_message_id": 1180,
+              "episode": 7,
+              "season": 1,
+              "special_type": null,
+              "part": null,
+              "quality": "1080P",
+              "file_size": 267397502,
+              "file_name": "[AL] Solo Leveling S1 - E07 1080p Sub @Anime_Locus.mkv",
+              "mime_type": "video/x-matroska",
+              "title": "Let's See How Far I Can Go",
+              "released": "2024-02-17",
+              "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/505/1264589.jpg"
+            },
+            "720P": {
+              "telegram_message_id": 1179,
+              "episode": 7,
+              "season": 1,
+              "special_type": null,
+              "part": null,
+              "quality": "720P",
+              "file_size": 145448089,
+              "file_name": "[AL] Solo Leveling S1 - E07 720p Sub @Anime_Locus.mkv",
+              "mime_type": "video/x-matroska",
+              "title": "Let's See How Far I Can Go",
+              "released": "2024-02-17",
+              "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/505/1264589.jpg"
+            },
+            "480P": {
+              "telegram_message_id": 1178,
+              "episode": 7,
+              "season": 1,
+              "special_type": null,
+              "part": null,
+              "quality": "480P",
+              "file_size": 56704712,
+              "file_name": "[AL] Solo Leveling S1 - E07 480p Sub @Anime_Locus.mkv",
+              "mime_type": "video/x-matroska",
+              "title": "Let's See How Far I Can Go",
+              "released": "2024-02-17",
+              "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/505/1264589.jpg"
+            }
+          }
+        },
+        {
+          "telegram_message_id": 1183,
+          "episode": 8,
+          "season": 1,
+          "special_type": null,
+          "part": null,
+          "quality": "720P",
+          "file_size": 112264913,
+          "file_name": "Solo Leveling S01 Ep08 720p.mkv",
+          "mime_type": "video/x-matroska",
+          "title": "This Is Frustrating",
+          "released": "2024-03-02",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/506/1267363.jpg",
+          "slug_id": "w7r6T75HMqPc8xlI",
+          "qualities": {
+            "4K": {
+              "telegram_message_id": 1185,
+              "episode": 8,
+              "season": 1,
+              "special_type": null,
+              "part": null,
+              "quality": "4K",
+              "file_size": 1412090205,
+              "file_name": "Solo leveling S01 Ep08 4k.mkv",
+              "mime_type": "video/x-matroska",
+              "title": "This Is Frustrating",
+              "released": "2024-03-02",
+              "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/506/1267363.jpg"
+            },
+            "1080P": {
+              "telegram_message_id": 1184,
+              "episode": 8,
+              "season": 1,
+              "special_type": null,
+              "part": null,
+              "quality": "1080P",
+              "file_size": 325971452,
+              "file_name": "Solo Leveling S01 Ep08 1080p.mkv",
+              "mime_type": "video/x-matroska",
+              "title": "This Is Frustrating",
+              "released": "2024-03-02",
+              "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/506/1267363.jpg"
+            },
+            "720P": {
+              "telegram_message_id": 1183,
+              "episode": 8,
+              "season": 1,
+              "special_type": null,
+              "part": null,
+              "quality": "720P",
+              "file_size": 112264913,
+              "file_name": "Solo Leveling S01 Ep08 720p.mkv",
+              "mime_type": "video/x-matroska",
+              "title": "This Is Frustrating",
+              "released": "2024-03-02",
+              "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/506/1267363.jpg"
+            }
+          }
+        },
+        {
+          "telegram_message_id": 1188,
+          "episode": 12,
+          "season": 1,
+          "special_type": null,
+          "part": null,
+          "quality": "720P",
+          "file_size": 136996811,
+          "file_name": "[SXF] Solo Leveling S1 - E12 720p Sub @TCRareToons.mkv",
+          "mime_type": "video/x-matroska",
+          "title": "Arise",
+          "released": "2024-03-30",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/554/1385112.jpg",
+          "slug_id": "njKkJ8VIQTh4JAqk",
+          "qualities": {
+            "1080P": {
+              "telegram_message_id": 1189,
+              "episode": 12,
+              "season": 1,
+              "special_type": null,
+              "part": null,
+              "quality": "1080P",
+              "file_size": 250290058,
+              "file_name": "[SXF] Solo Leveling S1 - E12 1080p Sub @TCRareToons.mkv",
+              "mime_type": "video/x-matroska",
+              "title": "Arise",
+              "released": "2024-03-30",
+              "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/554/1385112.jpg"
+            },
+            "720P": {
+              "telegram_message_id": 1188,
+              "episode": 12,
+              "season": 1,
+              "special_type": null,
+              "part": null,
+              "quality": "720P",
+              "file_size": 136996811,
+              "file_name": "[SXF] Solo Leveling S1 - E12 720p Sub @TCRareToons.mkv",
+              "mime_type": "video/x-matroska",
+              "title": "Arise",
+              "released": "2024-03-30",
+              "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/554/1385112.jpg"
+            },
+            "480P": {
+              "telegram_message_id": 1187,
+              "episode": 12,
+              "season": 1,
+              "special_type": null,
+              "part": null,
+              "quality": "480P",
+              "file_size": 53561488,
+              "file_name": "[AL] Solo Leveling S1 - E12 480p Sub @TCRareToons.mkv",
+              "mime_type": "video/x-matroska",
+              "title": "Arise",
+              "released": "2024-03-30",
+              "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/554/1385112.jpg"
+            }
+          }
+        },
+        {
+          "telegram_message_id": 1191,
+          "episode": 1,
+          "season": 2,
+          "special_type": null,
+          "part": null,
+          "quality": "720P",
+          "file_size": 158526355,
+          "file_name": "[ACT]-Solo Leveling S02 EP01 720p [Multi AuD].mkv",
+          "mime_type": "video/x-matroska",
+          "title": "You aren't E-rank, are You",
+          "released": "2025-01-04",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/554/1385270.jpg",
+          "slug_id": "KMfofhHs8szbvg6z",
+          "qualities": {
+            "1080P": {
+              "telegram_message_id": 1192,
+              "episode": 1,
+              "season": 2,
+              "special_type": null,
+              "part": null,
+              "quality": "1080P",
+              "file_size": 338058185,
+              "file_name": "[ACT]-Solo Leveling S02 EP01 1080p [Multi AuD].mkv",
+              "mime_type": "video/x-matroska",
+              "title": "You aren't E-rank, are You",
+              "released": "2025-01-04",
+              "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/554/1385270.jpg"
+            },
+            "720P": {
+              "telegram_message_id": 1191,
+              "episode": 1,
+              "season": 2,
+              "special_type": null,
+              "part": null,
+              "quality": "720P",
+              "file_size": 158526355,
+              "file_name": "[ACT]-Solo Leveling S02 EP01 720p [Multi AuD].mkv",
+              "mime_type": "video/x-matroska",
+              "title": "You aren't E-rank, are You",
+              "released": "2025-01-04",
+              "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/554/1385270.jpg"
+            },
+            "480P": {
+              "telegram_message_id": 1190,
+              "episode": 1,
+              "season": 2,
+              "special_type": null,
+              "part": null,
+              "quality": "480P",
+              "file_size": 124049261,
+              "file_name": "[ACT]-Solo Leveling S02 EP01 480p [Multi AuD].mkv",
+              "mime_type": "video/x-matroska",
+              "title": "You aren't E-rank, are You",
+              "released": "2025-01-04",
+              "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/554/1385270.jpg"
+            }
+          }
+        },
+        {
+          "telegram_message_id": 1194,
+          "episode": 2,
+          "season": 2,
+          "special_type": null,
+          "part": null,
+          "quality": "720P",
+          "file_size": 174705756,
+          "file_name": "[ACT]-Solo Leveling S02 EP02 720p [Multi AuD].mkv",
+          "mime_type": "video/x-matroska",
+          "title": "I Suppose You aren't Aware",
+          "released": "2025-01-11",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/554/1385275.jpg",
+          "slug_id": "o6O7phXftlfe-FLg",
+          "qualities": {
+            "1080P": {
+              "telegram_message_id": 1195,
+              "episode": 2,
+              "season": 2,
+              "special_type": null,
+              "part": null,
+              "quality": "1080P",
+              "file_size": 333244578,
+              "file_name": "[ACT]-Solo Leveling S02 EP02 1080p [Multi AuD].mkv",
+              "mime_type": "video/x-matroska",
+              "title": "I Suppose You aren't Aware",
+              "released": "2025-01-11",
+              "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/554/1385275.jpg"
+            },
+            "720P": {
+              "telegram_message_id": 1194,
+              "episode": 2,
+              "season": 2,
+              "special_type": null,
+              "part": null,
+              "quality": "720P",
+              "file_size": 174705756,
+              "file_name": "[ACT]-Solo Leveling S02 EP02 720p [Multi AuD].mkv",
+              "mime_type": "video/x-matroska",
+              "title": "I Suppose You aren't Aware",
+              "released": "2025-01-11",
+              "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/554/1385275.jpg"
+            },
+            "480P": {
+              "telegram_message_id": 1193,
+              "episode": 2,
+              "season": 2,
+              "special_type": null,
+              "part": null,
+              "quality": "480P",
+              "file_size": 95966674,
+              "file_name": "[ACT]-Solo Leveling S02 EP02 480p [Multi AuD].mkv",
+              "mime_type": "video/x-matroska",
+              "title": "I Suppose You aren't Aware",
+              "released": "2025-01-11",
+              "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/554/1385275.jpg"
+            }
+          }
+        },
+        {
+          "telegram_message_id": 1197,
+          "episode": 3,
+          "season": 2,
+          "special_type": null,
+          "part": null,
+          "quality": "720P",
+          "file_size": 155457333,
+          "file_name": "[ACT]-Solo Leveling S02 EP03 720p [Multi AuD].mkv",
+          "mime_type": "video/x-matroska",
+          "title": "Still a Long Way to Go",
+          "released": "2025-01-18",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/552/1381725.jpg",
+          "slug_id": "R9LqdwD5CmdhZKOF",
+          "qualities": {
+            "1080P": {
+              "telegram_message_id": 1198,
+              "episode": 3,
+              "season": 2,
+              "special_type": null,
+              "part": null,
+              "quality": "1080P",
+              "file_size": 339877696,
+              "file_name": "[ACT]-Solo Leveling S02 EP03 1080p [Multi AuD].mkv",
+              "mime_type": "video/x-matroska",
+              "title": "Still a Long Way to Go",
+              "released": "2025-01-18",
+              "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/552/1381725.jpg"
+            },
+            "720P": {
+              "telegram_message_id": 1197,
+              "episode": 3,
+              "season": 2,
+              "special_type": null,
+              "part": null,
+              "quality": "720P",
+              "file_size": 155457333,
+              "file_name": "[ACT]-Solo Leveling S02 EP03 720p [Multi AuD].mkv",
+              "mime_type": "video/x-matroska",
+              "title": "Still a Long Way to Go",
+              "released": "2025-01-18",
+              "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/552/1381725.jpg"
+            },
+            "480P": {
+              "telegram_message_id": 1196,
+              "episode": 3,
+              "season": 2,
+              "special_type": null,
+              "part": null,
+              "quality": "480P",
+              "file_size": 116387009,
+              "file_name": "[ACT]-Solo Leveling S02 EP03 480p [Multi AuD].mkv",
+              "mime_type": "video/x-matroska",
+              "title": "Still a Long Way to Go",
+              "released": "2025-01-18",
+              "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/552/1381725.jpg"
+            }
+          }
+        },
+        {
+          "telegram_message_id": 1200,
+          "episode": 4,
+          "season": 2,
+          "special_type": null,
+          "part": null,
+          "quality": "720P",
+          "file_size": 125824749,
+          "file_name": "[ACT]-Solo Leveling S02 EP04 720p [Multi AuD].mkv",
+          "mime_type": "video/x-matroska",
+          "title": "I Need to Stop Faking",
+          "released": "2025-01-25",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/553/1383763.jpg",
+          "slug_id": "jiIRaxmymGigkEpa",
+          "qualities": {
+            "1080P": {
+              "telegram_message_id": 1201,
+              "episode": 4,
+              "season": 2,
+              "special_type": null,
+              "part": null,
+              "quality": "1080P",
+              "file_size": 267690249,
+              "file_name": "[ACT]-Solo Leveling S02 EP04 1080p [Multi AuD].mkv",
+              "mime_type": "video/x-matroska",
+              "title": "I Need to Stop Faking",
+              "released": "2025-01-25",
+              "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/553/1383763.jpg"
+            },
+            "720P": {
+              "telegram_message_id": 1200,
+              "episode": 4,
+              "season": 2,
+              "special_type": null,
+              "part": null,
+              "quality": "720P",
+              "file_size": 125824749,
+              "file_name": "[ACT]-Solo Leveling S02 EP04 720p [Multi AuD].mkv",
+              "mime_type": "video/x-matroska",
+              "title": "I Need to Stop Faking",
+              "released": "2025-01-25",
+              "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/553/1383763.jpg"
+            },
+            "480P": {
+              "telegram_message_id": 1199,
+              "episode": 4,
+              "season": 2,
+              "special_type": null,
+              "part": null,
+              "quality": "480P",
+              "file_size": 96896787,
+              "file_name": "[ACT]-Solo Leveling S02 EP04 480p [Multi AuD].mkv",
+              "mime_type": "video/x-matroska",
+              "title": "I Need to Stop Faking",
+              "released": "2025-01-25",
+              "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/553/1383763.jpg"
+            }
+          }
+        },
+        {
+          "telegram_message_id": 1203,
+          "episode": 5,
+          "season": 2,
+          "special_type": null,
+          "part": null,
+          "quality": "720P",
+          "file_size": 142923931,
+          "file_name": "Solo Leveling S02 Ep05 (720p) தமிழ்.mkv",
+          "mime_type": "video/x-matroska",
+          "title": "This Is What We're Trained to Do",
+          "released": "2025-02-01",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/554/1385910.jpg",
+          "slug_id": "Kxuqpzp_j8M6OkX4",
+          "qualities": {
+            "1080P": {
+              "telegram_message_id": 1204,
+              "episode": 5,
+              "season": 2,
+              "special_type": null,
+              "part": null,
+              "quality": "1080P",
+              "file_size": 225713307,
+              "file_name": "Solo Leveling S02 Ep05 (1080p) தமிழ்.mkv",
+              "mime_type": "video/x-matroska",
+              "title": "This Is What We're Trained to Do",
+              "released": "2025-02-01",
+              "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/554/1385910.jpg"
+            },
+            "720P": {
+              "telegram_message_id": 1203,
+              "episode": 5,
+              "season": 2,
+              "special_type": null,
+              "part": null,
+              "quality": "720P",
+              "file_size": 142923931,
+              "file_name": "Solo Leveling S02 Ep05 (720p) தமிழ்.mkv",
+              "mime_type": "video/x-matroska",
+              "title": "This Is What We're Trained to Do",
+              "released": "2025-02-01",
+              "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/554/1385910.jpg"
+            },
+            "480P": {
+              "telegram_message_id": 1202,
+              "episode": 5,
+              "season": 2,
+              "special_type": null,
+              "part": null,
+              "quality": "480P",
+              "file_size": 72585945,
+              "file_name": "Solo Leveling S02 Ep05 (480p) தமிழ்.mkv",
+              "mime_type": "video/x-matroska",
+              "title": "This Is What We're Trained to Do",
+              "released": "2025-02-01",
+              "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/554/1385910.jpg"
+            }
+          }
+        }
+      ],
+      "poster": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx151807-it355ZgzquUd.png",
+      "plot": "They say whatever doesn’t kill you makes you stronger, but that’s not the case for the world’s weakest hunter Seong Jin-U. After being brutally slaughtered by monsters in a high-ranking dungeon, Jin-U came back with the System, a program only he could see, that’s leveling him up in every way. Now, he’s inspired to discover the secrets behind his powers and the dungeon that spawned them.\n\n(Source: Crunchyroll)",
+      "genre": [
+        "Action",
+        "Adventure",
+        "Fantasy"
+      ],
+      "rating": 8.0,
+      "status": "Finished",
+      "episodes_total": 12,
+      "year": 2024,
+      "studio": "A-1 Pictures",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Solo_Leveling",
+      "updated_at": "2026-11-02T12:48:26Z"
     }
   ]
 }

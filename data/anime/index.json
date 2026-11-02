@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": 1793605712,
+  "updated_at": 1793623750,
   "anime": [
     {
       "slug_id": "naruto",
@@ -33,7 +33,7 @@
         "10": "/banners/naruto-season-10.webp",
         "11": "/banners/naruto-season-11.webp"
       },
-      "updated_at": "2026-11-02T07:48:02Z"
+      "updated_at": "2026-11-02T12:48:45Z"
     },
     {
       "slug_id": "naruto-shippuden",
@@ -53,7 +53,7 @@
       "status": "Finished",
       "episodes_total": 500,
       "studio": "Studio Pierrot",
-      "updated_at": "2026-11-02T07:48:32Z"
+      "updated_at": "2026-11-02T12:49:10Z"
     },
     {
       "slug_id": "attack-on-titan",
@@ -79,7 +79,7 @@
         "3": "/banners/attack-on-titan-season-3.webp",
         "4": "/banners/attack-on-titan-season-4.webp"
       },
-      "updated_at": "2026-11-02T07:47:47Z"
+      "updated_at": "2026-11-02T12:48:34Z"
     },
     {
       "slug_id": "jujutsu-kaisen",
@@ -102,7 +102,25 @@
         "2": "/banners/jujutsu-kaisen-season-2.webp",
         "3": "/banners/jujutsu-kaisen-season-3.webp"
       },
-      "updated_at": "2026-11-02T07:47:41Z"
+      "updated_at": "2026-11-02T12:48:29Z"
+    },
+    {
+      "slug_id": "solo-leveling",
+      "title": "Solo Leveling",
+      "poster": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx151807-it355ZgzquUd.png",
+      "plot": "They say whatever doesn’t kill you makes you stronger, but that’s not the case for the world’s weakest hunter Seong Jin-U. After being brutally slaughtered by monsters in a high-ranking dungeon, Jin-U came back with the System, a program only he could see, that’s leveling him up in every way. Now, he’s inspired to discover the secrets behind his powers and the dungeon that spawned them.\n\n(Source: Crunchyroll)",
+      "genre": [
+        "Action",
+        "Adventure",
+        "Fantasy"
+      ],
+      "rating": 8.0,
+      "status": "Finished",
+      "episodes_total": 12,
+      "year": 2024,
+      "studio": "A-1 Pictures",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Solo_Leveling",
+      "updated_at": "2026-11-02T12:48:26Z"
     }
   ]
 }
