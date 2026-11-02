@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": 1793605460,
+  "updated_at": 1793605712,
   "anime": {
     "slug_id": "attack-on-titan",
     "title": "Attack On Titan",
@@ -1946,9 +1946,9 @@
         "file_size": 189081366,
         "file_name": "Attack on titan-(S02 - Ep01)-(தமிழ்)- 720p.mkv",
         "mime_type": "video/x-matroska",
-        "title": "To You, in 2000 Years - The Fall of Shiganshina (1)",
-        "released": "2013-04-07",
-        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242650.jpg",
+        "title": "Beast Titan",
+        "released": "2017-04-01",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/104/262363.jpg",
         "slug_id": "_LJKhwooKorjzo6E",
         "qualities": {
           "1080P": {
@@ -1961,9 +1961,9 @@
             "file_size": 342501304,
             "file_name": "Attack on titan-(S02 - Ep01)-(தமிழ்)- 1080p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "To You, in 2000 Years - The Fall of Shiganshina (1)",
-            "released": "2013-04-07",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242650.jpg"
+            "title": "Beast Titan",
+            "released": "2017-04-01",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/104/262363.jpg"
           },
           "720P": {
             "telegram_message_id": 690,
@@ -1975,9 +1975,9 @@
             "file_size": 189081366,
             "file_name": "Attack on titan-(S02 - Ep01)-(தமிழ்)- 720p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "To You, in 2000 Years - The Fall of Shiganshina (1)",
-            "released": "2013-04-07",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242650.jpg"
+            "title": "Beast Titan",
+            "released": "2017-04-01",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/104/262363.jpg"
           },
           "480P": {
             "telegram_message_id": 689,
@@ -1989,9 +1989,9 @@
             "file_size": 64442259,
             "file_name": "Attack on titan-(S02 - Ep01)-(தமிழ்)- 480p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "To You, in 2000 Years - The Fall of Shiganshina (1)",
-            "released": "2013-04-07",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242650.jpg"
+            "title": "Beast Titan",
+            "released": "2017-04-01",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/104/262363.jpg"
           }
         }
       },
@@ -2005,9 +2005,9 @@
         "file_size": 297014180,
         "file_name": "Attack on titan-(S02 - Ep02)-(தமிழ்)- 720p.mkv",
         "mime_type": "video/x-matroska",
-        "title": "That Day - The Fall of Shiganshina (2)",
-        "released": "2013-04-14",
-        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242651.jpg",
+        "title": "I'm Home",
+        "released": "2017-04-08",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1358468.jpg",
         "slug_id": "gBD05Sf3H2rMYSCI",
         "qualities": {
           "1080P": {
@@ -2020,9 +2020,9 @@
             "file_size": 370321325,
             "file_name": "Attack on titan-(S02 - Ep02)-(தமிழ்)- 1080p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "That Day - The Fall of Shiganshina (2)",
-            "released": "2013-04-14",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242651.jpg"
+            "title": "I'm Home",
+            "released": "2017-04-08",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1358468.jpg"
           },
           "720P": {
             "telegram_message_id": 693,
@@ -2034,9 +2034,9 @@
             "file_size": 297014180,
             "file_name": "Attack on titan-(S02 - Ep02)-(தமிழ்)- 720p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "That Day - The Fall of Shiganshina (2)",
-            "released": "2013-04-14",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242651.jpg"
+            "title": "I'm Home",
+            "released": "2017-04-08",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1358468.jpg"
           },
           "480P": {
             "telegram_message_id": 692,
@@ -2048,9 +2048,9 @@
             "file_size": 59191256,
             "file_name": "Attack on titan-(S02 - Ep02)-(தமிழ்)- 480p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "That Day - The Fall of Shiganshina (2)",
-            "released": "2013-04-14",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242651.jpg"
+            "title": "I'm Home",
+            "released": "2017-04-08",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1358468.jpg"
           }
         }
       },
@@ -2064,9 +2064,9 @@
         "file_size": 163292782,
         "file_name": "Attack on titan-(S02 - Ep03)-(தமிழ்)- 720p.mkv",
         "mime_type": "video/x-matroska",
-        "title": "A Dim Light Amid Despair - Humanity's Comeback (1)",
-        "released": "2013-04-21",
-        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242652.jpg",
+        "title": "Southwestward",
+        "released": "2017-04-15",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1358469.jpg",
         "slug_id": "w0p0Hur_J3boY3tS",
         "qualities": {
           "1080P": {
@@ -2079,9 +2079,9 @@
             "file_size": 278835948,
             "file_name": "Attack on titan-(S02 - Ep03)-(தமிழ்)- 1080p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "A Dim Light Amid Despair - Humanity's Comeback (1)",
-            "released": "2013-04-21",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242652.jpg"
+            "title": "Southwestward",
+            "released": "2017-04-15",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1358469.jpg"
           },
           "720P": {
             "telegram_message_id": 696,
@@ -2093,9 +2093,9 @@
             "file_size": 163292782,
             "file_name": "Attack on titan-(S02 - Ep03)-(தமிழ்)- 720p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "A Dim Light Amid Despair - Humanity's Comeback (1)",
-            "released": "2013-04-21",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242652.jpg"
+            "title": "Southwestward",
+            "released": "2017-04-15",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1358469.jpg"
           },
           "480P": {
             "telegram_message_id": 695,
@@ -2107,9 +2107,9 @@
             "file_size": 51890697,
             "file_name": "Attack on titan-(S02 - Ep03)-(தமிழ்)- 480p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "A Dim Light Amid Despair - Humanity's Comeback (1)",
-            "released": "2013-04-21",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242652.jpg"
+            "title": "Southwestward",
+            "released": "2017-04-15",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1358469.jpg"
           }
         }
       },
@@ -2123,9 +2123,9 @@
         "file_size": 152795190,
         "file_name": "Attack on titan-(S02 - Ep04)-(தமிழ்)- 720p.mkv",
         "mime_type": "video/x-matroska",
-        "title": "The Night of the Closing Ceremony - Humanity's Comeback (2)",
-        "released": "2013-04-28",
-        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357583.jpg",
+        "title": "Soldier",
+        "released": "2017-04-22",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/108/270511.jpg",
         "slug_id": "2YcVedgx1q1fXfSz",
         "qualities": {
           "1080P": {
@@ -2138,9 +2138,9 @@
             "file_size": 261427752,
             "file_name": "Attack on titan-(S02 - Ep04)-(தமிழ்)- 1080p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "The Night of the Closing Ceremony - Humanity's Comeback (2)",
-            "released": "2013-04-28",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357583.jpg"
+            "title": "Soldier",
+            "released": "2017-04-22",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/108/270511.jpg"
           },
           "720P": {
             "telegram_message_id": 699,
@@ -2152,9 +2152,9 @@
             "file_size": 152795190,
             "file_name": "Attack on titan-(S02 - Ep04)-(தமிழ்)- 720p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "The Night of the Closing Ceremony - Humanity's Comeback (2)",
-            "released": "2013-04-28",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357583.jpg"
+            "title": "Soldier",
+            "released": "2017-04-22",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/108/270511.jpg"
           },
           "480P": {
             "telegram_message_id": 698,
@@ -2166,9 +2166,9 @@
             "file_size": 48282231,
             "file_name": "Attack on titan-(S02 - Ep04)-(தமிழ்)- 480p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "The Night of the Closing Ceremony - Humanity's Comeback (2)",
-            "released": "2013-04-28",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357583.jpg"
+            "title": "Soldier",
+            "released": "2017-04-22",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/108/270511.jpg"
           }
         }
       },
@@ -2182,9 +2182,9 @@
         "file_size": 235571199,
         "file_name": "Attack on titan-(S02 - Ep05)-(தமிழ்)- 720p.mkv",
         "mime_type": "video/x-matroska",
-        "title": "First Battle - The Struggle for Trost (1)",
-        "released": "2013-05-05",
-        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357587.jpg",
+        "title": "Historia",
+        "released": "2017-04-29",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1358479.jpg",
         "slug_id": "I_o2RGJEMo2z7lJT",
         "qualities": {
           "1080P": {
@@ -2197,9 +2197,9 @@
             "file_size": 423282575,
             "file_name": "Attack on titan-(S02 - Ep05)-(தமிழ்)- 1080p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "First Battle - The Struggle for Trost (1)",
-            "released": "2013-05-05",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357587.jpg"
+            "title": "Historia",
+            "released": "2017-04-29",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1358479.jpg"
           },
           "720P": {
             "telegram_message_id": 702,
@@ -2211,9 +2211,9 @@
             "file_size": 235571199,
             "file_name": "Attack on titan-(S02 - Ep05)-(தமிழ்)- 720p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "First Battle - The Struggle for Trost (1)",
-            "released": "2013-05-05",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357587.jpg"
+            "title": "Historia",
+            "released": "2017-04-29",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1358479.jpg"
           },
           "480P": {
             "telegram_message_id": 701,
@@ -2225,9 +2225,9 @@
             "file_size": 69000558,
             "file_name": "Attack on titan-(S02 - Ep05)-(தமிழ்)- 480p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "First Battle - The Struggle for Trost (1)",
-            "released": "2013-05-05",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357587.jpg"
+            "title": "Historia",
+            "released": "2017-04-29",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1358479.jpg"
           }
         }
       },
@@ -2241,9 +2241,9 @@
         "file_size": 274885542,
         "file_name": "Attack on titan-(S02 - Ep06)-(தமிழ்)- 720p.mkv",
         "mime_type": "video/x-matroska",
-        "title": "The World the Girl Saw - The Struggle for Trost (2)",
-        "released": "2013-05-12",
-        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242630.jpg",
+        "title": "Warrior",
+        "released": "2017-05-06",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1358485.jpg",
         "slug_id": "R_0U6rOyyoi6E7ym",
         "qualities": {
           "1080P": {
@@ -2256,9 +2256,9 @@
             "file_size": 278747674,
             "file_name": "Attack on titan-(S02 - Ep06)-(தமிழ்)- 1080p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "The World the Girl Saw - The Struggle for Trost (2)",
-            "released": "2013-05-12",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242630.jpg"
+            "title": "Warrior",
+            "released": "2017-05-06",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1358485.jpg"
           },
           "720P": {
             "telegram_message_id": 705,
@@ -2270,9 +2270,9 @@
             "file_size": 274885542,
             "file_name": "Attack on titan-(S02 - Ep06)-(தமிழ்)- 720p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "The World the Girl Saw - The Struggle for Trost (2)",
-            "released": "2013-05-12",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242630.jpg"
+            "title": "Warrior",
+            "released": "2017-05-06",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1358485.jpg"
           },
           "480P": {
             "telegram_message_id": 704,
@@ -2284,9 +2284,9 @@
             "file_size": 51734057,
             "file_name": "Attack on titan-(S02 - Ep06)-(தமிழ்)- 480p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "The World the Girl Saw - The Struggle for Trost (2)",
-            "released": "2013-05-12",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242630.jpg"
+            "title": "Warrior",
+            "released": "2017-05-06",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1358485.jpg"
           }
         }
       },
@@ -2300,9 +2300,9 @@
         "file_size": 196965765,
         "file_name": "Attack on titan-(S02 - Ep07)-(தமிழ்)- 720p.mkv",
         "mime_type": "video/x-matroska",
-        "title": "Small Blade - The Struggle for Trost (3)",
-        "released": "2013-05-19",
-        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242629.jpg",
+        "title": "Close Combat",
+        "released": "2017-05-13",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/111/279026.jpg",
         "slug_id": "ygw4BjGKnoPBOx39",
         "qualities": {
           "1080P": {
@@ -2315,9 +2315,9 @@
             "file_size": 337151255,
             "file_name": "Attack on titan-(S02 - Ep07)-(தமிழ்)- 1080p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Small Blade - The Struggle for Trost (3)",
-            "released": "2013-05-19",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242629.jpg"
+            "title": "Close Combat",
+            "released": "2017-05-13",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/111/279026.jpg"
           },
           "720P": {
             "telegram_message_id": 708,
@@ -2329,9 +2329,9 @@
             "file_size": 196965765,
             "file_name": "Attack on titan-(S02 - Ep07)-(தமிழ்)- 720p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Small Blade - The Struggle for Trost (3)",
-            "released": "2013-05-19",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242629.jpg"
+            "title": "Close Combat",
+            "released": "2017-05-13",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/111/279026.jpg"
           },
           "480P": {
             "telegram_message_id": 707,
@@ -2343,9 +2343,9 @@
             "file_size": 63828868,
             "file_name": "Attack on titan-(S02 - Ep07)-(தமிழ்)- 480p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Small Blade - The Struggle for Trost (3)",
-            "released": "2013-05-19",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242629.jpg"
+            "title": "Close Combat",
+            "released": "2017-05-13",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/111/279026.jpg"
           }
         }
       },
@@ -2359,9 +2359,9 @@
         "file_size": 288862530,
         "file_name": "Attack on titan-(S02 - Ep08)-(தமிழ்)- 720p.mkv",
         "mime_type": "video/x-matroska",
-        "title": "I Can Hear His Heartbeat - The Struggle for Trost (4)",
-        "released": "2013-05-26",
-        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242631.jpg",
+        "title": "The Hunters",
+        "released": "2017-05-20",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1358533.jpg",
         "slug_id": "hJCXFPWRtDjRipjn",
         "qualities": {
           "1080P": {
@@ -2374,9 +2374,9 @@
             "file_size": 294174160,
             "file_name": "Attack on titan-(S02 - Ep08)-(தமிழ்)- 1080p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "I Can Hear His Heartbeat - The Struggle for Trost (4)",
-            "released": "2013-05-26",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242631.jpg"
+            "title": "The Hunters",
+            "released": "2017-05-20",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1358533.jpg"
           },
           "720P": {
             "telegram_message_id": 711,
@@ -2388,9 +2388,9 @@
             "file_size": 288862530,
             "file_name": "Attack on titan-(S02 - Ep08)-(தமிழ்)- 720p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "I Can Hear His Heartbeat - The Struggle for Trost (4)",
-            "released": "2013-05-26",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242631.jpg"
+            "title": "The Hunters",
+            "released": "2017-05-20",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1358533.jpg"
           },
           "480P": {
             "telegram_message_id": 710,
@@ -2402,9 +2402,9 @@
             "file_size": 58201116,
             "file_name": "Attack on titan-(S02 - Ep08)-(தமிழ்)- 480p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "I Can Hear His Heartbeat - The Struggle for Trost (4)",
-            "released": "2013-05-26",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242631.jpg"
+            "title": "The Hunters",
+            "released": "2017-05-20",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1358533.jpg"
           }
         }
       },
@@ -2418,9 +2418,9 @@
         "file_size": 152834192,
         "file_name": "Attack on titan-(S02 - Ep09)-(தமிழ்)- 720p.mkv",
         "mime_type": "video/x-matroska",
-        "title": "Whereabouts of His Left Arm - The Struggle for Trost (5)",
-        "released": "2013-06-02",
-        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242632.jpg",
+        "title": "Opening",
+        "released": "2017-05-27",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/114/285044.jpg",
         "slug_id": "2_rT8XT_R4oWzN0J",
         "qualities": {
           "1080P": {
@@ -2433,9 +2433,9 @@
             "file_size": 248129064,
             "file_name": "Attack on titan-(S02 - Ep09)-(தமிழ்)- 1080p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Whereabouts of His Left Arm - The Struggle for Trost (5)",
-            "released": "2013-06-02",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242632.jpg"
+            "title": "Opening",
+            "released": "2017-05-27",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/114/285044.jpg"
           },
           "720P": {
             "telegram_message_id": 714,
@@ -2447,9 +2447,9 @@
             "file_size": 152834192,
             "file_name": "Attack on titan-(S02 - Ep09)-(தமிழ்)- 720p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Whereabouts of His Left Arm - The Struggle for Trost (5)",
-            "released": "2013-06-02",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242632.jpg"
+            "title": "Opening",
+            "released": "2017-05-27",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/114/285044.jpg"
           },
           "480P": {
             "telegram_message_id": 713,
@@ -2461,9 +2461,9 @@
             "file_size": 45076984,
             "file_name": "Attack on titan-(S02 - Ep09)-(தமிழ்)- 480p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Whereabouts of His Left Arm - The Struggle for Trost (5)",
-            "released": "2013-06-02",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242632.jpg"
+            "title": "Opening",
+            "released": "2017-05-27",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/114/285044.jpg"
           }
         }
       },
@@ -2477,9 +2477,9 @@
         "file_size": 316791221,
         "file_name": "Attack on titan-(S02 - Ep10)-(தமிழ்)- 720p.mkv",
         "mime_type": "video/x-matroska",
-        "title": "Response - The Struggle for Trost (6)",
-        "released": "2013-06-09",
-        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242633.jpg",
+        "title": "Children",
+        "released": "2017-06-03",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/115/287691.jpg",
         "slug_id": "q99ZBtuRRflrHo1N",
         "qualities": {
           "1080P": {
@@ -2492,9 +2492,9 @@
             "file_size": 361176713,
             "file_name": "Attack on titan-(S02 - Ep10)-(தமிழ்)- 1080p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Response - The Struggle for Trost (6)",
-            "released": "2013-06-09",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242633.jpg"
+            "title": "Children",
+            "released": "2017-06-03",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/115/287691.jpg"
           },
           "720P": {
             "telegram_message_id": 717,
@@ -2506,9 +2506,9 @@
             "file_size": 316791221,
             "file_name": "Attack on titan-(S02 - Ep10)-(தமிழ்)- 720p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Response - The Struggle for Trost (6)",
-            "released": "2013-06-09",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242633.jpg"
+            "title": "Children",
+            "released": "2017-06-03",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/115/287691.jpg"
           },
           "480P": {
             "telegram_message_id": 716,
@@ -2520,9 +2520,9 @@
             "file_size": 67573460,
             "file_name": "Attack on titan-(S02 - Ep10)-(தமிழ்)- 480p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Response - The Struggle for Trost (6)",
-            "released": "2013-06-09",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242633.jpg"
+            "title": "Children",
+            "released": "2017-06-03",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/115/287691.jpg"
           }
         }
       },
@@ -2536,9 +2536,9 @@
         "file_size": 217039582,
         "file_name": "Attack on titan-(S02 - Ep11)-(தமிழ்)- 720p.mkv",
         "mime_type": "video/x-matroska",
-        "title": "Idol - The Struggle for Trost (7)",
-        "released": "2013-06-16",
-        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357835.jpg",
+        "title": "Charge",
+        "released": "2017-06-10",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1358590.jpg",
         "slug_id": "2MHkebNOEjm0HnOU",
         "qualities": {
           "1080P": {
@@ -2551,9 +2551,9 @@
             "file_size": 391072314,
             "file_name": "Attack on titan-(S02 - Ep11)-(தமிழ்)- 1080p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Idol - The Struggle for Trost (7)",
-            "released": "2013-06-16",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357835.jpg"
+            "title": "Charge",
+            "released": "2017-06-10",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1358590.jpg"
           },
           "720P": {
             "telegram_message_id": 720,
@@ -2565,9 +2565,9 @@
             "file_size": 217039582,
             "file_name": "Attack on titan-(S02 - Ep11)-(தமிழ்)- 720p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Idol - The Struggle for Trost (7)",
-            "released": "2013-06-16",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357835.jpg"
+            "title": "Charge",
+            "released": "2017-06-10",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1358590.jpg"
           },
           "480P": {
             "telegram_message_id": 719,
@@ -2579,9 +2579,9 @@
             "file_size": 74143389,
             "file_name": "Attack on titan-(S02 - Ep11)-(தமிழ்)- 480p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Idol - The Struggle for Trost (7)",
-            "released": "2013-06-16",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357835.jpg"
+            "title": "Charge",
+            "released": "2017-06-10",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1358590.jpg"
           }
         }
       },
@@ -2595,9 +2595,9 @@
         "file_size": 301492977,
         "file_name": "Attack on titan-(S02 - Ep12)-(தமிழ்)- 720p.mkv",
         "mime_type": "video/x-matroska",
-        "title": "Wound - The Struggle for Trost (8)",
-        "released": "2013-06-23",
-        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357836.jpg",
+        "title": "Scream",
+        "released": "2017-06-17",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/117/292535.jpg",
         "slug_id": "EI_ntMcUYqzvkE3Z",
         "qualities": {
           "1080P": {
@@ -2610,9 +2610,9 @@
             "file_size": 318161476,
             "file_name": "Attack on titan-(S02 - Ep12)-(தமிழ்)- 1080p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Wound - The Struggle for Trost (8)",
-            "released": "2013-06-23",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357836.jpg"
+            "title": "Scream",
+            "released": "2017-06-17",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/117/292535.jpg"
           },
           "720P": {
             "telegram_message_id": 723,
@@ -2624,9 +2624,9 @@
             "file_size": 301492977,
             "file_name": "Attack on titan-(S02 - Ep12)-(தமிழ்)- 720p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Wound - The Struggle for Trost (8)",
-            "released": "2013-06-23",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357836.jpg"
+            "title": "Scream",
+            "released": "2017-06-17",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/117/292535.jpg"
           },
           "480P": {
             "telegram_message_id": 722,
@@ -2638,9 +2638,9 @@
             "file_size": 60752856,
             "file_name": "Attack on titan-(S02 - Ep12)-(தமிழ்)- 480p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Wound - The Struggle for Trost (8)",
-            "released": "2013-06-23",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357836.jpg"
+            "title": "Scream",
+            "released": "2017-06-17",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/117/292535.jpg"
           }
         }
       },
@@ -2654,9 +2654,9 @@
         "file_size": 66460358,
         "file_name": "Attack on titan-(S03 - Ep01)-(தமிழ்)- 720p.mkv",
         "mime_type": "video/x-matroska",
-        "title": "To You, in 2000 Years - The Fall of Shiganshina (1)",
-        "released": "2013-04-07",
-        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242650.jpg",
+        "title": "Smoke Signal",
+        "released": "2018-07-22",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1358633.jpg",
         "slug_id": "7mN6Ddw_b0I6Dn9F",
         "qualities": {
           "1080P": {
@@ -2669,9 +2669,9 @@
             "file_size": 106132552,
             "file_name": "Attack on titan-(S03 - Ep01)-(தமிழ்)- 1080p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "To You, in 2000 Years - The Fall of Shiganshina (1)",
-            "released": "2013-04-07",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242650.jpg"
+            "title": "Smoke Signal",
+            "released": "2018-07-22",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1358633.jpg"
           },
           "720P": {
             "telegram_message_id": 726,
@@ -2683,9 +2683,9 @@
             "file_size": 66460358,
             "file_name": "Attack on titan-(S03 - Ep01)-(தமிழ்)- 720p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "To You, in 2000 Years - The Fall of Shiganshina (1)",
-            "released": "2013-04-07",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242650.jpg"
+            "title": "Smoke Signal",
+            "released": "2018-07-22",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1358633.jpg"
           },
           "480P": {
             "telegram_message_id": 725,
@@ -2697,9 +2697,9 @@
             "file_size": 44019359,
             "file_name": "Attack on titan-(S03 - Ep01)-(தமிழ்)- 480p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "To You, in 2000 Years - The Fall of Shiganshina (1)",
-            "released": "2013-04-07",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242650.jpg"
+            "title": "Smoke Signal",
+            "released": "2018-07-22",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1358633.jpg"
           }
         }
       },
@@ -2713,9 +2713,9 @@
         "file_size": 135657782,
         "file_name": "Attack on titan-(S03 - Ep02)-(தமிழ்)- 720p.mkv",
         "mime_type": "video/x-matroska",
-        "title": "That Day - The Fall of Shiganshina (2)",
-        "released": "2013-04-14",
-        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242651.jpg",
+        "title": "Pain",
+        "released": "2018-07-29",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1358853.jpg",
         "slug_id": "VKJoO-THAS5XiP_s",
         "qualities": {
           "1080P": {
@@ -2728,9 +2728,9 @@
             "file_size": 306219727,
             "file_name": "Attack on titan-(S03 - Ep02)-(தமிழ்)- 1080p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "That Day - The Fall of Shiganshina (2)",
-            "released": "2013-04-14",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242651.jpg"
+            "title": "Pain",
+            "released": "2018-07-29",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1358853.jpg"
           },
           "720P": {
             "telegram_message_id": 729,
@@ -2742,9 +2742,9 @@
             "file_size": 135657782,
             "file_name": "Attack on titan-(S03 - Ep02)-(தமிழ்)- 720p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "That Day - The Fall of Shiganshina (2)",
-            "released": "2013-04-14",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242651.jpg"
+            "title": "Pain",
+            "released": "2018-07-29",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1358853.jpg"
           },
           "480P": {
             "telegram_message_id": 728,
@@ -2756,9 +2756,9 @@
             "file_size": 66375770,
             "file_name": "Attack on titan-(S03 - Ep02)-(தமிழ்)- 480p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "That Day - The Fall of Shiganshina (2)",
-            "released": "2013-04-14",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242651.jpg"
+            "title": "Pain",
+            "released": "2018-07-29",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1358853.jpg"
           }
         }
       },
@@ -2772,9 +2772,9 @@
         "file_size": 110170439,
         "file_name": "Attack on titan-(S03 - Ep03)-(தமிழ்)- 720p.mkv",
         "mime_type": "video/x-matroska",
-        "title": "A Dim Light Amid Despair - Humanity's Comeback (1)",
-        "released": "2013-04-21",
-        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242652.jpg",
+        "title": "Old Story",
+        "released": "2018-08-05",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/163/408893.jpg",
         "slug_id": "g01_W-oxMc2TmtwD",
         "qualities": {
           "1080P": {
@@ -2787,9 +2787,9 @@
             "file_size": 229739022,
             "file_name": "Attack on titan-(S03 - Ep03)-(தமிழ்)- 1080p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "A Dim Light Amid Despair - Humanity's Comeback (1)",
-            "released": "2013-04-21",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242652.jpg"
+            "title": "Old Story",
+            "released": "2018-08-05",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/163/408893.jpg"
           },
           "720P": {
             "telegram_message_id": 732,
@@ -2801,9 +2801,9 @@
             "file_size": 110170439,
             "file_name": "Attack on titan-(S03 - Ep03)-(தமிழ்)- 720p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "A Dim Light Amid Despair - Humanity's Comeback (1)",
-            "released": "2013-04-21",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242652.jpg"
+            "title": "Old Story",
+            "released": "2018-08-05",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/163/408893.jpg"
           },
           "480P": {
             "telegram_message_id": 731,
@@ -2815,9 +2815,9 @@
             "file_size": 53426095,
             "file_name": "Attack on titan-(S03 - Ep03)-(தமிழ்)- 480p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "A Dim Light Amid Despair - Humanity's Comeback (1)",
-            "released": "2013-04-21",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242652.jpg"
+            "title": "Old Story",
+            "released": "2018-08-05",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/163/408893.jpg"
           }
         }
       },
@@ -2831,9 +2831,9 @@
         "file_size": 144094859,
         "file_name": "Attack on titan-(S03 - Ep04)-(தமிழ்)- 720p.mkv",
         "mime_type": "video/x-matroska",
-        "title": "The Night of the Closing Ceremony - Humanity's Comeback (2)",
-        "released": "2013-04-28",
-        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357583.jpg",
+        "title": "Trust",
+        "released": "2018-08-12",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1359137.jpg",
         "slug_id": "SJfiAJU5XGAZZuAo",
         "qualities": {
           "1080P": {
@@ -2846,9 +2846,9 @@
             "file_size": 291127075,
             "file_name": "Attack on titan-(S03 - Ep04)-(தமிழ்)- 1080p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "The Night of the Closing Ceremony - Humanity's Comeback (2)",
-            "released": "2013-04-28",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357583.jpg"
+            "title": "Trust",
+            "released": "2018-08-12",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1359137.jpg"
           },
           "720P": {
             "telegram_message_id": 735,
@@ -2860,9 +2860,9 @@
             "file_size": 144094859,
             "file_name": "Attack on titan-(S03 - Ep04)-(தமிழ்)- 720p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "The Night of the Closing Ceremony - Humanity's Comeback (2)",
-            "released": "2013-04-28",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357583.jpg"
+            "title": "Trust",
+            "released": "2018-08-12",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1359137.jpg"
           },
           "480P": {
             "telegram_message_id": 734,
@@ -2874,9 +2874,9 @@
             "file_size": 65979012,
             "file_name": "Attack on titan-(S03 - Ep04)-(தமிழ்)- 480p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "The Night of the Closing Ceremony - Humanity's Comeback (2)",
-            "released": "2013-04-28",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357583.jpg"
+            "title": "Trust",
+            "released": "2018-08-12",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1359137.jpg"
           }
         }
       },
@@ -2890,9 +2890,9 @@
         "file_size": 127829319,
         "file_name": "Attack on titan-(S03 - Ep05)-(தமிழ்)- 720p.mkv",
         "mime_type": "video/x-matroska",
-        "title": "First Battle - The Struggle for Trost (1)",
-        "released": "2013-05-05",
-        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357587.jpg",
+        "title": "Reply",
+        "released": "2018-08-19",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1359147.jpg",
         "slug_id": "ZVDEc9kRf9kggrYX",
         "qualities": {
           "1080P": {
@@ -2905,9 +2905,9 @@
             "file_size": 266087510,
             "file_name": "Attack on titan-(S03 - Ep05)-(தமிழ்)- 1080p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "First Battle - The Struggle for Trost (1)",
-            "released": "2013-05-05",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357587.jpg"
+            "title": "Reply",
+            "released": "2018-08-19",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1359147.jpg"
           },
           "720P": {
             "telegram_message_id": 738,
@@ -2919,9 +2919,9 @@
             "file_size": 127829319,
             "file_name": "Attack on titan-(S03 - Ep05)-(தமிழ்)- 720p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "First Battle - The Struggle for Trost (1)",
-            "released": "2013-05-05",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357587.jpg"
+            "title": "Reply",
+            "released": "2018-08-19",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1359147.jpg"
           },
           "480P": {
             "telegram_message_id": 737,
@@ -2933,9 +2933,9 @@
             "file_size": 60314038,
             "file_name": "Attack on titan-(S03 - Ep05)-(தமிழ்)- 480p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "First Battle - The Struggle for Trost (1)",
-            "released": "2013-05-05",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357587.jpg"
+            "title": "Reply",
+            "released": "2018-08-19",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1359147.jpg"
           }
         }
       },
@@ -2949,9 +2949,9 @@
         "file_size": 137343389,
         "file_name": "Attack on titan-(S03 - Ep06)-(தமிழ்)- 720p.mkv",
         "mime_type": "video/x-matroska",
-        "title": "The World the Girl Saw - The Struggle for Trost (2)",
-        "released": "2013-05-12",
-        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242630.jpg",
+        "title": "Sin",
+        "released": "2018-08-26",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1359155.jpg",
         "slug_id": "SlDkch6YcQdW8BTz",
         "qualities": {
           "1080P": {
@@ -2964,9 +2964,9 @@
             "file_size": 288807304,
             "file_name": "Attack on titan-(S03 - Ep06)-(தமிழ்)- 1080p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "The World the Girl Saw - The Struggle for Trost (2)",
-            "released": "2013-05-12",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242630.jpg"
+            "title": "Sin",
+            "released": "2018-08-26",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1359155.jpg"
           },
           "720P": {
             "telegram_message_id": 741,
@@ -2978,9 +2978,9 @@
             "file_size": 137343389,
             "file_name": "Attack on titan-(S03 - Ep06)-(தமிழ்)- 720p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "The World the Girl Saw - The Struggle for Trost (2)",
-            "released": "2013-05-12",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242630.jpg"
+            "title": "Sin",
+            "released": "2018-08-26",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1359155.jpg"
           },
           "480P": {
             "telegram_message_id": 740,
@@ -2992,9 +2992,9 @@
             "file_size": 61069342,
             "file_name": "Attack on titan-(S03 - Ep06)-(தமிழ்)- 480p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "The World the Girl Saw - The Struggle for Trost (2)",
-            "released": "2013-05-12",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242630.jpg"
+            "title": "Sin",
+            "released": "2018-08-26",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1359155.jpg"
           }
         }
       },
@@ -3008,9 +3008,9 @@
         "file_size": 185046110,
         "file_name": "Attack on titan-(S03 - Ep07)-(தமிழ்)- 720p.mkv",
         "mime_type": "video/x-matroska",
-        "title": "Small Blade - The Struggle for Trost (3)",
-        "released": "2013-05-19",
-        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242629.jpg",
+        "title": "Wish",
+        "released": "2018-09-02",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1359434.jpg",
         "slug_id": "8hLhnMMVud72xDZY",
         "qualities": {
           "1080P": {
@@ -3023,9 +3023,9 @@
             "file_size": 391069393,
             "file_name": "Attack on titan-(S03 - Ep07)-(தமிழ்)- 1080p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Small Blade - The Struggle for Trost (3)",
-            "released": "2013-05-19",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242629.jpg"
+            "title": "Wish",
+            "released": "2018-09-02",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1359434.jpg"
           },
           "720P": {
             "telegram_message_id": 744,
@@ -3037,9 +3037,9 @@
             "file_size": 185046110,
             "file_name": "Attack on titan-(S03 - Ep07)-(தமிழ்)- 720p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Small Blade - The Struggle for Trost (3)",
-            "released": "2013-05-19",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242629.jpg"
+            "title": "Wish",
+            "released": "2018-09-02",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1359434.jpg"
           },
           "480P": {
             "telegram_message_id": 743,
@@ -3051,9 +3051,9 @@
             "file_size": 82968171,
             "file_name": "Attack on titan-(S03 - Ep07)-(தமிழ்)- 480p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Small Blade - The Struggle for Trost (3)",
-            "released": "2013-05-19",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242629.jpg"
+            "title": "Wish",
+            "released": "2018-09-02",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1359434.jpg"
           }
         }
       },
@@ -3067,9 +3067,9 @@
         "file_size": 185059402,
         "file_name": "Attack on titan-(S03 - Ep08)-(தமிழ்)- 720p.mkv",
         "mime_type": "video/x-matroska",
-        "title": "I Can Hear His Heartbeat - The Struggle for Trost (4)",
-        "released": "2013-05-26",
-        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242631.jpg",
+        "title": "Outside the Walls of Orvud District",
+        "released": "2018-09-09",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1359469.jpg",
         "slug_id": "aXPF4yF-C7hSF3GE",
         "qualities": {
           "1080P": {
@@ -3082,9 +3082,9 @@
             "file_size": 395466723,
             "file_name": "Attack on titan-(S03 - Ep08)-(தமிழ்)- 1080p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "I Can Hear His Heartbeat - The Struggle for Trost (4)",
-            "released": "2013-05-26",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242631.jpg"
+            "title": "Outside the Walls of Orvud District",
+            "released": "2018-09-09",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1359469.jpg"
           },
           "720P": {
             "telegram_message_id": 747,
@@ -3096,9 +3096,9 @@
             "file_size": 185059402,
             "file_name": "Attack on titan-(S03 - Ep08)-(தமிழ்)- 720p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "I Can Hear His Heartbeat - The Struggle for Trost (4)",
-            "released": "2013-05-26",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242631.jpg"
+            "title": "Outside the Walls of Orvud District",
+            "released": "2018-09-09",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1359469.jpg"
           },
           "480P": {
             "telegram_message_id": 746,
@@ -3110,9 +3110,9 @@
             "file_size": 77257994,
             "file_name": "Attack on titan-(S03 - Ep08)-(தமிழ்)- 480p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "I Can Hear His Heartbeat - The Struggle for Trost (4)",
-            "released": "2013-05-26",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242631.jpg"
+            "title": "Outside the Walls of Orvud District",
+            "released": "2018-09-09",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1359469.jpg"
           }
         }
       },
@@ -3126,9 +3126,9 @@
         "file_size": 190104227,
         "file_name": "Attack on titan-(S03 - Ep09)-(தமிழ்)- 720p.mkv",
         "mime_type": "video/x-matroska",
-        "title": "Whereabouts of His Left Arm - The Struggle for Trost (5)",
-        "released": "2013-06-02",
-        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242632.jpg",
+        "title": "Ruler of the Walls",
+        "released": "2018-09-16",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1359551.jpg",
         "slug_id": "ui2LYA0lFDC3xYOx",
         "qualities": {
           "1080P": {
@@ -3141,9 +3141,9 @@
             "file_size": 411517169,
             "file_name": "Attack on titan-(S03 - Ep09)-(தமிழ்)- 1080p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Whereabouts of His Left Arm - The Struggle for Trost (5)",
-            "released": "2013-06-02",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242632.jpg"
+            "title": "Ruler of the Walls",
+            "released": "2018-09-16",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1359551.jpg"
           },
           "720P": {
             "telegram_message_id": 750,
@@ -3155,9 +3155,9 @@
             "file_size": 190104227,
             "file_name": "Attack on titan-(S03 - Ep09)-(தமிழ்)- 720p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Whereabouts of His Left Arm - The Struggle for Trost (5)",
-            "released": "2013-06-02",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242632.jpg"
+            "title": "Ruler of the Walls",
+            "released": "2018-09-16",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1359551.jpg"
           },
           "480P": {
             "telegram_message_id": 749,
@@ -3169,9 +3169,9 @@
             "file_size": 78242913,
             "file_name": "Attack on titan-(S03 - Ep09)-(தமிழ்)- 480p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Whereabouts of His Left Arm - The Struggle for Trost (5)",
-            "released": "2013-06-02",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242632.jpg"
+            "title": "Ruler of the Walls",
+            "released": "2018-09-16",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1359551.jpg"
           }
         }
       },
@@ -3185,9 +3185,9 @@
         "file_size": 138313508,
         "file_name": "Attack on titan-(S03 - Ep10)-(தமிழ்)- 720p.mkv",
         "mime_type": "video/x-matroska",
-        "title": "Response - The Struggle for Trost (6)",
-        "released": "2013-06-09",
-        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242633.jpg",
+        "title": "Friends",
+        "released": "2018-09-23",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/168/422153.jpg",
         "slug_id": "Tu8juEkw5-6eOtQC",
         "qualities": {
           "1080P": {
@@ -3200,9 +3200,9 @@
             "file_size": 278689921,
             "file_name": "Attack on titan-(S03 - Ep10)-(தமிழ்)- 1080p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Response - The Struggle for Trost (6)",
-            "released": "2013-06-09",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242633.jpg"
+            "title": "Friends",
+            "released": "2018-09-23",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/168/422153.jpg"
           },
           "720P": {
             "telegram_message_id": 753,
@@ -3214,9 +3214,9 @@
             "file_size": 138313508,
             "file_name": "Attack on titan-(S03 - Ep10)-(தமிழ்)- 720p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Response - The Struggle for Trost (6)",
-            "released": "2013-06-09",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242633.jpg"
+            "title": "Friends",
+            "released": "2018-09-23",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/168/422153.jpg"
           },
           "480P": {
             "telegram_message_id": 752,
@@ -3228,9 +3228,9 @@
             "file_size": 62838775,
             "file_name": "Attack on titan-(S03 - Ep10)-(தமிழ்)- 480p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Response - The Struggle for Trost (6)",
-            "released": "2013-06-09",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242633.jpg"
+            "title": "Friends",
+            "released": "2018-09-23",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/168/422153.jpg"
           }
         }
       },
@@ -3244,9 +3244,9 @@
         "file_size": 118853942,
         "file_name": "Attack on titan-(S03 - Ep11)-(தமிழ்)- 720p.mkv",
         "mime_type": "video/x-matroska",
-        "title": "Idol - The Struggle for Trost (7)",
-        "released": "2013-06-16",
-        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357835.jpg",
+        "title": "Bystander",
+        "released": "2018-10-07",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/170/426289.jpg",
         "slug_id": "p0lPLKspeojNs5fQ",
         "qualities": {
           "1080P": {
@@ -3259,9 +3259,9 @@
             "file_size": 215292080,
             "file_name": "Attack on titan-(S03 - Ep11)-(தமிழ்)- 1080p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Idol - The Struggle for Trost (7)",
-            "released": "2013-06-16",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357835.jpg"
+            "title": "Bystander",
+            "released": "2018-10-07",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/170/426289.jpg"
           },
           "720P": {
             "telegram_message_id": 756,
@@ -3273,9 +3273,9 @@
             "file_size": 118853942,
             "file_name": "Attack on titan-(S03 - Ep11)-(தமிழ்)- 720p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Idol - The Struggle for Trost (7)",
-            "released": "2013-06-16",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357835.jpg"
+            "title": "Bystander",
+            "released": "2018-10-07",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/170/426289.jpg"
           },
           "480P": {
             "telegram_message_id": 755,
@@ -3287,9 +3287,9 @@
             "file_size": 55926730,
             "file_name": "Attack on titan-(S03 - Ep11)-(தமிழ்)- 480p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Idol - The Struggle for Trost (7)",
-            "released": "2013-06-16",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357835.jpg"
+            "title": "Bystander",
+            "released": "2018-10-07",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/170/426289.jpg"
           }
         }
       },
@@ -3303,9 +3303,9 @@
         "file_size": 122029652,
         "file_name": "Attack on titan-(S03 - Ep12)-(தமிழ்)- 720p.mkv",
         "mime_type": "video/x-matroska",
-        "title": "Wound - The Struggle for Trost (8)",
-        "released": "2013-06-23",
-        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357836.jpg",
+        "title": "Night of the Battle to Retake the Wall",
+        "released": "2018-10-14",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1359579.jpg",
         "slug_id": "E0-JsneRPwpvUilI",
         "qualities": {
           "1080P": {
@@ -3318,9 +3318,9 @@
             "file_size": 287120737,
             "file_name": "Attack on titan-(S03 - Ep12)-(தமிழ்)- 1080p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Wound - The Struggle for Trost (8)",
-            "released": "2013-06-23",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357836.jpg"
+            "title": "Night of the Battle to Retake the Wall",
+            "released": "2018-10-14",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1359579.jpg"
           },
           "720P": {
             "telegram_message_id": 759,
@@ -3332,9 +3332,9 @@
             "file_size": 122029652,
             "file_name": "Attack on titan-(S03 - Ep12)-(தமிழ்)- 720p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Wound - The Struggle for Trost (8)",
-            "released": "2013-06-23",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357836.jpg"
+            "title": "Night of the Battle to Retake the Wall",
+            "released": "2018-10-14",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1359579.jpg"
           },
           "480P": {
             "telegram_message_id": 758,
@@ -3346,9 +3346,9 @@
             "file_size": 59189143,
             "file_name": "Attack on titan-(S03 - Ep12)-(தமிழ்)- 480p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Wound - The Struggle for Trost (8)",
-            "released": "2013-06-23",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357836.jpg"
+            "title": "Night of the Battle to Retake the Wall",
+            "released": "2018-10-14",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1359579.jpg"
           }
         }
       },
@@ -3362,9 +3362,9 @@
         "file_size": 173482021,
         "file_name": "Attack on titan-(S03 - Ep13)-(தமிழ்)- 720p.mkv",
         "mime_type": "video/x-matroska",
-        "title": "Primal Desire - The Struggle for Trost (9)",
-        "released": "2013-06-30",
-        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242637.jpg",
+        "title": "The Town Where Everything Began",
+        "released": "2019-04-28",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/194/485080.jpg",
         "slug_id": "G1nH-s_9_Ab2K8th",
         "qualities": {
           "1080P": {
@@ -3377,9 +3377,9 @@
             "file_size": 353819008,
             "file_name": "Attack on titan-(S03 - Ep13)-(தமிழ்)- 1080p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Primal Desire - The Struggle for Trost (9)",
-            "released": "2013-06-30",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242637.jpg"
+            "title": "The Town Where Everything Began",
+            "released": "2019-04-28",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/194/485080.jpg"
           },
           "720P": {
             "telegram_message_id": 762,
@@ -3391,9 +3391,9 @@
             "file_size": 173482021,
             "file_name": "Attack on titan-(S03 - Ep13)-(தமிழ்)- 720p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Primal Desire - The Struggle for Trost (9)",
-            "released": "2013-06-30",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242637.jpg"
+            "title": "The Town Where Everything Began",
+            "released": "2019-04-28",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/194/485080.jpg"
           },
           "480P": {
             "telegram_message_id": 761,
@@ -3405,9 +3405,9 @@
             "file_size": 76074663,
             "file_name": "Attack on titan-(S03 - Ep13)-(தமிழ்)- 480p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Primal Desire - The Struggle for Trost (9)",
-            "released": "2013-06-30",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242637.jpg"
+            "title": "The Town Where Everything Began",
+            "released": "2019-04-28",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/194/485080.jpg"
           }
         }
       },
@@ -3421,9 +3421,9 @@
         "file_size": 194100305,
         "file_name": "Attack on titan-(S03 - Ep14)-(தமிழ்)- 720p.mkv",
         "mime_type": "video/x-matroska",
-        "title": "Can't Look Into His Eyes - Eve of the Counterattack (1)",
-        "released": "2013-07-14",
-        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242636.jpg",
+        "title": "Thunder Spears",
+        "released": "2019-05-05",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/195/487967.jpg",
         "slug_id": "IPTTvAoeqjQWZTxy",
         "qualities": {
           "1080P": {
@@ -3436,9 +3436,9 @@
             "file_size": 414643633,
             "file_name": "Attack on titan-(S03 - Ep14)-(தமிழ்)- 1080p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Can't Look Into His Eyes - Eve of the Counterattack (1)",
-            "released": "2013-07-14",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242636.jpg"
+            "title": "Thunder Spears",
+            "released": "2019-05-05",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/195/487967.jpg"
           },
           "720P": {
             "telegram_message_id": 765,
@@ -3450,9 +3450,9 @@
             "file_size": 194100305,
             "file_name": "Attack on titan-(S03 - Ep14)-(தமிழ்)- 720p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Can't Look Into His Eyes - Eve of the Counterattack (1)",
-            "released": "2013-07-14",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242636.jpg"
+            "title": "Thunder Spears",
+            "released": "2019-05-05",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/195/487967.jpg"
           },
           "480P": {
             "telegram_message_id": 764,
@@ -3464,9 +3464,9 @@
             "file_size": 84927684,
             "file_name": "Attack on titan-(S03 - Ep14)-(தமிழ்)- 480p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Can't Look Into His Eyes - Eve of the Counterattack (1)",
-            "released": "2013-07-14",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242636.jpg"
+            "title": "Thunder Spears",
+            "released": "2019-05-05",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/195/487967.jpg"
           }
         }
       },
@@ -3480,9 +3480,9 @@
         "file_size": 163507514,
         "file_name": "Attack on titan-(S03 - Ep15)-(தமிழ்)- 720p.mkv",
         "mime_type": "video/x-matroska",
-        "title": "Special Operations Squad - Eve of the Counterattack (2)",
-        "released": "2013-07-21",
-        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242639.jpg",
+        "title": "Descent",
+        "released": "2019-05-12",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/403/1008842.jpg",
         "slug_id": "B2Lq19bTGh2wIQxC",
         "qualities": {
           "1080P": {
@@ -3495,9 +3495,9 @@
             "file_size": 324147384,
             "file_name": "Attack on titan-(S03 - Ep15)-(தமிழ்)- 1080p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Special Operations Squad - Eve of the Counterattack (2)",
-            "released": "2013-07-21",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242639.jpg"
+            "title": "Descent",
+            "released": "2019-05-12",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/403/1008842.jpg"
           },
           "720P": {
             "telegram_message_id": 768,
@@ -3509,9 +3509,9 @@
             "file_size": 163507514,
             "file_name": "Attack on titan-(S03 - Ep15)-(தமிழ்)- 720p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Special Operations Squad - Eve of the Counterattack (2)",
-            "released": "2013-07-21",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242639.jpg"
+            "title": "Descent",
+            "released": "2019-05-12",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/403/1008842.jpg"
           },
           "480P": {
             "telegram_message_id": 767,
@@ -3523,9 +3523,9 @@
             "file_size": 72074315,
             "file_name": "Attack on titan-(S03 - Ep15)-(தமிழ்)- 480p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Special Operations Squad - Eve of the Counterattack (2)",
-            "released": "2013-07-21",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242639.jpg"
+            "title": "Descent",
+            "released": "2019-05-12",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/403/1008842.jpg"
           }
         }
       },
@@ -3539,9 +3539,9 @@
         "file_size": 175197808,
         "file_name": "Attack on titan-(S03 - Ep16)-(தமிழ்)- 720p.mkv",
         "mime_type": "video/x-matroska",
-        "title": "What Needs to Be Done Now - Eve of the Counterattack (3)",
-        "released": "2013-07-28",
-        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242638.jpg",
+        "title": "Perfect Game",
+        "released": "2019-05-19",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/198/495209.jpg",
         "slug_id": "qkhUNtEhIIV5OpRC",
         "qualities": {
           "1080P": {
@@ -3554,9 +3554,9 @@
             "file_size": 354936754,
             "file_name": "Attack on titan-(S03 - Ep16)-(தமிழ்)- 1080p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "What Needs to Be Done Now - Eve of the Counterattack (3)",
-            "released": "2013-07-28",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242638.jpg"
+            "title": "Perfect Game",
+            "released": "2019-05-19",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/198/495209.jpg"
           },
           "720P": {
             "telegram_message_id": 771,
@@ -3568,9 +3568,9 @@
             "file_size": 175197808,
             "file_name": "Attack on titan-(S03 - Ep16)-(தமிழ்)- 720p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "What Needs to Be Done Now - Eve of the Counterattack (3)",
-            "released": "2013-07-28",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242638.jpg"
+            "title": "Perfect Game",
+            "released": "2019-05-19",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/198/495209.jpg"
           },
           "480P": {
             "telegram_message_id": 770,
@@ -3582,9 +3582,9 @@
             "file_size": 72852253,
             "file_name": "Attack on titan-(S03 - Ep16)-(தமிழ்)- 480p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "What Needs to Be Done Now - Eve of the Counterattack (3)",
-            "released": "2013-07-28",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242638.jpg"
+            "title": "Perfect Game",
+            "released": "2019-05-19",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/198/495209.jpg"
           }
         }
       },
@@ -3598,9 +3598,9 @@
         "file_size": 202026528,
         "file_name": "Attack on titan-(S03 - Ep17)-(தமிழ்)- 720p.mkv",
         "mime_type": "video/x-matroska",
-        "title": "Female Titan - The 57th Exterior Scouting Mission (1)",
-        "released": "2013-08-04",
-        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357858.jpg",
+        "title": "Hero",
+        "released": "2019-05-26",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1359834.jpg",
         "slug_id": "uZVdFLGwpkl1iRIg",
         "qualities": {
           "1080P": {
@@ -3613,9 +3613,9 @@
             "file_size": 420000657,
             "file_name": "Attack on titan-(S03 - Ep17)-(தமிழ்)- 1080p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Female Titan - The 57th Exterior Scouting Mission (1)",
-            "released": "2013-08-04",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357858.jpg"
+            "title": "Hero",
+            "released": "2019-05-26",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1359834.jpg"
           },
           "720P": {
             "telegram_message_id": 774,
@@ -3627,9 +3627,9 @@
             "file_size": 202026528,
             "file_name": "Attack on titan-(S03 - Ep17)-(தமிழ்)- 720p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Female Titan - The 57th Exterior Scouting Mission (1)",
-            "released": "2013-08-04",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357858.jpg"
+            "title": "Hero",
+            "released": "2019-05-26",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1359834.jpg"
           },
           "480P": {
             "telegram_message_id": 773,
@@ -3641,9 +3641,9 @@
             "file_size": 88522821,
             "file_name": "Attack on titan-(S03 - Ep17)-(தமிழ்)- 480p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Female Titan - The 57th Exterior Scouting Mission (1)",
-            "released": "2013-08-04",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357858.jpg"
+            "title": "Hero",
+            "released": "2019-05-26",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1359834.jpg"
           }
         }
       },
@@ -3657,9 +3657,9 @@
         "file_size": 144943154,
         "file_name": "Attack on titan-(S03 - Ep18)-(தமிழ்)- 720p.mkv",
         "mime_type": "video/x-matroska",
-        "title": "Forest of Giant Trees - The 57th Exterior Scouting Mission (2)",
-        "released": "2013-08-11",
-        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242640.jpg",
+        "title": "Midnight Sun",
+        "released": "2019-06-02",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1359837.jpg",
         "slug_id": "H8OWflNnizwrYmfD",
         "qualities": {
           "1080P": {
@@ -3672,9 +3672,9 @@
             "file_size": 265894368,
             "file_name": "Attack on titan-(S03 - Ep18)-(தமிழ்)- 1080p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Forest of Giant Trees - The 57th Exterior Scouting Mission (2)",
-            "released": "2013-08-11",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242640.jpg"
+            "title": "Midnight Sun",
+            "released": "2019-06-02",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1359837.jpg"
           },
           "720P": {
             "telegram_message_id": 777,
@@ -3686,9 +3686,9 @@
             "file_size": 144943154,
             "file_name": "Attack on titan-(S03 - Ep18)-(தமிழ்)- 720p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Forest of Giant Trees - The 57th Exterior Scouting Mission (2)",
-            "released": "2013-08-11",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242640.jpg"
+            "title": "Midnight Sun",
+            "released": "2019-06-02",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1359837.jpg"
           },
           "480P": {
             "telegram_message_id": 776,
@@ -3700,9 +3700,9 @@
             "file_size": 59845993,
             "file_name": "Attack on titan-(S03 - Ep18)-(தமிழ்)- 480p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Forest of Giant Trees - The 57th Exterior Scouting Mission (2)",
-            "released": "2013-08-11",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242640.jpg"
+            "title": "Midnight Sun",
+            "released": "2019-06-02",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1359837.jpg"
           }
         }
       },
@@ -3716,9 +3716,9 @@
         "file_size": 144110741,
         "file_name": "Attack on titan-(S03 - Ep19)-(தமிழ்)- 720p.mkv",
         "mime_type": "video/x-matroska",
-        "title": "Bite - The 57th Exterior Scouting Mission (3)",
-        "released": "2013-08-18",
-        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242642.jpg",
+        "title": "The Basement",
+        "released": "2019-06-09",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1359840.jpg",
         "slug_id": "j5blpNgCwWCRFQps",
         "qualities": {
           "1080P": {
@@ -3731,9 +3731,9 @@
             "file_size": 287160439,
             "file_name": "Attack on titan-(S03 - Ep19)-(தமிழ்)- 1080p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Bite - The 57th Exterior Scouting Mission (3)",
-            "released": "2013-08-18",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242642.jpg"
+            "title": "The Basement",
+            "released": "2019-06-09",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1359840.jpg"
           },
           "720P": {
             "telegram_message_id": 780,
@@ -3745,9 +3745,9 @@
             "file_size": 144110741,
             "file_name": "Attack on titan-(S03 - Ep19)-(தமிழ்)- 720p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Bite - The 57th Exterior Scouting Mission (3)",
-            "released": "2013-08-18",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242642.jpg"
+            "title": "The Basement",
+            "released": "2019-06-09",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1359840.jpg"
           },
           "480P": {
             "telegram_message_id": 779,
@@ -3759,9 +3759,9 @@
             "file_size": 63877049,
             "file_name": "Attack on titan-(S03 - Ep19)-(தமிழ்)- 480p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Bite - The 57th Exterior Scouting Mission (3)",
-            "released": "2013-08-18",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242642.jpg"
+            "title": "The Basement",
+            "released": "2019-06-09",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1359840.jpg"
           }
         }
       },
@@ -3775,9 +3775,9 @@
         "file_size": 123046425,
         "file_name": "Attack on titan-(S03 - Ep20)-(தமிழ்)- 720p.mkv",
         "mime_type": "video/x-matroska",
-        "title": "Erwin Smith - The 57th Exterior Scouting Mission (4)",
-        "released": "2013-08-25",
-        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242643.jpg",
+        "title": "That Day",
+        "released": "2019-06-16",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/202/505550.jpg",
         "slug_id": "SOJgvjLkmcTAh0ze",
         "qualities": {
           "1080P": {
@@ -3790,9 +3790,9 @@
             "file_size": 197530400,
             "file_name": "Attack on titan-(S03 - Ep20)-(தமிழ்)- 1080p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Erwin Smith - The 57th Exterior Scouting Mission (4)",
-            "released": "2013-08-25",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242643.jpg"
+            "title": "That Day",
+            "released": "2019-06-16",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/202/505550.jpg"
           },
           "720P": {
             "telegram_message_id": 783,
@@ -3804,9 +3804,9 @@
             "file_size": 123046425,
             "file_name": "Attack on titan-(S03 - Ep20)-(தமிழ்)- 720p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Erwin Smith - The 57th Exterior Scouting Mission (4)",
-            "released": "2013-08-25",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242643.jpg"
+            "title": "That Day",
+            "released": "2019-06-16",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/202/505550.jpg"
           },
           "480P": {
             "telegram_message_id": 782,
@@ -3818,9 +3818,9 @@
             "file_size": 55053691,
             "file_name": "Attack on titan-(S03 - Ep20)-(தமிழ்)- 480p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Erwin Smith - The 57th Exterior Scouting Mission (4)",
-            "released": "2013-08-25",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242643.jpg"
+            "title": "That Day",
+            "released": "2019-06-16",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/202/505550.jpg"
           }
         }
       },
@@ -3834,9 +3834,9 @@
         "file_size": 112565878,
         "file_name": "Attack on titan-(S03 - Ep21)-(தமிழ்)- 720p.mkv",
         "mime_type": "video/x-matroska",
-        "title": "Crushing Blow - The 57th Exterior Scouting Mission (5)",
-        "released": "2013-09-01",
-        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357929.jpg",
+        "title": "The Attack Titan",
+        "released": "2019-06-23",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/544/1360214.jpg",
         "slug_id": "2yKJX6Hgp7uZPQ3d",
         "qualities": {
           "1080P": {
@@ -3849,9 +3849,9 @@
             "file_size": 231147326,
             "file_name": "Attack on titan-(S03 - Ep21)-(தமிழ்)- 1080p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Crushing Blow - The 57th Exterior Scouting Mission (5)",
-            "released": "2013-09-01",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357929.jpg"
+            "title": "The Attack Titan",
+            "released": "2019-06-23",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/544/1360214.jpg"
           },
           "720P": {
             "telegram_message_id": 786,
@@ -3863,9 +3863,9 @@
             "file_size": 112565878,
             "file_name": "Attack on titan-(S03 - Ep21)-(தமிழ்)- 720p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Crushing Blow - The 57th Exterior Scouting Mission (5)",
-            "released": "2013-09-01",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357929.jpg"
+            "title": "The Attack Titan",
+            "released": "2019-06-23",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/544/1360214.jpg"
           },
           "480P": {
             "telegram_message_id": 785,
@@ -3877,9 +3877,9 @@
             "file_size": 55039828,
             "file_name": "Attack on titan-(S03 - Ep21)-(தமிழ்)- 480p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Crushing Blow - The 57th Exterior Scouting Mission (5)",
-            "released": "2013-09-01",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357929.jpg"
+            "title": "The Attack Titan",
+            "released": "2019-06-23",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/544/1360214.jpg"
           }
         }
       },
@@ -3893,9 +3893,9 @@
         "file_size": 151538741,
         "file_name": "Attack on titan-(S03 - Ep22)-(தமிழ்)- 720p.mkv",
         "mime_type": "video/x-matroska",
-        "title": "The Defeated - The 57th Exterior Scouting Mission (6)",
-        "released": "2013-09-08",
-        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242646.jpg",
+        "title": "Beyond the Wall",
+        "released": "2019-06-30",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/544/1360277.jpg",
         "slug_id": "X2uDX1Klw3opRHjl",
         "qualities": {
           "1080P": {
@@ -3908,9 +3908,9 @@
             "file_size": 281273996,
             "file_name": "Attack on titan-(S03 - Ep22)-(தமிழ்)- 1080p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "The Defeated - The 57th Exterior Scouting Mission (6)",
-            "released": "2013-09-08",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242646.jpg"
+            "title": "Beyond the Wall",
+            "released": "2019-06-30",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/544/1360277.jpg"
           },
           "720P": {
             "telegram_message_id": 789,
@@ -3922,9 +3922,9 @@
             "file_size": 151538741,
             "file_name": "Attack on titan-(S03 - Ep22)-(தமிழ்)- 720p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "The Defeated - The 57th Exterior Scouting Mission (6)",
-            "released": "2013-09-08",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242646.jpg"
+            "title": "Beyond the Wall",
+            "released": "2019-06-30",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/544/1360277.jpg"
           },
           "480P": {
             "telegram_message_id": 788,
@@ -3936,9 +3936,9 @@
             "file_size": 62860647,
             "file_name": "Attack on titan-(S03 - Ep22)-(தமிழ்)- 480p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "The Defeated - The 57th Exterior Scouting Mission (6)",
-            "released": "2013-09-08",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242646.jpg"
+            "title": "Beyond the Wall",
+            "released": "2019-06-30",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/544/1360277.jpg"
           }
         }
       },
@@ -3952,9 +3952,9 @@
         "file_size": 52918809,
         "file_name": "Attack on titan-(S04 - Ep01)-(தமிழ்)- 720p.mkv",
         "mime_type": "video/x-matroska",
-        "title": "To You, in 2000 Years - The Fall of Shiganshina (1)",
-        "released": "2013-04-07",
-        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242650.jpg",
+        "title": "Other Side of the Sea",
+        "released": "2020-12-06",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/544/1361703.jpg",
         "slug_id": "wDCU9Q3P0Y5bi1HZ",
         "qualities": {
           "1080P": {
@@ -3967,9 +3967,9 @@
             "file_size": 254843552,
             "file_name": "Attack on titan-(S04 - Ep01)-(தமிழ்)- 1080p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "To You, in 2000 Years - The Fall of Shiganshina (1)",
-            "released": "2013-04-07",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242650.jpg"
+            "title": "Other Side of the Sea",
+            "released": "2020-12-06",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/544/1361703.jpg"
           },
           "720P": {
             "telegram_message_id": 792,
@@ -3981,9 +3981,9 @@
             "file_size": 52918809,
             "file_name": "Attack on titan-(S04 - Ep01)-(தமிழ்)- 720p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "To You, in 2000 Years - The Fall of Shiganshina (1)",
-            "released": "2013-04-07",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242650.jpg"
+            "title": "Other Side of the Sea",
+            "released": "2020-12-06",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/544/1361703.jpg"
           },
           "480P": {
             "telegram_message_id": 791,
@@ -3995,9 +3995,9 @@
             "file_size": 31776548,
             "file_name": "Attack on titan-(S04 - Ep01)-(தமிழ்)- 480p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "To You, in 2000 Years - The Fall of Shiganshina (1)",
-            "released": "2013-04-07",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242650.jpg"
+            "title": "Other Side of the Sea",
+            "released": "2020-12-06",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/544/1361703.jpg"
           }
         }
       },
@@ -4011,9 +4011,9 @@
         "file_size": 45002647,
         "file_name": "Attack on titan-(S04 - Ep02)-(தமிழ்)- 720p.mkv",
         "mime_type": "video/x-matroska",
-        "title": "That Day - The Fall of Shiganshina (2)",
-        "released": "2013-04-14",
-        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242651.jpg",
+        "title": "Midnight Train",
+        "released": "2020-12-13",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/289/722719.jpg",
         "slug_id": "BqOq2UYuBAx_UT5B",
         "qualities": {
           "1080P": {
@@ -4026,9 +4026,9 @@
             "file_size": 197421446,
             "file_name": "Attack on titan-(S04 - Ep02)-(தமிழ்)- 1080p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "That Day - The Fall of Shiganshina (2)",
-            "released": "2013-04-14",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242651.jpg"
+            "title": "Midnight Train",
+            "released": "2020-12-13",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/289/722719.jpg"
           },
           "720P": {
             "telegram_message_id": 795,
@@ -4040,9 +4040,9 @@
             "file_size": 45002647,
             "file_name": "Attack on titan-(S04 - Ep02)-(தமிழ்)- 720p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "That Day - The Fall of Shiganshina (2)",
-            "released": "2013-04-14",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242651.jpg"
+            "title": "Midnight Train",
+            "released": "2020-12-13",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/289/722719.jpg"
           },
           "480P": {
             "telegram_message_id": 794,
@@ -4054,9 +4054,9 @@
             "file_size": 27427651,
             "file_name": "Attack on titan-(S04 - Ep02)-(தமிழ்)- 480p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "That Day - The Fall of Shiganshina (2)",
-            "released": "2013-04-14",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242651.jpg"
+            "title": "Midnight Train",
+            "released": "2020-12-13",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/289/722719.jpg"
           }
         }
       },
@@ -4070,9 +4070,9 @@
         "file_size": 47840709,
         "file_name": "Attack on titan-(S04 - Ep03)-(தமிழ்)- 720p.mkv",
         "mime_type": "video/x-matroska",
-        "title": "A Dim Light Amid Despair - Humanity's Comeback (1)",
-        "released": "2013-04-21",
-        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242652.jpg",
+        "title": "The Door of Hope",
+        "released": "2020-12-20",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/290/725698.jpg",
         "slug_id": "l5QZrjmQSJJjbWfp",
         "qualities": {
           "1080P": {
@@ -4085,9 +4085,9 @@
             "file_size": 216594991,
             "file_name": "Attack on titan-(S04 - Ep03)-(தமிழ்)- 1080p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "A Dim Light Amid Despair - Humanity's Comeback (1)",
-            "released": "2013-04-21",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242652.jpg"
+            "title": "The Door of Hope",
+            "released": "2020-12-20",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/290/725698.jpg"
           },
           "720P": {
             "telegram_message_id": 798,
@@ -4099,9 +4099,9 @@
             "file_size": 47840709,
             "file_name": "Attack on titan-(S04 - Ep03)-(தமிழ்)- 720p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "A Dim Light Amid Despair - Humanity's Comeback (1)",
-            "released": "2013-04-21",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242652.jpg"
+            "title": "The Door of Hope",
+            "released": "2020-12-20",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/290/725698.jpg"
           },
           "480P": {
             "telegram_message_id": 797,
@@ -4113,9 +4113,9 @@
             "file_size": 28771377,
             "file_name": "Attack on titan-(S04 - Ep03)-(தமிழ்)- 480p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "A Dim Light Amid Despair - Humanity's Comeback (1)",
-            "released": "2013-04-21",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242652.jpg"
+            "title": "The Door of Hope",
+            "released": "2020-12-20",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/290/725698.jpg"
           }
         }
       },
@@ -4129,9 +4129,9 @@
         "file_size": 136531530,
         "file_name": "Attack on titan-(S04 - Ep04)-(தமிழ்)- 720p.mkv",
         "mime_type": "video/x-matroska",
-        "title": "The Night of the Closing Ceremony - Humanity's Comeback (2)",
-        "released": "2013-04-28",
-        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357583.jpg",
+        "title": "From One Hand to Another",
+        "released": "2020-12-27",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/544/1361705.jpg",
         "slug_id": "eQwnlGFoIfq1TTNS",
         "qualities": {
           "1080P": {
@@ -4144,9 +4144,9 @@
             "file_size": 219869274,
             "file_name": "Attack on titan-(S04 - Ep04)-(தமிழ்)- 1080p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "The Night of the Closing Ceremony - Humanity's Comeback (2)",
-            "released": "2013-04-28",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357583.jpg"
+            "title": "From One Hand to Another",
+            "released": "2020-12-27",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/544/1361705.jpg"
           },
           "720P": {
             "telegram_message_id": 801,
@@ -4158,9 +4158,9 @@
             "file_size": 136531530,
             "file_name": "Attack on titan-(S04 - Ep04)-(தமிழ்)- 720p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "The Night of the Closing Ceremony - Humanity's Comeback (2)",
-            "released": "2013-04-28",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357583.jpg"
+            "title": "From One Hand to Another",
+            "released": "2020-12-27",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/544/1361705.jpg"
           },
           "480P": {
             "telegram_message_id": 800,
@@ -4172,9 +4172,9 @@
             "file_size": 28072092,
             "file_name": "Attack on titan-(S04 - Ep04)-(தமிழ்)- 480p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "The Night of the Closing Ceremony - Humanity's Comeback (2)",
-            "released": "2013-04-28",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357583.jpg"
+            "title": "From One Hand to Another",
+            "released": "2020-12-27",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/544/1361705.jpg"
           }
         }
       },
@@ -4188,9 +4188,9 @@
         "file_size": 84644595,
         "file_name": "Attack on titan-(S04 - Ep05)-(தமிழ்)- 720p.mkv",
         "mime_type": "video/x-matroska",
-        "title": "First Battle - The Struggle for Trost (1)",
-        "released": "2013-05-05",
-        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357587.jpg",
+        "title": "Declaration of War",
+        "released": "2021-01-10",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/544/1361712.jpg",
         "slug_id": "qkdSOuPf6pkJESM5",
         "qualities": {
           "1080P": {
@@ -4203,9 +4203,9 @@
             "file_size": 164782023,
             "file_name": "Attack on titan-(S04 - Ep05)-(தமிழ்)- 1080p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "First Battle - The Struggle for Trost (1)",
-            "released": "2013-05-05",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357587.jpg"
+            "title": "Declaration of War",
+            "released": "2021-01-10",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/544/1361712.jpg"
           },
           "720P": {
             "telegram_message_id": 804,
@@ -4217,9 +4217,9 @@
             "file_size": 84644595,
             "file_name": "Attack on titan-(S04 - Ep05)-(தமிழ்)- 720p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "First Battle - The Struggle for Trost (1)",
-            "released": "2013-05-05",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357587.jpg"
+            "title": "Declaration of War",
+            "released": "2021-01-10",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/544/1361712.jpg"
           },
           "480P": {
             "telegram_message_id": 803,
@@ -4231,9 +4231,9 @@
             "file_size": 24247075,
             "file_name": "Attack on titan-(S04 - Ep05)-(தமிழ்)- 480p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "First Battle - The Struggle for Trost (1)",
-            "released": "2013-05-05",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357587.jpg"
+            "title": "Declaration of War",
+            "released": "2021-01-10",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/544/1361712.jpg"
           }
         }
       },
@@ -4247,9 +4247,9 @@
         "file_size": 112235726,
         "file_name": "Attack on titan-(S04 - Ep06)-(தமிழ்)- 720p.mkv",
         "mime_type": "video/x-matroska",
-        "title": "The World the Girl Saw - The Struggle for Trost (2)",
-        "released": "2013-05-12",
-        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242630.jpg",
+        "title": "The War Hammer Titan",
+        "released": "2021-01-17",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/544/1361715.jpg",
         "slug_id": "kAvSLNOt6LgB6EfN",
         "qualities": {
           "1080P": {
@@ -4262,9 +4262,9 @@
             "file_size": 217797147,
             "file_name": "Attack on titan-(S04 - Ep06)-(தமிழ்)- 1080p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "The World the Girl Saw - The Struggle for Trost (2)",
-            "released": "2013-05-12",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242630.jpg"
+            "title": "The War Hammer Titan",
+            "released": "2021-01-17",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/544/1361715.jpg"
           },
           "720P": {
             "telegram_message_id": 807,
@@ -4276,9 +4276,9 @@
             "file_size": 112235726,
             "file_name": "Attack on titan-(S04 - Ep06)-(தமிழ்)- 720p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "The World the Girl Saw - The Struggle for Trost (2)",
-            "released": "2013-05-12",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242630.jpg"
+            "title": "The War Hammer Titan",
+            "released": "2021-01-17",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/544/1361715.jpg"
           },
           "480P": {
             "telegram_message_id": 806,
@@ -4290,9 +4290,9 @@
             "file_size": 29468198,
             "file_name": "Attack on titan-(S04 - Ep06)-(தமிழ்)- 480p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "The World the Girl Saw - The Struggle for Trost (2)",
-            "released": "2013-05-12",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242630.jpg"
+            "title": "The War Hammer Titan",
+            "released": "2021-01-17",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/544/1361715.jpg"
           }
         }
       },
@@ -4306,9 +4306,9 @@
         "file_size": 122191609,
         "file_name": "Attack on titan-(S04 - Ep07)-(தமிழ்)- 720p.mkv",
         "mime_type": "video/x-matroska",
-        "title": "Small Blade - The Struggle for Trost (3)",
-        "released": "2013-05-19",
-        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242629.jpg",
+        "title": "Assault",
+        "released": "2021-01-24",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/294/735595.jpg",
         "slug_id": "CCRPmpPbg_MRVM9b",
         "qualities": {
           "1080P": {
@@ -4321,9 +4321,9 @@
             "file_size": 238151296,
             "file_name": "Attack on titan-(S04 - Ep07)-(தமிழ்)- 1080p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Small Blade - The Struggle for Trost (3)",
-            "released": "2013-05-19",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242629.jpg"
+            "title": "Assault",
+            "released": "2021-01-24",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/294/735595.jpg"
           },
           "720P": {
             "telegram_message_id": 810,
@@ -4335,9 +4335,9 @@
             "file_size": 122191609,
             "file_name": "Attack on titan-(S04 - Ep07)-(தமிழ்)- 720p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Small Blade - The Struggle for Trost (3)",
-            "released": "2013-05-19",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242629.jpg"
+            "title": "Assault",
+            "released": "2021-01-24",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/294/735595.jpg"
           },
           "480P": {
             "telegram_message_id": 809,
@@ -4349,9 +4349,9 @@
             "file_size": 29703233,
             "file_name": "Attack on titan-(S04 - Ep07)-(தமிழ்)- 480p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Small Blade - The Struggle for Trost (3)",
-            "released": "2013-05-19",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242629.jpg"
+            "title": "Assault",
+            "released": "2021-01-24",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/294/735595.jpg"
           }
         }
       },
@@ -4365,9 +4365,9 @@
         "file_size": 108394768,
         "file_name": "Attack on titan-(S04 - Ep08)-(தமிழ்)- 720p.mkv",
         "mime_type": "video/x-matroska",
-        "title": "I Can Hear His Heartbeat - The Struggle for Trost (4)",
-        "released": "2013-05-26",
-        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242631.jpg",
+        "title": "Assassin's Bullet",
+        "released": "2021-01-31",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/295/737993.jpg",
         "slug_id": "VDrSElbVOl9Vcvyp",
         "qualities": {
           "1080P": {
@@ -4380,9 +4380,9 @@
             "file_size": 210344787,
             "file_name": "Attack on titan-(S04 - Ep08)-(தமிழ்)- 1080p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "I Can Hear His Heartbeat - The Struggle for Trost (4)",
-            "released": "2013-05-26",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242631.jpg"
+            "title": "Assassin's Bullet",
+            "released": "2021-01-31",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/295/737993.jpg"
           },
           "720P": {
             "telegram_message_id": 813,
@@ -4394,9 +4394,9 @@
             "file_size": 108394768,
             "file_name": "Attack on titan-(S04 - Ep08)-(தமிழ்)- 720p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "I Can Hear His Heartbeat - The Struggle for Trost (4)",
-            "released": "2013-05-26",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242631.jpg"
+            "title": "Assassin's Bullet",
+            "released": "2021-01-31",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/295/737993.jpg"
           },
           "480P": {
             "telegram_message_id": 812,
@@ -4408,9 +4408,9 @@
             "file_size": 28870233,
             "file_name": "Attack on titan-(S04 - Ep08)-(தமிழ்)- 480p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "I Can Hear His Heartbeat - The Struggle for Trost (4)",
-            "released": "2013-05-26",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242631.jpg"
+            "title": "Assassin's Bullet",
+            "released": "2021-01-31",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/295/737993.jpg"
           }
         }
       },
@@ -4424,9 +4424,9 @@
         "file_size": 89414863,
         "file_name": "Attack on titan-(S04 - Ep09)-(தமிழ்)- 720p.mkv",
         "mime_type": "video/x-matroska",
-        "title": "Whereabouts of His Left Arm - The Struggle for Trost (5)",
-        "released": "2013-06-02",
-        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242632.jpg",
+        "title": "Brave Volunteers",
+        "released": "2021-02-07",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/295/739942.jpg",
         "slug_id": "GLTOD0_IOFcHRDGs",
         "qualities": {
           "1080P": {
@@ -4439,9 +4439,9 @@
             "file_size": 174229703,
             "file_name": "Attack on titan-(S04 - Ep09)-(தமிழ்)- 1080p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Whereabouts of His Left Arm - The Struggle for Trost (5)",
-            "released": "2013-06-02",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242632.jpg"
+            "title": "Brave Volunteers",
+            "released": "2021-02-07",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/295/739942.jpg"
           },
           "720P": {
             "telegram_message_id": 816,
@@ -4453,9 +4453,9 @@
             "file_size": 89414863,
             "file_name": "Attack on titan-(S04 - Ep09)-(தமிழ்)- 720p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Whereabouts of His Left Arm - The Struggle for Trost (5)",
-            "released": "2013-06-02",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242632.jpg"
+            "title": "Brave Volunteers",
+            "released": "2021-02-07",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/295/739942.jpg"
           },
           "480P": {
             "telegram_message_id": 815,
@@ -4467,9 +4467,9 @@
             "file_size": 24847049,
             "file_name": "Attack on titan-(S04 - Ep09)-(தமிழ்)- 480p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Whereabouts of His Left Arm - The Struggle for Trost (5)",
-            "released": "2013-06-02",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242632.jpg"
+            "title": "Brave Volunteers",
+            "released": "2021-02-07",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/295/739942.jpg"
           }
         }
       },
@@ -4483,9 +4483,9 @@
         "file_size": 84233896,
         "file_name": "Attack on titan-(S04 - Ep10)-(தமிழ்)- 720p.mkv",
         "mime_type": "video/x-matroska",
-        "title": "Response - The Struggle for Trost (6)",
-        "released": "2013-06-09",
-        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242633.jpg",
+        "title": "A Sound Argument",
+        "released": "2021-02-14",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/296/742218.jpg",
         "slug_id": "nkXb_nrjZ1T3hTwm",
         "qualities": {
           "1080P": {
@@ -4498,9 +4498,9 @@
             "file_size": 166828423,
             "file_name": "Attack on titan-(S04 - Ep10)-(தமிழ்)- 1080p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Response - The Struggle for Trost (6)",
-            "released": "2013-06-09",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242633.jpg"
+            "title": "A Sound Argument",
+            "released": "2021-02-14",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/296/742218.jpg"
           },
           "720P": {
             "telegram_message_id": 819,
@@ -4512,9 +4512,9 @@
             "file_size": 84233896,
             "file_name": "Attack on titan-(S04 - Ep10)-(தமிழ்)- 720p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Response - The Struggle for Trost (6)",
-            "released": "2013-06-09",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242633.jpg"
+            "title": "A Sound Argument",
+            "released": "2021-02-14",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/296/742218.jpg"
           },
           "480P": {
             "telegram_message_id": 818,
@@ -4526,9 +4526,9 @@
             "file_size": 23769876,
             "file_name": "Attack on titan-(S04 - Ep10)-(தமிழ்)- 480p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Response - The Struggle for Trost (6)",
-            "released": "2013-06-09",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242633.jpg"
+            "title": "A Sound Argument",
+            "released": "2021-02-14",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/296/742218.jpg"
           }
         }
       },
@@ -4542,9 +4542,9 @@
         "file_size": 83728704,
         "file_name": "Attack on titan-(S04 - Ep11)-(தமிழ்)- 720p.mkv",
         "mime_type": "video/x-matroska",
-        "title": "Idol - The Struggle for Trost (7)",
-        "released": "2013-06-16",
-        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357835.jpg",
+        "title": "Impostors",
+        "released": "2021-02-21",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/298/745543.jpg",
         "slug_id": "uZ6mvoFl_hV1Orbw",
         "qualities": {
           "1080P": {
@@ -4557,9 +4557,9 @@
             "file_size": 158312760,
             "file_name": "Attack on titan-(S04 - Ep11)-(தமிழ்)- 1080p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Idol - The Struggle for Trost (7)",
-            "released": "2013-06-16",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357835.jpg"
+            "title": "Impostors",
+            "released": "2021-02-21",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/298/745543.jpg"
           },
           "720P": {
             "telegram_message_id": 822,
@@ -4571,9 +4571,9 @@
             "file_size": 83728704,
             "file_name": "Attack on titan-(S04 - Ep11)-(தமிழ்)- 720p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Idol - The Struggle for Trost (7)",
-            "released": "2013-06-16",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357835.jpg"
+            "title": "Impostors",
+            "released": "2021-02-21",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/298/745543.jpg"
           },
           "480P": {
             "telegram_message_id": 821,
@@ -4585,9 +4585,9 @@
             "file_size": 25433798,
             "file_name": "Attack on titan-(S04 - Ep11)-(தமிழ்)- 480p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Idol - The Struggle for Trost (7)",
-            "released": "2013-06-16",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357835.jpg"
+            "title": "Impostors",
+            "released": "2021-02-21",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/298/745543.jpg"
           }
         }
       },
@@ -4601,9 +4601,9 @@
         "file_size": 83654845,
         "file_name": "Attack on titan-(S04 - Ep12)-(தமிழ்)- 720p.mkv",
         "mime_type": "video/x-matroska",
-        "title": "Wound - The Struggle for Trost (8)",
-        "released": "2013-06-23",
-        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357836.jpg",
+        "title": "Guides",
+        "released": "2021-02-28",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/298/746022.jpg",
         "slug_id": "T_uq6SvFSccR6S0Z",
         "qualities": {
           "1080P": {
@@ -4616,9 +4616,9 @@
             "file_size": 157184363,
             "file_name": "Attack on titan-(S04 - Ep12)-(தமிழ்)- 1080p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Wound - The Struggle for Trost (8)",
-            "released": "2013-06-23",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357836.jpg"
+            "title": "Guides",
+            "released": "2021-02-28",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/298/746022.jpg"
           },
           "720P": {
             "telegram_message_id": 825,
@@ -4630,9 +4630,9 @@
             "file_size": 83654845,
             "file_name": "Attack on titan-(S04 - Ep12)-(தமிழ்)- 720p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Wound - The Struggle for Trost (8)",
-            "released": "2013-06-23",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357836.jpg"
+            "title": "Guides",
+            "released": "2021-02-28",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/298/746022.jpg"
           },
           "480P": {
             "telegram_message_id": 824,
@@ -4644,9 +4644,9 @@
             "file_size": 25374394,
             "file_name": "Attack on titan-(S04 - Ep12)-(தமிழ்)- 480p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Wound - The Struggle for Trost (8)",
-            "released": "2013-06-23",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357836.jpg"
+            "title": "Guides",
+            "released": "2021-02-28",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/298/746022.jpg"
           }
         }
       },
@@ -4660,9 +4660,9 @@
         "file_size": 86396699,
         "file_name": "Attack on titan-(S04 - Ep13)-(தமிழ்)- 720p.mkv",
         "mime_type": "video/x-matroska",
-        "title": "Primal Desire - The Struggle for Trost (9)",
-        "released": "2013-06-30",
-        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242637.jpg",
+        "title": "Children of the Forest",
+        "released": "2021-03-07",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/299/748152.jpg",
         "slug_id": "UYP8yTkaTjotT24V",
         "qualities": {
           "1080P": {
@@ -4675,9 +4675,9 @@
             "file_size": 161643866,
             "file_name": "Attack on titan-(S04 - Ep13)-(தமிழ்)- 1080p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Primal Desire - The Struggle for Trost (9)",
-            "released": "2013-06-30",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242637.jpg"
+            "title": "Children of the Forest",
+            "released": "2021-03-07",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/299/748152.jpg"
           },
           "720P": {
             "telegram_message_id": 828,
@@ -4689,9 +4689,9 @@
             "file_size": 86396699,
             "file_name": "Attack on titan-(S04 - Ep13)-(தமிழ்)- 720p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Primal Desire - The Struggle for Trost (9)",
-            "released": "2013-06-30",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242637.jpg"
+            "title": "Children of the Forest",
+            "released": "2021-03-07",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/299/748152.jpg"
           },
           "480P": {
             "telegram_message_id": 827,
@@ -4703,9 +4703,9 @@
             "file_size": 26241718,
             "file_name": "Attack on titan-(S04 - Ep13)-(தமிழ்)- 480p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Primal Desire - The Struggle for Trost (9)",
-            "released": "2013-06-30",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242637.jpg"
+            "title": "Children of the Forest",
+            "released": "2021-03-07",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/299/748152.jpg"
           }
         }
       },
@@ -4719,9 +4719,9 @@
         "file_size": 119630638,
         "file_name": "Attack on titan-(S04 - Ep14)-(தமிழ்)- 720p.mkv",
         "mime_type": "video/x-matroska",
-        "title": "Can't Look Into His Eyes - Eve of the Counterattack (1)",
-        "released": "2013-07-14",
-        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242636.jpg",
+        "title": "Violence",
+        "released": "2021-03-21",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/300/751604.jpg",
         "slug_id": "iUq-RvNHobJdI8zD",
         "qualities": {
           "1080P": {
@@ -4734,9 +4734,9 @@
             "file_size": 228839968,
             "file_name": "Attack on titan-(S04 - Ep14)-(தமிழ்)- 1080p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Can't Look Into His Eyes - Eve of the Counterattack (1)",
-            "released": "2013-07-14",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242636.jpg"
+            "title": "Violence",
+            "released": "2021-03-21",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/300/751604.jpg"
           },
           "720P": {
             "telegram_message_id": 831,
@@ -4748,9 +4748,9 @@
             "file_size": 119630638,
             "file_name": "Attack on titan-(S04 - Ep14)-(தமிழ்)- 720p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Can't Look Into His Eyes - Eve of the Counterattack (1)",
-            "released": "2013-07-14",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242636.jpg"
+            "title": "Violence",
+            "released": "2021-03-21",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/300/751604.jpg"
           },
           "480P": {
             "telegram_message_id": 830,
@@ -4762,9 +4762,9 @@
             "file_size": 30850298,
             "file_name": "Attack on titan-(S04 - Ep14)-(தமிழ்)- 480p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Can't Look Into His Eyes - Eve of the Counterattack (1)",
-            "released": "2013-07-14",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242636.jpg"
+            "title": "Violence",
+            "released": "2021-03-21",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/300/751604.jpg"
           }
         }
       },
@@ -4778,9 +4778,9 @@
         "file_size": 91189406,
         "file_name": "Attack on titan-(S04 - Ep15)-(தமிழ்)- 720p.mkv",
         "mime_type": "video/x-matroska",
-        "title": "Special Operations Squad - Eve of the Counterattack (2)",
-        "released": "2013-07-21",
-        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242639.jpg",
+        "title": "Sole Salvation",
+        "released": "2021-03-21",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/300/751605.jpg",
         "slug_id": "Ee5k6zVLzoElKU0n",
         "qualities": {
           "1080P": {
@@ -4793,9 +4793,9 @@
             "file_size": 174690293,
             "file_name": "Attack on titan-(S04 - Ep15)-(தமிழ்)- 1080p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Special Operations Squad - Eve of the Counterattack (2)",
-            "released": "2013-07-21",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242639.jpg"
+            "title": "Sole Salvation",
+            "released": "2021-03-21",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/300/751605.jpg"
           },
           "720P": {
             "telegram_message_id": 834,
@@ -4807,9 +4807,9 @@
             "file_size": 91189406,
             "file_name": "Attack on titan-(S04 - Ep15)-(தமிழ்)- 720p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Special Operations Squad - Eve of the Counterattack (2)",
-            "released": "2013-07-21",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242639.jpg"
+            "title": "Sole Salvation",
+            "released": "2021-03-21",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/300/751605.jpg"
           },
           "480P": {
             "telegram_message_id": 833,
@@ -4821,9 +4821,9 @@
             "file_size": 26045680,
             "file_name": "Attack on titan-(S04 - Ep15)-(தமிழ்)- 480p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Special Operations Squad - Eve of the Counterattack (2)",
-            "released": "2013-07-21",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242639.jpg"
+            "title": "Sole Salvation",
+            "released": "2021-03-21",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/300/751605.jpg"
           }
         }
       },
@@ -4837,9 +4837,9 @@
         "file_size": 86743651,
         "file_name": "Attack on titan-(S04 - Ep16)-(தமிழ்)- 720p.mkv",
         "mime_type": "video/x-matroska",
-        "title": "What Needs to Be Done Now - Eve of the Counterattack (3)",
-        "released": "2013-07-28",
-        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242638.jpg",
+        "title": "Heaven and Earth",
+        "released": "2021-03-28",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/544/1361814.jpg",
         "slug_id": "1ht3ufVjvPX5qDj2",
         "qualities": {
           "1080P": {
@@ -4852,9 +4852,9 @@
             "file_size": 164931515,
             "file_name": "Attack on titan-(S04 - Ep16)-(தமிழ்)- 1080p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "What Needs to Be Done Now - Eve of the Counterattack (3)",
-            "released": "2013-07-28",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242638.jpg"
+            "title": "Heaven and Earth",
+            "released": "2021-03-28",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/544/1361814.jpg"
           },
           "720P": {
             "telegram_message_id": 837,
@@ -4866,9 +4866,9 @@
             "file_size": 86743651,
             "file_name": "Attack on titan-(S04 - Ep16)-(தமிழ்)- 720p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "What Needs to Be Done Now - Eve of the Counterattack (3)",
-            "released": "2013-07-28",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242638.jpg"
+            "title": "Heaven and Earth",
+            "released": "2021-03-28",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/544/1361814.jpg"
           },
           "480P": {
             "telegram_message_id": 836,
@@ -4880,9 +4880,9 @@
             "file_size": 24331510,
             "file_name": "Attack on titan-(S04 - Ep16)-(தமிழ்)- 480p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "What Needs to Be Done Now - Eve of the Counterattack (3)",
-            "released": "2013-07-28",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242638.jpg"
+            "title": "Heaven and Earth",
+            "released": "2021-03-28",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/544/1361814.jpg"
           }
         }
       },
@@ -4896,9 +4896,9 @@
         "file_size": 160522826,
         "file_name": "Attack on titan-(S04 - Ep17)-(தமிழ்)- 720p.mkv",
         "mime_type": "video/x-matroska",
-        "title": "Female Titan - The 57th Exterior Scouting Mission (1)",
-        "released": "2013-08-04",
-        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357858.jpg",
+        "title": "Judgement",
+        "released": "2022-01-09",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/544/1361819.jpg",
         "slug_id": "_3qTvhqJ-8WjYT97",
         "qualities": {
           "1080P": {
@@ -4911,9 +4911,9 @@
             "file_size": 299675324,
             "file_name": "Attack on titan-(S04 - Ep17)-(தமிழ்)- 1080p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Female Titan - The 57th Exterior Scouting Mission (1)",
-            "released": "2013-08-04",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357858.jpg"
+            "title": "Judgement",
+            "released": "2022-01-09",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/544/1361819.jpg"
           },
           "720P": {
             "telegram_message_id": 840,
@@ -4925,9 +4925,9 @@
             "file_size": 160522826,
             "file_name": "Attack on titan-(S04 - Ep17)-(தமிழ்)- 720p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Female Titan - The 57th Exterior Scouting Mission (1)",
-            "released": "2013-08-04",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357858.jpg"
+            "title": "Judgement",
+            "released": "2022-01-09",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/544/1361819.jpg"
           },
           "480P": {
             "telegram_message_id": 839,
@@ -4939,9 +4939,9 @@
             "file_size": 40892468,
             "file_name": "Attack on titan-(S04 - Ep17)-(தமிழ்)- 480p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Female Titan - The 57th Exterior Scouting Mission (1)",
-            "released": "2013-08-04",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357858.jpg"
+            "title": "Judgement",
+            "released": "2022-01-09",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/544/1361819.jpg"
           }
         }
       },
@@ -4955,9 +4955,9 @@
         "file_size": 126004721,
         "file_name": "Attack on titan-(S04 - Ep18)-(தமிழ்)- 720p.mkv",
         "mime_type": "video/x-matroska",
-        "title": "Forest of Giant Trees - The 57th Exterior Scouting Mission (2)",
-        "released": "2013-08-11",
-        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242640.jpg",
+        "title": "Sneak Attack",
+        "released": "2022-01-16",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/544/1361831.jpg",
         "slug_id": "4P2hu-skQtrQHzTJ",
         "qualities": {
           "1080P": {
@@ -4970,9 +4970,9 @@
             "file_size": 236670705,
             "file_name": "Attack on titan-(S04 - Ep18)-(தமிழ்)- 1080p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Forest of Giant Trees - The 57th Exterior Scouting Mission (2)",
-            "released": "2013-08-11",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242640.jpg"
+            "title": "Sneak Attack",
+            "released": "2022-01-16",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/544/1361831.jpg"
           },
           "720P": {
             "telegram_message_id": 843,
@@ -4984,9 +4984,9 @@
             "file_size": 126004721,
             "file_name": "Attack on titan-(S04 - Ep18)-(தமிழ்)- 720p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Forest of Giant Trees - The 57th Exterior Scouting Mission (2)",
-            "released": "2013-08-11",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242640.jpg"
+            "title": "Sneak Attack",
+            "released": "2022-01-16",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/544/1361831.jpg"
           },
           "480P": {
             "telegram_message_id": 842,
@@ -4998,9 +4998,9 @@
             "file_size": 33583995,
             "file_name": "Attack on titan-(S04 - Ep18)-(தமிழ்)- 480p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Forest of Giant Trees - The 57th Exterior Scouting Mission (2)",
-            "released": "2013-08-11",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242640.jpg"
+            "title": "Sneak Attack",
+            "released": "2022-01-16",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/544/1361831.jpg"
           }
         }
       },
@@ -5014,9 +5014,9 @@
         "file_size": 137744266,
         "file_name": "Attack on titan-(S04 - Ep19)-(தமிழ்)- 720p.mkv",
         "mime_type": "video/x-matroska",
-        "title": "Bite - The 57th Exterior Scouting Mission (3)",
-        "released": "2013-08-18",
-        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242642.jpg",
+        "title": "Two Brothers",
+        "released": "2022-01-23",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/544/1361835.jpg",
         "slug_id": "EzkEPK2vO1HYrzkC",
         "qualities": {
           "1080P": {
@@ -5029,9 +5029,9 @@
             "file_size": 262292044,
             "file_name": "Attack on titan-(S04 - Ep19)-(தமிழ்)- 1080p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Bite - The 57th Exterior Scouting Mission (3)",
-            "released": "2013-08-18",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242642.jpg"
+            "title": "Two Brothers",
+            "released": "2022-01-23",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/544/1361835.jpg"
           },
           "720P": {
             "telegram_message_id": 846,
@@ -5043,9 +5043,9 @@
             "file_size": 137744266,
             "file_name": "Attack on titan-(S04 - Ep19)-(தமிழ்)- 720p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Bite - The 57th Exterior Scouting Mission (3)",
-            "released": "2013-08-18",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242642.jpg"
+            "title": "Two Brothers",
+            "released": "2022-01-23",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/544/1361835.jpg"
           },
           "480P": {
             "telegram_message_id": 845,
@@ -5057,9 +5057,9 @@
             "file_size": 34372401,
             "file_name": "Attack on titan-(S04 - Ep19)-(தமிழ்)- 480p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Bite - The 57th Exterior Scouting Mission (3)",
-            "released": "2013-08-18",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242642.jpg"
+            "title": "Two Brothers",
+            "released": "2022-01-23",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/544/1361835.jpg"
           }
         }
       },
@@ -5073,9 +5073,9 @@
         "file_size": 89271564,
         "file_name": "Attack on titan-(S04 - Ep20)-(தமிழ்)- 720p.mkv",
         "mime_type": "video/x-matroska",
-        "title": "Erwin Smith - The 57th Exterior Scouting Mission (4)",
-        "released": "2013-08-25",
-        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242643.jpg",
+        "title": "Memories of the Future",
+        "released": "2022-01-30",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/544/1361837.jpg",
         "slug_id": "9Nbrl3S36NsCVaho",
         "qualities": {
           "1080P": {
@@ -5088,9 +5088,9 @@
             "file_size": 165522970,
             "file_name": "Attack on titan-(S04 - Ep20)-(தமிழ்)- 1080p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Erwin Smith - The 57th Exterior Scouting Mission (4)",
-            "released": "2013-08-25",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242643.jpg"
+            "title": "Memories of the Future",
+            "released": "2022-01-30",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/544/1361837.jpg"
           },
           "720P": {
             "telegram_message_id": 849,
@@ -5102,9 +5102,9 @@
             "file_size": 89271564,
             "file_name": "Attack on titan-(S04 - Ep20)-(தமிழ்)- 720p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Erwin Smith - The 57th Exterior Scouting Mission (4)",
-            "released": "2013-08-25",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242643.jpg"
+            "title": "Memories of the Future",
+            "released": "2022-01-30",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/544/1361837.jpg"
           },
           "480P": {
             "telegram_message_id": 848,
@@ -5116,9 +5116,9 @@
             "file_size": 27396417,
             "file_name": "Attack on titan-(S04 - Ep20)-(தமிழ்)- 480p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Erwin Smith - The 57th Exterior Scouting Mission (4)",
-            "released": "2013-08-25",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242643.jpg"
+            "title": "Memories of the Future",
+            "released": "2022-01-30",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/544/1361837.jpg"
           }
         }
       },
@@ -5132,9 +5132,9 @@
         "file_size": 142096141,
         "file_name": "Attack on titan-(S04 - Ep21)-(தமிழ்)- 720p.mkv",
         "mime_type": "video/x-matroska",
-        "title": "Crushing Blow - The 57th Exterior Scouting Mission (5)",
-        "released": "2013-09-01",
-        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357929.jpg",
+        "title": "From You, 2,000 Years Ago",
+        "released": "2022-02-06",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/544/1361841.jpg",
         "slug_id": "Fh21wgjmwqrHPIyO",
         "qualities": {
           "1080P": {
@@ -5147,9 +5147,9 @@
             "file_size": 272428787,
             "file_name": "Attack on titan-(S04 - Ep21)-(தமிழ்)- 1080p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Crushing Blow - The 57th Exterior Scouting Mission (5)",
-            "released": "2013-09-01",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357929.jpg"
+            "title": "From You, 2,000 Years Ago",
+            "released": "2022-02-06",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/544/1361841.jpg"
           },
           "720P": {
             "telegram_message_id": 852,
@@ -5161,9 +5161,9 @@
             "file_size": 142096141,
             "file_name": "Attack on titan-(S04 - Ep21)-(தமிழ்)- 720p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Crushing Blow - The 57th Exterior Scouting Mission (5)",
-            "released": "2013-09-01",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357929.jpg"
+            "title": "From You, 2,000 Years Ago",
+            "released": "2022-02-06",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/544/1361841.jpg"
           },
           "480P": {
             "telegram_message_id": 851,
@@ -5175,9 +5175,9 @@
             "file_size": 36521180,
             "file_name": "Attack on titan-(S04 - Ep21)-(தமிழ்)- 480p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Crushing Blow - The 57th Exterior Scouting Mission (5)",
-            "released": "2013-09-01",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1357929.jpg"
+            "title": "From You, 2,000 Years Ago",
+            "released": "2022-02-06",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/544/1361841.jpg"
           }
         }
       },
@@ -5191,9 +5191,9 @@
         "file_size": 124162211,
         "file_name": "Attack on titan-(S04 - Ep22)-(தமிழ்)- 720p.mkv",
         "mime_type": "video/x-matroska",
-        "title": "The Defeated - The 57th Exterior Scouting Mission (6)",
-        "released": "2013-09-08",
-        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242646.jpg",
+        "title": "Thaw",
+        "released": "2022-02-13",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/545/1362589.jpg",
         "slug_id": "u90dm1vEAC9tX3ly",
         "qualities": {
           "1080P": {
@@ -5206,9 +5206,9 @@
             "file_size": 235685302,
             "file_name": "Attack on titan-(S04 - Ep22)-(தமிழ்)- 1080p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "The Defeated - The 57th Exterior Scouting Mission (6)",
-            "released": "2013-09-08",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242646.jpg"
+            "title": "Thaw",
+            "released": "2022-02-13",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/545/1362589.jpg"
           },
           "720P": {
             "telegram_message_id": 855,
@@ -5220,9 +5220,9 @@
             "file_size": 124162211,
             "file_name": "Attack on titan-(S04 - Ep22)-(தமிழ்)- 720p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "The Defeated - The 57th Exterior Scouting Mission (6)",
-            "released": "2013-09-08",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242646.jpg"
+            "title": "Thaw",
+            "released": "2022-02-13",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/545/1362589.jpg"
           },
           "480P": {
             "telegram_message_id": 854,
@@ -5234,9 +5234,9 @@
             "file_size": 32837889,
             "file_name": "Attack on titan-(S04 - Ep22)-(தமிழ்)- 480p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "The Defeated - The 57th Exterior Scouting Mission (6)",
-            "released": "2013-09-08",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242646.jpg"
+            "title": "Thaw",
+            "released": "2022-02-13",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/545/1362589.jpg"
           }
         }
       },
@@ -5250,9 +5250,9 @@
         "file_size": 99931790,
         "file_name": "Attack on titan-(S04 - Ep23)-(தமிழ்)- 720p.mkv",
         "mime_type": "video/x-matroska",
-        "title": "Smile - Assault on Stohess (1)",
-        "released": "2013-09-15",
-        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242645.jpg",
+        "title": "Sunset",
+        "released": "2022-02-20",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/545/1362594.jpg",
         "slug_id": "t6UpeRE56QUFApll",
         "qualities": {
           "1080P": {
@@ -5265,9 +5265,9 @@
             "file_size": 193206158,
             "file_name": "Attack on titan-(S04 - Ep23)-(தமிழ்)- 1080p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Smile - Assault on Stohess (1)",
-            "released": "2013-09-15",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242645.jpg"
+            "title": "Sunset",
+            "released": "2022-02-20",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/545/1362594.jpg"
           },
           "720P": {
             "telegram_message_id": 858,
@@ -5279,9 +5279,9 @@
             "file_size": 99931790,
             "file_name": "Attack on titan-(S04 - Ep23)-(தமிழ்)- 720p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Smile - Assault on Stohess (1)",
-            "released": "2013-09-15",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242645.jpg"
+            "title": "Sunset",
+            "released": "2022-02-20",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/545/1362594.jpg"
           },
           "480P": {
             "telegram_message_id": 857,
@@ -5293,9 +5293,9 @@
             "file_size": 28050164,
             "file_name": "Attack on titan-(S04 - Ep23)-(தமிழ்)- 480p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Smile - Assault on Stohess (1)",
-            "released": "2013-09-15",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242645.jpg"
+            "title": "Sunset",
+            "released": "2022-02-20",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/545/1362594.jpg"
           }
         }
       },
@@ -5309,9 +5309,9 @@
         "file_size": 111138729,
         "file_name": "Attack on titan-(S04 - Ep24)-(தமிழ்)- 720p.mkv",
         "mime_type": "video/x-matroska",
-        "title": "Mercy - Assault on Stohess (2)",
-        "released": "2013-09-22",
-        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242647.jpg",
+        "title": "Pride",
+        "released": "2022-02-27",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/545/1362598.jpg",
         "slug_id": "rLNMebvXeruP4n4r",
         "qualities": {
           "1080P": {
@@ -5324,9 +5324,9 @@
             "file_size": 214709305,
             "file_name": "Attack on titan-(S04 - Ep24)-(தமிழ்)- 1080p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Mercy - Assault on Stohess (2)",
-            "released": "2013-09-22",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242647.jpg"
+            "title": "Pride",
+            "released": "2022-02-27",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/545/1362598.jpg"
           },
           "720P": {
             "telegram_message_id": 861,
@@ -5338,9 +5338,9 @@
             "file_size": 111138729,
             "file_name": "Attack on titan-(S04 - Ep24)-(தமிழ்)- 720p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Mercy - Assault on Stohess (2)",
-            "released": "2013-09-22",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242647.jpg"
+            "title": "Pride",
+            "released": "2022-02-27",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/545/1362598.jpg"
           },
           "480P": {
             "telegram_message_id": 860,
@@ -5352,9 +5352,9 @@
             "file_size": 32193758,
             "file_name": "Attack on titan-(S04 - Ep24)-(தமிழ்)- 480p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Mercy - Assault on Stohess (2)",
-            "released": "2013-09-22",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242647.jpg"
+            "title": "Pride",
+            "released": "2022-02-27",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/545/1362598.jpg"
           }
         }
       },
@@ -5368,9 +5368,9 @@
         "file_size": 77338600,
         "file_name": "Attack on titan-(S04 - Ep25)-(தமிழ்)- 720p.mkv",
         "mime_type": "video/x-matroska",
-        "title": "Wall: Raid on Stohess District (3)",
-        "released": "2013-09-29",
-        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242648.jpg",
+        "title": "Night of the End",
+        "released": "2022-03-06",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/545/1362603.jpg",
         "slug_id": "EoP5RZZInLtjN82m",
         "qualities": {
           "1080P": {
@@ -5383,9 +5383,9 @@
             "file_size": 153183755,
             "file_name": "Attack on titan-(S04 - Ep25)-(தமிழ்)- 1080p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Wall: Raid on Stohess District (3)",
-            "released": "2013-09-29",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242648.jpg"
+            "title": "Night of the End",
+            "released": "2022-03-06",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/545/1362603.jpg"
           },
           "720P": {
             "telegram_message_id": 864,
@@ -5397,9 +5397,9 @@
             "file_size": 77338600,
             "file_name": "Attack on titan-(S04 - Ep25)-(தமிழ்)- 720p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Wall: Raid on Stohess District (3)",
-            "released": "2013-09-29",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242648.jpg"
+            "title": "Night of the End",
+            "released": "2022-03-06",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/545/1362603.jpg"
           },
           "480P": {
             "telegram_message_id": 863,
@@ -5411,9 +5411,9 @@
             "file_size": 22989165,
             "file_name": "Attack on titan-(S04 - Ep25)-(தமிழ்)- 480p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Wall: Raid on Stohess District (3)",
-            "released": "2013-09-29",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/97/242648.jpg"
+            "title": "Night of the End",
+            "released": "2022-03-06",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/545/1362603.jpg"
           }
         }
       },
@@ -5427,9 +5427,9 @@
         "file_size": 126434539,
         "file_name": "Attack on titan-(S04 - Ep26)-(தமிழ்)- 720p.mkv",
         "mime_type": "video/x-matroska",
-        "title": "Beast Titan",
-        "released": "2017-04-01",
-        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/104/262363.jpg",
+        "title": "Traitor",
+        "released": "2022-03-13",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/545/1362641.jpg",
         "slug_id": "w7t5ss6P6jfJV-QF",
         "qualities": {
           "1080P": {
@@ -5442,9 +5442,9 @@
             "file_size": 236145168,
             "file_name": "Attack on titan-(S04 - Ep26)-(தமிழ்)- 1080p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Beast Titan",
-            "released": "2017-04-01",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/104/262363.jpg"
+            "title": "Traitor",
+            "released": "2022-03-13",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/545/1362641.jpg"
           },
           "720P": {
             "telegram_message_id": 867,
@@ -5456,9 +5456,9 @@
             "file_size": 126434539,
             "file_name": "Attack on titan-(S04 - Ep26)-(தமிழ்)- 720p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Beast Titan",
-            "released": "2017-04-01",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/104/262363.jpg"
+            "title": "Traitor",
+            "released": "2022-03-13",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/545/1362641.jpg"
           },
           "480P": {
             "telegram_message_id": 866,
@@ -5470,9 +5470,9 @@
             "file_size": 36213625,
             "file_name": "Attack on titan-(S04 - Ep26)-(தமிழ்)- 480p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Beast Titan",
-            "released": "2017-04-01",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/104/262363.jpg"
+            "title": "Traitor",
+            "released": "2022-03-13",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/545/1362641.jpg"
           }
         }
       },
@@ -5486,9 +5486,9 @@
         "file_size": 163623617,
         "file_name": "Attack on titan-(S04 - Ep27)-(தமிழ்)- 720p.mkv",
         "mime_type": "video/x-matroska",
-        "title": "I'm Home",
-        "released": "2017-04-08",
-        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1358468.jpg",
+        "title": "Retrospective",
+        "released": "2022-03-20",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/545/1362642.jpg",
         "slug_id": "YWvoo-_9GvRJQjAf",
         "qualities": {
           "1080P": {
@@ -5501,9 +5501,9 @@
             "file_size": 301345325,
             "file_name": "Attack on titan-(S04 - Ep27)-(தமிழ்)- 1080p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "I'm Home",
-            "released": "2017-04-08",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1358468.jpg"
+            "title": "Retrospective",
+            "released": "2022-03-20",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/545/1362642.jpg"
           },
           "720P": {
             "telegram_message_id": 870,
@@ -5515,9 +5515,9 @@
             "file_size": 163623617,
             "file_name": "Attack on titan-(S04 - Ep27)-(தமிழ்)- 720p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "I'm Home",
-            "released": "2017-04-08",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1358468.jpg"
+            "title": "Retrospective",
+            "released": "2022-03-20",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/545/1362642.jpg"
           },
           "480P": {
             "telegram_message_id": 869,
@@ -5529,9 +5529,9 @@
             "file_size": 43835206,
             "file_name": "Attack on titan-(S04 - Ep27)-(தமிழ்)- 480p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "I'm Home",
-            "released": "2017-04-08",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1358468.jpg"
+            "title": "Retrospective",
+            "released": "2022-03-20",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/545/1362642.jpg"
           }
         }
       },
@@ -5545,9 +5545,9 @@
         "file_size": 96170471,
         "file_name": "Attack on titan-(S04 - Ep28)-(தமிழ்)- 720p.mkv",
         "mime_type": "video/x-matroska",
-        "title": "Southwestward",
-        "released": "2017-04-15",
-        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1358469.jpg",
+        "title": "The Dawn of Humanity",
+        "released": "2022-04-03",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/545/1362650.jpg",
         "slug_id": "sVeXpu0aCDeyBE8K",
         "qualities": {
           "1080P": {
@@ -5560,9 +5560,9 @@
             "file_size": 181336395,
             "file_name": "Attack on titan-(S04 - Ep28)-(தமிழ்)- 1080p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Southwestward",
-            "released": "2017-04-15",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1358469.jpg"
+            "title": "The Dawn of Humanity",
+            "released": "2022-04-03",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/545/1362650.jpg"
           },
           "720P": {
             "telegram_message_id": 873,
@@ -5574,9 +5574,9 @@
             "file_size": 96170471,
             "file_name": "Attack on titan-(S04 - Ep28)-(தமிழ்)- 720p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Southwestward",
-            "released": "2017-04-15",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1358469.jpg"
+            "title": "The Dawn of Humanity",
+            "released": "2022-04-03",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/545/1362650.jpg"
           },
           "480P": {
             "telegram_message_id": 872,
@@ -5588,9 +5588,9 @@
             "file_size": 28278950,
             "file_name": "Attack on titan-(S04 - Ep28)-(தமிழ்)- 480p.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Southwestward",
-            "released": "2017-04-15",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1358469.jpg"
+            "title": "The Dawn of Humanity",
+            "released": "2022-04-03",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/545/1362650.jpg"
           }
         }
       },
@@ -5604,9 +5604,9 @@
         "file_size": 228831315,
         "file_name": "_Attack_on_Titan_The_Final_Chapter_S04_E01_29_Tamil_720p_@official.mkv",
         "mime_type": "video/x-matroska",
-        "title": "Soldier",
-        "released": "2017-04-22",
-        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/108/270511.jpg",
+        "title": "Attack on Titan: The Final Chapters (Part One)",
+        "released": "2023-03-04",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/450/1125777.jpg",
         "slug_id": "-cdk79n6-10XI4uo",
         "qualities": {
           "1080P": {
@@ -5619,9 +5619,9 @@
             "file_size": 333221128,
             "file_name": "_Attack_on_Titan_The_Final_Chapter_S04_E01_29_Tamil_1080p_@official.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Soldier",
-            "released": "2017-04-22",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/108/270511.jpg"
+            "title": "Attack on Titan: The Final Chapters (Part One)",
+            "released": "2023-03-04",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/450/1125777.jpg"
           },
           "720P": {
             "telegram_message_id": 876,
@@ -5633,9 +5633,9 @@
             "file_size": 228831315,
             "file_name": "_Attack_on_Titan_The_Final_Chapter_S04_E01_29_Tamil_720p_@official.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Soldier",
-            "released": "2017-04-22",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/108/270511.jpg"
+            "title": "Attack on Titan: The Final Chapters (Part One)",
+            "released": "2023-03-04",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/450/1125777.jpg"
           },
           "480P": {
             "telegram_message_id": 875,
@@ -5647,9 +5647,9 @@
             "file_size": 83895668,
             "file_name": "_Attack_on_Titan_The_Final_Chapter_S04_E01_29_Tamil_480p_@official.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Soldier",
-            "released": "2017-04-22",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/108/270511.jpg"
+            "title": "Attack on Titan: The Final Chapters (Part One)",
+            "released": "2023-03-04",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/450/1125777.jpg"
           }
         }
       },
@@ -5663,9 +5663,9 @@
         "file_size": 271033138,
         "file_name": "_Attack_on_Titan_The_Final_Chapter_S04_E01_30_Tamil_720p_@official.mkv",
         "mime_type": "video/x-matroska",
-        "title": "Historia",
-        "released": "2017-04-29",
-        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1358479.jpg",
+        "title": "Attack on Titan: The Final Chapters (Part Two)",
+        "released": "2023-11-05",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/485/1213317.jpg",
         "slug_id": "Ml-7UEqdhN_RNQGJ",
         "qualities": {
           "1080P": {
@@ -5678,9 +5678,9 @@
             "file_size": 570070010,
             "file_name": "_Attack_on_Titan_The_Final_Chapter_S04_E01_30_Tamil_1080p_@official.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Historia",
-            "released": "2017-04-29",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1358479.jpg"
+            "title": "Attack on Titan: The Final Chapters (Part Two)",
+            "released": "2023-11-05",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/485/1213317.jpg"
           },
           "720P": {
             "telegram_message_id": 879,
@@ -5692,9 +5692,9 @@
             "file_size": 271033138,
             "file_name": "_Attack_on_Titan_The_Final_Chapter_S04_E01_30_Tamil_720p_@official.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Historia",
-            "released": "2017-04-29",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1358479.jpg"
+            "title": "Attack on Titan: The Final Chapters (Part Two)",
+            "released": "2023-11-05",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/485/1213317.jpg"
           },
           "480P": {
             "telegram_message_id": 878,
@@ -5706,9 +5706,9 @@
             "file_size": 141237376,
             "file_name": "_Attack_on_Titan_The_Final_Chapter_S04_E01_30_Tamil_480p_@official.mkv",
             "mime_type": "video/x-matroska",
-            "title": "Historia",
-            "released": "2017-04-29",
-            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/543/1358479.jpg"
+            "title": "Attack on Titan: The Final Chapters (Part Two)",
+            "released": "2023-11-05",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/485/1213317.jpg"
           }
         }
       }
@@ -5734,6 +5734,6 @@
       "3": "/banners/attack-on-titan-season-3.webp",
       "4": "/banners/attack-on-titan-season-4.webp"
     },
-    "updated_at": "2026-11-02T07:44:17Z"
+    "updated_at": "2026-11-02T07:47:47Z"
   }
 }
