@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "updated_at": 1793624256,
+  "updated_at": 1793624415,
   "anime": {
     "slug_id": "solo-leveling",
-    "title": "SOLO LEVELING by",
+    "title": "Solo Leveling",
     "episodes": [
       {
         "telegram_message_id": 1174,
@@ -88,6 +88,9 @@
         "file_size": 162279902,
         "file_name": "[AC] Solo Leveling [S1-03] [720p] [Subb] @Anime_Campus.mkv",
         "mime_type": "video/x-matroska",
+        "title": "It's Like a Game",
+        "released": "2024-01-20",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/505/1264585.jpg",
         "slug_id": "btzF3qztyb4_2l9M",
         "qualities": {
           "1080P": {
@@ -99,7 +102,10 @@
             "quality": "1080P",
             "file_size": 463498883,
             "file_name": "[AC] Solo Leveling [S1-03] [1080p] [Subb] @Anime_Campus.mkv",
-            "mime_type": "video/x-matroska"
+            "mime_type": "video/x-matroska",
+            "title": "It's Like a Game",
+            "released": "2024-01-20",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/505/1264585.jpg"
           },
           "720P": {
             "telegram_message_id": 1206,
@@ -110,7 +116,10 @@
             "quality": "720P",
             "file_size": 162279902,
             "file_name": "[AC] Solo Leveling [S1-03] [720p] [Subb] @Anime_Campus.mkv",
-            "mime_type": "video/x-matroska"
+            "mime_type": "video/x-matroska",
+            "title": "It's Like a Game",
+            "released": "2024-01-20",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/505/1264585.jpg"
           },
           "480P": {
             "telegram_message_id": 1205,
@@ -121,7 +130,41 @@
             "quality": "480P",
             "file_size": 76452297,
             "file_name": "[AC] Solo Leveling [S1-03] [480p] [Subb] @Anime_Campus.mkv",
-            "mime_type": "video/x-matroska"
+            "mime_type": "video/x-matroska",
+            "title": "It's Like a Game",
+            "released": "2024-01-20",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/505/1264585.jpg"
+          }
+        }
+      },
+      {
+        "telegram_message_id": 1211,
+        "episode": 4,
+        "season": 1,
+        "special_type": null,
+        "part": null,
+        "quality": "720P",
+        "file_size": 116115763,
+        "file_name": "Solo_Leveling_Tamil_S01_•_Episode_:_4_#official_•_Audio_:Tam+Hin+Tel+Eng+Jap.mkv",
+        "mime_type": "video/x-matroska",
+        "title": "I've Gotta Get Stronger",
+        "released": "2024-01-27",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/505/1264586.jpg",
+        "slug_id": "EFjoAEq2ywHYyl78",
+        "qualities": {
+          "720P": {
+            "telegram_message_id": 1211,
+            "episode": 4,
+            "season": 1,
+            "special_type": null,
+            "part": null,
+            "quality": "720P",
+            "file_size": 116115763,
+            "file_name": "Solo_Leveling_Tamil_S01_•_Episode_:_4_#official_•_Audio_:Tam+Hin+Tel+Eng+Jap.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "I've Gotta Get Stronger",
+            "released": "2024-01-27",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/505/1264586.jpg"
           }
         }
       },
@@ -284,7 +327,10 @@
             "quality": "2160P",
             "file_size": 832985630,
             "file_name": "SOLO LEVELING S01 Ep08\nTamil by [SxF] 2160p [4K].mkv",
-            "mime_type": "video/x-matroska"
+            "mime_type": "video/x-matroska",
+            "title": "This Is Frustrating",
+            "released": "2024-03-02",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/506/1267363.jpg"
           },
           "4K": {
             "telegram_message_id": 1185,
@@ -331,6 +377,99 @@
         }
       },
       {
+        "telegram_message_id": 1216,
+        "episode": 9,
+        "season": 1,
+        "special_type": null,
+        "part": null,
+        "quality": "2160P",
+        "file_size": 1757165890,
+        "file_name": "_SOLO_LEVELINGBy_Spy_x_Family_S01_Ep09_ORG_AUD_2160p_4K.mkv",
+        "mime_type": "video/x-matroska",
+        "title": "You've Been Hiding Your Skills",
+        "released": "2024-03-09",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/507/1269744.jpg",
+        "slug_id": "Gytbnn5a1M1qtTRQ",
+        "qualities": {
+          "2160P": {
+            "telegram_message_id": 1216,
+            "episode": 9,
+            "season": 1,
+            "special_type": null,
+            "part": null,
+            "quality": "2160P",
+            "file_size": 1757165890,
+            "file_name": "_SOLO_LEVELINGBy_Spy_x_Family_S01_Ep09_ORG_AUD_2160p_4K.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "You've Been Hiding Your Skills",
+            "released": "2024-03-09",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/507/1269744.jpg"
+          }
+        }
+      },
+      {
+        "telegram_message_id": 1220,
+        "episode": 10,
+        "season": 1,
+        "special_type": null,
+        "part": null,
+        "quality": "2160P",
+        "file_size": 1568590542,
+        "file_name": "_SOLO_LEVELINGBy_Spy_x_Family_S01_Ep10_ORG_AUD_2160p_4K.mkv",
+        "mime_type": "video/x-matroska",
+        "title": "What Is This, a Picnic?",
+        "released": "2024-03-16",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/508/1272460.jpg",
+        "slug_id": "mcFft73cdKFVMp0o",
+        "qualities": {
+          "2160P": {
+            "telegram_message_id": 1220,
+            "episode": 10,
+            "season": 1,
+            "special_type": null,
+            "part": null,
+            "quality": "2160P",
+            "file_size": 1568590542,
+            "file_name": "_SOLO_LEVELINGBy_Spy_x_Family_S01_Ep10_ORG_AUD_2160p_4K.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "What Is This, a Picnic?",
+            "released": "2024-03-16",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/508/1272460.jpg"
+          }
+        }
+      },
+      {
+        "telegram_message_id": 1224,
+        "episode": 11,
+        "season": 1,
+        "special_type": null,
+        "part": null,
+        "quality": "2160P",
+        "file_size": 1755095708,
+        "file_name": "_SOLO_LEVELINGBy_Spy_x_Family_S01_Ep11_ORG_AUD_2160p_4K.mkv",
+        "mime_type": "video/x-matroska",
+        "title": "A Knight Who Defends an Empty Throne",
+        "released": "2024-03-23",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/509/1274917.jpg",
+        "slug_id": "xoZrhhc--UkYodJy",
+        "qualities": {
+          "2160P": {
+            "telegram_message_id": 1224,
+            "episode": 11,
+            "season": 1,
+            "special_type": null,
+            "part": null,
+            "quality": "2160P",
+            "file_size": 1755095708,
+            "file_name": "_SOLO_LEVELINGBy_Spy_x_Family_S01_Ep11_ORG_AUD_2160p_4K.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "A Knight Who Defends an Empty Throne",
+            "released": "2024-03-23",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/509/1274917.jpg"
+          }
+        }
+      },
+      {
         "telegram_message_id": 1188,
         "episode": 12,
         "season": 1,
@@ -354,7 +493,10 @@
             "quality": "2160P",
             "file_size": 906339021,
             "file_name": "SOLO LEVELING S01 Ep12\nTamil by [SxF] 2160p [4K].mkv",
-            "mime_type": "video/x-matroska"
+            "mime_type": "video/x-matroska",
+            "title": "Arise",
+            "released": "2024-03-30",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/554/1385112.jpg"
           },
           "1080P": {
             "telegram_message_id": 1189,
@@ -415,6 +557,20 @@
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/554/1385270.jpg",
         "slug_id": "KMfofhHs8szbvg6z",
         "qualities": {
+          "4K": {
+            "telegram_message_id": 1227,
+            "episode": 1,
+            "season": 2,
+            "special_type": null,
+            "part": null,
+            "quality": "4K",
+            "file_size": 1536035395,
+            "file_name": "[ACT]-Solo Leveling S02 EP01 2140p[4K UHD] [Multi AuD].mkv",
+            "mime_type": "video/x-matroska",
+            "title": "You aren't E-rank, are You",
+            "released": "2025-01-04",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/554/1385270.jpg"
+          },
           "1080P": {
             "telegram_message_id": 1192,
             "episode": 1,
@@ -709,6 +865,6 @@
     "year": 2024,
     "studio": "A-1 Pictures",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Solo_Leveling",
-    "updated_at": "2026-11-02T12:56:06Z"
+    "updated_at": "2026-11-02T12:59:17Z"
   }
 }
