@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-02T01:50:30.751Z",
+  "updated_at": "2026-11-02T01:50:48.550Z",
   "anime": [
     {
       "slug_id": "naruto",
@@ -23811,15 +23811,16 @@
           }
         },
         {
-          "telegram_message_id": 913,
+          "telegram_message_id": 914,
           "episode": 3,
           "season": 1,
           "special_type": null,
           "part": null,
-          "quality": "480p",
-          "file_size": 105432022,
-          "file_name": "@TamilMob_LinkZz -Jujutsu Kaisen S01 E03 Blu-Ray - 480p - x2.mkv",
+          "quality": "720p",
+          "file_size": 180461013,
+          "file_name": "@TamilMob_LinkZz -Jujutsu Kaisen S01 E03 Blu-Ray - 720p - x2.mkv",
           "mime_type": "video/x-matroska",
+          "slug_id": "LZhpeMdwSP-N9NRy",
           "qualities": {
             "480P": {
               "telegram_message_id": 913,
@@ -23830,6 +23831,17 @@
               "quality": "480p",
               "file_size": 105432022,
               "file_name": "@TamilMob_LinkZz -Jujutsu Kaisen S01 E03 Blu-Ray - 480p - x2.mkv",
+              "mime_type": "video/x-matroska"
+            },
+            "720P": {
+              "telegram_message_id": 914,
+              "episode": 3,
+              "season": 1,
+              "special_type": null,
+              "part": null,
+              "quality": "720p",
+              "file_size": 180461013,
+              "file_name": "@TamilMob_LinkZz -Jujutsu Kaisen S01 E03 Blu-Ray - 720p - x2.mkv",
               "mime_type": "video/x-matroska"
             }
           }
@@ -23848,7 +23860,7 @@
       "year": 2020,
       "studio": "Toho",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Jujutsu_Kaisen_(TV_series)",
-      "updated_at": "2026-11-02T01:50:30.751Z"
+      "updated_at": "2026-11-02T01:50:48.550Z"
     }
   ]
 }
