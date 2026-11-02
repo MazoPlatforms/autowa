@@ -98,7 +98,7 @@ def anime_filename_parts(raw):
     value = re.sub(r'\s*(?:\[[^]]*\]|\{[^}]*\}|\([^)]*\))', ' ', value)
     value = re.sub(r'[\[\]{}()]', ' ', value)
     value = re.sub(r'(?i)\b(?:multi(?:\s+audio)?|audio|esub|esubs)\b', ' ', value)
-    value = re.sub(r'(?i)\s+(?:தமிழ்|tamil|telugu|malayalam|kannada|hindi|english|2160l?p|1080l?p|720l?p|480l?p|360l?p|4k|web[- ]?dl|webrip|blu[- ]?ray|bluray|brrip|hdrip|dvdrip|x264|x265|h264|h265|hevc|aac|ddp5?\.?(?:1|2)?|esub|multi|proper|repack|uncut|dub|dual audio)\b.*$', '', value)
+    value = re.sub(r'(?i)\s+(?:தமிழ்|tamil|telugu|malayalam|kannada|hindi|english|hq|2160l?p|1080l?p|720l?p|480l?p|360l?p|4k|web[- ]?dl|webrip|blu[- ]?ray|bluray|brrip|hdrip|dvdrip|x264|x265|h264|h265|hevc|aac|ddp5?\.?(?:1|2)?|esub|multi|proper|repack|uncut|dub|dual audio)\b.*$', '', value)
     value = re.sub(r'(?:\s*(?:\[[^]]*\]|\{[^}]*\}|\([^)]*\)))+\s*(?:@.*)?$', '', value)
     value = re.sub(r'\s+@.*$', '', value)
     value = re.sub(r'\s*\+\s*', ' ', value)
