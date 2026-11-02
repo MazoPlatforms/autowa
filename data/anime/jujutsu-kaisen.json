@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": 1793583599,
+  "updated_at": 1793583640,
   "anime": {
     "slug_id": "jujutsu-kaisen",
     "title": "JUJUTSU KAISEN",
@@ -20,6 +20,20 @@
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/542/1355130.jpg",
         "slug_id": "5719XgC4xRnr4_q_",
         "qualities": {
+          "1080P": {
+            "telegram_message_id": 909,
+            "episode": 1,
+            "season": 1,
+            "special_type": null,
+            "part": null,
+            "quality": "1080P",
+            "file_size": 304488934,
+            "file_name": "@TamilMob_LinkZz -Jujutsu Kaisen S01 E01 Blu-Ray - 1080p - H.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "Ryomen Sukuna",
+            "released": "2020-10-02",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/542/1355130.jpg"
+          },
           "720P": {
             "telegram_message_id": 908,
             "episode": 1,
@@ -64,6 +78,6 @@
     "year": 2020,
     "studio": "Toho",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Jujutsu_Kaisen_(TV_series)",
-    "updated_at": "2026-11-02T01:39:54Z"
+    "updated_at": "2026-11-02T01:40:34Z"
   }
 }
