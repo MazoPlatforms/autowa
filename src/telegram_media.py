@@ -261,6 +261,8 @@ def canonical_anime_release_title(title):
         return 'Jujutsu Kaisen'
     if key == 'byspyxfamily':
         return 'Solo Leveling'
+    if key.endswith('dandadan'):
+        return 'Dan Da Dan'
     # Uploader prefixes and catalogue labels can surround the real title
     # (for example ``By Spy X Family Solo Leveling`` or ``Catalogue Solo
     # Leveling``). They must never become separate anime records.
