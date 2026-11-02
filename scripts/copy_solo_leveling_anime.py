@@ -24,19 +24,39 @@ REVIEW_ONLY = os.getenv("REVIEW_ONLY", "0") == "1"
 
 
 def quality_of(filename):
-    match = re.search(r"(?i)(2160l?p|1080l?p|720l?p|480l?p|360l?p|4k)(?=[^a-z0-9]|$)", filename)
+    match = re.search(r"(?i)(2160l?p|2140l?p|1080l?p|720l?p|480l?p|360l?p|4k)(?=[^a-z0-9]|$)", filename)
     return (match.group(1) if match else "720p").lower().replace("lp", "p")
 
 
-def caption_for(filename):
-    title, season, episode, part = anime_filename_parts(filename)
-    key = re.sub(r"[^a-z0-9]+", "", title.casefold())
-    if key != "sololeveling" or episode is None:
+def solo_parts(raw):
+    """Parse Solo Leveling even when uploader/release text surrounds Sxx/Eyy."""
+    value = re.sub(r"(?i)\.(mkv|mp4)(\.\w+)?$", "", str(raw or ""))
+    normalized = re.sub(r"[_._•]+", " ", value)
+    if not re.search(r"(?i)\bsolo\s+leveling\b", normalized):
         return None
-    season = season or 1
-    special_type = anime_special_type(filename)
+    combined = re.search(r"(?i)\bS\s*0*(\d{1,2})\s*(?:-|x)?\s*E\s*0*(\d{1,3})\b", normalized)
+    season_match = re.search(r"(?i)\b(?:season\s*|s\s*[o0]?\s*)0*(\d{1,2})\b", normalized)
+    episode_match = re.search(r"(?i)\b(?:episode|ep|e)\s*[:#_\-]?\s*0*(\d{1,3})\b", normalized)
+    if combined:
+        season, episode = int(combined.group(1)), int(combined.group(2))
+        return season, episode
+    if not episode_match and season_match:
+        episode_match = re.search(r"(?i)^\s*[-–]\s*0*(\d{1,3})\b", normalized[season_match.end():])
+    if not episode_match or re.search(r"(?i)\bepisodes\b", normalized):
+        return None
+    season = int(season_match.group(1)) if season_match else 1
+    episode = int(episode_match.group(1))
+    return season, episode
+
+
+def caption_for(filename):
+    parsed = solo_parts(filename)
+    if not parsed:
+        return None
+    season, episode = parsed
+    special_type = None
     quality = quality_of(filename)
-    parent = anime_parent_slug(TITLE, season, episode, special_type, part)
+    parent = anime_parent_slug(TITLE, season, episode, special_type, 0)
     caption = "\n".join((
         f"Anime: {TITLE}",
         f"Anime Slug ID: {SLUG}",
@@ -45,7 +65,7 @@ def caption_for(filename):
         f"Quality: {quality}",
         f"Episode Slug ID: {parent}",
     ))
-    return caption, (season, episode, part or 0, quality)
+    return caption, (season, episode, 0, quality)
 
 
 def review_candidates(message, previous_messages):
