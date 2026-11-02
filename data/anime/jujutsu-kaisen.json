@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": 1793584635,
+  "updated_at": 1793585063,
   "anime": {
     "slug_id": "jujutsu-kaisen",
     "title": "JUJUTSU KAISEN",
@@ -196,6 +196,6 @@
     "year": 2020,
     "studio": "Toho",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Jujutsu_Kaisen_(TV_series)",
-    "updated_at": "2026-11-02T01:57:10Z"
+    "updated_at": "2026-11-02T02:04:17Z"
   }
 }
