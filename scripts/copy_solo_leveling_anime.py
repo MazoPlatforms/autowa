@@ -7,6 +7,7 @@ import asyncio
 import os
 import re
 import sys
+import tempfile
 from pathlib import Path
 
 from telethon import TelegramClient
@@ -21,6 +22,7 @@ TITLE = "Solo Leveling"
 SLUG = "solo-leveling"
 DRY_RUN = os.getenv("DRY_RUN", "0") == "1"
 REVIEW_ONLY = os.getenv("REVIEW_ONLY", "0") == "1"
+ALLOW_VIDEO_SOURCE = os.getenv("ALLOW_VIDEO_SOURCE", "0") == "1"
 
 
 def quality_of(filename):
@@ -114,11 +116,14 @@ async def main():
 
         previous_messages = []
         async for message in client.iter_messages(source, reverse=True):
-            # Video messages are deliberately excluded, even when their filename is MKV/MP4.
-            if not message.file or message.video:
+            # Source videos may be recovered, but they are always downloaded and
+            # re-uploaded as documents to the target channel.
+            if not message.file or (message.video and not ALLOW_VIDEO_SOURCE):
                 previous_messages.append(message)
                 continue
             filename = str(message.file.name or "")
+            if message.video and not filename and str(message.file.mime_type or "").lower() == "video/mp4":
+                filename = "Solo Leveling 720p.mp4"
             if not re.search(r"(?i)\.(mkv|mp4)$", filename):
                 previous_messages.append(message)
                 continue
@@ -144,7 +149,16 @@ async def main():
             if DRY_RUN:
                 print(f"DRY source={message.id} S{identity[0]:02d}E{identity[1]:02d} {identity[3]} {filename}", flush=True)
                 continue
-            await client.send_file(target, message.media, caption=caption, force_document=True)
+            if message.video:
+                with tempfile.TemporaryDirectory(prefix="solo-leveling-") as temp:
+                    downloaded = await client.download_media(message, file=temp)
+                    if not downloaded:
+                        print(f"SKIP download-failed source={message.id}", flush=True)
+                        previous_messages.append(message)
+                        continue
+                    await client.send_file(target, downloaded, caption=caption, force_document=True)
+            else:
+                await client.send_file(target, message.media, caption=caption, force_document=True)
             target_items.add(identity)
             copied += 1
             print(f"COPIED source={message.id} S{identity[0]:02d}E{identity[1]:02d} {identity[3]}", flush=True)

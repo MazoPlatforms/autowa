@@ -15,6 +15,10 @@ on:
         description: Review filenames, file captions, and image captions without copying
         required: true
         default: 'false'
+      include_video_sources:
+        description: Download source MKV/MP4 videos and re-upload them as documents
+        required: true
+        default: 'true'
 
 permissions:
   contents: read
@@ -38,4 +42,5 @@ jobs:
           SOURCE_CHANNEL: ${{ inputs.source_channel }}
           DRY_RUN: ${{ inputs.dry_run == 'true' && '1' || '0' }}
           REVIEW_ONLY: ${{ inputs.review_only == 'true' && '1' || '0' }}
+          ALLOW_VIDEO_SOURCE: ${{ inputs.include_video_sources == 'true' && '1' || '0' }}
         run: python scripts/copy_solo_leveling_anime.py
