@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": 1793624415,
+  "updated_at": 1793630162,
   "anime": [
     {
       "slug_id": "naruto",
@@ -6347,7 +6347,7 @@
         "10": "/banners/naruto-season-10.webp",
         "11": "/banners/naruto-season-11.webp"
       },
-      "updated_at": "2026-11-02T12:59:51Z"
+      "updated_at": "2026-11-02T14:35:35Z"
     },
     {
       "slug_id": "naruto-shippuden",
@@ -17963,7 +17963,7 @@
       "status": "Finished",
       "episodes_total": 500,
       "studio": "Studio Pierrot",
-      "updated_at": "2026-11-02T13:00:15Z"
+      "updated_at": "2026-11-02T14:36:02Z"
     },
     {
       "slug_id": "attack-on-titan",
@@ -23698,7 +23698,7 @@
         "3": "/banners/attack-on-titan-season-3.webp",
         "4": "/banners/attack-on-titan-season-4.webp"
       },
-      "updated_at": "2026-11-02T12:59:40Z"
+      "updated_at": "2026-11-02T14:35:23Z"
     },
     {
       "slug_id": "spy-x-family",
@@ -23896,7 +23896,7 @@
       "year": 2022,
       "studio": "CloverWorks",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Spy_%C3%97_Family",
-      "updated_at": "2026-11-02T12:59:18Z"
+      "updated_at": "2026-11-02T14:34:58Z"
     },
     {
       "slug_id": "by-spy-x-family-solo-leveling",
@@ -23932,7 +23932,7 @@
       "year": "2026",
       "plot": "Spy × Family is a Japanese web manga series written and illustrated by Tatsuya Endo. The story follows Agent Twilight, an enigmatic spy who has to \"build a family\" to execute a mission, not realizing that his adopted daughter is a telepath, and the woman he agrees to marry is a skilled assassin. The series has been serialized biweekly on Shueisha's Shōnen Jump+ app and website since March 2019, with its chapters collected in 17 tankōbon volumes as of April 2026. It is licensed in North America by Viz Media.",
       "poster": "https://upload.wikimedia.org/wikipedia/en/5/51/Spy_Family_vol_1.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
-      "updated_at": "2026-11-02T12:59:25Z"
+      "updated_at": "2026-11-02T14:35:06Z"
     },
     {
       "slug_id": "catalogue-solo-leveling",
@@ -24004,7 +24004,151 @@
       "year": "2026",
       "plot": "Love Hina  is a Japanese manga series written and illustrated by Ken Akamatsu. It was serialized in Kodansha's Weekly Shōnen Magazine from October 1998 to October 2001, with the chapters collected into 14 tankōbon volumes by Kodansha. The series tells the story of Keitarō Urashima and his attempts to find the girl with whom he made a childhood promise to enter the University of Tokyo. The manga was licensed for an English-language release in North America and the United Kingdom by Tokyopop, in Australia by Madman Entertainment, and in Singapore by Chuang Yi. Two novelizations of Love Hina, written by two anime series screenwriters, were also released in Japan by Kodansha. Both novels were later released in North America and the United Kingdom by Tokyopop.",
       "poster": "https://upload.wikimedia.org/wikipedia/en/3/3c/Love_Hina_volume_1.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
-      "updated_at": "2026-11-02T12:59:32Z"
+      "updated_at": "2026-11-02T14:35:13Z"
+    },
+    {
+      "slug_id": "document-2024-01-14-04-11-29",
+      "title": "document 2024-01-14 04-11-29",
+      "episodes": [
+        {
+          "telegram_message_id": 1228,
+          "episode": 2,
+          "season": 1,
+          "special_type": null,
+          "part": null,
+          "quality": "720P",
+          "file_size": 40212281,
+          "file_name": "document_2024-01-14_04-11-29.mp4",
+          "mime_type": "video/mp4",
+          "slug_id": "VOZ_KUI18bQMLO3D",
+          "qualities": {
+            "720P": {
+              "telegram_message_id": 1228,
+              "episode": 2,
+              "season": 1,
+              "special_type": null,
+              "part": null,
+              "quality": "720P",
+              "file_size": 40212281,
+              "file_name": "document_2024-01-14_04-11-29.mp4",
+              "mime_type": "video/mp4"
+            }
+          }
+        }
+      ],
+      "poster": "https://upload.wikimedia.org/wikipedia/en/2/21/One_Piece_DVD_21.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+      "year": "2026",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/One_Piece_season_21",
+      "plot": "The twenty-first season of the One Piece anime television series is produced by Toei Animation, directed by Tatsuya Nagamine, Wataru Matsumi, Satoshi Itō and Yasunori Koyama. The season began broadcasting on Fuji Television on January 7, 2024. Like the rest of the series, the season follows Monkey D. Luffy's adventures with his Straw Hat Pirates. The season adapts material from the \"Egghead\" story arc, from the rest of the 105th volume to the beginning of the 111th volume of the manga series One Piece by Eiichiro Oda. It deals with the Straw Hat Pirates meeting Dr. Vegapunk on the futuristic-looking island, Egghead, which leads into an event that shocks the world.",
+      "updated_at": "2026-11-02T14:34:58Z"
+    },
+    {
+      "slug_id": "document-2024-02-11-03-34-53",
+      "title": "document 2024-02-11 03-34-53",
+      "episodes": [
+        {
+          "telegram_message_id": 1229,
+          "episode": 6,
+          "season": 1,
+          "special_type": null,
+          "part": null,
+          "quality": "360P",
+          "file_size": 46947065,
+          "file_name": "document_2024-02-11_03-34-53.mp4",
+          "mime_type": "video/mp4",
+          "slug_id": "-tIJ99Q92CUyEAzW",
+          "qualities": {
+            "360P": {
+              "telegram_message_id": 1229,
+              "episode": 6,
+              "season": 1,
+              "special_type": null,
+              "part": null,
+              "quality": "360P",
+              "file_size": 46947065,
+              "file_name": "document_2024-02-11_03-34-53.mp4",
+              "mime_type": "video/mp4"
+            }
+          }
+        }
+      ],
+      "poster": "https://upload.wikimedia.org/wikipedia/en/2/21/One_Piece_DVD_21.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+      "year": "2026",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/One_Piece_season_21",
+      "plot": "The twenty-first season of the One Piece anime television series is produced by Toei Animation, directed by Tatsuya Nagamine, Wataru Matsumi, Satoshi Itō and Yasunori Koyama. The season began broadcasting on Fuji Television on January 7, 2024. Like the rest of the series, the season follows Monkey D. Luffy's adventures with his Straw Hat Pirates. The season adapts material from the \"Egghead\" story arc, from the rest of the 105th volume to the beginning of the 111th volume of the manga series One Piece by Eiichiro Oda. It deals with the Straw Hat Pirates meeting Dr. Vegapunk on the futuristic-looking island, Egghead, which leads into an event that shocks the world.",
+      "updated_at": "2026-11-02T14:34:51Z"
+    },
+    {
+      "slug_id": "document-2024-02-11-03-42-22",
+      "title": "document 2024-02-11 03-42-22",
+      "episodes": [
+        {
+          "telegram_message_id": 1230,
+          "episode": 6,
+          "season": 1,
+          "special_type": null,
+          "part": null,
+          "quality": "480P",
+          "file_size": 71194865,
+          "file_name": "document_2024-02-11_03-42-22.mp4",
+          "mime_type": "video/mp4",
+          "slug_id": "f1v9XMhYgkR92dCS",
+          "qualities": {
+            "480P": {
+              "telegram_message_id": 1230,
+              "episode": 6,
+              "season": 1,
+              "special_type": null,
+              "part": null,
+              "quality": "480P",
+              "file_size": 71194865,
+              "file_name": "document_2024-02-11_03-42-22.mp4",
+              "mime_type": "video/mp4"
+            }
+          }
+        }
+      ],
+      "poster": "https://upload.wikimedia.org/wikipedia/en/2/21/One_Piece_DVD_21.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+      "year": "2026",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/One_Piece_season_21",
+      "plot": "The twenty-first season of the One Piece anime television series is produced by Toei Animation, directed by Tatsuya Nagamine, Wataru Matsumi, Satoshi Itō and Yasunori Koyama. The season began broadcasting on Fuji Television on January 7, 2024. Like the rest of the series, the season follows Monkey D. Luffy's adventures with his Straw Hat Pirates. The season adapts material from the \"Egghead\" story arc, from the rest of the 105th volume to the beginning of the 111th volume of the manga series One Piece by Eiichiro Oda. It deals with the Straw Hat Pirates meeting Dr. Vegapunk on the futuristic-looking island, Egghead, which leads into an event that shocks the world.",
+      "updated_at": "2026-11-02T14:34:43Z"
+    },
+    {
+      "slug_id": "document-2024-02-12-12-20-04",
+      "title": "document 2024-02-12 12-20-04",
+      "episodes": [
+        {
+          "telegram_message_id": 1231,
+          "episode": 6,
+          "season": 1,
+          "special_type": null,
+          "part": null,
+          "quality": "1080P",
+          "file_size": 466625924,
+          "file_name": "document_2024-02-12_12-20-04.mp4",
+          "mime_type": "video/mp4",
+          "slug_id": "XIEnFC1VUEv5ZoG7",
+          "qualities": {
+            "1080P": {
+              "telegram_message_id": 1231,
+              "episode": 6,
+              "season": 1,
+              "special_type": null,
+              "part": null,
+              "quality": "1080P",
+              "file_size": 466625924,
+              "file_name": "document_2024-02-12_12-20-04.mp4",
+              "mime_type": "video/mp4"
+            }
+          }
+        }
+      ],
+      "poster": "https://upload.wikimedia.org/wikipedia/en/2/21/One_Piece_DVD_21.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+      "year": "2026",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/One_Piece_season_21",
+      "plot": "The twenty-first season of the One Piece anime television series is produced by Toei Animation, directed by Tatsuya Nagamine, Wataru Matsumi, Satoshi Itō and Yasunori Koyama. The season began broadcasting on Fuji Television on January 7, 2024. Like the rest of the series, the season follows Monkey D. Luffy's adventures with his Straw Hat Pirates. The season adapts material from the \"Egghead\" story arc, from the rest of the 105th volume to the beginning of the 111th volume of the manga series One Piece by Eiichiro Oda. It deals with the Straw Hat Pirates meeting Dr. Vegapunk on the futuristic-looking island, Egghead, which leads into an event that shocks the world.",
+      "updated_at": "2026-11-02T14:34:36Z"
     },
     {
       "slug_id": "jujutsu-kaisen",
@@ -27117,7 +27261,58 @@
         "2": "/banners/jujutsu-kaisen-season-2.webp",
         "3": "/banners/jujutsu-kaisen-season-3.webp"
       },
-      "updated_at": "2026-11-02T12:59:35Z"
+      "updated_at": "2026-11-02T14:35:17Z"
+    },
+    {
+      "slug_id": "solo-leveling",
+      "title": "Solo Leveling",
+      "episodes": [
+        {
+          "telegram_message_id": 1233,
+          "episode": 7,
+          "season": 2,
+          "special_type": null,
+          "part": null,
+          "quality": "720P",
+          "file_size": 237596757,
+          "file_name": "@Solo Leveling Tamil S02E7.mkv",
+          "mime_type": "video/x-matroska",
+          "title": "The 10th S-rank Hunter",
+          "released": "2025-02-15",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/556/1390105.jpg",
+          "slug_id": "xvcVH0MZzyOvp5Ca",
+          "qualities": {
+            "720P": {
+              "telegram_message_id": 1233,
+              "episode": 7,
+              "season": 2,
+              "special_type": null,
+              "part": null,
+              "quality": "720P",
+              "file_size": 237596757,
+              "file_name": "@Solo Leveling Tamil S02E7.mkv",
+              "mime_type": "video/x-matroska",
+              "title": "The 10th S-rank Hunter",
+              "released": "2025-02-15",
+              "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/556/1390105.jpg"
+            }
+          }
+        }
+      ],
+      "poster": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx151807-it355ZgzquUd.png",
+      "plot": "They say whatever doesn’t kill you makes you stronger, but that’s not the case for the world’s weakest hunter Seong Jin-U. After being brutally slaughtered by monsters in a high-ranking dungeon, Jin-U came back with the System, a program only he could see, that’s leveling him up in every way. Now, he’s inspired to discover the secrets behind his powers and the dungeon that spawned them.\n\n(Source: Crunchyroll)",
+      "genre": [
+        "Action",
+        "Adventure",
+        "Fantasy"
+      ],
+      "rating": 8.0,
+      "status": "Finished",
+      "episodes_total": 12,
+      "year": 2024,
+      "studio": "A-1 Pictures",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Solo_Leveling",
+      "updated_at": "2026-11-02T14:34:27Z"
     },
     {
       "slug_id": "solo-leveling",
@@ -27377,6 +27572,20 @@
           "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/505/1264589.jpg",
           "slug_id": "-rFw70-zu5Nkq_A_",
           "qualities": {
+            "360P": {
+              "telegram_message_id": 1232,
+              "episode": 7,
+              "season": 1,
+              "special_type": null,
+              "part": null,
+              "quality": "360P",
+              "file_size": 122640869,
+              "file_name": "SoloLeveling Tamil dubbed S01E07.mkv",
+              "mime_type": "video/x-matroska",
+              "title": "Let's See How Far I Can Go",
+              "released": "2024-02-17",
+              "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/505/1264589.jpg"
+            },
             "1080P": {
               "telegram_message_id": 1180,
               "episode": 7,
@@ -27983,7 +28192,7 @@
       "year": 2024,
       "studio": "A-1 Pictures",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Solo_Leveling",
-      "updated_at": "2026-11-02T12:59:17Z"
+      "updated_at": "2026-11-02T14:34:28Z"
     }
   ]
 }

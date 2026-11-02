@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "updated_at": 1793630162,
+  "anime": {
+    "slug_id": "document-2024-02-11-03-34-53",
+    "title": "document 2024-02-11 03-34-53",
+    "episodes": [
+      {
+        "telegram_message_id": 1229,
+        "episode": 6,
+        "season": 1,
+        "special_type": null,
+        "part": null,
+        "quality": "360P",
+        "file_size": 46947065,
+        "file_name": "document_2024-02-11_03-34-53.mp4",
+        "mime_type": "video/mp4",
+        "slug_id": "-tIJ99Q92CUyEAzW",
+        "qualities": {
+          "360P": {
+            "telegram_message_id": 1229,
+            "episode": 6,
+            "season": 1,
+            "special_type": null,
+            "part": null,
+            "quality": "360P",
+            "file_size": 46947065,
+            "file_name": "document_2024-02-11_03-34-53.mp4",
+            "mime_type": "video/mp4"
+          }
+        }
+      }
+    ],
+    "poster": "https://upload.wikimedia.org/wikipedia/en/2/21/One_Piece_DVD_21.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+    "year": "2026",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/One_Piece_season_21",
+    "plot": "The twenty-first season of the One Piece anime television series is produced by Toei Animation, directed by Tatsuya Nagamine, Wataru Matsumi, Satoshi Itō and Yasunori Koyama. The season began broadcasting on Fuji Television on January 7, 2024. Like the rest of the series, the season follows Monkey D. Luffy's adventures with his Straw Hat Pirates. The season adapts material from the \"Egghead\" story arc, from the rest of the 105th volume to the beginning of the 111th volume of the manga series One Piece by Eiichiro Oda. It deals with the Straw Hat Pirates meeting Dr. Vegapunk on the futuristic-looking island, Egghead, which leads into an event that shocks the world.",
+    "updated_at": "2026-11-02T14:34:51Z"
+  }
+}

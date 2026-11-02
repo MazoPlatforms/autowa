@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": 1793624415,
+  "updated_at": 1793630162,
   "anime": {
     "slug_id": "solo-leveling",
     "title": "Solo Leveling",
@@ -259,6 +259,20 @@
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/505/1264589.jpg",
         "slug_id": "-rFw70-zu5Nkq_A_",
         "qualities": {
+          "360P": {
+            "telegram_message_id": 1232,
+            "episode": 7,
+            "season": 1,
+            "special_type": null,
+            "part": null,
+            "quality": "360P",
+            "file_size": 122640869,
+            "file_name": "SoloLeveling Tamil dubbed S01E07.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "Let's See How Far I Can Go",
+            "released": "2024-02-17",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/505/1264589.jpg"
+          },
           "1080P": {
             "telegram_message_id": 1180,
             "episode": 7,
@@ -865,6 +879,6 @@
     "year": 2024,
     "studio": "A-1 Pictures",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Solo_Leveling",
-    "updated_at": "2026-11-02T12:59:17Z"
+    "updated_at": "2026-11-02T14:34:28Z"
   }
 }
