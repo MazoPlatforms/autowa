@@ -15,7 +15,7 @@ async function topic(kind){
  const redisUrl=(process.env.UPSTASH_REDIS_REST_URL||'').replace(/\/$/,'');
  const redisToken=process.env.UPSTASH_REDIS_REST_TOKEN||'';
  const key='filmgo:logs:topic:'+kind;
- async function redis(...args){if(!redisUrl||!redisToken)return null;const r=await fetch(redisUrl,{method:'POST',headers:{Authorization:'Bearer '+redisToken,'Content-Type':'application/json'},body:JSON.stringify(args),signal:AbortSignal.timeout(8000)});if(!r.ok)throw Error('Redis '+r.status);const d=await r.json();if(d.error)throw Error('Redis error');return d.result;}
+ async function redis(...args){if(!redisUrl||!redisToken)return null;const command=args.map((value,index)=>{if(value===undefined||value===null)throw Error('Redis argument '+index+' is missing');return String(value);});for(let attempt=0;attempt<3;attempt++){const r=await fetch(redisUrl,{method:'POST',headers:{Authorization:'Bearer '+redisToken,'Content-Type':'application/json'},body:JSON.stringify(command),signal:AbortSignal.timeout(8000)});if(r.ok){const d=await r.json();if(d.error)throw Error('Redis error');return d.result;}if(attempt===2){const detail=(await r.text()).replace(/\s+/g,' ').slice(0,180);throw Error('Redis '+r.status+(detail?': '+detail:''));}await new Promise(resolve=>setTimeout(resolve,250*(attempt+1)));}return null;}
  const saved=await redis('GET',key);
  if(saved){cache.set(kind,Number(saved));return Number(saved);}
  const lock=await redis('SET',key+':lock','1','NX','EX',20);

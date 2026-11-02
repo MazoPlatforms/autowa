@@ -381,11 +381,15 @@ let running=false;
 const sleep=ms=>new Promise(resolve=>setTimeout(resolve,ms));
 async function redis(...args){
  if(!REDIS_URL||!REDIS_TOKEN)throw Error('Bot Redis configuration missing');
+ const command=args.map((value,index)=>{
+  if(value===undefined||value===null)throw Error('Redis argument '+index+' is missing');
+  return String(value);
+ });
  let lastError=null;
  for(let attempt=0;attempt<4;attempt++){
   try{
-   const r=await fetch(REDIS_URL,{method:'POST',headers:{Authorization:'Bearer '+REDIS_TOKEN,'Content-Type':'application/json'},body:JSON.stringify(args),signal:AbortSignal.timeout(8000)});
-   if(!r.ok){lastError=Error('HTTP '+r.status);if(![408,425,429].includes(r.status)&&r.status<500)break;}
+   const r=await fetch(REDIS_URL,{method:'POST',headers:{Authorization:'Bearer '+REDIS_TOKEN,'Content-Type':'application/json'},body:JSON.stringify(command),signal:AbortSignal.timeout(8000)});
+   if(!r.ok){const detail=(await r.text()).replace(/\s+/g,' ').slice(0,180);lastError=Error('HTTP '+r.status+(detail?': '+detail:''));if(![400,408,425,429].includes(r.status)&&r.status<500)break;}
    else{const j=await r.json();if(j.error){lastError=Error('Redis command failed');}else return j.result;}
   }catch(error){lastError=error;}
   if(attempt<3)await sleep(250*(2**attempt)+Math.floor(Math.random()*150));
