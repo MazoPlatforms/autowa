@@ -403,7 +403,8 @@ const server=http.createServer(async(req,res)=>{
    if(!session||session.number!=='+94779290433')return send(res,404,{error:'Not found'});
    if(url.pathname==='/admin'){res.writeHead(200,{'Content-Type':'text/html; charset=utf-8','Cache-Control':'no-store','X-Robots-Tag':'noindex','Content-Security-Policy':"default-src 'self'; script-src 'self'; style-src 'self'; base-uri 'none'; frame-ancestors 'none'"});return res.end(adminHtml);}
    const asset=url.pathname==='/admin.css'?{body:adminCss,type:'text/css; charset=utf-8'}:{body:adminJs,type:'text/javascript; charset=utf-8'};
-   return send(res,200,asset.body,{'Content-Type':asset.type,'Cache-Control':'no-store','X-Content-Type-Options':'nosniff'});
+   res.writeHead(200,{'Content-Type':asset.type,'Cache-Control':'no-store','X-Content-Type-Options':'nosniff','Content-Security-Policy':"default-src 'self'; connect-src 'self'; base-uri 'none'; frame-ancestors 'none'"});
+   return res.end(asset.body);
   }
   if((url.pathname.startsWith('/api/audio')||url.pathname.startsWith('/internal/media/'))&&await audioService(req,res,url))return;
   const brandAsset=brandAssets.get(url.pathname);
