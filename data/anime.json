@@ -27312,7 +27312,11 @@
       "year": 2024,
       "studio": "A-1 Pictures",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Solo_Leveling",
-      "updated_at": "2026-11-02T14:34:27Z"
+      "updated_at": "2026-11-02T14:34:27Z",
+      "season_banners": {
+        "1": "/banners/solo-leveling-season-1.webp",
+        "2": "/banners/solo-leveling-season-2.webp"
+      }
     },
     {
       "slug_id": "solo-leveling",
@@ -28192,7 +28196,11 @@
       "year": 2024,
       "studio": "A-1 Pictures",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Solo_Leveling",
-      "updated_at": "2026-11-02T14:34:28Z"
+      "updated_at": "2026-11-02T14:34:28Z",
+      "season_banners": {
+        "1": "/banners/solo-leveling-season-1.webp",
+        "2": "/banners/solo-leveling-season-2.webp"
+      }
     }
   ]
 }

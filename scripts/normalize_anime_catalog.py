@@ -36,6 +36,11 @@ def main():
                 "OAD": "/banners/attack-on-titan-oad.webp",
                 **{str(number): f"/banners/attack-on-titan-season-{number}.webp" for number in range(1, 5)},
             }
+        elif show.get("slug_id") == "solo-leveling":
+            show["season_banners"] = {
+                "1": "/banners/solo-leveling-season-1.webp",
+                "2": "/banners/solo-leveling-season-2.webp",
+            }
         compact = {}
         for episode in show.get("episodes", []):
             variants = episode.get("qualities") or {
