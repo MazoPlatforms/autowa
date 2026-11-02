@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": 1793623750,
+  "updated_at": 1793624256,
   "anime": [
     {
       "slug_id": "naruto",
@@ -6347,7 +6347,7 @@
         "10": "/banners/naruto-season-10.webp",
         "11": "/banners/naruto-season-11.webp"
       },
-      "updated_at": "2026-11-02T12:48:45Z"
+      "updated_at": "2026-11-02T12:57:06Z"
     },
     {
       "slug_id": "naruto-shippuden",
@@ -17963,7 +17963,7 @@
       "status": "Finished",
       "episodes_total": 500,
       "studio": "Studio Pierrot",
-      "updated_at": "2026-11-02T12:49:10Z"
+      "updated_at": "2026-11-02T12:57:36Z"
     },
     {
       "slug_id": "attack-on-titan",
@@ -23698,7 +23698,115 @@
         "3": "/banners/attack-on-titan-season-3.webp",
         "4": "/banners/attack-on-titan-season-4.webp"
       },
-      "updated_at": "2026-11-02T12:48:34Z"
+      "updated_at": "2026-11-02T12:56:53Z"
+    },
+    {
+      "slug_id": "by-spy-x-family-solo-leveling",
+      "title": "By Spy X Family Solo Leveling",
+      "episodes": [
+        {
+          "telegram_message_id": 1212,
+          "episode": 8,
+          "season": 1,
+          "special_type": null,
+          "part": null,
+          "quality": "480P",
+          "file_size": 51708284,
+          "file_name": "By Spy X Family  Solo Leveling S01 Ep08 480p.mkv",
+          "mime_type": "video/x-matroska",
+          "slug_id": "m05sdFH3OkCAcAUW",
+          "qualities": {
+            "480P": {
+              "telegram_message_id": 1212,
+              "episode": 8,
+              "season": 1,
+              "special_type": null,
+              "part": null,
+              "quality": "480P",
+              "file_size": 51708284,
+              "file_name": "By Spy X Family  Solo Leveling S01 Ep08 480p.mkv",
+              "mime_type": "video/x-matroska"
+            }
+          }
+        }
+      ],
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Spy_%C3%97_Family",
+      "year": "2026",
+      "plot": "Spy × Family is a Japanese web manga series written and illustrated by Tatsuya Endo. The story follows Agent Twilight, an enigmatic spy who has to \"build a family\" to execute a mission, not realizing that his adopted daughter is a telepath, and the woman he agrees to marry is a skilled assassin. The series has been serialized biweekly on Shueisha's Shōnen Jump+ app and website since March 2019, with its chapters collected in 17 tankōbon volumes as of April 2026. It is licensed in North America by Viz Media.",
+      "poster": "https://upload.wikimedia.org/wikipedia/en/5/51/Spy_Family_vol_1.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+      "updated_at": "2026-11-02T12:56:29Z"
+    },
+    {
+      "slug_id": "catalogue-solo-leveling",
+      "title": "Catalogue Solo leveling",
+      "episodes": [
+        {
+          "telegram_message_id": 1208,
+          "episode": 4,
+          "season": 1,
+          "special_type": null,
+          "part": null,
+          "quality": "360P",
+          "file_size": 82238410,
+          "file_name": "@Anime_Catalogue Solo leveling Ep04 360p.mkv",
+          "mime_type": "video/x-matroska",
+          "slug_id": "ay0TxZwcXdGbC6j6",
+          "qualities": {
+            "360P": {
+              "telegram_message_id": 1208,
+              "episode": 4,
+              "season": 1,
+              "special_type": null,
+              "part": null,
+              "quality": "360P",
+              "file_size": 82238410,
+              "file_name": "@Anime_Catalogue Solo leveling Ep04 360p.mkv",
+              "mime_type": "video/x-matroska"
+            }
+          }
+        },
+        {
+          "telegram_message_id": 1210,
+          "episode": 5,
+          "season": 1,
+          "special_type": null,
+          "part": null,
+          "quality": "1080P",
+          "file_size": 395127177,
+          "file_name": "@Anime_Catalogue Solo leveling Ep05 1080p.mkv",
+          "mime_type": "video/x-matroska",
+          "slug_id": "WCWuYd-41NR2SQQq",
+          "qualities": {
+            "1080P": {
+              "telegram_message_id": 1210,
+              "episode": 5,
+              "season": 1,
+              "special_type": null,
+              "part": null,
+              "quality": "1080P",
+              "file_size": 395127177,
+              "file_name": "@Anime_Catalogue Solo leveling Ep05 1080p.mkv",
+              "mime_type": "video/x-matroska"
+            },
+            "360P": {
+              "telegram_message_id": 1209,
+              "episode": 5,
+              "season": 1,
+              "special_type": null,
+              "part": null,
+              "quality": "360P",
+              "file_size": 77481854,
+              "file_name": "@Anime_Catalogue Solo leveling Ep05 360p.mkv",
+              "mime_type": "video/x-matroska"
+            }
+          }
+        }
+      ],
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Love_Hina",
+      "year": "2026",
+      "plot": "Love Hina  is a Japanese manga series written and illustrated by Ken Akamatsu. It was serialized in Kodansha's Weekly Shōnen Magazine from October 1998 to October 2001, with the chapters collected into 14 tankōbon volumes by Kodansha. The series tells the story of Keitarō Urashima and his attempts to find the girl with whom he made a childhood promise to enter the University of Tokyo. The manga was licensed for an English-language release in North America and the United Kingdom by Tokyopop, in Australia by Madman Entertainment, and in Singapore by Chuang Yi. Two novelizations of Love Hina, written by two anime series screenwriters, were also released in Japan by Kodansha. Both novels were later released in North America and the United Kingdom by Tokyopop.",
+      "poster": "https://upload.wikimedia.org/wikipedia/en/3/3c/Love_Hina_volume_1.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+      "updated_at": "2026-11-02T12:56:44Z"
     },
     {
       "slug_id": "jujutsu-kaisen",
@@ -26811,11 +26919,43 @@
         "2": "/banners/jujutsu-kaisen-season-2.webp",
         "3": "/banners/jujutsu-kaisen-season-3.webp"
       },
-      "updated_at": "2026-11-02T12:48:29Z"
+      "updated_at": "2026-11-02T12:56:47Z"
+    },
+    {
+      "slug_id": "solo-leveling-2140p",
+      "title": "Solo Leveling 2140p",
+      "episodes": [
+        {
+          "telegram_message_id": 1227,
+          "episode": 1,
+          "season": 2,
+          "special_type": null,
+          "part": null,
+          "quality": "4K",
+          "file_size": 1536035395,
+          "file_name": "[ACT]-Solo Leveling S02 EP01 2140p[4K UHD] [Multi AuD].mkv",
+          "mime_type": "video/x-matroska",
+          "slug_id": "zUIucWeSmYFSUcQt",
+          "qualities": {
+            "4K": {
+              "telegram_message_id": 1227,
+              "episode": 1,
+              "season": 2,
+              "special_type": null,
+              "part": null,
+              "quality": "4K",
+              "file_size": 1536035395,
+              "file_name": "[ACT]-Solo Leveling S02 EP01 2140p[4K UHD] [Multi AuD].mkv",
+              "mime_type": "video/x-matroska"
+            }
+          }
+        }
+      ],
+      "updated_at": "2026-11-02T12:56:05Z"
     },
     {
       "slug_id": "solo-leveling",
-      "title": "Solo Leveling",
+      "title": "SOLO LEVELING by",
       "episodes": [
         {
           "telegram_message_id": 1174,
@@ -26887,6 +27027,53 @@
               "title": "I'm Used to It",
               "released": "2024-01-06",
               "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/498/1247043.jpg"
+            }
+          }
+        },
+        {
+          "telegram_message_id": 1206,
+          "episode": 3,
+          "season": 1,
+          "special_type": null,
+          "part": null,
+          "quality": "720P",
+          "file_size": 162279902,
+          "file_name": "[AC] Solo Leveling [S1-03] [720p] [Subb] @Anime_Campus.mkv",
+          "mime_type": "video/x-matroska",
+          "slug_id": "btzF3qztyb4_2l9M",
+          "qualities": {
+            "1080P": {
+              "telegram_message_id": 1207,
+              "episode": 3,
+              "season": 1,
+              "special_type": null,
+              "part": null,
+              "quality": "1080P",
+              "file_size": 463498883,
+              "file_name": "[AC] Solo Leveling [S1-03] [1080p] [Subb] @Anime_Campus.mkv",
+              "mime_type": "video/x-matroska"
+            },
+            "720P": {
+              "telegram_message_id": 1206,
+              "episode": 3,
+              "season": 1,
+              "special_type": null,
+              "part": null,
+              "quality": "720P",
+              "file_size": 162279902,
+              "file_name": "[AC] Solo Leveling [S1-03] [720p] [Subb] @Anime_Campus.mkv",
+              "mime_type": "video/x-matroska"
+            },
+            "480P": {
+              "telegram_message_id": 1205,
+              "episode": 3,
+              "season": 1,
+              "special_type": null,
+              "part": null,
+              "quality": "480P",
+              "file_size": 76452297,
+              "file_name": "[AC] Solo Leveling [S1-03] [480p] [Subb] @Anime_Campus.mkv",
+              "mime_type": "video/x-matroska"
             }
           }
         },
@@ -27040,6 +27227,17 @@
           "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/506/1267363.jpg",
           "slug_id": "w7r6T75HMqPc8xlI",
           "qualities": {
+            "2160P": {
+              "telegram_message_id": 1225,
+              "episode": 8,
+              "season": 1,
+              "special_type": null,
+              "part": null,
+              "quality": "2160P",
+              "file_size": 832985630,
+              "file_name": "SOLO LEVELING S01 Ep08\nTamil by [SxF] 2160p [4K].mkv",
+              "mime_type": "video/x-matroska"
+            },
             "4K": {
               "telegram_message_id": 1185,
               "episode": 8,
@@ -27099,6 +27297,17 @@
           "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/554/1385112.jpg",
           "slug_id": "njKkJ8VIQTh4JAqk",
           "qualities": {
+            "2160P": {
+              "telegram_message_id": 1226,
+              "episode": 12,
+              "season": 1,
+              "special_type": null,
+              "part": null,
+              "quality": "2160P",
+              "file_size": 906339021,
+              "file_name": "SOLO LEVELING S01 Ep12\nTamil by [SxF] 2160p [4K].mkv",
+              "mime_type": "video/x-matroska"
+            },
             "1080P": {
               "telegram_message_id": 1189,
               "episode": 12,
@@ -27452,7 +27661,323 @@
       "year": 2024,
       "studio": "A-1 Pictures",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Solo_Leveling",
-      "updated_at": "2026-11-02T12:48:26Z"
+      "updated_at": "2026-11-02T12:56:06Z"
+    },
+    {
+      "slug_id": "solo-leveling-official-tel",
+      "title": "Solo Leveling • #official • : Tel",
+      "episodes": [
+        {
+          "telegram_message_id": 1211,
+          "episode": 4,
+          "season": 1,
+          "special_type": null,
+          "part": null,
+          "quality": "720P",
+          "file_size": 116115763,
+          "file_name": "Solo_Leveling_Tamil_S01_•_Episode_:_4_#official_•_Audio_:Tam+Hin+Tel+Eng+Jap.mkv",
+          "mime_type": "video/x-matroska",
+          "slug_id": "2yjy4ZPV0405bsPQ",
+          "qualities": {
+            "720P": {
+              "telegram_message_id": 1211,
+              "episode": 4,
+              "season": 1,
+              "special_type": null,
+              "part": null,
+              "quality": "720P",
+              "file_size": 116115763,
+              "file_name": "Solo_Leveling_Tamil_S01_•_Episode_:_4_#official_•_Audio_:Tam+Hin+Tel+Eng+Jap.mkv",
+              "mime_type": "video/x-matroska"
+            }
+          }
+        }
+      ],
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Impact_of_the_COVID-19_pandemic_on_television",
+      "year": "2026",
+      "plot": "The COVID-19 pandemic has had a substantial impact on the television industry, mirroring its impacts across all arts sectors, shutting down or delaying production of television programs in many countries with consequent negative impacts on revenues and employment.",
+      "poster": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/94/Coronavirus._SARS-CoV-2.png/330px-Coronavirus._SARS-CoV-2.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "updated_at": "2026-11-02T12:56:36Z"
+    },
+    {
+      "slug_id": "solo-levelingby-spy-x-family-org-aud",
+      "title": "SOLO LEVELINGBy Spy x Family ORG AUD",
+      "episodes": [
+        {
+          "telegram_message_id": 1216,
+          "episode": 9,
+          "season": 1,
+          "special_type": null,
+          "part": null,
+          "quality": "2160P",
+          "file_size": 1757165890,
+          "file_name": "_SOLO_LEVELINGBy_Spy_x_Family_S01_Ep09_ORG_AUD_2160p_4K.mkv",
+          "mime_type": "video/x-matroska",
+          "slug_id": "48dT1z4emtaEzDIE",
+          "qualities": {
+            "2160P": {
+              "telegram_message_id": 1216,
+              "episode": 9,
+              "season": 1,
+              "special_type": null,
+              "part": null,
+              "quality": "2160P",
+              "file_size": 1757165890,
+              "file_name": "_SOLO_LEVELINGBy_Spy_x_Family_S01_Ep09_ORG_AUD_2160p_4K.mkv",
+              "mime_type": "video/x-matroska"
+            }
+          }
+        },
+        {
+          "telegram_message_id": 1220,
+          "episode": 10,
+          "season": 1,
+          "special_type": null,
+          "part": null,
+          "quality": "2160P",
+          "file_size": 1568590542,
+          "file_name": "_SOLO_LEVELINGBy_Spy_x_Family_S01_Ep10_ORG_AUD_2160p_4K.mkv",
+          "mime_type": "video/x-matroska",
+          "slug_id": "vtwrYetTaCxzkh3Q",
+          "qualities": {
+            "2160P": {
+              "telegram_message_id": 1220,
+              "episode": 10,
+              "season": 1,
+              "special_type": null,
+              "part": null,
+              "quality": "2160P",
+              "file_size": 1568590542,
+              "file_name": "_SOLO_LEVELINGBy_Spy_x_Family_S01_Ep10_ORG_AUD_2160p_4K.mkv",
+              "mime_type": "video/x-matroska"
+            }
+          }
+        },
+        {
+          "telegram_message_id": 1224,
+          "episode": 11,
+          "season": 1,
+          "special_type": null,
+          "part": null,
+          "quality": "2160P",
+          "file_size": 1755095708,
+          "file_name": "_SOLO_LEVELINGBy_Spy_x_Family_S01_Ep11_ORG_AUD_2160p_4K.mkv",
+          "mime_type": "video/x-matroska",
+          "slug_id": "mgdlp-d45m9z5P0e",
+          "qualities": {
+            "2160P": {
+              "telegram_message_id": 1224,
+              "episode": 11,
+              "season": 1,
+              "special_type": null,
+              "part": null,
+              "quality": "2160P",
+              "file_size": 1755095708,
+              "file_name": "_SOLO_LEVELINGBy_Spy_x_Family_S01_Ep11_ORG_AUD_2160p_4K.mkv",
+              "mime_type": "video/x-matroska"
+            }
+          }
+        }
+      ],
+      "updated_at": "2026-11-02T12:56:14Z"
+    },
+    {
+      "slug_id": "spy-x-family",
+      "title": "SPY x FAMILY",
+      "episodes": [
+        {
+          "telegram_message_id": 1214,
+          "episode": 9,
+          "season": 1,
+          "special_type": null,
+          "part": null,
+          "quality": "720P",
+          "file_size": 191808173,
+          "file_name": "[SOLO LEVELING]By Spy x Family\nS01 Ep09 (ORG AUD) 720p.mkv",
+          "mime_type": "video/x-matroska",
+          "title": "Show Off How In Love You Are",
+          "released": "2022-06-04",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/541/1354151.jpg",
+          "slug_id": "_hyRy8t74Mxoagm5",
+          "qualities": {
+            "1080P": {
+              "telegram_message_id": 1215,
+              "episode": 9,
+              "season": 1,
+              "special_type": null,
+              "part": null,
+              "quality": "1080P",
+              "file_size": 482811668,
+              "file_name": "[SOLO LEVELING]By Spy x Family\nS01 Ep09 (ORG AUD) 1080p.mkv",
+              "mime_type": "video/x-matroska",
+              "title": "Show Off How In Love You Are",
+              "released": "2022-06-04",
+              "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/541/1354151.jpg"
+            },
+            "720P": {
+              "telegram_message_id": 1214,
+              "episode": 9,
+              "season": 1,
+              "special_type": null,
+              "part": null,
+              "quality": "720P",
+              "file_size": 191808173,
+              "file_name": "[SOLO LEVELING]By Spy x Family\nS01 Ep09 (ORG AUD) 720p.mkv",
+              "mime_type": "video/x-matroska",
+              "title": "Show Off How In Love You Are",
+              "released": "2022-06-04",
+              "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/541/1354151.jpg"
+            },
+            "480P": {
+              "telegram_message_id": 1213,
+              "episode": 9,
+              "season": 1,
+              "special_type": null,
+              "part": null,
+              "quality": "480P",
+              "file_size": 78719095,
+              "file_name": "[SOLO LEVELING]By Spy x Family\nS01 Ep09 (ORG AUD) 480p.mkv",
+              "mime_type": "video/x-matroska",
+              "title": "Show Off How In Love You Are",
+              "released": "2022-06-04",
+              "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/541/1354151.jpg"
+            }
+          }
+        },
+        {
+          "telegram_message_id": 1218,
+          "episode": 10,
+          "season": 1,
+          "special_type": null,
+          "part": null,
+          "quality": "720P",
+          "file_size": 143251683,
+          "file_name": "[SOLO LEVELING]By Spy x Family\nS01 Ep10 (ORG AUD) 720p.mkv",
+          "mime_type": "video/x-matroska",
+          "title": "The Great Dodgeball Plan",
+          "released": "2022-06-11",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/541/1354221.jpg",
+          "slug_id": "htl9Z5HC7gy-SA_J",
+          "qualities": {
+            "1080P": {
+              "telegram_message_id": 1219,
+              "episode": 10,
+              "season": 1,
+              "special_type": null,
+              "part": null,
+              "quality": "1080P",
+              "file_size": 332334487,
+              "file_name": "[SOLO LEVELING]By Spy x Family\nS01 Ep10 (ORG AUD) 1080p.mkv",
+              "mime_type": "video/x-matroska",
+              "title": "The Great Dodgeball Plan",
+              "released": "2022-06-11",
+              "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/541/1354221.jpg"
+            },
+            "720P": {
+              "telegram_message_id": 1218,
+              "episode": 10,
+              "season": 1,
+              "special_type": null,
+              "part": null,
+              "quality": "720P",
+              "file_size": 143251683,
+              "file_name": "[SOLO LEVELING]By Spy x Family\nS01 Ep10 (ORG AUD) 720p.mkv",
+              "mime_type": "video/x-matroska",
+              "title": "The Great Dodgeball Plan",
+              "released": "2022-06-11",
+              "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/541/1354221.jpg"
+            },
+            "480P": {
+              "telegram_message_id": 1217,
+              "episode": 10,
+              "season": 1,
+              "special_type": null,
+              "part": null,
+              "quality": "480P",
+              "file_size": 82900367,
+              "file_name": "[SOLO LEVELING]By Spy x Family\nS01 Ep10 (ORG AUD) 480p.mkv",
+              "mime_type": "video/x-matroska",
+              "title": "The Great Dodgeball Plan",
+              "released": "2022-06-11",
+              "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/541/1354221.jpg"
+            }
+          }
+        },
+        {
+          "telegram_message_id": 1222,
+          "episode": 11,
+          "season": 1,
+          "special_type": null,
+          "part": null,
+          "quality": "720P",
+          "file_size": 205604163,
+          "file_name": "[SOLO LEVELING]By Spy x Family\nS01 Ep11 (ORG AUD) 720p.mkv",
+          "mime_type": "video/x-matroska",
+          "title": "Stella",
+          "released": "2022-06-18",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/541/1354226.jpg",
+          "slug_id": "Cr5wC5hK0SgraA2Q",
+          "qualities": {
+            "1080P": {
+              "telegram_message_id": 1223,
+              "episode": 11,
+              "season": 1,
+              "special_type": null,
+              "part": null,
+              "quality": "1080P",
+              "file_size": 325193606,
+              "file_name": "[SOLO LEVELING]By Spy x Family\nS01 Ep11 (ORG AUD) 1080p.mkv",
+              "mime_type": "video/x-matroska",
+              "title": "Stella",
+              "released": "2022-06-18",
+              "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/541/1354226.jpg"
+            },
+            "720P": {
+              "telegram_message_id": 1222,
+              "episode": 11,
+              "season": 1,
+              "special_type": null,
+              "part": null,
+              "quality": "720P",
+              "file_size": 205604163,
+              "file_name": "[SOLO LEVELING]By Spy x Family\nS01 Ep11 (ORG AUD) 720p.mkv",
+              "mime_type": "video/x-matroska",
+              "title": "Stella",
+              "released": "2022-06-18",
+              "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/541/1354226.jpg"
+            },
+            "480P": {
+              "telegram_message_id": 1221,
+              "episode": 11,
+              "season": 1,
+              "special_type": null,
+              "part": null,
+              "quality": "480P",
+              "file_size": 97577420,
+              "file_name": "[SOLO LEVELING]By Spy x Family\nS01 Ep11 (ORG AUD) 480p.mkv",
+              "mime_type": "video/x-matroska",
+              "title": "Stella",
+              "released": "2022-06-18",
+              "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/541/1354226.jpg"
+            }
+          }
+        }
+      ],
+      "poster": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx140960-Kb6R5nYQfjmP.jpg",
+      "plot": "Everyone has a part of themselves they cannot show to anyone else.\n\nAt a time when all nations of the world were involved in a fierce war of information happening behind closed doors, Ostania and Westalis had been in a state of cold war against one another for decades. The Westalis Intelligence Services' Eastern-Focused Division (WISE) sends their most talented spy, \"Twilight,\" on a top-secret mission to investigate the movements of Donovan Desmond, the chairman of Ostania's National Unity Party, who is threatening peace efforts between the two nations.\n\nThis mission is known as \"Operation Strix.\" It consists of \"putting together a family in one week in order to infiltrate social gatherings organized by the elite school that Desmond's son attends.\" \n\"Twilight\" takes on the identity of psychiatrist Loid Forger and starts looking for family members. But Anya, the daughter he adopts, turns ",
+      "genre": [
+        "Action",
+        "Comedy",
+        "Slice of Life",
+        "Supernatural"
+      ],
+      "rating": 8.3,
+      "status": "Finished",
+      "episodes_total": 12,
+      "year": 2022,
+      "studio": "CloverWorks",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Spy_%C3%97_Family",
+      "updated_at": "2026-11-02T12:56:22Z"
     }
   ]
 }

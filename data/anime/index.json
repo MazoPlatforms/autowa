@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": 1793623750,
+  "updated_at": 1793624256,
   "anime": [
     {
       "slug_id": "naruto",
@@ -33,7 +33,7 @@
         "10": "/banners/naruto-season-10.webp",
         "11": "/banners/naruto-season-11.webp"
       },
-      "updated_at": "2026-11-02T12:48:45Z"
+      "updated_at": "2026-11-02T12:57:06Z"
     },
     {
       "slug_id": "naruto-shippuden",
@@ -53,7 +53,7 @@
       "status": "Finished",
       "episodes_total": 500,
       "studio": "Studio Pierrot",
-      "updated_at": "2026-11-02T12:49:10Z"
+      "updated_at": "2026-11-02T12:57:36Z"
     },
     {
       "slug_id": "attack-on-titan",
@@ -79,7 +79,25 @@
         "3": "/banners/attack-on-titan-season-3.webp",
         "4": "/banners/attack-on-titan-season-4.webp"
       },
-      "updated_at": "2026-11-02T12:48:34Z"
+      "updated_at": "2026-11-02T12:56:53Z"
+    },
+    {
+      "slug_id": "by-spy-x-family-solo-leveling",
+      "title": "By Spy X Family Solo Leveling",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Spy_%C3%97_Family",
+      "year": "2026",
+      "plot": "Spy × Family is a Japanese web manga series written and illustrated by Tatsuya Endo. The story follows Agent Twilight, an enigmatic spy who has to \"build a family\" to execute a mission, not realizing that his adopted daughter is a telepath, and the woman he agrees to marry is a skilled assassin. The series has been serialized biweekly on Shueisha's Shōnen Jump+ app and website since March 2019, with its chapters collected in 17 tankōbon volumes as of April 2026. It is licensed in North America by Viz Media.",
+      "poster": "https://upload.wikimedia.org/wikipedia/en/5/51/Spy_Family_vol_1.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+      "updated_at": "2026-11-02T12:56:29Z"
+    },
+    {
+      "slug_id": "catalogue-solo-leveling",
+      "title": "Catalogue Solo leveling",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Love_Hina",
+      "year": "2026",
+      "plot": "Love Hina  is a Japanese manga series written and illustrated by Ken Akamatsu. It was serialized in Kodansha's Weekly Shōnen Magazine from October 1998 to October 2001, with the chapters collected into 14 tankōbon volumes by Kodansha. The series tells the story of Keitarō Urashima and his attempts to find the girl with whom he made a childhood promise to enter the University of Tokyo. The manga was licensed for an English-language release in North America and the United Kingdom by Tokyopop, in Australia by Madman Entertainment, and in Singapore by Chuang Yi. Two novelizations of Love Hina, written by two anime series screenwriters, were also released in Japan by Kodansha. Both novels were later released in North America and the United Kingdom by Tokyopop.",
+      "poster": "https://upload.wikimedia.org/wikipedia/en/3/3c/Love_Hina_volume_1.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+      "updated_at": "2026-11-02T12:56:44Z"
     },
     {
       "slug_id": "jujutsu-kaisen",
@@ -102,11 +120,16 @@
         "2": "/banners/jujutsu-kaisen-season-2.webp",
         "3": "/banners/jujutsu-kaisen-season-3.webp"
       },
-      "updated_at": "2026-11-02T12:48:29Z"
+      "updated_at": "2026-11-02T12:56:47Z"
+    },
+    {
+      "slug_id": "solo-leveling-2140p",
+      "title": "Solo Leveling 2140p",
+      "updated_at": "2026-11-02T12:56:05Z"
     },
     {
       "slug_id": "solo-leveling",
-      "title": "Solo Leveling",
+      "title": "SOLO LEVELING by",
       "poster": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx151807-it355ZgzquUd.png",
       "plot": "They say whatever doesn’t kill you makes you stronger, but that’s not the case for the world’s weakest hunter Seong Jin-U. After being brutally slaughtered by monsters in a high-ranking dungeon, Jin-U came back with the System, a program only he could see, that’s leveling him up in every way. Now, he’s inspired to discover the secrets behind his powers and the dungeon that spawned them.\n\n(Source: Crunchyroll)",
       "genre": [
@@ -120,7 +143,40 @@
       "year": 2024,
       "studio": "A-1 Pictures",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Solo_Leveling",
-      "updated_at": "2026-11-02T12:48:26Z"
+      "updated_at": "2026-11-02T12:56:06Z"
+    },
+    {
+      "slug_id": "solo-leveling-official-tel",
+      "title": "Solo Leveling • #official • : Tel",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Impact_of_the_COVID-19_pandemic_on_television",
+      "year": "2026",
+      "plot": "The COVID-19 pandemic has had a substantial impact on the television industry, mirroring its impacts across all arts sectors, shutting down or delaying production of television programs in many countries with consequent negative impacts on revenues and employment.",
+      "poster": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/94/Coronavirus._SARS-CoV-2.png/330px-Coronavirus._SARS-CoV-2.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "updated_at": "2026-11-02T12:56:36Z"
+    },
+    {
+      "slug_id": "solo-levelingby-spy-x-family-org-aud",
+      "title": "SOLO LEVELINGBy Spy x Family ORG AUD",
+      "updated_at": "2026-11-02T12:56:14Z"
+    },
+    {
+      "slug_id": "spy-x-family",
+      "title": "SPY x FAMILY",
+      "poster": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx140960-Kb6R5nYQfjmP.jpg",
+      "plot": "Everyone has a part of themselves they cannot show to anyone else.\n\nAt a time when all nations of the world were involved in a fierce war of information happening behind closed doors, Ostania and Westalis had been in a state of cold war against one another for decades. The Westalis Intelligence Services' Eastern-Focused Division (WISE) sends their most talented spy, \"Twilight,\" on a top-secret mission to investigate the movements of Donovan Desmond, the chairman of Ostania's National Unity Party, who is threatening peace efforts between the two nations.\n\nThis mission is known as \"Operation Strix.\" It consists of \"putting together a family in one week in order to infiltrate social gatherings organized by the elite school that Desmond's son attends.\" \n\"Twilight\" takes on the identity of psychiatrist Loid Forger and starts looking for family members. But Anya, the daughter he adopts, turns ",
+      "genre": [
+        "Action",
+        "Comedy",
+        "Slice of Life",
+        "Supernatural"
+      ],
+      "rating": 8.3,
+      "status": "Finished",
+      "episodes_total": 12,
+      "year": 2022,
+      "studio": "CloverWorks",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Spy_%C3%97_Family",
+      "updated_at": "2026-11-02T12:56:22Z"
     }
   ]
 }

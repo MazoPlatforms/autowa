@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "updated_at": 1793624256,
+  "anime": {
+    "slug_id": "by-spy-x-family-solo-leveling",
+    "title": "By Spy X Family Solo Leveling",
+    "episodes": [
+      {
+        "telegram_message_id": 1212,
+        "episode": 8,
+        "season": 1,
+        "special_type": null,
+        "part": null,
+        "quality": "480P",
+        "file_size": 51708284,
+        "file_name": "By Spy X Family  Solo Leveling S01 Ep08 480p.mkv",
+        "mime_type": "video/x-matroska",
+        "slug_id": "m05sdFH3OkCAcAUW",
+        "qualities": {
+          "480P": {
+            "telegram_message_id": 1212,
+            "episode": 8,
+            "season": 1,
+            "special_type": null,
+            "part": null,
+            "quality": "480P",
+            "file_size": 51708284,
+            "file_name": "By Spy X Family  Solo Leveling S01 Ep08 480p.mkv",
+            "mime_type": "video/x-matroska"
+          }
+        }
+      }
+    ],
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Spy_%C3%97_Family",
+    "year": "2026",
+    "plot": "Spy × Family is a Japanese web manga series written and illustrated by Tatsuya Endo. The story follows Agent Twilight, an enigmatic spy who has to \"build a family\" to execute a mission, not realizing that his adopted daughter is a telepath, and the woman he agrees to marry is a skilled assassin. The series has been serialized biweekly on Shueisha's Shōnen Jump+ app and website since March 2019, with its chapters collected in 17 tankōbon volumes as of April 2026. It is licensed in North America by Viz Media.",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/5/51/Spy_Family_vol_1.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+    "updated_at": "2026-11-02T12:56:29Z"
+  }
+}

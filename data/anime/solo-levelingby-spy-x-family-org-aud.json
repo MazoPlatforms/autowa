@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "updated_at": 1793624256,
+  "anime": {
+    "slug_id": "solo-levelingby-spy-x-family-org-aud",
+    "title": "SOLO LEVELINGBy Spy x Family ORG AUD",
+    "episodes": [
+      {
+        "telegram_message_id": 1216,
+        "episode": 9,
+        "season": 1,
+        "special_type": null,
+        "part": null,
+        "quality": "2160P",
+        "file_size": 1757165890,
+        "file_name": "_SOLO_LEVELINGBy_Spy_x_Family_S01_Ep09_ORG_AUD_2160p_4K.mkv",
+        "mime_type": "video/x-matroska",
+        "slug_id": "48dT1z4emtaEzDIE",
+        "qualities": {
+          "2160P": {
+            "telegram_message_id": 1216,
+            "episode": 9,
+            "season": 1,
+            "special_type": null,
+            "part": null,
+            "quality": "2160P",
+            "file_size": 1757165890,
+            "file_name": "_SOLO_LEVELINGBy_Spy_x_Family_S01_Ep09_ORG_AUD_2160p_4K.mkv",
+            "mime_type": "video/x-matroska"
+          }
+        }
+      },
+      {
+        "telegram_message_id": 1220,
+        "episode": 10,
+        "season": 1,
+        "special_type": null,
+        "part": null,
+        "quality": "2160P",
+        "file_size": 1568590542,
+        "file_name": "_SOLO_LEVELINGBy_Spy_x_Family_S01_Ep10_ORG_AUD_2160p_4K.mkv",
+        "mime_type": "video/x-matroska",
+        "slug_id": "vtwrYetTaCxzkh3Q",
+        "qualities": {
+          "2160P": {
+            "telegram_message_id": 1220,
+            "episode": 10,
+            "season": 1,
+            "special_type": null,
+            "part": null,
+            "quality": "2160P",
+            "file_size": 1568590542,
+            "file_name": "_SOLO_LEVELINGBy_Spy_x_Family_S01_Ep10_ORG_AUD_2160p_4K.mkv",
+            "mime_type": "video/x-matroska"
+          }
+        }
+      },
+      {
+        "telegram_message_id": 1224,
+        "episode": 11,
+        "season": 1,
+        "special_type": null,
+        "part": null,
+        "quality": "2160P",
+        "file_size": 1755095708,
+        "file_name": "_SOLO_LEVELINGBy_Spy_x_Family_S01_Ep11_ORG_AUD_2160p_4K.mkv",
+        "mime_type": "video/x-matroska",
+        "slug_id": "mgdlp-d45m9z5P0e",
+        "qualities": {
+          "2160P": {
+            "telegram_message_id": 1224,
+            "episode": 11,
+            "season": 1,
+            "special_type": null,
+            "part": null,
+            "quality": "2160P",
+            "file_size": 1755095708,
+            "file_name": "_SOLO_LEVELINGBy_Spy_x_Family_S01_Ep11_ORG_AUD_2160p_4K.mkv",
+            "mime_type": "video/x-matroska"
+          }
+        }
+      }
+    ],
+    "updated_at": "2026-11-02T12:56:14Z"
+  }
+}

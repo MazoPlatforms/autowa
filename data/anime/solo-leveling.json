@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "updated_at": 1793623750,
+  "updated_at": 1793624256,
   "anime": {
     "slug_id": "solo-leveling",
-    "title": "Solo Leveling",
+    "title": "SOLO LEVELING by",
     "episodes": [
       {
         "telegram_message_id": 1174,
@@ -75,6 +75,53 @@
             "title": "I'm Used to It",
             "released": "2024-01-06",
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/498/1247043.jpg"
+          }
+        }
+      },
+      {
+        "telegram_message_id": 1206,
+        "episode": 3,
+        "season": 1,
+        "special_type": null,
+        "part": null,
+        "quality": "720P",
+        "file_size": 162279902,
+        "file_name": "[AC] Solo Leveling [S1-03] [720p] [Subb] @Anime_Campus.mkv",
+        "mime_type": "video/x-matroska",
+        "slug_id": "btzF3qztyb4_2l9M",
+        "qualities": {
+          "1080P": {
+            "telegram_message_id": 1207,
+            "episode": 3,
+            "season": 1,
+            "special_type": null,
+            "part": null,
+            "quality": "1080P",
+            "file_size": 463498883,
+            "file_name": "[AC] Solo Leveling [S1-03] [1080p] [Subb] @Anime_Campus.mkv",
+            "mime_type": "video/x-matroska"
+          },
+          "720P": {
+            "telegram_message_id": 1206,
+            "episode": 3,
+            "season": 1,
+            "special_type": null,
+            "part": null,
+            "quality": "720P",
+            "file_size": 162279902,
+            "file_name": "[AC] Solo Leveling [S1-03] [720p] [Subb] @Anime_Campus.mkv",
+            "mime_type": "video/x-matroska"
+          },
+          "480P": {
+            "telegram_message_id": 1205,
+            "episode": 3,
+            "season": 1,
+            "special_type": null,
+            "part": null,
+            "quality": "480P",
+            "file_size": 76452297,
+            "file_name": "[AC] Solo Leveling [S1-03] [480p] [Subb] @Anime_Campus.mkv",
+            "mime_type": "video/x-matroska"
           }
         }
       },
@@ -228,6 +275,17 @@
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/506/1267363.jpg",
         "slug_id": "w7r6T75HMqPc8xlI",
         "qualities": {
+          "2160P": {
+            "telegram_message_id": 1225,
+            "episode": 8,
+            "season": 1,
+            "special_type": null,
+            "part": null,
+            "quality": "2160P",
+            "file_size": 832985630,
+            "file_name": "SOLO LEVELING S01 Ep08\nTamil by [SxF] 2160p [4K].mkv",
+            "mime_type": "video/x-matroska"
+          },
           "4K": {
             "telegram_message_id": 1185,
             "episode": 8,
@@ -287,6 +345,17 @@
         "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/554/1385112.jpg",
         "slug_id": "njKkJ8VIQTh4JAqk",
         "qualities": {
+          "2160P": {
+            "telegram_message_id": 1226,
+            "episode": 12,
+            "season": 1,
+            "special_type": null,
+            "part": null,
+            "quality": "2160P",
+            "file_size": 906339021,
+            "file_name": "SOLO LEVELING S01 Ep12\nTamil by [SxF] 2160p [4K].mkv",
+            "mime_type": "video/x-matroska"
+          },
           "1080P": {
             "telegram_message_id": 1189,
             "episode": 12,
@@ -640,6 +709,6 @@
     "year": 2024,
     "studio": "A-1 Pictures",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Solo_Leveling",
-    "updated_at": "2026-11-02T12:48:26Z"
+    "updated_at": "2026-11-02T12:56:06Z"
   }
 }
