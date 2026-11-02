@@ -19,6 +19,7 @@ from src.telegram_media import anime_filename_parts, anime_parent_slug, anime_sp
 SOURCE = os.getenv("SOURCE_CHANNEL", "New_Tamill_Movies")
 START_ID = int(os.getenv("START_MESSAGE_ID", "328"))
 END_ID = int(os.getenv("END_MESSAGE_ID", "548"))
+LAST_FILE_COUNT = int(os.getenv("LAST_FILE_COUNT", "0"))
 TITLE = "Jujutsu Kaisen"
 SLUG = "jujutsu-kaisen"
 DRY_RUN = os.getenv("DRY_RUN", "0") == "1"
@@ -62,7 +63,12 @@ async def main():
     seen = set()
     source_episodes = {}
     try:
-        async for message in client.iter_messages(source, min_id=START_ID - 1, max_id=END_ID + 1, reverse=True):
+        if LAST_FILE_COUNT > 0:
+            recent = [message async for message in client.iter_messages(source, limit=max(50, LAST_FILE_COUNT * 10)) if message.file]
+            messages = list(reversed(recent[:LAST_FILE_COUNT]))
+        else:
+            messages = [message async for message in client.iter_messages(source, min_id=START_ID - 1, max_id=END_ID + 1, reverse=True)]
+        for message in messages:
             if not (START_ID <= message.id <= END_ID) or not message.file:
                 skipped += 1
                 continue
