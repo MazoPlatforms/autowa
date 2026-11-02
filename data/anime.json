@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": 1793601846,
+  "updated_at": "2026-11-02T06:50:52.768Z",
   "anime": [
     {
       "slug_id": "naruto",
@@ -23692,11 +23692,11 @@
       "year": 2013,
       "studio": "WIT STUDIO",
       "season_banners": {
-        "OAD": "/banners/attack-on-titan-oad.webp",
         "1": "/banners/attack-on-titan-season-1.webp",
         "2": "/banners/attack-on-titan-season-2.webp",
         "3": "/banners/attack-on-titan-season-3.webp",
-        "4": "/banners/attack-on-titan-season-4.webp"
+        "4": "/banners/attack-on-titan-season-4.webp",
+        "OAD": "/banners/attack-on-titan-oad.webp"
       },
       "updated_at": "2026-11-02T06:44:03Z"
     },
@@ -24427,6 +24427,45 @@
       "studio": "Toho",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Jujutsu_Kaisen_(TV_series)",
       "updated_at": "2026-11-02T06:44:01Z"
+    },
+    {
+      "slug_id": "mob-linkzz-jujutsu-kaisen",
+      "title": "@ Mob LinkZz Jujutsu Kaisen",
+      "episodes": [
+        {
+          "telegram_message_id": 943,
+          "episode": 22,
+          "season": 1,
+          "special_type": null,
+          "part": null,
+          "quality": "480p",
+          "file_size": 114832800,
+          "file_name": "@TamilMob_LinkZz_Jujutsu_Kaisen_S01_E22_Blu_Ray_480p_x264_Tamil.mkv",
+          "mime_type": "video/x-matroska",
+          "qualities": {
+            "480P": {
+              "telegram_message_id": 943,
+              "episode": 22,
+              "season": 1,
+              "special_type": null,
+              "part": null,
+              "quality": "480p",
+              "file_size": 114832800,
+              "file_name": "@TamilMob_LinkZz_Jujutsu_Kaisen_S01_E22_Blu_Ray_480p_x264_Tamil.mkv",
+              "mime_type": "video/x-matroska"
+            }
+          }
+        }
+      ],
+      "year": "2026",
+      "poster": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/df/David_Vincent_LA_Anime_Film_Festival_2017_Red_Carpet.jpg/330px-David_Vincent_LA_Anime_Film_Festival_2017_Red_Carpet.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "plot": "David Vincent is an American voice actor and voice director who provides voices for animation, anime and video games. Some roles include Grimmjow Jaegerjaquez in Bleach, Senketsu in Kill la Kill, Gilgamesh in Fate/Zero & Fate/stay night, Male Robin in Fire Emblem Awakening, the Super Smash Bros. series and Code Name: S.T.E.A.M., Marshall Law in the Tekken series, T. Hawk in Super Street Fighter IV, Richter Belmont in Castlevania: The Dracula X Chronicles, the narrator of JoJo's Bizarre Adventure, and Jin Kisaragi and Hakumen in the BlazBlue series. He also had a guest role in Ghost in the Shell.",
+      "genre": [],
+      "rating": null,
+      "status": null,
+      "episodes_total": null,
+      "studio": null,
+      "updated_at": "2026-11-02T06:50:52.768Z"
     }
   ]
 }
