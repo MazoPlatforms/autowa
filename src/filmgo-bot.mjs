@@ -410,7 +410,12 @@ async function startAnimeDraft(file,messageId,detected=null,caption=''){
  const d={kind:'anime',message_id:messageId,file_name:file.file_name||'',file_size:Number(file.file_size||0),mime_type:file.mime_type||'',title:parts.title,titleCandidates:parts.titleCandidates,season:parts.season,episode:parts.episode,part:parts.part,special_type:parts.special_type,quality:parts.quality,slug_id:animeSlug(parts.title),episode_slug_id:crypto.randomBytes(12).toString('base64url')};
  const duplicate=await findAnimeDuplicate(d).catch(error=>{console.warn('Anime duplicate check failed:',error?.message||'unknown error');return null;});
  if(duplicate){d.existing=true;d.replace=true;d.episode_slug_id=duplicate.episode_slug_id||duplicate.slug_id;d.existing_episode_message_id=Number(duplicate.telegram_message_id)||null;}
- const metadata=known?null:(detected?.metadata||await animeMetadata(parts.title).catch(()=>null));if(metadata){Object.assign(d,metadata);d.slug_id=animeSlug(metadata.title);}d.stage='await-publish';await draftSave(d);
+ const metadata=known?null:(detected?.metadata||await animeMetadata(parts.title).catch(()=>null));
+ // Metadata providers may return an all-caps display title. Keep the title
+ // parsed from the release filename for drafts, captions, and the catalog;
+ // provider metadata is still used for poster, plot, rating, and other fields.
+ if(metadata){const releaseTitle=d.title;Object.assign(d,metadata,{title:releaseTitle});d.titleCandidates=titleCandidates(releaseTitle);d.slug_id=animeSlug(releaseTitle);}
+ d.stage='await-publish';await draftSave(d);
  if(detected?.confidence>=.7&&!d.replace){await say(ADMIN_ID,'Recognized '+d.title+' as anime ('+Math.round(detected.confidence*100)+'% confidence). Publishing automatically.');return publishAnimeDraft(d);}
  return animeDraftPrompt(d);
 }
