@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-02T06:50:52.768Z",
+  "updated_at": 1793602278,
   "anime": [
     {
       "slug_id": "naruto",
@@ -6347,7 +6347,7 @@
         "10": "/banners/naruto-season-10.webp",
         "11": "/banners/naruto-season-11.webp"
       },
-      "updated_at": "2026-11-02T06:44:05Z"
+      "updated_at": "2026-11-02T06:51:17Z"
     },
     {
       "slug_id": "naruto-shippuden",
@@ -17963,7 +17963,7 @@
       "status": "Finished",
       "episodes_total": 500,
       "studio": "Studio Pierrot",
-      "updated_at": "2026-11-02T06:44:06Z"
+      "updated_at": "2026-11-02T06:51:18Z"
     },
     {
       "slug_id": "attack-on-titan",
@@ -23692,13 +23692,13 @@
       "year": 2013,
       "studio": "WIT STUDIO",
       "season_banners": {
+        "OAD": "/banners/attack-on-titan-oad.webp",
         "1": "/banners/attack-on-titan-season-1.webp",
         "2": "/banners/attack-on-titan-season-2.webp",
         "3": "/banners/attack-on-titan-season-3.webp",
-        "4": "/banners/attack-on-titan-season-4.webp",
-        "OAD": "/banners/attack-on-titan-oad.webp"
+        "4": "/banners/attack-on-titan-season-4.webp"
       },
-      "updated_at": "2026-11-02T06:44:03Z"
+      "updated_at": "2026-11-02T06:51:16Z"
     },
     {
       "slug_id": "jujutsu-kaisen",
@@ -24411,6 +24411,37 @@
               "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/318/797117.jpg"
             }
           }
+        },
+        {
+          "telegram_message_id": 943,
+          "episode": 22,
+          "season": 1,
+          "special_type": null,
+          "part": null,
+          "quality": "480P",
+          "file_size": 114832800,
+          "file_name": "@TamilMob_LinkZz_Jujutsu_Kaisen_S01_E22_Blu_Ray_480p_x264_Tamil.mkv",
+          "mime_type": "video/x-matroska",
+          "title": "The Origin of Blind Obedience",
+          "released": "2021-03-12",
+          "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/318/797118.jpg",
+          "slug_id": "mwqd2_dcjrYyYahC",
+          "qualities": {
+            "480P": {
+              "telegram_message_id": 943,
+              "episode": 22,
+              "season": 1,
+              "special_type": null,
+              "part": null,
+              "quality": "480P",
+              "file_size": 114832800,
+              "file_name": "@TamilMob_LinkZz_Jujutsu_Kaisen_S01_E22_Blu_Ray_480p_x264_Tamil.mkv",
+              "mime_type": "video/x-matroska",
+              "title": "The Origin of Blind Obedience",
+              "released": "2021-03-12",
+              "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/318/797118.jpg"
+            }
+          }
         }
       ],
       "poster": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx113415-LHBAeoZDIsnF.jpg",
@@ -24426,46 +24457,7 @@
       "year": 2020,
       "studio": "Toho",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Jujutsu_Kaisen_(TV_series)",
-      "updated_at": "2026-11-02T06:44:01Z"
-    },
-    {
-      "slug_id": "mob-linkzz-jujutsu-kaisen",
-      "title": "@ Mob LinkZz Jujutsu Kaisen",
-      "episodes": [
-        {
-          "telegram_message_id": 943,
-          "episode": 22,
-          "season": 1,
-          "special_type": null,
-          "part": null,
-          "quality": "480p",
-          "file_size": 114832800,
-          "file_name": "@TamilMob_LinkZz_Jujutsu_Kaisen_S01_E22_Blu_Ray_480p_x264_Tamil.mkv",
-          "mime_type": "video/x-matroska",
-          "qualities": {
-            "480P": {
-              "telegram_message_id": 943,
-              "episode": 22,
-              "season": 1,
-              "special_type": null,
-              "part": null,
-              "quality": "480p",
-              "file_size": 114832800,
-              "file_name": "@TamilMob_LinkZz_Jujutsu_Kaisen_S01_E22_Blu_Ray_480p_x264_Tamil.mkv",
-              "mime_type": "video/x-matroska"
-            }
-          }
-        }
-      ],
-      "year": "2026",
-      "poster": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/df/David_Vincent_LA_Anime_Film_Festival_2017_Red_Carpet.jpg/330px-David_Vincent_LA_Anime_Film_Festival_2017_Red_Carpet.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
-      "plot": "David Vincent is an American voice actor and voice director who provides voices for animation, anime and video games. Some roles include Grimmjow Jaegerjaquez in Bleach, Senketsu in Kill la Kill, Gilgamesh in Fate/Zero & Fate/stay night, Male Robin in Fire Emblem Awakening, the Super Smash Bros. series and Code Name: S.T.E.A.M., Marshall Law in the Tekken series, T. Hawk in Super Street Fighter IV, Richter Belmont in Castlevania: The Dracula X Chronicles, the narrator of JoJo's Bizarre Adventure, and Jin Kisaragi and Hakumen in the BlazBlue series. He also had a guest role in Ghost in the Shell.",
-      "genre": [],
-      "rating": null,
-      "status": null,
-      "episodes_total": null,
-      "studio": null,
-      "updated_at": "2026-11-02T06:50:52.768Z"
+      "updated_at": "2026-11-02T06:51:14Z"
     }
   ]
 }

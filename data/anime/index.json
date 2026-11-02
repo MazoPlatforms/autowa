@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": 1793601846,
+  "updated_at": 1793602278,
   "anime": [
     {
       "slug_id": "naruto",
@@ -33,7 +33,7 @@
         "10": "/banners/naruto-season-10.webp",
         "11": "/banners/naruto-season-11.webp"
       },
-      "updated_at": "2026-11-02T06:44:05Z"
+      "updated_at": "2026-11-02T06:51:17Z"
     },
     {
       "slug_id": "naruto-shippuden",
@@ -53,7 +53,7 @@
       "status": "Finished",
       "episodes_total": 500,
       "studio": "Studio Pierrot",
-      "updated_at": "2026-11-02T06:44:06Z"
+      "updated_at": "2026-11-02T06:51:18Z"
     },
     {
       "slug_id": "attack-on-titan",
@@ -79,7 +79,7 @@
         "3": "/banners/attack-on-titan-season-3.webp",
         "4": "/banners/attack-on-titan-season-4.webp"
       },
-      "updated_at": "2026-11-02T06:44:03Z"
+      "updated_at": "2026-11-02T06:51:16Z"
     },
     {
       "slug_id": "jujutsu-kaisen",
@@ -97,7 +97,7 @@
       "year": 2020,
       "studio": "Toho",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Jujutsu_Kaisen_(TV_series)",
-      "updated_at": "2026-11-02T06:44:01Z"
+      "updated_at": "2026-11-02T06:51:14Z"
     }
   ]
 }

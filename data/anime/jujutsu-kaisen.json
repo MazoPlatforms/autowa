@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": 1793601846,
+  "updated_at": 1793602278,
   "anime": {
     "slug_id": "jujutsu-kaisen",
     "title": "Jujutsu Kaisen",
@@ -712,6 +712,37 @@
             "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/318/797117.jpg"
           }
         }
+      },
+      {
+        "telegram_message_id": 943,
+        "episode": 22,
+        "season": 1,
+        "special_type": null,
+        "part": null,
+        "quality": "480P",
+        "file_size": 114832800,
+        "file_name": "@TamilMob_LinkZz_Jujutsu_Kaisen_S01_E22_Blu_Ray_480p_x264_Tamil.mkv",
+        "mime_type": "video/x-matroska",
+        "title": "The Origin of Blind Obedience",
+        "released": "2021-03-12",
+        "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/318/797118.jpg",
+        "slug_id": "mwqd2_dcjrYyYahC",
+        "qualities": {
+          "480P": {
+            "telegram_message_id": 943,
+            "episode": 22,
+            "season": 1,
+            "special_type": null,
+            "part": null,
+            "quality": "480P",
+            "file_size": 114832800,
+            "file_name": "@TamilMob_LinkZz_Jujutsu_Kaisen_S01_E22_Blu_Ray_480p_x264_Tamil.mkv",
+            "mime_type": "video/x-matroska",
+            "title": "The Origin of Blind Obedience",
+            "released": "2021-03-12",
+            "frame": "https://static.tvmaze.com/uploads/images/medium_landscape/318/797118.jpg"
+          }
+        }
       }
     ],
     "poster": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx113415-LHBAeoZDIsnF.jpg",
@@ -727,6 +758,6 @@
     "year": 2020,
     "studio": "Toho",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Jujutsu_Kaisen_(TV_series)",
-    "updated_at": "2026-11-02T06:44:01Z"
+    "updated_at": "2026-11-02T06:51:14Z"
   }
 }
