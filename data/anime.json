@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-02T01:50:11.847Z",
+  "updated_at": "2026-11-02T01:50:30.751Z",
   "anime": [
     {
       "slug_id": "naruto",
@@ -23809,6 +23809,30 @@
               "mime_type": "video/x-matroska"
             }
           }
+        },
+        {
+          "telegram_message_id": 913,
+          "episode": 3,
+          "season": 1,
+          "special_type": null,
+          "part": null,
+          "quality": "480p",
+          "file_size": 105432022,
+          "file_name": "@TamilMob_LinkZz -Jujutsu Kaisen S01 E03 Blu-Ray - 480p - x2.mkv",
+          "mime_type": "video/x-matroska",
+          "qualities": {
+            "480P": {
+              "telegram_message_id": 913,
+              "episode": 3,
+              "season": 1,
+              "special_type": null,
+              "part": null,
+              "quality": "480p",
+              "file_size": 105432022,
+              "file_name": "@TamilMob_LinkZz -Jujutsu Kaisen S01 E03 Blu-Ray - 480p - x2.mkv",
+              "mime_type": "video/x-matroska"
+            }
+          }
         }
       ],
       "poster": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx113415-LHBAeoZDIsnF.jpg",
@@ -23824,7 +23848,7 @@
       "year": 2020,
       "studio": "Toho",
       "wikipedia_url": "https://en.wikipedia.org/wiki/Jujutsu_Kaisen_(TV_series)",
-      "updated_at": "2026-11-02T01:50:11.847Z"
+      "updated_at": "2026-11-02T01:50:30.751Z"
     }
   ]
 }
