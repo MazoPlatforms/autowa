@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": 1793572692,
+  "updated_at": "2026-11-02T00:55:55.695Z",
   "anime": [
     {
       "slug_id": "naruto",
@@ -23692,13 +23692,51 @@
       "year": 2013,
       "studio": "WIT STUDIO",
       "season_banners": {
-        "OAD": "/banners/attack-on-titan-oad.webp",
         "1": "/banners/attack-on-titan-season-1.webp",
         "2": "/banners/attack-on-titan-season-2.webp",
         "3": "/banners/attack-on-titan-season-3.webp",
-        "4": "/banners/attack-on-titan-season-4.webp"
+        "4": "/banners/attack-on-titan-season-4.webp",
+        "OAD": "/banners/attack-on-titan-oad.webp"
       },
       "updated_at": "2026-11-01T22:38:09Z"
+    },
+    {
+      "slug_id": "mob-linkzz-jujutsu-kaisen",
+      "title": "@ Mob LinkZz -Jujutsu Kaisen",
+      "episodes": [
+        {
+          "telegram_message_id": 899,
+          "episode": 1,
+          "season": 1,
+          "special_type": null,
+          "part": null,
+          "quality": "480p",
+          "file_size": 108069408,
+          "file_name": "@TamilMob_LinkZz -Jujutsu Kaisen S01 E01 Blu-Ray - 480p - x2.mkv",
+          "mime_type": "video/x-matroska",
+          "qualities": {
+            "480P": {
+              "telegram_message_id": 899,
+              "episode": 1,
+              "season": 1,
+              "special_type": null,
+              "part": null,
+              "quality": "480p",
+              "file_size": 108069408,
+              "file_name": "@TamilMob_LinkZz -Jujutsu Kaisen S01 E01 Blu-Ray - 480p - x2.mkv",
+              "mime_type": "video/x-matroska"
+            }
+          }
+        }
+      ],
+      "poster": null,
+      "plot": "",
+      "genre": [],
+      "rating": null,
+      "status": null,
+      "episodes_total": null,
+      "studio": null,
+      "updated_at": "2026-11-02T00:55:55.695Z"
     }
   ]
 }
