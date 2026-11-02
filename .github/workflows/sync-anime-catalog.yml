@@ -100,6 +100,8 @@ jobs:
                   item['season_banners']={str(number): f'/banners/naruto-season-{number}.webp' for number in range(1, 12)}
               if item.get('slug_id') == 'attack-on-titan':
                   item['season_banners']={'OAD':'/banners/attack-on-titan-oad.webp', **{str(number): f'/banners/attack-on-titan-season-{number}.webp' for number in range(1, 5)}}
+              if item.get('slug_id') == 'jujutsu-kaisen':
+                  item['season_banners']={str(number): f'/banners/jujutsu-kaisen-season-{number}.webp' for number in range(1, 4)}
           json.dump(output, open('/tmp/updated-anime.json','w',encoding='utf-8'), ensure_ascii=False, indent=2)
           open('/tmp/updated-anime.json','a').write('\n')
           import os
