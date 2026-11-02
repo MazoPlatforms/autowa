@@ -62,6 +62,9 @@ def anime_filename_parts(raw):
     # Telegram release uploads may start with a channel/uploader tag such as
     # ``@TamilMob_LinkZz -``. It is metadata, not part of the anime title.
     value = re.sub(r'^@\s*[\w-]+(?:\s+[\w-]+){0,3}\s*[-–—:]\s*', '', value, flags=re.I)
+    # Some uploader tags omit the dash (``@TamilMob_LinkZz Jujutsu...``).
+    # Remove the leading handle while keeping the actual show title intact.
+    value = re.sub(r'^@\s*[\w-]+\s+', '', value, flags=re.I)
     # Language/release labels are not part of the anime title.
     value = re.sub(r'(?i)(?:tamil|telugu|malayalam|kannada|hindi|english|தமிழ்|tam|mal|hin|eng|jap)', ' ', value)
     value = re.sub(r'\s+', ' ', value).strip()
