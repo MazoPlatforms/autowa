@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": 1793640878,
+  "updated_at": 1793644672,
   "anime": [
     {
       "slug_id": "naruto",
@@ -33,7 +33,7 @@
         "10": "/banners/naruto-season-10.webp",
         "11": "/banners/naruto-season-11.webp"
       },
-      "updated_at": "2026-11-02T17:34:16Z"
+      "updated_at": "2026-11-02T18:37:33Z"
     },
     {
       "slug_id": "naruto-shippuden",
@@ -53,7 +53,7 @@
       "status": "Finished",
       "episodes_total": 500,
       "studio": "Studio Pierrot",
-      "updated_at": "2026-11-02T17:34:38Z"
+      "updated_at": "2026-11-02T18:37:52Z"
     },
     {
       "slug_id": "attack-on-titan",
@@ -79,7 +79,28 @@
         "3": "/banners/attack-on-titan-season-3.webp",
         "4": "/banners/attack-on-titan-season-4.webp"
       },
-      "updated_at": "2026-11-02T17:34:06Z"
+      "updated_at": "2026-11-02T18:37:24Z"
+    },
+    {
+      "slug_id": "dan-da-dan",
+      "title": "Dan Da Dan",
+      "poster": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx171018-60q1B6GK2Ghb.jpg",
+      "plot": "This is a story about Momo, a high school girl who comes from a family of spirit mediums, and her classmate Okarun, an occult fanatic. After Momo rescues Okarun from being bullied, they begin talking. However, an argument ensues between them since Momo believes in ghosts but denies aliens exist, and Okarun believes in aliens but denies ghosts exist.\n\nTo prove to each other what they believe in is real, Momo goes to an abandoned hospital where a UFO has been spotted and Okarun goes to a tunnel rumored to be haunted. To their surprise, they each encounter overwhelming paranormal activities that transcend comprehension. Amid these predicaments, Momo awakens her hidden power and Okarun gains the power of a curse to overcome these new dangers! Their fateful love begins as well!?\n\nThe story of the occult battle and adolescence starts!\n(Source: Crunchyroll) \n\nNotes: \n- Worldwide premiere of Epi",
+      "genre": [
+        "Action",
+        "Comedy",
+        "Drama",
+        "Romance",
+        "Sci-Fi",
+        "Supernatural"
+      ],
+      "rating": 8.3,
+      "status": "Finished",
+      "episodes_total": 12,
+      "year": 2024,
+      "studio": "Science SARU",
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Dan_Da_Dan%3A_First_Encounter",
+      "updated_at": "2026-11-02T18:37:10Z"
     },
     {
       "slug_id": "jujutsu-kaisen",
@@ -102,7 +123,7 @@
         "2": "/banners/jujutsu-kaisen-season-2.webp",
         "3": "/banners/jujutsu-kaisen-season-3.webp"
       },
-      "updated_at": "2026-11-02T17:34:01Z"
+      "updated_at": "2026-11-02T18:37:20Z"
     },
     {
       "slug_id": "solo-leveling",
@@ -124,26 +145,7 @@
         "1": "/banners/solo-leveling-season-1.webp",
         "2": "/banners/solo-leveling-season-2.webp"
       },
-      "updated_at": "2026-11-02T17:33:44Z"
-    },
-    {
-      "slug_id": "spy-x-family",
-      "title": "Spy x Family",
-      "poster": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx140960-Kb6R5nYQfjmP.jpg",
-      "plot": "Everyone has a part of themselves they cannot show to anyone else.\n\nAt a time when all nations of the world were involved in a fierce war of information happening behind closed doors, Ostania and Westalis had been in a state of cold war against one another for decades. The Westalis Intelligence Services' Eastern-Focused Division (WISE) sends their most talented spy, \"Twilight,\" on a top-secret mission to investigate the movements of Donovan Desmond, the chairman of Ostania's National Unity Party, who is threatening peace efforts between the two nations.\n\nThis mission is known as \"Operation Strix.\" It consists of \"putting together a family in one week in order to infiltrate social gatherings organized by the elite school that Desmond's son attends.\" \n\"Twilight\" takes on the identity of psychiatrist Loid Forger and starts looking for family members. But Anya, the daughter he adopts, turns ",
-      "genre": [
-        "Action",
-        "Comedy",
-        "Slice of Life",
-        "Supernatural"
-      ],
-      "rating": 8.3,
-      "status": "Finished",
-      "episodes_total": 12,
-      "year": 2022,
-      "studio": "CloverWorks",
-      "wikipedia_url": "https://en.wikipedia.org/wiki/Spy_%C3%97_Family",
-      "updated_at": "2026-11-02T17:33:52Z"
+      "updated_at": "2026-11-02T18:37:11Z"
     }
   ]
 }
