@@ -11,6 +11,10 @@ on:
         description: Inspect source files without copying
         required: true
         default: 'false'
+      review_only:
+        description: Review filenames, file captions, and image captions without copying
+        required: true
+        default: 'false'
 
 permissions:
   contents: read
@@ -33,4 +37,5 @@ jobs:
           TELEGRAM_ANIME_CHANNEL_ID: ${{ secrets.TELEGRAM_ANIME_CHANNEL_ID }}
           SOURCE_CHANNEL: ${{ inputs.source_channel }}
           DRY_RUN: ${{ inputs.dry_run == 'true' && '1' || '0' }}
+          REVIEW_ONLY: ${{ inputs.review_only == 'true' && '1' || '0' }}
         run: python scripts/copy_solo_leveling_anime.py

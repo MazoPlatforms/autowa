@@ -20,6 +20,7 @@ SOURCE = os.getenv("SOURCE_CHANNEL", "Solo_leveling_tamil_ongoing")
 TITLE = "Solo Leveling"
 SLUG = "solo-leveling"
 DRY_RUN = os.getenv("DRY_RUN", "0") == "1"
+REVIEW_ONLY = os.getenv("REVIEW_ONLY", "0") == "1"
 
 
 def quality_of(filename):
@@ -45,6 +46,20 @@ def caption_for(filename):
         f"Episode Slug ID: {parent}",
     ))
     return caption, (season, episode, part or 0, quality)
+
+
+def review_candidates(message, previous_messages):
+    """Return filename/caption candidates, including a standalone poster caption above a file."""
+    filename = str(message.file.name or "") if message.file else ""
+    candidates = [("filename", filename)] if filename else []
+    caption = str(getattr(message, "raw_text", "") or "").strip()
+    if caption:
+        candidates.append(("file-caption", caption))
+    for previous in reversed(previous_messages[-3:]):
+        if getattr(previous, "photo", None) and str(getattr(previous, "raw_text", "") or "").strip():
+            candidates.append(("image-caption-above", str(previous.raw_text).strip()))
+            break
+    return candidates
 
 
 def caption_identity(text):
@@ -77,15 +92,28 @@ async def main():
             if identity:
                 target_items.add(identity)
 
+        previous_messages = []
         async for message in client.iter_messages(source, reverse=True):
             # Video messages are deliberately excluded, even when their filename is MKV/MP4.
             if not message.file or message.video:
+                previous_messages.append(message)
                 continue
             filename = str(message.file.name or "")
             if not re.search(r"(?i)\.(mkv|mp4)$", filename):
+                previous_messages.append(message)
                 continue
-            parsed = caption_for(filename)
+            candidates = review_candidates(message, previous_messages)
+            parsed = next((caption_for(value) for _, value in candidates if caption_for(value)), None)
+            if REVIEW_ONLY:
+                label = " | ".join(f"{kind}={value.replace(chr(10), ' / ')[:180]}" for kind, value in candidates)
+                parsed_label = "unparsed"
+                if parsed:
+                    parsed_label = f"S{parsed[1][0]:02d}E{parsed[1][1]:02d} {parsed[1][3]}"
+                print(f"REVIEW source={message.id} {label} => {parsed_label}", flush=True)
+                previous_messages.append(message)
+                continue
             if not parsed:
+                previous_messages.append(message)
                 continue
             caption, identity = parsed
             source_items.setdefault(identity[0], set()).add(identity[1])
@@ -101,6 +129,7 @@ async def main():
             copied += 1
             print(f"COPIED source={message.id} S{identity[0]:02d}E{identity[1]:02d} {identity[3]}", flush=True)
             await asyncio.sleep(1.2)
+            previous_messages.append(message)
     finally:
         await client.disconnect()
 
