@@ -46,7 +46,8 @@ export function createLinkedWhatsApp({redis,secret,hmac,adapter,deliver,onFailed
     const creds=stored||adapter.initCreds();ctx.registered=Boolean(creds.registered);
     await write(id,'meta','number',number);await redis('SADD',prefix+'accounts',id);
     const persist=async()=>{guard();await write(id,'auth','creds',creds,owner);if(!creds.registered)await redis('EXPIRE',key(id,'auth'),600);};
-    const keys={get:async(type,ids)=>{guard();const out={};for(const item of ids){const value=await read(id,'auth',type+':'+item);if(value)out[item]=adapter.keyValue(type,value);}return out;},set:async(data)=>{guard();for(const [type,items] of Object.entries(data))for(const [item,value]of Object.entries(items)){guard();if(value)await write(id,'auth',type+':'+item,value,owner);else if(!await redis('EVAL',authDeleteScript,2,key(id,'lease'),key(id,'auth'),owner,type+':'+item))throw Error('Session ownership lost');}}};
+    const keyField=(type,item)=>'key:'+hmac(id+':'+type+':'+item);
+    const keys={get:async(type,ids)=>{guard();const out={};for(const item of ids){const value=await read(id,'auth',keyField(type,item));if(value)out[item]=adapter.keyValue(type,value);}return out;},set:async(data)=>{guard();for(const [type,items] of Object.entries(data))for(const [item,value]of Object.entries(items)){guard();if(value)await write(id,'auth',keyField(type,item),value,owner);else if(!await redis('EVAL',authDeleteScript,2,key(id,'lease'),key(id,'auth'),owner,keyField(type,item)))throw Error('Session ownership lost');}}};
     ctx.socket=adapter.create({creds,keys});
     ctx.socket.ev.on('creds.update',update=>{Object.assign(creds,update);void persist().catch(()=>stopContext(ctx));});
     ctx.socket.ev.on('connection.update',update=>void (async()=>{
