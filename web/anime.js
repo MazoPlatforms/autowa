@@ -295,7 +295,18 @@ function renderPagination(total){
   button.addEventListener('click',()=>{page=target;render();home.scrollIntoView({behavior:'smooth',block:'start'});});
   pagination.append(button);
  };
- add('‹',page-1,page===1);for(let n=1;n<=pages;n++)add(String(n),n,false,n===page);add('›',page+1,page===pages);
+ add('‹',page-1,page===1);
+ const compact=window.matchMedia('(max-width: 640px)').matches;
+ const visible=new Set([1,pages,page]);
+ if(pages<=5){for(let n=1;n<=pages;n++)visible.add(n);}
+ else if(compact){if(page<=3){visible.add(2);visible.add(3);}else if(page>=pages-2){visible.add(pages-1);visible.add(pages-2);}}
+ else {for(let n=Math.max(1,page-1);n<=Math.min(pages,page+1);n++)visible.add(n);}
+ let previous=0;
+ for(const n of [...visible].sort((a,b)=>a-b)){
+  if(previous&&n>previous+1){const gap=el('span','page-ellipsis','…');gap.setAttribute('aria-hidden','true');pagination.append(gap);}
+  add(String(n),n,false,n===page);previous=n;
+ }
+ add('›',page+1,page===pages);
 }
 function render(){
  if(!loaded)return;

@@ -380,6 +380,9 @@ body.fg-home .fg-filter-reset[hidden]{display:none!important}
 body.fg-home .tv-main .page-button{min-width:46px;height:46px;border:1px solid var(--fg-line);border-radius:999px;background:var(--fg-surface);font-size:14px;font-weight:600;color:var(--fg-text)}
 body.fg-home .tv-main .page-button:hover:not(:disabled){background:var(--fg-surface-2)}
 body.fg-home .tv-main .page-button.active{background:var(--fg-text);color:#000;border-color:var(--fg-text)}
+body.fg-home .catalog-pagination{flex-wrap:nowrap;gap:8px}
+body.fg-home .catalog-pagination .page-button{flex:none}
+@media(max-width:640px){body.fg-home .catalog-pagination{gap:6px}body.fg-home .tv-main .page-button{min-width:36px;height:36px;padding:0 8px;font-size:13px}body.fg-home .page-ellipsis{padding:0 2px;font-size:13px}}
 @media(max-width:640px){
   body.fg-home .catalog-filters{
     overflow:visible;
