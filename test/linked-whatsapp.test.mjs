@@ -38,7 +38,7 @@ function fixture(options={}){
  const db=options.db||fakeRedis(),sockets=[];const adapter={initCreds:()=>({registered:false,secret:'private-key'}),keyValue:(_t,v)=>v,loggedOut:e=>e?.loggedOut,qrDataUrl:async value=>'data:image/png;base64,'+Buffer.from(value).toString('base64'),
  create:auth=>{const socket={ev:new EventEmitter(),auth,user:{id:number.slice(1)+':1@s.whatsapp.net'},pairRequests:[],messages:[],requestPairingCode:async(phone,code)=>{socket.pairRequests.push([phone,code]);return code;},logout:async()=>{},end:()=>{},sendMessage:async(jid,data,options)=>{socket.messages.push({jid,data,options});return {key:{id:'sent'}};}};sockets.push(socket);return socket;}};
  const calls=[];const manager=createLinkedWhatsApp({redis:db.redis,secret,hmac,adapter,deliver:options.deliver||(async(socket,n,job,update)=>{calls.push({n,job});await update('uploading',50);}),onFailed:options.onFailed,now:options.now});
- return {db,manager,sockets,calls};
+ return {db,manager,sockets,calls,adapter};
 }
 const delay=()=>new Promise(r=>setTimeout(r,5));
 async function until(fn){for(let n=0;n<100;n++){if(await fn())return;await delay();}throw Error('Condition timed out');}
@@ -57,6 +57,9 @@ test('connection notification sends once and not on restart/repeated open',async
  const a=fixture();await connect(a);await until(()=>a.sockets[0].messages.length===1);a.sockets[0].ev.emit('connection.update',{connection:'open'});await delay();assert.equal(a.sockets[0].messages.length,1);assert.equal(a.sockets[0].messages[0].jid,CONNECTED_NOTICE_JID);assert.equal(CONNECTED_NOTICE_JID,'94771227821@s.whatsapp.net');await a.manager.stop();const b=fixture({db:a.db});try{await b.manager.start();b.sockets[0].ev.emit('connection.update',{connection:'open'});await delay();await delay();assert.equal(b.sockets[0].messages.length,0);}finally{await b.manager.stop();}
 });
 test('removed test endpoint returns 404',async()=>{assert.equal((await apiCase({route:'/api/whatsapp/test'})).response.status,404);});
+test('late QR/code generation cannot revert a connected session to pairing',async()=>{
+ for(const method of ['qr','code']){const f=fixture();let finish;const pending=new Promise(r=>finish=r);try{f.adapter.qrDataUrl=()=>pending;await f.manager.pair(number,method);f.sockets[0].requestPairingCode=()=>pending;f.sockets[0].ev.emit('connection.update',{qr:'private-qr'});f.sockets[0].ev.emit('connection.update',{connection:'open'});await until(async()=>(await f.manager.status(number)).state==='connected');finish(method==='code'?'FILMGOWA':'data:image/png;base64,abc');await delay();const state=await f.manager.status(number);assert.equal(state.state,'connected');assert.equal(state.qr_image,null);assert.equal(state.pairing_code,null);}finally{finish('');await f.manager.stop();}}
+});
 test('notification survives pairing restart before first open',async()=>{
  const a=fixture();await a.manager.pair(number);a.sockets[0].ev.emit('creds.update',{registered:true});await delay();await a.manager.stop();const b=fixture({db:a.db});try{await b.manager.start();b.sockets[0].ev.emit('connection.update',{connection:'open'});await until(()=>b.sockets[0].messages.length===1);assert.equal(b.sockets[0].messages[0].jid,CONNECTED_NOTICE_JID);}finally{await b.manager.stop();}
 });

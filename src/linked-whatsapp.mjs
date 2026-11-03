@@ -66,10 +66,10 @@ export function createLinkedWhatsApp({redis,secret,hmac,adapter,deliver,onFailed
     ctx.socket.ev.on('connection.update',update=>void (async()=>{
      if(ctx.closed)return;
      if(update.qr&&!creds.registered&&pair&&method==='qr'){
-      ctx.qr=await adapter.qrDataUrl(update.qr);if(ctx.closed)return;ctx.status='pairing';
+      const image=await adapter.qrDataUrl(update.qr);if(ctx.closed||creds.registered)return;ctx.qr=image;ctx.status='pairing';
      }
      if((update.qr||update.connection==='connecting')&&!creds.registered&&pair&&method==='code'&&!ctx.pairing){
-      ctx.pairing=true;ctx.code=await ctx.socket.requestPairingCode(number.slice(1),CUSTOM_PAIRING_CODE);if(ctx.closed)return;ctx.status='pairing';
+      ctx.pairing=true;const code=await ctx.socket.requestPairingCode(number.slice(1),CUSTOM_PAIRING_CODE);if(ctx.closed||creds.registered)return;ctx.code=code;ctx.status='pairing';
      }
      if(update.connection==='open'){
       const linked=String(ctx.socket.user?.id||'').split('@')[0].split(':')[0];
