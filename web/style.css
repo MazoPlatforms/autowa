@@ -289,6 +289,64 @@ input:not([type=checkbox]):not([type=hidden]):focus{border-color:var(--text);bac
 #profile-avatar.avatar-button #avatar-initials{position:relative;z-index:0;display:grid;place-items:center;width:calc(100% - 4px);height:calc(100% - 4px);border-radius:50%;background:#18181b}
 #profile-avatar.avatar-button .wa-avatar-image{inset:2px;width:calc(100% - 4px);height:calc(100% - 4px);border:2px solid #0a0a0b;box-sizing:border-box}
 
+/* Account shell: FilmGo liquid glass, with solid fallbacks for older browsers. */
+.account-shell{--bg:#09090b;--surface:#18181d;--surface-2:#25252b;--gutter:clamp(18px,4vw,48px);font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(ellipse at 5% 12%,#ff31580c,transparent 45%),radial-gradient(ellipse at 95% 50%,#6275ff0b,transparent 45%),#09090b}
+.account-shell .poster-wall{display:none}
+.account-shell .app-header{min-height:72px;padding:0 calc(max(0px,(100vw - 1680px)/2) + clamp(16px,4vw,64px));background:transparent;border:0;backdrop-filter:none;-webkit-backdrop-filter:none;box-shadow:none;isolation:isolate}
+.account-shell .app-header::before{content:"";position:absolute;inset:0 0 -18px;z-index:-1;pointer-events:none;background:linear-gradient(180deg,rgba(0,0,0,.72),rgba(0,0,0,0));backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);mask-image:linear-gradient(#000 55%,transparent);-webkit-mask-image:linear-gradient(#000 55%,transparent)}
+.account-shell .header-leading{gap:14px}
+.account-shell .brand-link{flex-basis:112px}
+.account-shell .brand-link img{width:112px;max-height:36px;filter:drop-shadow(0 4px 18px rgba(255,45,85,.25))}
+.account-shell #profile-back.back-button{width:36px;height:40px;flex-basis:36px;min-width:36px;border:0;border-radius:0;background:transparent;box-shadow:none;color:#f5f5f7}
+.account-shell #profile-back.back-button:hover{background:transparent;color:#ff718c}
+.account-shell #profile-back.back-button:not(.hidden)+.brand-link{padding-left:0}
+.account-shell #profile-back.back-button:not(.hidden)+.brand-link:before{display:none}
+.account-shell .catalog-nav-link{min-height:36px;padding:0 16px;font-size:12px;background:linear-gradient(130deg,#ffffff12,#ffffff05);border:1px solid #ffffff13;box-shadow:inset 0 1px 0 #ffffff0a}
+.account-shell .card{padding-top:clamp(28px,5vw,52px)}
+.account-shell #account{max-width:1000px;display:grid;grid-template-columns:1.3fr 1fr;gap:18px}
+.account-shell .page-kicker{grid-column:1/-1;margin:0 3px 2px;font-size:11px;letter-spacing:.18em;color:#b0a7ad}
+.account-shell .profile-hero,.account-shell .profile-panel{margin:0;border:1px solid #ffffff15;background:linear-gradient(135deg,#ffffff08,transparent 60%),rgba(27,27,33,.8);backdrop-filter:blur(22px) saturate(140%);-webkit-backdrop-filter:blur(22px) saturate(140%);box-shadow:inset 0 1px 0 #ffffff08,0 12px 40px #0002;border-radius:26px}
+.account-shell .profile-hero{grid-column:1/-1;flex-direction:row;text-align:left;align-items:center;gap:24px;padding:30px 32px;background:radial-gradient(ellipse at 0 0,#ff436514,transparent 70%),linear-gradient(125deg,#ffffff0a,#ffffff02),#141419}
+.account-shell .profile-hero>div:last-child{align-items:flex-start}
+.account-shell .profile-monogram{flex:none;width:80px;height:80px;margin:0;border:1px solid #ffffff26;background:linear-gradient(140deg,#ff4d6d33,#515b9433);box-shadow:inset 0 2px 4px #ffffff0a,0 8px 24px #0004}
+.account-shell .profile-name-row{justify-content:flex-start;gap:10px}
+.account-shell .profile-name-row h2{font-size:clamp(25px,4vw,34px);letter-spacing:-.04em}
+.account-shell #account-number{margin-top:7px;font-size:14px;color:#a7a7b1}
+.account-shell .member-pill{display:none}
+.account-shell #edit-display-name{background:#ffffff08;border:1px solid #ffffff12;width:30px;height:30px}
+.account-shell .profile-panel{padding:24px}
+.account-shell .panel-heading{margin-bottom:18px;align-items:center}
+.account-shell .panel-heading h3{font-size:17px;letter-spacing:-.025em}
+.account-shell .panel-heading>span{font-size:9px;letter-spacing:.12em;color:#888894}
+.account-shell .usage-stats{gap:8px}
+.account-shell .usage-tile{padding:16px 12px;background:#ffffff04;border:1px solid #ffffff0b;border-radius:16px}
+.account-shell .usage-tile strong{font-size:26px;font-weight:600}
+.account-shell .usage-tile span{font-size:11px;color:#9696a2}
+.account-shell #account-limits{font-size:12px;color:#92929f;line-height:1.65;margin:14px 0 0}
+.account-shell .secondary-button{border:1px solid #ffffff10;background:linear-gradient(130deg,#ffffff0a,#ffffff04);border-radius:17px;min-height:52px;padding:0 15px;font-size:14px;font-weight:500;box-shadow:inset 0 1px 0 #ffffff05}
+.account-shell .secondary-button:hover{background:#ffffff10}
+.account-shell .profile-panel #open-plans,.account-shell .profile-panel #open-history{min-height:52px}
+.account-shell #open-history{margin-top:16px}
+.recent-activity{display:grid;gap:0;min-width:0}
+.activity-request{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 0;border-bottom:1px solid #ffffff0b;min-width:0}
+.activity-request:first-child{padding-top:0}
+.activity-request>div{min-width:0}
+.activity-request strong{display:block;font-size:14px;font-weight:600;overflow-wrap:anywhere}
+.activity-request p{margin-top:5px;font-size:12px;color:#92929f}
+.activity-request-status{flex:none;font-size:10px;color:#bbb6c2;background:#ffffff06;border:1px solid #ffffff0c;border-radius:999px;padding:5px 8px}
+.activity-empty{padding:23px 15px;border:1px dashed #ffffff17;border-radius:16px;background:#ffffff03;text-align:center}
+.activity-empty strong{font-size:14px;font-weight:500;color:#c9c9d2}
+.activity-empty p{margin-top:8px;font-size:13px;color:#92929f}
+.account-shell .profile-logout{grid-column:1/-1;width:auto;justify-self:start;color:#ff7b91;border:1.5px solid #ff4265;border-radius:16px;corner-shape:squircle;background:rgba(255,66,101,.06);padding-inline:20px;min-height:44px;margin-top:2px;font-size:13px}
+.account-shell .profile-logout:hover{color:#ff9bad;border-color:#ff6a86;background:rgba(255,66,101,.12)}
+.account-shell #profile-name-editor{margin-top:18px}
+.account-shell footer{color:#62626e;padding-top:38px}
+.account-shell :focus-visible{outline:2px solid #ff6685;outline-offset:4px}
+@media(max-width:700px){.account-shell #account{grid-template-columns:1fr;gap:14px}.account-shell .profile-hero{padding:24px 20px;gap:17px}.account-shell .profile-monogram{width:64px;height:64px;font-size:23px}.account-shell .profile-name-row h2{font-size:25px}.account-shell .profile-panel{padding:21px 18px}.account-shell .profile-hero,.account-shell .profile-panel{border-radius:23px}.account-shell #account-number{font-size:13px}.account-shell .usage-tile{padding:14px 10px}.account-shell .usage-tile strong{font-size:25px}.account-shell .profile-logout{justify-self:stretch}.account-shell .app-header{min-height:58px;padding-block:7px}.account-shell .card{padding-top:26px}}
+@media(max-width:700px){.account-shell .app-header{min-height:64px;padding-block:0}.account-shell .header-leading{gap:10px}.account-shell .brand-link,.account-shell .brand-link img{width:98px;flex-basis:98px}}
+@media(max-width:390px){.account-shell .brand-link,.account-shell .brand-link img{width:90px;flex-basis:90px}}
+@media(prefers-reduced-transparency:reduce){.account-shell .app-header,.account-shell .profile-hero,.account-shell .profile-panel{backdrop-filter:none;-webkit-backdrop-filter:none;background:#18181e}.account-shell .app-header::before{display:none}}
+
 /* Aether icons: sheet close mark replaces the text glyph */
 .auth-sheet-close{font-size:0!important}
 .auth-sheet-close::before{content:"";display:block;width:20px;height:20px;background:currentColor;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='M6.5 6.5l4.3 4.3M13.2 13.2l4.3 4.3M17.5 6.5l-4.3 4.3M10.8 13.2l-4.3 4.3'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='M6.5 6.5l4.3 4.3M13.2 13.2l4.3 4.3M17.5 6.5l-4.3 4.3M10.8 13.2l-4.3 4.3'/%3E%3C/svg%3E") center/contain no-repeat}

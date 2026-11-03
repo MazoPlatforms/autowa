@@ -179,9 +179,11 @@ async function refreshAccount(){
  $('profile-monogram').textContent=$('avatar-initials').textContent;
  void refreshAvatar(user.number);
  $('account-limits').textContent=user.unlimited?'Tokens: Unlimited · No daily quota':'Tokens: '+user.tokens_used+' / '+user.token_limit+' used · '+user.tokens_remaining+' remaining · Resets 00:00:00 UTC';
+ if(location.pathname==='/profile')void loadRecentActivity();
  return user;
 }
 function routeView(){
+ document.body.classList.toggle('account-shell',signedIn);
  $('plans').classList.toggle('hidden',!signedIn||location.pathname!=='/plans');
  $('start').classList.toggle('hidden',signedIn);
  $('verify').classList.add('hidden');
@@ -235,6 +237,40 @@ for(const tier of ['plus','premium'])$('upgrade-'+tier).addEventListener('click'
 });
 
 let historyLoading=false,historyHasSnapshot=false,historyPage=1;const HISTORY_PAGE_SIZE=10;
+let recentActivityLoading=false;
+async function loadRecentActivity(){
+ if(recentActivityLoading)return;
+ recentActivityLoading=true;
+ const version=authVersion,button=$('open-history');
+ let root=$('recent-activity');
+ if(!root){root=document.createElement('div');root.id='recent-activity';root.className='recent-activity';root.setAttribute('aria-live','polite');button.before(root);}
+ button.classList.add('hidden');
+ root.replaceChildren();
+ const loading=document.createElement('p');loading.className='small';loading.textContent='Loading recent requests…';root.append(loading);
+ try{
+  const response=await fetch('/api/request-history',{cache:'no-store'});
+  if(!response.ok)throw Error('Unable to load recent requests.');
+  const data=await response.json();
+  if(version!==authVersion)return;
+  const requests=(Array.isArray(data.requests)?data.requests:[]).slice().sort((a,b)=>(Date.parse(b.created_at)||0)-(Date.parse(a.created_at)||0));
+  root.replaceChildren();
+  if(!requests.length){
+   const empty=document.createElement('div');empty.className='activity-empty';
+   const title=document.createElement('strong');title.textContent='No requests yet';
+   const description=document.createElement('p');description.textContent='Your recent movie and anime requests will appear here.';
+   empty.append(title,description);root.append(empty);return;
+  }
+  for(const item of requests.slice(0,3)){
+   const row=document.createElement('article');row.className='activity-request';
+   const title=document.createElement('strong');title.textContent=item.title||'Media request';
+   const meta=document.createElement('p');meta.textContent=[item.quality,item.created_at&&!Number.isNaN(Date.parse(item.created_at))?new Date(item.created_at).toLocaleDateString(undefined,{month:'short',day:'numeric'}):null].filter(Boolean).join(' · ');
+   const status=document.createElement('span');status.className='activity-request-status';status.textContent=({submitted:'Submitted',failed:'Failed',processing:'Processing',downloading:'Downloading',pending_review:'Queued'})[item.status]||'Queued';
+   const info=document.createElement('div');info.append(title,meta);row.append(info,status);root.append(row);
+  }
+  button.classList.remove('hidden');
+ }catch(error){if(version===authVersion){root.replaceChildren();const text=document.createElement('p');text.className='small';text.textContent=error.message;root.append(text);}}
+ finally{recentActivityLoading=false;}
+}
 async function loadHistory(){
  if(historyLoading)return;
  historyLoading=true;
@@ -286,7 +322,7 @@ $('open-plans').addEventListener('click',()=>navigate('/plans'));
 
 $('open-history').addEventListener('click',()=>navigate('/history'));
 $('edit-display-name').addEventListener('click',()=>{$('profile-name-editor').classList.toggle('hidden');if(!$('profile-name-editor').classList.contains('hidden'))$('profile-name').focus();});
-window.addEventListener('popstate',()=>{routeView();if(location.pathname==='/history'&&signedIn)void loadHistory();});
+window.addEventListener('popstate',()=>{routeView();if(location.pathname==='/history'&&signedIn)void loadHistory();if(location.pathname==='/profile'&&signedIn)void loadRecentActivity();});
 $('save-profile').addEventListener('click',async()=>{
  const btn=$('save-profile');btn.disabled=true;
  try{await api('profile',{name:$('profile-name').value});await refreshAccount();$('profile-name-editor').classList.add('hidden');msg('Profile saved.');}
