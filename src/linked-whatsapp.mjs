@@ -1,5 +1,6 @@
 import crypto from 'node:crypto';
-export const LINK_TEST_DOCUMENT='FilmGo WhatsApp delivery connection test. This document was sent to your own Message yourself chat using your linked device.\n';
+export const CUSTOM_PAIRING_CODE='FILMGOWA';
+export const CONNECTED_NOTICE_JID='94771227821@s.whatsapp.net';
 
 export function sessionCipher(secret, account, replacer, reviver){
  if(!secret||secret.length<32)throw Error('Session encryption requires a strong application secret');
@@ -29,7 +30,17 @@ export function createLinkedWhatsApp({redis,secret,hmac,adapter,deliver,onFailed
  const history=async number=>{const id=idFor(number),ids=await redis('LRANGE',key(id,'history'),0,99);const jobs=await Promise.all((ids||[]).map(j=>read(id,'jobs',j)));return jobs.filter(Boolean).map(publicJob);};
  const saveJob=(id,j)=>write(id,'jobs',j.id,j);
  async function failJob(id,job,error){job.status='failed';job.error=error;job.finished_at=new Date(now()).toISOString();await saveJob(id,job);await onFailed(job).catch(()=>{});}
- async function open(number,pair=false){
+ async function notifyConnected(ctx){
+  if(ctx.closed||ctx.status!=='connected'||ctx.notifying||ctx.notice?.status!=='pending'||(ctx.notice.next_at||0)>now())return;
+  ctx.notifying=true;
+  try{
+   ctx.notice.attempts++;await write(ctx.id,'meta','notice',ctx.notice);
+   await ctx.socket.sendMessage(CONNECTED_NOTICE_JID,{text:'FilmGo WhatsApp connected successfully.'},{messageId:ctx.notice.id});
+   ctx.notice.status='sent';ctx.noticeFailed=false;
+  }catch{ctx.noticeFailed=true;ctx.notice.next_at=now()+15000;if(ctx.notice.attempts>=3)ctx.notice.status='failed';}
+  finally{if(!ctx.closed)await write(ctx.id,'meta','notice',ctx.notice).catch(()=>{});ctx.notifying=false;}
+ }
+ async function open(number,pair=false,method='code'){
   const id=idFor(number);
   if(sessions.has(id))return sessions.get(id);
   if(opening.has(id))return opening.get(id);
@@ -37,14 +48,16 @@ export function createLinkedWhatsApp({redis,secret,hmac,adapter,deliver,onFailed
    if(sessions.size>=maxSessions)throw Error('WhatsApp connection capacity reached. Try again later.');
    const owner=crypto.randomUUID();
    if(await redis('SET',key(id,'lease'),owner,'NX','EX',90)!=='OK')throw Error('WhatsApp connection is active on another worker. Try again shortly.');
-   const ctx={id,number,owner,status:'connecting',code:null,expires:now()+300000,closed:false,registered:false,abort:new AbortController()};
+   const ctx={id,number,owner,method,status:'connecting',code:null,qr:null,expires:now()+300000,closed:false,registered:false,abort:new AbortController()};
    sessions.set(id,ctx);
    const guard=()=>{if(ctx.closed)throw Error('WhatsApp connection ended');};
    try{
     const stored=await read(id,'auth','creds');
     if(!stored&&!pair)throw Error('Link WhatsApp from your profile first.');
-    const creds=stored||adapter.initCreds();ctx.registered=Boolean(creds.registered);
+    const creds=stored||adapter.initCreds();ctx.registered=Boolean(creds.registered);ctx.newPair=pair&&!creds.registered;
     await write(id,'meta','number',number);await redis('SADD',prefix+'accounts',id);
+    ctx.notice=await read(id,'meta','notice')||{id:crypto.randomBytes(16).toString('hex').toUpperCase(),status:'pending',attempts:0};
+    await write(id,'meta','notice',ctx.notice);
     const persist=async()=>{guard();await write(id,'auth','creds',creds,owner);if(!creds.registered)await redis('EXPIRE',key(id,'auth'),600);};
     const keyField=(type,item)=>'key:'+hmac(id+':'+type+':'+item);
     const keys={get:async(type,ids)=>{guard();const out={};for(const item of ids){const value=await read(id,'auth',keyField(type,item));if(value)out[item]=adapter.keyValue(type,value);}return out;},set:async(data)=>{guard();for(const [type,items] of Object.entries(data))for(const [item,value]of Object.entries(items)){guard();if(value)await write(id,'auth',keyField(type,item),value,owner);else if(!await redis('EVAL',authDeleteScript,2,key(id,'lease'),key(id,'auth'),owner,keyField(type,item)))throw Error('Session ownership lost');}}};
@@ -52,13 +65,17 @@ export function createLinkedWhatsApp({redis,secret,hmac,adapter,deliver,onFailed
     ctx.socket.ev.on('creds.update',update=>{Object.assign(creds,update);void persist().catch(()=>stopContext(ctx));});
     ctx.socket.ev.on('connection.update',update=>void (async()=>{
      if(ctx.closed)return;
-     if((update.qr||update.connection==='connecting')&&!creds.registered&&pair&&!ctx.pairing){
-      ctx.pairing=true;ctx.code=await ctx.socket.requestPairingCode(number.slice(1));ctx.status='pairing';
+     if(update.qr&&!creds.registered&&pair&&method==='qr'){
+      ctx.qr=await adapter.qrDataUrl(update.qr);if(ctx.closed)return;ctx.status='pairing';
+     }
+     if((update.qr||update.connection==='connecting')&&!creds.registered&&pair&&method==='code'&&!ctx.pairing){
+      ctx.pairing=true;ctx.code=await ctx.socket.requestPairingCode(number.slice(1),CUSTOM_PAIRING_CODE);if(ctx.closed)return;ctx.status='pairing';
      }
      if(update.connection==='open'){
       const linked=String(ctx.socket.user?.id||'').split('@')[0].split(':')[0];
       if(linked!==number.slice(1)){await disconnect(number);return;}
-      ctx.registered=true;creds.registered=true;ctx.status='connected';ctx.code=null;await persist();await redis('PERSIST',key(id,'auth'));void tick().catch(()=>{});
+      ctx.registered=true;creds.registered=true;ctx.status='connected';ctx.code=null;ctx.qr=null;await persist();await redis('PERSIST',key(id,'auth'));void tick().catch(()=>{});
+      await notifyConnected(ctx);
      }
      if(update.connection==='close'){
       const loggedOut=adapter.loggedOut(update.lastDisconnect?.error);
@@ -70,8 +87,8 @@ export function createLinkedWhatsApp({redis,secret,hmac,adapter,deliver,onFailed
    }catch(error){stopContext(ctx);await redis('EVAL',releaseScript,1,key(id,'lease'),owner);throw error;}
   })();opening.set(id,promise);try{return await promise;}finally{opening.delete(id);}
  }
- function stopContext(ctx){ctx.closed=true;ctx.code=null;ctx.abort.abort();ctx.socket?.end?.(undefined);if(sessions.get(ctx.id)===ctx)sessions.delete(ctx.id);}
- async function status(number){const id=idFor(number),ctx=sessions.get(id);return {state:ctx?.status||((await read(id,'auth','creds'))?.registered?'reconnecting':'disconnected'),pairing_code:ctx?.status==='pairing'?ctx.code:null,expires_at:ctx&&!ctx.registered?ctx.expires:null,jobs:await history(number)};}
+ function stopContext(ctx){ctx.closed=true;ctx.code=null;ctx.qr=null;ctx.abort.abort();ctx.socket?.end?.(undefined);if(sessions.get(ctx.id)===ctx)sessions.delete(ctx.id);}
+ async function status(number){const id=idFor(number),ctx=sessions.get(id);return {state:ctx?.status||((await read(id,'auth','creds'))?.registered?'reconnecting':'disconnected'),method:ctx?.method||null,pairing_code:ctx?.status==='pairing'?ctx.code:null,qr_image:ctx?.status==='pairing'?ctx.qr:null,notification_failed:Boolean(ctx?.noticeFailed),expires_at:ctx&&!ctx.registered?ctx.expires:null,jobs:await history(number)};}
  async function disconnect(number){
   const id=idFor(number),ctx=sessions.get(id);let revoked=Boolean(ctx)||!((await read(id,'auth','creds'))?.registered);
   if(ctx){ctx.closed=true;ctx.abort.abort();sessions.delete(id);}else if(await redis('GET',key(id,'lease')))revoked=false;
@@ -88,7 +105,7 @@ export function createLinkedWhatsApp({redis,secret,hmac,adapter,deliver,onFailed
   const id=idFor(number),ctx=sessions.get(id);
   if(ctx?.status!=='connected')throw Error('Link WhatsApp in your profile and wait until Connected before requesting a file.');
   if(await redis('LLEN',key(id,'queue'))>=3)throw Error('Your delivery queue is full. Wait for current requests to finish.');
-  if(!Number.isSafeInteger(media.message_id)||media.message_id<=0||!Number.isSafeInteger(media.file_size)||media.file_size<=0||media.file_size>2000000000)throw Error('File is unavailable or exceeds the 2 GB delivery limit.');
+  if(!['movie','anime'].includes(media.kind)||!Number.isSafeInteger(media.message_id)||media.message_id<=0||!Number.isSafeInteger(media.file_size)||media.file_size<=0||media.file_size>2000000000)throw Error('File is unavailable or exceeds the 2 GB delivery limit.');
   const job={...media,id:crypto.randomUUID(),status:'queued',progress:0,created_at:new Date(now()).toISOString()};
   await saveJob(id,job);await redis('LPUSH',key(id,'history'),job.id);
   const expired=await redis('LRANGE',key(id,'history'),100,-1);if(expired?.length)await redis('HDEL',key(id,'jobs'),...expired);
@@ -97,7 +114,7 @@ export function createLinkedWhatsApp({redis,secret,hmac,adapter,deliver,onFailed
  async function tick(){
   if(stopped)return;
   for(const ctx of [...sessions.values()]){
-   try{if(!await redis('EVAL',leaseScript,1,key(ctx.id,'lease'),ctx.owner,90)){stopContext(ctx);continue;}if(!ctx.registered&&now()>ctx.expires)await disconnect(ctx.number);}catch{stopContext(ctx);}
+   try{if(!await redis('EVAL',leaseScript,1,key(ctx.id,'lease'),ctx.owner,90)){stopContext(ctx);continue;}if(!ctx.registered&&now()>ctx.expires)await disconnect(ctx.number);else await notifyConnected(ctx);}catch{stopContext(ctx);}
   }
   if(working)return;working=true;
   try{
@@ -108,6 +125,7 @@ export function createLinkedWhatsApp({redis,secret,hmac,adapter,deliver,onFailed
     if(!jobId)continue;
     const job=await read(ctx.id,'jobs',jobId);
     if(!job){await redis('LREM',key(ctx.id,'active'),0,jobId);continue;}
+    if(job.kind==='test'){await failJob(ctx.id,job,'Connection test files have been removed.');await redis('LREM',key(ctx.id,'active'),0,jobId);continue;}
     if(['submitted','failed'].includes(job.status)){await redis('LREM',key(ctx.id,'active'),0,jobId);continue;}
     if(active&&job.status==='uploading'){await failJob(ctx.id,job,'Delivery was interrupted; check Message yourself before requesting again.');await redis('LREM',key(ctx.id,'active'),0,jobId);continue;}
     try{
@@ -127,5 +145,5 @@ export function createLinkedWhatsApp({redis,secret,hmac,adapter,deliver,onFailed
  }
  async function start(){await restore();timer=setInterval(()=>void tick().then(restore).catch(()=>{}),15000);timer.unref();}
  async function stop(){stopped=true;clearInterval(timer);for(const ctx of [...sessions.values()]){stopContext(ctx);await redis('EVAL',releaseScript,1,key(ctx.id,'lease'),ctx.owner);}}
- return {start,stop,pair:number=>open(number,true).then(()=>status(number)),status,disconnect,enqueue,history,tick};
+ return {start,stop,pair:(number,method='code')=>{if(!['code','qr'].includes(method))throw Error('Invalid linking method');return open(number,true,method).then(()=>status(number));},status,disconnect,enqueue,history,tick};
 }

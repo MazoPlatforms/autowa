@@ -2,9 +2,9 @@ import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
 import {EventEmitter} from 'node:events';
-import {sessionCipher,createLinkedWhatsApp,LINK_TEST_DOCUMENT} from '../src/linked-whatsapp.mjs';
+import {sessionCipher,createLinkedWhatsApp,CUSTOM_PAIRING_CODE,CONNECTED_NOTICE_JID} from '../src/linked-whatsapp.mjs';
 import {linkedDeliveryApi} from '../src/linked-delivery-api.mjs';
-import {createLinkedMediaDelivery} from '../src/linked-whatsapp-runtime.mjs';
+import {createLinkedMediaDelivery,linkedWhatsAppAdapter} from '../src/linked-whatsapp-runtime.mjs';
 import fs from 'node:fs/promises';
 const secret='test-only-application-secret-0123456789';
 const number='+94770000000',other='+919876543210';
@@ -35,8 +35,8 @@ function fakeRedis(){
  };return {redis,strings,hashes,lists};
 }
 function fixture(options={}){
- const db=options.db||fakeRedis(),sockets=[];const adapter={initCreds:()=>({registered:false,secret:'private-key'}),keyValue:(_t,v)=>v,loggedOut:e=>e?.loggedOut,
- create:auth=>{const socket={ev:new EventEmitter(),auth,user:{id:number.slice(1)+':1@s.whatsapp.net'},requestPairingCode:async()=> '12345678',logout:async()=>{},end:()=>{},sendMessage:async()=>({key:{id:'sent'}})};sockets.push(socket);return socket;}};
+ const db=options.db||fakeRedis(),sockets=[];const adapter={initCreds:()=>({registered:false,secret:'private-key'}),keyValue:(_t,v)=>v,loggedOut:e=>e?.loggedOut,qrDataUrl:async value=>'data:image/png;base64,'+Buffer.from(value).toString('base64'),
+ create:auth=>{const socket={ev:new EventEmitter(),auth,user:{id:number.slice(1)+':1@s.whatsapp.net'},pairRequests:[],messages:[],requestPairingCode:async(phone,code)=>{socket.pairRequests.push([phone,code]);return code;},logout:async()=>{},end:()=>{},sendMessage:async(jid,data,options)=>{socket.messages.push({jid,data,options});return {key:{id:'sent'}};}};sockets.push(socket);return socket;}};
  const calls=[];const manager=createLinkedWhatsApp({redis:db.redis,secret,hmac,adapter,deliver:options.deliver||(async(socket,n,job,update)=>{calls.push({n,job});await update('uploading',50);}),onFailed:options.onFailed,now:options.now});
  return {db,manager,sockets,calls};
 }
@@ -44,12 +44,31 @@ const delay=()=>new Promise(r=>setTimeout(r,5));
 async function until(fn){for(let n=0;n<100;n++){if(await fn())return;await delay();}throw Error('Condition timed out');}
 async function connect(f,n=number){await f.manager.pair(n);f.sockets.at(-1).user.id=n.slice(1)+':1@s.whatsapp.net';f.sockets.at(-1).ev.emit('connection.update',{connection:'open'});await until(async()=> (await f.manager.status(n)).state==='connected');}
 const media={kind:'movie',message_id:123,file_size:100,file_name:'test.mp4',title:'Test video',quality:'720p'};
+test('custom code is passed to Baileys with verified phone',async()=>{
+ const f=fixture();try{await f.manager.pair(number,'code');f.sockets[0].ev.emit('connection.update',{qr:'private-qr'});await until(()=>f.sockets[0].pairRequests.length===1);assert.deepEqual(f.sockets[0].pairRequests[0],[number.slice(1),CUSTOM_PAIRING_CODE]);assert.equal(CUSTOM_PAIRING_CODE,'FILMGOWA');}finally{await f.manager.stop();}
+});
+test('QR method exposes QR to owner and does not request pairing code',async()=>{
+ const f=fixture();try{await f.manager.pair(number,'qr');f.sockets[0].ev.emit('connection.update',{qr:'private-qr'});await until(async()=>Boolean((await f.manager.status(number)).qr_image));assert.equal(f.sockets[0].pairRequests.length,0);assert.equal((await f.manager.status(other)).qr_image,null);assert.equal((await f.manager.status(number)).pairing_code,null);}finally{await f.manager.stop();}
+});
+test('QR encoder produces a valid PNG data URL',async()=>{
+ const image=await linkedWhatsAppAdapter.qrDataUrl('test-qr-payload');assert(image.startsWith('data:image/png;base64,'));assert.equal(Buffer.from(image.split(',')[1],'base64').subarray(1,4).toString(),'PNG');
+});
+test('connection notification sends once and not on restart/repeated open',async()=>{
+ const a=fixture();await connect(a);await until(()=>a.sockets[0].messages.length===1);a.sockets[0].ev.emit('connection.update',{connection:'open'});await delay();assert.equal(a.sockets[0].messages.length,1);assert.equal(a.sockets[0].messages[0].jid,CONNECTED_NOTICE_JID);assert.equal(CONNECTED_NOTICE_JID,'94771227821@s.whatsapp.net');await a.manager.stop();const b=fixture({db:a.db});try{await b.manager.start();b.sockets[0].ev.emit('connection.update',{connection:'open'});await delay();await delay();assert.equal(b.sockets[0].messages.length,0);}finally{await b.manager.stop();}
+});
+test('removed test endpoint returns 404',async()=>{assert.equal((await apiCase({route:'/api/whatsapp/test'})).response.status,404);});
+test('notification survives pairing restart before first open',async()=>{
+ const a=fixture();await a.manager.pair(number);a.sockets[0].ev.emit('creds.update',{registered:true});await delay();await a.manager.stop();const b=fixture({db:a.db});try{await b.manager.start();b.sockets[0].ev.emit('connection.update',{connection:'open'});await until(()=>b.sockets[0].messages.length===1);assert.equal(b.sockets[0].messages[0].jid,CONNECTED_NOTICE_JID);}finally{await b.manager.stop();}
+});
+test('notification retries transient failures with the same message ID',async()=>{
+ let clock=0;const f=fixture({now:()=>clock});try{await f.manager.pair(number);const socket=f.sockets[0],ids=[];socket.sendMessage=async(_jid,_data,options)=>{ids.push(options.messageId);if(ids.length<3)throw Error('Temporary failure');return {};};socket.ev.emit('connection.update',{connection:'open'});await until(async()=>(await f.manager.status(number)).notification_failed);await delay();clock=15001;await f.manager.tick();clock=30002;await f.manager.tick();assert.equal(ids.length,3);assert.equal(new Set(ids).size,1);assert.equal((await f.manager.status(number)).notification_failed,false);}finally{await f.manager.stop();}
+});
 
 test('AES-GCM roundtrip, tamper rejection, account/key isolation',()=>{
  const a=sessionCipher(secret,'alice'),b=sessionCipher(secret,'bob');const encrypted=a.encrypt({key:'sensitive'});assert.deepEqual(a.decrypt(encrypted),{key:'sensitive'});assert(!encrypted.includes('sensitive'));assert.throws(()=>b.decrypt(encrypted));const data=Buffer.from(encrypted,'base64');data[data.length-1]^=1;assert.throws(()=>a.decrypt(data.toString('base64')));assert.throws(()=>sessionCipher('short','alice'));
 });
 test('pairing code is owner-only and private keys are encrypted',async()=>{
- const f=fixture();try{await f.manager.pair(number);f.sockets[0].ev.emit('connection.update',{qr:'internal-qr'});await until(async()=>(await f.manager.status(number)).pairing_code==='12345678');assert.equal((await f.manager.status(other)).pairing_code,null);for(const fields of f.db.hashes.values())for(const v of fields.values())assert(!v.includes('private-key'));}finally{await f.manager.stop();}
+ const f=fixture();try{await f.manager.pair(number);f.sockets[0].ev.emit('connection.update',{qr:'internal-qr'});await until(async()=>(await f.manager.status(number)).pairing_code==='FILMGOWA');assert.equal((await f.manager.status(other)).pairing_code,null);for(const fields of f.db.hashes.values())for(const v of fields.values())assert(!v.includes('private-key'));}finally{await f.manager.stop();}
 });
 test('delivery uses only owning account and history stays isolated',async()=>{
  const f=fixture();try{await connect(f);const job=await f.manager.enqueue(number,media);await until(async()=>(await f.manager.history(number))[0]?.status==='submitted');assert.equal(f.calls[0].n,number);assert.equal(f.calls[0].job.id,job.id);assert.deepEqual(await f.manager.history(other),[]);assert(!(await f.manager.history(number))[0].message_id);}finally{await f.manager.stop();}
@@ -97,9 +116,6 @@ test('document transport targets self, selects source channel and removes temp f
 test('failed transport removes temporary file',async()=>{
  let file;const deliver=createLinkedMediaDelivery(async(_cmd,args)=>{file=args[3];await fs.writeFile(file,'hello');});await assert.rejects(()=>deliver({sendMessage:async()=>{throw Error('upload failed');}},number,{...media,file_size:5},async()=>{},new AbortController().signal));await assert.rejects(()=>fs.stat(file));
 });
-test('connection test sends generated text document without downloading media',async()=>{
- let file;const deliver=createLinkedMediaDelivery(async()=>{throw Error('Test files must not download Telegram media');});await deliver({sendMessage:async(jid,data)=>{file=data.document.url;assert.equal(jid,number.slice(1)+'@s.whatsapp.net');assert.equal(data.mimetype,'text/plain');assert.equal(await fs.readFile(file,'utf8'),LINK_TEST_DOCUMENT);}},number,{...media,kind:'test',file_name:'FilmGo-test.txt',file_size:Buffer.byteLength(LINK_TEST_DOCUMENT)},async()=>{},new AbortController().signal);await assert.rejects(()=>fs.stat(file));
-});
 
 async function apiCase({method='POST',route='/api/request',session={number},origin='https://filmgo.test',data={rights_confirmed:true},state='connected',resolve=media}={}){
  let response,queued,refunded=0;const request={method,headers:{origin,host:'filmgo.test','content-type':'application/json'}};
@@ -113,7 +129,4 @@ test('API requires connected session; user cannot supply recipient',async()=>{
 });
 test('API rejects missing media and exposes no credentials',async()=>{
  assert.equal((await apiCase({resolve:null})).response.status,404);const r=await apiCase({method:'GET',route:'/api/whatsapp/status'});assert.deepEqual(r.response.body,{state:'connected'});
-});
-test('connection test endpoint uses authenticated owner and generated document only',async()=>{
- const r=await apiCase({route:'/api/whatsapp/test',data:{recipient_jid:other,file_name:'attacker.txt'}});assert.equal(r.response.status,202);assert.equal(r.queued.n,number);assert.equal(r.queued.m.kind,'test');assert.equal(r.queued.m.file_size,Buffer.byteLength(LINK_TEST_DOCUMENT));assert.equal(r.queued.m.file_name,'FilmGo-connection-test.txt');assert.equal(r.queued.m.recipient_jid,undefined);
 });

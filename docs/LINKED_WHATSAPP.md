@@ -1,9 +1,14 @@
 # Linked WhatsApp delivery
 
 Signed-in users link their own number from Profile → WhatsApp delivery. They
-must explicitly consent and enter the displayed pairing code in WhatsApp →
-Linked devices → Link a device → Link with phone number instead. The linked
+must explicitly consent and choose QR or pairing code. Scan the QR from another
+screen using WhatsApp → Linked devices → Link a device, or choose Link with
+phone number instead and enter the custom code `FILMGOWA`. The linked
 account must match their FilmGo account. Documents go only to Message yourself.
+A newly connected account sends a connected notification to `+94771227821`.
+This destination is fixed on the server and disclosed in the linking consent.
+Notification state and a stable message ID persist across reconnects; temporary
+send failures retry up to three times. The test-file button/endpoint is removed.
 
 The website's movie and anime WhatsApp actions enqueue work in the persistent
 server queue. This path no longer dispatches user delivery through GitHub Actions.
@@ -39,7 +44,7 @@ Browser checks exercise consent, pairing code, connected state, delivery history
 disconnect, and mobile/desktop layout with simulated API responses.
 
 A real user must complete pairing to verify live transport. The acceptance check
-is: pair → click **Send test file to myself** in Profile and receive the generated
-connection-test document in Message yourself → restart
+is: pair through code and QR → verify the connected notification at the configured
+number → receive an authorized media document in Message yourself → restart
 and restore → disconnect → confirm device removal. Automated passing tests alone
 do not prove WhatsApp accepted a real login or delivered a document.
