@@ -1,6 +1,6 @@
 *{box-sizing:border-box}html{background:#09090b;color-scheme:dark}body{font-family:Inter,system-ui,sans-serif;margin:0}a{text-decoration:none}button,input{font:inherit}button{cursor:pointer}.poster{display:block;width:100%;aspect-ratio:2/3;object-fit:cover;background:#27272a;border-radius:14px}.poster-wrap{position:relative;overflow:hidden;border-radius:14px;background:#27272a}.poster-wrap:after{content:"";position:absolute;inset:0;pointer-events:none;border:1px solid #ffffff12;border-radius:14px}.poster-wrap img{transition:transform .3s ease}.movie-card:hover .poster-wrap img{transform:scale(1.035)}.movie-card:focus-visible{outline:2px solid #a1a1aa;outline-offset:5px;border-radius:14px}.shimmer{background:linear-gradient(100deg,#202024 8%,#303035 18%,#202024 33%);background-size:200% 100%;animation:shimmer 1.45s linear infinite}.detail-hero{display:grid;grid-template-columns:minmax(0,200px) minmax(0,1fr);gap:32px;align-items:start}.detail-poster{width:100%;aspect-ratio:2/3;object-fit:cover;border-radius:16px;background:#27272a}@keyframes shimmer{to{background-position-x:-200%}}@media(max-width:640px){.detail-hero{grid-template-columns:112px minmax(0,1fr);gap:16px}.detail-poster{border-radius:11px}}@media(prefers-reduced-motion:reduce){.shimmer{animation:none}.poster-wrap img{transition:none}}
 .catalog-brand{display:inline-flex;align-items:center;flex:0 1 112px;min-width:0;color:#fafafa}.catalog-brand img{display:block;width:112px;max-width:100%;height:auto;object-fit:contain}
-.catalog-filters{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:0 0 28px}
+.catalog-filters{display:flex;align-items:center;gap:10px;margin:0 0 24px}
 .catalog-filter{display:flex;flex-direction:column;gap:8px;min-width:0;color:#a1a1aa;font-size:12px;font-weight:600}
 .catalog-filter select{appearance:none;min-width:0;width:100%;height:44px;padding:0 34px 0 14px;border:1px solid #3f3f46;border-radius:12px;background:#18181b;color:#f4f4f5;font-size:13px;outline:none;cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='%23a1a1aa' stroke-width='2' viewBox='0 0 24 24'%3E%3Cpath d='M6.5 9.5 11 14a1.4 1.4 0 0 0 2 0l4.5-4.5'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center}
 .catalog-filter select:focus-visible,.page-button:focus-visible{outline:2px solid #a1a1aa;outline-offset:2px}
@@ -436,7 +436,7 @@ html,body{max-width:100%;overflow-x:clip}
 @media(max-width:640px){
  main.mx-auto.max-w-6xl{padding:24px 20px 58px}
  #catalog-search{margin-bottom:20px}
- .catalog-filters{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-bottom:25px}
+ .catalog-filters{margin-bottom:20px}
  .catalog-filter>span{font-size:10px}
  .filter-trigger{padding-inline:9px!important;font-size:11px}
  #catalog-grid{grid-template-columns:repeat(3,minmax(0,1fr));column-gap:12px!important;row-gap:25px!important}
@@ -466,8 +466,7 @@ html,body{max-width:100%;overflow-x:clip}
  .catalog-header-leading{gap:7px}
  .catalog-brand,.catalog-brand img{width:98px;flex-basis:98px}
  #catalog-account-link.catalog-account-avatar{flex-basis:34px!important;width:34px!important;height:34px!important;min-width:34px!important;max-width:34px!important;min-height:34px!important;max-height:34px!important}
- .catalog-filters{grid-template-columns:repeat(2,minmax(0,1fr))}
- .catalog-filter:last-child{grid-column:1/-1}
+ .catalog-filters{margin-bottom:18px}
  .filter-panel{max-width:calc(100vw - 30px)!important}
  #catalog-grid{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:14px!important;row-gap:23px!important}
  .movie-card h3{font-size:13px!important}
@@ -564,23 +563,9 @@ body.catalog-search-active>div>header,body.catalog-search-active>div>footer{disp
  #catalog-home.search-fullscreen .search-result-plot{font-size:11px;line-height:1.4;-webkit-line-clamp:2}
 }
 
-/* Compact the home filters and keep the fullscreen search header pinned above content. */
-.catalog-filters{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:8px!important;margin-bottom:20px!important}
-.catalog-filter{gap:0!important}
-.catalog-filter>span{display:none!important}
-.catalog-filter .filter-trigger{height:40px!important;min-height:40px;padding:0 10px!important;border-radius:12px!important;font-size:11px!important}
-.catalog-filter .filter-chevron,.catalog-filter .filter-chevron svg{width:14px!important;height:14px!important;flex-basis:14px!important}
-.catalog-filter .filter-trigger-label{font-size:11px;letter-spacing:0}
+/* Compact modern liquid-glass filter rail and keep the fullscreen search header pinned above content. */
+.catalog-filters{display:flex!important;align-items:center!important;gap:8px!important;margin-bottom:20px!important}
 #catalog-home.search-fullscreen>.catalog-search-shell{top:0;margin-top:0;background:#09090b;}
-@media(max-width:390px){.catalog-filters .catalog-filter:last-child{grid-column:auto!important}}
-
-/* Search results and filters adapt to narrow screens without changing home poster cards. */
-@media(max-width:480px){
- .catalog-filters{gap:6px!important}
- .catalog-filter .filter-trigger{padding-inline:7px!important;gap:3px!important;font-size:10px!important}
- .catalog-filter .filter-chevron,.catalog-filter .filter-chevron svg{width:12px!important;height:12px!important;flex-basis:12px!important}
- .catalog-filter .filter-trigger-label{font-size:10px}
-}
 
 /* Keep poster cards visibly loading while their nearby images are prefetched. */
 .poster-loading,.detail-poster.poster-loading{background-color:#18181b!important;background-image:linear-gradient(105deg,#18181b 10%,#303035 25%,#18181b 40%)!important;background-size:220% 100%!important;animation:shimmer 1.35s linear infinite}

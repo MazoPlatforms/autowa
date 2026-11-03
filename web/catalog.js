@@ -35,37 +35,207 @@ function confirmMovieRequest(movie,channel){
 }
 const $=id=>document.getElementById(id);const grid=$('catalog-grid'),search=$('catalog-search'),empty=$('catalog-empty'),home=$('catalog-home'),detail=$('catalog-detail');let movies=[];const el=(tag,cls,text)=>{const e=document.createElement(tag);if(cls)e.className=cls;if(text!==undefined)e.textContent=text;return e;};const iconSvg=(inner,size)=>{const s=document.createElementNS('http://www.w3.org/2000/svg','svg');s.setAttribute('viewBox','0 0 24 24');s.setAttribute('width',size);s.setAttribute('height',size);s.setAttribute('fill','none');s.setAttribute('stroke','currentColor');s.setAttribute('stroke-width','1.8');s.setAttribute('stroke-linecap','round');s.setAttribute('stroke-linejoin','round');s.setAttribute('aria-hidden','true');s.innerHTML=inner;return s;};const STAR_INNER='<path d="M12 4.2l2.3 4.9 5.3.7-3.9 3.7 1 5.3L12 16.2l-4.7 2.6 1-5.3-3.9-3.7 5.3-.7L12 4.2Z" fill="currentColor" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>';const CHEV_INNER={l:'<path d="M14.6 5.9 9.3 11.2a1.2 1.2 0 0 0 0 1.7l5.3 5.2"/>',r:'<path d="M9.4 5.9l5.3 5.3a1.2 1.2 0 0 1 0 1.7L9.4 18.1"/>'};const starIcon=()=>{const s=iconSvg(STAR_INNER,13);s.classList.add('fg-star');return s;};const chevIcon=dir=>iconSvg(CHEV_INNER[dir],18);const ratingTag=(tag,cls,text)=>{const e=el(tag,cls);e.append(starIcon(),document.createTextNode(text));return e;};const FALLBACK_POSTER='https://i.ibb.co/TMJ6YCC4/IMG-33a2f581-8ff4-4a5e-9e64-e43c900000c2.png';const poster=m=>m.poster&&(/^https:\/\//.test(m.poster)||/^\/posters\/[a-f0-9]{24}\.jpg$/.test(m.poster))?m.poster:FALLBACK_POSTER;function startPoster(img){const source=img.dataset.posterSrc;if(!source)return;delete img.dataset.posterSrc;img.loading='eager';img.src=source;}const posterObserver='IntersectionObserver'in window?new IntersectionObserver(entries=>{for(const entry of entries){if(!entry.isIntersecting)continue;posterObserver.unobserve(entry.target);startPoster(entry.target);}},{rootMargin:'1600px 0px'}):null;function image(m,cls,eager=false,priority=false){const img=el('img',cls);img.alt='';img.loading=eager?'eager':'lazy';img.decoding='async';img.classList.add('poster-loading');if(priority)img.fetchPriority='high';img.addEventListener('load',()=>{img.classList.remove('poster-loading');img.classList.add('poster-loaded');},{once:true});img.onerror=()=>{if(img.src!==FALLBACK_POSTER){img.src=FALLBACK_POSTER;}else{img.onerror=null;img.removeAttribute('src');img.classList.remove('poster-loading');img.classList.add('poster-failed');}};img.dataset.posterSrc=poster(m);if(eager||!posterObserver)startPoster(img);else posterObserver.observe(img);return img;}function skeleton(){grid.replaceChildren();grid.classList.add('movie-catalog-loading');for(let i=0;i<8;i++){const box=el('div','movie-skeleton-card');box.append(el('div','shimmer movie-skeleton-poster'),el('div','shimmer movie-skeleton-title'),el('div','shimmer movie-skeleton-meta'));grid.append(box);}}const PAGE_SIZE=()=>window.matchMedia('(min-width: 768px)').matches?24:20;let page=1,catalogLoaded=false,searchSuggestions=[],suggestionsInitialized=false;
 const yearFilter=$('filter-year'),genreFilter=$('filter-genre'),sortFilter=$('filter-sort'),pagination=$('catalog-pagination');let updatingFilters=false;
-// Accessible custom popovers; native selects remain as the state source.
-function initCustomFilters(){
- const filters=[yearFilter,genreFilter,sortFilter];
- const closeAll=()=>{for(const select of filters){const box=select.closest('.catalog-filter');box.classList.remove('open');box.querySelector('.filter-trigger').setAttribute('aria-expanded','false');}};
- for(const select of filters){
-  const box=select.closest('.catalog-filter');
-  select.classList.add('visually-hidden-select');
-  const trigger=el('button','filter-trigger');trigger.type='button';trigger.setAttribute('aria-label',select.getAttribute('aria-label')||'Filter options');trigger.setAttribute('aria-haspopup','listbox');trigger.setAttribute('aria-expanded','false');
-  const label=el('span','filter-trigger-label');const arrow=el('span','filter-chevron');arrow.innerHTML='<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.5 9.5 11 14a1.4 1.4 0 0 0 2 0l4.5-4.5"/></svg>';trigger.append(label,arrow);
-  const panel=el('div','filter-panel');panel.setAttribute('role','listbox');panel.setAttribute('aria-label',select.getAttribute('aria-label')||'Filter options');
-  box.append(trigger,panel);
-  const refresh=()=>{
-   label.textContent=select.selectedOptions[0]?.textContent||'All';
-   panel.replaceChildren();
-   for(const option of select.options){
-    const item=el('button','filter-option'+(option.value===select.value?' selected':''),option.textContent);
-    item.type='button';item.setAttribute('role','option');item.setAttribute('aria-selected',String(option.value===select.value));
-    item.addEventListener('click',()=>{select.value=option.value;select.dispatchEvent(new Event('change'));closeAll();trigger.focus();});
-    panel.append(item);
-   }
-  };
-  select.addEventListener('change',refresh);
-  trigger.addEventListener('click',()=>{const open=box.classList.contains('open');closeAll();if(!open){box.classList.add('open');trigger.setAttribute('aria-expanded','true');}});
-  trigger.addEventListener('keydown',event=>{if(event.key==='ArrowDown'||event.key==='Enter'&& !box.classList.contains('open')){event.preventDefault();closeAll();box.classList.add('open');trigger.setAttribute('aria-expanded','true');panel.querySelector('button')?.focus();}});
-  panel.addEventListener('keydown',event=>{const buttons=[...panel.querySelectorAll('button')],index=buttons.indexOf(document.activeElement);if(event.key==='ArrowDown'||event.key==='ArrowUp'){event.preventDefault();buttons[(index+(event.key==='ArrowDown'?1:-1)+buttons.length)%buttons.length]?.focus();}if(event.key==='Escape'){closeAll();trigger.focus();}});
-  refresh();
+// Modern low-space liquid-glass filter rail (Capsules for Sort/Year + Horizontal Genre Chips).
+function initModernFilterRail(){
+ const container=document.querySelector('.catalog-filters');
+ if(!container)return;
+ for(const s of [yearFilter,genreFilter,sortFilter]){
+  s.classList.add('visually-hidden-select');
+  s.setAttribute('tabindex','-1');
+  s.setAttribute('aria-hidden','true');
  }
- document.addEventListener('click',event=>{if(!event.target.closest('.catalog-filter'))closeAll();});
- document.addEventListener('keydown',event=>{if(event.key==='Escape')closeAll();});
+ const selects=[yearFilter,genreFilter,sortFilter];
+ for(const s of selects)s.remove();
+ container.replaceChildren(...selects);
+
+ const closeAll=()=>{
+  container.querySelectorAll('.fg-filter-popover-wrap').forEach(w=>{
+   w.classList.remove('open');
+   w.querySelector('.fg-filter-capsule')?.setAttribute('aria-expanded','false');
+   const p=w.querySelector('.fg-filter-popover');
+   if(p)p.hidden=true;
+  });
+ };
+
+ // Sort capsule
+ const sortWrap=el('div','fg-filter-popover-wrap fg-sort-wrap');
+ const sortBtn=el('button','fg-filter-capsule fg-capsule-sort');
+ sortBtn.type='button';sortBtn.setAttribute('aria-haspopup','listbox');sortBtn.setAttribute('aria-expanded','false');sortBtn.title='Sort order';
+ const sortIcon=document.createElementNS('http://www.w3.org/2000/svg','svg');
+ sortIcon.setAttribute('viewBox','0 0 24 24');sortIcon.setAttribute('width','14');sortIcon.setAttribute('height','14');sortIcon.setAttribute('fill','none');sortIcon.setAttribute('stroke','currentColor');sortIcon.setAttribute('stroke-width','2');sortIcon.setAttribute('stroke-linecap','round');sortIcon.setAttribute('stroke-linejoin','round');sortIcon.setAttribute('aria-hidden','true');sortIcon.classList.add('fg-capsule-icon');
+ sortIcon.innerHTML='<path d="m3 16 4 4 4-4M7 20V4M21 8l-4-4-4 4M17 4v16"/>';
+ const sortLabel=el('span','fg-capsule-label',sortFilter.selectedOptions[0]?.textContent||'Sort');
+ const sortChev=document.createElementNS('http://www.w3.org/2000/svg','svg');
+ sortChev.setAttribute('viewBox','0 0 24 24');sortChev.setAttribute('width','12');sortChev.setAttribute('height','12');sortChev.setAttribute('fill','none');sortChev.setAttribute('stroke','currentColor');sortChev.setAttribute('stroke-width','2.2');sortChev.setAttribute('stroke-linecap','round');sortChev.setAttribute('stroke-linejoin','round');sortChev.setAttribute('aria-hidden','true');sortChev.classList.add('fg-capsule-chevron');
+ sortChev.innerHTML='<path d="M6 9l6 6 6-6"/>';
+ sortBtn.append(sortIcon,sortLabel,sortChev);
+
+ const sortPopover=el('div','fg-filter-popover fg-sort-popover');
+ sortPopover.hidden=true;sortPopover.setAttribute('role','listbox');
+ const renderSortOptions=()=>{
+  sortPopover.replaceChildren();
+  for(const opt of sortFilter.options){
+   const item=el('button','fg-popover-item'+(opt.value===sortFilter.value?' is-selected':''),opt.textContent);
+   item.type='button';item.setAttribute('role','option');item.setAttribute('aria-selected',String(opt.value===sortFilter.value));
+   if(opt.value===sortFilter.value){
+    const check=document.createElementNS('http://www.w3.org/2000/svg','svg');
+    check.setAttribute('viewBox','0 0 24 24');check.setAttribute('width','13');check.setAttribute('height','13');check.setAttribute('fill','none');check.setAttribute('stroke','currentColor');check.setAttribute('stroke-width','2.4');check.setAttribute('stroke-linecap','round');check.setAttribute('stroke-linejoin','round');
+    check.innerHTML='<path d="M20 6 9 17l-5-5"/>';item.append(check);
+   }
+   item.addEventListener('click',()=>{
+    sortFilter.value=opt.value;sortFilter.dispatchEvent(new Event('change'));closeAll();sortBtn.focus();
+   });
+   sortPopover.append(item);
+  }
+ };
+ renderSortOptions();
+ sortBtn.addEventListener('click',e=>{
+  e.stopPropagation();
+  const isOpen=sortWrap.classList.contains('open');
+  closeAll();
+  if(!isOpen){
+   sortWrap.classList.add('open');sortBtn.setAttribute('aria-expanded','true');sortPopover.hidden=false;
+  }
+ });
+ sortWrap.append(sortBtn,sortPopover);
+
+ // Year capsule
+ const yearWrap=el('div','fg-filter-popover-wrap fg-year-wrap');
+ const yearBtn=el('button','fg-filter-capsule fg-capsule-year');
+ yearBtn.type='button';yearBtn.setAttribute('aria-haspopup','listbox');yearBtn.setAttribute('aria-expanded','false');yearBtn.title='Filter by release year';
+ const yearIcon=document.createElementNS('http://www.w3.org/2000/svg','svg');
+ yearIcon.setAttribute('viewBox','0 0 24 24');yearIcon.setAttribute('width','14');yearIcon.setAttribute('height','14');yearIcon.setAttribute('fill','none');yearIcon.setAttribute('stroke','currentColor');yearIcon.setAttribute('stroke-width','2');yearIcon.setAttribute('stroke-linecap','round');yearIcon.setAttribute('stroke-linejoin','round');yearIcon.setAttribute('aria-hidden','true');yearIcon.classList.add('fg-capsule-icon');
+ yearIcon.innerHTML='<rect width="18" height="18" x="3" y="4" rx="4"/><path d="M16 2v4M8 2v4M3 10h18"/>';
+ const yearLabel=el('span','fg-capsule-label',yearFilter.value||'Year');
+ const yearChev=document.createElementNS('http://www.w3.org/2000/svg','svg');
+ yearChev.setAttribute('viewBox','0 0 24 24');yearChev.setAttribute('width','12');yearChev.setAttribute('height','12');yearChev.setAttribute('fill','none');yearChev.setAttribute('stroke','currentColor');yearChev.setAttribute('stroke-width','2.2');yearChev.setAttribute('stroke-linecap','round');yearChev.setAttribute('stroke-linejoin','round');yearChev.setAttribute('aria-hidden','true');yearChev.classList.add('fg-capsule-chevron');
+ yearChev.innerHTML='<path d="M6 9l6 6 6-6"/>';
+ yearBtn.append(yearIcon,yearLabel,yearChev);
+
+ const yearPopover=el('div','fg-filter-popover fg-year-popover');
+ yearPopover.hidden=true;yearPopover.setAttribute('role','listbox');
+ const renderYearOptions=()=>{
+  yearPopover.replaceChildren();
+  const allItem=el('button','fg-popover-item'+(!yearFilter.value?' is-selected':''),'All years');
+  allItem.type='button';allItem.setAttribute('role','option');
+  allItem.addEventListener('click',()=>{
+   yearFilter.value='';yearFilter.dispatchEvent(new Event('change'));closeAll();yearBtn.focus();
+  });
+  yearPopover.append(allItem);
+  const head=el('div','fg-popover-header','Release year');
+  yearPopover.append(head);
+  const grid=el('div','fg-year-grid');
+  for(const opt of yearFilter.options){
+   if(!opt.value)continue;
+   const yBtn=el('button','fg-year-item'+(opt.value===yearFilter.value?' is-selected':''),opt.textContent);
+   yBtn.type='button';yBtn.setAttribute('role','option');
+   yBtn.addEventListener('click',()=>{
+    yearFilter.value=opt.value;yearFilter.dispatchEvent(new Event('change'));closeAll();yearBtn.focus();
+   });
+   grid.append(yBtn);
+  }
+  yearPopover.append(grid);
+ };
+ renderYearOptions();
+ yearBtn.addEventListener('click',e=>{
+  e.stopPropagation();
+  const isOpen=yearWrap.classList.contains('open');
+  closeAll();
+  if(!isOpen){
+   yearWrap.classList.add('open');yearBtn.setAttribute('aria-expanded','true');yearPopover.hidden=false;
+  }
+ });
+ yearWrap.append(yearBtn,yearPopover);
+
+ // Divider
+ const divider=el('div','fg-rail-divider');
+
+ // Horizontal Genre Rail
+ const genreRail=el('div','fg-genre-rail');
+ genreRail.setAttribute('role','tablist');genreRail.setAttribute('aria-label','Filter by genre');
+ genreRail.addEventListener('wheel',e=>{
+  if(Math.abs(e.deltaY)>Math.abs(e.deltaX)){
+   e.preventDefault();genreRail.scrollLeft+=e.deltaY;
+  }
+ },{passive:false});
+
+ const renderGenreChips=()=>{
+  genreRail.replaceChildren();
+  const allChip=el('button','fg-genre-chip'+(!genreFilter.value?' is-active':''),'All');
+  allChip.type='button';allChip.setAttribute('role','tab');allChip.setAttribute('aria-selected',String(!genreFilter.value));
+  allChip.addEventListener('click',()=>{
+   if(genreFilter.value!==''){
+    genreFilter.value='';genreFilter.dispatchEvent(new Event('change'));
+   }
+  });
+  genreRail.append(allChip);
+
+  for(const opt of genreFilter.options){
+   if(!opt.value)continue;
+   const chip=el('button','fg-genre-chip'+(opt.value===genreFilter.value?' is-active':''),opt.textContent);
+   chip.type='button';chip.setAttribute('role','tab');chip.setAttribute('aria-selected',String(opt.value===genreFilter.value));
+   chip.addEventListener('click',()=>{
+    if(genreFilter.value===opt.value){
+     genreFilter.value='';
+    }else{
+     genreFilter.value=opt.value;
+    }
+    genreFilter.dispatchEvent(new Event('change'));
+    chip.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});
+   });
+   genreRail.append(chip);
+  }
+ };
+ renderGenreChips();
+
+ // Reset filter button
+ const resetBtn=el('button','fg-filter-reset');
+ resetBtn.type='button';resetBtn.hidden=true;resetBtn.title='Reset all filters';resetBtn.setAttribute('aria-label','Reset all filters');
+ const resetIcon=document.createElementNS('http://www.w3.org/2000/svg','svg');
+ resetIcon.setAttribute('viewBox','0 0 24 24');resetIcon.setAttribute('width','12');resetIcon.setAttribute('height','12');resetIcon.setAttribute('fill','none');resetIcon.setAttribute('stroke','currentColor');resetIcon.setAttribute('stroke-width','2.4');resetIcon.setAttribute('stroke-linecap','round');resetIcon.setAttribute('stroke-linejoin','round');
+ resetIcon.innerHTML='<path d="M18 6 6 18M6 6l12 12"/>';
+ resetBtn.append(resetIcon,el('span','','Reset'));
+ resetBtn.addEventListener('click',()=>{
+  yearFilter.value='';genreFilter.value='';sortFilter.value='default';
+  yearFilter.dispatchEvent(new Event('change'));
+  genreFilter.dispatchEvent(new Event('change'));
+  sortFilter.dispatchEvent(new Event('change'));
+  closeAll();
+ });
+
+ const syncUI=()=>{
+  sortLabel.textContent=sortFilter.selectedOptions[0]?.textContent||'Sort';
+  sortBtn.classList.toggle('is-active',sortFilter.value!=='default');
+  renderSortOptions();
+
+  yearLabel.textContent=yearFilter.value||'Year';
+  yearBtn.classList.toggle('is-active',Boolean(yearFilter.value));
+  renderYearOptions();
+
+  renderGenreChips();
+
+  const isFiltered=Boolean(yearFilter.value)||Boolean(genreFilter.value)||sortFilter.value!=='default';
+  resetBtn.hidden=!isFiltered;
+ };
+
+ for(const s of selects){
+  s.addEventListener('change',syncUI);
+ }
+ document.addEventListener('click',e=>{
+  if(!e.target.closest('.fg-filter-popover-wrap'))closeAll();
+ });
+ document.addEventListener('keydown',e=>{
+  if(e.key==='Escape')closeAll();
+ });
+
+ container.append(sortWrap,yearWrap,divider,genreRail,resetBtn);
+ container._fgRebuild=()=>{
+  renderYearOptions();
+  renderGenreChips();
+  syncUI();
+ };
 }
-initCustomFilters();
+initModernFilterRail();
 function updateFilters(){
  const oldYear=yearFilter.value,oldGenre=genreFilter.value;
  const years=[...new Set(movies.map(m=>String(m.year||'').trim()).filter(y=>/^\d{4}$/.test(y)))].sort((a,b)=>Number(b)-Number(a));
@@ -73,8 +243,12 @@ function updateFilters(){
  const fill=(select,values,label)=>{select.replaceChildren(new Option(label,''));for(const value of values)select.add(new Option(value,value));};
  fill(yearFilter,years,'All years');fill(genreFilter,genres,'All genres');
  updatingFilters=true;yearFilter.value=years.includes(oldYear)?oldYear:'';genreFilter.value=genres.includes(oldGenre)?oldGenre:'';
- yearFilter.dispatchEvent(new Event('change'));genreFilter.dispatchEvent(new Event('change'));
  updatingFilters=false;
+ const rail=document.querySelector('.catalog-filters');
+ if(rail?._fgRebuild)rail._fgRebuild();
+ else{
+  yearFilter.dispatchEvent(new Event('change'));genreFilter.dispatchEvent(new Event('change'));
+ }
 }
 function renderPagination(total){
  pagination.replaceChildren();
