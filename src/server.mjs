@@ -248,7 +248,7 @@ async function requestHistory(number){
 }
 async function profile(number){const raw=await redis('GET','profile:'+hmac(number));return raw?JSON.parse(raw):{name:'',created_at:new Date().toISOString()};}
 async function sendOtp(number,code){return sendWhatsAppOtp(number,code);}
-const index=fs.readFileSync(new URL('../web/index.html',import.meta.url)).toString('utf8').replace('<script src="/poster-wall.js','<script src="/phone-format.js?v=20261101-1" defer></script><script src="/poster-wall.js');
+const index=fs.readFileSync(new URL('../web/index.html',import.meta.url)).toString('utf8').replace('<script src="/poster-wall.js','<script src="/phone-format.js?v=20261103-1" defer></script><script src="/poster-wall.js');
 const catalogHtml=fs.readFileSync(new URL('../web/catalog.html',import.meta.url));
 const catalogJs=fs.readFileSync(new URL('../web/catalog.js',import.meta.url));
 const catalogCss=fs.readFileSync(new URL('../web/catalog.css',import.meta.url));

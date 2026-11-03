@@ -61,5 +61,28 @@
     const country = [...(window.filmgoCountries || [])].sort((a, b) => b.dial.length - a.dial.length).find(item => raw.startsWith(item.dial));
     return formatLocal(raw, country);
   };
-  window.FilmGoPhone = { formatLocal, international, placeholder, localFromInternational, selectedCountry };
+  const displayInternational = value => {
+    const raw = digitsOnly(value);
+    if (!raw) return '';
+    // Profile numbers are already E.164: remove only the matched calling
+    // code, then apply the country's complete international capture pattern.
+    const countries = [...(window.filmgoCountries || [])].sort((a, b) => b.dial.length - a.dial.length);
+    const matches = countries.filter(country => raw.startsWith(country.dial));
+    if (!matches.length) return '+' + raw;
+    const dial = matches[0].dial;
+    const national = raw.slice(dial.length);
+    for (const country of matches.filter(item => item.dial === dial)) {
+      for (const format of country.formats || []) {
+        const pattern = new RegExp('^(?:' + format.pattern + ')$');
+        if (!pattern.test(national)) continue;
+        if (format.leading?.length && !format.leading.some(leading => new RegExp('^(?:' + leading + ')').test(national))) continue;
+        const template = format.international;
+        if (!template || template === 'NA') continue;
+        const formatted = national.replace(pattern, template).trim();
+        if (digitsOnly(formatted) === national) return '+' + dial + ' ' + formatted;
+      }
+    }
+    return '+' + dial + (national ? ' ' + national : '');
+  };
+  window.FilmGoPhone = { formatLocal, international, placeholder, localFromInternational, displayInternational, selectedCountry };
 })();
