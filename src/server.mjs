@@ -256,14 +256,14 @@ async function requestHistory(number){
 async function profile(number){const raw=await redis('GET','profile:'+hmac(number));return raw?JSON.parse(raw):{name:'',created_at:new Date().toISOString()};}
 async function sendOtp(number,code){return sendWhatsAppOtp(number,code);}
 const index=fs.readFileSync(new URL('../web/index.html',import.meta.url)).toString('utf8').replace('<script src="/poster-wall.js','<script src="/phone-format.js?v=20261103-1" defer></script><script src="/poster-wall.js').replace('</body>','<script src="/linked-whatsapp.js?v=20261103-1" defer></script></body>');
-const catalogHtml=fs.readFileSync(new URL('../web/catalog.html',import.meta.url));
+const catalogHtml=fs.readFileSync(new URL('../web/catalog.html',import.meta.url),'utf8').replaceAll('v=20261102-i1','v=20261103-wa2');
 const catalogJs=fs.readFileSync(new URL('../web/catalog.js',import.meta.url));
 const catalogCss=fs.readFileSync(new URL('../web/catalog.css',import.meta.url));
 const playerUiJs=fs.readFileSync(new URL('../web/player-ui.js',import.meta.url));
 const playerCss=fs.readFileSync(new URL('../web/player.css',import.meta.url));
 // Anime metadata is rebuilt on startup so season-aware episode titles replace stale Redis data.
 const animeHtml=fs.readFileSync(new URL('../web/anime.html',import.meta.url));
-const animeWatchHtml=fs.readFileSync(new URL('../web/anime-watch.html',import.meta.url));
+const animeWatchHtml=fs.readFileSync(new URL('../web/anime-watch.html',import.meta.url),'utf8').replaceAll('v=20261102-i1','v=20261103-wa2');
 const animeSoonHtml=fs.readFileSync(new URL('../web/anime-soon.html',import.meta.url));
 const animeJs=fs.readFileSync(new URL('../web/anime.js',import.meta.url));
 const animeCss=fs.readFileSync(new URL('../web/anime.css',import.meta.url));
