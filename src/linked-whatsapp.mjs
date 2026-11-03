@@ -1,4 +1,5 @@
 import crypto from 'node:crypto';
+export const LINK_TEST_DOCUMENT='FilmGo WhatsApp delivery connection test. This document was sent to your own Message yourself chat using your linked device.\n';
 
 export function sessionCipher(secret, account, replacer, reviver){
  if(!secret||secret.length<32)throw Error('Session encryption requires a strong application secret');
