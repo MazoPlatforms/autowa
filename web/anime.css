@@ -1,45 +1,110 @@
-/* Anime page extras. Layout, cards, hero, shelves, filters and pagination reuse catalog.css. */
-.anime-badge{position:absolute;top:8px;left:8px;padding:4px 8px;border-radius:7px;background:rgba(9,9,11,.85);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);font-size:11px;font-weight:700;color:#f4f4f5}
+/* Anime page extras — glassmorphism design language matching Movies catalog.
+   Layout, cards, hero, shelves, filters and pagination reuse catalog.css. */
+
+/* ---------- Badge (overlay on poster) ---------- */
+.anime-badge{
+  position:absolute;top:8px;left:8px;padding:4px 9px;border-radius:8px;
+  background:rgba(5,5,9,.82);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border:1px solid rgba(255,255,255,.1);
+  font-size:11px;font-weight:700;color:#f5f5f7}
+
+/* ---------- Search shell ---------- */
 .anime-search-shell{position:static;background:none;backdrop-filter:none;-webkit-backdrop-filter:none;padding:0;margin:0 0 18px}
-.catalog-search-field>#anime-search{flex:1;min-width:0;height:100%;padding:0;border:0;background:transparent;color:#f4f4f5;font-size:14px;outline:none}
-#anime-search::placeholder{color:#858891}
+.catalog-search-field>#anime-search{flex:1;min-width:0;height:100%;padding:0;border:0;background:transparent;color:#f5f5f7;font-size:14px;outline:none}
+#anime-search::placeholder{color:#6e6e73}
 #anime-search::-webkit-search-cancel-button{display:none}
-.anime-kicker{margin:0 0 8px;font-size:12px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#71717a}
+
+/* ---------- Typography ---------- */
+.anime-kicker{margin:0 0 8px;font-size:12px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#6e6e73}
 .anime-detail-title{margin:0;font-size:clamp(26px,5vw,48px);line-height:1.08;font-weight:800;letter-spacing:-.03em;overflow-wrap:anywhere}
-.anime-detail-meta,.anime-detail-line{margin:12px 0 0;font-size:14px;color:#a1a1aa}
-.anime-detail-rating{margin:12px 0 0;font-size:14px;font-weight:600;color:#e4e4e7}
-.anime-overview{max-width:760px;margin-top:36px;padding-top:28px;border-top:1px solid #27272a}
+.anime-detail-meta,.anime-detail-line{margin:12px 0 0;font-size:14px;color:#a1a1a6}
+.anime-detail-rating{margin:12px 0 0;font-size:14px;font-weight:600;color:#e4e4e9}
+
+/* ---------- Overview section ---------- */
+.anime-overview{max-width:760px;margin-top:36px;padding-top:28px;border-top:1px solid rgba(255,255,255,.08)}
 .anime-overview h2,.anime-eps-head h2{margin:0;font-size:18px;font-weight:700}
-.anime-overview p{margin:12px 0 0;font-size:14px;line-height:1.75;color:#a1a1aa}
+.anime-overview p{margin:12px 0 0;font-size:14px;line-height:1.75;color:#a1a1a6;max-width:68ch}
+
+/* ---------- Episodes section ---------- */
 .anime-eps{max-width:760px;margin-top:36px}
 .anime-eps-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:14px}
-.anime-eps-head span{font-size:12px;color:#71717a}
-.anime-season-divider{position:relative;aspect-ratio:2172/724;min-height:0;margin:24px 0 10px;overflow:hidden;border:1px solid #3f3f46;border-radius:16px;background-color:#18181b;background-position:center;background-size:cover}
+.anime-eps-head span{font-size:12px;color:#6e6e73}
+
+/* ---------- Season divider ---------- */
+.anime-season-divider{
+  position:relative;aspect-ratio:2172/724;min-height:0;
+  margin:24px 0 10px;overflow:hidden;
+  border:1px solid rgba(255,255,255,.12);border-radius:20px;
+  background-color:rgba(10,10,14,.9);background-position:center;background-size:cover}
 .anime-season-group{margin:0 0 18px}
-.anime-season-toggle{position:absolute;right:14px;top:50%;display:grid;place-items:center;width:42px;height:42px;transform:translateY(-50%);border:1px solid rgba(255,255,255,.3);border-radius:999px;background:rgba(9,9,11,.7);color:#fafafa;cursor:pointer;backdrop-filter:blur(10px)}
+.anime-season-toggle{
+  position:absolute;right:14px;top:50%;
+  display:grid;place-items:center;width:42px;height:42px;
+  transform:translateY(-50%);
+  border:1px solid rgba(255,255,255,.22);border-radius:999px;
+  background:rgba(5,5,9,.72);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  color:#fafaf7;cursor:pointer}
 .anime-season-toggle svg{transition:transform .2s ease}
 .anime-season-toggle[aria-expanded="true"] svg{transform:rotate(180deg)}
 .anime-season-episodes[hidden]{display:none}
-.anime-season-divider-body{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;padding:22px 24px}
-.anime-season-kicker{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#a1a1aa}
-.anime-season-divider h3{margin:5px 0 0;font-size:24px;font-weight:700;color:#fafafa}
+.anime-season-divider-body{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;justify-content:center;
+  padding:22px 24px}
+.anime-season-kicker{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#a1a1a6}
+.anime-season-divider h3{margin:5px 0 0;font-size:24px;font-weight:700;color:#fafaf7}
 .anime-season-divider p{margin:5px 0 0;font-size:12px;color:#d4d4d8}
-.anime-ep{display:grid;grid-template-columns:92px minmax(0,1fr) auto;gap:14px;align-items:center;margin-bottom:8px;padding:10px 14px;border:1px solid #27272a;border-radius:14px;background:rgba(255,255,255,.035)}
-.anime-ep-frame{width:92px;height:52px;object-fit:cover;border-radius:9px;background:#27272a}
-.anime-ep-num{display:grid;place-items:center;width:44px;height:44px;border-radius:12px;background:#27272a;font-size:14px;font-weight:700;color:#f4f4f5}
-.anime-ep-title{margin:0;font-size:14px;font-weight:600;color:#f4f4f5;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.anime-ep-copy{min-width:0;flex:1}.anime-ep-sub{margin:3px 0 0;font-size:12px;color:#71717a}.anime-ep-sub-only{align-self:center;text-align:center}
-.anime-ep-play{display:inline-flex;align-items:center;gap:6px;height:36px;padding:0 14px;border:1px solid #3f3f46;border-radius:999px;background:#18181b;color:#a1a1aa;font-size:12px;font-weight:700;cursor:not-allowed}
-.anime-empty-eps{padding:18px;border:1px dashed #3f3f46;border-radius:14px;font-size:13px;color:#71717a;text-align:center}
 
-/* Phones: show the Movies / Anime pill under the header (catalog.css hides it below 560px; movies page is left as-is). */
-@media(max-width:560px){.tv-nav-inner{row-gap:10px}.tv-nav-links{display:flex;grid-column:1/-1;grid-row:2}.tv-nav-links a{flex:1;text-align:center;padding:8px 0}}
-@media(max-width:560px){.anime-season-divider{aspect-ratio:2172/724}.anime-season-divider-body{padding:18px}.anime-season-toggle{right:10px;width:38px;height:38px}.anime-ep{grid-template-columns:68px minmax(0,1fr) auto;gap:10px;padding:9px}.anime-ep-frame{width:68px;height:48px}.anime-ep-play{gap:5px;padding:0 10px;font-size:12px}.anime-ep-play svg{width:17px;height:17px;flex:none}}
+/* ---------- Episode row ---------- */
+.anime-ep{
+  display:grid;grid-template-columns:92px minmax(0,1fr) auto;
+  gap:14px;align-items:center;
+  margin-bottom:8px;padding:10px 14px;
+  border:1px solid rgba(255,255,255,.08);border-radius:16px;
+  background:rgba(255,255,255,.03);
+  transition:background .2s,border-color .2s}
+.anime-ep:hover{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.14)}
+.anime-ep-frame{width:92px;height:52px;object-fit:cover;border-radius:10px;background:rgba(255,255,255,.08)}
+.anime-ep-num{
+  display:grid;place-items:center;width:44px;height:44px;
+  border-radius:13px;
+  background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.1);
+  font-size:14px;font-weight:700;color:#f5f5f7}
+.anime-ep-title{margin:0;font-size:14px;font-weight:600;color:#f5f5f7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.anime-ep-copy{min-width:0;flex:1}
+.anime-ep-sub{margin:3px 0 0;font-size:12px;color:#6e6e73}
+.anime-ep-sub-only{align-self:center;text-align:center}
 
-/* Detail overlay polish (header/toggle hiding itself lives in catalog.css). */
-.anime-overview p{max-width:68ch}
-.anime-ep{transition:background .2s,border-color .2s}
-.anime-ep:hover{background:rgba(255,255,255,.065);border-color:#3f3f46}
-.anime-ep-play{background:#f4f4f5;border-color:#f4f4f5;color:#09090b;cursor:pointer;text-decoration:none;transition:background .2s,transform .2s}
+/* ---------- Episode play button ---------- */
+.anime-ep-play{
+  display:inline-flex;align-items:center;gap:6px;
+  height:36px;padding:0 14px;
+  border:1px solid rgba(255,255,255,.1);border-radius:999px;
+  background:#f5f5f7;border-color:#f5f5f7;color:#09090b;
+  font-size:12px;font-weight:700;cursor:pointer;text-decoration:none;
+  transition:background .2s,transform .2s}
 .anime-ep-play:hover{background:#fff;transform:scale(1.04)}
-.anime-ep-play[aria-disabled="true"]{background:#18181b;border-color:#3f3f46;color:#a1a1aa;cursor:not-allowed;transform:none}
+.anime-ep-play[aria-disabled="true"]{
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);
+  color:#a1a1a6;cursor:not-allowed;transform:none}
+
+/* ---------- Empty state ---------- */
+.anime-empty-eps{
+  padding:18px;
+  border:1px dashed rgba(255,255,255,.1);border-radius:16px;
+  font-size:13px;color:#6e6e73;text-align:center}
+
+/* ---------- Phones: show Movies / Anime pill under header ---------- */
+@media(max-width:560px){
+  .tv-nav-inner{row-gap:10px}
+  .tv-nav-links{display:flex;grid-column:1/-1;grid-row:2}
+  .tv-nav-links a{flex:1;text-align:center;padding:8px 0}
+  .anime-season-divider{aspect-ratio:2172/724}
+  .anime-season-divider-body{padding:18px}
+  .anime-season-toggle{right:10px;width:38px;height:38px}
+  .anime-ep{grid-template-columns:68px minmax(0,1fr) auto;gap:10px;padding:9px}
+  .anime-ep-frame{width:68px;height:48px}
+  .anime-ep-play{gap:5px;padding:0 10px;font-size:12px}
+  .anime-ep-play svg{width:17px;height:17px;flex:none}
+}
