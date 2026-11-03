@@ -39,6 +39,7 @@ Browser checks exercise consent, pairing code, connected state, delivery history
 disconnect, and mobile/desktop layout with simulated API responses.
 
 A real user must complete pairing to verify live transport. The acceptance check
-is: pair → receive a small authorized test document in Message yourself → restart
+is: pair → click **Send test file to myself** in Profile and receive the generated
+connection-test document in Message yourself → restart
 and restore → disconnect → confirm device removal. Automated passing tests alone
 do not prove WhatsApp accepted a real login or delivered a document.

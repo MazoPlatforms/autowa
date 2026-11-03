@@ -2,7 +2,7 @@ import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
 import {EventEmitter} from 'node:events';
-import {sessionCipher,createLinkedWhatsApp} from '../src/linked-whatsapp.mjs';
+import {sessionCipher,createLinkedWhatsApp,LINK_TEST_DOCUMENT} from '../src/linked-whatsapp.mjs';
 import {linkedDeliveryApi} from '../src/linked-delivery-api.mjs';
 import {createLinkedMediaDelivery} from '../src/linked-whatsapp-runtime.mjs';
 import fs from 'node:fs/promises';
@@ -94,6 +94,9 @@ test('document transport targets self, selects source channel and removes temp f
 test('failed transport removes temporary file',async()=>{
  let file;const deliver=createLinkedMediaDelivery(async(_cmd,args)=>{file=args[3];await fs.writeFile(file,'hello');});await assert.rejects(()=>deliver({sendMessage:async()=>{throw Error('upload failed');}},number,{...media,file_size:5},async()=>{},new AbortController().signal));await assert.rejects(()=>fs.stat(file));
 });
+test('connection test sends generated text document without downloading media',async()=>{
+ let file;const deliver=createLinkedMediaDelivery(async()=>{throw Error('Test files must not download Telegram media');});await deliver({sendMessage:async(jid,data)=>{file=data.document.url;assert.equal(jid,number.slice(1)+'@s.whatsapp.net');assert.equal(data.mimetype,'text/plain');assert.equal(await fs.readFile(file,'utf8'),LINK_TEST_DOCUMENT);}},number,{...media,kind:'test',file_name:'FilmGo-test.txt',file_size:Buffer.byteLength(LINK_TEST_DOCUMENT)},async()=>{},new AbortController().signal);await assert.rejects(()=>fs.stat(file));
+});
 
 async function apiCase({method='POST',route='/api/request',session={number},origin='https://filmgo.test',data={rights_confirmed:true},state='connected',resolve=media}={}){
  let response,queued,refunded=0;const request={method,headers:{origin,host:'filmgo.test','content-type':'application/json'}};
@@ -107,4 +110,7 @@ test('API requires connected session; user cannot supply recipient',async()=>{
 });
 test('API rejects missing media and exposes no credentials',async()=>{
  assert.equal((await apiCase({resolve:null})).response.status,404);const r=await apiCase({method:'GET',route:'/api/whatsapp/status'});assert.deepEqual(r.response.body,{state:'connected'});
+});
+test('connection test endpoint uses authenticated owner and generated document only',async()=>{
+ const r=await apiCase({route:'/api/whatsapp/test',data:{recipient_jid:other,file_name:'attacker.txt'}});assert.equal(r.response.status,202);assert.equal(r.queued.n,number);assert.equal(r.queued.m.kind,'test');assert.equal(r.queued.m.file_size,Buffer.byteLength(LINK_TEST_DOCUMENT));assert.equal(r.queued.m.file_name,'FilmGo-connection-test.txt');assert.equal(r.queued.m.recipient_jid,undefined);
 });
