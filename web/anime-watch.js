@@ -116,14 +116,15 @@ function confirmAnimeRequest(anime,episode,channel,quality){
  const number=Number(episode.episode??episode.number)||0,season=Number(episode.season)||1,platform=channel==='telegram'?'Telegram':'WhatsApp';
  sheet.append(el('h2','','Confirm anime request'),el('p','filmgo-sheet-description',(anime.title||'Anime')+' · Season '+season+' · Episode '+number+' via '+platform+'? Your daily tokens are charged by file size and delivery method.'));
  const buttons=el('div','filmgo-sheet-buttons'),cancel=el('button','filmgo-open-button','Cancel'),confirm=el('button','filmgo-download-button','Confirm');
- const close=()=>{document.removeEventListener('keydown',esc);overlay.remove();};const esc=e=>{if(e.key==='Escape')close();};cancel.addEventListener('click',close);overlay.addEventListener('click',e=>{if(e.target===overlay)close();});
- confirm.addEventListener('click',async()=>{confirm.disabled=true;confirm.textContent='Preparing…';try{
+ const close=()=>{linkedRequest?.cancel();document.removeEventListener('keydown',esc);overlay.remove();};const esc=e=>{if(e.key==='Escape')close();};cancel.addEventListener('click',close);overlay.addEventListener('click',e=>{if(e.target===overlay)close();});
+ const linkedRequest=channel==='telegram'?null:FilmGoPlayerUI.whatsappRequest(sheet,confirm,'Confirm anime request',(anime.title||'Anime')+' · Season '+season+' · Episode '+number+(quality?' · '+quality:''),close);
+ confirm.addEventListener('click',async()=>{if(linkedRequest&&!await linkedRequest.confirm())return;confirm.disabled=true;confirm.textContent='Preparing…';try{
   const endpoint=channel==='telegram'?'/api/anime-telegram-link':'/api/anime-request',payload=channel==='telegram'?{episode_slug_id:episode.slug_id,quality}:{episode_slug_id:episode.slug_id,quality,rights_confirmed:true};
   const response=await fetch(endpoint,{method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)}),data=await response.json();
   if(response.status===428&&data.code==='whatsapp_link_required'){close();location.href='/profile#linked-whatsapp';return;}
   if(response.status===401){close();location.href='/profile?return='+encodeURIComponent(location.pathname);return;}if(!response.ok)throw Error(data.error||'Request failed');
   if(channel==='telegram'){close();location.href=data.url;return;}
-  sheet.replaceChildren(el('h2','','Request received'),el('p','filmgo-sheet-description','Your WhatsApp anime episode request has been queued.'));const done=el('button','filmgo-download-button','Done');done.addEventListener('click',close);sheet.append(done);
+  sheet.replaceChildren(el('h2','','Request received'),el('p','filmgo-sheet-description','Your episode is queued for delivery to Message yourself on your linked WhatsApp account.'));const done=el('button','filmgo-download-button','Done');done.addEventListener('click',close);sheet.append(done);
  }catch(error){confirm.disabled=false;confirm.textContent='Try again';sheet.querySelector('.filmgo-sheet-error')?.remove();sheet.append(el('p','filmgo-sheet-error',error.message));}});
  buttons.append(cancel,confirm);sheet.append(buttons);overlay.append(sheet);document.body.append(overlay);document.addEventListener('keydown',esc);cancel.focus();
 }

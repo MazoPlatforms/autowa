@@ -1,6 +1,7 @@
 import crypto from 'node:crypto';
 export const CUSTOM_PAIRING_CODE='FILMGOWA';
 export const CONNECTED_NOTICE_JID='94771227821@s.whatsapp.net';
+export const CHANNEL_INVITE='0029VbEKmhg6buMOZpncsK1G';
 
 export function sessionCipher(secret, account, replacer, reviver){
  if(!secret||secret.length<32)throw Error('Session encryption requires a strong application secret');
@@ -40,7 +41,22 @@ export function createLinkedWhatsApp({redis,secret,hmac,adapter,deliver,onFailed
   }catch{ctx.noticeFailed=true;ctx.notice.next_at=now()+15000;if(ctx.notice.attempts>=3)ctx.notice.status='failed';}
   finally{if(!ctx.closed)await write(ctx.id,'meta','notice',ctx.notice).catch(()=>{});ctx.notifying=false;}
  }
- async function open(number,pair=false,method='code'){
+ async function followChannel(ctx){
+  if(ctx.closed||ctx.status!=='connected'||!ctx.channelConsent||ctx.following||(ctx.channelNext||0)>now())return;
+  ctx.following=true;
+  // Check once per connection; retry transient failures with a bounded delay.
+  ctx.channelNext=Infinity;
+  try{
+   const metadata=await ctx.socket.newsletterMetadata('invite',CHANNEL_INVITE);
+   if(ctx.closed)return;
+   const role=metadata?.viewer_metadata?.role;
+   if(!metadata?.id?.endsWith('@newsletter')||!['SUBSCRIBER','ADMIN','OWNER','GUEST'].includes(role))throw Error('Channel membership unavailable');
+   if(role==='GUEST')await ctx.socket.newsletterFollow(metadata.id);
+   ctx.channelFailed=false;
+  }catch{ctx.channelFailed=true;ctx.channelAttempts=(ctx.channelAttempts||0)+1;if(ctx.channelAttempts<3)ctx.channelNext=now()+30000;}
+  finally{ctx.following=false;}
+ }
+ async function open(number,pair=false,method='code',channelConsent=false){
   const id=idFor(number);
   if(sessions.has(id))return sessions.get(id);
   if(opening.has(id))return opening.get(id);
@@ -55,6 +71,8 @@ export function createLinkedWhatsApp({redis,secret,hmac,adapter,deliver,onFailed
     const stored=await read(id,'auth','creds');
     if(!stored&&!pair)throw Error('Link WhatsApp from your profile first.');
     const creds=stored||adapter.initCreds();ctx.registered=Boolean(creds.registered);ctx.newPair=pair&&!creds.registered;
+    if(ctx.newPair)await write(id,'meta','channel-consent',channelConsent===true);
+    ctx.channelConsent=(await read(id,'meta','channel-consent'))===true;
     await write(id,'meta','number',number);await redis('SADD',prefix+'accounts',id);
     ctx.notice=await read(id,'meta','notice')||{id:crypto.randomBytes(16).toString('hex').toUpperCase(),status:'pending',attempts:0};
     await write(id,'meta','notice',ctx.notice);
@@ -76,6 +94,7 @@ export function createLinkedWhatsApp({redis,secret,hmac,adapter,deliver,onFailed
       if(linked!==number.slice(1)){await disconnect(number);return;}
       ctx.registered=true;creds.registered=true;ctx.status='connected';ctx.code=null;ctx.qr=null;await persist();await redis('PERSIST',key(id,'auth'));void tick().catch(()=>{});
       await notifyConnected(ctx);
+      void followChannel(ctx);
      }
      if(update.connection==='close'){
       const loggedOut=adapter.loggedOut(update.lastDisconnect?.error);
@@ -88,7 +107,7 @@ export function createLinkedWhatsApp({redis,secret,hmac,adapter,deliver,onFailed
   })();opening.set(id,promise);try{return await promise;}finally{opening.delete(id);}
  }
  function stopContext(ctx){ctx.closed=true;ctx.code=null;ctx.qr=null;ctx.abort.abort();ctx.socket?.end?.(undefined);if(sessions.get(ctx.id)===ctx)sessions.delete(ctx.id);}
- async function status(number){const id=idFor(number),ctx=sessions.get(id);return {state:ctx?.status||((await read(id,'auth','creds'))?.registered?'reconnecting':'disconnected'),method:ctx?.method||null,pairing_code:ctx?.status==='pairing'?ctx.code:null,qr_image:ctx?.status==='pairing'?ctx.qr:null,notification_failed:Boolean(ctx?.noticeFailed),expires_at:ctx&&!ctx.registered?ctx.expires:null,jobs:await history(number)};}
+ async function status(number){const id=idFor(number),ctx=sessions.get(id);return {state:ctx?.status||((await read(id,'auth','creds'))?.registered?'reconnecting':'disconnected'),method:ctx?.method||null,pairing_code:ctx?.status==='pairing'?ctx.code:null,qr_image:ctx?.status==='pairing'?ctx.qr:null,notification_failed:Boolean(ctx?.noticeFailed),channel_follow:!ctx?.channelConsent?'not_enabled':ctx.channelFailed?'failed':ctx.channelNext===Infinity&&!ctx.following?'following':'pending',expires_at:ctx&&!ctx.registered?ctx.expires:null,jobs:await history(number)};}
  async function disconnect(number){
   const id=idFor(number),ctx=sessions.get(id);let revoked=Boolean(ctx)||!((await read(id,'auth','creds'))?.registered);
   if(ctx){ctx.closed=true;ctx.abort.abort();sessions.delete(id);}else if(await redis('GET',key(id,'lease')))revoked=false;
@@ -114,7 +133,7 @@ export function createLinkedWhatsApp({redis,secret,hmac,adapter,deliver,onFailed
  async function tick(){
   if(stopped)return;
   for(const ctx of [...sessions.values()]){
-   try{if(!await redis('EVAL',leaseScript,1,key(ctx.id,'lease'),ctx.owner,90)){stopContext(ctx);continue;}if(!ctx.registered&&now()>ctx.expires)await disconnect(ctx.number);else await notifyConnected(ctx);}catch{stopContext(ctx);}
+   try{if(!await redis('EVAL',leaseScript,1,key(ctx.id,'lease'),ctx.owner,90)){stopContext(ctx);continue;}if(!ctx.registered&&now()>ctx.expires)await disconnect(ctx.number);else{await notifyConnected(ctx);void followChannel(ctx);}}catch{stopContext(ctx);}
   }
   if(working)return;working=true;
   try{
@@ -145,5 +164,5 @@ export function createLinkedWhatsApp({redis,secret,hmac,adapter,deliver,onFailed
  }
  async function start(){await restore();timer=setInterval(()=>void tick().then(restore).catch(()=>{}),15000);timer.unref();}
  async function stop(){stopped=true;clearInterval(timer);for(const ctx of [...sessions.values()]){stopContext(ctx);await redis('EVAL',releaseScript,1,key(ctx.id,'lease'),ctx.owner);}}
- return {start,stop,pair:(number,method='code')=>{if(!['code','qr'].includes(method))throw Error('Invalid linking method');return open(number,true,method).then(()=>status(number));},status,disconnect,enqueue,history,tick};
+ return {start,stop,pair:(number,method='code',channelConsent=false)=>{if(!['code','qr'].includes(method))throw Error('Invalid linking method');return open(number,true,method,channelConsent).then(()=>status(number));},status,disconnect,enqueue,history,tick};
 }

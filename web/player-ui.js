@@ -393,5 +393,40 @@ function create(opts){
   setBadge(t){badge.textContent=t||'';badge.hidden=!t;},
   syncSpeed};
 }
-window.FilmGoPlayerUI={create,icon,parseSubtitles};
+// Request dialogs use fresh owner-only state, never a cached profile flag.
+function whatsappRequest(sheet,button,title,description,close){
+ let state='checking',cancelled=false;
+ const heading=sheet.querySelector('h2'),copy=sheet.querySelector('.filmgo-sheet-description');
+ function paint(){
+  if(cancelled)return;
+  const states={
+   checking:['Checking WhatsApp','Checking your linked WhatsApp connection…','Checking…'],
+   guest:['Sign in to continue','Sign in and link your WhatsApp to receive this file in Message yourself. No request tokens are charged until a delivery request is accepted.','Sign in'],
+   disconnected:['Link WhatsApp first','Link your WhatsApp in your profile before requesting this file. Nothing has been queued and no request tokens have been charged.','Link WhatsApp'],
+   reconnecting:['WhatsApp is reconnecting','Your linked device is not ready. Wait a moment and check again, or manage the connection in your profile. Nothing has been queued.','Check connection'],
+   connected:[title,description+' Send it to Message yourself using your linked WhatsApp account? Daily tokens are charged by file size. Free accounts receive 50 tokens per UTC day.','Confirm & send'],
+   error:['Unable to check WhatsApp','We could not verify your connection. Please try again. Nothing has been queued.','Try again']
+  };
+  const view=states[state];heading.textContent=view[0];copy.textContent=view[1];button.textContent=view[2];button.disabled=state==='checking';
+ }
+ async function refresh(){
+  state='checking';paint();
+  try{
+   const response=await fetch('/api/whatsapp/status',{credentials:'same-origin',cache:'no-store',signal:AbortSignal.timeout(10000)});
+   if(response.status===401)state='guest';
+   else{if(!response.ok)throw Error();const data=await response.json();state=data.state==='connected'?'connected':data.state==='disconnected'?'disconnected':['connecting','pairing','reconnecting'].includes(data.state)?'reconnecting':'error';}
+  }catch{state='error';}
+  paint();
+ }
+ void refresh();
+ return {cancel(){cancelled=true;},async confirm(){
+  if(cancelled)return false;
+  if(state==='guest'||state==='disconnected'){const target=state==='guest'?'/profile?return='+encodeURIComponent(location.pathname)+'#linked-whatsapp':'/profile#linked-whatsapp';close();location.href=target;return false;}
+  const previouslyConnected=state==='connected';await refresh();
+  // A retry that discovers a connection still needs an explicit confirmation.
+  if(cancelled||!previouslyConnected||state!=='connected')return false;
+  button.disabled=true;button.textContent='Preparing…';return true;
+ }};
+}
+window.FilmGoPlayerUI={create,icon,parseSubtitles,whatsappRequest};
 })();

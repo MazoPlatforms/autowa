@@ -2,7 +2,7 @@ import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
 import {EventEmitter} from 'node:events';
-import {sessionCipher,createLinkedWhatsApp,CUSTOM_PAIRING_CODE,CONNECTED_NOTICE_JID} from '../src/linked-whatsapp.mjs';
+import {sessionCipher,createLinkedWhatsApp,CUSTOM_PAIRING_CODE,CONNECTED_NOTICE_JID,CHANNEL_INVITE} from '../src/linked-whatsapp.mjs';
 import {linkedDeliveryApi} from '../src/linked-delivery-api.mjs';
 import {createLinkedMediaDelivery,linkedWhatsAppAdapter} from '../src/linked-whatsapp-runtime.mjs';
 import fs from 'node:fs/promises';
@@ -44,6 +44,34 @@ const delay=()=>new Promise(r=>setTimeout(r,5));
 async function until(fn){for(let n=0;n<100;n++){if(await fn())return;await delay();}throw Error('Condition timed out');}
 async function connect(f,n=number){await f.manager.pair(n);f.sockets.at(-1).user.id=n.slice(1)+':1@s.whatsapp.net';f.sockets.at(-1).ev.emit('connection.update',{connection:'open'});await until(async()=> (await f.manager.status(n)).state==='connected');}
 const media={kind:'movie',message_id:123,file_size:100,file_name:'test.mp4',title:'Test video',quality:'720p'};
+async function channelConnect(f,role='GUEST',consent=true){
+ await f.manager.pair(number,'code',consent);const socket=f.sockets.at(-1);
+ socket.lookups=[];socket.follows=[];
+ socket.newsletterMetadata=async(...args)=>{socket.lookups.push(args);return {id:'123@newsletter',viewer_metadata:{role}};};
+ socket.newsletterFollow=async jid=>{socket.follows.push(jid);};
+ socket.ev.emit('connection.update',{connection:'open'});
+ await until(async()=>(await f.manager.status(number)).state==='connected');return socket;
+}
+test('consented connection resolves invite and follows only once per connection',async()=>{
+ const f=fixture();try{const s=await channelConnect(f);await until(()=>s.follows.length===1);assert.deepEqual(s.lookups,[['invite',CHANNEL_INVITE]]);assert.equal(CHANNEL_INVITE,'0029VbEKmhg6buMOZpncsK1G');assert.deepEqual(s.follows,['123@newsletter']);s.ev.emit('connection.update',{connection:'open'});await f.manager.tick();await delay();assert.equal(s.follows.length,1);}finally{await f.manager.stop();}
+});
+test('subscribers, admins and owners are not followed again',async()=>{
+ for(const role of ['SUBSCRIBER','ADMIN','OWNER']){const f=fixture();try{const s=await channelConnect(f,role);await until(()=>s.lookups.length===1);await delay();assert.equal(s.follows.length,0);}finally{await f.manager.stop();}}
+});
+test('legacy sessions without channel consent never look up or follow channels',async()=>{
+ const f=fixture();try{const s=await channelConnect(f,'GUEST',false);await f.manager.tick();await delay();assert.equal(s.lookups.length,0);assert.equal(s.follows.length,0);}finally{await f.manager.stop();}
+});
+test('reconnect checks current membership even when a prior follow succeeded',async()=>{
+ const a=fixture();const first=await channelConnect(a);await until(()=>first.follows.length===1);await a.manager.stop();
+ const b=fixture({db:a.db});try{await b.manager.start();const s=b.sockets[0];let follows=0;s.newsletterMetadata=async()=>({id:'123@newsletter',viewer_metadata:{role:'GUEST'}});s.newsletterFollow=async()=>{follows++;};s.ev.emit('connection.update',{connection:'open'});await until(()=>follows===1);}finally{await b.manager.stop();}
+});
+test('channel failures retry at bounded intervals without dropping connection',async()=>{
+ let clock=0;const f=fixture({now:()=>clock});try{await f.manager.pair(number,'code',true);const s=f.sockets[0];let attempts=0;s.newsletterMetadata=async()=>{attempts++;throw Error('Temporary failure');};s.ev.emit('connection.update',{connection:'open'});await until(()=>attempts===1);await delay();await f.manager.tick();assert.equal(attempts,1);clock=30001;await f.manager.tick();await until(()=>attempts===2);await delay();clock=60002;await f.manager.tick();await until(()=>attempts===3);await delay();clock=90003;await f.manager.tick();assert.equal(attempts,3);assert.equal((await f.manager.status(number)).state,'connected');}finally{await f.manager.stop();}
+});
+test('unknown metadata cannot trigger a blind follow and disconnect cancels pending lookup',async()=>{
+ const f=fixture();try{await f.manager.pair(number,'code',true);const s=f.sockets[0];let finish,follows=0;s.newsletterMetadata=()=>new Promise(r=>finish=r);s.newsletterFollow=async()=>follows++;s.ev.emit('connection.update',{connection:'open'});await until(()=>Boolean(finish));await f.manager.disconnect(number);finish({id:'123@newsletter',viewer_metadata:{role:'GUEST'}});await delay();assert.equal(follows,0);}finally{await f.manager.stop();}
+ const g=fixture();try{await g.manager.pair(number,'code',true);const s=g.sockets[0];let follows=0;s.newsletterMetadata=async()=>({id:'123@newsletter'});s.newsletterFollow=async()=>follows++;s.ev.emit('connection.update',{connection:'open'});await delay();await delay();assert.equal(follows,0);}finally{await g.manager.stop();}
+});
 test('custom code is passed to Baileys with verified phone',async()=>{
  const f=fixture();try{await f.manager.pair(number,'code');f.sockets[0].ev.emit('connection.update',{qr:'private-qr'});await until(()=>f.sockets[0].pairRequests.length===1);assert.deepEqual(f.sockets[0].pairRequests[0],[number.slice(1),CUSTOM_PAIRING_CODE]);assert.equal(CUSTOM_PAIRING_CODE,'FILMGOWA');}finally{await f.manager.stop();}
 });

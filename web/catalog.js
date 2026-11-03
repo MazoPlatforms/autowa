@@ -12,10 +12,12 @@ function confirmMovieRequest(movie,channel){
  sheet.append(el('h2','','Confirm movie request'),el('p','filmgo-sheet-description',movie.title+' ('+movie.year+') via '+(channel==='telegram'?'Telegram':'WhatsApp')+'? Daily tokens are charged by file size and delivery method. Free accounts receive 50 tokens per UTC day.'));
  const buttons=el('div','filmgo-sheet-buttons');
  const cancel=el('button','filmgo-open-button','Cancel');const confirm=el('button','filmgo-download-button','Confirm');
- const close=()=>{document.removeEventListener('keydown',esc);overlay.remove();};
+ const close=()=>{linkedRequest?.cancel();document.removeEventListener('keydown',esc);overlay.remove();};
  const esc=e=>{if(e.key==='Escape')close();};
  cancel.addEventListener('click',close);overlay.addEventListener('click',e=>{if(e.target===overlay)close();});
+ const linkedRequest=channel==='telegram'?null:FilmGoPlayerUI.whatsappRequest(sheet,confirm,'Confirm movie request',movie.title+(movie.year?' ('+movie.year+')':''),close);
  confirm.addEventListener('click',async()=>{
+  if(linkedRequest&&!await linkedRequest.confirm())return;
   confirm.disabled=true;confirm.textContent='Preparing…';
   try{
    if(channel==='telegram'){
@@ -28,7 +30,7 @@ function confirmMovieRequest(movie,channel){
    const data=await response.json();if(response.status===401){close();location.href='/profile?return='+encodeURIComponent(location.pathname);return;}
    if(response.status===428&&data.code==='whatsapp_link_required'){close();location.href='/profile#linked-whatsapp';return;}
    if(!response.ok)throw Error(data.error||'Request failed');
-   sheet.replaceChildren(el('h2','','Request received'),el('p','filmgo-sheet-description','Your WhatsApp movie request has been queued.'));
+   sheet.replaceChildren(el('h2','','Request received'),el('p','filmgo-sheet-description','Your movie is queued for delivery to Message yourself on your linked WhatsApp account.'));
    const done=el('button','filmgo-download-button','Done');done.addEventListener('click',close);sheet.append(done);
   }catch(err){confirm.disabled=false;confirm.textContent='Try again';sheet.querySelector('.filmgo-sheet-error')?.remove();sheet.append(el('p','filmgo-sheet-error',err.message));}
  });

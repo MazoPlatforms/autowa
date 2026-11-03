@@ -15,7 +15,7 @@ export async function linkedDeliveryApi(req,res,url,{authenticated,send,body,lim
   if(data.consent!==true){send(res,400,{error:'Confirm linked-device access before linking.'});return true;}
   if(data.method!==undefined&&!['code','qr'].includes(data.method)){send(res,400,{error:'Choose QR or pairing code.'});return true;}
   if(!await limit('linked-wa-pair:'+session.number,5,3600)){send(res,429,{error:'Pairing limit reached. Try again later.'});return true;}
-  try{send(res,202,await manager.pair(session.number,data.method||'code'));}catch{send(res,503,{error:'Could not start WhatsApp pairing. Try again shortly.'});}return true;
+  try{send(res,202,await manager.pair(session.number,data.method||'code',data.channel_consent===true));}catch{send(res,503,{error:'Could not start WhatsApp pairing. Try again shortly.'});}return true;
  }
  if(data.rights_confirmed!==true){send(res,400,{error:'Confirm you can receive this media.'});return true;}
  if(!await limit('linked-wa-delivery:'+session.number,20,3600)){send(res,429,{error:'Request limit reached.'});return true;}
