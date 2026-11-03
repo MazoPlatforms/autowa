@@ -382,7 +382,8 @@ body.fg-home .tv-main .page-button:hover:not(:disabled){background:var(--fg-surf
 body.fg-home .tv-main .page-button.active{background:var(--fg-text);color:#000;border-color:var(--fg-text)}
 @media(max-width:640px){
   body.fg-home .catalog-filters{
-    overflow-x:auto;
+    overflow:visible;
+    flex-wrap:wrap;
     scrollbar-width:none;
     -webkit-overflow-scrolling:touch;
     padding-bottom:4px;
@@ -391,6 +392,8 @@ body.fg-home .tv-main .page-button.active{background:var(--fg-text);color:#000;b
   }
   body.fg-home .catalog-filters::-webkit-scrollbar{display:none}
   body.fg-home .fg-genre-rail{
+    order:5;
+    flex-basis:100%;
     mask-image:none;
     -webkit-mask-image:none;
   }
@@ -400,6 +403,13 @@ body.fg-home .tv-main .page-button.active{background:var(--fg-text);color:#000;b
     font-size:12px;
     gap:6px;
   }
+  body.fg-home .fg-year-wrap{position:static}
+  body.fg-home .fg-rail-divider{display:none}
+  body.fg-home .fg-capsule-sort{max-width:150px}
+  body.fg-home .fg-capsule-label{min-width:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+  body.fg-home .fg-filter-reset{margin-left:auto;padding-inline:10px}
+  body.fg-home .fg-filter-reset span{display:none}
+  body.fg-home .fg-year-popover{left:0;right:auto;max-width:calc(100vw - 32px)}
   body.fg-home .fg-genre-chip{
     height:36px;
     padding:0 13px;
