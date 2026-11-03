@@ -263,10 +263,8 @@ function renderPagination(total){
   pagination.append(button);
  };
  add('‹',page-1,page===1);
- const compact=window.matchMedia('(max-width: 640px)').matches;
  const visible=new Set([1,pages,page]);
- if(pages<=5){for(let n=1;n<=pages;n++)visible.add(n);}
- else if(compact){if(page<=3){visible.add(2);visible.add(3);}else if(page>=pages-2){visible.add(pages-1);visible.add(pages-2);}}
+ if(pages<=6){for(let n=1;n<=pages;n++)visible.add(n);}
  else {for(let n=Math.max(1,page-1);n<=Math.min(pages,page+1);n++)visible.add(n);}
  let previous=0;
  for(const n of [...visible].sort((a,b)=>a-b)){
