@@ -73,7 +73,7 @@ export function createLinkedWhatsApp({redis,secret,hmac,adapter,deliver,onFailed
  function stopContext(ctx){ctx.closed=true;ctx.code=null;ctx.abort.abort();ctx.socket?.end?.(undefined);if(sessions.get(ctx.id)===ctx)sessions.delete(ctx.id);}
  async function status(number){const id=idFor(number),ctx=sessions.get(id);return {state:ctx?.status||((await read(id,'auth','creds'))?.registered?'reconnecting':'disconnected'),pairing_code:ctx?.status==='pairing'?ctx.code:null,expires_at:ctx&&!ctx.registered?ctx.expires:null,jobs:await history(number)};}
  async function disconnect(number){
-  const id=idFor(number),ctx=sessions.get(id);let revoked=true;
+  const id=idFor(number),ctx=sessions.get(id);let revoked=Boolean(ctx)||!((await read(id,'auth','creds'))?.registered);
   if(ctx){ctx.closed=true;ctx.abort.abort();sessions.delete(id);}else if(await redis('GET',key(id,'lease')))revoked=false;
   // Revoke the write fence before deleting credentials, including when a
   // rolling deployment routes this request to a different instance.

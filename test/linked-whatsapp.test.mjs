@@ -63,6 +63,9 @@ test('a second worker cannot own the same session',async()=>{
 test('registered sessions restore after restart without a new code',async()=>{
  const a=fixture();await connect(a);await a.manager.stop();const b=fixture({db:a.db});try{await b.manager.start();assert.equal(b.sockets.length,1);assert.equal(b.sockets[0].auth.creds.registered,true);assert.equal((await b.manager.status(number)).pairing_code,null);}finally{await b.manager.stop();}
 });
+test('offline disconnect reports that device must also be removed in WhatsApp',async()=>{
+ const a=fixture();await connect(a);await a.manager.stop();const b=fixture({db:a.db});const result=await b.manager.disconnect(number);assert.equal(result.device_revoked,false);assert.equal((await b.manager.status(number)).state,'disconnected');await b.manager.stop();
+});
 test('disconnect erases credentials and prevents future delivery',async()=>{
  const f=fixture();await connect(f);await f.manager.disconnect(number);assert.equal((await f.manager.status(number)).state,'disconnected');assert(!f.db.hashes.has('filmgo:linked-wa:v1:'+hmac(number)+':auth'));await assert.rejects(()=>f.manager.enqueue(number,media));await f.manager.stop();
 });
