@@ -5,6 +5,8 @@ on:
       - 'src/server.mjs'
       - 'src/whatsapp-otp.mjs'
       - 'src/stage-request.mjs'
+      - 'src/linked-*.mjs'
+      - 'test/linked-whatsapp.test.mjs'
       - 'web/**'
       - 'Dockerfile'
       - 'package.json'
@@ -25,6 +27,9 @@ jobs:
           node --check src/server.mjs
           node --check src/whatsapp-otp.mjs
           node --check src/stage-request.mjs
+          node --test test/linked-whatsapp.test.mjs
+          node --check src/linked-whatsapp-runtime.mjs
+          node --check web/linked-whatsapp.js
           node --check web/app.js
           test -s web/style.css
       - name: Container build

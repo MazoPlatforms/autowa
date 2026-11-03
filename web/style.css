@@ -337,6 +337,13 @@ input:not([type=checkbox]):not([type=hidden]):focus{border-color:var(--text);bac
 .activity-empty{padding:23px 15px;border:1px dashed #ffffff17;border-radius:16px;background:#ffffff03;text-align:center}
 .activity-empty strong{font-size:14px;font-weight:500;color:#c9c9d2}
 .activity-empty p{margin-top:8px;font-size:13px;color:#92929f}
+.linked-whatsapp{grid-column:1/-1;scroll-margin-top:86px}
+.linked-whatsapp [hidden]{display:none!important}
+.linked-whatsapp .linked-wa-status{margin-bottom:12px;color:#d1d1da;font-size:14px}
+.linked-wa-consent{display:flex;align-items:flex-start;gap:10px;letter-spacing:0;text-transform:none;font-size:13px;line-height:1.6}
+.linked-wa-consent input{margin-top:4px;accent-color:#ff4265;flex:none}
+.linked-wa-code{display:block;margin:18px 0;padding:20px;border:1px solid #ffffff24;border-radius:16px;text-align:center;font-size:28px;font-weight:700;letter-spacing:.12em;font-variant-numeric:tabular-nums}
+.linked-whatsapp .recent-activity{margin-top:18px}
 .account-shell .profile-logout{grid-column:1/-1;width:auto;justify-self:start;color:#ff7b91;border:1.5px solid #ff4265;border-radius:16px;corner-shape:squircle;background:rgba(255,66,101,.06);padding-inline:20px;min-height:44px;margin-top:2px;font-size:13px}
 .account-shell .profile-logout:hover{color:#ff9bad;border-color:#ff6a86;background:rgba(255,66,101,.12)}
 .account-shell #profile-name-editor{margin-top:18px}

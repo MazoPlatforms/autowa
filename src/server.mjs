@@ -12,6 +12,9 @@ import {startStreamWorker,proxyRange,downloadFile,streamWorkerState} from './str
 import {startFastStreamWorker,fastProxyRange,fastWarm} from './fast-stream-worker.mjs';
 import {createAudioService,telegramRangeReader} from './audio-tracks.mjs';
 import {DAILY_TOKEN_LIMIT,DAILY_TOKEN_LIMIT_MILLI,tokenCostMilli,tokenAmount,reserveDailyTokens,releaseDailyTokens,dailyTokenUsage} from './daily-tokens.mjs';
+import {createLinkedWhatsApp} from './linked-whatsapp.mjs';
+import {linkedWhatsAppAdapter,deliverLinkedMedia} from './linked-whatsapp-runtime.mjs';
+import {linkedDeliveryApi} from './linked-delivery-api.mjs';
 
 const PORT=Number(process.env.PORT||8000);
 const STREAM_RANGE_SIZE=32*1024*1024;
@@ -78,6 +81,9 @@ function startOtpMessageCleanup(){
 }
 const UNLIMITED_REQUEST_NUMBER="+94779290433";
 const unlimitedRequests=number=>number===UNLIMITED_REQUEST_NUMBER;
+const linkedWhatsApp=configured?createLinkedWhatsApp({redis,secret:process.env.WHATSAPP_LINK_SECRET||secret,hmac,adapter:linkedWhatsAppAdapter,deliver:deliverLinkedMedia,onFailed:async job=>{
+ if(await redis('SET','linked-wa-refunded:'+job.id,'1','NX','EX',2592000)==='OK')await releaseDailyTokens(redis,job.reservation);
+}}):null;
 const telegramReady=['TELEGRAM_API_ID','TELEGRAM_API_HASH','TELEGRAM_SESSION','TELEGRAM_CHANNEL_ID'].every(k=>!!process.env[k]);
 const telegramAnimeReady=['TELEGRAM_API_ID','TELEGRAM_API_HASH','TELEGRAM_SESSION','TELEGRAM_ANIME_CHANNEL_ID'].every(k=>!!process.env[k]);
 let syncPromise=null;
@@ -244,11 +250,12 @@ async function requestHistory(number){
    if(['processing','downloading','submitted','failed'].includes(saved.status)){record.status=saved.status;record.finished_at=saved.finished_at||null;}
   }catch{/* Keep last known status when GitHub is unavailable. */}
  }));
- return records;
+ const linked=linkedWhatsApp?await linkedWhatsApp.history(number):[];
+ return [...linked,...records].sort((a,b)=>(Date.parse(b.created_at)||0)-(Date.parse(a.created_at)||0)).slice(0,100);
 }
 async function profile(number){const raw=await redis('GET','profile:'+hmac(number));return raw?JSON.parse(raw):{name:'',created_at:new Date().toISOString()};}
 async function sendOtp(number,code){return sendWhatsAppOtp(number,code);}
-const index=fs.readFileSync(new URL('../web/index.html',import.meta.url)).toString('utf8').replace('<script src="/poster-wall.js','<script src="/phone-format.js?v=20261103-1" defer></script><script src="/poster-wall.js');
+const index=fs.readFileSync(new URL('../web/index.html',import.meta.url)).toString('utf8').replace('<script src="/poster-wall.js','<script src="/phone-format.js?v=20261103-1" defer></script><script src="/poster-wall.js').replace('</body>','<script src="/linked-whatsapp.js?v=20261103-1" defer></script></body>');
 const catalogHtml=fs.readFileSync(new URL('../web/catalog.html',import.meta.url));
 const catalogJs=fs.readFileSync(new URL('../web/catalog.js',import.meta.url));
 const catalogCss=fs.readFileSync(new URL('../web/catalog.css',import.meta.url));
@@ -336,6 +343,7 @@ const appJs=fs.readFileSync(new URL('../web/app.js',import.meta.url));
 const stylesheet=fs.readFileSync(new URL('../web/style.css',import.meta.url));
 const posterWallJs=fs.readFileSync(new URL('../web/poster-wall.js',import.meta.url));
 const phoneFormatJs=fs.readFileSync(new URL('../web/phone-format.js',import.meta.url));
+const linkedWhatsAppJs=fs.readFileSync(new URL('../web/linked-whatsapp.js',import.meta.url));
 const posterBackgrounds=new Map(['bg-04.webp','bg-05.webp','bg-06.webp','bg-28.webp','bg-30.webp'].map(name=>[
  '/posters/background/'+name,
  fs.readFileSync(new URL('../web/posters/background/'+name,import.meta.url))
@@ -398,6 +406,22 @@ const audioService=createAudioService({
 const server=http.createServer(async(req,res)=>{
  try{
   const url=new URL(req.url,'http://localhost');
+  if(req.method==='GET'&&url.pathname==='/linked-whatsapp.js'){res.writeHead(200,{'Content-Type':'text/javascript; charset=utf-8','Cache-Control':'no-store','X-Content-Type-Options':'nosniff'});return res.end(linkedWhatsAppJs);}
+  if(configured&&await linkedDeliveryApi(req,res,url,{authenticated,send,body,limit,manager:linkedWhatsApp,
+   resolveMedia:async(kind,input)=>{
+    if(kind==='anime'){
+     if(typeof input.episode_slug_id!=='string')return null;
+     const found=findAnimeEpisode(await getAnimeCatalog(),input.episode_slug_id),episode=selectAnimeVariant(found?.episode,input.quality);
+     if(!episode)return null;
+     return {kind,title:found.anime.title+' · Season '+episode.season+' · Episode '+episode.episode,quality:episode.quality,file_size:Number(episode.file_size),message_id:Number(episode.telegram_message_id),file_name:episode.file_name};
+    }
+    const catalog=await getPublicCatalog();
+    for(const movie of catalog.movies||[]){const variant=Object.entries(movie.qualities||{[movie.quality]:movie}).find(([,item])=>Number(item.telegram_message_id)===input.movie_id);if(variant){const [quality,item]=variant;return {kind,title:movie.title,year:movie.year,quality,file_size:Number(item.file_size),message_id:Number(item.telegram_message_id),file_name:item.file_name};}}
+    return null;
+   },
+   reserve:(number,size)=>reserveDailyTokens(redis,hmac(number),tokenCostMilli(size,'whatsapp'),{unlimited:unlimitedRequests(number)}),
+   refund:reservation=>releaseDailyTokens(redis,reservation)
+  }))return;
   if(url.pathname==='/admin'||url.pathname==='/admin.css'||url.pathname==='/admin.js'){
    const session=await authenticated(req);
    if(!session||session.number!=='+94779290433')return send(res,404,{error:'Not found'});
@@ -798,60 +822,12 @@ const server=http.createServer(async(req,res)=>{
    await redis('SET','profile:'+hmac(session.number),JSON.stringify({...await profile(session.number),name,updated_at:new Date().toISOString()}));
    return send(res,200,{ok:true,name});
   }
-  if(url.pathname==='/api/anime-request'){
-   if(data.rights_confirmed!==true||typeof data.episode_slug_id!=='string'||!/^[A-Za-z0-9_-]{8,80}$/.test(data.episode_slug_id))return send(res,400,{error:'Select an anime episode and confirm distribution rights'});
-   const catalog=await getAnimeCatalog(),found=findAnimeEpisode(catalog,data.episode_slug_id),anime=found?.anime,episode=selectAnimeVariant(found?.episode,data.quality);
-   if(!episode||!anime)return send(res,404,{error:'Anime episode unavailable'});
-   const messageId=Number(episode.telegram_message_id),size=Number(episode.file_size||0);if(!Number.isSafeInteger(messageId)||!Number.isSafeInteger(size)||size<=0)return send(res,503,{error:'Anime episode size unavailable; try again later'});
-   if(!telegramAnimeReady)return send(res,503,{error:'Anime delivery is temporarily unavailable'});
-   const exempt=unlimitedRequests(session.number),reservation=await reserveDailyTokens(redis,hmac(session.number),tokenCostMilli(size,'whatsapp'),{unlimited:exempt});if(!reservation.allowed)return send(res,429,{error:'Daily streaming tokens exhausted; reset is 00:00:00 UTC'});
-   const requestId=crypto.randomUUID(),[owner,repo]=String(process.env.GITHUB_REPOSITORY||'').split('/');if(!owner||!repo){await releaseDailyTokens(redis,reservation).catch(()=>{});return send(res,503,{error:'Request queue unavailable'});}
-   const payload={request_id:requestId,media_type:'anime',title:anime.title,episode_slug_id:episode.slug_id,special_type:episode.special_type||null,telegram_message_id:messageId,season:Number(episode.season)||1,episode:Number(episode.episode??episode.number)||0,quality:String(episode.quality||'720p'),file_name:String(episode.file_name||''),file_size:size,recipient_jid:session.number.slice(1)+'@s.whatsapp.net',rights_confirmed:true};
-   let result;try{result=await fetch('https://api.github.com/repos/'+encodeURIComponent(owner)+'/'+encodeURIComponent(repo)+'/dispatches',{method:'POST',headers:{Authorization:'Bearer '+process.env.GITHUB_DISPATCH_TOKEN,Accept:'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28','Content-Type':'application/json'},body:JSON.stringify({event_type:'autowa-verified-anime-request',client_payload:payload}),signal:AbortSignal.timeout(15000)});}catch(error){await releaseDailyTokens(redis,reservation).catch(()=>{});return send(res,503,{error:'Queue unavailable; try again later'});}
-   if(!result.ok){await releaseDailyTokens(redis,reservation).catch(()=>{});return send(res,503,{error:'Queue unavailable; try again later'});}
-   void logFilmGo('requests','📨 WhatsApp anime request queued · '+anime.title+' S'+payload.season+'E'+payload.episode+' · request '+requestId);return send(res,202,{ok:true,request_id:requestId});
-  }
-  if(data.rights_confirmed!==true||!Number.isSafeInteger(data.movie_id)||data.movie_id<=0)return send(res,400,{error:'Select a movie and confirm distribution rights'});
-  const catalog=await getCatalog();
-  let movie=null;
-  try{
-   const {stdout}=await execFileAsync('python3',['src/telegram_media.py','check',String(data.movie_id)],{timeout:45000,maxBuffer:32768,env:process.env});
-   const fresh=JSON.parse(stdout).movie;
-   if(!fresh)return send(res,409,{error:'Movie was deleted or caption changed. Refresh and select another.'});
-   movie=fresh;
-  }catch(err){console.warn('Movie verification failed:',err.message);return send(res,503,{error:'Unable to verify movie availability right now'});}
-
-  const claim=unlimitedRequests(session.number)?'OK':await redis('SET','claim:'+hmac(session.nonce),'1','EX',900,'NX');
-  if(claim!=='OK')return send(res,409,{error:'Request already submitted'});
-  if(!Number.isSafeInteger(movie.size)||movie.size<=0){if(!unlimitedRequests(session.number))await redis('DEL','claim:'+hmac(session.nonce));return send(res,503,{error:'Movie size unavailable; try again later'});}
-  const tokenReservation=await reserveDailyTokens(redis,hmac(session.number),tokenCostMilli(movie.size||0,'whatsapp'),{unlimited:unlimitedRequests(session.number)});
-  if(!tokenReservation.allowed){await redis('DEL','claim:'+hmac(session.nonce));return send(res,429,{error:'Daily tokens exhausted; reset is 00:00:00 UTC'});}
-  const requestId=crypto.randomUUID();
-  const [owner,repo]=process.env.GITHUB_REPOSITORY.split('/');
-  if(!owner||!repo)throw Error('Invalid GITHUB_REPOSITORY');
-  const payload={request_id:requestId,title:movie.title,movie_id:movie.id,year:movie.year,quality:movie.quality,recipient_jid:session.number.slice(1)+'@s.whatsapp.net',rights_confirmed:true};
-  let result;
-  try{result=await fetch('https://api.github.com/repos/'+encodeURIComponent(owner)+'/'+encodeURIComponent(repo)+'/dispatches',{
-   method:'POST',headers:{Authorization:'Bearer '+process.env.GITHUB_DISPATCH_TOKEN,Accept:'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28','Content-Type':'application/json'},
-   body:JSON.stringify({event_type:'autowa-verified-request',client_payload:payload}),signal:AbortSignal.timeout(15000)
-  });}catch(err){await releaseDailyTokens(redis,tokenReservation).catch(()=>{});await redis('DEL','claim:'+hmac(session.nonce));throw err;}
-  if(!result.ok){await releaseDailyTokens(redis,tokenReservation).catch(()=>{});await redis('DEL','claim:'+hmac(session.nonce));return send(res,503,{error:'Queue unavailable; try again later'});}
-  void logFilmGo('requests','📨 WhatsApp movie request queued · '+movie.title+' ('+movie.year+') · '+movie.quality+' · request '+requestId);
-  // Queue accepted; store only minimal metadata in the user's private Redis list.
-  // GitHub dispatch acceptance does not imply media delivery.
-  try{
-   await redis('LPUSH',historyKey(session.number),JSON.stringify({id:requestId,title:movie.title,year:movie.year,quality:movie.quality,status:'pending_review',created_at:new Date().toISOString()}));
-   await redis('LTRIM',historyKey(session.number),0,99);
-   const month=new Date().toISOString().slice(0,7);
-   const monthlyKey='monthly-requests:'+hmac(session.number)+':'+month;
-   await redis('INCR',monthlyKey);
-   await redis('EXPIRE',monthlyKey,60*86400);
-  }catch(err){console.error('FilmGo request history persistence failed',err.message);}
-  return send(res,202,{request_id:requestId,status:'pending_review',message:'Request queued for review; delivery is not guaranteed',tokens_used:tokenAmount(tokenReservation.costMilli),tokens_remaining:tokenReservation.unlimited?null:tokenAmount(Math.max(0,DAILY_TOKEN_LIMIT_MILLI-tokenReservation.usedMilli))});
+  return send(res,404,{error:'Not found'});
  }catch(err){console.error('API error',String(err.message));return send(res,500,{error:'Request could not be completed'});}
 });
 server.listen(PORT,'0.0.0.0',()=>console.log('FilmGo API listening on',PORT));
 if(configured){
+ linkedWhatsApp.start().catch(()=>console.error('Linked WhatsApp initialization deferred'));
  startOtpMessageCleanup();
  startWhatsApp().catch(e=>console.error('WhatsApp initialization failed',e.message));
  startFilmGoBot(refreshCatalog);

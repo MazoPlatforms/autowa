@@ -3,6 +3,7 @@ WORKDIR /app
 COPY package.json ./
 RUN apk add --no-cache git openssh-client ca-certificates ffmpeg python3 py3-pip build-base python3-dev && npm install --no-audit --no-fund
 COPY requirements-fast-stream.txt ./requirements-fast-stream.txt
+COPY src/linked-whatsapp.mjs src/linked-whatsapp-runtime.mjs src/linked-delivery-api.mjs ./src/
 RUN python3 -m pip install --break-system-packages --no-cache-dir telethon==1.42.0 -r requirements-fast-stream.txt
 COPY src/server.mjs src/filmgo-bot.mjs src/filmgo-logs.mjs src/whatsapp-otp.mjs src/stream-worker.mjs src/fast-stream-worker.mjs src/daily-tokens.mjs src/audio-tracks.mjs src/telegram_media.py src/telegram_stream.py src/telegram_stream_server.py src/telegram_stream_fast_server.py ./src/
 COPY web/ ./web/

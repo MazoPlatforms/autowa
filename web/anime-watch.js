@@ -120,6 +120,7 @@ function confirmAnimeRequest(anime,episode,channel,quality){
  confirm.addEventListener('click',async()=>{confirm.disabled=true;confirm.textContent='Preparing…';try{
   const endpoint=channel==='telegram'?'/api/anime-telegram-link':'/api/anime-request',payload=channel==='telegram'?{episode_slug_id:episode.slug_id,quality}:{episode_slug_id:episode.slug_id,quality,rights_confirmed:true};
   const response=await fetch(endpoint,{method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)}),data=await response.json();
+  if(response.status===428&&data.code==='whatsapp_link_required'){close();location.href='/profile#linked-whatsapp';return;}
   if(response.status===401){close();location.href='/profile?return='+encodeURIComponent(location.pathname);return;}if(!response.ok)throw Error(data.error||'Request failed');
   if(channel==='telegram'){close();location.href=data.url;return;}
   sheet.replaceChildren(el('h2','','Request received'),el('p','filmgo-sheet-description','Your WhatsApp anime episode request has been queued.'));const done=el('button','filmgo-download-button','Done');done.addEventListener('click',close);sheet.append(done);

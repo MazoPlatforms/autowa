@@ -26,6 +26,7 @@ function confirmMovieRequest(movie,channel){
    }
    const response=await fetch('/api/request',{method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json'},body:JSON.stringify({movie_id:movie.telegram_message_id,rights_confirmed:true})});
    const data=await response.json();if(response.status===401){close();location.href='/profile?return='+encodeURIComponent(location.pathname);return;}
+   if(response.status===428&&data.code==='whatsapp_link_required'){close();location.href='/profile#linked-whatsapp';return;}
    if(!response.ok)throw Error(data.error||'Request failed');
    sheet.replaceChildren(el('h2','','Request received'),el('p','filmgo-sheet-description','Your WhatsApp movie request has been queued.'));
    const done=el('button','filmgo-download-button','Done');done.addEventListener('click',close);sheet.append(done);
@@ -410,7 +411,7 @@ download.addEventListener('click',async event=>{
  if(movieAccessState==='signed-out')location.href='/profile?return='+encodeURIComponent(location.pathname);
  else if(movieAccessState==='unavailable')void checkMovieAccess();
 });
-whatsapp.addEventListener('click',()=>{if(movieAccessState==='signed-in')confirmMovieRequest(m,'whatsapp');});
+whatsapp.addEventListener('click',()=>{if(movieAccessState==='signed-in')confirmMovieRequest({...m,...m.qualities?.[selected],slug_id:m.slug_id,quality:selected},'whatsapp');});
 telegram.addEventListener('click',()=>{if(movieAccessState==='signed-in')confirmMovieRequest(m,'telegram');});
 const setStatus=value=>{if(isActive())status.textContent=value;};
 const setLoading=(value,show=true)=>{if(!isActive())return;loadingOverlay.hidden=!show;};
