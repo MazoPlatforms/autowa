@@ -701,6 +701,7 @@ html{background:#0a0a0b;scroll-behavior:smooth}
 .tv .text-zinc-400{color:var(--muted)}.tv .text-zinc-200{color:#e4e4e7}
 .tv #catalog-detail .mt-9.max-w-3xl{border-top:1px solid var(--line)!important;padding-top:28px}
 .tv #catalog-detail h2{font-size:clamp(19px,2.2vw,24px);font-weight:700;letter-spacing:-.02em;margin:0}
+#catalog-detail .filmgo-watch>h2,.anime-watch .filmgo-watch>h2{margin-bottom:20px!important}
 .tv .filmgo-watch{max-width:none!important}
 .tv .filmgo-token-notice{border:1px solid var(--line)!important;border-radius:18px!important;background:var(--surface)!important;color:var(--muted)!important}
 .tv .filmgo-player-shell{border:1px solid var(--line);border-radius:22px;background:#000;box-shadow:0 30px 80px rgba(0,0,0,.55)}

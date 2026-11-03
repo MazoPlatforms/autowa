@@ -148,7 +148,7 @@ async function main(){
  const all=el('a','anime-watch-link');all.href='/anime/title/'+encodeURIComponent(anime.slug_id||'');all.append(g('list',16),document.createTextNode('All episodes'));info.append(all);
  layout.append(info);hero.append(layout);
 
- const section=el('section','mt-9 border-t border-zinc-800 pt-8 filmgo-watch');section.append(el('h2','mb-4 text-lg font-bold','Watch & download'));
+ const section=el('section','mt-9 border-t border-zinc-800 pt-8 filmgo-watch');section.append(el('h2','mb-4 text-lg font-bold','Watch & Download'));
  const notice=el('div','filmgo-token-notice filmgo-signin-notice');notice.setAttribute('role','status');notice.setAttribute('aria-live','polite');notice.hidden=true;section.append(notice);
  const status=el('p','filmgo-stream-status','');status.setAttribute('role','status');status.setAttribute('aria-live','polite');status.style.cssText='min-height:0;margin:10px 0 0;font-size:13px;color:#a1a1aa';
 
