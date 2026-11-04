@@ -44,6 +44,12 @@ const delay=()=>new Promise(r=>setTimeout(r,5));
 async function until(fn){for(let n=0;n<100;n++){if(await fn())return;await delay();}throw Error('Condition timed out');}
 async function connect(f,n=number){await f.manager.pair(n);f.sockets.at(-1).user.id=n.slice(1)+':1@s.whatsapp.net';f.sockets.at(-1).ev.emit('connection.update',{connection:'open'});await until(async()=> (await f.manager.status(n)).state==='connected');}
 const media={kind:'movie',message_id:123,file_size:100,file_name:'test.mp4',title:'Test video',quality:'720p'};
+test('pairing waits for WhatsApp handshake instead of early connecting event',async()=>{
+ const f=fixture();try{await f.manager.pair(number);const s=f.sockets[0];s.ev.emit('connection.update',{connection:'connecting'});await delay();assert.equal(s.pairRequests.length,0);s.ev.emit('connection.update',{qr:'ready'});await until(()=>s.pairRequests.length===1);}finally{await f.manager.stop();}
+});
+test('registered socket close reconnects promptly without the restore sweep',async()=>{
+ const f=fixture();try{await connect(f);f.sockets[0].ev.emit('connection.update',{connection:'close',lastDisconnect:{error:{}}});await new Promise(r=>setTimeout(r,1150));assert.equal(f.sockets.length,2);f.sockets[1].ev.emit('connection.update',{connection:'open'});await until(async()=>(await f.manager.status(number)).state==='connected');}finally{await f.manager.stop();}
+});
 async function channelConnect(f,role='GUEST',consent=true){
  await f.manager.pair(number,'code',consent);const socket=f.sockets.at(-1);
  socket.lookups=[];socket.follows=[];

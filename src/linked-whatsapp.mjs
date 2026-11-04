@@ -86,7 +86,9 @@ export function createLinkedWhatsApp({redis,secret,hmac,adapter,deliver,onFailed
      if(update.qr&&!creds.registered&&pair&&method==='qr'){
       const image=await adapter.qrDataUrl(update.qr);if(ctx.closed||creds.registered)return;ctx.qr=image;ctx.status='pairing';
      }
-     if((update.qr||update.connection==='connecting')&&!creds.registered&&pair&&method==='code'&&!ctx.pairing){
+     // A connecting event precedes the WhatsApp handshake. Requesting a code
+     // there can close the socket before pairing is ready; QR signals readiness.
+     if(update.qr&&!creds.registered&&pair&&method==='code'&&!ctx.pairing){
       ctx.pairing=true;const code=await ctx.socket.requestPairingCode(number.slice(1),CUSTOM_PAIRING_CODE);if(ctx.closed||creds.registered)return;ctx.code=code;ctx.status='pairing';
      }
      if(update.connection==='open'){
@@ -100,6 +102,11 @@ export function createLinkedWhatsApp({redis,secret,hmac,adapter,deliver,onFailed
       const loggedOut=adapter.loggedOut(update.lastDisconnect?.error);
       stopContext(ctx);const owned=await redis('EVAL',releaseScript,1,key(id,'lease'),owner);
       if(loggedOut&&owned){await redis('DEL',key(id,'auth'));await redis('SREM',prefix+'accounts',id);}
+      else if(owned&&creds.registered){
+       // Pairing normally ends with restartRequired. Do not wait for the
+       // 15-second account-restore sweep to bring the registered device online.
+       const retry=setTimeout(()=>{if(!stopped&&!sessions.has(id))void read(id,'auth','creds').then(saved=>{if(saved?.registered&&!stopped)return open(number);}).catch(()=>{});},1000);retry.unref();
+      }
      }
     })().catch(()=>stopContext(ctx)));
     await persist();return ctx;
