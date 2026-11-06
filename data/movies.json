@@ -1,13 +1,19 @@
 {
   "schema_version": 2,
-  "updated_at": "2026-11-06T16:48:42.691093+00:00",
+  "updated_at": "2026-11-06T16:49:23.614557+00:00",
   "movies": [
     {
       "id": "telegram-123",
-      "slug_id": "U79zSYw9tOp-5gff",
+      "slug_id": "NxTztJBgsdACL9Ns",
       "title": "Comrade Kalyan",
       "year": 2026,
       "qualities": {
+        "1080p": {
+          "telegram_message_id": 124,
+          "file_size": 1786765880,
+          "file_name": "@CinemasTrend - Comrade Kalyan (2026) Tamil HQ HDRip - 1080p.mkv",
+          "mime_type": "video/x-matroska"
+        },
         "720p": {
           "telegram_message_id": 123,
           "file_size": 1018613199,
