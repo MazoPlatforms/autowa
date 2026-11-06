@@ -1,7 +1,41 @@
 {
   "schema_version": 2,
-  "updated_at": "2026-11-03T06:55:55.936949+00:00",
+  "updated_at": "2026-11-06T16:44:56.948286+00:00",
   "movies": [
+    {
+      "id": "telegram-121",
+      "slug_id": "1_0LJZsfpZv2Pybs",
+      "title": "I'm Game",
+      "year": 2026,
+      "qualities": {
+        "720p": {
+          "telegram_message_id": 121,
+          "file_size": 1310463249,
+          "file_name": "@CinemasTrend_I'm_Game_2026_Tamil_HQ_HDRip_720p_HEVC_.mkv",
+          "mime_type": "video/x-matroska"
+        }
+      },
+      "imdb_id": "tt34284946",
+      "poster": "https://m.media-amazon.com/images/M/MV5BYTY0NGE5YjItYWQzNi00ZGJlLTg1Y2UtYzQ2NmZkODRiNjE1XkEyXkFqcGc@._V1_.jpg",
+      "genre": [
+        "N/A"
+      ],
+      "runtime": null,
+      "director": "Nahas Hidhayath",
+      "cast": [
+        "Dulquer Salmaan",
+        "Mysskin",
+        "Samyuktha Viswanathan"
+      ],
+      "plot": null,
+      "imdb_rating": null,
+      "metadata_status": "matched",
+      "telegram_message_id": 121,
+      "file_size": 1310463249,
+      "file_name": "@CinemasTrend_I'm_Game_2026_Tamil_HQ_HDRip_720p_HEVC_.mkv",
+      "mime_type": "video/x-matroska",
+      "quality": "720p"
+    },
     {
       "id": "telegram-120",
       "slug_id": "NBUzxhim4vBG4hl0",
@@ -3686,32 +3720,6 @@
       "file_name": "Modha Rathri (2026) Tamil HQ HDRip - 720p - x264 - (DD+5.mkv",
       "mime_type": "video/x-matroska",
       "quality": "720p"
-    },
-    {
-      "id": "telegram-121",
-      "slug_id": "1_0LJZsfpZv2Pybs",
-      "title": "I'm Game",
-      "year": 2026,
-      "qualities": {
-        "720p": {
-          "telegram_message_id": 121,
-          "file_name": "@CinemasTrend_I'm_Game_2026_Tamil_HQ_HDRip_720p_HEVC_.mkv",
-          "file_size": 0,
-          "mime_type": ""
-        }
-      },
-      "telegram_message_id": 121,
-      "quality": "720p",
-      "file_name": "@CinemasTrend_I'm_Game_2026_Tamil_HQ_HDRip_720p_HEVC_.mkv",
-      "file_size": 0,
-      "mime_type": "",
-      "imdb_id": "tt34284946",
-      "poster": "https://m.media-amazon.com/images/M/MV5BMjVhMDcwMmItNDkwNy00MjJjLWJhNTctMzE0ZmRmYjYyMTY3XkEyXkFqcGc@._V1_SX300.jpg",
-      "genre": "N/A",
-      "runtime": "N/A",
-      "director": "Nahas Hidhayath",
-      "cast": "Dulquer Salmaan, Mysskin, Samyuktha Viswanathan",
-      "plot": "N/A"
     }
   ]
 }
