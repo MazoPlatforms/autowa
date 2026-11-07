@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": 1794058164,
+  "updated_at": 1794089732,
   "anime": {
     "slug_id": "dan-da-dan",
     "title": "Dan Da Dan",
@@ -716,6 +716,6 @@
     "year": 2024,
     "studio": "Science SARU",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Dan_Da_Dan%3A_First_Encounter",
-    "updated_at": "2026-11-07T13:28:32Z"
+    "updated_at": "2026-11-07T22:14:40Z"
   }
 }
