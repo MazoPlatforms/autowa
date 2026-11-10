@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": 1794296528,
+  "updated_at": 1794340755,
   "anime": {
     "slug_id": "jujutsu-kaisen",
     "title": "Jujutsu Kaisen",
@@ -3112,6 +3112,6 @@
       "2": "/banners/jujutsu-kaisen-season-2.webp",
       "3": "/banners/jujutsu-kaisen-season-3.webp"
     },
-    "updated_at": "2026-11-10T07:41:28Z"
+    "updated_at": "2026-11-10T19:58:24Z"
   }
 }
