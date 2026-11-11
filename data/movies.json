@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "updated_at": "2026-11-08T13:36:58.453933+00:00",
+  "updated_at": "2026-11-11T19:41:56.686819+00:00",
   "movies": [
     {
       "id": "telegram-126",
@@ -926,7 +926,7 @@
         }
       },
       "imdb_id": "tt27007466",
-      "poster": "https://m.media-amazon.com/images/M/MV5BOTczNTZiNWItZTZmNy00YjEzLWI5ZDItYjIxODcxNGQxY2U0XkEyXkFqcGc@._V1_.jpg",
+      "poster": "https://m.media-amazon.com/images/M/MV5BNDk0NzM3ZGQtNjk5Mi00Y2I4LWIwYzUtYjA2NzJiNmQyNDdlXkEyXkFqcGc@._V1_.jpg",
       "genre": [
         "Comedy",
         "Drama",
