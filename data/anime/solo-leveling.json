@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": 1795332184,
+  "updated_at": 1795377436,
   "anime": {
     "slug_id": "solo-leveling",
     "title": "Solo Leveling",
@@ -1127,6 +1127,6 @@
       "1": "/banners/solo-leveling-season-1.webp",
       "2": "/banners/solo-leveling-season-2.webp"
     },
-    "updated_at": "2026-11-22T07:22:08Z"
+    "updated_at": "2026-11-22T19:56:20Z"
   }
 }

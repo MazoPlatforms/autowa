@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": 1795332184,
+  "updated_at": 1795377436,
   "anime": {
     "slug_id": "attack-on-titan",
     "title": "Attack On Titan",
@@ -5734,6 +5734,6 @@
       "3": "/banners/attack-on-titan-season-3.webp",
       "4": "/banners/attack-on-titan-season-4.webp"
     },
-    "updated_at": "2026-11-22T07:22:24Z"
+    "updated_at": "2026-11-22T19:56:36Z"
   }
 }
