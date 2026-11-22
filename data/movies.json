@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "updated_at": "2026-11-11T19:41:56.686819+00:00",
+  "updated_at": "2026-11-22T19:48:09.225222+00:00",
   "movies": [
     {
       "id": "telegram-126",
@@ -2881,7 +2881,7 @@
         }
       },
       "imdb_id": "tt44090278",
-      "poster": "https://m.media-amazon.com/images/M/MV5BNjRmZGFjMDctMzRiNS00MmIwLTliYmMtODY5ZGFkOTE5YmFkXkEyXkFqcGc@._V1_.jpg",
+      "poster": "https://m.media-amazon.com/images/M/MV5BN2U1OTkxMjEtZmNhYi00ZGExLWIyMjktODIxNmRjN2M3YjRlXkEyXkFqcGc@._V1_.jpg",
       "genre": [
         "Action",
         "Drama",
